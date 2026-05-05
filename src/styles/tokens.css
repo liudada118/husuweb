@@ -1,0 +1,33 @@
+:root {
+  --root-font-size: clamp(12px, calc(100vw / 120), 16px);
+
+  --color-bg: #171717;
+  --color-panel: #242424;
+  --color-gold: #d9b27a;
+  --color-gold-strong: #d79d48;
+  --color-copy: #cfd5df;
+
+  --shell-sm: clamp(1.25rem, 10vw, 12rem);
+  --shell-md: clamp(1.25rem, 10vw, 12rem);
+  --header-height: clamp(6.3rem, calc(3rem + 3vw), 7.5rem);
+
+  --type-hero: clamp(2.5rem, 6vw, 5.75rem);
+  --type-title: clamp(2.5rem, 6vw, 6rem);
+  --type-body: clamp(0.95rem, 1.15vw, 1.25rem);
+
+  --site-max: 120rem;
+}
+
+@media (min-width: 90rem) {
+  :root {
+    --shell-sm: 12rem;
+    --shell-md: 12rem;
+  }
+}
+
+@media (min-width: 120rem) {
+  :root {
+    --shell-sm: 12rem;
+    --shell-md: 12rem;
+  }
+}

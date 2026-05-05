@@ -1,0 +1,83 @@
+@import "tailwindcss";
+@import "../styles/tokens.css";
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: var(--root-font-size);
+  min-width: 320px;
+  background: var(--color-bg);
+  color: #fff;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  font-family: var(--font-poppins), Arial, Helvetica, sans-serif;
+  background: var(--color-bg);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+summary {
+  font: inherit;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+.site-shell {
+  width: 100%;
+  max-width: var(--site-max);
+  margin-inline: auto;
+  padding-inline: var(--shell-md);
+}
+
+.gold-title {
+  background-image: linear-gradient(138deg, #f6ebe4 8%, #d9b27a 150%);
+  background-clip: text;
+  color: transparent;
+}
+
+.client-logo-track {
+  animation-name: client-logo-scroll;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.client-logo-track-reverse {
+  animation-direction: reverse;
+}
+
+.client-logo-row:hover .client-logo-track {
+  animation-play-state: paused;
+}
+
+@keyframes client-logo-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

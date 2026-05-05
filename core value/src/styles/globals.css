@@ -1,0 +1,15 @@
+html {
+  font-size: 16px;
+}
+
+@media (min-width: 1440px) {
+  html {
+    font-size: clamp(16px, calc(100vw / 90), 20px);
+  }
+}
+
+body {
+  background: #171717;
+  color: #f7f7f7;
+  -webkit-font-smoothing: antialiased;
+}
