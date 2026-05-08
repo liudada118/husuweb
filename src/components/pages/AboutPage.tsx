@@ -8,16 +8,18 @@ import { PageTriangle } from "@/components/shared/PageTriangle";
 
 export function AboutPage() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#171717] text-white">
+    <main className="relative isolate min-h-screen overflow-hidden bg-[#171717] text-white">
       <PageTriangle
-        className="right-0 top-[calc(100svh+22rem)] h-[calc(100%-100svh-22rem)] w-full opacity-50"
+        className="right-0 top-[calc(100svh+22rem)] z-0 h-[calc(100%-100svh-22rem)] w-full bg-[#2a2a2a] opacity-10"
       />
-      <SiteHeader active="ABOUT US" />
-      <AboutHero />
-      <Honors />
-      <Culture />
-      <Chronicle />
-      <SiteFooter />
+      <div className="relative z-10">
+        <SiteHeader active="ABOUT US" />
+        <AboutHero />
+        <Honors />
+        <Culture />
+        <Chronicle />
+        <SiteFooter />
+      </div>
     </main>
   );
 }

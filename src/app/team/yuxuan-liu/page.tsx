@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { TeamProfilePage } from "@/components/pages/TeamProfilePage";
+import { getTeamProfile } from "@/data/teamProfiles";
 
 export const metadata: Metadata = {
   title: "Yuxuan Liu",
@@ -7,5 +9,8 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <TeamProfilePage />;
+  const profile = getTeamProfile("yuxuan-liu");
+  if (!profile) notFound();
+
+  return <TeamProfilePage profile={profile} />;
 }

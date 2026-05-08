@@ -1,7 +1,14 @@
+"use client";
+
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
+import { pick, useLanguage } from "@/i18n/LanguageProvider";
+import { copy } from "@/i18n/copy";
 
 export function Culture() {
+  const { language } = useLanguage();
+
   return (
     <section className="relative mt-32 w-full overflow-hidden">
       <div className="relative grid min-h-[80vh] w-full grid-cols-1 lg:grid-cols-2">
@@ -37,17 +44,17 @@ export function Culture() {
             <path d="M86 210C126 120 294 120 334 210C294 300 126 300 86 210Z" stroke="currentColor" strokeWidth="18" />
             <path d="M210 58V362M58 210H362" stroke="currentColor" strokeWidth="14" />
           </svg>
-          <h2 className="relative text-[clamp(2.5rem,4vw,4rem)] font-bold leading-none text-white">CULTURE</h2>
-          <p className="relative mt-10 max-w-[42rem] text-justify leading-relaxed text-white text-[clamp(1rem,1.3vw,1.5rem)]">
-            As a new prominent law firm, Tiger Partners holds its unique culture.
+          <h2 className="relative text-[4rem] font-semibold leading-none text-white">{pick(language, copy.about.cultureTitle)}</h2>
+          <p className="relative mt-10 max-w-[42rem] text-justify text-[1.75rem] font-normal leading-relaxed text-white">
+            {pick(language, copy.about.cultureSubtitle)}
           </p>
-          <a
+          <Link
             href="/about/core-value"
-            className="group relative mt-10 inline-flex items-center gap-4 self-start border border-[#D9B27A] bg-[#D9B27A] px-9 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-white transition-all duration-500 hover:bg-transparent"
+            className="group relative mt-10 inline-flex items-center gap-4 self-start border border-[#D9B27A] bg-[#D9B27A] px-9 py-4 text-[1.125rem] font-medium uppercase tracking-[0.08em] text-white transition-all duration-500 hover:bg-transparent"
           >
-            READ FULL MANIFESTO
+            {pick(language, copy.about.cultureCta)}
             <ArrowRight className="size-4 transition-transform duration-500 group-hover:translate-x-2" strokeWidth={1.5} />
-          </a>
+          </Link>
         </div>
       </div>
     </section>

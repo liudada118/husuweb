@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { AppProviders } from "@/components/layout/AppProviders";
 import "./globals.css";
 
 const poppins = localFont({
@@ -26,7 +27,9 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={poppins.variable}>{children}</body>
+      <body className={poppins.variable}>
+        <AppProviders>{children}</AppProviders>
+      </body>
     </html>
   );
 }

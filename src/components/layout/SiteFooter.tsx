@@ -1,4 +1,8 @@
+"use client";
+
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
+import { pick, useLanguage } from "@/i18n/LanguageProvider";
+import { copy } from "@/i18n/copy";
 
 const footerAssets = {
   logo: "/assets/foot/logo.png",
@@ -15,6 +19,10 @@ function FooterIcon({ src, alt, className = "size-5" }: { src: string; alt: stri
 }
 
 export function SiteFooter() {
+  const { language } = useLanguage();
+  const tagline = pick(language, copy.footer.tagline);
+  const address = pick(language, copy.footer.address);
+
   return (
     <footer id="contact" className="relative mt-20 bg-[#0c0c0c]">
       <div className="absolute inset-x-0 top-0 h-full bg-gradient-to-b from-[#121212] to-transparent" />
@@ -26,9 +34,9 @@ export function SiteFooter() {
             className="h-auto w-[clamp(5.5rem,8vw,8.25rem)] object-contain"
           />
           <div className="text-[clamp(0.95rem,1.2vw,1.5rem)] font-medium leading-relaxed tracking-[0.05em] text-[#d9b27a]/75 lg:text-right">
-            <p>Always pursuing the extreme and seeking the perfection</p>
-            <p>Always aiming at winning lawsuits and fulfilling clients&apos;</p>
-            <p>business goals</p>
+            {tagline.map((line) => (
+              <p key={line}>{line}</p>
+            ))}
           </div>
         </div>
 
@@ -38,9 +46,12 @@ export function SiteFooter() {
           <div className="flex items-start gap-4 text-[clamp(0.875rem,1vw,1.25rem)] leading-relaxed text-[#7a7a7a]">
             <FooterIcon src={footerAssets.address} alt="" className="mt-1 size-6" />
             <p>
-              Suite 01, 25F, Tower A, Sino-Ocean International Center, 56 East 4th Ring Middle Road, Chaoyang District, Beijing
-              <br />
-              100025, China
+              {address.map((line, index) => (
+                <span key={line}>
+                  {line}
+                  {index < address.length - 1 ? <br /> : null}
+                </span>
+              ))}
             </p>
           </div>
           <ImageWithFallback src={footerAssets.weixin} alt="WeChat" className="h-auto w-9 object-contain lg:justify-self-end" />
@@ -65,8 +76,8 @@ export function SiteFooter() {
         <div className="mt-10 h-px bg-[#343434]/80" />
 
         <div className="grid gap-4 py-8 text-[clamp(0.75rem,0.9vw,1rem)] text-[#7f7f7f] md:grid-cols-2 xl:grid-cols-4 xl:items-center">
-          <p>All Rights Reserved © 2019 Tiger Partners</p>
-          <p>Disclaimer and Privacy</p>
+          <p>{pick(language, copy.footer.rights)}</p>
+          <p>{pick(language, copy.footer.disclaimer)}</p>
           <p className="flex items-center gap-2">
             <FooterIcon src={footerAssets.china} alt="" className="size-4" />
             京公网安备11010502052714号

@@ -5,6 +5,16 @@ import { useState, type ImgHTMLAttributes } from "react";
 const ERROR_IMG_SRC =
   "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODgiIGhlaWdodD0iODgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjMDAwIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBvcGFjaXR5PSIuMyIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIzLjciPjxyZWN0IHg9IjE2IiB5PSIxNiIgd2lkdGg9IjU2IiBoZWlnaHQ9IjU2IiByeD0iNiIvPjxwYXRoIGQ9Im0xNiA1OCAxNi0xOCAzMiAzMiIvPjxjaXJjbGUgY3g9IjUzIiBjeT0iMzUiIHI9IjciLz48L3N2Zz4KCg==";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
+function resolveAssetSrc(src: ImgHTMLAttributes<HTMLImageElement>["src"]) {
+  if (typeof src !== "string" || !basePath || !src.startsWith("/assets/")) {
+    return src;
+  }
+
+  return `${basePath}${src}`;
+}
+
 export function ImageWithFallback({
   src,
   alt,
@@ -12,6 +22,7 @@ export function ImageWithFallback({
   ...rest
 }: ImgHTMLAttributes<HTMLImageElement>) {
   const [didError, setDidError] = useState(false);
+  const resolvedSrc = resolveAssetSrc(src);
 
   if (didError) {
     return (
@@ -25,7 +36,7 @@ export function ImageWithFallback({
 
   return (
     <img
-      src={src}
+      src={resolvedSrc}
       alt={alt}
       className={className}
       {...rest}

@@ -4,23 +4,23 @@ import Link from "next/link";
 import { Globe, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
+import { useLanguage } from "@/i18n/LanguageProvider";
 
 const navItems = [
-  { key: "HOME", en: "Home", zh: "首页", href: "/" },
-  { key: "ABOUT US", en: "About us", zh: "关于我们", href: "/about" },
-  { key: "OUR TEAM", en: "Our team", zh: "虎诉团队", href: "/team" },
-  { key: "INDUSTRIES", en: "Industries", zh: "服务行业", href: "/industries" },
-  { key: "EVENTS", en: "Events", zh: "虎诉动态", href: "/events" },
-  { key: "CONTACT", en: "Contact", zh: "联系我们", href: "/contact" },
+  { key: "HOME", en: "HOME", zh: "首页", href: "/" },
+  { key: "ABOUT US", en: "ABOUT US", zh: "关于我们", href: "/about" },
+  { key: "OUR TEAM", en: "OUR TEAM", zh: "虎诉团队", href: "/team" },
+  { key: "INDUSTRIES", en: "INDUSTRIES", zh: "服务行业", href: "/industries" },
+  { key: "EVENTS", en: "EVENTS", zh: "虎诉动态", href: "/events" },
+  { key: "CONTACT", en: "CONTACT", zh: "联系我们", href: "/contact" },
 ] as const;
 
 type ActiveNav = "HOME" | "ABOUT US" | "OUR TEAM" | "INDUSTRIES" | "EVENTS" | "CONTACT";
-type Language = "en" | "zh";
 
 export function SiteHeader({ active }: { active: ActiveNav }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [language, setLanguage] = useState<Language>("en");
+  const { language, toggleLanguage } = useLanguage();
 
   useEffect(() => {
     const updateHeaderState = () => setScrolled(window.scrollY > 16);
@@ -73,7 +73,7 @@ export function SiteHeader({ active }: { active: ActiveNav }) {
           })}
           <button
             type="button"
-            onClick={() => setLanguage((value) => (value === "en" ? "zh" : "en"))}
+            onClick={toggleLanguage}
             className="flex h-10 items-center gap-2 rounded-full border border-white/[0.22] px-4 text-[1.715rem] font-semibold text-white/80 transition hover:border-white/[0.45] hover:bg-white/[0.08] hover:text-white"
             aria-label="Toggle language"
           >
@@ -85,7 +85,7 @@ export function SiteHeader({ active }: { active: ActiveNav }) {
         <div className="flex items-center gap-3 xl:hidden">
           <button
             type="button"
-            onClick={() => setLanguage((value) => (value === "en" ? "zh" : "en"))}
+            onClick={toggleLanguage}
             className="flex h-10 items-center gap-2 rounded-full border border-white/[0.22] px-3 text-[1.715rem] font-semibold text-white/80 transition hover:border-white/[0.45] hover:bg-white/[0.08] hover:text-white"
             aria-label="Toggle language"
           >

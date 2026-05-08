@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import { IndustryDetailPage, industries, type IndustrySlug } from "@/components/pages/IndustryDetailPage";
+import { IndustryDetailPage } from "@/components/pages/IndustryDetailPage";
+import {
+  defaultIndustryMetadata,
+  industryMetadata,
+  type IndustryMetadataSlug,
+} from "@/data/industryMetadata";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -7,7 +12,7 @@ type PageProps = {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const industry = industries[slug as IndustrySlug] ?? industries["private-equity"];
+  const industry = industryMetadata[slug as IndustryMetadataSlug] ?? defaultIndustryMetadata;
 
   return {
     title: industry.title,
@@ -16,7 +21,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export function generateStaticParams() {
-  return Object.keys(industries).map((slug) => ({ slug }));
+  return Object.keys(industryMetadata).map((slug) => ({ slug }));
 }
 
 export default async function Page({ params }: PageProps) {

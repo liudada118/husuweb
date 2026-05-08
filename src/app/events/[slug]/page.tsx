@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { EventDetailPage } from "@/components/pages/EventDetailPage";
-import { events } from "@/components/pages/EventsPage";
+import { events } from "@/data/events";
 
 type PageProps = {
   params: Promise<{ slug: string }>;

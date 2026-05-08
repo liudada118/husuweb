@@ -21,6 +21,8 @@
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": [
     "node_modules",
+    "EventLandingPage.tsx",
+    "事件 copy",
     "首页",
     "about 页",
     "事件",
