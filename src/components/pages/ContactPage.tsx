@@ -19,6 +19,8 @@ export function ContactPage() {
         <ImageWithFallback
           src="/assets/contact/hero.png"
           alt=""
+          loading="eager"
+          fetchPriority="high"
           className="absolute inset-x-0 top-0 h-[40rem] w-full object-cover opacity-45"
         />
         <div className="absolute inset-x-0 top-0 h-[40rem] bg-gradient-to-b from-black/55 via-[#171717]/35 to-transparent" />
@@ -39,7 +41,7 @@ export function ContactPage() {
 
       <section className="relative w-full overflow-hidden">
         <div className="grid min-h-[80vh] grid-cols-1 lg:grid-cols-2">
-          <div className="relative flex flex-col justify-center bg-[#a88d61] py-20 pl-5 pr-5 md:pl-[9rem] lg:pr-20">
+          <div className="relative flex flex-col justify-center bg-[#A1865F] py-20 pl-5 pr-5 md:pl-[9rem] lg:pr-20">
             <svg
               className="pointer-events-none absolute bottom-[60px] left-[-90px] w-[420px] max-w-[72vw] text-[rgba(120,96,58,0.35)] opacity-[0.1] mix-blend-multiply"
               viewBox="0 0 420 420"
@@ -69,8 +71,9 @@ export function ContactPage() {
           </div>
           <div className="group relative min-h-[24rem] overflow-hidden lg:min-h-[80vh]">
             <ImageWithFallback
-              src="/assets/prototypes/contact/city.png"
+              src="/assets/prototypes/contact/city.webp"
               alt="city"
+              decoding="sync"
               className="absolute inset-0 size-full object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-105"
             />
             <div

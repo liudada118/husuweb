@@ -1,13 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import localFont from "next/font/local";
 import { AppProviders } from "@/components/layout/AppProviders";
+import { assetUrl } from "@/lib/assets";
 import "./globals.css";
-
-const poppins = localFont({
-  src: "../font/poppins.ttf",
-  variable: "--font-poppins",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: {
@@ -25,9 +19,26 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const poppinsUrl = assetUrl("/font/poppins.ttf");
+
   return (
     <html lang="en">
-      <body className={poppins.variable}>
+      <head>
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+@font-face {
+  font-family: "Poppins";
+  src: url("${poppinsUrl}") format("truetype");
+  font-display: swap;
+  font-weight: 100 900;
+}
+:root { --font-poppins: "Poppins"; }
+`,
+          }}
+        />
+      </head>
+      <body>
         <AppProviders>{children}</AppProviders>
       </body>
     </html>

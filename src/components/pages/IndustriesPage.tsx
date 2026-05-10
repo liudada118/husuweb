@@ -9,12 +9,12 @@ import { pick, useLanguage } from "@/i18n/LanguageProvider";
 import { copy } from "@/i18n/copy";
 
 const cards = [
-  { label: { en: "Private Equity", zh: "私募股权" }, slug: "private-equity", image: "/assets/industries/in1.png" },
-  { label: { en: "International\nTrade", zh: "国际贸易行业" }, slug: "international-trade", image: "/assets/industries/in2.png" },
-  { label: { en: "Finance", zh: "金融" }, slug: "finance", image: "/assets/industries/in3.png" },
-  { label: { en: "Real Estate", zh: "房地产行业" }, slug: "real-estate", image: "/assets/industries/in4.png" },
-  { label: { en: "Sports and\nE-Sports", zh: "体育及电子竞技行业" }, slug: "sports-and-e-sports", image: "/assets/industries/in5.png" },
-  { label: { en: "Cyber Tech and\nGame", zh: "互联网科技及游戏行业" }, slug: "cyber-tech-and-game", image: "/assets/industries/in6.png" },
+  { label: { en: "Private Equity", zh: "私募股权" }, slug: "private-equity", image: "/assets/industries/in1.webp" },
+  { label: { en: "International\nTrade", zh: "国际贸易行业" }, slug: "international-trade", image: "/assets/industries/in2.webp" },
+  { label: { en: "Finance", zh: "金融" }, slug: "finance", image: "/assets/industries/in3.webp" },
+  { label: { en: "Real Estate", zh: "房地产行业" }, slug: "real-estate", image: "/assets/industries/in4.webp" },
+  { label: { en: "Sports and\nE-Sports", zh: "体育及电子竞技行业" }, slug: "sports-and-e-sports", image: "/assets/industries/in5.webp" },
+  { label: { en: "Cyber Tech and\nGame", zh: "互联网科技及游戏行业" }, slug: "cyber-tech-and-game", image: "/assets/industries/in6.webp" },
 ];
 
 function IndustryCard({
@@ -36,6 +36,7 @@ function IndustryCard({
       <ImageWithFallback
         src={image}
         alt=""
+        decoding="sync"
         className="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-105"
       />
       <div className="absolute inset-0 bg-black/35 transition-colors duration-500 group-hover:bg-black/20" />
@@ -62,6 +63,8 @@ export function IndustriesPage() {
         <ImageWithFallback
           src="/assets/industries/hero.png"
           alt=""
+          loading="eager"
+          fetchPriority="high"
           className="absolute inset-0 size-full object-cover"
         />
         <div className="absolute inset-0 bg-[rgba(68,67,67,0.55)] mix-blend-screen" />

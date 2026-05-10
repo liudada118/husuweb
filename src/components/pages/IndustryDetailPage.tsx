@@ -1,20 +1,23 @@
 "use client";
 
-import Link from "next/link";
-import { ChevronRight } from "lucide-react";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { BackToTop } from "@/components/shared/BackToTop";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
+import { SubpageBreadcrumb } from "@/components/shared/SubpageBreadcrumb";
 import { pick, useLanguage } from "@/i18n/LanguageProvider";
 import { copy } from "@/i18n/copy";
 
 export const industries = {
   "private-equity": {
     title: "Private Equity",
-    image: "/assets/industries/in1.png",
+    image: "/assets/industries/in1.webp",
     intro:
       "Tiger Partners provides a full range of legal services to many well-known Chinese investment institutions, portfolio or invested companies, founders and shareholders, ranging from potential risk control, pre-litigation dispute resolution, litigation, arbitration and enforcement, to achieve their ultimate business goals.",
     sections: [
+      {
+        title: "In the event of investment in private equity or private funds under the mode of trust, limited partnership or company, etc.:",
+      },
       {
         title:
           "1. Analysis of potential legal exposures in contracts such as partnership agreements or investment agreements",
@@ -32,10 +35,10 @@ export const industries = {
         title: "3. On behalf of investors, fund managers or invested companies:",
         items: [
           "Initiating litigation or arbitration;",
-          "Initiating pre-litigation preservation or preservation in litigation;",
+          "Initiating pre-litigation preservation or preservation in litigation, (including judicial preservation against the bank accounts, equity interests or investment proceeds of the counterparty);",
           "Responding to claims or filing counterclaims;",
           "Initiating application for enforcement;",
-          "Assisting in preservation or enforcement proceedings by visiting institutions in person, such as Shanghai Stock Exchange or China Securities Depository and Clearing Corporation Limited;",
+          "In the litigation or arbitration proceedings, assisting in preservation or enforcement proceedings by visiting institutions in person, such as Shanghai Stock Exchange or China Securities Depository and Clearing Corporation Limited;",
           "Participating in negotiations for settlement or mediation.",
         ],
       },
@@ -43,7 +46,7 @@ export const industries = {
   },
   finance: {
     title: "Finance",
-    image: "/assets/industries/in3.png",
+    image: "/assets/industries/in3.webp",
     intro:
       "Tiger Partners has highly specialized knowledge and extensive experience in dispute resolution relating to finance, and is able to provide early warning and prevent risks arising from various financial products, investment and finance transactions, and provide all-round dispute resolution services in civil & commercial and civil cross criminal area.",
     sections: [
@@ -71,7 +74,7 @@ export const industries = {
   },
   "real-estate": {
     title: "Real Estate",
-    image: "/assets/industries/in4.png",
+    image: "/assets/industries/in4.webp",
     intro:
       "Tiger Partners is specialized in dispute resolution in real estate industry. From traditional disputes over construction contracts to large-scale disputes over real estate, land purchase and lease agreements, Tiger Partners has a profound theoretical basis and extensive practical experience.",
     sections: [
@@ -88,13 +91,13 @@ export const industries = {
       },
       {
         title:
-          "3. Representing real estate developers or constructors in disputes over construction contracts, or representing lessors or lessees in disputes over large real estate leasing contracts:",
+          "3. Representing real estate developers or constructors in the disputes over construction contracts, or representing lessors or lessees in the disputes over large real estate leasing contracts to participate in the following dispute resolution procedures or providing corresponding legal services:",
         items: [
           "Initiating litigation or arbitration;",
-          "Initiating pre-litigation preservation or preservation during litigation;",
+          "Initiating pre-litigation preservation or preservation during litigation, (including judicial preservation for the counterparty's bank accounts, equity interest or the property or construction-in-progress involved);",
           "Responding to claims or filing counterclaims;",
           "Conducting on-site investigation to collect evidence, and assisting clients to complete evidence collection;",
-          "Initiating applications for judicial authentication of quality, construction period, actual leased area, etc., and providing cross-examination opinions;",
+          "In litigation or arbitration proceedings, initiating applications for judicial authentication of the quality, construction period, actual leased area, etc., and providing cross-examination opinions in relation to authentication or evaluation report submitted by the counterparty;",
           "Initiating application for enforcement, and assisting clients to achieve their ultimate business goal;",
           "Participating in negotiations for settlement or mediation.",
         ],
@@ -103,7 +106,7 @@ export const industries = {
   },
   "sports-and-e-sports": {
     title: "Sports and E-Sports",
-    image: "/assets/industries/in5.png",
+    image: "/assets/industries/in5.webp",
     intro:
       "Tiger Partners has deeply participated in the increasingly mature commercialization process of China's sports industry. E-Sports, after being selected into the Asian Games, has opened a golden era again. With a wealth of experience and foresight, Tiger Partners is energizing the dream of young talents in the industry to set sail.",
     sections: [
@@ -139,7 +142,7 @@ export const industries = {
         title: "4. Litigation and arbitration agency services:",
         items: [
           "Initiating litigation or arbitration;",
-          "Initiating pre-litigation preservation or preservation during litigation;",
+          "Initiate pre-litigation preservation or preservation during litigation, (including judicial preservation of tangible or intangible property such as bank accounts, equity interests, intellectual property rights, right to income and so on of the counterparty);",
           "Responding to claims or filing counterclaims;",
           "Investigating and collecting evidence and assisting clients to complete evidence collection;",
           "Initiating application for enforcement, and assisting clients to achieve their ultimate business goals;",
@@ -150,7 +153,7 @@ export const industries = {
   },
   "international-trade": {
     title: "International Trade",
-    image: "/assets/industries/in2.png",
+    image: "/assets/industries/in2.webp",
     intro:
       "The Belt and Road Initiative offers new opportunities as well as challenges on an ongoing basis for foreign trade participants in all sectors. With extensive experience and academic background in foreign-related cases, the lawyers of Tiger Partners are able to provide high-quality and efficient foreign-related dispute resolution legal services to Chinese and foreign clients.",
     sections: [
@@ -169,7 +172,7 @@ export const industries = {
   },
   "cyber-tech-and-game": {
     title: "Cyber Tech and Game",
-    image: "/assets/industries/in6.png",
+    image: "/assets/industries/in6.webp",
     intro:
       "Since Internet plus initiative became a national strategy, numerous entrepreneurs have been pursuing wealth and success in the tide of the internet. With years of legal service experience cultivating in internet technology and game, Tiger Partners has greatly protected and escorted investors and young entrepreneurs in this industry.",
     sections: [
@@ -206,7 +209,7 @@ export const industries = {
         title: "5. Litigation and arbitration agency services:",
         items: [
           "Initiating litigation or arbitration;",
-          "Initiating pre-litigation preservation or preservation during litigation;",
+          "Initiating pre-litigation preservation or preservation during litigation, (including judicial preservation of tangible or intangible property such as bank accounts or equity interests, the intellectual property right and right to income held by the counterparty);",
           "Responding to claims or filing counterclaims;",
           "Investigating and collecting evidence, and assisting clients in evidence collection;",
           "Initiating application for enforcement, and assisting clients in achieving their ultimate business goals;",
@@ -426,6 +429,7 @@ export function IndustryDetailPage({ slug }: { slug: string }) {
   const industry = industries[slug as IndustrySlug] ?? defaultIndustry;
   const zhIndustry = zhIndustries[slug as IndustrySlug] ?? zhIndustries["private-equity"];
   const displayIndustry = language === "zh" ? { ...industry, ...zhIndustry } : industry;
+  const breadcrumbParent = language === "zh" ? "服务行业" : "industries";
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-[#171717] text-white">
@@ -433,7 +437,13 @@ export function IndustryDetailPage({ slug }: { slug: string }) {
 
       <section className="relative w-full overflow-hidden">
         <div className="absolute inset-0">
-          <ImageWithFallback src={displayIndustry.image} alt="" className="size-full object-cover" />
+          <ImageWithFallback
+            src={displayIndustry.image}
+            alt=""
+            loading="eager"
+            fetchPriority="high"
+            className="size-full object-cover"
+          />
           <div className="absolute inset-0 bg-[rgba(68,67,67,0.5)] mix-blend-screen" />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#171717]" />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(56,56,56,0)_30%,#171717_93%)]" />
@@ -448,12 +458,12 @@ export function IndustryDetailPage({ slug }: { slug: string }) {
         />
 
         <div className="site-shell relative z-10 pb-12 pt-[calc(var(--header-height)+5rem)] lg:pb-14 lg:pt-[14rem]">
-          <div className="mb-28 flex items-center gap-2 text-[clamp(1rem,1.2vw,1.25rem)] tracking-[0.02em]">
-            <Link href="/industries" className="font-light text-[#bec3cb] transition hover:text-[#d9b27a]">
-              {pick(language, copy.industriesPage.title)}
-            </Link>
-            <ChevronRight className="size-4 text-[#bec3cb]" />
-            <span className="text-white">{displayIndustry.title}</span>
+          <div className="mb-28">
+            <SubpageBreadcrumb
+              parentLabel={breadcrumbParent}
+              currentLabel={displayIndustry.title}
+              fallbackHref="/industries"
+            />
           </div>
 
           <div className="flex flex-col items-start gap-8 lg:flex-row lg:gap-12">
@@ -490,6 +500,8 @@ export function IndustryDetailPage({ slug }: { slug: string }) {
       </section>
 
       <SiteFooter />
+      <BackToTop />
     </main>
   );
 }
+

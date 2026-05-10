@@ -514,17 +514,17 @@ function ChronicleYear({ group, open, onToggle }: { group: YearGroup; open: bool
         <button
           type="button"
           onClick={onToggle}
-          className="group ml-[20px] flex -translate-x-1/2 items-center gap-5 border border-[#d9b27a] bg-[#202020] px-6 py-3 shadow-[0_0_30px_rgba(20,20,20,1)] transition-colors duration-500 hover:border-[#f8d097] md:ml-0 md:translate-x-0 md:px-10"
+          className="group ml-[20px] flex -translate-x-1/2 items-center gap-5 border border-[#d9b27a] bg-[#202020] px-6 py-3 text-white shadow-[0_0_30px_rgba(20,20,20,1)] transition-all duration-500 hover:bg-[#d9b27a] md:ml-0 md:translate-x-0 md:px-10"
           aria-expanded={open}
         >
-          <span className="text-[2.25rem] font-medium leading-none tracking-[0.2em] text-[#e5e5e5]">
+          <span className="text-[2.25rem] font-medium leading-none tracking-[0.2em] text-current">
             {group.year}
           </span>
-          <span className="hidden text-xs uppercase tracking-[0.18em] text-white/45 sm:inline">
+          <span className="hidden text-xs uppercase tracking-[0.18em] text-current opacity-60 transition-opacity duration-500 group-hover:opacity-100 sm:inline">
             {open ? pick(language, copy.common.close) : pick(language, copy.common.open)}
           </span>
           <ChevronDown
-            className={`size-5 text-[#e5e5e5] transition-transform duration-500 ${
+            className={`size-5 text-current transition-transform duration-500 ${
               open ? "rotate-180" : "group-hover:translate-y-0.5"
             }`}
             strokeWidth={1.5}

@@ -16,7 +16,7 @@ const coreValueItems: CoreValueItem[] = [
   {
     number: "No.1",
     title: "Our Spiritual Totem: Tiger",
-    image: "/assets/core/core1.png",
+    image: "/assets/core/core1.webp",
     body: (
       <>
         As quoted from an ancient Chinese book the Dragon Classic : &quot;Bi An (狴犴) is good at
@@ -32,7 +32,7 @@ const coreValueItems: CoreValueItem[] = [
   {
     number: "No.2",
     title: "We focus on tangible benefits clients could get from our legal services",
-    image: "/assets/core/core2.png",
+    image: "/assets/core/core2.webp",
     body: (
       <>
         Dispute Resolution Legal Services are inherently different from non-litigation legal services. The
@@ -46,7 +46,7 @@ const coreValueItems: CoreValueItem[] = [
   {
     number: "No.3",
     title: 'The "Hands-on"',
-    image: "/assets/core/core3.png",
+    image: "/assets/core/core3.webp",
     body: (
       <>
         <p>
@@ -75,9 +75,9 @@ const coreValueItems: CoreValueItem[] = [
 
 const zhCoreValueItems: CoreValueItem[] = [
   {
-    number: "一",
-    title: "事务所价值观之一：精神图腾“虎”",
-    image: "/assets/core/core1.png",
+    number: "",
+    title: "价值观之一：精神图腾“虎”",
+    image: "/assets/core/core1.webp",
     body: (
       <>
         《龙经》有云：“狴犴(bì àn)好讼”。狴犴，系中国神话中掌管诉讼的神兽，为龙的第七子。在现实世界中，往往又以“虎”之形象示人。故在中国历代有关诉讼的文物器件中均有虎的形象出现，孔武有力、威严振振。老虎，森林之王，自身雄壮有力的同时，行迹却隐于山林，捕猎先发制人，出奇制胜。正是基于虎的这些特性，我们选择了“虎”作为我们的精神图腾。
@@ -85,9 +85,9 @@ const zhCoreValueItems: CoreValueItem[] = [
     ),
   },
   {
-    number: "二",
+    number: "",
     title: "事务所价值观之二：注重法律服务给客户带来的实际利益",
-    image: "/assets/core/core2.png",
+    image: "/assets/core/core2.webp",
     body: (
       <>
         争议解决法律服务业务先天性地与非诉法律服务有所区别，结果导向的属性让争议解决法律服务业务充满挑战，在强调法律服务质量本身的同时，我们更加重视代理案件在结果上保障客户的实际利益——我们相信，没有客户最终经济利益的实现，就没有我们作为争议解决律师价值的最终实现。
@@ -95,9 +95,9 @@ const zhCoreValueItems: CoreValueItem[] = [
     ),
   },
   {
-    number: "三",
+    number: "",
     title: "事务所价值观之三：争议解决法律服务的“属人性”",
-    image: "/assets/core/core3.png",
+    image: "/assets/core/core3.webp",
     body: (
       <>
         <p>
@@ -125,10 +125,7 @@ function CoreImageStack({ items, progress }: { items: CoreValueItem[]; progress:
   const itemCount = items.length;
 
   return (
-    <div
-      className="relative w-full rounded-[1.5rem]"
-      style={{ height: "min(72vh, 40rem)" }}
-    >
+    <div className="relative aspect-[16/14] w-full overflow-hidden rounded-[1.5rem]">
       {items.map((item, index) => {
         const clipFraction = Math.min(Math.max(progress - index, 0), 1);
         const clipBottomPct = clipFraction * 100;
@@ -137,7 +134,7 @@ function CoreImageStack({ items, progress }: { items: CoreValueItem[]; progress:
 
         return (
           <div
-            key={item.number}
+            key={`${item.image}-${index}`}
             className="absolute inset-0"
             style={{
               zIndex: itemCount - index,
@@ -148,6 +145,7 @@ function CoreImageStack({ items, progress }: { items: CoreValueItem[]; progress:
             <ImageWithFallback
               src={item.image}
               alt=""
+              loading="lazy"
               className="absolute inset-0 block size-full rounded-[1.5rem] object-cover"
               style={{
                 transform: `translateY(${translateY}px)`,
@@ -156,9 +154,11 @@ function CoreImageStack({ items, progress }: { items: CoreValueItem[]; progress:
               }}
             />
             <div className="pointer-events-none absolute inset-0 rounded-[1.5rem] bg-[linear-gradient(to_top,rgba(22,25,21,0.6)_0%,transparent_50%)]" />
-            <div className="absolute bottom-5 left-5 rounded-lg border border-white/10 bg-black/55 px-4 py-3 backdrop-blur-md">
-              <span className="text-[0.875rem] font-medium tracking-[0.08em] text-white/85">{item.number}</span>
-            </div>
+            {item.number ? (
+              <div className="absolute bottom-5 left-5 rounded-lg border border-white/10 bg-black/55 px-4 py-3 backdrop-blur-md">
+                <span className="text-[0.875rem] font-medium tracking-[0.08em] text-white/85">{item.number}</span>
+              </div>
+            ) : null}
           </div>
         );
       })}
@@ -175,7 +175,7 @@ function CoreValueBlock({ item, active }: { item: CoreValueItem; active: boolean
         }`}
       >
         <h2 className="text-[1.75rem] font-semibold leading-[1.25] tracking-[0.01em] text-[#d9b27a]">
-          {item.number} {item.title}
+          {[item.number, item.title].filter(Boolean).join(" ")}
         </h2>
         <div className="mt-8 text-justify text-[1.5rem] font-normal leading-[1.75] tracking-[0.01em] text-[#d1d5dc]">
           {item.body}
@@ -187,6 +187,8 @@ function CoreValueBlock({ item, active }: { item: CoreValueItem; active: boolean
 
 export function CoreValueScrollFlow() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const frameRef = useRef<number | null>(null);
+  const nearViewportRef = useRef(true);
   const [progress, setProgress] = useState(0);
   const { language } = useLanguage();
   const items = language === "zh" ? zhCoreValueItems : coreValueItems;
@@ -194,7 +196,7 @@ export function CoreValueScrollFlow() {
   const activeIndex = Math.min(Math.floor(progress), itemCount - 1);
 
   useEffect(() => {
-    const handleScroll = () => {
+    const updateProgress = () => {
       const element = containerRef.current;
       if (!element) return;
 
@@ -203,25 +205,49 @@ export function CoreValueScrollFlow() {
       setProgress(Math.max(0, Math.min(itemCount - 1 + 0.999, nextProgress)));
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleScroll);
-    handleScroll();
+    const scheduleUpdate = () => {
+      if (!nearViewportRef.current || frameRef.current !== null) return;
+
+      frameRef.current = window.requestAnimationFrame(() => {
+        frameRef.current = null;
+        updateProgress();
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        nearViewportRef.current = entry.isIntersecting;
+        if (entry.isIntersecting) scheduleUpdate();
+      },
+      { rootMargin: "100% 0px" },
+    );
+
+    const element = containerRef.current;
+    if (element) observer.observe(element);
+
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+    updateProgress();
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
+      observer.disconnect();
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+      if (frameRef.current !== null) {
+        window.cancelAnimationFrame(frameRef.current);
+      }
     };
   }, [itemCount]);
 
   return (
     <section className="bg-[#171717] py-20 lg:py-0">
       <div className="site-shell mt-14 space-y-14 lg:hidden">
-        {items.map((item) => (
-          <article key={item.number} className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#111814]">
-            <ImageWithFallback src={item.image} alt="" className="aspect-[16/11] w-full object-cover" />
+        {items.map((item, index) => (
+          <article key={`${item.image}-${index}`} className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#111814]">
+            <ImageWithFallback src={item.image} alt="" loading="lazy" className="aspect-[16/14] w-full object-cover" />
             <div className="p-7">
               <h3 className="text-[1.75rem] font-semibold leading-[1.25] text-[#d9b27a]">
-                {item.number} {item.title}
+                {[item.number, item.title].filter(Boolean).join(" ")}
               </h3>
               <div className="mt-6 text-justify text-[1.5rem] font-normal leading-[1.75] text-[#d1d5dc]">
                 {item.body}
@@ -234,11 +260,11 @@ export function CoreValueScrollFlow() {
       <div ref={containerRef} className="site-shell hidden gap-16 lg:flex" style={{ height: `${itemCount * 100}vh` }}>
         <div className="flex flex-1 flex-col">
           {items.map((item, index) => (
-            <CoreValueBlock key={item.number} item={item} active={activeIndex === index} />
+            <CoreValueBlock key={`${item.image}-${index}`} item={item} active={activeIndex === index} />
           ))}
         </div>
 
-        <div className="w-[clamp(22.5rem,40%,31.25rem)] shrink-0">
+        <div className="w-[clamp(34rem,48%,46rem)] shrink-0">
           <div className="sticky top-0 flex h-screen items-center justify-center">
             <div className="w-full translate-y-[5rem]">
               <div className="w-full scale-90">

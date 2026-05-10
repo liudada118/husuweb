@@ -91,6 +91,18 @@ export const copy = {
         "我们拥有专业优秀的争议解决团队，团队成员均毕业于国内外名校，且在各仲裁机构及各级法院拥有丰富的实战经验。我们在众多具有广泛影响力的复杂、疑难案件中扮演过极其重要的角色，并且一直保持着令人瞩目的案件胜诉率，成为越来越多国内领先企业及知名跨国公司在争议解决服务领域首选的律师团队。",
       ],
     },
+    visionMoreParagraphs: {
+      en: [
+        "We always take the realization of client's needs as the first goal, and \"winning the case\" as the ultimate goal of our dispute resolution legal services. Our partners undertake and represent our clients in court in person, and we are dedicated to the details of each case, so that we can provide our clients with professional, accurate and efficient legal services and achieve their business goals. Each case is our unmatched work, and we never pursue the quantity of our work; we value our brand and reputation, and pursue excellence and perfection in each work.",
+        "We are committed to continually improving the professionalism of our team of lawyers, and we continue to work closely with leaders in emerging areas to further ensure that we are growing and able to provide our clients with increasingly high quality legal services.",
+        "In our pursuit of excellence, our vision is to make Tiger Partners one of the best dispute resolution law firms in China, to be the \"sword\" and \"defender\" of our clients, and to aggressively engaged in the process of legalization in China.",
+      ],
+      zh: [
+        "我们始终以实现客户的需求作为第一目标，以“胜诉”为争议解决法律服务的最终目的。我们对每个案件进行严谨的流程节点把控和大量的时间投入，由合伙人具体承办并出庭代理案件，对每个细节精雕细琢，力求每次开庭、每起案件都做到无懈可击，为客户提供专业、精准、高效的法律服务，实现客户的商业目标。每个案件都是我们的作品，我们从不追求作品的数量，我们珍视自己的品牌及口碑，追求每个作品的卓越与完美。",
+        "我们具有完善的业务培训机制和晋升机制，致力于持续地提高律师团队的专业服务水平，并持续与新兴领域的领军者保持紧密合作，进一步确保我们不断成长，从而能够为客户提供越来越优质的法律服务。",
+        "我们追求卓越，我们的愿景是把“虎诉”打造成中国最好的争议解决律师事务所之一，成为客户的“利剑”与“捍卫者”，并积极投身于中国法治化的进程之中。",
+      ],
+    },
     honorsTitle: { en: "HONORS", zh: "虎诉荣誉" },
     honorsSubtitle: {
       en: ["Tiger Partners Is Favored And Recognized By", "Multiple Authoritative Legal Directories And Awarding Organizations All Over The World"],
@@ -126,12 +138,12 @@ export const copy = {
     title: { en: "Contact", zh: "联系我们" },
     intro: {
       en: "When you face legal problems, please contact us without hesitation On our way achieving our goals, we are also looking for partners with the same professional ideal",
-      zh: "当您面临法律上的困境或问题，请毫不犹豫地联系我们 成长途中，我们亦在寻找怀揣同样执业理想的伙伴",
+      zh: "如您有任何法律疑问或争议，欢迎随时与我们联系。我们诚挚期待为您提供专业的法律服务，致力于维护您的合法权益。",
     },
     cardTitle: { en: "Contact us", zh: "联系我们" },
     cardBody: {
       en: "Should you have any legal questions or disputes, please feel free to contact us. We sincerely look forward to providing you with professional legal services and are committed to safeguarding your legitimate rights and interests.",
-      zh: "当您面临法律上的困境或问题，请毫不犹豫地联系我们。",
+      zh: "如您有任何法律疑问或争议，欢迎随时与我们联系。我们诚挚期待为您提供专业的法律服务，致力于维护您的合法权益。",
     },
     joinTitle: { en: ["Welcome", "To", "Join Us"], zh: ["欢迎加入虎诉"] },
     joinBody: {
@@ -159,9 +171,9 @@ export const copy = {
   },
   team: {
     title: { en: "Our team", zh: "虎诉团队" },
-    subtitle: { en: "Professional, Efficient, Passionate, and Desperate for Win", zh: "专业、高效、热忱，并渴望胜诉" },
-    sloganTitle: { en: ["WE ARE SPECIAL", "FORCES"], zh: ["我们是", "特别行动队"] },
-    slogan: { en: ["As fast as wind,", "and as aggressive", "as fire"], zh: ["其疾如风", "侵掠如火"] },
+    subtitle: { en: "Professional, Efficient, Passionate, and Desperate for Win", zh: "专业、高效、充满激情并极度渴望胜利" },
+    sloganTitle: { en: ["WE ARE SPECIAL", "FORCES"], zh: ["我们，", "即为精锐之师"] },
+    slogan: { en: ["As fast as wind,", "and as aggressive", "as fire"], zh: ["快如风，", "烈如火"] },
     partner: { en: "Partner", zh: "合伙人" },
     seniorAssociate: { en: "Senior Associate", zh: "高级律师" },
   },

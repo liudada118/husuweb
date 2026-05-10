@@ -105,7 +105,7 @@ export const industriesDetailData = {
             "（2）Initiating pre-litigation preservation or preservation in litigation (including judicial preservation against the bank accounts, equity interests or investment proceeds of the counterparty);",
             "（3）Responding to claims or filing counterclaims;",
             "（4）Initiating application for enforcement;",
-            "（5）In the litigation or arbitration proceedings, assisting in preservation or enforcement proceedings by visiting institutions in person, such as Shanghai Stock Exchange or China Securities Depository and Clearing Corporation Limited;",
+            "（5）In the litigation or arbitration proceedings, In the litigation or arbitration proceedings, assisting in preservation or enforcement proceedings by visiting institutions in person, such as Shanghai Stock Exchange or China Securities Depository and Clearing Corporation Limited;",
             "（6）Participating in negotiations for settlement or mediation."
           ]
         }

@@ -44,9 +44,10 @@ export function SiteHeader({ active }: { active: ActiveNav }) {
       <div className="site-shell flex min-h-[var(--header-height)] items-center justify-between gap-4 py-[1.2rem]">
         <Link href="/" className="flex min-w-0 items-center" onClick={() => setMenuOpen(false)}>
           <ImageWithFallback
-            src="/assets/title/logo.png"
+            src="/assets/title/logo.svg"
             alt="Tiger Partners"
-            className="h-[clamp(3.9rem,4.68vw,5.07rem)] w-auto object-contain"
+            loading="eager"
+            className="h-auto w-[5.375rem] object-contain"
           />
         </Link>
 
@@ -64,7 +65,7 @@ export function SiteHeader({ active }: { active: ActiveNav }) {
               >
                 {language === "en" ? item.en : item.zh}
                 <span
-                  className={`absolute -bottom-2 left-0 h-px bg-[#d9b27a] transition-transform duration-200 origin-left ${
+                  className={`absolute -bottom-2 left-0 h-0.5 bg-[#d9b27a] transition-transform duration-200 origin-left ${
                     isActive ? "w-full scale-x-100" : "w-full scale-x-0 group-hover:scale-x-100"
                   }`}
                 />
@@ -78,7 +79,7 @@ export function SiteHeader({ active }: { active: ActiveNav }) {
             aria-label="Toggle language"
           >
             <Globe className="size-4" />
-            {language === "en" ? "EN" : "中"}
+            {language === "en" ? "CN" : "英"}
           </button>
         </nav>
 
@@ -90,7 +91,7 @@ export function SiteHeader({ active }: { active: ActiveNav }) {
             aria-label="Toggle language"
           >
             <Globe className="size-4" />
-            {language === "en" ? "EN" : "中"}
+            {language === "en" ? "CN" : "英"}
           </button>
           <button
             type="button"
@@ -120,7 +121,7 @@ export function SiteHeader({ active }: { active: ActiveNav }) {
                   }`}
                 >
                   {language === "en" ? item.en : item.zh}
-                  {isActive ? <span className="absolute bottom-2 left-1 h-px w-10 bg-[#d9b27a]" /> : null}
+                  {isActive ? <span className="absolute bottom-2 left-1 h-0.5 w-10 bg-[#d9b27a]" /> : null}
                 </Link>
               );
             })}

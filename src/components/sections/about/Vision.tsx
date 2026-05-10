@@ -1,12 +1,15 @@
 "use client";
 
+import { useState } from "react";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
 import { pick, useLanguage } from "@/i18n/LanguageProvider";
 import { copy } from "@/i18n/copy";
 
 export function VisionCard({ className = "" }: { className?: string }) {
   const { language } = useLanguage();
+  const [expanded, setExpanded] = useState(false);
   const paragraphs = pick(language, copy.about.visionParagraphs);
+  const moreParagraphs = pick(language, copy.about.visionMoreParagraphs);
 
   return (
     <div className={className}>
@@ -18,8 +21,9 @@ export function VisionCard({ className = "" }: { className?: string }) {
         }}
       >
         <ImageWithFallback
-          src="/assets/about/aboutVision.png"
+          src="/assets/about/aboutVision.webp"
           alt=""
+          loading="lazy"
           className="absolute inset-0 h-full w-full object-cover opacity-35"
         />
         <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(47,47,47,0.72)_0%,rgba(47,47,47,0.42)_48%,rgba(30,30,30,0.78)_100%)]" />
@@ -68,10 +72,26 @@ export function VisionCard({ className = "" }: { className?: string }) {
           ))}
         </div>
 
-        <a href="#" className="relative mx-auto mb-8 mt-10 flex w-max flex-col items-center">
-          <span className="text-[1.5rem] font-semibold text-[#e1ab5c]">{pick(language, copy.common.seeMore)}</span>
+        {expanded ? (
+          <div className="relative mt-8 space-y-6">
+            {moreParagraphs.map((paragraph) => (
+              <p key={paragraph} className="text-justify text-[1.5rem] font-medium leading-relaxed text-white/80">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        ) : null}
+
+        <button
+          type="button"
+          onClick={() => setExpanded((value) => !value)}
+          className="relative mx-auto mb-8 mt-10 flex w-max flex-col items-center"
+        >
+          <span className="text-[1.5rem] font-semibold text-[#e1ab5c]">
+            {expanded ? pick(language, copy.common.collapse) : pick(language, copy.common.seeMore)}
+          </span>
           <span className="mt-1 block h-0.5 w-28 bg-[#e1ab5c]" />
-        </a>
+        </button>
       </div>
     </div>
   );

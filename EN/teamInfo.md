@@ -20,7 +20,7 @@ Mandarin  
 English
 Social Engagements
 Mr. Liu currently serves as a member of the Commercial Arbitration Law Professional Committee of the Beijing Lawyers Association, Deputy Director of the Arbitration and Mediation Business Research Association of the Chaoyang District Lawyers Association.
-, and a member of the "Legal Experts Database" of the Arbitration Research Center of the Sichuan Law and Social Governance Research Association.
+
 成员简介
 Practice Area
 
@@ -29,7 +29,7 @@ Mr. Liu specializes in domestic litigation and arbitration. He has extensive exp
 Practice Experience
 
 As the founding partner of Tiger Partners, Mr. Liu Yuxuan has been practicing law for more than sixteen years. Prior to founding Tiger Partners, Mr. Liu worked as a partner at Jingtian & Gongcheng (2018-2019). Before that, Mr. Liu worked as a dispute resolution lawyer at Fangda Partners (2014-2018), King & Wood (2012-2014), and Zhong Lun Law Firm (2009-2010). 
-Mr. Liu Yuxuan once received an exclusive interview with Asian Legal Business (ALB), a well-known legal media, and was featured by ALB as "An Up-and-Comer in Dispute Resolution".
+
 
 Honors
 
@@ -118,7 +118,7 @@ Languages Skills
 Mandarin  
 English
 Social Engagements
-Mr. Xu Min is a Fellow of the Chartered Institute of Arbitrators (F.CI Arb) and is listed in the "100 High-end International Legal Talents" by the Beijing Municipal Bureau of Justice and the International Lawyers Talent Pool of the Beijing Lawyers Association. Mr. Xu is a member of the China Association For Sports Law (CASL), the Culture, Tourism, Media, and Sports Committee of the Beijing Lawyers Association, and the Sports Law and Olympic Legal Affairs Research Association of the Beijing Law Society. 
+Mr. Xu Min is a Fellow of the Chartered Institute of Arbitrators (F.CIArb), an arbitrator of China Commission of Arbitration for Sport and is listed in the "100 High-end International Legal Talents" by the Beijing Municipal Bureau of Justice and the International Lawyers Talent Pool of the Beijing Lawyers Association. Mr. Xu is a member of the China Association For Sports Law (CASL), the Culture, Tourism, Media, and Sports Committee of the Beijing Lawyers Association, and the Sports Law and Olympic Legal Affairs Research Association of the Beijing Law Society.
 成员简介
 Practice Area
 
@@ -177,7 +177,7 @@ wan.li@tigerpartners.cn
 服务行业
 Finance,International Trade,Private Equity
 Educational Background
-University of International Relations, Bachelor of Law, 2007 
+Bachelor of Law, University of International Relations, 2007 
  
 Dalian Maritime University, Master of Law, 2009
 

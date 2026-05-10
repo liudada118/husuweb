@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { ChevronRight, Mail } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { BackToTop } from "@/components/shared/BackToTop";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
+import { SubpageBreadcrumb } from "@/components/shared/SubpageBreadcrumb";
 import type { TeamProfile } from "@/data/teamProfiles";
 import { pick, useLanguage } from "@/i18n/LanguageProvider";
 import { copy } from "@/i18n/copy";
@@ -47,6 +48,20 @@ const detailLabels = {
   achievements: { en: "Performance & Achievements", zh: "个人业绩" },
 };
 
+function splitEducation(education: string) {
+  return education
+    .split(/[;；]/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+function splitParagraphs(text: string) {
+  return text
+    .split(/\n+/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
 export function TeamProfilePage({ profile }: { profile: TeamProfile }) {
   const { language } = useLanguage();
   const [honorsOpen, setHonorsOpen] = useState(false);
@@ -55,6 +70,7 @@ export function TeamProfilePage({ profile }: { profile: TeamProfile }) {
   const displayName = language === "zh" ? profile.zhName : profile.name;
   const displayTitle = language === "zh" ? profile.zhTitle : profile.title;
   const hasHonors = details.honors.length > 0;
+  const hasSocialEngagements = details.socialEngagements.trim().length > 0;
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-[#171717] text-white">
@@ -66,6 +82,8 @@ export function TeamProfilePage({ profile }: { profile: TeamProfile }) {
             <ImageWithFallback
               src={profile.image}
               alt={displayName}
+              loading="eager"
+              fetchPriority="high"
               className="absolute inset-0 h-full w-full object-cover object-bottom"
             />
           </div>
@@ -79,8 +97,15 @@ export function TeamProfilePage({ profile }: { profile: TeamProfile }) {
             </p>
             <div className="mt-10 h-px w-[28rem] bg-white/80" />
             <a
+              href={`tel:${profile.phone.replace(/[^+\d]/g, "")}`}
+              className="mt-10 flex w-max items-center gap-4 text-[1.75rem] font-light text-white underline underline-offset-4 transition hover:text-[#d9b27a]"
+            >
+              <Phone className="size-7 text-white" strokeWidth={1.5} />
+              {profile.phone}
+            </a>
+            <a
               href={`mailto:${profile.email}`}
-              className="mt-10 inline-flex items-center gap-4 text-[1.75rem] font-light text-white underline underline-offset-4 transition hover:text-[#d9b27a]"
+              className="mt-5 inline-flex items-center gap-4 text-[1.75rem] font-light text-white underline underline-offset-4 transition hover:text-[#d9b27a]"
             >
               <Mail className="size-7 text-white" strokeWidth={1.5} />
               {profile.email}
@@ -90,13 +115,11 @@ export function TeamProfilePage({ profile }: { profile: TeamProfile }) {
       </section>
 
       <div className="bg-black px-[var(--shell-md)] py-8">
-        <div className="flex items-center gap-3 text-[1.125rem] tracking-[0.06em] text-white/75">
-          <Link href="/team" className="transition hover:text-[#d9b27a]">
-            {pick(language, copy.team.title)}
-          </Link>
-          <ChevronRight className="size-4" />
-          <span className="text-white">{displayName}</span>
-        </div>
+        <SubpageBreadcrumb
+          parentLabel={pick(language, copy.team.title)}
+          currentLabel={displayName}
+          fallbackHref="/team"
+        />
       </div>
 
       <section className="bg-[linear-gradient(180deg,#333231_0%,#433e38_100%)] px-[8rem] pb-16 pt-8">
@@ -135,19 +158,23 @@ export function TeamProfilePage({ profile }: { profile: TeamProfile }) {
             <h2 className="text-[2rem] font-semibold leading-none text-[#d9b27a]">
               {pick(language, detailLabels.educationalBackground)}
             </h2>
-            <p className="mt-6 text-[1.5rem] font-light leading-[1.45] text-white/72">
-              {details.education}
-            </p>
+            <div className="mt-6 space-y-4 text-[1.5rem] font-light leading-[1.45] text-white/72">
+              {splitEducation(details.education).map((item) => (
+                <p key={item}>{item}</p>
+              ))}
+            </div>
           </div>
 
-          <div className="lg:col-span-3">
-            <h2 className="text-[2rem] font-semibold leading-none text-[#d9b27a]">
-              {pick(language, detailLabels.socialEngagements)}
-            </h2>
-            <p className="mt-6 text-[1.5rem] font-light leading-[1.55] text-white/72">
-              {details.socialEngagements}
-            </p>
-          </div>
+          {hasSocialEngagements ? (
+            <div className="lg:col-span-3">
+              <h2 className="text-[2rem] font-semibold leading-none text-[#d9b27a]">
+                {pick(language, detailLabels.socialEngagements)}
+              </h2>
+              <p className="mt-6 text-[1.5rem] font-light leading-[1.55] text-white/72">
+                {details.socialEngagements}
+              </p>
+            </div>
+          ) : null}
         </div>
       </section>
 
@@ -173,9 +200,11 @@ export function TeamProfilePage({ profile }: { profile: TeamProfile }) {
               <h3 className="border-l-2 border-[#d9b27a] pl-7 text-[2.25rem] font-normal leading-none text-[#d9b27a]">
                 {pick(language, detailLabels.practiceExperience)}
               </h3>
-              <p className="mt-8 text-[1.5rem] font-light leading-[1.75] text-white/72">
-                {details.practiceExperience}
-              </p>
+              <div className="mt-8 space-y-5 text-[1.5rem] font-light leading-[1.75] text-white/72">
+                {splitParagraphs(details.practiceExperience).map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
             </div>
           </div>
           {hasHonors ? (
@@ -264,6 +293,7 @@ export function TeamProfilePage({ profile }: { profile: TeamProfile }) {
       </section>
 
       <SiteFooter />
+      <BackToTop />
     </main>
   );
 }

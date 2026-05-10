@@ -47,18 +47,22 @@ summary::-webkit-details-marker {
   color: transparent;
 }
 
+.hero-flow-text {
+  background-image: linear-gradient(112deg, #d5ad71 0%, #fff2cf 18%, #d09e57 34%, #f8e6b8 50%, #d09e57 66%, #fff2cf 82%, #d5ad71 100%);
+  background-size: 260% 100%;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 34px rgba(217, 178, 122, 0.16);
+  animation: hero-flow-shine 5.5s linear infinite;
+}
+
 .client-logo-track {
-  animation-name: client-logo-scroll;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
+  animation: client-logo-scroll 135s linear infinite;
+  will-change: transform;
 }
 
 .client-logo-track-reverse {
   animation-direction: reverse;
-}
-
-.client-logo-row:hover .client-logo-track {
-  animation-play-state: paused;
 }
 
 @keyframes client-logo-scroll {
@@ -71,13 +75,18 @@ summary::-webkit-details-marker {
   }
 }
 
+@keyframes hero-flow-shine {
+  from {
+    background-position: 260% 50%;
+  }
+
+  to {
+    background-position: 0% 50%;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
+  html {
     scroll-behavior: auto !important;
-    transition-duration: 0.01ms !important;
   }
 }

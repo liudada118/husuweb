@@ -38,6 +38,7 @@ function TeamCard({
         <ImageWithFallback
           src={image}
           alt={displayName}
+          decoding="sync"
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1600ms] ease-out group-hover:scale-105"
         />
       </div>
@@ -67,10 +68,16 @@ export function TeamPage() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#171717] text-white">
       <PageTriangle
-        className="right-0 top-[calc(100svh+7rem)] h-[calc(100%-100svh-7rem)] w-full opacity-50"
+        className="right-0 top-[calc(100svh+7rem)] h-[calc(100%-100svh-7rem)] w-full opacity-20"
       />
       <section className="relative h-[min(67.5rem,100svh)] min-h-[40rem] w-full overflow-hidden">
-        <ImageWithFallback src={teamAssets.hero} alt="" className="absolute inset-0 h-full w-full object-cover" />
+        <ImageWithFallback
+          src={teamAssets.hero}
+          alt=""
+          loading="eager"
+          fetchPriority="high"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
         <div className="absolute inset-0 bg-[rgba(68,67,67,0.5)] mix-blend-screen" />
         <div className="absolute inset-0 bg-[linear-gradient(180.182deg,rgba(56,56,56,0)_30.211%,rgb(23,23,23)_93.072%)]" />
         <SiteHeader active="OUR TEAM" />
@@ -88,7 +95,7 @@ export function TeamPage() {
         </div>
       </section>
 
-      <section className="relative w-full">
+      <section className="relative z-10 w-full">
         <div className="site-shell pb-20 pt-16">
           <div className="flex flex-col items-start justify-between gap-8 border-b border-white/45 pb-10 xl:flex-row xl:items-end">
             <h2 className="text-left text-[6rem] font-semibold italic uppercase leading-[0.92] tracking-[-0.04em] text-white">
@@ -111,7 +118,7 @@ export function TeamPage() {
         </div>
       </section>
 
-      <section className="site-shell pb-32">
+      <section className="site-shell relative z-10 pb-32">
         <div className="grid grid-cols-1 gap-x-20 gap-y-20 lg:grid-cols-2">
           <h2 className="mb-[-2.5rem] text-[4rem] font-normal italic uppercase leading-[1.1] tracking-[-0.04em] text-white lg:col-span-2">
             {pick(language, copy.team.partner)}

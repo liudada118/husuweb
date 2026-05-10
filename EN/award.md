@@ -158,6 +158,9 @@ March 2026, Shortlisted for the ALB China Law Awards 2026 with two nominations: 
 
 刘煜暄律师荣获《亚洲法律概况》（Asialaw Profiles）2020中国法律市场争议解决领域“知名律师”（Notable Practitioner）称号
 
+[图片]
+
+In September 2019, Mr. Liu Yuxuan was awarded the title of “Notable Practitioner” in the field of dispute resolution in China legal market by Asialaw Profiles for 2020.
 公众号：无
 官网：https://www.tigerpartners.cn/en/#/team/20
 领英：【】
@@ -167,6 +170,9 @@ March 2026, Shortlisted for the ALB China Law Awards 2026 with two nominations: 
 刘煜暄律师接受ALB专访，被赞誉为“争议解决领域的耀眼新星”
 
 
+[图片]
+
+In May 2020, Mr. Liu once received an exclusive interview with Asian Legal Business (ALB), a well-known legal media, and was featured by ALB as “An Up-and-Comer in Dispute Resolution”.
 公众号：https://mp.weixin.qq.com/s/qAbZbbU28WuUpSNMRPMXtg
 官网：https://www.tigerpartners.cn/zh/#/events/46
 领英：【】
@@ -175,6 +181,9 @@ March 2026, Shortlisted for the ALB China Law Awards 2026 with two nominations: 
 
 许旻律师和万力律师入选北京市律师协会涉外律师人才库
 
+[图片]
+
+In October 2020, Mr. Xu Min and Mr. Wan Li were selected into the Foreign-Related Lawyer Talent Pool of the Beijing Bar Association.
 公众号：https://mp.weixin.qq.com/s/xjJ_NZ1wAF5UWhBBFBXR0g
 官网：https://www.tigerpartners.cn/zh/#/events/14
 领英：【】
@@ -183,6 +192,9 @@ March 2026, Shortlisted for the ALB China Law Awards 2026 with two nominations: 
 
 刘煜暄律师和万力律师入选《商法》Rising Stars 2021 TOP 40榜单
 
+[图片]
+
+In March 2021, Mr. Liu Yuxuan  and Mr. Wan Li were identified by the notable legal media China Business Law Journal in the list of Rising Stars 2021 Top 40.
 公众号：https://mp.weixin.qq.com/s/rP92POWLpql0e0SokZFAEg
 官网：https://www.tigerpartners.cn/zh/#/events/24
 领英：【】
@@ -191,6 +203,10 @@ March 2026, Shortlisted for the ALB China Law Awards 2026 with two nominations: 
 
 刘煜暄律师入选LEGALBAND2021年度中国顶级律师排行榜，在本次排行中被评选为“争议解决·诉讼”领域的“后起之秀”
 
+[图片]
+
+In April 2021, Mr. Liu Yuxuan was listed in the LEGALBAND 2021 Top Ranked Lawyers, and ranked as the "Rising Star" in the field of "dispute resolution and litigation
+
 公众号：https://mp.weixin.qq.com/s/j-99ykPm_F1MY0DNkTFNIQ
 官网：https://www.tigerpartners.cn/zh/#/events/36
 领英：【】
@@ -198,6 +214,9 @@ March 2026, Shortlisted for the ALB China Law Awards 2026 with two nominations: 
 20210610
 刘煜暄律师、万力律师荣登Benchmark Litigation China 2021北京地区争议解决推荐律师榜单
 
+[图片]
+
+In June 2021, Mr. Liu Yuxuan and Mr. Wan Li were listed on the benchmark Litigation China 2021 list of lawyers recommended for dispute resolution in Beijing.
 公众号：https://mp.weixin.qq.com/s/QY2BANTbmd43qWi_CKziwQ
 官网：https://www.tigerpartners.cn/zh/#/events/33
 领英：【】
@@ -205,6 +224,9 @@ March 2026, Shortlisted for the ALB China Law Awards 2026 with two nominations: 
 20211015
 刘煜暄律师、许旻律师、万力律师当选第十一届北京律师协会专业委员会委员
 
+[图片]
+
+In October 2021, Mr. Liu Yuxuan, Mr. Xu Min and Mr. Wan Li were elected as members of the 11th Professional Committee of the Beijing Lawyers Association
 公众号：https://mp.weixin.qq.com/s/ZnKhh9BgIU55Fiq_F-n3qQ
 官网：https://www.tigerpartners.cn/zh/#/events/55
 领英：【】
@@ -212,12 +234,18 @@ March 2026, Shortlisted for the ALB China Law Awards 2026 with two nominations: 
 20220124
 刘煜暄律师入选2021年度《商法》“The A-List 法律精英”名册
   
+[图片]
+
+ In January 2022, Mr. Liu Yuxuan was selected as one of  "The A List" among 100 elite practitioners of Chinese law by China Business Law Journal.
 公众号：https://mp.weixin.qq.com/s/fJpKTpsvv13xsNTegaDWKw
 官网：https://www.tigerpartners.cn/zh/#/events/60
 领英：【】
 9
 202203
 万力律师受聘为大连国际仲裁院（大连仲裁委员会）第六届仲裁员。
+
+[图片]
+In March 2022, Mr. Wan Li was engaged as the 6th arbitrator of Dalian International Arbitration Court.
 
 公众号：https://mp.weixin.qq.com/s/2yjTES3gCfjVrzT88JE45w
 官网：https://www.tigerpartners.cn/zh/#/about
@@ -226,6 +254,8 @@ March 2026, Shortlisted for the ALB China Law Awards 2026 with two nominations: 
 20220517
 刘煜暄律师入选2022年度LEGALBAND中国顶级律师排行榜，被评为争议解决（诉讼）领域的“后起之秀”
 
+[图片]
+In May 2022, Mr. Liu Yuxuan was listed in the 2022 Top Ranked Lawyers List as "Rising Star" in the field of "Dispute Resolution · Litigation" by LEGALBAND.
 公众号：https://mp.weixin.qq.com/s/2dhrPQ18vC8m860xllZteg
 官网：https://www.tigerpartners.cn/zh/#/events/64
 领英：【】
@@ -233,6 +263,8 @@ March 2026, Shortlisted for the ALB China Law Awards 2026 with two nominations: 
 20220517
 万力律师入选2022年度LEGALBAND中国顶级律师排行榜，被评为合规领域的“后起之秀”
 
+[图片]
+In May 2022,  Mr. Wan Li was listed in the 2022 Top Ranked Lawyers List as "Rising Star" in the field of "Dispute Resolution · Litigation" by LEGALBAND.
 公众号：https://mp.weixin.qq.com/s/2dhrPQ18vC8m860xllZteg
 官网：https://www.tigerpartners.cn/zh/#/events/64
 领英：【】
@@ -240,12 +272,63 @@ March 2026, Shortlisted for the ALB China Law Awards 2026 with two nominations: 
 202501
 虎诉刘煜暄律师、许旻律师、万力律师、张莉律师受邀撰写《2025钱伯斯全球指南-中国争议解决概览》
 exclusively invited to author the Chambers Global Practice Guides 2025 - Dispute Resolution Overview (China Chapter)
+[图片]
+
+In January 2025, Mr. Liu Yuxuan, Mr. Xu Min, Mr. Wan Li and Ms. Zhang Li(Zoe) of Tiger Partners were exclusively invited to author the Chambers Global Practice Guides 2025 - Dispute Resolution Overview (China Chapter).
 钱伯斯官网原文：虎诉律师事务所：突破与创新 - 2025年中国争议解决概览/CHINA: An Introduction to Dispute Resolution (PRC Firms)(https://chambers.com/content/item/6288?utm_source=WeChat&utm_medium=Organic&utm_campaign=WeChat-February2025&utm_id=WeChat-February2025&sessionid=)
 13
 20251119
 虎诉刘煜暄律师、万力律师、张莉律师荣获首届Legal 500中国精英-“北京精英·商业争议”
 Legal 500 China Elite
 
+[图片]
+In November 2025, Mr. Liu Yuxuan, Mr. Wan Li and Ms. Zhang Li(Zoe) of Tiger Partners were awarded the inaugural Legal 500 China Elite: Beijing Elite – Commercial Disputes.
 公众号：https://mp.weixin.qq.com/s/mOZ5OQfwytgjlTcba_6ItA
 官网：【】
+领英：【】
+虎诉赞助活动
+
+
+
+
+
+1
+202211
+虎诉荣幸成为第二十届“贸仲杯”Voice of Moot系列培训活动银牌赞助商
+
+[图片]
+
+In November 2022, Tiger Partners was honored to be the Silver Sponsor of the 20th "CIETAC Cup" Voice of Moot series training activities.
+公众号：https://mp.weixin.qq.com/s/eyqN6Oc4dTkue-yeCgiOKQ
+官网：https://www.tigerpartners.cn/zh/#/events/70
+领英：【】
+2
+202304
+虎诉赞助2023钱伯斯北京论坛并受邀参会
+
+[图片]
+
+In April 2023, Tiger Partners sponsored the Chambers Beijing Forum 2023 and was invited to participate.
+
+公众号：https://mp.weixin.qq.com/s/PyDLW8DCGTkl_uc7rU0bFw
+官网：https://www.tigerpartners.cn/zh/#/events/72
+领英：【】
+3
+20240515
+虎诉赞助2024世界仲裁最新动态大会（WAU）中国站
+World Arbitration Update 2024，“WAU 2024”
+
+[图片]
+In May 2024, Tiger Partners sponsored the World Arbitration Update 2024 (WAU 2024) China Edition.
+公众号：https://mp.weixin.qq.com/s/7aGIqSiBs6zWAbs8gUD35A
+官网：无
+领英：【】
+4
+20241129
+虎诉荣任第二十二届“贸仲杯”VOICE OF MOOT系列培训活动钻石赞助商
+
+[图片]
+In November 2024, Tiger Partners was honored to be the Diamond Sponsor of the 22nd "CIETAC Cup" Voice of Moot series training activities.
+公众号：https://mp.weixin.qq.com/s/jTF2REe5GZUKyjG4yHlqgg
+官网：无
 领英：【】

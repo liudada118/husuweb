@@ -9,15 +9,18 @@ export function AboutHero() {
   const { language } = useLanguage();
 
   return (
-    <section className="relative w-full overflow-hidden" style={{ minHeight: "calc(100svh + 36rem)" }}>
+    <section className="relative w-full overflow-hidden pb-20">
       <ImageWithFallback
         src="/assets/about/hero.png"
         alt="building"
+        loading="eager"
+        fetchPriority="high"
         className="absolute inset-0 size-full object-cover"
       />
       <div className="absolute inset-x-0 bottom-0 top-[100svh] bg-gradient-to-b from-transparent to-[#171717]" />
       <div className="absolute inset-x-0 bottom-0 top-[100svh] bg-gradient-to-r from-black/30 to-transparent" />
-      <div className="relative z-10 min-h-[calc(100svh+36rem)]">
+      <div className="relative z-10">
+        <div className="relative min-h-[100svh]">
         <div className="absolute left-[var(--shell-md)] right-[var(--shell-md)] top-[55svh] border-l-[0.3rem] border-[#d9b27a] pl-8">
           <h1
             className="text-[#1b1b1b]"
@@ -48,7 +51,8 @@ export function AboutHero() {
             ))}
           </p>
         </div>
-        <VisionCard className="absolute left-[1.25rem] right-[1.25rem] top-[90svh] md:left-[5rem] md:right-[5rem]" />
+        </div>
+        <VisionCard className="relative mx-[1.25rem] -mt-[10svh] md:mx-[5rem]" />
       </div>
     </section>
   );

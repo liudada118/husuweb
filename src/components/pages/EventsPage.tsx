@@ -25,17 +25,18 @@ function EventCard({
   image: string;
 }) {
   return (
-    <Link href={`/events/${slug}`} className="group relative block min-w-0 pt-[22%]">
+    <Link href={`/events/${slug}`} className="group relative block min-w-0">
       <div className="relative flex h-full flex-col bg-[#5a5955] shadow-[0_8px_20px_rgba(0,0,0,0.25)] transition-colors duration-700 hover:bg-[#5f5e5a]">
         <div className="pointer-events-none absolute bottom-0 right-0 h-[6%] w-1/2 bg-white/10 [clip-path:polygon(100%_0,100%_100%,0_100%)]" />
-        <div className="absolute -left-[3.3%] -top-[3.3%] aspect-[4/3] w-[90%] overflow-hidden bg-[#0a0a0a]">
+        <div className="relative -left-[3.3%] -top-[1.25rem] aspect-[16/9] w-[90%] overflow-hidden bg-[#0a0a0a]">
           <ImageWithFallback
             src={image}
             alt={title}
-            className="absolute inset-0 size-full object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-105"
+            decoding="sync"
+            className="size-full object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-105"
           />
         </div>
-        <div className="relative z-20 flex flex-1 flex-col px-6 pb-8 pt-[calc(54%+6rem)]">
+        <div className="relative z-20 flex flex-1 flex-col px-6 pb-8 pt-6">
           <div className="mb-6 flex items-center justify-between gap-6 text-[1.5rem] font-normal tracking-[0.02em] text-[#d8d8d8]">
             <span>{date}</span>
             <ArrowRight className="size-[clamp(2rem,3vw,3.75rem)] shrink-0 text-[#d9b27a] transition-transform duration-500 group-hover:translate-x-2" strokeWidth={1.5} />
@@ -65,6 +66,8 @@ export function EventsPage() {
         <ImageWithFallback
           src="/assets/event/hero.png"
           alt=""
+          loading="eager"
+          fetchPriority="high"
           className="absolute inset-0 size-full object-cover opacity-45"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-[#171717]/35 to-[#171717]" />

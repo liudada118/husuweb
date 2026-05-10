@@ -83,13 +83,25 @@ const data: YearItem[] = [
   },
   {
     year: "2024",
-    count: "2 Distinctions",
+    count: "4 Distinctions",
     awards: [
+      {
+        title: 'Diamond Sponsor of the 22nd "CIETAC Cup" Voice of Moot series training activities',
+        date: "2024-11",
+        body: 'In November 2024, Tiger Partners was honored to be the Diamond Sponsor of the 22nd "CIETAC Cup" Voice of Moot series training activities.',
+        href: "https://mp.weixin.qq.com/s/jTF2REe5GZUKyjG4yHlqgg",
+      },
       {
         title: "Benchmark Litigation China 2024",
         date: "2024-06",
         body: "Tiger Partners was listed in the Dispute Resolution list as a Firm to Watch.",
         href: "https://mp.weixin.qq.com/s/1BLkOkRN9_AXkw--ubFNQQ",
+      },
+      {
+        title: "World Arbitration Update 2024 China Edition",
+        date: "2024-05",
+        body: "In May 2024, Tiger Partners sponsored the World Arbitration Update 2024 (WAU 2024) China Edition.",
+        href: "https://mp.weixin.qq.com/s/7aGIqSiBs6zWAbs8gUD35A",
       },
       {
         title: "ALB China Firms to Watch 2024",
@@ -100,9 +112,27 @@ const data: YearItem[] = [
     ],
   },
   {
-    year: "2022",
-    count: "7 Distinctions",
+    year: "2023",
+    count: "1 Distinction",
     awards: [
+      {
+        title: "Chambers Beijing Forum 2023",
+        date: "2023-04",
+        body: "In April 2023, Tiger Partners sponsored the Chambers Beijing Forum 2023 and was invited to participate.",
+        href: "https://mp.weixin.qq.com/s/PyDLW8DCGTkl_uc7rU0bFw",
+      },
+    ],
+  },
+  {
+    year: "2022",
+    count: "9 Distinctions",
+    awards: [
+      {
+        title: 'Silver Sponsor of the 20th "CIETAC Cup" Voice of Moot series training activities',
+        date: "2022-11",
+        body: 'In November 2022, Tiger Partners was honored to be the Silver Sponsor of the 20th "CIETAC Cup" Voice of Moot series training activities.',
+        href: "https://mp.weixin.qq.com/s/eyqN6Oc4dTkue-yeCgiOKQ",
+      },
       {
         title: "China Business Law Awards 2022",
         date: "2022-06",
@@ -132,6 +162,12 @@ const data: YearItem[] = [
         date: "2022-03",
         body: "Tiger Partners was nominated for Rising Law Firm of the Year.",
         href: "https://mp.weixin.qq.com/s/XZXux5kRZ65PHROSJbj7hg",
+      },
+      {
+        title: "Wan Li appointed as arbitrator of Dalian International Arbitration Court",
+        date: "2022-03",
+        body: "In March 2022, Mr. Wan Li was engaged as the 6th arbitrator of Dalian International Arbitration Court.",
+        href: "https://mp.weixin.qq.com/s/2yjTES3gCfjVrzT88JE45w",
       },
       {
         title: "China Business Law Journal A-List 2021",
@@ -443,6 +479,79 @@ const zhData: YearItem[] = [
   },
 ];
 
+const zhSponsorHonors: Record<string, Award[]> = {
+  "2024": [
+    {
+      title: "虎诉荣任第二十二届“贸仲杯”VOICE OF MOOT系列培训活动钻石赞助商",
+      date: "2024-11",
+      body: "2024年11月，虎诉荣任第二十二届“贸仲杯”VOICE OF MOOT系列培训活动钻石赞助商。",
+      href: "https://mp.weixin.qq.com/s/jTF2REe5GZUKyjG4yHlqgg",
+    },
+    {
+      title: "虎诉赞助2024世界仲裁最新动态大会（WAU）中国站",
+      date: "2024-05",
+      body: "2024年5月，虎诉赞助2024世界仲裁最新动态大会（WAU 2024）中国站。",
+      href: "https://mp.weixin.qq.com/s/7aGIqSiBs6zWAbs8gUD35A",
+    },
+  ],
+  "2022": [
+    {
+      title: "虎诉荣幸成为第二十届“贸仲杯”Voice of Moot系列培训活动银牌赞助商",
+      date: "2022-11",
+      body: "2022年11月，虎诉荣幸成为第二十届“贸仲杯”Voice of Moot系列培训活动银牌赞助商。",
+      href: "https://mp.weixin.qq.com/s/eyqN6Oc4dTkue-yeCgiOKQ",
+    },
+    {
+      title: "万力律师受聘为大连国际仲裁院（大连仲裁委员会）第六届仲裁员",
+      date: "2022-03",
+      body: "2022年3月，万力律师受聘为大连国际仲裁院（大连仲裁委员会）第六届仲裁员。",
+      href: "https://mp.weixin.qq.com/s/2yjTES3gCfjVrzT88JE45w",
+    },
+  ],
+};
+
+const zhChambers2023: YearItem = {
+  year: "2023",
+  count: "1项荣誉",
+  awards: [
+    {
+      title: "虎诉赞助2023钱伯斯北京论坛并受邀参会",
+      date: "2023-04",
+      body: "2023年4月，虎诉赞助2023钱伯斯北京论坛并受邀参会。",
+      href: "https://mp.weixin.qq.com/s/PyDLW8DCGTkl_uc7rU0bFw",
+    },
+  ],
+};
+
+function withZhSponsorHonors(items: YearItem[]) {
+  return items.flatMap((item) => {
+    if (item.year === "2024") {
+      const [diamondSponsor, wauSponsor] = zhSponsorHonors["2024"];
+      return [
+        {
+          ...item,
+          count: "4项荣誉",
+          awards: [diamondSponsor, item.awards[0], wauSponsor, ...item.awards.slice(1)],
+        },
+        zhChambers2023,
+      ];
+    }
+
+    if (item.year === "2022") {
+      const [silverSponsor, dalianArbitrator] = zhSponsorHonors["2022"];
+      return [
+        {
+          ...item,
+          count: "9项荣誉",
+          awards: [silverSponsor, ...item.awards.slice(0, 5), dalianArbitrator, ...item.awards.slice(5)],
+        },
+      ];
+    }
+
+    return [item];
+  });
+}
+
 function YearRow({ item, open, onToggle }: { item: YearItem; open: boolean; onToggle: () => void }) {
   const { language } = useLanguage();
 
@@ -464,7 +573,9 @@ function YearRow({ item, open, onToggle }: { item: YearItem; open: boolean; onTo
             {item.year}
           </span>
           <div className="min-w-0 border-l-2 border-[#d9b27a] pl-5 md:pl-8">
-            <div className="text-[1.5rem] font-semibold text-[#d6a866]">Awards Won</div>
+            <div className="text-[1.5rem] font-semibold text-[#d6a866]">
+              {language === "zh" ? "所获奖项" : "Awards Won"}
+            </div>
             <div className="mt-1 text-[1.125rem] font-normal text-[#c1c1c1]">
               {item.count}
             </div>
@@ -488,8 +599,9 @@ function YearRow({ item, open, onToggle }: { item: YearItem; open: boolean; onTo
         <div className="overflow-hidden">
           <div className="relative border-t border-black/20 bg-[#777777] px-6 py-10 md:px-12">
             <ImageWithFallback
-              src="/assets/about/awardbg.png"
+              src="/assets/about/awardbg.webp"
               alt=""
+              loading="lazy"
               className="pointer-events-none absolute inset-y-0 right-0 h-full w-[58%] object-cover object-right opacity-35"
             />
             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,#777777_0%,rgba(119,119,119,0.98)_46%,rgba(119,119,119,0.76)_100%)]" />
@@ -533,7 +645,7 @@ function YearRow({ item, open, onToggle }: { item: YearItem; open: boolean; onTo
 export function Honors() {
   const [openYear, setOpenYear] = useState<string | null>("2026");
   const { language } = useLanguage();
-  const displayData = language === "zh" ? zhData : data;
+  const displayData = language === "zh" ? withZhSponsorHonors(zhData) : data;
 
   return (
     <section id="honors" className="site-shell mt-32 scroll-mt-[var(--header-height)]">

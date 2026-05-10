@@ -128,29 +128,29 @@ const mengchengAchievements = [
 ];
 
 const weifanAchievements = [
-  "Represented a large overseas listed company in an insurance claim dispute arbitration against several leading domestic insurance companies before SHIAC. By arguing key policy provisions such as severability and exclusion clauses, the client obtained full payment of insurance benefits.",
+  "Represented a large overseas listed company in an insurance claim dispute arbitration against several leading domestic insurance companies before the Shanghai International Economic and Trade Arbitration Commission (SHIAC). By analyzing and arguing key policy provisions such as severability and exclusion clauses, we successfully obtained full payment of the insurance benefits for the client.",
   "Represented an enterprise under a leading industrial investment institution in an investment contract dispute arbitration against an investment management company and its legal representative before BAC. The subject matter exceeded RMB 720 million and a favorable award was obtained.",
-  "Represented a leading entertainment industry enterprise in an investment repurchase lawsuit against a film company, then initiated arbitration based on the settlement agreement and assisted enforcement proceedings until all amounts were recovered.",
-  "Represented a leading film and television entertainment enterprise in a film investment agreement dispute against a large state-owned company and affiliates, with a subject matter of approximately RMB 150 million. The judgment was upheld by the Beijing Higher People's Court and the Supreme People's Court.",
-  "Represented an enterprise under a leading capital management company in a CIETAC equity repurchase dispute against a technology company and its legal representative, using asset preservation over core assets to prompt settlement and full payment of the repurchase price.",
-  "Represented a manufacturing company in a BAC equity repurchase dispute arbitration against a real estate company, with a subject matter exceeding RMB 360 million. The tribunal accepted arguments on share repurchase restrictions and debt disguised as equity, resulting in a fully favorable award.",
-  "Represented an enterprise under a leading industrial investment institution in enforcing a final arbitral award against a technology company and its legal representative, using asset investigation and recovery actions including debtor act revocation, contract invalidation, and marital joint debt claims.",
-  "Represented an enterprise under a leading investment management group in a CIETAC compensation agreement dispute arbitration against a leading retail service enterprise, obtaining a favorable award and default interest at the maximum rate permitted under current judicial practice.",
-  "Represented a technology start-up in the aviation and gas turbine field in multiple contract disputes against a leading sales enterprise of vacuum pumps and precision components, involving delivery quantity, quality, and appraisal issues with a total subject matter of approximately RMB 30 million.",
+  "Represented a leading entertainment industry enterprise in an investment repurchase lawsuit against a film company. Subsequently, based on the settlement agreement reached in the lawsuit, we initiated an arbitration against the legal representative of the film company. In the ensuing enforcement proceedings, we assisted the enforcement court in taking a series of compulsory measures against the opposing party. All amounts have been recovered and the case has been closed upon full satisfaction of the judgment.",
+  "Represented a leading film and television entertainment enterprise in a film investment agreement dispute against a large state-owned company and its affiliates, with a subject matter of approximately RMB 150 million. The case involved conflicts in contractual arrangements among different parties. Through professional analysis and argumentation, we successfully persuaded the court to rule that all amounts should be paid to our client. The judgment was upheld by the Beijing Higher People's Court on second instance and by the Supreme People's Court on retrial.",
+  "Represented an enterprise under a leading capital management company in an equity repurchase dispute arbitration against a technology company and its legal representative, among others, before the China International Economic and Trade Arbitration Commission (CIETAC). By promptly applying for asset preservation measures over the core assets of the opposing party, we prompted the opposing party to settle with the client and pay the full repurchase price.",
+  "Represented a manufacturing company in an equity repurchase dispute arbitration against a real estate company before the Beijing Arbitration Commission (BAC), with a subject matter exceeding RMB 360 million. The case involved core legal issues such as restrictions on corporate share repurchases under the Minutes of the National Conference on the Trial of Commercial Cases (Jiumin Minutes) and the characterization of debt disguised as equity. Through our professional arguments, we successfully persuaded the arbitral tribunal that the matter was in substance a loan and obtained a fully favorable award.",
+  "Represented an enterprise under a leading industrial investment institution in enforcing a final arbitral award against a technology company and its legal representative. In the enforcement proceedings, we took a series of asset investigation measures and initiated various recovery actions, including but not limited to claims to set aside a debtor's act, actions to declare contracts void, and actions to establish marital joint debt.",
+  "Represented an enterprise under a leading investment management group in a compensation agreement dispute arbitration against a leading retail service enterprise before the China International Economic and Trade Arbitration Commission (CIETAC). A favorable award was obtained, and despite the contract not specifying a default interest rate, we successfully persuaded the arbitral tribunal to impose default interest at the maximum rate permitted under current judicial practice.",
+  "Represented a technology start-up in the aviation and gas turbine field in multiple contract dispute cases against a leading sales enterprise of vacuum pumps and precision components. The cases involved disputes over delivery quantity, quality issues, and judicial appraisal procedures, with a total subject matter of approximately RMB 30 million. Currently, some cases are still pending, while others have resulted in complete victories and full recovery of the amounts.",
 ];
 
 const zhTeamDetails: Record<string, TeamProfile["zh"]> = {
   "yuxuan-liu": {
     serviceIndustries: ["商业与交易", "私募股权", "公司股权与控制权争夺", "金融行业", "传媒及娱乐", "房地产及建设工程"],
-    education: "刘煜暄律师毕业于北京大学法学院，取得法学学士学位。",
-    qualification: "中国内地律师执业资格。",
+    education: "北京大学 法学学士（2009）",
+    qualification: "中国内地律师执业资格",
     languages: ["中文（普通话）", "英语"],
     socialEngagements:
-      "刘煜暄律师现任北京市律师协会商事仲裁法律专业委员会委员、北京市朝阳区律师协会仲裁与调解业务研究会副主任、四川法治与社会治理研究会仲裁研究中心“法律人库”成员。",
+      "刘煜暄律师现任北京市律师协会商事仲裁法律专业委员会委员、北京市朝阳区律师协会仲裁与调解业务研究会副主任",
     practiceArea:
       "刘煜暄律师专长于代理国内诉讼及仲裁案件，在争议解决领域拥有丰富的执业经验，主要领域包括商业与交易、私募股权、公司股权与控制权争夺、金融行业、传媒及娱乐、房地产及建设工程等。",
     practiceExperience:
-      "刘煜暄律师作为虎诉的管理合伙人，有超过16年的工作经验。其在创立虎诉之前，曾先后在中伦律师事务所、金杜律师事务所、方达律师事务所担任律师，在竞天公诚律师事务所担任合伙人律师。刘律师曾接受《亚洲法律杂志》（ALB）的专访，被誉为“争议解决领域的耀眼新星”。",
+      "刘煜暄律师作为虎诉的管理合伙人，有超过16年的工作经验，其在创立虎诉之前，曾先后在中伦律师事务所（2009-2010年），金杜律师事务所（2012-2014年），方达律师事务所（2014-2018年）担任律师，竞天公诚律师事务所（2018-2019年）担任合伙人律师。",
     honors: [
       "刘煜暄律师在争议解决领域为全球各大权威法律评级机构或知名媒体所认可。",
       "2025年11月，刘煜暄律师荣获首届《法律500强》中国精英榜单“北京精英·商业争议”奖项。",
@@ -189,13 +189,13 @@ const zhTeamDetails: Record<string, TeamProfile["zh"]> = {
   },
   "min-xu": {
     serviceIndustries: ["国际贸易行业", "互联网科技及游戏行业"],
-    education: "香港城市大学（法学学士，2011年）；香港城市大学（法学硕士，2012年）。",
-    qualification: "中国内地律师执业资格。",
+    education: "香港城市大学 法学学士（2011）；香港城市大学 法学硕士（2012）",
+    qualification: "中国内地律师执业资格",
     languages: ["中文（普通话）", "英语"],
     socialEngagements:
       "许旻律师现为英国特许仲裁员协会高级会员（F.CIArb），中国体育仲裁委员会仲裁员，并入选北京市司法局百名高端涉外法治人才及北京市律师协会涉外律师人才库；同时担任中国法学会体育法学研究会会员、北京市律师协会文旅传媒与体育专业委员会委员、北京市法学会体育法学与奥林匹克法律事务研究会会员。",
     practiceArea:
-      "许旻律师是中国内地执业律师，专长于代理国内诉讼及境内外仲裁案件，并长期为企业提供法律顾问服务。许旻律师在投融资、股权交易、公司治理、商事合同审查及纠纷处理、产品责任等业务领域经验丰富。",
+      "许旻律师是中国内地执业律师，专长于代理国内诉讼及境内外仲裁案件，并长期为企业提供法律顾问服务。许旻律师在投融资、股权交易、公司治理、商事合同审查及纠纷处理、产品责任等业务领域经验丰富，承办的案件涉及银行金融、私募基金、高新科技、新媒体、影视娱乐、教育、房地产等多个领域。",
     practiceExperience: "在加入虎诉律师事务所之前，许旻律师曾在金杜、方达两家律所担任争议解决律师。",
     honors: [
       "许旻律师是英国特许仲裁员协会高级会员（F.CIArb），并被北京市律师协会列入涉外律师人才库。",
@@ -222,8 +222,8 @@ const zhTeamDetails: Record<string, TeamProfile["zh"]> = {
   },
   "li-wan": {
     serviceIndustries: ["金融", "国际贸易行业", "私募股权"],
-    education: "国际关系学院（法学学士，2007年）；大连海事大学（法学硕士，2009年）。",
-    qualification: "中国内地律师执业资格。",
+    education: "国际关系学院 法学学士（2007）；大连海事大学 法学硕士（2009）",
+    qualification: "中国内地律师执业资格",
     languages: ["中文（普通话）", "英语"],
     socialEngagements:
       "万力律师现任北京市律师协会涉外法律服务工作委员会委员、互联网诉讼法律专业委员会委员，大连国际仲裁院（大连仲裁委员会）仲裁员，被北京市律师协会列入涉外律师人才库。",
@@ -267,15 +267,15 @@ const zhTeamDetails: Record<string, TeamProfile["zh"]> = {
   },
   "zoe-zhang": {
     serviceIndustries: ["国际贸易行业", "私募股权", "金融"],
-    education: "北京外国语大学法学院英语、法学双学士；北京外国语大学法学院法学硕士；2018年度英国大律师公会中国律师培训计划项目；2025年度香港国际仲裁中心高级仲裁员培训项目。",
-    qualification: "中国内地律师执业资格。",
+    education: "北京外国语大学 英语、法学双学士（2007）；北京外国语大学 法学硕士（2010）；英国大律师公会中国律师培训计划项目（2018）；香港国际仲裁中心高级仲裁员培训项目（2025）",
+    qualification: "中国内地律师执业资格",
     languages: ["中文", "英文"],
     socialEngagements:
       "张莉律师是中国国际经济贸易仲裁委员会仲裁员、中国青年仲裁小组组委会成员、北京市律师协会商事仲裁法律专业委员会委员、北京市朝阳区律师协会仲裁与调解研究会委员、香港一邦国际网上仲调中心仲裁员、APEC中立成员专家组成员。",
     practiceArea:
-      "张莉律师的专业领域为争议解决，尤其擅长涉外争议解决；主要领域包括私募股权投资、建筑工程、房地产、中外合资、股权转让、国际货物买卖、知识产权和能源等多个领域。",
+      "张莉律师的专业领域为争议解决，尤其擅长涉外争议解决；主要领域包括私募股权投资、建筑工程、房地产、中外合资、股权转让、国际货物买卖、知识产权和能源等多个领域。张律师能够熟练运用中英文双语办案，工作能力受到客户的充分认可。张律师代理客户多为跨国公司、私募投资基金、外商投资企业、大型国有企业、创业型企业等。",
     practiceExperience:
-      "加入虎诉前，张律师在某知名律师事务所争议解决部担任权益合伙人。张律师参与代理了超过一百多起商事争议诉讼及仲裁案件，绝大部分为涉外争议案件，并在中国、香港、新加坡、印度等多地进行开庭。",
+      "加入虎诉前，张律师在某知名律师事务所争议解决部担任权益合伙人。张律师参与代理了超过一百多起商事争议诉讼及仲裁案件，绝大部分为涉外争议案件。仲裁案件适用规则包括贸仲委仲裁规则、北京仲裁委员会仲裁规则、联合国国际贸易法委员会仲裁规则、香港国际仲裁中心机构仲裁规则、国际商会仲裁规则、新加坡国际仲裁中心仲裁规则等；其中多起案件仲裁语言为英文，并在中国、香港、新加坡、印度等多地进行开庭。诉讼案件在北京、上海、浙江、江苏等多地、多级法院进行。\n张律师代理的绝大多数案件，结果均比较良好，维持着较高的胜率，客户满意度高。",
     honors: [
       "2025 Legal 500 首届中国精英“北京精英·商业争议”。",
       "2021 The Legal 500亚太榜单明日之星 Next Generation（争议解决：仲裁）。",
@@ -306,12 +306,12 @@ const zhTeamDetails: Record<string, TeamProfile["zh"]> = {
   },
   "mengcheng-yun": {
     serviceIndustries: ["金融", "泛娱乐", "地产", "新能源", "新消费"],
-    education: "南京大学法学院 法学学士。",
-    qualification: "中国内地律师执业资格。",
+    education: "南京大学 法学学士（2016）",
+    qualification: "中国内地律师执业资格",
     languages: ["中文", "英文"],
-    socialEngagements: "云梦成律师专注于复杂商事争议解决及重大诉讼、仲裁案件。",
+    socialEngagements: "",
     practiceArea:
-      "云梦成律师的主要业务领域为商事争议解决，包括境内外诉讼与仲裁。云律师代理的案件类型涵盖股权争议、公司控制权纠纷、金融借贷、影视文娱、复杂商事租赁及专业机构责任纠纷等。",
+      "云梦成律师的主要业务领域为商事争议解决，包括境内外诉讼与仲裁。云律师代理的案件类型涵盖股权争议、公司控制权纠纷、金融借贷、影视文娱、复杂商事租赁及专业机构责任纠纷等。其不仅在最高人民法院及各级地方法院拥有丰富的出庭经验，亦多次代表客户在 CIETAC、北仲、上国仲等机构处理重特大仲裁案件。",
     practiceExperience:
       "北京虎诉律师事务所资深律师（2026.02 - 至今）；北京市中伦律师事务所律师（2025.08 - 2026.01）；北京虎诉律师事务所律师（2021.04 - 2025.08）。",
     honors: [],
@@ -329,14 +329,14 @@ const zhTeamDetails: Record<string, TeamProfile["zh"]> = {
   },
   "weifan-qiu": {
     serviceIndustries: ["商业与交易", "金融和私募股权"],
-    education: "华南理工大学 法学&工学双学士（2019）；中国政法大学 法律硕士（2022）。",
-    qualification: "中国内地律师执业资格。",
+    education: "中国政法大学 法律硕士（2022）；华南理工大学 法学、工学双学士（2019）",
+    qualification: "中国内地律师执业资格",
     languages: ["中文", "英文"],
     socialEngagements: "邱伟帆律师是中国法学会财税法学研究会的会员。",
     practiceArea:
-      "邱伟帆律师具备中国大陆律师执业资格。他的业务专注于高端商事诉讼与仲裁，同时涵盖日常公司法律咨询工作，经常处理投融资、股权交易与回购、合同纠纷以及争议解决等相关事务。",
+      "邱伟帆律师具备中国大陆律师执业资格。他的业务专注于高端商事诉讼与仲裁，同时涵盖日常公司法律咨询工作。他经常处理投融资、股权交易与回购、合同纠纷以及争议解决等相关事务，并为多个行业的客户提供法律服务，包括银行与金融、私募股权、影视、娱乐及房地产等领域。",
     practiceExperience:
-      "邱伟帆律师自毕业以来一直就职于北京虎诉律师事务所，先后担任律师助理、资深律师，并已于2023年成功取得中国内地律师执业资格。",
+      "邱伟帆律师自毕业以来一直就职于北京虎诉律师事务所，先后担任律师助理、资深律师，并已于2023年成功取得中国内地律师执业资格",
     honors: [],
     achievements: [
       "代理某大型境外上市公司针对多家国内头部保险公司提起保险索赔争议仲裁案，成功赢得保险金全额赔付。",
@@ -359,7 +359,7 @@ export const teamProfiles: TeamProfile[] = [
     zhName: "刘煜暄",
     title: "Managing Partner",
     zhTitle: "管理合伙人",
-    image: "/assets/team/team1.png",
+    image: "/assets/team/team1.webp",
     phone: "010-85885228",
     email: "liu.yuxuan@tigerpartners.cn",
     serviceIndustries: [
@@ -371,14 +371,14 @@ export const teamProfiles: TeamProfile[] = [
       "Real Estate and Construction",
     ],
     education: "Mr. Liu graduated from Peking University Law School with a Bachelor of Laws degree.",
-    qualification: "Bar Admission in the People's Republic of China.",
+    qualification: "Bar Admission in the People's Republic of China",
     languages: ["Mandarin", "English"],
     socialEngagements:
       "Mr. Liu currently serves as a member of the Commercial Arbitration Law Professional Committee of the Beijing Lawyers Association, Deputy Director of the Arbitration and Mediation Business Research Association of the Chaoyang District Lawyers Association, and a member of the Legal Experts Database of the Arbitration Research Center of the Sichuan Law and Social Governance Research Association.",
     practiceArea:
       "Mr. Liu specializes in domestic litigation and arbitration. He has extensive experience in the field of dispute resolution, with a focus on commerce and transaction, private equity, corporate equity and control, finance, media and entertainment, real estate and construction.",
     practiceExperience:
-      'As the founding partner of Tiger Partners, Mr. Liu Yuxuan has been practicing law for more than sixteen years. Prior to founding Tiger Partners, Mr. Liu worked as a partner at Jingtian & Gongcheng (2018-2019). Before that, Mr. Liu worked as a dispute resolution lawyer at Fangda Partners (2014-2018), King & Wood (2012-2014), and Zhong Lun Law Firm (2009-2010). Mr. Liu Yuxuan once received an exclusive interview with Asian Legal Business (ALB), a well-known legal media, and was featured by ALB as "An Up-and-Comer in Dispute Resolution".',
+      'As the founding partner of Tiger Partners, Mr. Liu Yuxuan has been practicing law for more than sixteen years. Prior to founding Tiger Partners, Mr. Liu worked as a partner at Jingtian & Gongcheng (2018-2019). Before that, Mr. Liu worked as a dispute resolution lawyer at Fangda Partners (2014-2018), King & Wood (2012-2014), and Zhong Lun Law Firm (2009-2010). ',
     honors: [
       "Mr. Liu Yuxuan has been widely recognized by leading global legal ranking institutions and prominent media outlets in the field of dispute resolution.",
       "In November 2025, Mr. Liu Yuxuan was awarded the inaugural Legal 500 China Elite: Beijing Elite - Commercial Disputes.",
@@ -388,7 +388,7 @@ export const teamProfiles: TeamProfile[] = [
       "In June 2021, Mr. Liu Yuxuan was listed on the Benchmark Litigation China 2021 list of lawyers recommended for dispute resolution in Beijing.",
       'In April 2021, Mr. Liu Yuxuan was listed in the LEGALBAND 2021 Top Ranked Lawyers, and ranked as the "Rising Star" in the field of "dispute resolution and litigation".',
       "In March 2021, Mr. Liu Yuxuan was identified by the notable legal media China Business Law Journal in the list of Rising Stars 2021 Top 40.",
-      'In May 2020, Mr. Liu once received an exclusive interview with Asian Legal Business (ALB), a well-known legal media, and was featured by ALB as "An Up-and-Comer in Dispute Resolution".',
+      "In May 2020, Mr. Liu once received an exclusive interview with Asian Legal Business (ALB), a well-known legal media, and was featured by ALB as “An Up-and-Comer in Dispute Resolution”.",
       'In September 2019, Mr. Liu Yuxuan was awarded the title of "Notable Practitioner" in the field of dispute resolution in China legal market by Asialaw Profiles for 2020.',
     ],
     achievements: yuxuanAchievements,
@@ -400,17 +400,17 @@ export const teamProfiles: TeamProfile[] = [
     zhName: "许旻",
     title: "Partner",
     zhTitle: "合伙人",
-    image: "/assets/team/team2.png",
+    image: "/assets/team/team2.webp",
     phone: "010-85885228",
     email: "xu.min@tigerpartners.cn",
     serviceIndustries: ["International Trade", "Cyber Tech and Game"],
-    education: "Mr. Xu graduated with an LL.B. and LL.M. degree from City University of Hong Kong School of Law in 2012.",
-    qualification: "Bar Admission in the People's Republic of China.",
+    education: "LL.B., City University of Hong Kong School of Law, 2011; LL.M., City University of Hong Kong School of Law, 2012",
+    qualification: "Bar Admission in the People's Republic of China",
     languages: ["Mandarin", "English"],
     socialEngagements:
-      "Mr. Xu Min is a Fellow of the Chartered Institute of Arbitrators and is listed in the 100 High-end International Legal Talents by the Beijing Municipal Bureau of Justice and the International Lawyers Talent Pool of the Beijing Lawyers Association.",
+      'Mr. Xu Min is a Fellow of the Chartered Institute of Arbitrators (F.CIArb), an arbitrator of China Commission of Arbitration for Sport and is listed in the "100 High-end International Legal Talents" by the Beijing Municipal Bureau of Justice and the International Lawyers Talent Pool of the Beijing Lawyers Association. Mr. Xu is a member of the China Association For Sports Law (CASL), the Culture, Tourism, Media, and Sports Committee of the Beijing Lawyers Association, and the Sports Law and Olympic Legal Affairs Research Association of the Beijing Law Society.',
     practiceArea:
-      "Xu Min specializes in acting as an advocate in domestic litigation and domestic and overseas arbitration, and has extensive experience in investment and financing, equity transaction, corporate governance, commercial contract review, dispute resolution and product liability.",
+      "XU Min is a practicing lawyer in Mainland China. He specializes in acting as an advocate in domestic litigation and domestic and overseas arbitration and has extensive experience in providing legal advisory services to enterprises. XU Min has extensive experience in investment & financing, equity transaction, corporate governance, commercial contract review and dispute resolution and product liability for clients.  His cases involve in industries of banking and finance, private equity, high technology, new media, film, television and entertainment, education, real estate and other areas. ",
     practiceExperience:
       "Prior to joining Tiger Partners, Xu Min was a dispute resolution attorney in King & Wood and Fangda Partners.",
     honors: [
@@ -427,17 +427,17 @@ export const teamProfiles: TeamProfile[] = [
     zhName: "万力",
     title: "Partner",
     zhTitle: "合伙人",
-    image: "/assets/team/team3.png",
+    image: "/assets/team/team3.webp",
     phone: "010-85885228",
     email: "wan.li@tigerpartners.cn",
     serviceIndustries: ["Finance", "International Trade", "Private Equity"],
-    education: "University of International Relations, Bachelor of Law, 2007. Dalian Maritime University, Master of Law, 2009.",
-    qualification: "Bar Admission in the People's Republic of China.",
+    education: "Bachelor of Law, University of International Relations, 2007; Master of Law, Dalian Maritime University, 2009",
+    qualification: "Bar Admission in the People's Republic of China",
     languages: ["Mandarin", "English"],
     socialEngagements:
-      "Wan Li is an arbitrator of Dalian International Arbitration Court and a member of multiple Beijing Lawyers Association committees and foreign-related legal service talent programs.",
+      "Arbitrator of Dalian International Arbitration Court (Dalian Arbitration Commission); Member of the Beijing Lawyers Association's Talent Pool for Foreign-Related Matters; Member of the Beijing Lawyers Association's Foreign-Related Legal Service Working Committee; Member of the Beijing Lawyers Association's Internet Litigation Law; Member of the Beijing Lawyers Association's Beijing 100-Talent Program for High-End Foreign-Related Rule of Law Talents.",
     practiceArea:
-      "Mr. Wan specializes in commercial dispute resolution, specifically foreign-related commercial litigation and arbitration. He also has experience in IP-related disputes and matters involving both criminal and civil proceedings.",
+      "Mr. Wan specializes in commercial dispute resolution, specifically foreign-related commercial litigation and arbitration. He has also made breakthroughs in the fields of IP-related disputes as well as matters involving both criminal and civil proceedings. Wan Li's clients come from many industries including finance, investment, maritime, aviation, insurance, industrial manufacturing, pharmaceutical, real estate, culture and entertainment, and e-sports.",
     practiceExperience:
       "Wan Li joined Tiger Partners in 2020. Prior to that, Mr. Wan worked as a dispute resolution lawyer in top Chinese law firms, and as a Litigation Director in the legal department of an A-share listed company.",
     honors: [
@@ -455,24 +455,24 @@ export const teamProfiles: TeamProfile[] = [
     zhName: "张莉",
     title: "Partner",
     zhTitle: "合伙人",
-    image: "/assets/team/team4.png",
+    image: "/assets/team/team4.webp",
     phone: "010-85885228",
     email: "zoelizhang@tigerpartners.cn",
     serviceIndustries: ["International Trade", "Private Equity", "Finance"],
     education:
-      "Bachelor of Laws and Bachelor of English, Beijing Foreign Studies University. Master of Laws, Beijing Foreign Studies University.",
-    qualification: "Bar Admission in the People's Republic of China.",
+      "Bachelor of Laws & Bachelor of English (Double Degree), Beijing Foreign Studies University; Master of Laws, Beijing Foreign Studies University; 2018 Bar Council Training Scheme; 2025 HKIAC Advanced Arbitrator Training Programme",
+    qualification: "Bar Admission in the People's Republic of China",
     languages: ["Mandarin", "English"],
     socialEngagements:
-      "Zoe is an arbitrator of CIETAC, a member of the Organizing Committee of the China Young Arbitration Group, and a panelist on the Arbitrators & Neutrals Panel of the eBRAM International Online Dispute Resolution Centre.",
+      "Zoe is an arbitrator of the China International Economic and Trade Arbitration Commission, a member of the Organizing Committee of the China Young Arbitration Group, a member of the Commercial Arbitration Law Professional Committee of the Beijing Lawyers Association, a member of the Arbitration and Mediation Research Committee of the Beijing Chaoyang District Lawyers Association, and a panelist on the Arbitrators & Neutrals Panel of the eBRAM International Online Dispute Resolution Centre.",
     practiceArea:
-      "Zoe Zhang specializes in commercial arbitration and litigation, especially foreign-related arbitration and international arbitration. Her practice covers sale of goods, private equity, construction, real estate, joint venture, equity transfer, intellectual properties and energy.",
+      "Zoe Zhang specializes in commercial arbitration and litigation, and especially foreign related arbitration and international arbitration. The major sectors of her practice involve sale of goods, private equity, construction, real estate, joint venture, equity transfer, intellectual properties, energy etc.",
     practiceExperience:
-      "Before joining Tiger Partners, Zoe worked with the Dispute Resolution Team of a top Chinese law firm as an equity partner. She has represented clients in over 100 commercial disputes, most of which are foreign-related or international arbitration cases.",
+      "Before joining Tiger Partners, Zoe was working with the Dispute Resolution Team of a top Chinese law firm as an equity partner. Zoe has represented clients in over 100 commercial disputes, most of which are foreign related or international arbitration cases. The applicable rules of those arbitration cases include CIETAC Rules, the BAC Rules, the UNCITRAL Rules, the HKIAC Administered Rules, the ICC Rules, and the SIAC Rules. The arbitration language of many of those cases were English, and hearings were conducted in China Mainland, Hong Kong, Singapore, India and other jurisdictions.\nThe clients represented by Zoe are mainly multinational companies, foreign-invested enterprises, large state-owned enterprises and private equity funds. Well-known foreign clients include Total, Honeywell, Heineken, ADM, Hyundai, Paul-Y, Sony, Dalkia, ContiTech, INVISTA, Toyota Tsusho, Marubeni, Carlyle, Vataple, IPG, Canadian Solar, Sandvik, Moody's, East West Bank, Avenue Capital, CRCI, New Horizon, Standard Chartered Bank, Ting Hsin, Chinachem etc. Famous state-owned and private enterprises include COFCO, Dongfang Electric Corporation (DEC), Luneng Group, Shougang Group, Nanjing Automobile Group, Oriental Petrochemical, China Ordins Corporation, CITIC Group, Junzheng Group, Jingfeng Pharmaceutical, Huaxin Cement etc.",
     honors: [
       "2025 Legal 500, China Elite - Beijing Elite - Commercial Disputes.",
-      "2021 The Legal 500 Next Generation Partners, Dispute Resolution: Arbitration.",
-      "2018 Best Defense Award, Beijing Lawyers Association.",
+      "2021 The Legal 500 Next Generation Partners (Dispute Resolution: Arbitration).",
+      "2018 Best Defense Award, Beijing Lawyers Association - Beijing Lawyers' Achievements Display on Excellent Defense - Celebration of Forty Years of Reform and Opening-up.",
     ],
     achievements: zoeAchievements,
     zh: zhTeamDetails["zoe-zhang"],
@@ -483,18 +483,18 @@ export const teamProfiles: TeamProfile[] = [
     zhName: "云梦成",
     title: "Senior Associate",
     zhTitle: "资深律师",
-    image: "/assets/team/team5.png",
+    image: "/assets/team/team5.webp",
     phone: "010-85885228",
     email: "yun.mengcheng@tigerpartners.cn",
     serviceIndustries: ["Finance", "Pan-entertainment", "Real Estate", "New Energy", "New Consumption"],
-    education: "LL.B., Nanjing University Law School.",
-    qualification: "PRC Bar Admission.",
+    education: "LL.B., Nanjing University Law School, 2016",
+    qualification: "Bar Admission in the People's Republic of China",
     languages: ["Mandarin", "English"],
-    socialEngagements: "Ms. Yun focuses on complex commercial dispute resolution and major litigation and arbitration matters.",
+    socialEngagements: "",
     practiceArea:
-      "Ms. Yun's primary practice area is commercial dispute resolution, encompassing both domestic and cross-border litigation and arbitration. Her experience covers equity disputes, corporate control contests, financial lending, film and entertainment, complex commercial leasing and professional liability disputes.",
+      "Ms Yun's primary practice area is Commercial Dispute Resolution, encompassing both domestic and cross-border litigation and arbitration. Her experience covers various case types, including equity disputes, corporate control contests, financial lending, film and entertainment, complex commercial leasing, and professional liability disputes. Ms Yun has extensive advocacy experience before the Supreme People's Court and local courts at all levels, and has frequently represented clients in major arbitration matters before CIETAC, BAC, and SHIAC.",
     practiceExperience:
-      "Ms. Yun has served as Senior Associate at Tiger Partners, Associate at Zhong Lun Law Firm, and Associate at Tiger Partners.",
+      "Tiger Partners | Senior Associate (Feb 2026 - Present)\nZhong Lun Law Firm | Associate (Aug 2025 - Jan 2026)\nTiger Partners | Associate (Apr 2021 - Aug 2025)",
     honors: [],
     achievements: mengchengAchievements,
     zh: zhTeamDetails["mengcheng-yun"],
@@ -505,17 +505,17 @@ export const teamProfiles: TeamProfile[] = [
     zhName: "邱伟帆",
     title: "Senior Associate",
     zhTitle: "资深律师",
-    image: "/assets/team/team6.png",
+    image: "/assets/team/team6.webp",
     phone: "010-85885228",
     email: "qiu.weifan@tigerpartners.cn",
     serviceIndustries: ["Commerce and Transaction", "Finance", "Private Equity"],
     education:
-      "Bachelor of Laws and Bachelor of Engineering, South China University of Technology, 2019. Master of Laws, China University of Political Science and Law, 2022.",
-    qualification: "Bar Admission in the People's Republic of China.",
+      "Master of Laws, China University of Political Science and Law, 2022 ; Bachelor of Laws and Bachelor of Engineering, South China University of Technology, 2019 ",
+    qualification: "Bar Admission in the People's Republic of China",
     languages: ["Mandarin", "English"],
     socialEngagements: "Mr. Qiu is a member of the Fiscal and Tax Law Research Association of the China Law Society.",
     practiceArea:
-      "Mr. Qiu is admitted to practice law in Mainland China. His practice focuses on high-end commercial litigation and arbitration, and also covers day-to-day corporate legal advisory work.",
+      "Mr. Qiu is admitted to practice law in Mainland China. His practice focuses on high-end commercial litigation and arbitration, and also covers day-to-day corporate legal advisory work. He regularly handles matters relating to investment and financing, equity transactions and repurchases, contract disputes, and dispute resolution. Mr. Qiu provides legal services to clients across a range of industries, including banking and finance, private equity, film and television, entertainment, and real estate.",
     practiceExperience:
       "Since graduation, Mr. Qiu has been working at Tiger Partners, successively serving as a legal assistant and a senior associate, and successfully obtained PRC Bar Admission in 2023.",
     honors: [],

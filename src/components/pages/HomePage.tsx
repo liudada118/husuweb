@@ -2,44 +2,50 @@
 
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
 import { PageTriangle } from "@/components/shared/PageTriangle";
+import { events as eventItems, formatEventDate, localizeEvent } from "@/data/events";
 import { pick, useLanguage } from "@/i18n/LanguageProvider";
 import { copy } from "@/i18n/copy";
-
-const heroImg = "/assets/home/hero.png";
+import { assetUrl } from "@/lib/assets";
 
 const industries = [
   {
     name: "Private Equity",
-    img: "/assets/home/INDUSTRIES1.png",
+    slug: "private-equity",
+    img: "/assets/home/INDUSTRIES1.webp",
     cls: "lg:col-span-2",
   },
   {
     name: "Finance",
-    img: "/assets/home/INDUSTRIES2.png",
+    slug: "finance",
+    img: "/assets/home/INDUSTRIES2.webp",
     cls: "lg:col-span-1",
   },
   {
     name: "Real Estate",
-    img: "/assets/home/INDUSTRIES3.png",
+    slug: "real-estate",
+    img: "/assets/home/INDUSTRIES3.webp",
     cls: "lg:col-span-1 lg:row-span-2",
   },
   {
     name: "Sports and E-Sports",
-    img: "/assets/home/INDUSTRIES4.png",
+    slug: "sports-and-e-sports",
+    img: "/assets/home/INDUSTRIES4.webp",
     cls: "lg:col-span-1",
   },
   {
     name: "International Trade",
-    img: "/assets/home/INDUSTRIES5.png",
+    slug: "international-trade",
+    img: "/assets/home/INDUSTRIES5.webp",
     cls: "lg:col-span-1",
   },
   {
     name: "Cyber Tech and Game",
+    slug: "cyber-tech-and-game",
     img: "https://images.unsplash.com/photo-1585743876840-53866e12a598?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1600",
     cls: "lg:col-span-2",
   },
@@ -85,9 +91,19 @@ const honorsByYear = [
     year: "2024",
     honors: [
       {
+        title: 'Diamond Sponsor of the 22nd "CIETAC Cup" Voice of Moot series training activities',
+        date: "Nov. 2024",
+        desc: 'Tiger Partners was honored to be the Diamond Sponsor of the 22nd "CIETAC Cup" Voice of Moot series training activities.',
+      },
+      {
         title: "Benchmark Litigation China 2024: Dispute Resolution",
         date: "Jun. 2024",
         desc: "Tiger Partners was listed in the Benchmark Litigation China 2024 Dispute Resolution list as a Notable Firm.",
+      },
+      {
+        title: "World Arbitration Update 2024 China Edition",
+        date: "May. 2024",
+        desc: "Tiger Partners sponsored the World Arbitration Update 2024 (WAU 2024) China Edition.",
       },
       {
         title: "ALB China 2024 Firms to Watch",
@@ -97,8 +113,23 @@ const honorsByYear = [
     ],
   },
   {
+    year: "2023",
+    honors: [
+      {
+        title: "Chambers Beijing Forum 2023",
+        date: "Apr. 2023",
+        desc: "Tiger Partners sponsored the Chambers Beijing Forum 2023 and was invited to participate.",
+      },
+    ],
+  },
+  {
     year: "2022",
     honors: [
+      {
+        title: 'Silver Sponsor of the 20th "CIETAC Cup" Voice of Moot series training activities',
+        date: "Nov. 2022",
+        desc: 'Tiger Partners was honored to be the Silver Sponsor of the 20th "CIETAC Cup" Voice of Moot series training activities.',
+      },
       {
         title: "China Business Law Awards 2022",
         date: "Jun. 2022",
@@ -113,6 +144,11 @@ const honorsByYear = [
         title: "Benchmark Litigation Asia-Pacific & China 2022",
         date: "May. 2022",
         desc: "Tiger Partners was listed as a Notable Firm for commercial disputes resolution in Beijing.",
+      },
+      {
+        title: "Wan Li appointed as arbitrator of Dalian International Arbitration Court",
+        date: "Mar. 2022",
+        desc: "Mr. Wan Li was engaged as the 6th arbitrator of Dalian International Arbitration Court.",
       },
     ],
   },
@@ -133,6 +169,36 @@ const honorsByYear = [
         title: "China Business Law Journal Firm to Watch",
         date: "May. 2021",
         desc: "Tiger Partners was selected as Firm to Watch by China Business Law Journal.",
+      },
+    ],
+  },
+  {
+    year: "2020",
+    honors: [
+      {
+        title: "Beijing Bar Association Foreign-Related Lawyer Talent Pool",
+        date: "Oct. 2020",
+        desc: "Xu Min and Wan Li were selected into the Foreign-Related Lawyer Talent Pool of the Beijing Bar Association.",
+      },
+      {
+        title: "China Business Law Journal officially included Tiger Partners",
+        date: "Sep. 2020",
+        desc: "China Business Law Journal officially included Beijing Tiger Partners Law Firm.",
+      },
+      {
+        title: "ALB interview recognition",
+        date: "May. 2020",
+        desc: "Liu Yuxuan was interviewed by ALB and recognized as an emerging star in dispute resolution.",
+      },
+    ],
+  },
+  {
+    year: "2019",
+    honors: [
+      {
+        title: "Asialaw Profiles 2020",
+        date: "Sep. 2019",
+        desc: "Liu Yuxuan was recognized as a Notable Practitioner in dispute resolution in the 2020 China legal market list.",
       },
     ],
   },
@@ -229,59 +295,141 @@ const zhHomeHonorsByYear = [
       },
     ],
   },
-];
-
-const events = [
   {
-    title: "Tiger Dynamics | Kinsey Kang Yanan was engaged as Hong Kong Legal Counsel of Tiger Partners",
-    date: "Nov. 11, 2023",
-    tag: "Tiger Dynamics",
-    img: "/assets/home/event1.png",
-    desc: "Tiger Partners is honored to announce that Kinsey Kang Yanan, barrister-at-law, has been engaged as our Hong Kong Legal Counsel.",
+    year: "2020",
+    honors: [
+      {
+        title: "许旻律师和万力律师入选北京市律师协会涉外律师人才库",
+        date: "2020年10月",
+        desc: "许旻律师和万力律师入选北京市律师协会涉外律师人才库。",
+      },
+      {
+        title: "《商法》正式收录北京虎诉律师事务所",
+        date: "2020年9月",
+        desc: "知名法律媒体《商法》（China Business Law Journal）正式收录北京虎诉律师事务所。",
+      },
+      {
+        title: "刘煜暄律师接受 ALB 专访",
+        date: "2020年5月",
+        desc: "刘煜暄律师接受 ALB 专访，被赞誉为争议解决领域的耀眼新星。",
+      },
+    ],
   },
   {
-    title: "Tiger Dynamics | Tiger Partners upgraded the functions of the official account and launched a new Mini Program",
-    date: "Jun. 09, 2022",
-    tag: "Tiger Dynamics",
-    img: "/assets/home/event2.png",
-    desc: "Tiger Partners upgraded its official account functions and launched the new TigerPark Mini Program after a long period of preparation.",
-  },
-  {
-    title: "Industry News | Tiger Partners was listed in Asia-Pacific & China on Dispute Resolution of 2022 by Benchmark Litigation",
-    date: "May. 10, 2022",
-    tag: "Industry News",
-    img: "/assets/home/event3.png",
-    desc: "Tiger Partners won the title of Notable Firm in commercial disputes resolution in Beijing by Benchmark Litigation 2022.",
-  },
-];
-
-const zhHomeEvents = [
-  {
-    title: "虎诉动态 | 康亚男（Kinsey Kang Yanan）出庭大律师受聘为虎诉的香港法律顾问",
-    date: "2023年11月17日",
-    tag: "虎诉动态",
-    img: "/assets/home/event1.png",
-    desc: "虎诉律师事务所非常荣幸地宣布，康亚男出庭大律师已受聘为本所香港法律顾问。",
-  },
-  {
-    title: "虎诉动态 | 虎诉升级公众号功能并上线全新小程序",
-    date: "2022年6月9日",
-    tag: "虎诉动态",
-    img: "/assets/home/event2.png",
-    desc: "经过长期筹备，虎诉对公众号功能进行升级，并上线全新TigerPark小程序。",
-  },
-  {
-    title: "行业资讯 | 虎诉荣登Benchmark Litigation 2022年度亚太地区及中国地区争议解决榜单",
-    date: "2022年5月10日",
-    tag: "行业资讯",
-    img: "/assets/home/event3.png",
-    desc: "虎诉被Benchmark Litigation评为2022年度中国北京地区商业纠纷领域“值得关注的律所”。",
+    year: "2019",
+    honors: [
+      {
+        title: "刘煜暄律师获 Asialaw Profiles 知名律师称号",
+        date: "2019年9月",
+        desc: "刘煜暄律师获《亚洲法律概况》2020 中国法律市场争议解决领域 Notable Practitioner 称号。",
+      },
+    ],
   },
 ];
 
-const pngLogoIndexes = new Set([5, 8, 10, 11, 14, 16, 18, 19, 22, 42]);
+type HomeHonorYear = (typeof honorsByYear)[number];
 
-const clientLogos = Array.from({ length: 43 }, (_, index) => {
+const zhHomeSponsorHonors: Record<string, HomeHonorYear["honors"]> = {
+  "2024": [
+    {
+      title: "虎诉荣任第二十二届“贸仲杯”VOICE OF MOOT系列培训活动钻石赞助商",
+      date: "2024年11月",
+      desc: "虎诉荣任第二十二届“贸仲杯”VOICE OF MOOT系列培训活动钻石赞助商。",
+    },
+    {
+      title: "虎诉赞助2024世界仲裁最新动态大会（WAU）中国站",
+      date: "2024年5月",
+      desc: "虎诉赞助2024世界仲裁最新动态大会（WAU 2024）中国站。",
+    },
+  ],
+  "2022": [
+    {
+      title: "虎诉荣幸成为第二十届“贸仲杯”Voice of Moot系列培训活动银牌赞助商",
+      date: "2022年11月",
+      desc: "虎诉荣幸成为第二十届“贸仲杯”Voice of Moot系列培训活动银牌赞助商。",
+    },
+    {
+      title: "万力律师受聘为大连国际仲裁院（大连仲裁委员会）第六届仲裁员",
+      date: "2022年3月",
+      desc: "万力律师受聘为大连国际仲裁院（大连仲裁委员会）第六届仲裁员。",
+    },
+  ],
+};
+
+const zhHomeChambers2023: HomeHonorYear = {
+  year: "2023",
+  honors: [
+    {
+      title: "虎诉赞助2023钱伯斯北京论坛并受邀参会",
+      date: "2023年4月",
+      desc: "虎诉赞助2023钱伯斯北京论坛并受邀参会。",
+    },
+  ],
+};
+
+function withZhHomeSponsorHonors(items: HomeHonorYear[]) {
+  return items.flatMap((item) => {
+    if (item.year === "2024") {
+      const [diamondSponsor, wauSponsor] = zhHomeSponsorHonors["2024"];
+      return [
+        {
+          ...item,
+          honors: [diamondSponsor, item.honors[0], wauSponsor, ...item.honors.slice(1)],
+        },
+        zhHomeChambers2023,
+      ];
+    }
+
+    if (item.year === "2022") {
+      const [silverSponsor, dalianArbitrator] = zhHomeSponsorHonors["2022"];
+      return [
+        {
+          ...item,
+          honors: [silverSponsor, ...item.honors, dalianArbitrator],
+        },
+      ];
+    }
+
+    return [item];
+  });
+}
+
+const homeEventSlugs = [
+  "kinsey-kang-hong-kong-legal-counsel",
+  "official-account-mini-program-upgrade",
+  "benchmark-litigation-2022-dispute-resolution",
+  "civil-code-contract-termination-rules-part-one",
+  "wuhan-kingold-fake-gold-jurisdiction-objection",
+] as const;
+
+function formatHomeEventDate(date: string, language: "en" | "zh") {
+  if (language === "zh") {
+    return `${date.slice(0, 4)}年${Number(date.slice(4, 6))}月${Number(date.slice(6, 8))}日`;
+  }
+
+  return formatEventDate(date);
+}
+
+function getHomeEvents(language: "en" | "zh") {
+  return homeEventSlugs
+    .map((slug) => eventItems.find((event) => event.slug === slug))
+    .filter((event): event is NonNullable<typeof event> => Boolean(event))
+    .map((event) => {
+      const localized = localizeEvent(event, language);
+
+      return {
+        slug: event.slug,
+        title: `${localized.localizedCategory} | ${localized.localizedTitle}`,
+        date: formatHomeEventDate(event.date, language),
+        img: event.image,
+        desc: localized.localizedSummary,
+      };
+    });
+}
+
+const pngLogoIndexes = new Set([5, 8, 10, 11, 14, 16, 18, 19, 22, 41]);
+
+const clientLogos = Array.from({ length: 42 }, (_, index) => {
   const fileNumber = index + 1;
   const ext = pngLogoIndexes.has(fileNumber) ? "png" : "jpg";
 
@@ -300,16 +448,47 @@ function mod(value: number, length: number) {
 
 export function HomePage() {
   const { language } = useLanguage();
-  const [activeHonor, setActiveHonor] = useState(2);
+  const [activeHonor, setActiveHonor] = useState(0);
+  const [honorWindowStart, setHonorWindowStart] = useState(0);
   const [activeEvent, setActiveEvent] = useState(0);
-  const homeHonors = language === "zh" ? zhHomeHonorsByYear : honorsByYear;
-  const homeEvents = language === "zh" ? zhHomeEvents : events;
+  const homeHonors = language === "zh" ? withZhHomeSponsorHonors(zhHomeHonorsByYear) : honorsByYear;
+  const homeEvents = getHomeEvents(language);
   const honor = homeHonors[activeHonor];
+  const honorWindowSize = Math.min(5, homeHonors.length);
+  const visibleHonorIndexes = Array.from({ length: honorWindowSize }, (_, offset) =>
+    mod(honorWindowStart + offset, homeHonors.length),
+  );
   const industryLabels = pick(language, copy.home.industries.labels);
+
+  const updateHonor = (direction: -1 | 1) => {
+    const nextHonor = mod(activeHonor + direction, homeHonors.length);
+    let nextStart = honorWindowStart;
+
+    if (!visibleHonorIndexes.includes(nextHonor)) {
+      if (activeHonor === 0 && direction === -1) {
+        nextStart = homeHonors.length - honorWindowSize;
+      } else if (activeHonor === homeHonors.length - 1 && direction === 1) {
+        nextStart = 0;
+      } else {
+        nextStart = direction === 1 ? mod(nextHonor - honorWindowSize + 1, homeHonors.length) : nextHonor;
+      }
+    }
+
+    setHonorWindowStart(nextStart);
+    setActiveHonor(nextHonor);
+  };
 
   const updateEvent = (direction: -1 | 1) => {
     setActiveEvent((current) => mod(current + direction, homeEvents.length));
   };
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveEvent((current) => mod(current + 1, homeEvents.length));
+    }, 5000);
+
+    return () => window.clearInterval(timer);
+  }, [homeEvents.length, activeEvent]);
 
   return (
     <main className="relative isolate min-h-screen overflow-hidden bg-[#171717] text-white [&>section]:relative [&>section]:z-10">
@@ -320,12 +499,20 @@ export function HomePage() {
 
       <section className="relative w-full overflow-hidden bg-[#0d0d0d]">
         <div className="absolute inset-0">
-          <ImageWithFallback src={heroImg} alt="" className="size-full object-cover opacity-90" />
+          <video
+            className="size-full object-cover opacity-90"
+            src={assetUrl("/assets/home/海浪0508.mp4")}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+          />
           <div className="absolute inset-x-0 bottom-0 h-[30%] bg-gradient-to-b from-transparent to-[#171717]" />
         </div>
 
         <div className="relative z-10 flex min-h-[100svh] items-center justify-center px-5 py-32">
-          <h1 className="max-w-none whitespace-nowrap bg-[linear-gradient(135deg,#DBC39F_0%,#D09E57_100%)] bg-clip-text text-center text-[6.25rem] font-bold leading-none tracking-[0.06em] text-transparent">
+          <h1 className="hero-flow-text max-w-none whitespace-nowrap text-center text-[6.25rem] font-bold leading-none tracking-[0.06em]">
             WE KNOW HOW TO WIN
           </h1>
         </div>
@@ -343,7 +530,7 @@ export function HomePage() {
             }}
           >
             <div className="relative z-10 mb-7 h-1 w-12 bg-[#d9b27a]" />
-            <p className="relative z-10 max-w-[84rem] text-[2.5rem] leading-[1.45]">
+            <p className={`relative z-10 max-w-[84rem] leading-[1.45] ${language === "zh" ? "text-[2rem]" : "text-[2.5rem]"}`}>
               {language === "en" ? (
                 <>
                   <span className="font-light italic">{copy.home.vision.body.en[0]}</span>{" "}
@@ -368,7 +555,11 @@ export function HomePage() {
               className="pointer-events-none absolute inset-y-0 hidden w-[clamp(5rem,11vw,10rem)] items-center justify-center xl:flex"
               style={{ right: "calc(var(--shell-md) - 2.5rem)" }}
             >
-              <span className="rotate-[270deg] whitespace-nowrap text-[8.75rem] font-normal leading-none tracking-[-0.03em] text-[#d9b27a]/70">
+              <span
+                className={`rotate-[270deg] whitespace-nowrap font-normal leading-none tracking-[-0.03em] text-[#d9b27a]/70 ${
+                  language === "zh" ? "text-[7rem]" : "text-[8.75rem]"
+                }`}
+              >
                 {pick(language, copy.home.vision.title)}
               </span>
             </div>
@@ -398,13 +589,14 @@ export function HomePage() {
           {industries.map((item, index) => (
             <Link
               key={item.name}
-              href="/industries"
+              href={`/industries/${item.slug}`}
               className={`group relative min-w-0 overflow-hidden bg-[#141414] shadow-xl transition-transform duration-500 hover:-translate-y-2 ${item.cls}`}
             >
               <div className="absolute left-0 top-0 z-20 h-[2px] w-full bg-gradient-to-r from-transparent via-[#f3dfb5] to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
               <ImageWithFallback
                 src={item.img}
                 alt={industryLabels[index] ?? item.name}
+                decoding="sync"
                 className="size-full object-cover opacity-60 grayscale transition-all duration-1000 group-hover:scale-110 group-hover:opacity-80 group-hover:grayscale-0"
               />
               <div className="absolute inset-0 bg-[#09090b]/55 transition-colors duration-700 group-hover:bg-[#09090b]/25" />
@@ -437,7 +629,7 @@ export function HomePage() {
               <div className="mt-6 flex items-center gap-3 lg:justify-end">
                 <button
                   type="button"
-                  onClick={() => setActiveHonor((current) => mod(current - 1, homeHonors.length))}
+                  onClick={() => updateHonor(-1)}
                   className="flex size-11 items-center justify-center rounded-full border border-white/35 text-white/80 transition hover:scale-105 hover:border-[#d9b27a] hover:text-[#d9b27a]"
                   aria-label="Previous honor year"
                 >
@@ -445,7 +637,7 @@ export function HomePage() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => setActiveHonor((current) => mod(current + 1, homeHonors.length))}
+                  onClick={() => updateHonor(1)}
                   className="flex size-11 items-center justify-center rounded-full border border-white/35 text-white/80 transition hover:scale-105 hover:border-[#d9b27a] hover:text-[#d9b27a]"
                   aria-label="Next honor year"
                 >
@@ -455,8 +647,9 @@ export function HomePage() {
             </div>
           </div>
 
-          <div className="mt-12 grid grid-cols-5 gap-2">
-            {homeHonors.map((item, index) => {
+          <div className="mt-12 grid grid-cols-1 gap-2 sm:grid-cols-5">
+            {visibleHonorIndexes.map((index) => {
+              const item = homeHonors[index];
               const active = index === activeHonor;
               return (
                 <button
@@ -549,13 +742,9 @@ export function HomePage() {
             }[position];
 
             return (
-              <button
-                type="button"
-                key={event.title}
-                onClick={() => {
-                  if (position === "prev") updateEvent(-1);
-                  if (position === "next") updateEvent(1);
-                }}
+              <Link
+                href={`/events/${event.slug}`}
+                key={event.slug}
                 className={`absolute top-4 w-[62.1875rem] max-w-full cursor-pointer overflow-visible rounded-none bg-transparent p-0 text-left shadow-2xl shadow-black/40 transition-all duration-700 ease-out ${
                   position === "active" ? "hover:scale-[1.02]" : "hover:opacity-75"
                 }`}
@@ -564,7 +753,13 @@ export function HomePage() {
               >
                 <div className="bg-transparent">
                   <div className="relative aspect-[16/9] overflow-hidden bg-[#151515]">
-                    <ImageWithFallback src={event.img} alt="" className="size-full object-cover" />
+                    <ImageWithFallback
+                      src={event.img}
+                      alt=""
+                      loading={position === "active" ? "eager" : "lazy"}
+                      fetchPriority={position === "active" ? "high" : "auto"}
+                      className="size-full object-cover"
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent" />
                     <div className="absolute bottom-6 left-[4.5625rem] w-[calc(70%+1rem)]">
                       <p className="ml-4 text-[1.5rem] font-light leading-none text-[#D9B27A]">
@@ -584,7 +779,7 @@ export function HomePage() {
                     </div>
                   ) : null}
                 </div>
-              </button>
+              </Link>
             );
           })}
         </div>
@@ -647,14 +842,13 @@ export function HomePage() {
             <div key={rowIndex} className="client-logo-row overflow-hidden">
               <div
                 className={`client-logo-track flex w-max gap-5 ${rowIndex === 1 ? "client-logo-track-reverse" : ""}`}
-                style={{ animationDuration: "135s" }}
               >
                 {[...row, ...row].map((logo, index) => (
                   <div
                     key={`${logo}-${index}`}
                     className="flex h-24 w-44 shrink-0 items-center justify-center rounded-md border border-black/10 bg-white px-6 shadow-lg shadow-black/10 sm:h-28 sm:w-56"
                   >
-                    <ImageWithFallback src={logo} alt="Client logo" className="max-h-[70%] max-w-full object-contain" />
+                    <ImageWithFallback src={logo} alt="Client logo" loading="lazy" className="h-[80%] w-auto max-w-full object-contain" />
                   </div>
                 ))}
               </div>

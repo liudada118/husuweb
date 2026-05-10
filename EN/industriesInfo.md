@@ -17,7 +17,7 @@ In the event of investment in private equity or private funds under the mode of 
 （2）Initiating pre-litigation preservation or preservation in litigation (including judicial preservation against the bank accounts, equity interests or investment proceeds of the counterparty);
 （3）Responding to claims or filing counterclaims;
 （4）Initiating application for enforcement;
-（5）In the litigation or arbitration proceedings, assisting in preservation or enforcement proceedings by visiting institutions in person, such as Shanghai Stock Exchange or China Securities Depository and Clearing Corporation Limited;
+（5）In the litigation or arbitration proceedings, In the litigation or arbitration proceedings, assisting in preservation or enforcement proceedings by visiting institutions in person, such as Shanghai Stock Exchange or China Securities Depository and Clearing Corporation Limited;
 （6）Participating in negotiations for settlement or mediation.
 Finance
 Tiger Partners has highly specialized knowledge and extensive experience in dispute resolution relating to finance, and is able to provide early warning and prevent risks arising from various financial products, investment and finance transactions, and provide all-round dispute resolution services in civil & commercial and civil cross criminal area.
@@ -47,7 +47,7 @@ Tiger Partners is specialized in dispute resolution in real estate industry. Fro
 
 3、 Representing real estate developers or constructors in the disputes over construction contracts, or representing lessors or lessees in the disputes over large real estate leasing contracts to participate in the following dispute resolution procedures or providing corresponding legal services.
 （1）Initiating litigation or arbitration;
-（2）Initiating pre-litigation preservation or preservation during litigation (including judicial preservation for the counterparty's bank accounts, equity interest or the property or construction-in-progress involved);
+（2）Initiating pre-litigation preservation or preservation during litigation ((including judicial preservation for the counterparty's bank accounts, equity interest or the property or construction-in-progress involved));
 （3）Responding to claims or filing counterclaims;
 （4）Conducting on-site investigation to collect evidence, and assisting clients to complete evidence collection;
 （5）In litigation or arbitration proceedings, initiating applications for judicial authentication of the quality, construction period, actual leased area, etc., and providing cross-examination opinions in relation toauthentication or evaluation report submitted by the counterparty;
@@ -78,7 +78,7 @@ Tiger Partners has deeply participated in the increasingly mature commercializat
 
 4、 Litigation and arbitration agency services:
 （1）Initiating litigation or arbitration;
-（2）Initiate pre-litigation preservation or preservation during litigation (including judicial preservation of tangible or intangible property such as bank accounts, equity interests, intellectual property rights, right to income and so on of the counterparty);
+（2）Initiate pre-litigation preservation or preservation during litigation ((including judicial preservation of tangible or intangible property such as bank accounts, equity interests, intellectual property rights, right to income and so on of the counterparty));
 （3）Responding to claims, or filing counterclaims;
 （4） Investigating and collecting evidence; Assisting clients to complete evidence collection;
 （5） Initiating application of enforcement, and assisting clients to achieve their ultimate business goals;
@@ -107,7 +107,7 @@ Since Internet plus initiative became a national strategy, numerous entrepreneur
 
 5、Litigation and arbitration agency services:
 （1）Initiating litigation or arbitration;
-（2）Initiating pre-litigation preservation or preservation during litigation (including judicial preservation of tangible or intangible property such as bank accounts or equity interests, the intellectual property right and right to income held by the counterparty);
+（2）Initiating pre-litigation preservation or preservation during litigation ((including judicial preservation of tangible or intangible property such as bank accounts or equity interests, the intellectual property right and right to income held by the counterparty));
 （3）Responding to claims or filing counterclaims;
 （4）Investigating and collecting evidence, and assisting clients in evidence collection;
 （5）Initiating application for enforcement, and assisting clients in achieving their ultimate business goals;
