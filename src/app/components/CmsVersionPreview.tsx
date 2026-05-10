@@ -2,9 +2,10 @@
 
 import { type MouseEvent, useState } from "react";
 import dynamic from "next/dynamic";
-import { LanguageProvider } from "../contexts/LanguageContext";
-import { PublicCmsDataProvider } from "../contexts/PublicCmsDataContext";
-import { SiteContentProvider } from "../contexts/SiteContentContext";
+import { PublicCmsProvider as OfficialPublicCmsProvider } from "@/cms/PublicCmsProvider";
+import type { OfficialCmsPublicState } from "@/cms/official-state";
+import { LanguageProvider as OfficialLanguageProvider } from "@/i18n/LanguageProvider";
+import { getPageContentField } from "@/lib/cms-page-content";
 import type { CmsVersionSnapshot, PublicCmsData, VisualPage } from "@/lib/cms-types";
 import type { Language } from "@/lib/site-types";
 import type { SiteContent } from "../translations/translations";
@@ -15,52 +16,80 @@ const previewLoading = () => (
   </div>
 );
 
-const HomePreview = dynamic(() => import("./landing/HomeLandingPage").then((mod) => mod.HomeLandingPage), {
+const HomePreview = dynamic(() => import("@/components/pages/HomePage").then((mod) => mod.HomePage), {
   ssr: false,
   loading: previewLoading,
 });
-const AboutPreview = dynamic(() => import("./landing/AboutLandingPage").then((mod) => mod.AboutLandingPage), {
+const AboutPreview = dynamic(() => import("@/components/pages/AboutPage").then((mod) => mod.AboutPage), {
   ssr: false,
   loading: previewLoading,
 });
-const AwardsPreview = dynamic(() => import("./landing/AwardsLandingPage").then((mod) => mod.AwardsLandingPage), {
+const EventPreview = dynamic(() => import("@/components/pages/EventsPage").then((mod) => mod.EventsPage), {
   ssr: false,
   loading: previewLoading,
 });
-const EventPreview = dynamic(() => import("./landing/EventLandingPage").then((mod) => mod.EventLandingPage), {
+const IndustriesPreview = dynamic(() => import("@/components/pages/IndustriesPage").then((mod) => mod.IndustriesPage), {
   ssr: false,
   loading: previewLoading,
 });
-const MediaPreview = dynamic(() => import("./landing/PodcastLandingPage").then((mod) => mod.PodcastLandingPage), {
+const TeamPreview = dynamic(() => import("@/components/pages/TeamPage").then((mod) => mod.TeamPage), {
   ssr: false,
   loading: previewLoading,
 });
-const PodcastPreview = dynamic(() => import("./landing/MediaLandingPage").then((mod) => mod.MediaLandingPage), {
-  ssr: false,
-  loading: previewLoading,
-});
-const ContactPreview = dynamic(() => import("./landing/ContactLandingPage").then((mod) => mod.ContactLandingPage), {
+const ContactPreview = dynamic(() => import("@/components/pages/ContactPage").then((mod) => mod.ContactPage), {
   ssr: false,
   loading: previewLoading,
 });
 
 function PreviewPage({ page }: { page: VisualPage }) {
   if (page === "home") return <HomePreview />;
-  if (page === "about") return <AboutPreview />;
-  if (page === "awards") return <AwardsPreview />;
+  if (page === "about" || page === "awards") return <AboutPreview />;
   if (page === "event") return <EventPreview />;
-  if (page === "media") return <MediaPreview />;
-  if (page === "podcast") return <PodcastPreview />;
+  if (page === "media") return <IndustriesPreview />;
+  if (page === "podcast") return <TeamPreview />;
   return <ContactPreview />;
+}
+
+function officialPreviewState(publicData: PublicCmsData): OfficialCmsPublicState {
+  return {
+    version: 1,
+    updatedAt: new Date().toISOString(),
+    assets: {
+      titleLogo: publicData.siteSettings.logoUrl || "/assets/title/logo.svg",
+      footerLogo: publicData.siteSettings.footerLeftLogoUrl || "/assets/foot/logo.svg",
+      footerQr: publicData.siteSettings.footerOfficialLogoUrl || "/assets/foot/QRcode.png?v=202605101205",
+    },
+    footer: {
+      phone: publicData.siteSettings.footerPhone || "010-85885228",
+      email: publicData.siteSettings.footerEmail || "contact@tigerpartners.cn",
+    },
+    home: {
+      heroTitle: {
+        en: getPageContentField(publicData.pageContent, "en", "home", "hero", "title", "") || "WE KNOW HOW TO WIN",
+        zh: getPageContentField(publicData.pageContent, "zh", "home", "hero", "title", "") || "WE KNOW HOW TO WIN",
+      },
+      heroVideo:
+        getPageContentField(publicData.pageContent, "en", "home", "hero", "video", "") ||
+        "/assets/home/海浪0508.mp4",
+      eventSlugs: [
+        "kinsey-kang-hong-kong-legal-counsel",
+        "official-account-mini-program-upgrade",
+        "benchmark-litigation-2022-dispute-resolution",
+        "civil-code-contract-termination-rules-part-one",
+        "wuhan-kingold-fake-gold-jurisdiction-objection",
+      ],
+    },
+    events: { overrides: {} },
+  };
 }
 
 const internalRouteToPage = new Map<string, VisualPage>([
   ["/", "home"],
   ["/about", "about"],
-  ["/awards", "awards"],
-  ["/event", "event"],
-  ["/media", "media"],
-  ["/podcast", "podcast"],
+  ["/about#honors", "awards"],
+  ["/events", "event"],
+  ["/industries", "media"],
+  ["/team", "podcast"],
   ["/contact", "contact"],
 ]);
 
@@ -123,13 +152,11 @@ export function CmsVersionPreview({
   return (
     <div className="min-h-screen bg-[#161915] text-slate-950">
       <div onClickCapture={handlePreviewClick}>
-        <PublicCmsDataProvider data={publicData}>
-          <SiteContentProvider content={siteContent}>
-            <LanguageProvider key={`${version.id}-${page}-${language}`} initialLanguage={language} persist={false}>
-              <PreviewPage page={page} />
-            </LanguageProvider>
-          </SiteContentProvider>
-        </PublicCmsDataProvider>
+        <OfficialPublicCmsProvider initialState={officialPreviewState(publicData)}>
+          <OfficialLanguageProvider key={`${version.id}-${page}-${language}`} initialLanguage={language} persist={false}>
+            <PreviewPage page={page} />
+          </OfficialLanguageProvider>
+        </OfficialPublicCmsProvider>
       </div>
     </div>
   );

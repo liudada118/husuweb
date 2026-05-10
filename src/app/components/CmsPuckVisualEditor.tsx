@@ -23,6 +23,7 @@ import {
   getPastEventPlatformNumbersFromFields,
   getPastEventProgramNumber,
   getPastEventProgramNumbersFromFields,
+  getPageContentField,
   isPastEventPlatformFieldId,
   pageContentItemFieldKey,
   type PageContentField,

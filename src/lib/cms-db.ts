@@ -680,7 +680,7 @@ function seedBaseState(db: Database.Database) {
     const password = process.env.CMS_ADMIN_PASSWORD || "ChangeMe123!";
 
     db.prepare(`
-      INSERT INTO users (username, password_hash, role, force_password_reset, created_at, updated_at)
+      INSERT OR IGNORE INTO users (username, password_hash, role, force_password_reset, created_at, updated_at)
       VALUES (@username, @passwordHash, 'admin', @forcePasswordReset, @createdAt, @updatedAt)
     `).run({
       username,
