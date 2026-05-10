@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Globe, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { usePublicCms } from "@/cms/PublicCmsProvider";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
 import { useLanguage } from "@/i18n/LanguageProvider";
 
@@ -21,6 +22,7 @@ export function SiteHeader({ active }: { active: ActiveNav }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const { language, toggleLanguage } = useLanguage();
+  const cms = usePublicCms();
 
   useEffect(() => {
     const updateHeaderState = () => setScrolled(window.scrollY > 16);
@@ -44,7 +46,7 @@ export function SiteHeader({ active }: { active: ActiveNav }) {
       <div className="site-shell flex min-h-[var(--header-height)] items-center justify-between gap-4 py-[1.2rem]">
         <Link href="/" className="flex min-w-0 items-center" onClick={() => setMenuOpen(false)}>
           <ImageWithFallback
-            src="/assets/title/logo.svg"
+            src={cms?.assets.titleLogo ?? "/assets/title/logo.svg"}
             alt="Tiger Partners"
             loading="eager"
             className="h-auto w-[5.375rem] object-contain"

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { AppProviders } from "@/components/layout/AppProviders";
+import { getPublicCmsState } from "@/lib/cms-store";
 import { assetUrl } from "@/lib/assets";
 import "./globals.css";
 
@@ -18,8 +19,9 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const poppinsUrl = assetUrl("/font/poppins.ttf");
+  const cmsState = await getPublicCmsState();
 
   return (
     <html lang="en">
@@ -39,7 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        <AppProviders>{children}</AppProviders>
+        <AppProviders cmsState={cmsState}>{children}</AppProviders>
       </body>
     </html>
   );

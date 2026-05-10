@@ -5,13 +5,17 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { BackToTop } from "@/components/shared/BackToTop";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
 import { SubpageBreadcrumb } from "@/components/shared/SubpageBreadcrumb";
-import { events, formatEventDate, localizeEvent } from "@/data/events";
+import { usePublicCms } from "@/cms/PublicCmsProvider";
+import { localizeCmsEvent } from "@/cms/events";
+import { events, formatEventDate } from "@/data/events";
 import { pick, useLanguage } from "@/i18n/LanguageProvider";
 import { copy } from "@/i18n/copy";
 
 export function EventDetailPage({ slug }: { slug: string }) {
   const { language } = useLanguage();
-  const event = localizeEvent(events.find((item) => item.slug === slug) ?? events[0], language);
+  const cms = usePublicCms();
+  const baseEvent = events.find((item) => item.slug === slug) ?? events[0];
+  const event = localizeCmsEvent(baseEvent, language, cms?.events.overrides[baseEvent.slug]);
   const fullTitle = `${event.localizedCategory} | ${event.localizedTitle}`;
   const cleanText = (text: string) => text.replace(/\[图片\]?/g, "").replace(/\[Image\]?/gi, "").trim();
   const summary = cleanText(event.localizedSummary);

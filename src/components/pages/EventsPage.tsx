@@ -7,7 +7,9 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
 import { PageTriangle } from "@/components/shared/PageTriangle";
-import { events, formatEventDate, localizeEvent } from "@/data/events";
+import { usePublicCms } from "@/cms/PublicCmsProvider";
+import { localizeCmsEvent } from "@/cms/events";
+import { events, formatEventDate } from "@/data/events";
 import { pick, useLanguage } from "@/i18n/LanguageProvider";
 import { copy } from "@/i18n/copy";
 
@@ -55,7 +57,10 @@ function EventCard({
 export function EventsPage() {
   const [showAll, setShowAll] = useState(false);
   const { language } = useLanguage();
-  const visibleEvents = (showAll ? events : events.slice(0, 9)).map((event) => localizeEvent(event, language));
+  const cms = usePublicCms();
+  const visibleEvents = (showAll ? events : events.slice(0, 9)).map((event) =>
+    localizeCmsEvent(event, language, cms?.events.overrides[event.slug]),
+  );
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#171717] text-white">

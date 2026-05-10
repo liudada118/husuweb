@@ -7,10 +7,13 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
 import { PageTriangle } from "@/components/shared/PageTriangle";
-import { events as eventItems, formatEventDate, localizeEvent } from "@/data/events";
+import { usePublicCms } from "@/cms/PublicCmsProvider";
+import { localizeCmsEvent } from "@/cms/events";
+import { events as eventItems, formatEventDate } from "@/data/events";
 import { pick, useLanguage } from "@/i18n/LanguageProvider";
 import { copy } from "@/i18n/copy";
 import { assetUrl } from "@/lib/assets";
+import type { OfficialCmsSiteState } from "@/cms/official-state";
 
 const industries = [
   {
@@ -394,7 +397,7 @@ function withZhHomeSponsorHonors(items: HomeHonorYear[]) {
   });
 }
 
-const homeEventSlugs = [
+const defaultHomeEventSlugs = [
   "kinsey-kang-hong-kong-legal-counsel",
   "official-account-mini-program-upgrade",
   "benchmark-litigation-2022-dispute-resolution",
@@ -410,12 +413,16 @@ function formatHomeEventDate(date: string, language: "en" | "zh") {
   return formatEventDate(date);
 }
 
-function getHomeEvents(language: "en" | "zh") {
-  return homeEventSlugs
+function getHomeEvents(
+  language: "en" | "zh",
+  slugs: readonly string[],
+  overrides: OfficialCmsSiteState["events"]["overrides"] = {},
+) {
+  return slugs
     .map((slug) => eventItems.find((event) => event.slug === slug))
     .filter((event): event is NonNullable<typeof event> => Boolean(event))
     .map((event) => {
-      const localized = localizeEvent(event, language);
+      const localized = localizeCmsEvent(event, language, overrides[event.slug]);
 
       return {
         slug: event.slug,
@@ -448,11 +455,15 @@ function mod(value: number, length: number) {
 
 export function HomePage() {
   const { language } = useLanguage();
+  const cms = usePublicCms();
   const [activeHonor, setActiveHonor] = useState(0);
   const [honorWindowStart, setHonorWindowStart] = useState(0);
   const [activeEvent, setActiveEvent] = useState(0);
   const homeHonors = language === "zh" ? withZhHomeSponsorHonors(zhHomeHonorsByYear) : honorsByYear;
-  const homeEvents = getHomeEvents(language);
+  const cmsHomeEventSlugs = cms?.home.eventSlugs?.length ? cms.home.eventSlugs : defaultHomeEventSlugs;
+  const homeEvents = getHomeEvents(language, cmsHomeEventSlugs, cms?.events.overrides);
+  const heroTitle = (language === "zh" ? cms?.home.heroTitle.zh : cms?.home.heroTitle.en) || "WE KNOW HOW TO WIN";
+  const heroVideo = cms?.home.heroVideo ?? "/assets/home/海浪0508.mp4";
   const honor = homeHonors[activeHonor];
   const honorWindowSize = Math.min(5, homeHonors.length);
   const visibleHonorIndexes = Array.from({ length: honorWindowSize }, (_, offset) =>
@@ -501,7 +512,7 @@ export function HomePage() {
         <div className="absolute inset-0">
           <video
             className="size-full object-cover opacity-90"
-            src={assetUrl("/assets/home/海浪0508.mp4")}
+            src={assetUrl(heroVideo)}
             autoPlay
             muted
             loop
@@ -513,7 +524,7 @@ export function HomePage() {
 
         <div className="relative z-10 flex min-h-[100svh] items-center justify-center px-5 py-32">
           <h1 className="hero-flow-text max-w-none whitespace-nowrap text-center text-[6.25rem] font-bold leading-none tracking-[0.06em]">
-            WE KNOW HOW TO WIN
+            {heroTitle}
           </h1>
         </div>
       </section>

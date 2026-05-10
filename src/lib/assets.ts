@@ -12,7 +12,7 @@ export function assetUrl(src: string) {
     return `${assetBaseUrl}${src}`;
   }
 
-  if (basePath && (src.startsWith("/assets/") || src.startsWith("/font/"))) {
+  if (basePath && (src.startsWith("/assets/") || src.startsWith("/font/") || src.startsWith("/uploads/"))) {
     return `${basePath}${src}`;
   }
 

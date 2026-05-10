@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "updatedAt": "2026-05-10T12:30:00.000Z",
+  "assets": {
+    "titleLogo": "/assets/title/logo.svg",
+    "footerLogo": "/assets/foot/logo.svg",
+    "footerQr": "/assets/foot/QRcode.png?v=202605101205"
+  },
+  "footer": {
+    "phone": "010-85885228",
+    "email": "contact@tigerpartners.cn"
+  },
+  "home": {
+    "heroTitle": {
+      "en": "WE KNOW HOW TO WIN",
+      "zh": "WE KNOW HOW TO WIN"
+    },
+    "heroVideo": "/assets/home/海浪0508.mp4",
+    "eventSlugs": [
+      "kinsey-kang-hong-kong-legal-counsel",
+      "official-account-mini-program-upgrade",
+      "benchmark-litigation-2022-dispute-resolution",
+      "civil-code-contract-termination-rules-part-one",
+      "wuhan-kingold-fake-gold-jurisdiction-objection"
+    ]
+  },
+  "events": {
+    "overrides": {}
+  }
+}
