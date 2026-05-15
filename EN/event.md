@@ -54,7 +54,7 @@ It is reported that this forum will focus on compliance, centering on the rich c
 
 3
 20230329
-Tiger Dynamics | Party Branch of Tiger Partners entered into a pairing relationship with Shifoying Nanli Community to build a l
+Tiger Dynamics | Tiger Dynamics | Party Branch of Tiger Partners entered into a pairing relationship with Shifoying Nanli Community to build a law-based community
 In order to deepen the implementation of Xi Jinping Thought on the Rule of Law and fulfill practice "Good Lawyers to the satisfaction of the Party and the people", the Party branch committee of Tiger Partners responded positively to the call of the Party Committee of the Lawyers' Profession of Chaoyang District of Beijing for building a law-based community and entered into a pairing relationship with the community committee of Shifoying Nanli in order to make use of the advantages of the legal profession to contribute to promoting the construction of the rule of law in the community.
 
 Pairing to build a law-based community
@@ -176,7 +176,7 @@ Upgrading of official account function and online of the new Mini Program this t
 
 11
 20220517
-Industry News | Tiger Partners and Mr. Liu Yuxuan, Mr. Wan Li were selected into the ranking of 2022 China's top law firms and
+Industry News | Tiger Partners and Mr. Liu Yuxuan, Mr. Wan Li were selected into the ranking of 2022 China's top law firms and top lawyers
 On May 17, LEGALBAND released the ranking of China's top law firms and lawyers in 2022. Tiger Partners and Mr. Liu Yuxuan, Mr. Wan Li were selected into the abovementioned ranking lists.
 
 Tiger Partners was honored to be selected as "Firm to Watch" in the fields of dispute resolution (litigation) and compliance.
@@ -219,7 +219,7 @@ Today, Dalian International Arbitration Court released the namelist of arbitrato
 
 Mr. Wan specializes in commercial dispute resolution, specifically foreign-related commercial litigation and arbitration.  He has also made breakthroughs in the fields of IP-related disputes as well as matters involving both criminal and civil proceedings.  Wan Li’s clients come from many industries including finance, investment, maritime, aviation, insurance, industrial manufacturing, pharmaceutical, real estate, culture and entertainment, e-sports and ect.
 
-In addition, Mrs. Zoe Zhang, another partner , is engaged by Qingdao Arbitration Commission as the arbitrator.
+In addition, Ms. Zoe Zhang, another partner , is engaged by Qingdao Arbitration Commission as the arbitrator.
 
 [图片]
 
@@ -302,7 +302,7 @@ All the past is a preface. In the days to come, Tiger Partners will continue to 
 
 19
 20211015
-Industry News | Three partners of Tiger Partners were elected as members of the Professional Committee of the 11th Beijing Lawy
+Industry News | Three partners of Tiger Partners were elected as members of the Professional Committee of the 11th Beijing Lawyer Association
 On October 13, the Beijing Lawyers Association released the "Supplementary List of Members of the Beijing Lawyers Association on Publishing Professional Committees (Board)". Through strict procedures of selection and publication, Mr. Liu Yuxuan, Mr. Xu Min and Mr. Wan Li, partners of Tiger Partners, were elected as members of the 11th Professional Committee of the Beijing Lawyers Association with their extensive experience in specialized fields. Specifically,
 
 Member of the Professional Committee of Commercial Arbitration Law
@@ -325,13 +325,35 @@ Mr. Wan Li （Partner）
 
 20
 
+20210720
+
+Industry News | Mr. Liu Yuxuan and  Mr. Liao Mengcheng Invited to Attend the 29th Cross-Strait Youth Vision Forum
+
+On July 19, 2021, the 29th Cross-Strait Youth Vision Forum, hosted by the Central Committee of the Revolutionary Committee of the Chinese Kuomintang, was held in Beijing. With the theme of "Heart Across the Straits · Legal Resonance of Sincere Voices", the forum gathered young legal professionals from both sides of the Taiwan Strait to engage in in-depth discussions on industrial development and legal issues concerning cross-strait exchanges. Liu Yuxuan, Managing Partner of Tiger Partners, and Liao Mengcheng, Senior Consultant of Tiger Partners, were honored to be invited to attend the forum.
+[图片]
+
+At the invitation of the Central Committee of the Revolutionary Committee of the Chinese Kuomintang, Mr. Liu Yuxuan paired up with Cheng Weilin, a trainee lawyer from Taiwan, to co-host the forum as representatives of legal practitioners across the two sides of the Taiwan Strait.
+
+At the invitation, Mr. Liao Mengcheng delivered a keynote speech entitled Policy and Legal Framework for the Development of Cross-Strait Sports Industry. From a legal perspective, he shared his insights and reflections on the development of the cross-strait sports industry.
+
+[图片]
+
+As the forum was drawing to a close, Mr. Liu Yuxuan remarked on stage that he sincerely hopes young people on both sides of the Strait will strengthen exchanges and interactions in the legal sector, jointly explore new pathways for cross-strait integrated development, and earnestly implement the principle of promoting integration through connectivity, welfare benefits, and emotional affinity, so as to jointly create a promising future for cross-strait youth.
+
+[图片]
+
+Finally, leaders and guests attending the forum took a group photo in front of the rostrum. The 29th Cross-Strait Youth Vision Forum themed Heart Across the Straits · Legal Resonance of Sincere Voices concluded successfully.
+
+
+21
+
 20210610
 Industry News|Tiger Partners and Mr. Liu Yuxuan and Mr. Wan Li recommend by Benchmark Litigation China
 On June 10, 2021, the international legal rating agency benchmark ligation officially released the ranking guide for China in 2021, which is also the first time that benchmark ligation has launched the ranking guide for dispute resolution in China.
 
 With its outstanding performance in the field of dispute resolution in the past year, Tiger Partners was awarded as "Notable Firm" in the field of commercial disputes resolution in Beijing in 2021. Mr. Liu Yuxuan and Mr. Wan Li, partners of Tiger Partners, were also listed as recommended lawyers for dispute resolution in Beijing in benchmark litigation China 2021.
 
-21
+22
 20210518
 Industry News|Tiger Partners was listed as "Firm to Watch"
 Recently, China Business Law Journal, a leading international legal magazine, announced the results of the China Business Law Awards 2021. Tiger partners, with its exquisite professional ability and high-quality reputation, was selected as a "Firm to Watch".
@@ -342,9 +364,9 @@ As a boutique law firm focusing on the settlement of major and complex civil and
 
 Tiger Partners will continue to cultivate the legal profession in order to provide clients with more professional legal services and more accurate business solutions.
 
-22
+23
 20210416
-Industry News|Tiger Partners was nominated as "Rising Law Firm of the Year" in the 18th Annual SSQ ALB China Law Awards 2021.
+Industry News| 
 Recently, Asian legal business ("ALB") published the shortlist of SSQ 2021 ALB China law award. Tiger Partners, with its superb professional ability and outstanding achievements, was shortlisted for the "Rising Law Firm of the Year"
 
 ALB is a cutting-edge legal magazine under Thomson Reuters and one of the most influential legal media in the world. This year's ALB China law award attracted more than 1400 nominations from more than 200 law firms and corporate legal teams, reaching a new high.
@@ -353,14 +375,14 @@ As a boutique law firm focusing on the settlement of major and complex civil and
 
 Tiger Partners will continue to be committed to providing clients with more professional legal services, and accurate business solutions.
 
-23
+24
 20210414
 Industry News | Mr. Liu Yuxuan was listed in the top lawyers in China by LEGALBAND in 2021
 In April 2021, Mr. Liu Yuxuan was listed in the top lawyers in China by LEGALBAND in 2021 and selected as the "Rising Star" in the field of "dispute resolution litigation" .
 
-24
+25
 20210315
-Industry News|Attorney Liu Yuxuan and Wan Li from Tiger Partners identified in the list of Top 40 Rising Stars 2021 elite up-an
+Industry News|Attorney Liu Yuxuan and Wan Li from Tiger Partners identified in the list of Top 40 Rising Stars 2021 elite up-and-coming lawyers in China
 The leading legal press China Business Law Journal recently released its list of Top 40 Rising Stars 2021 - 40 elite up-and-coming lawyers in China, recognizing their outstanding performance in their respective practice areas in the past year of 2020.  Liu Yuxuan and Wan Li from Tiger Partners are identified in the list for their expertise in the field of commercial dispute resolution and for their excellent client reputation.
 
 The endorsement is based on extensive research conducted by China Business Law Journal, in which thousands of corporate legal counsel, executives and fellow lawyers were invited to nominate noticeable private practice lawyers.  The 40 young lawyers on the list all have more than 10 years of legal experience.  Their practices cover dispute resolution, M&A, capital markets, intellectual property and other specialized fields.  The successful listing of Liu and Wan shows that Tiger Partners lawyers' professional legal services have won high recognition from clients and legal peers.
@@ -389,9 +411,9 @@ Wan Li joined Tiger Partners in 2020. Prior to that, Mr. Wan worked as a dispute
 
 Wan Li graduated from the University of International Relations with a Bachelor's degree in Law, and completed his Master's degree in Law (Maritime Law) at Dalian Maritime University.
 
-25
+26
 20201014
-Industry News|Mr. Xu Min and Mr. Wan Li were selected into the Foreign-Related Lawyer Talent Pool of the Beijing Bar Associatio
+Industry News|Mr. Xu Min and Mr. Wan Li were selected into the Foreign-Related Lawyer Talent Pool of the Beijing Bar Association
 
 The Beijing Lawyers Association released the list of Foreign Lawyers Talent pool yesterday. After strict selection and publicity procedures, Mr. Xu Min and Mr. Wan Li were successfully selected into the foreign lawyers talent pool with their rich foreign business experience. 
 
@@ -399,7 +421,15 @@ This fully shows the rich practical experience and consistent excellent performa
 
 Tiger Partners will continue to take a broad view of the international legal affiars, and continue to provide clients with high-quality legal services.
 
-26
+27
+
+20200927
+Industry News | China Business Law Journal officially included Tiger Partners
+Recently, China Business Law Journal, a well-known legal media, officially included Tiger Partners. Tiger Partners’ inclusion in the Journal’s recommended law firm list fully attests to the firm’s consistently outstanding performance in dispute resolution (litigation and arbitration).
+
+Tiger Partners will continue to deepen its professional expertise, devote full professionalism and dedication to every case, and consistently deliver exceptional legal services to clients.
+
+28
 20200902
 Tiger Watch | The gun goes off, the gold is gone - The interpretation of the adjustment of judicial protection rules of private
 On August 20, 2020, the Supreme People's Court ("SPC") issued the Decision on Amending the "Provisions on Several Issues Concerning the Application of Law in the Trial of Private Lending Cases"(the "New Provisions"), which made certain amendments to the trial rules for private lending cases.
@@ -414,12 +444,12 @@ In brief, the range of interest rates protected by the court was adjusted as fol
 
 [图片]
 
-27
+29
 20200526
 Industry News | ALB report “An up-and-comer in dispute resolution-Interview Liu Yuxuan, managing partner”
 Recently, Asian Legal Business ("ALB"), one of the world's most influential legal media, interviewed Liu Yuxuan, Managing Partner of Tiger Partners. The article has been published in the May 2020 issue of ALB China. If you would like to read the rest of the article, please visit ALB's website http://www.legalbusinessonline.com/china.
 
-28
+30
 20200311
 Industry News | ALB report“Former red circle firm lawyers leave to set up boutique firm Tiger Partners”
 Asian Legal Business ("ALB"), one of the world's most influential legal media, has recently noted the establishment of Tiger Partners. As a boutique firm specializing in complex commercial dispute resolution, Tiger Partners' primary objective is to realize the interests of its clients. Tiger Partners has a deep legal expertise, rich practical experience and a distinctive commercial mindset. It is committed to providing professional legal services, precise business solutions and good user experience to its clients.

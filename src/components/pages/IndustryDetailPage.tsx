@@ -7,6 +7,7 @@ import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
 import { SubpageBreadcrumb } from "@/components/shared/SubpageBreadcrumb";
 import { pick, useLanguage } from "@/i18n/LanguageProvider";
 import { copy } from "@/i18n/copy";
+import { useSearchParams } from "next/navigation";
 
 export const industries = {
   "private-equity": {
@@ -172,7 +173,7 @@ export const industries = {
   },
   "cyber-tech-and-game": {
     title: "Cyber Tech and Game",
-    image: "/assets/industries/in6.webp",
+    image: "/assets/home/INDUSTRIES6.png",
     intro:
       "Since Internet plus initiative became a national strategy, numerous entrepreneurs have been pursuing wealth and success in the tide of the internet. With years of legal service experience cultivating in internet technology and game, Tiger Partners has greatly protected and escorted investors and young entrepreneurs in this industry.",
     sections: [
@@ -426,10 +427,13 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
 
 export function IndustryDetailPage({ slug }: { slug: string }) {
   const { language } = useLanguage();
+  const searchParams = useSearchParams();
   const industry = industries[slug as IndustrySlug] ?? defaultIndustry;
   const zhIndustry = zhIndustries[slug as IndustrySlug] ?? zhIndustries["private-equity"];
   const displayIndustry = language === "zh" ? { ...industry, ...zhIndustry } : industry;
-  const breadcrumbParent = language === "zh" ? "服务行业" : "industries";
+  const fromHome = searchParams.get("from") === "home";
+  const parentLabel = fromHome ? pick(language, copy.nav.home) : pick(language, copy.nav.industries);
+  const fallbackHref = fromHome ? "/" : "/industries";
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-[#171717] text-white">
@@ -442,7 +446,7 @@ export function IndustryDetailPage({ slug }: { slug: string }) {
             alt=""
             loading="eager"
             fetchPriority="high"
-            className="size-full object-cover"
+            className="absolute left-1/2 top-0 block h-full w-screen min-w-full max-w-none -translate-x-1/2 object-cover md:left-0 md:w-full md:translate-x-0"
           />
           <div className="absolute inset-0 bg-[rgba(68,67,67,0.5)] mix-blend-screen" />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#171717]" />
@@ -460,9 +464,9 @@ export function IndustryDetailPage({ slug }: { slug: string }) {
         <div className="site-shell relative z-10 pb-12 pt-[calc(var(--header-height)+5rem)] lg:pb-14 lg:pt-[14rem]">
           <div className="mb-28">
             <SubpageBreadcrumb
-              parentLabel={breadcrumbParent}
+              parentLabel={parentLabel}
               currentLabel={displayIndustry.title}
-              fallbackHref="/industries"
+              fallbackHref={fallbackHref}
             />
           </div>
 
@@ -500,8 +504,7 @@ export function IndustryDetailPage({ slug }: { slug: string }) {
       </section>
 
       <SiteFooter />
-      <BackToTop />
+      <BackToTop fallbackHref={fallbackHref} />
     </main>
   );
 }
-

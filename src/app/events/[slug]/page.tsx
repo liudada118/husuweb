@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { EventDetailPage } from "@/components/pages/EventDetailPage";
 import { events } from "@/data/events";
 
@@ -23,5 +24,9 @@ export function generateStaticParams() {
 export default async function Page({ params }: PageProps) {
   const { slug } = await params;
 
-  return <EventDetailPage slug={slug} />;
+  return (
+    <Suspense>
+      <EventDetailPage slug={slug} />
+    </Suspense>
+  );
 }

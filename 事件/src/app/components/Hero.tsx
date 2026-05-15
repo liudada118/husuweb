@@ -19,7 +19,7 @@ export function Hero() {
           className="text-white/70 mt-[1.5rem] max-w-[60rem]"
           style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 500, fontSize: "clamp(1rem, 1.4vw, 1.5rem)", lineHeight: 1.4 }}
         >
-          Welcome the attention to our real-time dynamics and industry news.
+          Welcome your attention to our real-time dynamics and industry news.
         </p>
       </div>
     </section>

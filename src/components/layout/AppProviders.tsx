@@ -6,10 +6,10 @@ import type { OfficialCmsPublicState } from "@/cms/official-state";
 
 export function AppProviders({
   children,
-  cmsState,
+  cmsState = null,
 }: {
   children: React.ReactNode;
-  cmsState: OfficialCmsPublicState | null;
+  cmsState?: OfficialCmsPublicState | null;
 }) {
   return (
     <PublicCmsProvider initialState={cmsState}>

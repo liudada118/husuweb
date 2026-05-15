@@ -52,8 +52,11 @@ const coreValueItems: CoreValueItem[] = [
         <p>
           The result of a dispute resolution case could be as far removed as heaven from earth, that is because
           different lawyers handle a case in different ways during the whole process, from strategic planning at
-          the beginning, to evidence collecting, trial presentation, and post-trial briefing. Therefore, we
-          guaranty our partners&apos; Hands-on throughout the process:
+          the beginning, to evidence collecting, trial presentation, and post-trial briefing, which attributes to
+          the lawyer&apos;s personal legal foundation, presentation ability, working and social experience. But as
+          the win or lose of a major and complicated case often rest with the judge&apos;s judgment just one remove
+          from another, the lawyer who is actually handing the case plays a vital role in the ultimate outcome.
+          Therefore, we guaranty our partners&apos; Hands-on throughout the process:
         </p>
         <ul className="mt-6 space-y-3 text-[#99a1af]">
           {[
@@ -68,6 +71,7 @@ const coreValueItems: CoreValueItem[] = [
             </li>
           ))}
         </ul>
+
       </>
     ),
   },
@@ -101,7 +105,7 @@ const zhCoreValueItems: CoreValueItem[] = [
     body: (
       <>
         <p>
-          争议解决案件，从案件起始的“策略方案制定”，到“证据搜集整理”，到“庭审陈述”，再到“庭后文件表达”，都因实际操作办理案件个人不同而有重大差异。故，我们保证合伙人的“四个全程办案”，具体而言：
+          争议解决案件，从案件起始的“策略方案制定”，到“证据搜集整理”，到“庭审陈述”，再到“庭后文件表达”，都因实际操作办理案件个人不同而有重大差异，而这又往往可以追溯到具体办案律师的个人法律功底、办案经验、表达能力以及社会阅历。而重大疑难复杂案件的胜负又往往系于审判者在分毫之间的判断，因此，具体操作承办案件的个人将对案件的最终胜负起到至关重要的作用。故，我们保证合伙人的“四个全程办案”，具体而言：
         </p>
         <ul className="mt-6 space-y-3 text-[#99a1af]">
           {[
@@ -116,6 +120,7 @@ const zhCoreValueItems: CoreValueItem[] = [
             </li>
           ))}
         </ul>
+
       </>
     ),
   },
@@ -166,7 +171,11 @@ function CoreImageStack({ items, progress }: { items: CoreValueItem[]; progress:
   );
 }
 
-function CoreValueBlock({ item, active }: { item: CoreValueItem; active: boolean }) {
+function CoreValueBlock({ item, active, isZh }: { item: CoreValueItem; active: boolean; isZh: boolean }) {
+  const bodyClassName = isZh
+    ? "text-justify leading-[1.65]"
+    : "text-left leading-[1.55] tracking-normal [word-spacing:normal]";
+
   return (
     <article className="flex min-h-screen items-center py-24">
       <div
@@ -177,7 +186,7 @@ function CoreValueBlock({ item, active }: { item: CoreValueItem; active: boolean
         <h2 className="text-[1.75rem] font-semibold leading-[1.25] tracking-[0.01em] text-[#d9b27a]">
           {[item.number, item.title].filter(Boolean).join(" ")}
         </h2>
-        <div className="mt-8 text-justify text-[1.5rem] font-normal leading-[1.75] tracking-[0.01em] text-[#d1d5dc]">
+        <div className={`mt-8 text-[1.5rem] font-normal text-[#d1d5dc] ${bodyClassName}`}>
           {item.body}
         </div>
       </div>
@@ -192,6 +201,7 @@ export function CoreValueScrollFlow() {
   const [progress, setProgress] = useState(0);
   const { language } = useLanguage();
   const items = language === "zh" ? zhCoreValueItems : coreValueItems;
+  const isZh = language === "zh";
   const itemCount = items.length;
   const activeIndex = Math.min(Math.floor(progress), itemCount - 1);
 
@@ -249,7 +259,11 @@ export function CoreValueScrollFlow() {
               <h3 className="text-[1.75rem] font-semibold leading-[1.25] text-[#d9b27a]">
                 {[item.number, item.title].filter(Boolean).join(" ")}
               </h3>
-              <div className="mt-6 text-justify text-[1.5rem] font-normal leading-[1.75] text-[#d1d5dc]">
+              <div
+                className={`mt-6 text-[1.5rem] font-normal text-[#d1d5dc] ${
+                  isZh ? "text-justify leading-[1.65]" : "text-left leading-[1.55] [word-spacing:normal]"
+                }`}
+              >
                 {item.body}
               </div>
             </div>
@@ -260,7 +274,7 @@ export function CoreValueScrollFlow() {
       <div ref={containerRef} className="site-shell hidden gap-16 lg:flex" style={{ height: `${itemCount * 100}vh` }}>
         <div className="flex flex-1 flex-col">
           {items.map((item, index) => (
-            <CoreValueBlock key={`${item.image}-${index}`} item={item} active={activeIndex === index} />
+            <CoreValueBlock key={`${item.image}-${index}`} item={item} active={activeIndex === index} isZh={isZh} />
           ))}
         </div>
 

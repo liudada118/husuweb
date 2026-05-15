@@ -2,7 +2,6 @@
 
 import { X } from "lucide-react";
 import { useState } from "react";
-import { usePublicCms } from "@/cms/PublicCmsProvider";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
 import { pick, useLanguage } from "@/i18n/LanguageProvider";
 import { copy } from "@/i18n/copy";
@@ -13,7 +12,7 @@ const footerAssets = {
   weixin: "/assets/foot/weixin.png",
   phone: "/assets/foot/phone.png",
   email: "/assets/foot/email.png",
-  qr: "/assets/foot/QRcode.png?v=202605101205",
+  qr: "/assets/foot/QRcode.png?v=202605112333",
   china: "/assets/foot/china.png",
 };
 
@@ -42,14 +41,9 @@ const disclaimerParagraphs = {
 
 export function SiteFooter() {
   const { language } = useLanguage();
-  const cms = usePublicCms();
   const [disclaimerOpen, setDisclaimerOpen] = useState(false);
   const tagline = pick(language, copy.footer.tagline);
   const address = pick(language, copy.footer.address);
-  const phone = cms?.footer.phone ?? "010-85885228";
-  const email = cms?.footer.email ?? "contact@tigerpartners.cn";
-  const footerLogo = cms?.assets.footerLogo ?? footerAssets.logo;
-  const footerQr = cms?.assets.footerQr ?? footerAssets.qr;
 
   return (
     <footer id="contact" className="relative mt-20 bg-[#0c0c0c]">
@@ -57,7 +51,7 @@ export function SiteFooter() {
       <div className="site-shell relative pt-20">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[auto_1fr] lg:items-start">
           <ImageWithFallback
-            src={footerLogo}
+            src={footerAssets.logo}
             alt="Tiger Partners"
             loading="lazy"
             className="h-auto w-[9.5rem] object-contain"
@@ -90,15 +84,15 @@ export function SiteFooter() {
           <div className="flex flex-col gap-4 text-[clamp(0.875rem,1vw,1.25rem)] text-[#7a7a7a] sm:flex-row sm:flex-wrap sm:gap-x-16">
             <span className="flex items-center gap-3">
               <FooterIcon src={footerAssets.phone} alt="" />
-              {phone}
+              010-85885228
             </span>
             <span className="flex items-center gap-3">
               <FooterIcon src={footerAssets.email} alt="" />
-              {email}
+              contact@tigerpartners.cn
             </span>
           </div>
-          <div className="bg-white p-1 lg:justify-self-end">
-            <ImageWithFallback src={footerQr} alt="QR code" loading="lazy" className="size-28 object-contain" />
+          <div className="lg:justify-self-end">
+            <ImageWithFallback src={footerAssets.qr} alt="QR code" loading="lazy" className="size-28 object-contain" />
           </div>
         </div>
 

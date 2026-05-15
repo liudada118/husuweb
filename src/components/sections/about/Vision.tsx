@@ -27,71 +27,72 @@ export function VisionCard({ className = "" }: { className?: string }) {
           className="absolute inset-0 h-full w-full object-cover opacity-35"
         />
         <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(47,47,47,0.72)_0%,rgba(47,47,47,0.42)_48%,rgba(30,30,30,0.78)_100%)]" />
-        <div className="mb-10 flex flex-col justify-between gap-8 lg:flex-row lg:items-center">
-          <div className="hidden size-40 opacity-40 md:block">
-            <svg viewBox="0 0 170 170" fill="none" aria-hidden="true">
-              <circle cx="85" cy="85" r="80" stroke="#C5C5C5" strokeOpacity="0.6" strokeWidth="1.5" />
-              <path
-                d="M30 85 Q 85 30, 140 85 T 30 85"
-                stroke="#C5C5C5"
-                strokeOpacity="0.6"
-                strokeWidth="1.5"
-                fill="none"
-              />
-              <path d="M85 20 L85 150 M20 85 L150 85" stroke="#C5C5C5" strokeOpacity="0.4" strokeWidth="1" />
-            </svg>
-          </div>
-          <div className="flex flex-1 flex-col items-start justify-end gap-5 lg:flex-row lg:items-center lg:text-right">
-            <p className="relative max-w-[56rem] text-[1.5rem] font-medium leading-relaxed text-[#D9B27A]">
+        <div className="relative z-10 mx-auto max-w-[95rem]">
+          <div className="mb-8 flex min-w-0 flex-col items-start justify-end gap-5 lg:flex-row lg:items-center lg:pl-[7rem] lg:text-right">
+            <p className="relative min-w-0 max-w-full break-words text-[1.1rem] font-medium leading-relaxed text-[#D9B27A] md:max-w-[56rem] md:text-[1.5rem]">
               {pick(language, copy.about.visionSubtitle).map((line, index, lines) => (
-                <span key={line} className={language === "en" && index === 1 ? "whitespace-nowrap" : undefined}>
+                <span key={line} className={language === "en" && index === 1 ? "md:whitespace-nowrap" : undefined}>
                   {line}
                   {index < lines.length - 1 ? <br /> : null}
                 </span>
               ))}
             </p>
             <h2
-              className="relative inline-block shrink-0 bg-clip-text text-transparent"
+              className="relative inline-block max-w-full shrink-0 break-words bg-clip-text pb-2 text-[3rem] text-transparent md:text-[5rem]"
               style={{
                 fontWeight: 800,
-                fontSize: "5rem",
-                lineHeight: 1,
+                lineHeight: 1.12,
                 backgroundImage: "linear-gradient(153deg, #dbdbdb 10%, #946c32 130%)",
               }}
             >
               {pick(language, copy.about.visionTitle)}
             </h2>
           </div>
-        </div>
 
-        <div className="relative space-y-6">
-          {paragraphs.map((paragraph) => (
-            <p key={paragraph} className="text-justify text-[1.5rem] font-medium leading-relaxed text-white/80">
-              {paragraph}
-            </p>
-          ))}
-        </div>
-
-        {expanded ? (
-          <div className="relative mt-8 space-y-6">
-            {moreParagraphs.map((paragraph) => (
-              <p key={paragraph} className="text-justify text-[1.5rem] font-medium leading-relaxed text-white/80">
+          <div className="relative space-y-6">
+            {paragraphs.map((paragraph, index) => (
+              <p
+                key={paragraph}
+                className={`relative break-words text-left text-[1.05rem] font-medium leading-relaxed text-white/80 md:text-justify md:text-[1.5rem] ${
+                  index === 0 ? "lg:[text-indent:-3rem]" : ""
+                }`}
+              >
+                {index === 0 ? (
+                  <span className="relative mr-2 hidden h-[1em] w-[8.4375rem] align-baseline lg:inline-block">
+                    <ImageWithFallback
+                      src="/assets/about/Icon.svg"
+                      alt=""
+                      loading="lazy"
+                      className="pointer-events-none absolute bottom-[-0.2rem] left-0 w-[8.4375rem] max-w-none opacity-80"
+                    />
+                  </span>
+                ) : null}
                 {paragraph}
               </p>
             ))}
-          </div>
-        ) : null}
 
-        <button
-          type="button"
-          onClick={() => setExpanded((value) => !value)}
-          className="relative mx-auto mb-8 mt-10 flex w-max flex-col items-center"
-        >
-          <span className="text-[1.5rem] font-semibold text-[#e1ab5c]">
-            {expanded ? pick(language, copy.common.collapse) : pick(language, copy.common.seeMore)}
-          </span>
-          <span className="mt-1 block h-0.5 w-28 bg-[#e1ab5c]" />
-        </button>
+            {expanded ? (
+              <div className="space-y-6">
+                {moreParagraphs.map((paragraph) => (
+                  <p key={paragraph} className="break-words text-left text-[1.05rem] font-medium leading-relaxed text-white/80 md:text-justify md:text-[1.5rem]">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            ) : null}
+
+            <button
+              type="button"
+              onClick={() => setExpanded((value) => !value)}
+              className="relative mx-auto mb-8 mt-10 flex w-max flex-col items-center"
+            >
+              <span className="text-[1.15rem] font-semibold text-[#e1ab5c] md:text-[1.5rem]">
+                {expanded ? pick(language, copy.common.collapse) : pick(language, copy.common.seeMore)}
+              </span>
+              <span className="mt-1 block h-0.5 w-28 bg-[#e1ab5c]" />
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

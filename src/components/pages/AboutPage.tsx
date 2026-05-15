@@ -1,3 +1,5 @@
+"use client";
+
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { AboutHero } from "@/components/sections/about/AboutHero";
@@ -5,8 +7,11 @@ import { Chronicle } from "@/components/sections/about/Chronicle";
 import { Culture } from "@/components/sections/about/Culture";
 import { Honors } from "@/components/sections/about/Honors";
 import { PageTriangle } from "@/components/shared/PageTriangle";
+import { useRestoreReturnPosition } from "@/lib/returnPosition";
 
 export function AboutPage() {
+  useRestoreReturnPosition();
+
   return (
     <main className="relative isolate min-h-screen overflow-hidden bg-[#171717] text-white">
       <PageTriangle

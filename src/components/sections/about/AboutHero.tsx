@@ -15,7 +15,7 @@ export function AboutHero() {
         alt="building"
         loading="eager"
         fetchPriority="high"
-        className="absolute inset-0 size-full object-cover"
+        className="absolute left-1/2 top-0 block h-full w-screen min-w-full max-w-none -translate-x-1/2 object-cover md:left-0 md:w-full md:translate-x-0"
       />
       <div className="absolute inset-x-0 bottom-0 top-[100svh] bg-gradient-to-b from-transparent to-[#171717]" />
       <div className="absolute inset-x-0 bottom-0 top-[100svh] bg-gradient-to-r from-black/30 to-transparent" />
@@ -23,10 +23,9 @@ export function AboutHero() {
         <div className="relative min-h-[100svh]">
         <div className="absolute left-[var(--shell-md)] right-[var(--shell-md)] top-[55svh] border-l-[0.3rem] border-[#d9b27a] pl-8">
           <h1
-            className="text-[#1b1b1b]"
+            className="text-[3.75rem] text-[#1b1b1b] md:text-[6rem]"
             style={{
               fontWeight: 600,
-              fontSize: "6rem",
               letterSpacing: "0.04em",
               textShadow: "0 0 1px rgba(0,0,0,0.4)",
               lineHeight: 1,
@@ -35,11 +34,10 @@ export function AboutHero() {
             {pick(language, copy.about.heroTitle)}
           </h1>
           <p
-            className="mt-8 max-w-[74rem] text-balance text-[#1b1b1b]"
+            className="mt-8 max-w-[74rem] text-balance text-[1.35rem] text-[#1b1b1b] md:text-[2rem]"
             style={{
               fontWeight: 500,
               fontStyle: "italic",
-              fontSize: "2rem",
               lineHeight: 1.4,
             }}
           >

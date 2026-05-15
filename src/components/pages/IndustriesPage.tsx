@@ -7,6 +7,7 @@ import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
 import { PageTriangle } from "@/components/shared/PageTriangle";
 import { pick, useLanguage } from "@/i18n/LanguageProvider";
 import { copy } from "@/i18n/copy";
+import { rememberReturnPosition, useRestoreReturnPosition } from "@/lib/returnPosition";
 
 const cards = [
   { label: { en: "Private Equity", zh: "私募股权" }, slug: "private-equity", image: "/assets/industries/in1.webp" },
@@ -14,7 +15,7 @@ const cards = [
   { label: { en: "Finance", zh: "金融" }, slug: "finance", image: "/assets/industries/in3.webp" },
   { label: { en: "Real Estate", zh: "房地产行业" }, slug: "real-estate", image: "/assets/industries/in4.webp" },
   { label: { en: "Sports and\nE-Sports", zh: "体育及电子竞技行业" }, slug: "sports-and-e-sports", image: "/assets/industries/in5.webp" },
-  { label: { en: "Cyber Tech and\nGame", zh: "互联网科技及游戏行业" }, slug: "cyber-tech-and-game", image: "/assets/industries/in6.webp" },
+  { label: { en: "Cyber Tech and\nGame", zh: "互联网科技及游戏行业" }, slug: "cyber-tech-and-game", image: "/assets/home/INDUSTRIES6.png" },
 ];
 
 function IndustryCard({
@@ -30,7 +31,8 @@ function IndustryCard({
 }) {
   return (
     <Link
-      href={`/industries/${slug}`}
+      href={`/industries/${slug}?from=industries`}
+      onClick={rememberReturnPosition}
       className={`group relative flex min-h-52 min-w-0 items-end justify-start overflow-hidden rounded bg-[#d9d9d9] p-[clamp(1.5rem,3vw,3.5rem)] ${className ?? ""}`}
     >
       <ImageWithFallback
@@ -52,6 +54,7 @@ function IndustryCard({
 
 export function IndustriesPage() {
   const { language } = useLanguage();
+  useRestoreReturnPosition();
   const localizedCards = cards.map((card) => ({ ...card, label: pick(language, card.label) }));
 
   return (
@@ -65,13 +68,13 @@ export function IndustriesPage() {
           alt=""
           loading="eager"
           fetchPriority="high"
-          className="absolute inset-0 size-full object-cover"
+          className="absolute left-1/2 top-0 block h-full w-screen min-w-full max-w-none -translate-x-1/2 object-cover md:left-0 md:w-full md:translate-x-0"
         />
         <div className="absolute inset-0 bg-[rgba(68,67,67,0.55)] mix-blend-screen" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#141414]/90" />
         <SiteHeader active="INDUSTRIES" />
         <div className="relative z-10 flex min-h-[clamp(28rem,56vw,67.5rem)] flex-col items-start justify-start gap-[clamp(1.5rem,3.5vw,4rem)] px-[var(--shell-md)] pt-[36.875rem]">
-          <h1 className="text-left text-[clamp(4rem,5vw,6rem)] font-medium leading-none text-white drop-shadow-lg">
+          <h1 className="text-left text-[3.4rem] font-medium leading-none text-white drop-shadow-lg md:text-[clamp(4rem,5vw,6rem)]">
             {pick(language, copy.industriesPage.title)}
           </h1>
           <div className="relative w-full rounded-lg px-[clamp(2rem,4vw,4.5rem)] py-[clamp(2rem,4.5vw,5.375rem)] text-white">

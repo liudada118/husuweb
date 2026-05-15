@@ -542,7 +542,7 @@ export default function OurTeam() {
       </div>
       <Group13 />
       <p className="absolute font-['Poppins:SemiBold',sans-serif] leading-[16px] left-[1344px] not-italic text-[#d9b27a] text-[28px] top-[920px] tracking-[2.4px] whitespace-nowrap">Educational Background</p>
-      <p className="absolute font-['Poppins:Light',sans-serif] leading-[35px] left-[1281px] not-italic text-[#bec3cb] text-[24px] top-[964px] tracking-[0.4px] w-[515px]">Mr. Liu graduated from Peking University Law School with a Bachelor of Laws degree.</p>
+      <p className="absolute font-['Poppins:Light',sans-serif] leading-[35px] left-[1281px] not-italic text-[#bec3cb] text-[24px] top-[964px] tracking-[0.4px] w-[515px]">Bachelor of Laws, Peking University, 2009</p>
       <Group15 />
       <p className="absolute font-['Poppins:SemiBold',sans-serif] leading-[16px] left-[698px] not-italic text-[#d9b27a] text-[28px] top-[920px] tracking-[2.4px] whitespace-nowrap">Professional Qualification</p>
       <p className="absolute font-['Poppins:Light',sans-serif] leading-[35px] left-[651px] not-italic text-[#bec3cb] text-[24px] top-[966px] tracking-[0.4px] w-[549px]">{`Bar Admission in the People's Republic of China`}</p>

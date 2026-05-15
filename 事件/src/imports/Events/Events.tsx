@@ -560,7 +560,7 @@ export default function Events() {
       <div className="absolute bg-[#e8e8e8] h-[424px] left-0 rounded-[10px] top-[499px] w-[1923px]" />
       <div className="absolute h-[424px] left-0 rounded-[10px] top-[499px] w-[1923px]" style={{ backgroundImage: "linear-gradient(136.466deg, rgba(0, 0, 0, 0.8) 16.904%, rgba(47, 42, 35, 0.8) 107.03%)" }} />
       <p className="-translate-x-1/2 absolute font-['Poppins:Medium_Italic',sans-serif] italic leading-[20px] left-[calc(50%-561.5px)] text-[#d9b27a] text-[100px] text-center top-[672px] tracking-[-3px] uppercase whitespace-nowrap">Events</p>
-      <p className="absolute font-['Poppins:Medium',sans-serif] h-[99px] leading-[100px] left-[226px] not-italic text-[32px] text-[rgba(255,255,255,0.7)] top-[724px] tracking-[1px] w-[1236px]">Welcome the attention to our real-time dynamics and industry news.</p>
+      <p className="absolute font-['Poppins:Medium',sans-serif] h-[99px] leading-[100px] left-[226px] not-italic text-[32px] text-[rgba(255,255,255,0.7)] top-[724px] tracking-[1px] w-[1236px]">Welcome your attention to our real-time dynamics and industry news.</p>
       <Group12 />
       <Group13 />
       <Group14 />

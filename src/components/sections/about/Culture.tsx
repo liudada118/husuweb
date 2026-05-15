@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
 import { pick, useLanguage } from "@/i18n/LanguageProvider";
 import { copy } from "@/i18n/copy";
+import { rememberReturnPosition } from "@/lib/returnPosition";
 
 export function Culture() {
   const { language } = useLanguage();
@@ -26,16 +27,12 @@ export function Culture() {
           />
         </div>
         <div className="relative flex flex-col justify-center bg-[#A1865F] px-[var(--shell-md)] py-20 lg:px-20">
-          <svg
-            className="pointer-events-none absolute bottom-[60px] right-[-40px] w-[420px] max-w-[72vw] text-[rgba(120,96,58,0.35)] opacity-[0.1] mix-blend-multiply"
-            viewBox="0 0 420 420"
-            fill="none"
-            aria-hidden="true"
-          >
-            <circle cx="210" cy="210" r="168" stroke="currentColor" strokeWidth="18" />
-            <path d="M86 210C126 120 294 120 334 210C294 300 126 300 86 210Z" stroke="currentColor" strokeWidth="18" />
-            <path d="M210 58V362M58 210H362" stroke="currentColor" strokeWidth="14" />
-          </svg>
+          <ImageWithFallback
+            src="/assets/about/bg.png"
+            alt=""
+            loading="lazy"
+            className="pointer-events-none absolute bottom-[3.75rem] right-[-2.5rem] w-[15.75rem] max-w-[43.2vw] opacity-10 mix-blend-multiply"
+          />
           <h2 className="relative text-[clamp(2.5rem,2.708vw,3.25rem)] font-semibold leading-none text-black">
             {pick(language, copy.about.cultureTitle)}
           </h2>
@@ -44,6 +41,7 @@ export function Culture() {
           </p>
           <Link
             href="/about/core-value"
+            onClick={rememberReturnPosition}
             className="group relative mt-10 inline-flex items-center gap-4 self-start border border-[#D9B27A] bg-[#D9B27A] px-9 py-4 text-[1.125rem] font-medium uppercase tracking-[0.08em] text-white transition-all duration-500 hover:bg-transparent hover:text-black"
           >
             {pick(language, copy.about.cultureCta)}
