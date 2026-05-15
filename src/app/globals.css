@@ -11,6 +11,7 @@ html {
   background: var(--color-bg);
   color: #fff;
   scroll-behavior: smooth;
+  touch-action: pan-x pan-y;
 }
 
 body {
@@ -18,6 +19,7 @@ body {
   overflow-x: hidden;
   font-family: var(--font-poppins), Arial, Helvetica, sans-serif;
   background: var(--color-bg);
+  touch-action: pan-x pan-y;
 }
 
 a {
@@ -57,7 +59,7 @@ summary::-webkit-details-marker {
 }
 
 .client-logo-track {
-  animation: client-logo-scroll 135s linear infinite;
+  animation: client-logo-scroll 103.85s linear infinite;
   will-change: transform;
 }
 

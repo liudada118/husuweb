@@ -8,6 +8,7 @@ import { PageTriangle } from "@/components/shared/PageTriangle";
 import { teamProfiles } from "@/data/teamProfiles";
 import { pick, useLanguage } from "@/i18n/LanguageProvider";
 import { copy } from "@/i18n/copy";
+import { rememberReturnPosition, useRestoreReturnPosition } from "@/lib/returnPosition";
 
 const teamAssets = {
   hero: "/assets/team/hero.png",
@@ -50,7 +51,7 @@ function TeamCard({
           <p className="text-[2.25rem] font-extralight uppercase leading-[1.3] text-[#979797]">
             {displayTitle}
           </p>
-          <Link href={`/team/${slug}`} className="group/link inline-flex shrink-0 flex-col items-end text-[#d9b27a]">
+          <Link href={`/team/${slug}`} onClick={rememberReturnPosition} className="group/link inline-flex shrink-0 flex-col items-end text-[#d9b27a]">
             <span className="text-[1.75rem] font-medium uppercase leading-[1.3]">
               {pick(language, copy.common.findOutMore)}
             </span>
@@ -64,39 +65,40 @@ function TeamCard({
 
 export function TeamPage() {
   const { language } = useLanguage();
+  useRestoreReturnPosition();
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#171717] text-white">
       <PageTriangle
-        className="right-0 top-[calc(100svh+7rem)] h-[calc(100%-100svh-7rem)] w-full opacity-20"
+        className="right-0 top-[calc(67.5rem+7rem)] h-[calc(100%-67.5rem-7rem)] w-full opacity-20"
       />
-      <section className="relative h-[min(67.5rem,100svh)] min-h-[40rem] w-full overflow-hidden">
+      <section className="relative h-[100svh] w-full overflow-hidden md:h-[67.5rem]">
         <ImageWithFallback
           src={teamAssets.hero}
           alt=""
           loading="eager"
           fetchPriority="high"
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute left-0 top-0 block !h-auto !w-full max-w-none object-cover md:inset-0 md:!h-full"
         />
         <div className="absolute inset-0 bg-[rgba(68,67,67,0.5)] mix-blend-screen" />
         <div className="absolute inset-0 bg-[linear-gradient(180.182deg,rgba(56,56,56,0)_30.211%,rgb(23,23,23)_93.072%)]" />
         <SiteHeader active="OUR TEAM" />
 
-        <div className="site-shell relative z-10 flex h-full flex-col justify-end pb-[clamp(5rem,11vw,12rem)] pt-[var(--header-height)]">
-          <div className="text-[5.625rem] font-light uppercase leading-none text-[#dea552]">
+        <div className="site-shell relative z-10 flex h-full flex-col justify-end pb-12 pt-[var(--header-height)] md:pb-[clamp(5rem,11vw,12rem)]">
+          <div className="text-[3.25rem] font-light uppercase leading-none text-[#dea552] md:text-[5.625rem]">
             #
           </div>
-          <h1 className="mt-5 text-[7.5rem] font-semibold uppercase leading-none text-white">
+          <h1 className="mt-4 text-[4rem] font-semibold uppercase leading-none text-white md:mt-5 md:text-[7.5rem]">
             {pick(language, copy.team.title)}
           </h1>
-          <p className="mt-10 max-w-[55rem] text-[1.75rem] font-normal leading-[1.3] tracking-[0.05em] text-white">
+          <p className="mt-6 max-w-[55rem] text-[1.2rem] font-normal leading-[1.3] tracking-[0.05em] text-white md:mt-10 md:text-[1.75rem]">
             {pick(language, copy.team.subtitle)}
           </p>
         </div>
       </section>
 
       <section className="relative z-10 w-full">
-        <div className="site-shell pb-20 pt-16">
+        <div className="site-shell pb-20 pt-8 md:pt-16">
           <div className="flex flex-col items-start justify-between gap-8 border-b border-white/45 pb-10 xl:flex-row xl:items-end">
             <h2 className="text-left text-[6rem] font-semibold italic uppercase leading-[0.92] tracking-[-0.04em] text-white">
               {pick(language, copy.team.sloganTitle).map((line, index, lines) => (

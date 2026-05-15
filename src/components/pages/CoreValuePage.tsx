@@ -19,13 +19,13 @@ function CoreValueHero() {
   const { language } = useLanguage();
 
   return (
-    <section className="relative h-[28rem] overflow-hidden md:h-[32rem] lg:h-[35rem]">
+    <section className="relative h-[28rem] w-full overflow-hidden md:h-[32rem] lg:h-[35rem]">
       <ImageWithFallback
         src={valueImages.hero}
         alt=""
         loading="eager"
         fetchPriority="high"
-        className="absolute inset-0 size-full object-cover opacity-60"
+        className="absolute left-1/2 top-0 block h-full w-screen min-w-full max-w-none -translate-x-1/2 object-cover opacity-60 md:left-0 md:w-full md:translate-x-0"
       />
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(18,18,18,0.7)_0%,rgba(23,23,23,0.95)_90%)]" />
       <div className="absolute inset-0 hidden bg-[linear-gradient(115deg,rgba(18,18,18,0.85)_0%,rgba(18,18,18,0.4)_60%,rgba(217,178,122,0.15)_100%)] lg:block" />
@@ -37,7 +37,7 @@ function CoreValueHero() {
           fallbackHref="/about"
         />
         <div className="mt-12 h-[3px] w-16 bg-[#d9b27a]" />
-        <h1 className="mt-12 text-[clamp(3rem,7vw,6rem)] font-semibold leading-[0.9] text-[#d9b27a]">
+        <h1 className="mt-10 text-[3rem] font-semibold leading-[0.9] text-[#d9b27a] md:mt-12 md:text-[clamp(3rem,7vw,6rem)]">
           {pick(language, copy.coreValue.title)}
         </h1>
       </div>
@@ -100,7 +100,7 @@ export function CoreValuePage() {
       <CoreValueScrollFlow />
       <ClosingStatement />
       <SiteFooter />
-      <BackToTop />
+      <BackToTop fallbackHref="/about" />
     </main>
   );
 }

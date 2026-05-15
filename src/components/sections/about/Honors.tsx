@@ -552,6 +552,13 @@ function withZhSponsorHonors(items: YearItem[]) {
   });
 }
 
+function sortAwardsByDateDesc(items: YearItem[]) {
+  return items.map((item) => ({
+    ...item,
+    awards: [...item.awards].sort((a, b) => b.date.localeCompare(a.date)),
+  }));
+}
+
 function YearRow({ item, open, onToggle }: { item: YearItem; open: boolean; onToggle: () => void }) {
   const { language } = useLanguage();
 
@@ -563,20 +570,20 @@ function YearRow({ item, open, onToggle }: { item: YearItem; open: boolean; onTo
       <button
         type="button"
         onClick={onToggle}
-        className="flex w-full items-center justify-between gap-6 px-6 py-8 text-left md:px-12"
+        className="flex w-full min-w-0 items-center justify-between gap-4 px-4 py-6 text-left md:gap-6 md:px-12 md:py-8"
       >
-        <div className="flex min-w-0 items-center gap-6 md:gap-8">
+        <div className="grid min-w-0 grid-cols-[5.25rem_minmax(0,1fr)] items-center gap-4 md:grid-cols-[8rem_minmax(0,1fr)] md:gap-8">
           <span
-            className="shrink-0 text-[3rem] font-normal leading-none tracking-[0.04em]"
+            className="shrink-0 text-[2rem] font-normal leading-none tracking-[0.04em] md:text-[3rem]"
             style={{ color: "#c1c1c1" }}
           >
             {item.year}
           </span>
-          <div className="min-w-0 border-l-2 border-[#d9b27a] pl-5 md:pl-8">
-            <div className="text-[1.5rem] font-semibold text-[#d6a866]">
+          <div className="min-w-0 border-l-2 border-[#d9b27a] pl-4 md:pl-8">
+            <div className="break-words text-[1rem] font-semibold text-[#d6a866] md:text-[1.5rem]">
               {language === "zh" ? "所获奖项" : "Awards Won"}
             </div>
-            <div className="mt-1 text-[1.125rem] font-normal text-[#c1c1c1]">
+            <div className="mt-1 text-[0.95rem] font-normal text-[#c1c1c1] md:text-[1.125rem]">
               {item.count}
             </div>
           </div>
@@ -597,7 +604,7 @@ function YearRow({ item, open, onToggle }: { item: YearItem; open: boolean; onTo
 
       <div className={`grid transition-all duration-700 ease-in-out ${open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
         <div className="overflow-hidden">
-          <div className="relative border-t border-black/20 bg-[#777777] px-6 py-10 md:px-12">
+          <div className="relative border-t border-black/20 bg-[#777777] px-4 py-8 md:px-12 md:py-10">
             <ImageWithFallback
               src="/assets/about/awardbg.webp"
               alt=""
@@ -605,14 +612,14 @@ function YearRow({ item, open, onToggle }: { item: YearItem; open: boolean; onTo
               className="pointer-events-none absolute inset-y-0 right-0 h-full w-[58%] object-cover object-right opacity-35"
             />
             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,#777777_0%,rgba(119,119,119,0.98)_46%,rgba(119,119,119,0.76)_100%)]" />
-            <div className="relative z-10 space-y-10">
+            <div className="relative z-10 min-w-0 space-y-8 md:space-y-10">
               {item.awards.map((award) => (
                 <div key={`${item.year}-${award.date}-${award.title}`} className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-[minmax(0,1fr)_13rem]">
-                  <div className="border-l-4 border-[#d9b27a] pl-5">
-                    <h3 className="text-[1.75rem] font-semibold leading-relaxed text-black">
+                  <div className="min-w-0 border-l-4 border-[#d9b27a] pl-4 md:pl-5">
+                    <h3 className="break-words text-[1.15rem] font-semibold leading-relaxed text-black md:text-[1.75rem]">
                       {award.title}
                     </h3>
-                    <p className="mt-5 text-[1.5rem] font-normal leading-relaxed text-black">
+                    <p className="mt-4 break-words text-[1rem] font-normal leading-relaxed text-black md:mt-5 md:text-[1.5rem]">
                       {award.body}
                     </p>
                   </div>
@@ -630,7 +637,7 @@ function YearRow({ item, open, onToggle }: { item: YearItem; open: boolean; onTo
                     ) : (
                       <span className="h-11" aria-hidden="true" />
                     )}
-                    <span className="text-[1.75rem] font-medium leading-none text-black">{award.date}</span>
+                    <span className="text-[1.15rem] font-medium leading-none text-black md:text-[1.75rem]">{award.date}</span>
                   </div>
                 </div>
               ))}
@@ -645,16 +652,17 @@ function YearRow({ item, open, onToggle }: { item: YearItem; open: boolean; onTo
 export function Honors() {
   const [openYear, setOpenYear] = useState<string | null>("2026");
   const { language } = useLanguage();
-  const displayData = language === "zh" ? withZhSponsorHonors(zhData) : data;
+  const displayData = sortAwardsByDateDesc(language === "zh" ? withZhSponsorHonors(zhData) : data).sort(
+    (a, b) => Number(b.year) - Number(a.year),
+  );
 
   return (
     <section id="honors" className="site-shell mt-32 scroll-mt-[var(--header-height)]">
       <div className="mb-12 grid grid-cols-1 gap-x-12 gap-y-6 lg:grid-cols-[auto_minmax(0,1fr)] lg:items-end">
         <h2
-          className="bg-clip-text pb-3 pr-4 text-transparent italic"
+          className="max-w-full bg-clip-text pb-3 pr-4 text-[4rem] text-transparent italic md:text-[7.5rem]"
           style={{
             fontWeight: 600,
-            fontSize: "7.5rem",
             letterSpacing: "0.02em",
             backgroundImage: "linear-gradient(112deg, #d19d51 16%, #d9b27a 100%)",
             lineHeight: 1.12,
@@ -662,7 +670,7 @@ export function Honors() {
         >
           {pick(language, copy.about.honorsTitle)}
         </h2>
-        <p className="max-w-full justify-self-end pb-7 text-right text-[1.5rem] font-medium leading-[2rem] text-[#c2c2c2]/85 lg:max-w-[calc(100vw-var(--shell-md)*2)]">
+        <p className="max-w-full justify-self-start pb-3 text-left text-[1.05rem] font-medium leading-relaxed text-[#c2c2c2]/85 md:pb-7 md:text-[1.5rem] md:leading-[2rem] lg:max-w-[calc(100vw-var(--shell-md)*2)] lg:justify-self-end lg:text-right">
           {pick(language, copy.about.honorsSubtitle).map((line) => (
             <span key={line} className="block">
               {line}

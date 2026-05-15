@@ -12,7 +12,7 @@ const footerAssets = {
   weixin: "/assets/foot/weixin.png",
   phone: "/assets/foot/phone.png",
   email: "/assets/foot/email.png",
-  qr: "/assets/foot/QRcode.png?v=202605101205",
+  qr: "/assets/foot/QRcode.png?v=202605112333",
   china: "/assets/foot/china.png",
 };
 
@@ -91,7 +91,7 @@ export function SiteFooter() {
               contact@tigerpartners.cn
             </span>
           </div>
-          <div className="bg-white p-1 lg:justify-self-end">
+          <div className="lg:justify-self-end">
             <ImageWithFallback src={footerAssets.qr} alt="QR code" loading="lazy" className="size-28 object-contain" />
           </div>
         </div>

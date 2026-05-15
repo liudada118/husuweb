@@ -19,7 +19,7 @@ export const copy = {
   },
   footer: {
     tagline: {
-      en: ["Always pursuing the extreme and seeking the perfection", "Always aiming at winning lawsuits and fulfilling clients'", "business goals"],
+      en: ["Always pursuing the extreme and seeking the perfection,", "Always aiming at winning lawsuits and", "Fulling clients' business goals"],
       zh: ["始终追求极致与完美，一切以胜诉和客户的商业目标为导向"],
     },
     address: {
@@ -36,7 +36,7 @@ export const copy = {
     vision: {
       title: { en: "Vision", zh: "虎诉愿景" },
       body: {
-        en: ["We are committed to", "be one of the extraordinary", "dispute resolution law firms in the Asia Pacific", "Region"],
+        en: ["We are committed to be one of the extraordinary", "dispute resolution law firms in the Asia Pacific Region"],
         zh: ["矢志成为亚太地区优秀的争议解决律师事务所之一"],
       },
       cta: { en: "GET TO KNOW US", zh: "查看更多" },
@@ -55,14 +55,18 @@ export const copy = {
     honors: {
       title: { en: "HONORS", zh: "虎诉荣誉" },
       subtitle: {
-        en: ["Tiger Partners is favored and recognized by multiple", "authoritative legal directories and awarding organizations all", "over the world"],
+        en: [
+          "Tiger Partners Is Favored And Recognized",
+          "By Multiple Authoritative Legal Directories And Awarding Organizations",
+          "All Over The World",
+        ],
         zh: ["虎诉受到来自全球多家权威法律评选机构的青睐与认可"],
       },
     },
     events: {
       title: { en: "Events", zh: "虎诉动态与新闻" },
       subtitle: {
-        en: ["Welcome your attention to our real-time", "dynamics and industry news"],
+        en: ["Welcome Your Attention To Our Real-Time Dynamics", "And Industry News"],
         zh: ["欢迎关注虎诉的实时动态及行业新闻"],
       },
     },
@@ -105,7 +109,11 @@ export const copy = {
     },
     honorsTitle: { en: "HONORS", zh: "虎诉荣誉" },
     honorsSubtitle: {
-      en: ["Tiger Partners Is Favored And Recognized By", "Multiple Authoritative Legal Directories And Awarding Organizations All Over The World"],
+      en: [
+        "Tiger Partners Is Favored And Recognized",
+        "By Multiple Authoritative Legal Directories And Awarding Organizations",
+        "All Over The World",
+      ],
       zh: ["虎诉受到来自全球多家权威法律评选机构的青睐与认可"],
     },
     cultureTitle: { en: "CULTURE", zh: "虎诉文化" },
@@ -116,7 +124,7 @@ export const copy = {
     cultureCta: { en: "READ FULL MANIFESTO", zh: "查看完整文化" },
     chronicleTitle: { en: "CHRONICLE", zh: "虎诉大事记" },
     chronicleSubtitle: {
-      en: "Events and Milestones during our development",
+      en: ["Our Key Events and Milestones", "In Tiger Partners' Development"],
       zh: "虎诉发展历程中的重要事件及时间节点",
     },
   },
@@ -130,15 +138,15 @@ export const copy = {
   eventsPage: {
     title: { en: "Events", zh: "虎诉动态" },
     intro: {
-      en: "Welcome the attention to our real-time dynamics and industry news.",
+      en: "Welcome your attention to our real-time dynamics and industry news.",
       zh: "欢迎关注虎诉的实时动态及行业新闻",
     },
   },
   contact: {
     title: { en: "Contact", zh: "联系我们" },
     intro: {
-      en: "When you face legal problems, please contact us without hesitation On our way achieving our goals, we are also looking for partners with the same professional ideal",
-      zh: "如您有任何法律疑问或争议，欢迎随时与我们联系。我们诚挚期待为您提供专业的法律服务，致力于维护您的合法权益。",
+      en: "When you face legal problems, please contact us without hesitation on our way achieving our goals, we are also looking for partners with the same professional ideal",
+      zh: "如您遇到法律问题，请随时联系我们。在追求目标的道路上，我们也期待与秉持相同职业理想的伙伴携手同行。",
     },
     cardTitle: { en: "Contact us", zh: "联系我们" },
     cardBody: {
@@ -173,9 +181,9 @@ export const copy = {
     title: { en: "Our team", zh: "虎诉团队" },
     subtitle: { en: "Professional, Efficient, Passionate, and Desperate for Win", zh: "专业、高效、充满激情并极度渴望胜利" },
     sloganTitle: { en: ["WE ARE SPECIAL", "FORCES"], zh: ["我们，", "即为精锐之师"] },
-    slogan: { en: ["As fast as wind,", "and as aggressive", "as fire"], zh: ["快如风，", "烈如火"] },
+    slogan: { en: ["AS FAST AS WIND,", "AS AGGRESSIVE AS FIRE"], zh: ["快如风，", "烈如火"] },
     partner: { en: "Partner", zh: "合伙人" },
-    seniorAssociate: { en: "Senior Associate", zh: "高级律师" },
+    seniorAssociate: { en: "Senior Associate", zh: "资深律师" },
   },
   coreValue: {
     breadcrumb: { en: "About us / CULTURE /", zh: "关于我们 / 虎诉文化 /" },

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { AppProviders } from "@/components/layout/AppProviders";
+import { ViewportZoomLock } from "@/components/layout/ViewportZoomLock";
 import { assetUrl } from "@/lib/assets";
 import "./globals.css";
 
@@ -15,6 +16,9 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  minimumScale: 1,
+  maximumScale: 1,
+  userScalable: false,
   viewportFit: "cover",
 };
 
@@ -39,6 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
+        <ViewportZoomLock />
         <AppProviders>{children}</AppProviders>
       </body>
     </html>

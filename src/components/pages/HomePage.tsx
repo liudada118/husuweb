@@ -11,6 +11,7 @@ import { events as eventItems, formatEventDate, localizeEvent } from "@/data/eve
 import { pick, useLanguage } from "@/i18n/LanguageProvider";
 import { copy } from "@/i18n/copy";
 import { assetUrl } from "@/lib/assets";
+import { rememberReturnPosition, useRestoreReturnPosition } from "@/lib/returnPosition";
 
 const industries = [
   {
@@ -46,7 +47,7 @@ const industries = [
   {
     name: "Cyber Tech and Game",
     slug: "cyber-tech-and-game",
-    img: "https://images.unsplash.com/photo-1585743876840-53866e12a598?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1600",
+    img: "/assets/home/INDUSTRIES6.png",
     cls: "lg:col-span-2",
   },
 ];
@@ -396,10 +397,10 @@ function withZhHomeSponsorHonors(items: HomeHonorYear[]) {
 
 const homeEventSlugs = [
   "kinsey-kang-hong-kong-legal-counsel",
-  "official-account-mini-program-upgrade",
-  "benchmark-litigation-2022-dispute-resolution",
-  "civil-code-contract-termination-rules-part-one",
-  "wuhan-kingold-fake-gold-jurisdiction-objection",
+  "chambers-forum-beijing-2023",
+  "shifoying-nanli-community-pairing",
+  "tiger-partners-third-anniversary",
+  "cietac-cup-voice-of-moot-sponsor",
 ] as const;
 
 function formatHomeEventDate(date: string, language: "en" | "zh") {
@@ -407,7 +408,7 @@ function formatHomeEventDate(date: string, language: "en" | "zh") {
     return `${date.slice(0, 4)}年${Number(date.slice(4, 6))}月${Number(date.slice(6, 8))}日`;
   }
 
-  return formatEventDate(date);
+  return formatEventDate(date, language);
 }
 
 function getHomeEvents(language: "en" | "zh") {
@@ -419,7 +420,7 @@ function getHomeEvents(language: "en" | "zh") {
 
       return {
         slug: event.slug,
-        title: `${localized.localizedCategory} | ${localized.localizedTitle}`,
+        title: [localized.localizedCategory, localized.localizedTitle].filter(Boolean).join(" | "),
         date: formatHomeEventDate(event.date, language),
         img: event.image,
         desc: localized.localizedSummary,
@@ -448,6 +449,7 @@ function mod(value: number, length: number) {
 
 export function HomePage() {
   const { language } = useLanguage();
+  useRestoreReturnPosition();
   const [activeHonor, setActiveHonor] = useState(0);
   const [honorWindowStart, setHonorWindowStart] = useState(0);
   const [activeEvent, setActiveEvent] = useState(0);
@@ -500,7 +502,7 @@ export function HomePage() {
       <section className="relative w-full overflow-hidden bg-[#0d0d0d]">
         <div className="absolute inset-0">
           <video
-            className="size-full object-cover opacity-90"
+            className="absolute left-1/2 top-0 block h-full w-screen min-w-full max-w-none -translate-x-1/2 object-cover opacity-90 md:left-0 md:w-full md:translate-x-0"
             src={assetUrl("/assets/home/海浪0508.mp4")}
             autoPlay
             muted
@@ -512,9 +514,13 @@ export function HomePage() {
         </div>
 
         <div className="relative z-10 flex min-h-[100svh] items-center justify-center px-5 py-32">
-          <h1 className="hero-flow-text max-w-none whitespace-nowrap text-center text-[6.25rem] font-bold leading-none tracking-[0.06em]">
+          <h1 className="sr-only">虎诉律师事务所 Tiger Partners</h1>
+          <p
+            aria-hidden="true"
+            className="hero-flow-text max-w-none whitespace-nowrap text-center text-[clamp(1.8rem,7vw,3rem)] font-bold leading-none tracking-[0.02em] md:text-[6.25rem] md:tracking-[0.06em]"
+          >
             WE KNOW HOW TO WIN
-          </h1>
+          </p>
         </div>
       </section>
 
@@ -533,12 +539,12 @@ export function HomePage() {
             <p className={`relative z-10 max-w-[84rem] leading-[1.45] ${language === "zh" ? "text-[2rem]" : "text-[2.5rem]"}`}>
               {language === "en" ? (
                 <>
-                  <span className="font-light italic">{copy.home.vision.body.en[0]}</span>{" "}
-                  <span className="font-bold">{copy.home.vision.body.en[1]}</span>
-                  <br />
-                  <span className="font-bold">{copy.home.vision.body.en[2]}</span>
-                  <br />
-                  <span className="font-bold">{copy.home.vision.body.en[3]}</span>
+                  {copy.home.vision.body.en.map((line, index, lines) => (
+                    <span key={line} className={index === 0 ? "font-light italic" : "font-bold"}>
+                      {line}
+                      {index < lines.length - 1 ? <br /> : null}
+                    </span>
+                  ))}
                 </>
               ) : (
                 <span className="font-bold">{copy.home.vision.body.zh[0]}</span>
@@ -589,7 +595,8 @@ export function HomePage() {
           {industries.map((item, index) => (
             <Link
               key={item.name}
-              href={`/industries/${item.slug}`}
+              href={`/industries/${item.slug}?from=home`}
+              onClick={rememberReturnPosition}
               className={`group relative min-w-0 overflow-hidden bg-[#141414] shadow-xl transition-transform duration-500 hover:-translate-y-2 ${item.cls}`}
             >
               <div className="absolute left-0 top-0 z-20 h-[2px] w-full bg-gradient-to-r from-transparent via-[#f3dfb5] to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
@@ -617,12 +624,13 @@ export function HomePage() {
       <section className="relative py-20 lg:py-28 [&>*]:relative [&>*]:z-10" style={{ background: "linear-gradient(170deg, #242424 9%, #383838 113%)" }}>
         <div className="site-shell">
           <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[auto_1fr]">
-            <h2 className="gold-title text-[6.875rem] font-light leading-none">{pick(language, copy.home.honors.title)}</h2>
+            <h2 className="gold-title max-w-full pb-3 text-[4rem] font-light leading-[1.12] md:text-[6.875rem]">{pick(language, copy.home.honors.title)}</h2>
             <div className="lg:text-right">
-              <p className="text-pretty text-[1.75rem] font-light italic capitalize leading-[2.375rem] text-[#cfd5df]/70">
-                {pick(language, copy.home.honors.subtitle).map((line) => (
+              <p className="text-pretty text-[1.15rem] font-light italic capitalize leading-relaxed text-[#cfd5df]/70 md:text-[1.75rem] md:leading-[2.375rem]">
+                {pick(language, copy.home.honors.subtitle).map((line, index, lines) => (
                   <span key={line} className="block">
                     {line}
+                    {index < lines.length - 1 ? " " : null}
                   </span>
                 ))}
               </p>
@@ -656,7 +664,7 @@ export function HomePage() {
                   type="button"
                   key={item.year}
                   onClick={() => setActiveHonor(index)}
-                  className={`flex h-11 items-center justify-start px-4 text-left text-[1.25rem] font-bold transition ${
+                  className={`flex h-11 min-w-0 items-center justify-start px-4 text-left text-[1.1rem] font-bold transition md:text-[1.25rem] ${
                     active ? "bg-[#d9b27a] font-bold text-black" : "bg-[#484643] text-black/80 opacity-70 hover:opacity-100"
                   }`}
                 >
@@ -670,16 +678,16 @@ export function HomePage() {
           <div className="mt-4 divide-y divide-white/15 border-b border-white/15">
             {honor.honors.map((item) => (
               <div key={`${honor.year}-${item.date}-${item.title}`} className="py-8 lg:py-10">
-                <div className="flex min-w-0 flex-wrap items-center gap-6">
-                  <h3 className="text-[2.25rem] font-semibold text-[#d9b27a]">
+                <div className="flex min-w-0 flex-wrap items-center gap-3 md:gap-6">
+                  <h3 className="min-w-0 max-w-full break-words text-[1.45rem] font-semibold leading-snug text-[#d9b27a] md:text-[2.25rem]">
                     {item.title}
                   </h3>
                   <div className="hidden h-7 w-px bg-[#d9b27a]/50 sm:block" />
-                  <span className="text-[1.75rem] font-medium text-[#d9b27a]">
+                  <span className="text-[1.15rem] font-medium text-[#d9b27a] md:text-[1.75rem]">
                     {item.date}
                   </span>
                 </div>
-                <p className="mt-4 text-[1.5rem] leading-relaxed text-[#cfd5df]/70">
+                <p className="mt-4 break-words text-[1rem] leading-relaxed text-[#cfd5df]/70 md:text-[1.5rem]">
                   {item.desc}
                 </p>
               </div>
@@ -700,8 +708,8 @@ export function HomePage() {
 
       <section id="events" className="site-shell relative bg-[#171717] py-20 lg:py-28 [&>*]:relative [&>*]:z-10">
         <div className="grid grid-cols-1 items-end gap-6 lg:grid-cols-[auto_1fr]">
-          <h2 className="text-[7.5rem] leading-none">{pick(language, copy.home.events.title)}</h2>
-          <p className="text-[1.75rem] capitalize leading-[2.125rem] tracking-[0.04em] text-[#cfd5df]/70 lg:text-right">
+          <h2 className="text-[4rem] leading-none md:text-[7.5rem]">{pick(language, copy.home.events.title)}</h2>
+          <p className="text-[1.15rem] capitalize leading-relaxed tracking-[0.04em] text-[#cfd5df]/70 md:text-[1.75rem] md:leading-[2.125rem] lg:text-right">
             {pick(language, copy.home.events.subtitle).map((line) => (
               <span key={line} className="block">
                 {line}
@@ -710,7 +718,7 @@ export function HomePage() {
           </p>
         </div>
 
-        <div className="relative mt-12 h-[56rem] w-full overflow-hidden sm:h-[58rem]">
+        <div className="relative mt-8 h-[34rem] w-full overflow-hidden sm:h-[58rem] md:mt-12">
           {homeEvents.map((event, index) => {
             const offset = mod(index - activeEvent, homeEvents.length);
             const position = offset === 0 ? "active" : offset === 1 ? "next" : offset === homeEvents.length - 1 ? "prev" : "hidden";
@@ -743,9 +751,10 @@ export function HomePage() {
 
             return (
               <Link
-                href={`/events/${event.slug}`}
+                href={`/events/${event.slug}?from=home`}
+                onClick={rememberReturnPosition}
                 key={event.slug}
-                className={`absolute top-4 w-[62.1875rem] max-w-full cursor-pointer overflow-visible rounded-none bg-transparent p-0 text-left shadow-2xl shadow-black/40 transition-all duration-700 ease-out ${
+                className={`absolute top-4 w-[62.1875rem] max-w-[calc(100vw-2.5rem)] cursor-pointer overflow-visible rounded-none bg-transparent p-0 text-left shadow-2xl shadow-black/40 transition-all duration-700 ease-out md:max-w-full ${
                   position === "active" ? "hover:scale-[1.02]" : "hover:opacity-75"
                 }`}
                 style={styles}
@@ -761,21 +770,23 @@ export function HomePage() {
                       className="size-full object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent" />
-                    <div className="absolute bottom-6 left-[4.5625rem] w-[calc(70%+1rem)]">
-                      <p className="ml-4 text-[1.5rem] font-light leading-none text-[#D9B27A]">
+                    <div className="absolute bottom-4 left-4 w-[calc(100%-2rem)] md:bottom-6 md:left-[4.5625rem] md:w-[calc(70%+1rem)]">
+                      <p className="ml-3 text-[1rem] font-light leading-none text-[#D9B27A] md:ml-4 md:text-[1.5rem]">
                         {event.date}
                       </p>
-                      <div className="mt-3 border-l-2 border-[#D79D48] pl-4">
-                        <p className="text-[1.75rem] font-light leading-snug text-white">
+                      <div className="mt-2 border-l-2 border-[#D79D48] pl-3 md:mt-3 md:pl-4">
+                        <p className="text-[1.05rem] font-light leading-snug text-white md:text-[1.75rem]">
                           {event.title}
                         </p>
                       </div>
                     </div>
                   </div>
                   {position === "active" ? (
-                    <div className="relative mt-8 overflow-hidden bg-[linear-gradient(135deg,#333333_0%,#5b5955_100%)] px-[5.5625rem] py-6 text-white">
+                    <div className="relative mt-4 overflow-hidden bg-[linear-gradient(135deg,#333333_0%,#5b5955_100%)] px-5 py-4 text-white md:mt-8 md:px-[5.5625rem] md:py-6">
                       <div className="pointer-events-none absolute bottom-0 right-0 h-full w-full bg-[#706d69] [clip-path:polygon(100%_50%,100%_100%,70%_100%)]" />
-                      <p className="relative z-10 text-[1.75rem] font-light leading-relaxed text-white/82">{event.desc}</p>
+                      <p className="relative z-10 overflow-hidden text-[1rem] font-light leading-relaxed text-white/82 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:4] md:text-[1.75rem] md:[-webkit-line-clamp:5]">
+                        {event.desc}
+                      </p>
                     </div>
                   ) : null}
                 </div>
@@ -784,8 +795,8 @@ export function HomePage() {
           })}
         </div>
 
-        <div className="relative mt-1 h-12 w-full">
-          <div className="absolute left-1/2 top-0 flex w-max -translate-x-1/2 items-center gap-6">
+        <div className="mt-4 flex w-full flex-col items-center gap-6 md:relative md:mt-1 md:h-12 md:block">
+          <div className="flex w-max items-center gap-4 md:absolute md:left-1/2 md:top-0 md:-translate-x-1/2 md:gap-6">
             <button
               type="button"
               onClick={() => updateEvent(-1)}
@@ -818,7 +829,7 @@ export function HomePage() {
               <ChevronRight className="size-5" />
             </button>
           </div>
-          <div className="absolute right-0 top-0">
+          <div className="md:absolute md:right-0 md:top-0">
             <Link
               href="/events"
               className="group inline-flex items-center gap-3 border-b-2 border-[#d9b27a] pb-2 text-[1.5rem] font-semibold uppercase tracking-[0.12em] text-[#d9b27a] transition-all duration-300 hover:translate-x-1 hover:border-white hover:text-white"

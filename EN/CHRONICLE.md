@@ -2,6 +2,18 @@
 月份
 内容
 2026
+
+MARCH
+
+Tiger Partners has been shortlisted for the ALB China Law Awards 2026 with two nominations: Dispute Resolution Boutique Law Firm of the Year, Rising Law Firm of the Year
+
+APRIL
+
+Xu Min, Partner at Tiger Partners, has been successfully selected into the new arbitrator roster of CCAS, owing to his solid legal expertise, extensive experience in dispute resolution, and in-depth dedication to the field of sports rule of law.
+
+MAY
+Zoe Zhang, Partner at Tiger Partners, has been successfully selected into the new CIETAC Arbitrator Roster by virtue of her profound professional legal accomplishment and extensive experience in foreign-related dispute resolution. 
+
 January
 
 Tiger Partners was listed in “Dispute Resolution (PRC Firms)” in the Chambers Greater China Region Guide 2026.
@@ -73,7 +85,7 @@ March
 LEGALBAND released 2022 China Law Awards Nominations list, and Tiger Partners was nominated as "Rising Law Firm of the Year".
 2022
 January
-Mrs. Zoe Zhang joined Tiger Partners as Partner.
+Ms. Zoe Zhang joined Tiger Partners as Partner.
 2022
 January1
 Tiger Partners was selected as one of 2022 ALB China Firms to Watch for its outstanding performance in the area of civil and commercial dispute resolution over the past year, as announced by Asian Legal Business ("ALB").
@@ -91,7 +103,7 @@ May
 China Business Law Journal, a well-known legal media, announced the results of China Business Law Awards 2021, and Tiger Partners was listed as "Firm to Watch" .
 2021
 April
-Tiger Partners was nominated as "Rising Law Firm of the Year" in the 18th Annual SSQ ALB China Law Awards 2021.
+ 
 2021
 April
 Mr. Liu Yuxuan was listed in the top lawyers in China by LEGALBAND in 2021 and selected as the "Rising Star" in the field of "dispute resolution litigation" .

@@ -1,6 +1,7 @@
 "use client";
 
 import { pick, useLanguage } from "@/i18n/LanguageProvider";
+import { getStoredReturnHref } from "@/lib/returnPosition";
 import { useRouter } from "next/navigation";
 
 const labels = {
@@ -8,7 +9,7 @@ const labels = {
   zh: "返回",
 };
 
-export function BackToTop() {
+export function BackToTop({ fallbackHref = "/" }: { fallbackHref?: string }) {
   const { language } = useLanguage();
   const router = useRouter();
 
@@ -18,7 +19,7 @@ export function BackToTop() {
       return;
     }
 
-    router.push("/");
+    router.push(getStoredReturnHref(fallbackHref));
   }
 
   return (

@@ -1,3 +1,6 @@
+import { event2Events } from "./event2Events";
+import { eventInfoImagesByDate } from "./eventInfoImages";
+
 export type EventCopy = {
   category: string;
   title: string;
@@ -9,6 +12,8 @@ export type EventItem = EventCopy & {
   slug: string;
   date: string;
   image: string;
+  detailImages?: string[];
+  detailVideos?: string[];
   zh: EventCopy;
 };
 
@@ -19,7 +24,7 @@ export type LocalizedEventItem = EventItem & {
   localizedContent: string[];
 };
 
-export const events: EventItem[] = [
+const allEvents: EventItem[] = [
   {
     "slug": "kinsey-kang-hong-kong-legal-counsel",
     "date": "20231117",
@@ -48,7 +53,7 @@ export const events: EventItem[] = [
       "[图片"
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "虎诉动态 | 康亚男（Kinsey Kang Yanan）出庭大律师受聘为虎诉的香港法律顾问",
       "summary": "虎诉律师事务所非常荣幸地宣布，康亚男（Kinsey Kang Yanan）出庭大律师已受聘为本所香港法律顾问。自即日起，虎诉将与康大律师竭诚携手，以为我们的客户提供更优质专业、高效便捷的法律服务。",
       "content": [
@@ -86,7 +91,7 @@ export const events: EventItem[] = [
       "It is reported that this forum will focus on compliance, centering on the rich connotation of corporate compliance and the latest regulatory policies, legal practices and market trends, and discuss hot compliance issues, PE/VC, revision of arbitration law, ad hoc arbitration and other related sub-topics in global investment and M&A."
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "行业资讯 | 虎诉赞助2023钱伯斯北京论坛并受邀参会",
       "summary": "4月12日至13日，2023钱伯斯北京论坛将在北京王府井希尔顿酒店举办。北京虎诉律师事务所作为赞助商之一，受邀参与本次论坛活动。",
       "content": [
@@ -100,7 +105,7 @@ export const events: EventItem[] = [
     "date": "20230329",
     "image": "/assets/event/event3.png",
     "category": "Tiger Dynamics",
-    "title": "Party Branch of Tiger Partners entered into a pairing relationship with Shifoying Nanli Community to build a l",
+    "title": "Tiger Dynamics | Party Branch of Tiger Partners entered into a pairing relationship with Shifoying Nanli Community to build a law-based community",
     "summary": "In order to deepen the implementation of Xi Jinping Thought on the Rule of Law and fulfill practice \"Good Lawyers to the satisfaction of the Party and the people\", the Party branch committee of Tiger Partners responded positively to the call of the Party Committee of the Lawyers' Profession of Chaoyang District of Beijing for building a law-based community and entered into a pairing relationship with the community committee of Shifoying Nanli in order to make use of the advantages of the legal profession to contribute to promoting the construction of the rule of law in the community.",
     "content": [
       "In order to deepen the implementation of Xi Jinping Thought on the Rule of Law and fulfill practice \"Good Lawyers to the satisfaction of the Party and the people\", the Party branch committee of Tiger Partners responded positively to the call of the Party Committee of the Lawyers' Profession of Chaoyang District of Beijing for building a law-based community and entered into a pairing relationship with the community committee of Shifoying Nanli in order to make use of the advantages of the legal profession to contribute to promoting the construction of the rule of law in the community.",
@@ -111,7 +116,7 @@ export const events: EventItem[] = [
       "The Party Branch of Tiger Partners will adhere to the working method of \" the Party Branches and the Communities in pairing, the Party and the Masses hand in hand\". By organizing party branch’s members and actively mobilizing the law firm’s masses, we plan to set up the Tiger Partners’ legal service team, and better carry out the legal services oriented to the community. We look forward to truly become \"Good Lawyers to the satisfaction of the Party and the people\"."
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "虎诉动态 | 虎诉律所党支部与石佛营南里社区结对共建法治社区",
       "summary": "为进一步深入贯彻习近平法治思想，践行“做党和人民满意的好律师”，中共北京虎诉律师事务所支部委员会积极响应北京市朝阳区律师行业党委提出的共建法治社区的号召，与石佛营南里社区委员会达成结对关系，以期利用法律专业优势，为推进社区法治进程贡献智慧。",
       "content": [
@@ -139,7 +144,7 @@ export const events: EventItem[] = [
       "On the occasion of our third birthday, we are very pleased to share with you the great news that Tiger Partners will be relocated from China Central Place to Sino-Ocean International Center next year! In the new year, with the support and witness of all friends, we look forward to moving to a broader world!"
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "虎诉动态 | 今天，虎诉三周岁啦！",
       "summary": "这一年，我们继续秉持“虎诉精神”为各位客户服务，并最终实现了相较去年30%的业务收入增长；",
       "content": [
@@ -166,7 +171,7 @@ export const events: EventItem[] = [
       "Finally, Tiger Partners wishes that this event will be a great success and that all the young participants will have a wonderful performance!"
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "行业资讯 | 虎诉赞助“贸仲杯”Voice of Moot系列培训活动",
       "summary": "第二十届“贸仲杯”将于2022年11月28日至12月2日举行，本届“贸仲杯”汇集来自全国以及境外，包括英国、越南、荷兰、乌兹别克斯坦、中国香港、中国澳门在内的90余所法学院校1000余名参赛队员参与比赛。",
       "content": [
@@ -196,7 +201,7 @@ export const events: EventItem[] = [
       "Finally, we would like to thank you again for your attention and support. We cherish it and will always take it as the motivation to move forward."
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "虎诉动态 | “2022虎行风从奖学金”获奖名单揭晓",
       "summary": "6月16日，我们正式启动了“2022虎行风从奖学金”项目。经过第一轮的材料审查以及第二轮的面谈，综合考虑各位奖学金申请者对本次奖学金申请的投入程度、对争议解决业务的理解与从事意愿、学习能力、理解能力及表达能力等多个维度，奖学金评选委员会最终确定了王苓瑜、曹家豪、马延茹三位获奖者。",
       "content": [
@@ -224,7 +229,7 @@ export const events: EventItem[] = [
       "[图片"
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "虎诉动态 | 重磅消息！某重量级嘉宾宣布正式加入虎诉……",
       "summary": "为了迎接这位重量级嘉宾的正式诞生，我们于6月10日在TigerPark小程序上发起了“虎诉卡通形象命名活动”。短短两天时间，我们收到了176位朋友的报名信息。经过虎诉全体成员的投票，最终它拥有了自己的名字——虎氪！接下来，请看它的详细介绍~",
       "content": [
@@ -245,7 +250,7 @@ export const events: EventItem[] = [
       "[图片"
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "虎诉动态 | “虎行风从奖学金”项目正式启动",
       "summary": "[图片",
       "content": [
@@ -269,7 +274,7 @@ export const events: EventItem[] = [
       "It is said that during the evaluation phase, firm candidates were scored based on three sources of analysis: the firm’s submissions; endorsement from client referees; and valid nominations from the industry. Apart from peer nominations, selections from government institutions, the judiciary and academia were also received. Based on months of research and evaluation, hundreds of submissions and more than 1,000 comments from corporate executives, in-house counsel and senior practitioners, the editorial team of China Business Journal finally selected the China Business Law Awards 2022."
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "行业资讯 | 虎诉荣获2022商法卓越律所大奖",
       "summary": "6月15日，知名法律媒体《商法》（China Business Law Journal）公布了商法卓越律所大奖2022评选结果，虎诉律师事务所荣幸入选其中两类奖项榜单。",
       "content": [
@@ -306,7 +311,7 @@ export const events: EventItem[] = [
       "Upgrading of official account function and online of the new Mini Program this time, is a bold attempt made by our team after a long period of preparation. We believe that change and innovation provide inexhaustible power and infinite possibility for upward growth. On the road to realizing our vision, we look forward to each of you who are concerned anout us to witness it together."
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "虎诉动态 | 虎诉升级公众号功能并上线全新小程序",
       "summary": "自成立以来，虎诉始终坚持以深厚的法律功底、丰富的实战经验及与众不同的商业化思维，为客户提供专业的法律服务与精准的商业解决方案。同时，作为一家极具生命力、创造力与包容性的律师事务所，虎诉一直在寻求服务的升级换代，以期为客户及其他所有关注虎诉成长的朋友带来更好的用户体验。",
       "content": [
@@ -333,7 +338,7 @@ export const events: EventItem[] = [
     "date": "20220517",
     "image": "/assets/event/event11.png",
     "category": "Industry News",
-    "title": "Tiger Partners and Mr. Liu Yuxuan, Mr. Wan Li were selected into the ranking of 2022 China's top law firms and",
+    "title": "Tiger Partners and Mr. Liu Yuxuan, Mr. Wan Li were selected into the ranking of 2022 China's top law firms and top lawyers",
     "summary": "On May 17, LEGALBAND released the ranking of China's top law firms and lawyers in 2022. Tiger Partners and Mr. Liu Yuxuan, Mr. Wan Li were selected into the abovementioned ranking lists.",
     "content": [
       "On May 17, LEGALBAND released the ranking of China's top law firms and lawyers in 2022. Tiger Partners and Mr. Liu Yuxuan, Mr. Wan Li were selected into the abovementioned ranking lists.",
@@ -344,7 +349,7 @@ export const events: EventItem[] = [
       "[图片"
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "行业资讯 | 虎诉及其合伙人刘煜暄、万力律师分别入选2022年度LEGALBAND中国顶级律所及顶级律师排行榜",
       "summary": "5月17日，LEGALBAND发布了2022年度中国顶级律所及顶级律师排行榜，虎诉律师事务所及其合伙人刘煜暄律师、万力律师分别入选前述两个榜单。",
       "content": [
@@ -370,7 +375,7 @@ export const events: EventItem[] = [
       "It is said that the list is based on extensive interviews with litigators, arbitrators, dispute resolution specialists and their clients, as well as as well as examining recent casework handled by law firms and lawyers."
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "行业资讯 | 虎诉荣登Benchmark Litigation2022年度亚太地区及中国地区争议解决榜单",
       "summary": "5月9日，Benchmark Litigation发布了2022年度亚太地区及中国地区争议解决推荐律所及律师排行榜，虎诉律师事务所被评为中国北京地区商业纠纷领域“值得关注的律所（Notable Firm）”。",
       "content": [
@@ -394,7 +399,7 @@ export const events: EventItem[] = [
       "[图片"
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "行业资讯 | 虎诉获LEGALBAND2022年度最佳新锐律师事务所提名",
       "summary": "3月31日，LEGALBAND发布了2022年度中国法律卓越大奖提名名单，虎诉律师事务所荣获年度最佳新锐律师事务所提名。",
       "content": [
@@ -416,12 +421,12 @@ export const events: EventItem[] = [
       "Today, Dalian International Arbitration Court released the namelist of arbitrators for the 6th session, and Mr. Wan Li, partner of Tiger Partners, is honored to be the selected one.",
       "[图片",
       "Mr. Wan specializes in commercial dispute resolution, specifically foreign-related commercial litigation and arbitration. He has also made breakthroughs in the fields of IP-related disputes as well as matters involving both criminal and civil proceedings. Wan Li’s clients come from many industries including finance, investment, maritime, aviation, insurance, industrial manufacturing, pharmaceutical, real estate, culture and entertainment, e-sports and ect.",
-      "In addition, Mrs. Zoe Zhang, another partner , is engaged by Qingdao Arbitration Commission as the arbitrator.",
+      "In addition, Ms. Zoe Zhang, another partner , is engaged by Qingdao Arbitration Commission as the arbitrator.",
       "[图片",
       "Zoe Zhang specializes in commercial arbitration and litigation, and especially foreign related arbitration and international arbitration. The major sectors of her practice involve international sale of goods, construction, real estate, joint venture, equity transfer, intellectual properties, energy etc."
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "行业资讯 | 虎诉万力律师受聘大连国际仲裁院（大连仲裁委员会）第六届仲裁员",
       "summary": "今日，大连国际仲裁院（大连仲裁委员会）发布了第六届仲裁员增聘名单，虎诉律师事务所的合伙人万力律师荣幸入选。",
       "content": [
@@ -439,7 +444,7 @@ export const events: EventItem[] = [
     "date": "20220125",
     "image": "/assets/event/event15.png",
     "category": "Industry News",
-    "title": "Mr. Liu Yuxuan was listed in “The A-List” by China Business Law Journal",
+    "title": "Mr. Liu Yuxuan was listed in \"The A-List\" by China Business Law Journal",
     "summary": "On January 24, 2021, China Business Law Journal released “The A-List” for related businesses in 2021 in P.R.C. Liu Yuxuan, Managing Partner of Tiger Partners was selected as “The A-List”.",
     "content": [
       "On January 24, 2021, China Business Law Journal released “The A-List” for related businesses in 2021 in P.R.C. Liu Yuxuan, Managing Partner of Tiger Partners was selected as “The A-List”.",
@@ -449,7 +454,7 @@ export const events: EventItem[] = [
       "Liu was featured by Asian Legal Business as An Up-and-Comer in Dispute Resolution and identified in the list of Top 40 Rising Stars 2021 by China Business Law Journal and 2021 Recommended Lawyers for Dispute Resolution in Beijing by Benchmark Litigation China. Liu was also recommended as a Leading Individual in dispute resolution litigation in the list of 2021 China Top Ranked Lawyers by LEGALBAND, and a Notable Practitioner in dispute resolution in China Legal Market 2020 by Asia Law Profiles."
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "行业资讯 | 虎诉刘煜暄律师入选2021年度“The A-List 法律精英”名册",
       "summary": "1月24日，知名法律媒体《商法》（China Business Law Journal）公布了2021年度中国相关业务“The A-List 法律精英”名册，虎诉律师事务所的管理合伙人刘煜暄律师荣列其中。",
       "content": [
@@ -464,7 +469,7 @@ export const events: EventItem[] = [
   {
     "slug": "zoe-zhang-joined-as-partner",
     "date": "20220124",
-    "image": "/assets/event/event16.jpg",
+    "image": "/assets/event/event16.png",
     "category": "Tiger Dynamics",
     "title": "Welcome Zoe Zhang has officially joined the firm as a partner",
     "summary": "Tiger Partners is pleased to announce that Zoe Zhang has officially joined the firm as a partner. Before joining Tiger Partners, Zoe was working with the Dispute Resolution Team of Zhong Lun Law Firm as an equity partner. We are in the process of fulfilling registration formalities for Zoe’s transfer.",
@@ -477,7 +482,7 @@ export const events: EventItem[] = [
       "As an expert in foreign related arbitration and international arbitration, Zoe will certainly help strengthen Tiger Partners’ business in cross-border commercial dispute resolution, further enlarging its fields in dispute resolution. [图片"
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "虎诉动态 | 虎诉迎来合伙人张莉律师加入",
       "summary": "虎诉律师事务所荣幸宣布，张莉律师自即日起以合伙人的身份正式加盟本所。在加入虎诉之前，张律师就职于中伦律师事务所争议解决部，担任权益合伙人职位。目前，张律师的相关转所手续正在办理中。",
       "content": [
@@ -510,7 +515,7 @@ export const events: EventItem[] = [
       "Tiger Partners will continue to cultivate the legal profession in order to provide clients with more professional legal services and more accurate business solutions."
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "行业资讯 | 虎诉入选2022年度ALB China精品律所榜单",
       "summary": "今日，《亚洲法律杂志》（Asian Legal Business，“ALB”）公布2022年度ALB China精品律所榜单，北京虎诉律师事务所（Tiger Partners）凭借过去一年在民商事争议解决领域的优秀业绩，成功入选该榜单。",
       "content": [
@@ -547,7 +552,7 @@ export const events: EventItem[] = [
       "[图片"
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "虎诉动态 | 虎诉举办2周年晚宴",
       "summary": "2021年12月18日，虎诉2周年晚宴于北京市三里屯通盈中心洲际酒店4楼玫瑰厅隆重举行。虎诉众多亲朋好友欢聚一堂，共同庆祝虎诉的2周岁生日。",
       "content": [
@@ -579,7 +584,7 @@ export const events: EventItem[] = [
       "Tiger Partners launched an electronic case file management system to help clients store, review and manage case materials more efficiently throughout dispute resolution matters."
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "虎诉动态 | 虎诉为客户提供案件电子文件管理系统",
       "summary": "虎诉在面对客户时，始终视自己为⼀家“服务企业”，并始终着眼于客户服务的不断完善、升级。",
       "content": [
@@ -608,7 +613,7 @@ export const events: EventItem[] = [
     "date": "20211015",
     "image": "/assets/event/event20.png",
     "category": "Industry News",
-    "title": "Three partners of Tiger Partners were elected as members of the Professional Committee of the 11th Beijing Lawy",
+    "title": "Three partners of Tiger Partners were elected as members of the Professional Committee of the 11th Beijing Lawyer Association",
     "summary": "On October 13, the Beijing Lawyers Association released the \"Supplementary List of Members of the Beijing Lawyers Association on Publishing Professional Committees (Board)\". Through strict procedures of selection and publication, Mr. Liu Yuxuan, Mr. Xu Min and Mr. Wan Li, partners of Tiger Partners, were elected as members of the 11th Professional Committee of the Beijing Lawyers Association with their extensive experience in specialized fields. Specifically,",
     "content": [
       "On October 13, the Beijing Lawyers Association released the \"Supplementary List of Members of the Beijing Lawyers Association on Publishing Professional Committees (Board)\". Through strict procedures of selection and publication, Mr. Liu Yuxuan, Mr. Xu Min and Mr. Wan Li, partners of Tiger Partners, were elected as members of the 11th Professional Committee of the Beijing Lawyers Association with their extensive experience in specialized fields. Specifically,",
@@ -623,7 +628,7 @@ export const events: EventItem[] = [
       "[图片"
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "行业资讯 | 虎诉三名合伙人当选第十一届北京律师协会专业委员会委员",
       "summary": "北京市律师协会于10月13日发布了《北京市律师协会关于发布专业委员会（研究会）委员增补名单》，经过严格的选拔和公示程序，虎诉律师事务所的合伙人刘煜暄律师、许旻律师和万力律师，凭借其在专业领域丰富的业务经验，成功当选北京市律师协会第十一届专业委员会委员。具体如下：",
       "content": [
@@ -640,14 +645,21 @@ export const events: EventItem[] = [
     "slug": "liu-yuxuan-and-sam-liao-were-invited-to-the-29th-cross-strait-youth-perspectives",
     "date": "20210720",
     "image": "/assets/event/event21.png",
-    "category": "Tiger Dynamics",
-    "title": "Liu Yuxuan and Sam Liao were invited to the 29th Cross-Strait Youth Perspectives Forum",
-    "summary": "Liu Yuxuan and Sam Liao of Tiger Partners were invited to participate in the 29th Cross-Strait Youth Perspectives Forum and shared observations on legal practice and dispute resolution.",
+    "category": "Industry News",
+    "title": "Mr. Liu Yuxuan and  Mr. Liao Mengcheng Invited to Attend the 29th Cross-Strait Youth Vision Forum",
+    "summary": "On July 19, 2021, the 29th Cross-Strait Youth Vision Forum, hosted by the Central Committee of the Revolutionary Committee of the Chinese Kuomintang, was held in Beijing. With the theme of \"Heart Across the Straits · Legal Resonance of Sincere Voices\", the forum gathered young legal professionals from both sides of the Taiwan Strait to engage in in-depth discussions on industrial development and legal issues concerning cross-strait exchanges. Liu Yuxuan, Managing Partner of Tiger Partners, and Liao Mengcheng, Senior Consultant of Tiger Partners, were honored to be invited to attend the forum.",
     "content": [
-      "Liu Yuxuan and Sam Liao of Tiger Partners were invited to participate in the 29th Cross-Strait Youth Perspectives Forum and shared observations on legal practice and dispute resolution."
+      "On July 19, 2021, the 29th Cross-Strait Youth Vision Forum, hosted by the Central Committee of the Revolutionary Committee of the Chinese Kuomintang, was held in Beijing. With the theme of \"Heart Across the Straits · Legal Resonance of Sincere Voices\", the forum gathered young legal professionals from both sides of the Taiwan Strait to engage in in-depth discussions on industrial development and legal issues concerning cross-strait exchanges. Liu Yuxuan, Managing Partner of Tiger Partners, and Liao Mengcheng, Senior Consultant of Tiger Partners, were honored to be invited to attend the forum.",
+      "[图片]",
+      "At the invitation of the Central Committee of the Revolutionary Committee of the Chinese Kuomintang, Mr. Liu Yuxuan paired up with Cheng Weilin, a trainee lawyer from Taiwan, to co-host the forum as representatives of legal practitioners across the two sides of the Taiwan Strait.",
+      "At the invitation, Mr. Liao Mengcheng delivered a keynote speech entitled Policy and Legal Framework for the Development of Cross-Strait Sports Industry. From a legal perspective, he shared his insights and reflections on the development of the cross-strait sports industry.",
+      "[图片]",
+      "As the forum was drawing to a close, Mr. Liu Yuxuan remarked on stage that he sincerely hopes young people on both sides of the Strait will strengthen exchanges and interactions in the legal sector, jointly explore new pathways for cross-strait integrated development, and earnestly implement the principle of promoting integration through connectivity, welfare benefits, and emotional affinity, so as to jointly create a promising future for cross-strait youth.",
+      "[图片]",
+      "Finally, leaders and guests attending the forum took a group photo in front of the rostrum. The 29th Cross-Strait Youth Vision Forum themed Heart Across the Straits · Legal Resonance of Sincere Voices concluded successfully."
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "虎诉动态 | 刘煜暄律师、廖孟誠律师受邀参加第29次两岸青年观点论坛",
       "summary": "2021年7月19日，由民革中央主办的第29次两岸青年观点论坛在京举行。本次论坛以“心跨两岸·法悦心声”为主题，两岸青年法律从业者围绕行业发展和两岸交流中的法律问题展开了热烈的座谈研讨。北京虎诉律师事务所管理合伙人刘煜暄律师、高级顾问廖孟誠律师非常荣幸地受邀参加了本次观点论坛。",
       "content": [
@@ -674,7 +686,7 @@ export const events: EventItem[] = [
       "With its outstanding performance in the field of dispute resolution in the past year, Tiger Partners was awarded as \"Notable Firm\" in the field of commercial disputes resolution in Beijing in 2021. Mr. Liu Yuxuan and Mr. Wan Li, partners of Tiger Partners, were also listed as recommended lawyers for dispute resolution in Beijing in benchmark litigation China 2021."
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "行业资讯 | 虎诉及合伙人荣获2021 Benchmark Litigation推荐",
       "summary": "2021年6月10日，国际法律评级机构Benchmark Litigation正式发布2021年中国地区排名指南，这也是Benchmark Litigation首次在中国地区推出争议解决排名指南。",
       "content": [
@@ -697,7 +709,7 @@ export const events: EventItem[] = [
       "Tiger Partners will continue to cultivate the legal profession in order to provide clients with more professional legal services and more accurate business solutions."
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "行业资讯 | 虎诉荣膺2021《商法》卓越律所大奖",
       "summary": "近日，国际领先法律期刊《商法》（China Business Law Journal）公布2021年《商法》卓越律所大奖评选结果，北京虎诉律师事务所（Tiger Partners），凭借精湛的专业能力和优质的客户口碑，被评选为“备受关注律所”。",
       "content": [
@@ -712,7 +724,7 @@ export const events: EventItem[] = [
     "date": "20210416",
     "image": "/assets/event/event24.png",
     "category": "Industry News",
-    "title": "Tiger Partners was nominated as \"Rising Law Firm of the Year\" in the 18th Annual SSQ ALB China Law Awards 2021.",
+    "title": "Tiger Partners was nominated as \"Rising Law Firm of the Year\" in the 18th Annual SSQ ALB China Law Awards 2021",
     "summary": "Recently, Asian legal business (\"ALB\") published the shortlist of SSQ 2021 ALB China law award. Tiger Partners, with its superb professional ability and outstanding achievements, was shortlisted for the \"Rising Law Firm of the Year\"",
     "content": [
       "Recently, Asian legal business (\"ALB\") published the shortlist of SSQ 2021 ALB China law award. Tiger Partners, with its superb professional ability and outstanding achievements, was shortlisted for the \"Rising Law Firm of the Year\"",
@@ -721,7 +733,7 @@ export const events: EventItem[] = [
       "Tiger Partners will continue to be committed to providing clients with more professional legal services, and accurate business solutions."
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "行业资讯 | 虎诉入围SSQ二零二一年ALB中国法律大奖",
       "summary": "近日，《亚洲法律杂志》（Asian Legal Business,“ALB”）公布SSQ二零二一年ALB中国法律大奖入围名单，北京虎诉律师事务所（Tiger Partners），凭借精湛的专业能力和突出的成绩，入围“年度最具潜力律师事务所大奖”（Rising Law Firm of the Year）",
       "content": [
@@ -740,10 +752,11 @@ export const events: EventItem[] = [
     "title": "Mr. Liu Yuxuan was listed in the top lawyers in China by LEGALBAND in 2021",
     "summary": "In April 2021, Mr. Liu Yuxuan was listed in the top lawyers in China by LEGALBAND in 2021 and selected as the \"Rising Star\" in the field of \"dispute resolution litigation\" .",
     "content": [
-      "In April 2021, Mr. Liu Yuxuan was listed in the top lawyers in China by LEGALBAND in 2021 and selected as the \"Rising Star\" in the field of \"dispute resolution litigation\" ."
+      "In April 2021, Mr. Liu Yuxuan was listed in the top lawyers in China by LEGALBAND in 2021 and selected as the \"Rising Star\" in the field of \"dispute resolution litigation\" .",
+      "[图片]"
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "行业资讯 | 虎诉刘煜暄律师入选LEGALBAND2021年度中国顶级律师排行榜",
       "summary": "近日，Accurate Media旗下的专业法律评级机构LEGALBAND发布了2021年度中国顶级律师排行榜（Top Ranked Lawyers）。虎诉刘煜暄律师，凭借其在争议解决领域精湛的专业能力、丰富的实战经验，以及优质的客户口碑，在本次排行中被评选为“争议解决·诉讼”领域的“后起之秀”。",
       "content": [
@@ -765,7 +778,7 @@ export const events: EventItem[] = [
       "Tiger Partners announced that Sam Liao joined the firm as Senior Counsel, further strengthening the firm's professional capability in dispute resolution and related legal services."
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "虎诉动态 | 虎诉迎来廖孟誠（Sam Liao）加入担任高级顾问",
       "summary": "虎诉律师事务所荣幸宣布，廖孟誠（Sam Liao）从2021年3月19日起作为高级顾问加入本所，成为虎诉团队发展道路上的重要一员。",
       "content": [
@@ -786,17 +799,19 @@ export const events: EventItem[] = [
     "date": "20210315",
     "image": "/assets/event/event27.png",
     "category": "Industry News",
-    "title": "Attorney Liu Yuxuan and Wan Li from Tiger Partners identified in the list of Top 40 Rising Stars 2021 elite up-an",
+    "title": "Attorney Liu Yuxuan and Wan Li from Tiger Partners identified in the list of Top 40 Rising Stars 2021 elite up-and-coming lawyers in China",
     "summary": "The leading legal press China Business Law Journal recently released its list of Top 40 Rising Stars 2021 - 40 elite up-and-coming lawyers in China, recognizing their outstanding performance in their respective practice areas in the past year of 2020. Liu Yuxuan and Wan Li from Tiger Partners are identified in the list for their expertise in the field of commercial dispute resolution and for their excellent client reputation.",
     "content": [
       "The leading legal press China Business Law Journal recently released its list of Top 40 Rising Stars 2021 - 40 elite up-and-coming lawyers in China, recognizing their outstanding performance in their respective practice areas in the past year of 2020. Liu Yuxuan and Wan Li from Tiger Partners are identified in the list for their expertise in the field of commercial dispute resolution and for their excellent client reputation.",
       "The endorsement is based on extensive research conducted by China Business Law Journal, in which thousands of corporate legal counsel, executives and fellow lawyers were invited to nominate noticeable private practice lawyers. The 40 young lawyers on the list all have more than 10 years of legal experience. Their practices cover dispute resolution, M&A, capital markets, intellectual property and other specialized fields. The successful listing of Liu and Wan shows that Tiger Partners lawyers' professional legal services have won high recognition from clients and legal peers.",
+      "[图片]",
       "Liu Yuxuan is a founding partner of Tiger Partners. He graduated from Peking University Law School and has been practicing law for more than twelve years. His wide ranging legal expertise, strong practice, and passionate courtroom presentation style are widely recognized by his clients and the industry at large.",
       "Prior to founding Tiger Partners, Mr. Liu worked as a partner at Jingtian & Gongcheng (2018-2019). Before that, Mr. Liu worked as a dispute resolution lawyer at Fangda Partners (2014-2018), King & Wood Mallesons (2012-2014), and Zhong Lun Law Firm (2009-2010).",
       "Mr. Liu specializes in representing complex commercial litigation and arbitration cases. He has extensive experience in the field of dispute resolution, with a focus on financial investments, corporate equity and control, real estate and construction projects, as well as games, sports, media, and entertainment.",
       "Mr. Liu has extensive hands-on case experience. In the year of 2020, Mr. Liu represented more than 30 complex commercial cases, including five cases worth over 100 million RMB, and a dozen cases worth more than 50 million RMB.",
       "For cases pertaining to financial investment, Mr. Liu provided post-investment dispute resolution legal services for several well-known domestic institutions, maintaining a high success rate. In the field of corporate control, Mr. Liu successfully helped the controller of a leading battery company in China in obtaining a series of successful judgments, which secured the control of the client over the company. In the field of construction Mr. Liu was entrusted, by a famous domestic energy enterprise, with the task of handling two complex construction cases, which involved a diverse subject matter and complex legal relationships. In the field of administrative litigation, Mr. Liu was entrusted to provide legal services for a listed company's production subsidiary and successfully exempted the client from paying tens of millions of RMB in administrative penalties.",
       "Based on his consistent outstanding performance in the field of dispute resolution, Mr. Liu was awarded the title of “Notable Practitioner” in the field of dispute resolution by Asia Law for 2020 and 2021, and was featured by a leading legal publication Asian Legal Business (“ALB”) as “An Up-and-Comer in Dispute Resolution”.",
+      "[图片]",
       "Wan Li is a partner of Tiger Partners and is listed in the Foreign-Related Lawyer Talent Pool of the Beijing Bar Association. Combined, he has over twelve years of experience as a lawyer and an in-house counsel. He specializes in commercial dispute resolution, specifically foreign-related commercial litigation and arbitration. He has also made breakthroughs in the fields of IP-related disputes as well as matters involving both criminal and civil proceedings.",
       "He has represented numerous well-known and leading international and domestic companies in litigation and arbitration cases in PRC courts at all levels and arbitration institutions, including the China International Economic and Trade Arbitration Commission and the Beijing Arbitration Commission. He has also represented clients in initiating criminal charge proceedings against offenders.",
       "Wan Li’s clients come from many industries including finance, investment, maritime, aviation, insurance, industrial manufacturing, pharmaceutical, real estate, culture and entertainment, and e-sports.",
@@ -805,7 +820,7 @@ export const events: EventItem[] = [
       "Wan Li graduated from the University of International Relations with a Bachelor's degree in Law, and completed his Master's degree in Law (Maritime Law) at Dalian Maritime University."
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "行业资讯｜虎诉两位律师入选《商法》Rising Stars 2021 TOP 40榜单",
       "summary": "近日，知名法律媒体《商法》（China Business Law Journal）发布了2021中国业务法律新星（Rising Stars 2021）榜单, 该榜单收录了40位中国精英律师, 以表彰他们上年度在各自擅长业务领域中的杰出表现。北京虎诉律师事务所的刘煜暄律师和万力律师，凭借其在商事争议解决领域精湛的专业能力和优质的客户口碑，荣列榜单。",
       "content": [
@@ -837,7 +852,7 @@ export const events: EventItem[] = [
       "Tiger Partners continued its Civil Code interpretation series by reviewing the second part of the nine major changes to contract termination rules."
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "虎眼观察 | 《民法典》解读系列 - 合同解除规则之九大变化（下）",
       "summary": "虎诉律师针对《民法典》合同解除制度的相关规定进行梳理，梳理出九大变化，以飨读者。",
       "content": [
@@ -893,7 +908,7 @@ export const events: EventItem[] = [
       "Tiger Partners reviewed the changes brought by the Civil Code to contract termination rules, focusing on the key questions of whether, how and with what consequences a contract may be terminated."
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "虎眼观察 | 《民法典》解读系列 - 合同解除规则之九大变化（上）",
       "summary": "本期《民法典》解读专题为合同解除规则的变化。合同解除制度向来是民商事争议解决关注的重点。合同能不能被解除？要如何解除？解除的后果是什么？弄清楚这些问题至关重要。2021年1月1日生效施行《中华人民共和国民法典》（下称“《民法典》”）对过往的合同解除制度进行了较多的修改，对此前实务中的很多困惑作出了明确的规定。虎诉律师针对《民法典》中的合同解除制度进行了梳理，提炼出九大变化，以飨读者。",
       "content": [
@@ -948,7 +963,7 @@ export const events: EventItem[] = [
       "Tiger Partners reviewed the jurisdiction objection behind the second-instance ruling in the Wuhan Kingold fake gold case and analyzed the procedural contest in a dispute involving massive underlying claims."
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "虎眼观察 | “争夺战场”——“武汉金凰假黄金案” 二审背后的管辖权异议",
       "summary": "日前，中国裁判文书网公布了一份陕西高院作出的二审裁定书（案号：【2020】陕民辖终53号），对簿公堂的是中国人民财产保险股份有限公司武汉市分公司（下称“人保公司”）与长安国际信托股份有限公司（下称“长安信托”）。虽然陕西高院仅对管辖权异议做出了裁定，但该案背后所牵扯的标的之大，情节之曲折，很好地诠释了“真实的生活比戏剧更具戏剧性”。今天就带大家了解下这个涉及数百亿标的的“武汉金凰假黄金案”，顺便聊一聊人保公司二提的管辖权异议究竟是什么。",
       "content": [
@@ -991,7 +1006,7 @@ export const events: EventItem[] = [
     "date": "20201014",
     "image": "/assets/event/event31.png",
     "category": "Industry News",
-    "title": "Mr. Xu Min and Mr. Wan Li were selected into the Foreign-Related Lawyer Talent Pool of the Beijing Bar Associatio",
+    "title": "Mr. Xu Min and Mr. Wan Li were selected into the Foreign-Related Lawyer Talent Pool of the Beijing Bar Association",
     "summary": "The Beijing Lawyers Association released the list of Foreign Lawyers Talent pool yesterday. After strict selection and publicity procedures, Mr. Xu Min and Mr. Wan Li were successfully selected into the foreign lawyers talent pool with their rich foreign business experience.",
     "content": [
       "The Beijing Lawyers Association released the list of Foreign Lawyers Talent pool yesterday. After strict selection and publicity procedures, Mr. Xu Min and Mr. Wan Li were successfully selected into the foreign lawyers talent pool with their rich foreign business experience.",
@@ -999,7 +1014,7 @@ export const events: EventItem[] = [
       "Tiger Partners will continue to take a broad view of the international legal affiars, and continue to provide clients with high-quality legal services."
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "行业资讯 | 虎诉两位合伙人入选北京市律师协会涉外律师人才库",
       "summary": "北京市律师协会于昨日发布了《北京市律师协会涉外律师人才库名单》，经过严格的选拔和公示程序，虎诉律师事务所的许旻律师和万力律师，凭借其丰富的涉外业务经验，成功入选北京市律师协会涉外律师人才库。这充分显示了虎诉律师在涉外法律服务方面，尤其是民商事诉讼与仲裁领域，丰富的实战经验和一贯的优异表现。",
       "content": [
@@ -1015,13 +1030,14 @@ export const events: EventItem[] = [
     "date": "20200927",
     "image": "/assets/event/event32.png",
     "category": "Industry News",
-    "title": "China Business Law Journal featured Tiger Partners",
-    "summary": "China Business Law Journal featured Tiger Partners, recognizing the firm's professional focus and development in complex commercial dispute resolution.",
+    "title": "China Business Law Journal officially included Tiger Partners",
+    "summary": "Recently, China Business Law Journal, a well-known legal media, officially included Tiger Partners. Tiger Partners’ inclusion in the Journal’s recommended law firm list fully attests to the firm’s consistently outstanding performance in dispute resolution (litigation and arbitration).",
     "content": [
-      "China Business Law Journal featured Tiger Partners, recognizing the firm's professional focus and development in complex commercial dispute resolution."
+      "Recently, China Business Law Journal, a well-known legal media, officially included Tiger Partners. Tiger Partners’ inclusion in the Journal’s recommended law firm list fully attests to the firm’s consistently outstanding performance in dispute resolution (litigation and arbitration).",
+      "Tiger Partners will continue to deepen its professional expertise, devote full professionalism and dedication to every case, and consistently deliver exceptional legal services to clients."
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "行业资讯 | \"商法“收录虎诉",
       "summary": "近日，知名法律媒体《商法》（China Business Law Journal）正式收录北京虎诉律师事务所。虎诉荣登商法推荐律所榜单，充分显示了虎诉在争议解决（诉讼与仲裁）领域一贯的优异表现。",
       "content": [
@@ -1046,7 +1062,7 @@ export const events: EventItem[] = [
       "[图片"
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "枪炮一响 黄金万两 | 关于民间借贷利率司法保护规则调整的解读",
       "summary": "2020年8月20日，最高人民法院发布了《关于修改<关于审理民间借贷案件适用法律若干问题的规定>的决定》（以下简称“新《规定》”），对民间借贷案件的审判规则进行了一些修订。",
       "content": [
@@ -1086,13 +1102,13 @@ export const events: EventItem[] = [
     "date": "20200526",
     "image": "/assets/event/event34.png",
     "category": "Industry News",
-    "title": "ALB report “An up-and-comer in dispute resolution-Interview Liu Yuxuan, managing partner”",
+    "title": "ALB report \"An up-and-comer in dispute resolution-Interview Liu Yuxuan, managing partner\"",
     "summary": "Recently, Asian Legal Business (\"ALB\"), one of the world's most influential legal media, interviewed Liu Yuxuan, Managing Partner of Tiger Partners. The article has been published in the May 2020 issue of ALB China. If you would like to read the rest of the article, please visit ALB's website http://www.legalbusinessonline.com/china.",
     "content": [
       "Recently, Asian Legal Business (\"ALB\"), one of the world's most influential legal media, interviewed Liu Yuxuan, Managing Partner of Tiger Partners. The article has been published in the May 2020 issue of ALB China. If you would like to read the rest of the article, please visit ALB's website http://www.legalbusinessonline.com/china."
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "行业资讯 | ALB专访虎诉管理合伙人刘煜暄律师：“争议解决领域的耀眼新星”",
       "summary": "近日，全球最具影响力的法律媒体之一——亚洲法律杂志（Asian Legal Business，“ALB”）采访了虎诉管理合伙人刘煜暄律师。",
       "content": [
@@ -1119,7 +1135,7 @@ export const events: EventItem[] = [
       "Tiger Partners analyzed investor rights protection in securities misrepresentation liability disputes and discussed how retail investors may protect their legitimate interests through litigation."
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "虎眼观察 | 我们“韭菜”有力量——证券虚假陈述责任纠纷诉讼之“投资者权利保护”",
       "summary": "瑞幸咖啡”财务造假事件余波未平，康美药业违法违规案风波又起。证监会近日对康美药业做出了行政处罚及市场进入决定。某些上市公司对市场和投资者毫无敬畏之心，肆意“收割韭菜”，严重破坏资本市场健康生态，损害了投资人的切身利益。“韭菜”们就只能“坐以待毙”嘛？本文将简单介绍大杀器“证券虚假陈述责任纠纷诉讼”。",
       "content": [
@@ -1188,7 +1204,7 @@ export const events: EventItem[] = [
       "Tiger Partners discussed service of process, a procedural step that often creates practical difficulty for courts and lawyers in civil and commercial litigation."
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "虎眼观察 | 一个让法院和律师都头疼的诉讼环节——送达",
       "summary": "争议解决过程中的一个十分重要、又因常被客户忽视从而引发麻烦的环节就是送达。看似简单的送达在现实中往往会遇到难以确定送达地址、对方当事人拒收等难题，虎诉律师在本文结合以往经验和最新规定对这些问题做了解析。",
       "content": [
@@ -1232,7 +1248,7 @@ export const events: EventItem[] = [
       "Tiger Partners addressed several common misunderstandings about dispute resolution lawyers and explained how litigation and arbitration lawyers create value in complex disputes."
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "虎眼观察 | 这些可能是大家对争议解决律师最大的三个误解！",
       "summary": "争议解决律师，一般协助客户通过诉讼、仲裁、谈判以及其他方式解决争议，我们同行之间也常常自我揶揄为“讼棍”。我们虎诉律师结合自身超过十年的争议解决律师实务和上市公司诉讼法务的经验，认为争议解决律师的工作内容和价值，远不限于帮人打官司。",
       "content": [
@@ -1277,7 +1293,7 @@ export const events: EventItem[] = [
       "Tiger Partners discussed consumer fraud and triple compensation claims in automobile sales, emphasizing that sellers must truthfully disclose material information."
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "虎眼观察 | 退一赔三很严重，卖车要说真话",
       "summary": "特斯拉因Model 3车型的“减配门”事件被工信部约谈，成为3月份车市最引人关注的话题之一。虎诉注意到，已有部分受影响的车主正在就此问题咨询法律意见，包括寻求“退一赔三”的可能性。虎诉律所里资深汽车爱好者许律师（人送称号“许师傅”）在此就谈一谈汽车销售领域广受关注的“退一赔三”问题，以期对经销商和消费者都有所帮助。",
       "content": [
@@ -1332,7 +1348,7 @@ export const events: EventItem[] = [
       "Tiger Partners continued its discussion of consumer fraud and triple compensation in automobile transactions, focusing on truthful disclosure obligations in sales."
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "虎眼观察 | 退一赔三很严重，卖车要说真话",
       "summary": "中国正走在民族伟大复兴的康庄大道上，商事交易风起云涌，我们提供的法律服务绝大多数也是围绕着商事交易进行的。",
       "content": [
@@ -1375,7 +1391,7 @@ export const events: EventItem[] = [
     "date": "20200311",
     "image": "/assets/event/event40.png",
     "category": "Industry News",
-    "title": "ALB report“Former red circle firm lawyers leave to set up boutique firm Tiger Partners”",
+    "title": "ALB report\"Former red circle firm lawyers leave to set up boutique firm Tiger Partners\"",
     "summary": "Asian Legal Business (\"ALB\"), one of the world's most influential legal media, has recently noted the establishment of Tiger Partners. As a boutique firm specializing in complex commercial dispute resolution, Tiger Partners' primary objective is to realize the interests of its clients. Tiger Partners has a deep legal expertise, rich practical experience and a distinctive commercial mindset. It is committed to providing professional legal services, precise business solutions and good user experience to its clients.",
     "content": [
       "Asian Legal Business (\"ALB\"), one of the world's most influential legal media, has recently noted the establishment of Tiger Partners. As a boutique firm specializing in complex commercial dispute resolution, Tiger Partners' primary objective is to realize the interests of its clients. Tiger Partners has a deep legal expertise, rich practical experience and a distinctive commercial mindset. It is committed to providing professional legal services, precise business solutions and good user experience to its clients.",
@@ -1389,7 +1405,7 @@ export const events: EventItem[] = [
       "Wan specializes on finance and investment, equity transaction, commercial contract, tort liability, IP dispute resolution and criminal accountability, with special knowledge of finance, maritime, aviation, manufacture, medicine, real estate, sports, electronic entertainment and competition industries."
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "行业资讯 | ALB报道虎诉：“前红圈所律师组建精品律所虎诉，专注争议解决业务”",
       "summary": "近日，全球最具影响力的法律媒体之一——亚洲法律杂志（Asian Legal Business，“ALB”）关注到虎诉的成立。虎诉作为一家专注于高端商事争议解决业务的精品所，始终以实现客户需求为第一目标。虎诉拥有深厚的法律功底、丰富的实战经验及与众不同的商业化思维，致力于为客户提供专业的法律服务、精准的商业解决方案及良好的用户体验。 以下为ALB关于虎诉的报道原文。",
       "content": [
@@ -1415,7 +1431,7 @@ export const events: EventItem[] = [
       "Tiger Partners discussed how game companies can use legal measures to combat unauthorized private servers and protect the legitimate rights of original game operators."
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "虎眼观察 | 该出手时就出手——谈谈游戏公司如何重拳打击私服",
       "summary": "当今精彩纷呈的世界，“游戏”，尤其是“网络游戏”早已被社会公众所认识。游戏公司也成为了巨无霸，拥有着庞大的玩家群体，获得了巨大的现金流。",
       "content": [
@@ -1456,7 +1472,7 @@ export const events: EventItem[] = [
       "Tiger Partners analyzed whether contracts may be terminated, suspended or extended due to the COVID-19 pandemic and highlighted practical points for businesses and investors."
     ],
     "zh": {
-      "category": "????",
+      "category": "",
       "title": "虎眼观察 | 疫情之下，合同终止或延期需三思而后行",
       "summary": "当前全国人民同病毒正在激战，我们坚信COVID-19终将败退。而疫情对经济生产的影响正被越来越多地关注。不可否认的是，第三产企业正面临着严峻考验，尤其是服务于餐饮、旅游、影视娱乐、线下教育等行业的企业，以及服务这些企业的金融机构、投资基金。疫情导致很多此类企业难以继续履行原有的业务合同，很多企业希望以法律上的不可抗力或情势变更为由，延缓甚至免除一定的合同义务。但是能否主张延期、变更或终止合同以减少损失，企业和投资人仍应结合自身情况具体判断。本文将重点探讨疫情之下及疫情过后的企业应对这一问题的注意要点。",
       "content": [
@@ -1482,6 +1498,53 @@ export const events: EventItem[] = [
     }
   }
 ];
+
+const eventDatesFromEnglishSource = new Set([
+  "20231117",
+  "20230406",
+  "20230329",
+  "20221218",
+  "20221108",
+  "20220725",
+  "20220710",
+  "20220616",
+  "20220615",
+  "20220609",
+  "20220517",
+  "20220510",
+  "20220331",
+  "20220322",
+  "20220125",
+  "20220124",
+  "20220120",
+  "20211231",
+  "20211015",
+  "20210720",
+  "20210610",
+  "20210518",
+  "20210416",
+  "20210414",
+  "20210315",
+  "20201014",
+  "20200927",
+  "20200526",
+  "20200311",
+]);
+
+export const events: EventItem[] = [
+  ...[...event2Events].sort((a, b) => getEvent2ImageOrder(a) - getEvent2ImageOrder(b)),
+  ...allEvents
+    .filter((event) => eventDatesFromEnglishSource.has(event.date))
+    .map((event) => {
+      const detailImages = eventInfoImagesByDate[event.date];
+      return detailImages ? { ...event, detailImages } : event;
+    }),
+];
+
+function getEvent2ImageOrder(event: EventItem) {
+  const match = event.image.match(/\/event2\/(\d+)\.(?:jpe?g|png|webp)$/i);
+  return match ? Number(match[1]) : Number.MAX_SAFE_INTEGER;
+}
 
 function normalizeLocalizedCopy(copy: EventCopy): EventCopy {
   const titleSeparator = copy.title.includes("｜") ? "｜" : "|";
@@ -1513,11 +1576,17 @@ export function localizeEvent(event: EventItem, language: "en" | "zh"): Localize
   };
 }
 
-export function formatEventDate(date: string) {
+export function formatEventDate(date: string, language: "en" | "zh" = "en") {
   const year = date.slice(0, 4);
-  const month = Number(date.slice(4, 6));
-  const day = Number(date.slice(6, 8));
+  const rawMonth = date.slice(4, 6);
+  const rawDay = date.slice(6, 8);
+  const month = Number(rawMonth);
+  const day = Number(rawDay);
   const monthNames = ["Jan.", "Feb.", "Mar.", "Apr.", "May.", "Jun.", "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."];
+
+  if (language === "zh") {
+    return `${year}.${rawMonth}.${rawDay}`;
+  }
 
   return `${monthNames[month - 1]} ${day}, ${year}`;
 }

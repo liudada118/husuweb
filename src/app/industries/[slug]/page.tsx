@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { IndustryDetailPage } from "@/components/pages/IndustryDetailPage";
 import {
   defaultIndustryMetadata,
@@ -27,5 +28,9 @@ export function generateStaticParams() {
 export default async function Page({ params }: PageProps) {
   const { slug } = await params;
 
-  return <IndustryDetailPage slug={slug} />;
+  return (
+    <Suspense>
+      <IndustryDetailPage slug={slug} />
+    </Suspense>
+  );
 }

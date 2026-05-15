@@ -21,7 +21,7 @@ export function ContactPage() {
           alt=""
           loading="eager"
           fetchPriority="high"
-          className="absolute inset-x-0 top-0 h-[40rem] w-full object-cover opacity-45"
+          className="absolute left-1/2 top-0 block h-[40rem] w-screen min-w-full max-w-none -translate-x-1/2 object-cover opacity-45 md:left-0 md:w-full md:translate-x-0"
         />
         <div className="absolute inset-x-0 top-0 h-[40rem] bg-gradient-to-b from-black/55 via-[#171717]/35 to-transparent" />
         <div className="absolute inset-x-0 top-0 h-[40rem] bg-gradient-to-b from-[#1e1e1e] to-[#d9b27a]/25 mix-blend-color-dodge" />
@@ -29,7 +29,7 @@ export function ContactPage() {
         <SiteHeader active="CONTACT" />
 
         <div className={`${contactShell} relative z-10 pt-[calc(var(--header-height)+7rem)]`}>
-          <h1 className="text-[clamp(4rem,5vw,6rem)] font-medium italic leading-none tracking-[-0.03em] text-[#d9b27a]">
+          <h1 className="text-[3.25rem] font-medium italic leading-none tracking-[-0.03em] text-[#d9b27a] md:text-[clamp(4rem,5vw,6rem)]">
             {pick(language, copy.contact.title)}
           </h1>
           <p className="mt-12 max-w-[90rem] text-pretty text-[clamp(1.5rem,1.875vw,2.25rem)] font-light leading-relaxed tracking-[0.04em] text-[#868686]">
@@ -42,16 +42,12 @@ export function ContactPage() {
       <section className="relative w-full overflow-hidden">
         <div className="grid min-h-[80vh] grid-cols-1 lg:grid-cols-2">
           <div className="relative flex flex-col justify-center bg-[#A1865F] py-20 pl-5 pr-5 md:pl-[9rem] lg:pr-20">
-            <svg
-              className="pointer-events-none absolute bottom-[60px] left-[-90px] w-[420px] max-w-[72vw] text-[rgba(120,96,58,0.35)] opacity-[0.1] mix-blend-multiply"
-              viewBox="0 0 420 420"
-              fill="none"
-              aria-hidden="true"
-            >
-              <circle cx="210" cy="210" r="168" stroke="currentColor" strokeWidth="18" />
-              <path d="M86 210C126 120 294 120 334 210C294 300 126 300 86 210Z" stroke="currentColor" strokeWidth="18" />
-              <path d="M210 58V362M58 210H362" stroke="currentColor" strokeWidth="14" />
-            </svg>
+            <ImageWithFallback
+              src="/assets/about/bg.png"
+              alt=""
+              loading="lazy"
+              className="pointer-events-none absolute bottom-[3.75rem] left-[-2.5rem] w-[15.75rem] max-w-[43.2vw] opacity-10 mix-blend-multiply"
+            />
             <h2 className="relative text-[clamp(2.5rem,2.708vw,3.25rem)] font-semibold leading-none text-black">
               {pick(language, copy.contact.cardTitle)}
             </h2>

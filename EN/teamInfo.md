@@ -275,9 +275,9 @@ zoelizhang@tigerpartners.cn
 International Trade,Private Equity,Finance
 Educational Background
 
-Bachelor of Laws & Bachelor of English (Double Degree), Beijing Foreign Studies University
+Bachelor of Laws & Bachelor of English (Double Degree), Beijing Foreign Studies University , 2007
 
-Master of Laws, Beijing Foreign Studies University
+Master of Laws, Beijing Foreign Studies University , 2010 
 
 2018 Bar Council Training Scheme
 

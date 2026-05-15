@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { getStoredReturnHref } from "@/lib/returnPosition";
 
 export function SubpageBreadcrumb({
   parentLabel,
@@ -19,7 +20,7 @@ export function SubpageBreadcrumb({
       return;
     }
 
-    router.push(fallbackHref);
+    router.push(getStoredReturnHref(fallbackHref));
   }
 
   return (
