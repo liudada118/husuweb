@@ -45,6 +45,23 @@ export interface SiteSettings {
   footerEmail: string;
   footerPhone: string;
   footerQuote: string;
+  footerTaglineEn: string;
+  footerTaglineZh: string;
+  footerAddressEn: string;
+  footerAddressZh: string;
+  footerRightsEn: string;
+  footerRightsZh: string;
+  footerDisclaimerLabelEn: string;
+  footerDisclaimerLabelZh: string;
+  footerPublicSecurityText: string;
+  footerPublicSecurityUrl: string;
+  footerIcpText: string;
+  footerIcpUrl: string;
+  footerWechatIconUrl: string;
+  footerAddressIconUrl: string;
+  footerPhoneIconUrl: string;
+  footerEmailIconUrl: string;
+  footerChinaIconUrl: string;
   navigation: SiteNavigationItem[];
   socialLinks: SiteSocialLink[];
   homeCarousel: HomeCarouselItem[];
@@ -65,6 +82,23 @@ export const defaultSiteSettings: SiteSettings = {
   footerEmail: "contact@tigerpartners.cn",
   footerPhone: "010-85885228",
   footerQuote: "WE KNOW HOW TO WIN",
+  footerTaglineEn: "Always pursuing the extreme and seeking the perfection,\nAlways aiming at winning lawsuits and\nFulling clients' business goals",
+  footerTaglineZh: "\u59cb\u7ec8\u8ffd\u6c42\u6781\u81f4\u4e0e\u5b8c\u7f8e\uff0c\u4e00\u5207\u4ee5\u80dc\u8bc9\u548c\u5ba2\u6237\u7684\u5546\u4e1a\u76ee\u6807\u4e3a\u5bfc\u5411",
+  footerAddressEn: "Suite 01, 25F, Tower A, Sino-Ocean International Center, 56 East 4th Ring Middle Road, Chaoyang District, Beijing\n100025, China",
+  footerAddressZh: "\u5317\u4eac\u5e02\u671d\u9633\u533a\u4e1c\u56db\u73af\u4e2d\u8def56\u53f7\u8fdc\u6d0b\u56fd\u9645\u4e2d\u5fc3A\u5ea72501\u5ba4\uff0c\u90ae\u7f16\uff1a100025",
+  footerRightsEn: "All Rights Reserved \u00a9 2019 Tiger Partners",
+  footerRightsZh: "\u7248\u6743\u6240\u6709\u00a9 2019 \u864e\u8bc9\u5f8b\u5e08\u4e8b\u52a1\u6240",
+  footerDisclaimerLabelEn: "Disclaimer and Privacy",
+  footerDisclaimerLabelZh: "Disclaimer and Privacy",
+  footerPublicSecurityText: "\u4eac\u516c\u7f51\u5b89\u5907 11010502052714\u53f7",
+  footerPublicSecurityUrl: "https://beian.mps.gov.cn/#/query/webSearch",
+  footerIcpText: "\u4eacICP\u590720002490\u53f7",
+  footerIcpUrl: "https://beian.miit.gov.cn/#/Integrated/index",
+  footerWechatIconUrl: "/assets/foot/weixin.png",
+  footerAddressIconUrl: "/assets/foot/address.png",
+  footerPhoneIconUrl: "/assets/foot/phone.png",
+  footerEmailIconUrl: "/assets/foot/email.png",
+  footerChinaIconUrl: "/assets/foot/china.png",
   navigation: [
     { id: "home", href: "/", labelZh: "首页", labelEn: "HOME", visible: true, order: 10 },
     { id: "about", href: "/about", labelZh: "关于我们", labelEn: "ABOUT US", visible: true, order: 20 },

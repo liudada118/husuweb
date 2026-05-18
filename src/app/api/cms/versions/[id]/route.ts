@@ -1,9 +1,26 @@
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 import { requireCmsApiUser } from "@/lib/cms-api-auth";
 import { getVersionEditorData, listVersions, updateVersionPayload } from "@/lib/cms-db";
 import type { CmsVersionPayload } from "@/lib/cms-types";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
+function revalidateOfficialPages() {
+  revalidatePath("/");
+  revalidatePath("/about");
+  revalidatePath("/about/core-value");
+  revalidatePath("/events");
+  revalidatePath("/events/[slug]", "page");
+  revalidatePath("/industries");
+  revalidatePath("/industries/[slug]", "page");
+  revalidatePath("/team");
+  revalidatePath("/team/[slug]", "page");
+  revalidatePath("/contact");
+  revalidatePath("/api/cms/public");
+  revalidatePath("/cms");
+}
 
 function parseVersionId(id: string) {
   const versionId = Number(id);
@@ -63,12 +80,17 @@ export async function PUT(
     return NextResponse.json({ message: "版本内容不能为空。" }, { status: 400 });
   }
 
-  updateVersionPayload({
+  const result = updateVersionPayload({
     versionId,
     payload: payload.payload,
     name: payload.name,
     description: payload.description,
+    updatedBy: auth.user.id,
   });
 
-  return NextResponse.json({ ok: true, versions: listVersions() });
+  if (result.appliedToCurrentSite) {
+    revalidateOfficialPages();
+  }
+
+  return NextResponse.json({ ok: true, versions: listVersions(), appliedToCurrentSite: result.appliedToCurrentSite });
 }

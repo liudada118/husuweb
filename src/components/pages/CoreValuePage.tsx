@@ -6,6 +6,8 @@ import { CoreValueScrollFlow } from "@/components/sections/core-value/CoreValueS
 import { BackToTop } from "@/components/shared/BackToTop";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
 import { SubpageBreadcrumb } from "@/components/shared/SubpageBreadcrumb";
+import { getPreviewPageField } from "@/cms/preview-page-content";
+import { usePublicCms } from "@/cms/PublicCmsProvider";
 import { pick, useLanguage } from "@/i18n/LanguageProvider";
 import { copy } from "@/i18n/copy";
 
@@ -17,11 +19,15 @@ const valueImages = {
 
 function CoreValueHero() {
   const { language } = useLanguage();
+  const cms = usePublicCms();
+  const title = getPreviewPageField(cms, language, "coreValue", "hero", "title", pick(language, copy.coreValue.title));
+  const heroImage = getPreviewPageField(cms, language, "coreValue", "hero", "image", valueImages.hero);
+  const breadcrumb = getPreviewPageField(cms, language, "coreValue", "hero", "breadcrumb", pick(language, copy.coreValue.breadcrumb));
 
   return (
     <section className="relative h-[28rem] w-full overflow-hidden md:h-[32rem] lg:h-[35rem]">
       <ImageWithFallback
-        src={valueImages.hero}
+        src={heroImage}
         alt=""
         loading="eager"
         fetchPriority="high"
@@ -32,13 +38,13 @@ function CoreValueHero() {
 
       <div className="site-shell relative z-10 flex h-full flex-col justify-center pt-[var(--header-height)]">
         <SubpageBreadcrumb
-          parentLabel={pick(language, copy.coreValue.breadcrumb)}
-          currentLabel={pick(language, copy.coreValue.title)}
+          parentLabel={breadcrumb}
+          currentLabel={title}
           fallbackHref="/about"
         />
         <div className="mt-12 h-[3px] w-16 bg-[#d9b27a]" />
         <h1 className="mt-10 text-[3rem] font-semibold leading-[0.9] text-[#d9b27a] md:mt-12 md:text-[clamp(3rem,7vw,6rem)]">
-          {pick(language, copy.coreValue.title)}
+          {title}
         </h1>
       </div>
     </section>
@@ -76,6 +82,8 @@ function QuoteIcon({ flip }: { flip?: boolean }) {
 
 function ClosingStatement() {
   const { language } = useLanguage();
+  const cms = usePublicCms();
+  const closing = getPreviewPageField(cms, language, "coreValue", "closing", "body", pick(language, copy.coreValue.closing));
 
   return (
     <section className="relative">
@@ -83,7 +91,7 @@ function ClosingStatement() {
         <div className="flex items-start gap-4 lg:gap-8">
           <QuoteIcon />
           <p className="flex-1 text-center text-[clamp(1rem,1.4vw,1.5rem)] leading-[1.875] tracking-[0.02em] text-[#d1d5dc]">
-            {pick(language, copy.coreValue.closing)}
+            {closing}
           </p>
           <QuoteIcon flip />
         </div>

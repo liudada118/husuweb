@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import { TeamProfilePage } from "@/components/pages/TeamProfilePage";
-import { getTeamProfile, teamProfiles } from "@/data/teamProfiles";
+import { createEmptyTeamProfile, getTeamProfile, teamProfiles } from "@/data/teamProfiles";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -32,9 +31,7 @@ export function generateStaticParams() {
 
 export default async function Page({ params }: PageProps) {
   const { slug } = await params;
-  const profile = getTeamProfile(slug);
-
-  if (!profile) notFound();
+  const profile = getTeamProfile(slug) ?? createEmptyTeamProfile(slug);
 
   return <TeamProfilePage profile={profile} />;
 }

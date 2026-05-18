@@ -3,12 +3,19 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
+import { getPreviewPageField } from "@/cms/preview-page-content";
+import { usePublicCms } from "@/cms/PublicCmsProvider";
 import { pick, useLanguage } from "@/i18n/LanguageProvider";
 import { copy } from "@/i18n/copy";
 import { rememberReturnPosition } from "@/lib/returnPosition";
 
 export function Culture() {
   const { language } = useLanguage();
+  const cms = usePublicCms();
+  const cultureTitle = getPreviewPageField(cms, language, "about", "culture", "title", pick(language, copy.about.cultureTitle));
+  const cultureBody = getPreviewPageField(cms, language, "about", "culture", "body", pick(language, copy.about.cultureSubtitle));
+  const cultureCtaLabel = getPreviewPageField(cms, language, "about", "culture", "ctaLabel", pick(language, copy.about.cultureCta));
+  const cultureCtaHref = getPreviewPageField(cms, language, "about", "culture", "ctaHref", "/about/core-value");
 
   return (
     <section className="relative mt-32 w-full overflow-hidden">
@@ -34,17 +41,17 @@ export function Culture() {
             className="pointer-events-none absolute bottom-[3.75rem] right-[-2.5rem] w-[15.75rem] max-w-[43.2vw] opacity-10 mix-blend-multiply"
           />
           <h2 className="relative text-[clamp(2.5rem,2.708vw,3.25rem)] font-semibold leading-none text-black">
-            {pick(language, copy.about.cultureTitle)}
+            {cultureTitle}
           </h2>
           <p className="relative mt-10 max-w-[48rem] text-justify text-[clamp(1.25rem,1.46vw,1.75rem)] italic leading-relaxed text-black">
-            {pick(language, copy.about.cultureSubtitle)}
+            {cultureBody}
           </p>
           <Link
-            href="/about/core-value"
+            href={cultureCtaHref}
             onClick={rememberReturnPosition}
             className="group relative mt-10 inline-flex items-center gap-4 self-start border border-[#D9B27A] bg-[#D9B27A] px-9 py-4 text-[1.125rem] font-medium uppercase tracking-[0.08em] text-white transition-all duration-500 hover:bg-transparent hover:text-black"
           >
-            {pick(language, copy.about.cultureCta)}
+            {cultureCtaLabel}
             <ArrowRight className="size-4 transition-transform duration-500 group-hover:translate-x-2" strokeWidth={1.5} />
           </Link>
         </div>

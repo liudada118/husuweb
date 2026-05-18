@@ -7,7 +7,11 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
 import { PageTriangle } from "@/components/shared/PageTriangle";
-import { events as eventItems, formatEventDate, localizeEvent } from "@/data/events";
+import { localizeCmsEvent } from "@/cms/events";
+import { getPreviewPageField } from "@/cms/preview-page-content";
+import { usePublicCms } from "@/cms/PublicCmsProvider";
+import type { OfficialCmsEventOverride, OfficialCmsHonorYear } from "@/cms/official-state";
+import { events as eventItems, formatEventDate } from "@/data/events";
 import { pick, useLanguage } from "@/i18n/LanguageProvider";
 import { copy } from "@/i18n/copy";
 import { assetUrl } from "@/lib/assets";
@@ -16,36 +20,42 @@ import { rememberReturnPosition, useRestoreReturnPosition } from "@/lib/returnPo
 const industries = [
   {
     name: "Private Equity",
+    zhName: "私募股权",
     slug: "private-equity",
     img: "/assets/home/INDUSTRIES1.webp",
     cls: "lg:col-span-2",
   },
   {
     name: "Finance",
+    zhName: "金融",
     slug: "finance",
     img: "/assets/home/INDUSTRIES2.webp",
     cls: "lg:col-span-1",
   },
   {
     name: "Real Estate",
+    zhName: "房地产",
     slug: "real-estate",
     img: "/assets/home/INDUSTRIES3.webp",
     cls: "lg:col-span-1 lg:row-span-2",
   },
   {
     name: "Sports and E-Sports",
+    zhName: "体育和电子竞技",
     slug: "sports-and-e-sports",
     img: "/assets/home/INDUSTRIES4.webp",
     cls: "lg:col-span-1",
   },
   {
     name: "International Trade",
+    zhName: "国际贸易",
     slug: "international-trade",
     img: "/assets/home/INDUSTRIES5.webp",
     cls: "lg:col-span-1",
   },
   {
     name: "Cyber Tech and Game",
+    zhName: "互联网科技及游戏",
     slug: "cyber-tech-and-game",
     img: "/assets/home/INDUSTRIES6.png",
     cls: "lg:col-span-2",
@@ -411,21 +421,47 @@ function formatHomeEventDate(date: string, language: "en" | "zh") {
   return formatEventDate(date, language);
 }
 
-function getHomeEvents(language: "en" | "zh") {
-  return homeEventSlugs
-    .map((slug) => eventItems.find((event) => event.slug === slug))
-    .filter((event): event is NonNullable<typeof event> => Boolean(event))
-    .map((event) => {
-      const localized = localizeEvent(event, language);
+function getHomeEvents(
+  language: "en" | "zh",
+  managedSlugs?: string[],
+  homeOverrides?: Record<string, OfficialCmsEventOverride>,
+  eventOverrides?: Record<string, OfficialCmsEventOverride>,
+) {
+  const slugs = managedSlugs?.length ? managedSlugs : homeEventSlugs;
+
+  return slugs
+    .map((slug) => {
+      const event = eventItems.find((eventItem) => eventItem.slug === slug);
+      const override = homeOverrides?.[slug] ?? eventOverrides?.[slug];
+      const localizedOverride = override?.[language];
+
+      if (!event) {
+        const title = [localizedOverride?.category, localizedOverride?.title].filter(Boolean).join(" | ");
+
+        return title || override?.image
+          ? {
+              slug,
+              href: override?.href || "/events",
+              title,
+              date: localizedOverride?.displayDate || "",
+              img: override?.image || "",
+              desc: localizedOverride?.summary || "",
+            }
+          : null;
+      }
+
+      const localized = localizeCmsEvent(event, language, override);
 
       return {
         slug: event.slug,
+        href: override?.href || `/events/${event.slug}?from=home`,
         title: [localized.localizedCategory, localized.localizedTitle].filter(Boolean).join(" | "),
-        date: formatHomeEventDate(event.date, language),
-        img: event.image,
+        date: localizedOverride?.displayDate || formatHomeEventDate(event.date, language),
+        img: localized.image,
         desc: localized.localizedSummary,
       };
-    });
+    })
+    .filter((event): event is NonNullable<typeof event> => Boolean(event));
 }
 
 const pngLogoIndexes = new Set([5, 8, 10, 11, 14, 16, 18, 19, 22, 41]);
@@ -443,18 +479,162 @@ const logoRows = [
   clientLogos.slice(29),
 ];
 
+function applyYearList<T extends { year: string }>(items: T[], years?: string[]) {
+  if (!years?.length) return items;
+
+  const byYear = new Map(items.map((item) => [item.year, item]));
+  const ordered = years.map((year) => byYear.get(year)).filter((item): item is T => Boolean(item));
+  return ordered.length ? ordered : items;
+}
+
+function homeHonorItemId(year: string, index: number, date: string) {
+  return `${year}-${index + 1}-${date || "award"}`;
+}
+
+function applyHomeHonorItemList(items: HomeHonorYear[], itemIds?: string[]) {
+  if (!itemIds?.length) return null;
+
+  const entries = items.flatMap((yearItem) =>
+    yearItem.honors.map((honor, index) => ({
+      id: homeHonorItemId(yearItem.year, index, honor.date),
+      year: yearItem.year,
+      honor,
+    })),
+  );
+  const byId = new Map(entries.map((entry) => [entry.id, entry]));
+  const groups = new Map<string, HomeHonorYear>();
+  const orderedGroups: HomeHonorYear[] = [];
+
+  itemIds.forEach((id) => {
+    const entry = byId.get(id);
+    if (!entry) return;
+
+    let group = groups.get(entry.year);
+    if (!group) {
+      group = { year: entry.year, honors: [] };
+      groups.set(entry.year, group);
+      orderedGroups.push(group);
+    }
+
+    group.honors.push(entry.honor);
+  });
+
+  return orderedGroups.length ? orderedGroups : null;
+}
+
+function localizeCmsHomeHonors(items: OfficialCmsHonorYear[] | undefined, language: "en" | "zh"): HomeHonorYear[] | null {
+  if (!items?.length) return null;
+
+  return items.map((item) => ({
+    year: item.year,
+    honors: item.awards.map((award) => ({
+      title: award.title[language],
+      date: award.date,
+      desc: award.body[language],
+    })),
+  }));
+}
+
+function mergeHomeHonorsWithFallback(cmsItems: HomeHonorYear[] | null, fallbackItems: HomeHonorYear[]) {
+  if (!cmsItems?.length) return fallbackItems;
+
+  const cmsByYear = new Map(cmsItems.map((item) => [item.year, item]));
+
+  return fallbackItems.map((fallbackYear) => {
+    const cmsYear = cmsByYear.get(fallbackYear.year);
+    if (!cmsYear) return fallbackYear;
+
+    const seen = new Set(cmsYear.honors.map((item) => `${item.date}::${item.title}`.toLowerCase()));
+    const mergedHonors = [
+      ...cmsYear.honors,
+      ...fallbackYear.honors.filter((item) => !seen.has(`${item.date}::${item.title}`.toLowerCase())),
+    ];
+
+    return {
+      ...cmsYear,
+      honors: mergedHonors,
+    };
+  });
+}
+
+function splitLogoRows(logos: string[]) {
+  if (logos.length === 0) return logoRows;
+  const rowSize = Math.ceil(logos.length / 3);
+  return [logos.slice(0, rowSize), logos.slice(rowSize, rowSize * 2), logos.slice(rowSize * 2)].filter((row) => row.length);
+}
+
 function mod(value: number, length: number) {
   return (value + length) % length;
 }
 
 export function HomePage() {
   const { language } = useLanguage();
+  const cms = usePublicCms();
   useRestoreReturnPosition();
   const [activeHonor, setActiveHonor] = useState(0);
   const [honorWindowStart, setHonorWindowStart] = useState(0);
   const [activeEvent, setActiveEvent] = useState(0);
-  const homeHonors = language === "zh" ? withZhHomeSponsorHonors(zhHomeHonorsByYear) : honorsByYear;
-  const homeEvents = getHomeEvents(language);
+  const cmsHomeHonors = localizeCmsHomeHonors(cms?.content?.honors, language);
+  const fallbackHomeHonors = language === "zh" ? withZhHomeSponsorHonors(zhHomeHonorsByYear) : honorsByYear;
+  const mergedHomeHonors = mergeHomeHonorsWithFallback(cmsHomeHonors, fallbackHomeHonors);
+  const homeHonors =
+    applyHomeHonorItemList(mergedHomeHonors, cms?.lists?.homeHonorItems) ??
+    applyYearList(mergedHomeHonors, cms?.lists?.homeHonorYears ?? cms?.lists?.honorYears);
+  const homeEvents = getHomeEvents(language, cms?.home.eventSlugs, cms?.home.eventOverrides, cms?.events.overrides);
+  const homeIndustries = cms?.lists?.industries?.length ? cms.lists.industries : industries;
+  const managedLogoRows = splitLogoRows(cms?.lists?.clientLogos ?? clientLogos);
+  const heroTitle = getPreviewPageField(cms, language, "home", "hero", "title", cms?.home.heroTitle?.[language] || "WE KNOW HOW TO WIN");
+  const heroVideo = getPreviewPageField(cms, language, "home", "hero", "video", cms?.home.heroVideo || "/assets/home/海浪0508.mp4");
+  const normalizeHomeField = (value: string, fallback: string, staleValues: string[]) =>
+    staleValues.includes(value.trim()) ? fallback : value;
+  const visionBody = normalizeHomeField(
+    getPreviewPageField(cms, language, "home", "vision", "body", pick(language, copy.home.vision.body).join("\n")),
+    pick(language, copy.home.vision.body).join("\n"),
+    ["We are committed to be one of the extraordinary dispute resolution law firms in the Asia Pacific Region."],
+  );
+  const visionLines = visionBody.split(/\r?\n/).filter(Boolean);
+  const visionTitle = normalizeHomeField(
+    getPreviewPageField(cms, language, "home", "vision", "title", pick(language, copy.home.vision.title)),
+    pick(language, copy.home.vision.title),
+    ["Vision"],
+  );
+  const visionCtaLabel = getPreviewPageField(cms, language, "home", "vision", "ctaLabel", pick(language, copy.home.vision.cta));
+  const visionCtaHref = getPreviewPageField(cms, language, "home", "vision", "ctaHref", "/about");
+  const industriesTitle = normalizeHomeField(
+    getPreviewPageField(cms, language, "home", "industries", "title", pick(language, copy.home.industries.title)),
+    pick(language, copy.home.industries.title),
+    ["Industries", "INDUSTRIES"],
+  );
+  const industriesSubtitle = normalizeHomeField(
+    getPreviewPageField(cms, language, "home", "industries", "body", pick(language, copy.home.industries.subtitle)),
+    pick(language, copy.home.industries.subtitle),
+    ["Tiger Partners offers targeted legal services based on industry characteristics, covering dispute resolution, compliance, civil-criminal crossover matters, and corporate legal consulting."],
+  );
+  const honorsTitle = getPreviewPageField(cms, language, "home", "honors", "title", pick(language, copy.home.honors.title));
+  const honorsSubtitle = normalizeHomeField(
+    getPreviewPageField(cms, language, "home", "honors", "subtitle", pick(language, copy.home.honors.subtitle).join("\n")),
+    pick(language, copy.home.honors.subtitle).join("\n"),
+    ["Tiger Partners is favored and recognized by multiple authoritative legal directories and awarding organizations all over the world."],
+  );
+  const honorsCtaLabel = getPreviewPageField(cms, language, "home", "honors", "ctaLabel", pick(language, copy.common.seeMore));
+  const honorsCtaHref = getPreviewPageField(cms, language, "home", "honors", "ctaHref", "/about#honors");
+  const eventsTitle = normalizeHomeField(
+    getPreviewPageField(cms, language, "home", "events", "title", pick(language, copy.home.events.title)),
+    pick(language, copy.home.events.title),
+    ["EVENTS"],
+  );
+  const eventsSubtitle = normalizeHomeField(
+    getPreviewPageField(cms, language, "home", "events", "subtitle", pick(language, copy.home.events.subtitle).join("\n")),
+    pick(language, copy.home.events.subtitle).join("\n"),
+    ["Latest Tiger Partners updates and professional insights."],
+  );
+  const eventsCtaLabel = getPreviewPageField(cms, language, "home", "events", "ctaLabel", pick(language, copy.common.seeMore));
+  const eventsCtaHref = getPreviewPageField(cms, language, "home", "events", "ctaHref", "/events");
+  const clientsTitle = normalizeHomeField(
+    getPreviewPageField(cms, language, "home", "clients", "title", pick(language, copy.home.clients.title)),
+    pick(language, copy.home.clients.title),
+    ["OUR CLIENTS"],
+  );
   const honor = homeHonors[activeHonor];
   const honorWindowSize = Math.min(5, homeHonors.length);
   const visibleHonorIndexes = Array.from({ length: honorWindowSize }, (_, offset) =>
@@ -503,7 +683,7 @@ export function HomePage() {
         <div className="absolute inset-0">
           <video
             className="absolute left-1/2 top-0 block h-full w-screen min-w-full max-w-none -translate-x-1/2 object-cover opacity-90 md:left-0 md:w-full md:translate-x-0"
-            src={assetUrl("/assets/home/海浪0508.mp4")}
+            src={assetUrl(heroVideo)}
             autoPlay
             muted
             loop
@@ -519,7 +699,7 @@ export function HomePage() {
             aria-hidden="true"
             className="hero-flow-text max-w-none whitespace-nowrap text-center text-[clamp(1.8rem,7vw,3rem)] font-bold leading-none tracking-[0.02em] md:text-[6.25rem] md:tracking-[0.06em]"
           >
-            WE KNOW HOW TO WIN
+            {heroTitle}
           </p>
         </div>
       </section>
@@ -539,7 +719,7 @@ export function HomePage() {
             <p className={`relative z-10 max-w-[84rem] leading-[1.45] ${language === "zh" ? "text-[2rem]" : "text-[2.5rem]"}`}>
               {language === "en" ? (
                 <>
-                  {copy.home.vision.body.en.map((line, index, lines) => (
+                  {visionLines.map((line, index, lines) => (
                     <span key={line} className={index === 0 ? "font-light italic" : "font-bold"}>
                       {line}
                       {index < lines.length - 1 ? <br /> : null}
@@ -547,14 +727,14 @@ export function HomePage() {
                   ))}
                 </>
               ) : (
-                <span className="font-bold">{copy.home.vision.body.zh[0]}</span>
+                <span className="font-bold">{visionBody}</span>
               )}
             </p>
             <Link
-              href="/about"
+              href={visionCtaHref}
               className="group relative z-10 mt-10 inline-flex w-max items-center gap-4 border border-white !bg-white px-9 py-4 text-[1.5rem] font-semibold uppercase tracking-[0.08em] !text-[#09090b] transition-all duration-500 hover:!bg-transparent hover:!text-white"
             >
-              {pick(language, copy.home.vision.cta)}
+              {visionCtaLabel}
               <ArrowRight className="size-4 transition-transform duration-500 group-hover:translate-x-2" strokeWidth={1.5} />
             </Link>
             <div
@@ -566,7 +746,7 @@ export function HomePage() {
                   language === "zh" ? "text-[7rem]" : "text-[8.75rem]"
                 }`}
               >
-                {pick(language, copy.home.vision.title)}
+                {visionTitle}
               </span>
             </div>
           </div>
@@ -576,23 +756,16 @@ export function HomePage() {
       <section id="industries" className="site-shell relative bg-[#171717] py-20 lg:py-28 [&>*]:relative [&>*]:z-10">
         <div className="mb-12 flex flex-col gap-6 lg:mb-16">
           <h2 className="bg-gradient-to-r from-[#f6ebe4] to-[#d9b27a] bg-clip-text text-[5.625rem] font-light leading-[0.95] text-transparent">
-            {language === "en" ? (
-              <>
-                INDUSTRIES <span className="font-semibold">&amp;</span>{" "}
-                <span className="font-semibold">SERVICES</span>
-              </>
-            ) : (
-              pick(language, copy.home.industries.title)
-            )}
+            {industriesTitle}
           </h2>
           <p className="w-full text-pretty text-[1.75rem] font-light italic leading-relaxed text-[#cfd5df]/80">
-            {pick(language, copy.home.industries.subtitle)}
+            {industriesSubtitle}
           </p>
           <div className="h-px w-full bg-[#6f6f6f]/70" />
         </div>
 
         <div className="grid auto-rows-[18rem] grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:auto-rows-[20rem]">
-          {industries.map((item, index) => (
+          {homeIndustries.map((item, index) => (
             <Link
               key={item.name}
               href={`/industries/${item.slug}?from=home`}
@@ -609,7 +782,7 @@ export function HomePage() {
               <div className="absolute inset-0 bg-[#09090b]/55 transition-colors duration-700 group-hover:bg-[#09090b]/25" />
               <div className="absolute inset-x-0 bottom-0 z-10 border-t border-white/10 bg-gradient-to-t from-[#101010] via-[#101010]/92 to-transparent p-7">
                 <h3 className="flex items-center justify-between gap-5 text-balance text-[2.25rem] font-light leading-tight">
-                  {industryLabels[index] ?? item.name}
+                  {language === "zh" ? item.zhName || industryLabels[index] || item.name : item.name}
                   <ArrowRight
                     className="size-5 shrink-0 -translate-x-4 text-[#d9b27a] opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100"
                     strokeWidth={1.5}
@@ -624,10 +797,10 @@ export function HomePage() {
       <section className="relative py-20 lg:py-28 [&>*]:relative [&>*]:z-10" style={{ background: "linear-gradient(170deg, #242424 9%, #383838 113%)" }}>
         <div className="site-shell">
           <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[auto_1fr]">
-            <h2 className="gold-title max-w-full pb-3 text-[4rem] font-light leading-[1.12] md:text-[6.875rem]">{pick(language, copy.home.honors.title)}</h2>
+            <h2 className="gold-title max-w-full pb-3 text-[4rem] font-light leading-[1.12] md:text-[6.875rem]">{honorsTitle}</h2>
             <div className="lg:text-right">
               <p className="text-pretty text-[1.15rem] font-light italic capitalize leading-relaxed text-[#cfd5df]/70 md:text-[1.75rem] md:leading-[2.375rem]">
-                {pick(language, copy.home.honors.subtitle).map((line, index, lines) => (
+                {honorsSubtitle.split(/\r?\n/).filter(Boolean).map((line, index, lines) => (
                   <span key={line} className="block">
                     {line}
                     {index < lines.length - 1 ? " " : null}
@@ -696,10 +869,10 @@ export function HomePage() {
 
           <div className="mt-8 flex justify-center">
             <Link
-              href="/about#honors"
+              href={honorsCtaHref}
               className="group inline-flex items-center gap-4 border-b-2 border-[#d9b27a] pb-2 text-[1.5rem] font-semibold uppercase tracking-[0.12em] text-[#d9b27a] transition-all duration-300 hover:translate-x-1 hover:border-white hover:text-white"
             >
-              {pick(language, copy.common.seeMore)}
+              {honorsCtaLabel}
               <ArrowRight className="size-5 transition-transform duration-300 group-hover:translate-x-2" strokeWidth={1.5} />
             </Link>
           </div>
@@ -708,9 +881,9 @@ export function HomePage() {
 
       <section id="events" className="site-shell relative bg-[#171717] py-20 lg:py-28 [&>*]:relative [&>*]:z-10">
         <div className="grid grid-cols-1 items-end gap-6 lg:grid-cols-[auto_1fr]">
-          <h2 className="text-[4rem] leading-none md:text-[7.5rem]">{pick(language, copy.home.events.title)}</h2>
+          <h2 className="text-[4rem] leading-none md:text-[7.5rem]">{eventsTitle}</h2>
           <p className="text-[1.15rem] capitalize leading-relaxed tracking-[0.04em] text-[#cfd5df]/70 md:text-[1.75rem] md:leading-[2.125rem] lg:text-right">
-            {pick(language, copy.home.events.subtitle).map((line) => (
+            {eventsSubtitle.split(/\r?\n/).filter(Boolean).map((line) => (
               <span key={line} className="block">
                 {line}
               </span>
@@ -751,7 +924,7 @@ export function HomePage() {
 
             return (
               <Link
-                href={`/events/${event.slug}?from=home`}
+                href={event.href}
                 onClick={rememberReturnPosition}
                 key={event.slug}
                 className={`absolute top-4 w-[62.1875rem] max-w-[calc(100vw-2.5rem)] cursor-pointer overflow-visible rounded-none bg-transparent p-0 text-left shadow-2xl shadow-black/40 transition-all duration-700 ease-out md:max-w-full ${
@@ -809,7 +982,7 @@ export function HomePage() {
               {homeEvents.map((event, index) => (
                 <button
                   type="button"
-                  key={event.date}
+                  key={`${event.slug}-${index}`}
                   onClick={() => setActiveEvent(index)}
                   className={`h-2 rounded-full transition-all duration-500 ${
                     index === activeEvent
@@ -831,10 +1004,10 @@ export function HomePage() {
           </div>
           <div className="md:absolute md:right-0 md:top-0">
             <Link
-              href="/events"
+              href={eventsCtaHref}
               className="group inline-flex items-center gap-3 border-b-2 border-[#d9b27a] pb-2 text-[1.5rem] font-semibold uppercase tracking-[0.12em] text-[#d9b27a] transition-all duration-300 hover:translate-x-1 hover:border-white hover:text-white"
             >
-              {pick(language, copy.common.seeMore)}
+              {eventsCtaLabel}
               <ArrowRight className="size-5 transition-transform duration-300 group-hover:translate-x-2" strokeWidth={1.5} />
             </Link>
           </div>
@@ -844,12 +1017,12 @@ export function HomePage() {
       <section className="relative overflow-hidden bg-[#202020] py-20 lg:py-28 [&>*]:relative [&>*]:z-10">
         <div className="w-full pl-[5rem] pr-[var(--shell-md)]">
           <h2 className="max-w-[62rem] text-balance text-[2.25rem] font-medium uppercase leading-snug">
-            {pick(language, copy.home.clients.title)}
+            {clientsTitle}
           </h2>
         </div>
 
         <div className="relative mt-12 space-y-5">
-          {logoRows.map((row, rowIndex) => (
+          {managedLogoRows.map((row, rowIndex) => (
             <div key={rowIndex} className="client-logo-row overflow-hidden">
               <div
                 className={`client-logo-track flex w-max gap-5 ${rowIndex === 1 ? "client-logo-track-reverse" : ""}`}

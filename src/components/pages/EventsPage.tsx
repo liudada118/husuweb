@@ -7,10 +7,28 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
 import { PageTriangle } from "@/components/shared/PageTriangle";
-import { events, formatEventDate, localizeEvent } from "@/data/events";
+import { localizeCmsEvent } from "@/cms/events";
+import { getPreviewPageField, getPreviewPageItemField, getPreviewPageSectionItems } from "@/cms/preview-page-content";
+import { usePublicCms } from "@/cms/PublicCmsProvider";
+import { events, formatEventDate } from "@/data/events";
 import { pick, useLanguage } from "@/i18n/LanguageProvider";
 import { copy } from "@/i18n/copy";
 import { rememberReturnPosition, useRestoreReturnPosition } from "@/lib/returnPosition";
+
+type EventListCard = {
+  slug: string;
+  category: string;
+  title: string;
+  displayDate: string;
+  sortDate: string;
+  image: string;
+};
+
+function parseSortDate(value: string) {
+  const normalized = value.replace(/\D/g, "");
+  if (normalized.length >= 8) return Number(normalized.slice(0, 8));
+  return 0;
+}
 
 function EventCard({
   slug,
@@ -65,6 +83,7 @@ export function EventsPage() {
   const [showAll, setShowAll] = useState(false);
   const [restoreReady, setRestoreReady] = useState(false);
   const { language } = useLanguage();
+  const cms = usePublicCms();
 
   useEffect(() => {
     if (window.sessionStorage.getItem(eventsShowAllStorageKey) === "true") {
@@ -87,7 +106,51 @@ export function EventsPage() {
 
   useRestoreReturnPosition({ enabled: restoreReady, onRestored: clearEventsReturnState });
 
-  const visibleEvents = (showAll ? events : events.slice(0, 9)).map((event) => localizeEvent(event, language));
+  const pageEventItems = getPreviewPageSectionItems(cms, language, "event", "list");
+  const fallbackPageEventItems = getPreviewPageSectionItems(cms, language === "zh" ? "en" : "zh", "event", "list");
+  const cmsEventCards = pageEventItems
+    .map((item, index): EventListCard | null => {
+      const fallbackItem = fallbackPageEventItems[index];
+      const slug = getPreviewPageItemField(item, "slug", getPreviewPageItemField(fallbackItem, "slug", item.id));
+      const sortDate = getPreviewPageItemField(item, "sortDate", getPreviewPageItemField(item, "date", ""));
+      const displayDate = getPreviewPageItemField(
+        item,
+        "displayDate",
+        sortDate ? formatEventDate(sortDate, language) : getPreviewPageItemField(item, "date", ""),
+      );
+      const title = getPreviewPageItemField(item, "title", getPreviewPageItemField(fallbackItem, "title", ""));
+
+      if (!slug || !title) return null;
+
+      return {
+        slug,
+        sortDate,
+        displayDate,
+        title,
+        category: getPreviewPageItemField(item, "category", getPreviewPageItemField(fallbackItem, "category", "")),
+        image: getPreviewPageItemField(item, "image", getPreviewPageItemField(fallbackItem, "image", "")),
+      };
+    })
+    .filter((item): item is EventListCard => Boolean(item))
+    .sort((a, b) => parseSortDate(b.sortDate) - parseSortDate(a.sortDate));
+  const staticEventCards = events.map((event): EventListCard => {
+    const localizedEvent = localizeCmsEvent(event, language, cms?.events.overrides[event.slug]);
+
+    return {
+      slug: localizedEvent.slug,
+      sortDate: localizedEvent.date,
+      displayDate: formatEventDate(localizedEvent.date, language),
+      category: localizedEvent.localizedCategory,
+      title: localizedEvent.localizedTitle,
+      image: localizedEvent.image,
+    };
+  });
+  const eventSource = cmsEventCards.length ? cmsEventCards : staticEventCards;
+  const visibleEvents = showAll ? eventSource : eventSource.slice(0, 9);
+  const heroTitle = getPreviewPageField(cms, language, "event", "hero", "title", pick(language, copy.eventsPage.title));
+  const heroBody = getPreviewPageField(cms, language, "event", "hero", "body", pick(language, copy.eventsPage.intro));
+  const heroImage = getPreviewPageField(cms, language, "event", "hero", "image", "/assets/event/hero.png");
+  const listTitle = getPreviewPageField(cms, language, "event", "list", "title", "");
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#171717] text-white">
@@ -96,7 +159,7 @@ export function EventsPage() {
       />
       <section className="relative min-h-[100svh] overflow-hidden bg-[#171717]">
         <ImageWithFallback
-          src="/assets/event/hero.png"
+          src={heroImage}
           alt=""
           loading="eager"
           fetchPriority="high"
@@ -107,10 +170,10 @@ export function EventsPage() {
         <div className="relative z-10 flex min-h-[100svh] flex-col items-center justify-center px-5 pt-[var(--header-height)] text-center md:px-[8rem]">
           <div className="flex min-h-[40svh] w-full flex-col items-center justify-center bg-gradient-to-br from-[#56524a] to-[#212121] px-[var(--shell-sm)] md:px-[var(--shell-md)]">
             <h1 className="text-center text-[3.25rem] font-semibold italic leading-none text-[#d9b27a] md:text-[6.25rem]">
-              {pick(language, copy.eventsPage.title)}
+              {heroTitle}
             </h1>
             <p className="mt-6 max-w-[58rem] text-center text-pretty text-[2.25rem] font-normal leading-relaxed text-[#cfd5df]/80">
-              {pick(language, copy.eventsPage.intro)}
+              {heroBody}
             </p>
           </div>
         </div>
@@ -119,14 +182,19 @@ export function EventsPage() {
       <section className="relative">
         <div className="absolute inset-0 bg-[linear-gradient(225deg,rgba(39,39,39,0.42)_0%,rgba(23,23,23,0)_60%)]" />
         <div className="relative mx-5 py-16 md:mx-[6rem] lg:py-24">
+          {listTitle ? (
+            <h2 className="mb-12 text-[3rem] font-semibold italic leading-none text-[#d9b27a] md:text-[4.5rem]">
+              {listTitle}
+            </h2>
+          ) : null}
           <div className="grid grid-cols-1 gap-x-24 gap-y-16 md:grid-cols-2 xl:grid-cols-3">
             {visibleEvents.map((event) => (
               <EventCard
                 key={event.slug}
                 slug={event.slug}
-                category={event.localizedCategory}
-                title={event.localizedTitle}
-                date={formatEventDate(event.date, language)}
+                category={event.category}
+                title={event.title}
+                date={event.displayDate}
                 image={event.image}
                 onRememberReturn={rememberEventsReturnPosition}
               />

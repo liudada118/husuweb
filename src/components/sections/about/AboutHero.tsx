@@ -2,16 +2,22 @@
 
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
 import { VisionCard } from "@/components/sections/about/Vision";
+import { getPreviewPageField } from "@/cms/preview-page-content";
+import { usePublicCms } from "@/cms/PublicCmsProvider";
 import { pick, useLanguage } from "@/i18n/LanguageProvider";
 import { copy } from "@/i18n/copy";
 
 export function AboutHero() {
   const { language } = useLanguage();
+  const cms = usePublicCms();
+  const heroTitle = getPreviewPageField(cms, language, "about", "hero", "title", pick(language, copy.about.heroTitle));
+  const heroBody = getPreviewPageField(cms, language, "about", "hero", "body", pick(language, copy.about.heroIntro).join("\n"));
+  const heroImage = getPreviewPageField(cms, language, "about", "hero", "image", "/assets/about/hero.png");
 
   return (
     <section className="relative w-full overflow-hidden pb-20">
       <ImageWithFallback
-        src="/assets/about/hero.png"
+        src={heroImage}
         alt="building"
         loading="eager"
         fetchPriority="high"
@@ -31,7 +37,7 @@ export function AboutHero() {
               lineHeight: 1,
             }}
           >
-            {pick(language, copy.about.heroTitle)}
+            {heroTitle}
           </h1>
           <p
             className="mt-8 max-w-[74rem] text-balance text-[1.35rem] text-[#1b1b1b] md:text-[2rem]"
@@ -41,7 +47,7 @@ export function AboutHero() {
               lineHeight: 1.4,
             }}
           >
-            {pick(language, copy.about.heroIntro).map((line, index, lines) => (
+            {heroBody.split(/\r?\n/).filter(Boolean).map((line, index, lines) => (
               <span key={line}>
                 {line}
                 {index < lines.length - 1 ? <br /> : null}

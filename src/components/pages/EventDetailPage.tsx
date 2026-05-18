@@ -5,16 +5,66 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { BackToTop } from "@/components/shared/BackToTop";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
 import { SubpageBreadcrumb } from "@/components/shared/SubpageBreadcrumb";
-import { events, formatEventDate, localizeEvent } from "@/data/events";
+import { localizeCmsEvent } from "@/cms/events";
+import { getPreviewPageItemField, getPreviewPageSectionItems } from "@/cms/preview-page-content";
+import { usePublicCms } from "@/cms/PublicCmsProvider";
+import { events, formatEventDate } from "@/data/events";
 import { pick, useLanguage } from "@/i18n/LanguageProvider";
 import { copy } from "@/i18n/copy";
 import { useSearchParams } from "next/navigation";
 
+type EventPageItem = ReturnType<typeof getPreviewPageSectionItems>[number];
+
+function trimTrailingEmptyItems(list: string[]) {
+  const next = [...list];
+
+  while (next.length && !next[next.length - 1]) {
+    next.pop();
+  }
+
+  return next;
+}
+
+function collectDetailMedia(item: EventPageItem | undefined, legacyFieldId: string, pattern: RegExp) {
+  if (!item) return [];
+
+  const list = getPreviewPageItemField(item, legacyFieldId, "")
+    .split(/\r?\n/)
+    .map((value) => value.trim());
+
+  item.fields.forEach((field) => {
+    const match = field.id.match(pattern);
+    if (!match) return;
+
+    list[Number(match[1]) - 1] = field.value.trim();
+  });
+
+  return trimTrailingEmptyItems(list);
+}
+
+function pickCmsDetailMedia(
+  primaryItem: EventPageItem | undefined,
+  secondaryItem: EventPageItem | undefined,
+  legacyFieldId: string,
+  pattern: RegExp,
+  fallback: string[],
+) {
+  const primary = collectDetailMedia(primaryItem, legacyFieldId, pattern);
+  if (primary.some(Boolean)) return primary;
+
+  const secondary = collectDetailMedia(secondaryItem, legacyFieldId, pattern);
+  if (secondary.some(Boolean)) return secondary;
+
+  return fallback;
+}
+
 export function EventDetailPage({ slug }: { slug: string }) {
   const { language } = useLanguage();
+  const cms = usePublicCms();
   const searchParams = useSearchParams();
-  const event = localizeEvent(events.find((item) => item.slug === slug) ?? events[0], language);
-  const fullTitle = [event.localizedCategory, event.localizedTitle].filter(Boolean).join(" | ");
+  const staticEvent = events.find((item) => item.slug === slug);
+  const baseEvent = staticEvent ?? events[0];
+  const event = localizeCmsEvent(baseEvent, language, cms?.events.overrides[slug]);
   const fromHome = searchParams.get("from") === "home";
   const parentLabel = fromHome ? pick(language, copy.nav.home) : pick(language, copy.nav.events);
   const fallbackHref = fromHome ? "/" : "/events";
@@ -22,12 +72,40 @@ export function EventDetailPage({ slug }: { slug: string }) {
   const videoPlaceholderText = "\u6682\u65f6\u65e0\u6cd5\u5728\u98de\u4e66\u6587\u6863\u5916\u5c55\u793a\u6b64\u5185\u5bb9";
   const mediaPlaceholderPattern = new RegExp(`${imagePlaceholderSource}|${videoPlaceholderText}`, "g");
   const cleanText = (text: string) => text.replace(mediaPlaceholderPattern, "").trim();
-  const summary = cleanText(event.localizedSummary);
-  const detailImages = event.detailImages ?? [];
-  const detailVideos = event.detailVideos ?? [];
+  const currentLanguageItems = getPreviewPageSectionItems(cms, language, "event", "detailPages");
+  const fallbackLanguageItems = getPreviewPageSectionItems(cms, language === "zh" ? "en" : "zh", "event", "detailPages");
+  const currentListItems = getPreviewPageSectionItems(cms, language, "event", "list");
+  const fallbackListItems = getPreviewPageSectionItems(cms, language === "zh" ? "en" : "zh", "event", "list");
+  const findItemBySlug = (item: EventPageItem) => getPreviewPageItemField(item, "slug", item.id) === slug;
+  const currentDetailItem = currentLanguageItems.find(findItemBySlug);
+  const fallbackDetailItem = fallbackLanguageItems.find(findItemBySlug);
+  const currentListItem = currentListItems.find(findItemBySlug);
+  const fallbackListItem = fallbackListItems.find(findItemBySlug);
+  const currentPageItem = currentDetailItem ?? currentListItem;
+  const fallbackPageItem = fallbackDetailItem ?? fallbackListItem;
+  const localizedCategory = getPreviewPageItemField(currentPageItem, "category", staticEvent ? event.localizedCategory : "");
+  const localizedTitle = getPreviewPageItemField(currentPageItem, "title", staticEvent ? event.localizedTitle : slug);
+  const localizedSummary = getPreviewPageItemField(currentPageItem, "summary", staticEvent ? event.localizedSummary : "");
+  const localizedContentValue = getPreviewPageItemField(currentPageItem, "content", "");
+  const localizedContent = localizedContentValue.trim()
+    ? localizedContentValue
+        .split(/\n\s*\n/)
+        .map((item) => item.trim())
+        .filter(Boolean)
+    : staticEvent
+      ? event.localizedContent
+      : [];
+  const fullTitle = [localizedCategory, localizedTitle].filter(Boolean).join(" | ");
+  const summary = cleanText(localizedSummary);
+  const normalizeDetailText = (text: string) => cleanText(text).replace(/\s+/g, " ");
+  const summaryForCompare = normalizeDetailText(localizedSummary);
+  const detailImageFieldPattern = /^detailImage(\d+)$/;
+  const detailVideoFieldPattern = /^detailVideo(\d+)$/;
+  const detailImages = pickCmsDetailMedia(currentDetailItem, fallbackDetailItem, "detailImages", detailImageFieldPattern, staticEvent ? event.detailImages ?? [] : []);
+  const detailVideos = pickCmsDetailMedia(currentDetailItem, fallbackDetailItem, "detailVideos", detailVideoFieldPattern, staticEvent ? event.detailVideos ?? [] : []);
   let detailImageIndex = 0;
   let detailVideoIndex = 0;
-  const detailBlocks = event.localizedContent
+  const detailBlocks = localizedContent
     .flatMap((paragraph, index) => {
       const blocks: Array<
         | { type: "image"; src: string; index: number }
@@ -38,7 +116,7 @@ export function EventDetailPage({ slug }: { slug: string }) {
 
       if (matches.length === 0) {
         const text = cleanText(paragraph);
-        if (!text || (index === 0 && text === summary)) return blocks;
+        if (!text || normalizeDetailText(text) === summaryForCompare) return blocks;
 
         blocks.push({ type: "text", text, index });
         return blocks;
@@ -47,8 +125,9 @@ export function EventDetailPage({ slug }: { slug: string }) {
       let cursor = 0;
       matches.forEach((match, matchIndex) => {
         const text = paragraph.slice(cursor, match.index).trim();
-        if (text && !(index === 0 && text === summary)) {
-          blocks.push({ type: "text", text, index });
+        const cleanedText = cleanText(text);
+        if (cleanedText && normalizeDetailText(cleanedText) !== summaryForCompare) {
+          blocks.push({ type: "text", text: cleanedText, index });
         }
 
         const placeholder = match[0];
@@ -66,8 +145,9 @@ export function EventDetailPage({ slug }: { slug: string }) {
       });
 
       const trailingText = paragraph.slice(cursor).trim();
-      if (trailingText && !(index === 0 && trailingText === summary)) {
-        blocks.push({ type: "text", text: trailingText, index });
+      const cleanedTrailingText = cleanText(trailingText);
+      if (cleanedTrailingText && normalizeDetailText(cleanedTrailingText) !== summaryForCompare) {
+        blocks.push({ type: "text", text: cleanedTrailingText, index });
       }
 
       return blocks;
@@ -78,6 +158,19 @@ export function EventDetailPage({ slug }: { slug: string }) {
         | { type: "video"; src: string; index: number }
         | { type: "text"; text: string; index: number } => Boolean(block),
     );
+  const renderedBlocks = [
+    ...detailBlocks,
+    ...detailImages.slice(detailImageIndex).filter(Boolean).map((src, index) => ({
+      type: "image" as const,
+      src,
+      index: 100000 + index,
+    })),
+    ...detailVideos.slice(detailVideoIndex).filter(Boolean).map((src, index) => ({
+      type: "video" as const,
+      src,
+      index: 200000 + index,
+    })),
+  ];
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-[#171717] text-white">
@@ -109,13 +202,13 @@ export function EventDetailPage({ slug }: { slug: string }) {
             <p className="text-justify text-[1.5rem] font-light italic leading-[1.7] tracking-[0.02em] text-[#d1d5dc]">
               {summary}
             </p>
-            {detailBlocks.map((block, blockIndex) =>
+            {renderedBlocks.map((block, blockIndex) =>
               block.type === "image" ? (
-                <div key={`${event.slug}-image-${block.index}-${blockIndex}`} className="mx-auto mt-10 w-full overflow-hidden bg-[#272727] md:w-[70%]">
-                  <ImageWithFallback src={block.src} alt={fullTitle} loading="lazy" className="h-auto w-full object-contain" />
+                <div key={`${event.slug}-image-${block.index}-${blockIndex}-${block.src}`} className="mx-auto mt-10 w-full overflow-hidden bg-[#272727] md:w-[70%]">
+                  <ImageWithFallback key={block.src} src={block.src} alt={fullTitle} loading="lazy" className="h-auto w-full object-contain" />
                 </div>
               ) : block.type === "video" ? (
-                <div key={`${event.slug}-video-${block.index}-${blockIndex}`} className="mx-auto mt-10 w-full overflow-hidden bg-[#272727] md:w-[70%]">
+                <div key={`${event.slug}-video-${block.index}-${blockIndex}-${block.src}`} className="mx-auto mt-10 w-full overflow-hidden bg-[#272727] md:w-[70%]">
                   <video
                     src={block.src}
                     controls

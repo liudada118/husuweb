@@ -1,7 +1,8 @@
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 import { requireCmsApiUser } from "@/lib/cms-api-auth";
-import { listVersions, publishVersion, restoreVersion } from "@/lib/cms-db";
+import { getCmsSiteState, saveCmsSiteState } from "@/lib/cms-store";
+import type { OfficialCmsSiteState } from "@/cms/official-state";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -21,39 +22,38 @@ function revalidateOfficialPages() {
   revalidatePath("/cms");
 }
 
-export async function POST(
-  _request: Request,
-  { params }: { params: Promise<{ id: string; action: string }> },
-) {
+export async function GET() {
   const auth = await requireCmsApiUser();
 
   if (!auth.ok) {
     return auth.response;
   }
 
-  const { id, action } = await params;
-  const versionId = Number(id);
-
-  if (!Number.isFinite(versionId)) {
-    return NextResponse.json({ message: "版本 ID 无效。" }, { status: 400 });
-  }
-
-  if (action === "restore") {
-    restoreVersion(versionId, auth.user.id);
-  } else if (action === "publish") {
-    publishVersion(versionId, auth.user.id);
-  } else {
-    return NextResponse.json({ message: "未知操作。" }, { status: 404 });
-  }
-
-  revalidateOfficialPages();
-
   return NextResponse.json(
-    { ok: true, versions: listVersions() },
+    { state: await getCmsSiteState() },
     {
       headers: {
         "Cache-Control": "no-store, max-age=0",
       },
     },
   );
+}
+
+export async function PUT(request: Request) {
+  const auth = await requireCmsApiUser();
+
+  if (!auth.ok) {
+    return auth.response;
+  }
+
+  const payload = (await request.json()) as { state?: OfficialCmsSiteState };
+
+  if (!payload.state) {
+    return NextResponse.json({ message: "Invalid official site state." }, { status: 400 });
+  }
+
+  const state = await saveCmsSiteState(payload.state);
+  revalidateOfficialPages();
+
+  return NextResponse.json({ ok: true, state });
 }

@@ -3,7 +3,10 @@
 import { Mail, Phone } from "lucide-react";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { FormattedText } from "@/components/shared/FormattedText";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
+import { getPreviewPageField, getPreviewPageItemField, getPreviewPageSectionItems } from "@/cms/preview-page-content";
+import { usePublicCms } from "@/cms/PublicCmsProvider";
 import { pick, useLanguage } from "@/i18n/LanguageProvider";
 import { copy } from "@/i18n/copy";
 
@@ -11,13 +14,29 @@ const contactShell = "w-full pl-5 pr-5 md:pl-[9rem] md:pr-[var(--shell-md)]";
 
 export function ContactPage() {
   const { language } = useLanguage();
-  const cards = pick(language, copy.contact.requirements);
+  const cms = usePublicCms();
+  const heroTitle = getPreviewPageField(cms, language, "contact", "hero", "title", pick(language, copy.contact.title));
+  const heroBody = getPreviewPageField(cms, language, "contact", "hero", "body", pick(language, copy.contact.intro));
+  const heroImage = getPreviewPageField(cms, language, "contact", "hero", "image", "/assets/contact/hero.png");
+  const contactTitle = getPreviewPageField(cms, language, "contact", "contact", "title", pick(language, copy.contact.cardTitle));
+  const contactBody = getPreviewPageField(cms, language, "contact", "contact", "body", pick(language, copy.contact.cardBody));
+  const contactImage = getPreviewPageField(cms, language, "contact", "contact", "image", "/assets/prototypes/contact/city.webp");
+  const joinTitle = getPreviewPageField(cms, language, "contact", "join", "title", pick(language, copy.contact.joinTitle).join("\n"));
+  const joinBody = getPreviewPageField(cms, language, "contact", "join", "body", pick(language, copy.contact.joinBody));
+  const resumeLabel = getPreviewPageField(cms, language, "contact", "join", "resumeLabel", pick(language, copy.contact.resume));
+  const resumeEmail = getPreviewPageField(cms, language, "contact", "join", "resumeEmail", "recruit@tigerpartners.cn");
+  const phone = getPreviewPageField(cms, language, "contact", "contact", "phone", cms?.footer.phone || "010-85885228");
+  const email = getPreviewPageField(cms, language, "contact", "contact", "email", cms?.footer.email || "contact@tigerpartners.cn");
+  const requirementItems = getPreviewPageSectionItems(cms, language, "contact", "join");
+  const cards = requirementItems.length
+    ? requirementItems.map((item) => getPreviewPageItemField(item, "body", item.label)).filter(Boolean)
+    : pick(language, copy.contact.requirements);
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-[#171717] text-white">
       <section className="relative overflow-hidden">
         <ImageWithFallback
-          src="/assets/contact/hero.png"
+          src={heroImage}
           alt=""
           loading="eager"
           fetchPriority="high"
@@ -30,10 +49,10 @@ export function ContactPage() {
 
         <div className={`${contactShell} relative z-10 pt-[calc(var(--header-height)+7rem)]`}>
           <h1 className="text-[3.25rem] font-medium italic leading-none tracking-[-0.03em] text-[#d9b27a] md:text-[clamp(4rem,5vw,6rem)]">
-            {pick(language, copy.contact.title)}
+            <FormattedText text={heroTitle} />
           </h1>
           <p className="mt-12 max-w-[90rem] text-pretty text-[clamp(1.5rem,1.875vw,2.25rem)] font-light leading-relaxed tracking-[0.04em] text-[#868686]">
-            {pick(language, copy.contact.intro)}
+            <FormattedText text={heroBody} />
           </p>
           <div className="mt-14 h-0.5 w-24 bg-[#3a3a3a]" />
         </div>
@@ -49,25 +68,25 @@ export function ContactPage() {
               className="pointer-events-none absolute bottom-[3.75rem] left-[-2.5rem] w-[15.75rem] max-w-[43.2vw] opacity-10 mix-blend-multiply"
             />
             <h2 className="relative text-[clamp(2.5rem,2.708vw,3.25rem)] font-semibold leading-none text-black">
-              {pick(language, copy.contact.cardTitle)}
+              <FormattedText text={contactTitle} />
             </h2>
             <p className="relative mt-10 max-w-[48rem] text-justify text-[clamp(1.25rem,1.46vw,1.75rem)] italic leading-relaxed text-black">
-              {pick(language, copy.contact.cardBody)}
+              <FormattedText text={contactBody} />
             </p>
             <div className="relative mt-10 space-y-5 text-[clamp(1.25rem,1.46vw,1.75rem)] font-normal text-black">
               <div className="flex items-center gap-4">
                 <Phone className="size-5 shrink-0 text-black" strokeWidth={1.6} />
-                <span>010-85885228</span>
+                <span>{phone}</span>
               </div>
               <div className="flex items-center gap-4">
                 <Mail className="size-5 shrink-0 text-black" strokeWidth={1.6} />
-                <span className="underline underline-offset-4">contact@tigerpartners.cn</span>
+                <span className="underline underline-offset-4">{email}</span>
               </div>
             </div>
           </div>
           <div className="group relative min-h-[24rem] overflow-hidden lg:min-h-[80vh]">
             <ImageWithFallback
-              src="/assets/prototypes/contact/city.webp"
+              src={contactImage}
               alt="city"
               decoding="sync"
               className="absolute inset-0 size-full object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-105"
@@ -89,15 +108,15 @@ export function ContactPage() {
 
         <section className={`${contactShell} relative z-30 grid gap-10 py-20 lg:grid-cols-[minmax(auto,26.75rem)_1px_1fr] lg:gap-16`}>
           <div className="text-[clamp(3.25rem,4.688vw,5.625rem)] font-light italic leading-tight tracking-[-0.03em] text-[#f1efec]">
-            {pick(language, copy.contact.joinTitle).map((line, index, lines) => (
+            {joinTitle.split(/\r?\n/).filter(Boolean).map((line, index, lines) => (
               <div key={line} className={index === lines.length - 1 ? "text-[#d9b27a]" : undefined}>
-                {line}
+                <FormattedText text={line} />
               </div>
             ))}
           </div>
           <div className="hidden h-64 w-px bg-[#d9b27a] lg:block" />
           <p className="text-pretty text-[clamp(1.25rem,1.46vw,1.75rem)] font-normal leading-relaxed tracking-[0.04em] text-white/70">
-            {pick(language, copy.contact.joinBody)}
+            <FormattedText text={joinBody} />
           </p>
         </section>
 
@@ -110,7 +129,7 @@ export function ContactPage() {
               <div className="absolute inset-0 z-0 bg-[linear-gradient(154deg,#202020_0%,#292723_72%,#4b3f31_160%)]" />
               <div className="relative z-30 mt-16 h-1.5 w-20 bg-[#d9b27a]" />
               <p className="relative z-30 mt-12 text-pretty text-[clamp(1.25rem,1.46vw,1.75rem)] font-semibold leading-relaxed tracking-[0.04em] text-white/75">
-                {text}
+                <FormattedText text={text} />
               </p>
             </article>
           ))}
@@ -118,8 +137,8 @@ export function ContactPage() {
 
         <section className={`${contactShell} relative z-30 py-20 text-right`}>
           <p className="text-[clamp(1.5rem,1.667vw,2rem)] leading-relaxed tracking-[0.04em]">
-            <span className="font-light italic text-[#b7b7b7]/70">{pick(language, copy.contact.resume)}</span>{" "}
-            <span className="font-normal text-[#d9b27a]">recruit@tigerpartners.cn</span>
+            <span className="font-light italic text-[#b7b7b7]/70"><FormattedText text={resumeLabel} /></span>{" "}
+            <span className="font-normal text-[#d9b27a]"><FormattedText text={resumeEmail} /></span>
           </p>
         </section>
       </div>

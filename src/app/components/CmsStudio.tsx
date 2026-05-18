@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import type { ChangeEvent, ComponentType, Dispatch, FormEvent, RefObject, SetStateAction } from "react";
-import { useEffect, useMemo, useRef, useState, useTransition } from "react";
+import type { ChangeEvent, ComponentType, Dispatch, FormEvent, ReactNode, RefObject, SetStateAction } from "react";
+import { Children, isValidElement, useEffect, useMemo, useRef, useState, useTransition } from "react";
 import {
   ArrowDown,
   ArrowUp,
@@ -12,7 +12,6 @@ import {
   Eye,
   FileImage,
   FileText,
-  FolderOpen,
   Globe2,
   HardDrive,
   Home,
@@ -51,6 +50,8 @@ import {
   getPastEventProgramNumber,
   getPastEventProgramNumbersFromFields,
   isPastEventPlatformFieldId,
+  defaultPageContentState,
+  mergePageContentDefaults,
 } from "@/lib/cms-page-content";
 import type {
   CmsArticle,
@@ -67,7 +68,26 @@ import type {
 } from "@/lib/cms-types";
 import type { SiteContent } from "../translations/translations";
 import type { Language } from "@/lib/site-types";
-import { resolvePublicAssetUrl } from "@/lib/public-assets";
+import type {
+  OfficialCmsChronicleEvent,
+  OfficialCmsChronicleYear,
+  OfficialCmsEventOverride,
+  OfficialCmsHonorAward,
+  OfficialCmsHonorYear,
+  OfficialCmsIndustryListItem,
+  OfficialCmsLocalizedEventOverride,
+  OfficialCmsSiteState,
+  OfficialCmsTeamProfileContent,
+} from "@/cms/official-state";
+import { events as officialEventsData, formatEventDate } from "@/data/events";
+import { teamProfiles } from "@/data/teamProfiles";
+import { honorData, withZhSponsorHonors, zhHonorData } from "@/components/sections/about/Honors";
+import { chronicleGroups, zhChronicleGroups } from "@/components/sections/about/Chronicle";
+import {
+  industries as industryDetailDefaults,
+  zhIndustries as zhIndustryDetailDefaults,
+  type IndustrySlug,
+} from "@/components/pages/IndustryDetailPage";
 
 type EditorValue =
   | string
@@ -86,6 +106,14 @@ type StudioPanel =
   | "articles"
   | "carousel"
   | "eventAwards"
+  | "homeEventCarousel"
+  | "homeHonorsCarousel"
+  | "officialIndustries"
+  | "officialHonors"
+  | "officialChronicle"
+  | "officialPartners"
+  | "officialSeniorAssociates"
+  | "officialEvents"
   | "site"
   | "assets"
   | "cases"
@@ -300,10 +328,15 @@ const navigationGroups: Array<{
     icon: FileText,
     defaultOpen: true,
     items: [
-      { id: "carousel", label: "轮播管理" },
-      { id: "eventAwards", label: "事件和奖项管理" },
+      { id: "homeEventCarousel", label: "首页 event 事件轮播" },
+      { id: "homeHonorsCarousel", label: "首页 HONORS 轮播" },
+      { id: "officialIndustries", label: "服务行业" },
+      { id: "officialHonors", label: "虎诉荣誉" },
+      { id: "officialChronicle", label: "虎诉大事记" },
+      { id: "officialPartners", label: "合伙人" },
+      { id: "officialSeniorAssociates", label: "资深律师" },
+      { id: "officialEvents", label: "虎诉动态" },
       { id: "assets", label: "文件管理" },
-      { id: "contactSubmissions", label: "联系提交" },
     ],
   },
   {
@@ -341,7 +374,7 @@ const quickActions: Array<{
   {
     title: "管理轮播",
     description: "维护首页、关于页、活动页和播客页的轮播内容。",
-    panel: "carousel",
+    panel: "homeEventCarousel",
     icon: Layers3,
     accent: "text-[#f97316] bg-[#fff7ed]",
   },
@@ -500,13 +533,6 @@ function getAssetKind(asset: CmsAsset) {
   return "file";
 }
 
-const assetKindLabels = {
-  all: "全部",
-  image: "图片",
-  video: "视频",
-  file: "其他附件",
-} as const;
-
 const assetPageCategories = [
   { id: "all", label: "全部页面", keywords: [] },
   { id: "home", label: "首页", keywords: ["cms-home", "home", "program", "course", "case"] },
@@ -519,13 +545,6 @@ const assetPageCategories = [
 ] as const;
 
 type AssetPageCategoryId = (typeof assetPageCategories)[number]["id"];
-
-function getAssetPageCategory(asset: CmsAsset): AssetPageCategoryId {
-  const haystack = `${asset.url} ${asset.originalName} ${asset.filename}`.toLowerCase();
-  return assetPageCategories.find((category) =>
-    category.id !== "all" && category.keywords.some((keyword) => haystack.includes(keyword)),
-  )?.id ?? "all";
-}
 
 function getStatusLabel(status: string) {
   return (
@@ -701,9 +720,17 @@ export function CmsStudio({ initialData }: { initialData: CmsBootstrapData }) {
   const [groupState, setGroupState] = useState<Record<string, boolean>>(() =>
     Object.fromEntries(navigationGroups.map((group) => [group.title, group.defaultOpen !== false])),
   );
+  const initialOfficialSiteState = initialData.officialSiteState
+    ? normalizeOfficialSiteStateForEditor(cloneValue(initialData.officialSiteState))
+    : null;
   const [siteContent, setSiteContent] = useState<SiteContent>(cloneValue(initialData.siteContent));
   const [visualEditor, setVisualEditor] = useState<VisualEditorState>(cloneValue(initialData.visualEditor));
-  const [pageContent, setPageContent] = useState<PageContentState>(cloneValue(initialData.pageContent));
+  const [pageContent, setPageContent] = useState<PageContentState>(
+    initialOfficialSiteState
+      ? syncPageContentFromOfficialSiteState(mergePageContentDefaults(cloneValue(initialData.pageContent)), initialOfficialSiteState)
+      : mergePageContentDefaults(cloneValue(initialData.pageContent)),
+  );
+  const [officialSiteState, setOfficialSiteState] = useState<OfficialCmsSiteState | null>(initialOfficialSiteState);
   const [dashboard, setDashboard] = useState<CmsDashboardMetrics | undefined>(
     initialData.dashboard ? cloneValue(initialData.dashboard) : undefined,
   );
@@ -738,7 +765,7 @@ export function CmsStudio({ initialData }: { initialData: CmsBootstrapData }) {
   });
   const [isPasswordSaving, setIsPasswordSaving] = useState(false);
   const assetInputRef = useRef<HTMLInputElement>(null);
-  const defaultVersionLoadedRef = useRef(false);
+  const defaultPublishedVersionLoadedRef = useRef(false);
 
   const pageSections = useMemo(
     () => Object.keys(siteContent[activeLanguage]) as Array<keyof SiteContent["zh"]>,
@@ -753,6 +780,30 @@ export function CmsStudio({ initialData }: { initialData: CmsBootstrapData }) {
     const timer = window.setTimeout(() => setMessage(""), 5000);
     return () => window.clearTimeout(timer);
   }, [message]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadOfficialState() {
+      if (officialSiteState) return;
+
+      const response = await fetch("/api/cms/official");
+
+      if (!response.ok) {
+        if (!cancelled) setMessage("官网内容数据加载失败。");
+        return;
+      }
+
+      const payload = (await response.json()) as { state: OfficialCmsSiteState };
+      if (!cancelled) setOfficialSiteState(normalizeOfficialSiteStateForEditor(payload.state));
+    }
+
+    void loadOfficialState();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [officialSiteState]);
 
   useEffect(() => {
     if (versions.length === 0) {
@@ -785,10 +836,41 @@ export function CmsStudio({ initialData }: { initialData: CmsBootstrapData }) {
     return true;
   };
 
+  const saveOfficialSiteState = async (nextState: OfficialCmsSiteState) => {
+    const normalizedState = normalizeOfficialSiteStateForEditor(nextState);
+    const syncedPageContent = syncPageContentFromOfficialSiteState(pageContent, normalizedState);
+    const stateForSave = { ...normalizedState, previewPageContent: syncedPageContent };
+    const response = await fetch("/api/cms/official", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ state: stateForSave }),
+    });
+
+    if (!response.ok) {
+      setMessage("官网内容保存失败。");
+      return false;
+    }
+
+    const payload = (await response.json()) as { state: OfficialCmsSiteState };
+    setOfficialSiteState(normalizeOfficialSiteStateForEditor(payload.state));
+    setPageContent(syncedPageContent);
+    setMessage("官网内容已保存，并同步到真实前台数据。");
+    return true;
+  };
+
   const applyVersionPayload = (payload: CmsVersionPayload) => {
     setSiteContent(cloneValue(payload.siteContent));
     setVisualEditor(cloneValue(payload.visualEditor));
-    setPageContent(cloneValue(payload.pageContent));
+    const normalizedOfficialState = payload.officialSiteState
+      ? normalizeOfficialSiteStateForEditor(cloneValue(payload.officialSiteState))
+      : null;
+    const nextPageContent = normalizedOfficialState
+      ? syncPageContentFromOfficialSiteState(mergePageContentDefaults(cloneValue(payload.pageContent)), normalizedOfficialState)
+      : mergePageContentDefaults(cloneValue(payload.pageContent));
+    setPageContent(nextPageContent);
+    if (payload.officialSiteState) {
+      setOfficialSiteState({ ...normalizedOfficialState!, previewPageContent: nextPageContent });
+    }
     setArticles(cloneValue(payload.articles));
     setCaseStudies(cloneValue(payload.caseStudies));
     setMediaItems(cloneValue(payload.mediaItems));
@@ -805,19 +887,63 @@ export function CmsStudio({ initialData }: { initialData: CmsBootstrapData }) {
     siteContent?: SiteContent;
     visualEditor?: VisualEditorState;
     pageContent?: PageContentState;
-  }): CmsVersionPayload => ({
-    siteContent: nextState?.siteContent ?? siteContent,
-    visualEditor: nextState?.visualEditor ?? visualEditor,
-    pageContent: nextState?.pageContent ?? pageContent,
-    articles,
-    caseStudies,
-    mediaItems,
-    podcastEpisodes,
-  });
+    officialSiteState?: OfficialCmsSiteState | null;
+  }): CmsVersionPayload => {
+    const normalizedOfficialState = nextState?.officialSiteState
+      ? normalizeOfficialSiteStateForEditor(nextState.officialSiteState)
+      : officialSiteState
+        ? normalizeOfficialSiteStateForEditor(officialSiteState)
+        : undefined;
+    const nextPageContent =
+      nextState?.pageContent ??
+      (nextState?.officialSiteState && normalizedOfficialState
+        ? syncPageContentFromOfficialSiteState(pageContent, normalizedOfficialState)
+        : pageContent);
+
+    return {
+      siteContent: nextState?.siteContent ?? siteContent,
+      visualEditor: nextState?.visualEditor ?? visualEditor,
+      pageContent: nextPageContent,
+      officialSiteState: normalizedOfficialState
+        ? { ...normalizedOfficialState, previewPageContent: nextPageContent }
+        : undefined,
+      articles,
+      caseStudies,
+      mediaItems,
+      podcastEpisodes,
+    };
+  };
 
   const loadVersionForEditing = async (versionId: number | null) => {
     if (!versionId) {
-      setMessage("请先选择一个版本。");
+      const [siteResponse, officialResponse] = await Promise.all([
+        fetch("/api/cms/site"),
+        fetch("/api/cms/official"),
+      ]);
+
+      if (!siteResponse.ok || !officialResponse.ok) {
+        setMessage("加载当前站点内容失败。");
+        return;
+      }
+
+      const sitePayload = (await siteResponse.json()) as {
+        siteContent: SiteContent;
+        visualEditor: VisualEditorState;
+        pageContent: PageContentState;
+      };
+      const officialPayload = (await officialResponse.json()) as { state: OfficialCmsSiteState };
+      const normalizedOfficialState = normalizeOfficialSiteStateForEditor(cloneValue(officialPayload.state));
+      const nextPageContent = syncPageContentFromOfficialSiteState(
+        mergePageContentDefaults(cloneValue(sitePayload.pageContent)),
+        normalizedOfficialState,
+      );
+
+      setSiteContent(cloneValue(sitePayload.siteContent));
+      setVisualEditor(cloneValue(sitePayload.visualEditor));
+      setPageContent(nextPageContent);
+      setOfficialSiteState({ ...normalizedOfficialState, previewPageContent: nextPageContent });
+      setEditingVersionId(null);
+      setMessage("已切换到当前站点内容，后续保存会直接更新当前站点。");
       return;
     }
 
@@ -839,15 +965,19 @@ export function CmsStudio({ initialData }: { initialData: CmsBootstrapData }) {
   };
 
   useEffect(() => {
-    if (defaultVersionLoadedRef.current || editingVersionId || versions.length === 0) return;
+    if (defaultPublishedVersionLoadedRef.current || editingVersionId || versions.length === 0) return;
 
-    defaultVersionLoadedRef.current = true;
-    void loadVersionForEditing(versions[0].id);
+    const publishedVersion = versions.find((version) => version.isPublished);
+    if (!publishedVersion) return;
+
+    defaultPublishedVersionLoadedRef.current = true;
+    setVersionSourceId(publishedVersion.id);
+    void loadVersionForEditing(publishedVersion.id);
   }, [editingVersionId, versions]);
 
   const submitVersionDraft = async (
     versionId: number,
-    nextState?: { siteContent?: SiteContent; visualEditor?: VisualEditorState; pageContent?: PageContentState },
+    nextState?: { siteContent?: SiteContent; visualEditor?: VisualEditorState; pageContent?: PageContentState; officialSiteState?: OfficialCmsSiteState | null },
   ) => {
     const response = await fetch(`/api/cms/versions/${versionId}`, {
       method: "PUT",
@@ -862,9 +992,9 @@ export function CmsStudio({ initialData }: { initialData: CmsBootstrapData }) {
       return false;
     }
 
-    const payload = (await response.json()) as { versions: CmsVersionSnapshot[] };
+    const payload = (await response.json()) as { versions: CmsVersionSnapshot[]; appliedToCurrentSite?: boolean };
     setVersions(payload.versions);
-    setMessage("版本内容已更新，可在版本管理中预览或发布。");
+    setMessage(payload.appliedToCurrentSite ? "已发布版本内容已更新，并同步到当前站点。" : "版本内容已更新，可在版本管理中预览或发布。");
     return true;
   };
 
@@ -1060,6 +1190,13 @@ export function CmsStudio({ initialData }: { initialData: CmsBootstrapData }) {
                   <p className="mt-1 text-sm text-slate-500">CMS Studio</p>
                 </div>
               </div>
+              <div className="mt-5">
+                <CmsVersionSelect
+                  versions={versions}
+                  editingVersionId={editingVersionId}
+                  loadVersionForEditing={loadVersionForEditing}
+                />
+              </div>
             </div>
 
             <div className="min-h-0 flex-1 overflow-y-auto px-4 py-5">
@@ -1173,6 +1310,8 @@ export function CmsStudio({ initialData }: { initialData: CmsBootstrapData }) {
                 siteContent={siteContent}
                 visualEditor={visualEditor}
                 pageContent={pageContent}
+                officialSiteState={officialSiteState}
+                setOfficialSiteState={setOfficialSiteState}
                 setVisualEditor={setVisualEditor}
                 setPageContent={setPageContent}
                 updatePageContent={updatePageContent}
@@ -1207,6 +1346,7 @@ export function CmsStudio({ initialData }: { initialData: CmsBootstrapData }) {
                 saveCollection={saveCollection}
                 deleteCollection={deleteCollection}
                 persistWorkspace={persistWorkspace}
+                saveOfficialSiteState={saveOfficialSiteState}
                 setMessage={setMessage}
               />
             </div>
@@ -1298,6 +1438,8 @@ function CmsMainPanel(props: {
   siteContent: SiteContent;
   visualEditor: VisualEditorState;
   pageContent: PageContentState;
+  officialSiteState: OfficialCmsSiteState | null;
+  setOfficialSiteState: Dispatch<SetStateAction<OfficialCmsSiteState | null>>;
   setVisualEditor: (updater: (current: VisualEditorState) => VisualEditorState) => void;
   setPageContent: Dispatch<SetStateAction<PageContentState>>;
   updatePageContent: (path: PathSegment[], value: EditorValue) => void;
@@ -1321,7 +1463,7 @@ function CmsMainPanel(props: {
   loadVersionForEditing: (versionId: number | null) => Promise<void>;
   submitVersionDraft: (
     versionId: number,
-    nextState?: { siteContent?: SiteContent; visualEditor?: VisualEditorState; pageContent?: PageContentState },
+    nextState?: { siteContent?: SiteContent; visualEditor?: VisualEditorState; pageContent?: PageContentState; officialSiteState?: OfficialCmsSiteState | null },
   ) => Promise<boolean>;
   selectedCollectionItem: Record<string, number | null>;
   setSelectedCollectionItem: Dispatch<SetStateAction<Record<string, number | null>>>;
@@ -1335,6 +1477,7 @@ function CmsMainPanel(props: {
   saveCollection: (collection: keyof typeof collectionTitleMap, item: Record<string, unknown>) => Promise<CollectionItem[] | null>;
   deleteCollection: (collection: keyof typeof collectionTitleMap, id: number) => Promise<CollectionItem[] | null>;
   persistWorkspace: (nextState?: { siteContent?: SiteContent; visualEditor?: VisualEditorState; pageContent?: PageContentState }) => Promise<boolean>;
+  saveOfficialSiteState: (nextState: OfficialCmsSiteState) => Promise<boolean>;
   setMessage: (message: string) => void;
 }) {
   if (props.panel === "overview") {
@@ -1371,6 +1514,7 @@ function CmsMainPanel(props: {
         siteContent={props.siteContent}
         visualEditor={props.visualEditor}
         pageContent={props.pageContent}
+        officialSiteState={props.officialSiteState}
         setVisualEditor={props.setVisualEditor}
         setPageContent={props.setPageContent}
         activeLanguage={props.activeLanguage}
@@ -1386,7 +1530,6 @@ function CmsMainPanel(props: {
         assets={props.assets}
         versions={props.versions}
         editingVersionId={props.editingVersionId}
-        loadVersionForEditing={props.loadVersionForEditing}
         submitVersionDraft={props.submitVersionDraft}
         setPanel={props.setPanel}
         persistWorkspace={props.persistWorkspace}
@@ -1410,6 +1553,31 @@ function CmsMainPanel(props: {
         editingVersionId={props.editingVersionId}
         loadVersionForEditing={props.loadVersionForEditing}
         submitVersionDraft={props.submitVersionDraft}
+        setMessage={props.setMessage}
+      />
+    );
+  }
+
+  if (
+    props.panel === "homeEventCarousel" ||
+    props.panel === "homeHonorsCarousel" ||
+    props.panel === "officialIndustries" ||
+    props.panel === "officialHonors" ||
+    props.panel === "officialChronicle" ||
+    props.panel === "officialPartners" ||
+    props.panel === "officialSeniorAssociates" ||
+    props.panel === "officialEvents"
+  ) {
+    return (
+      <OfficialSiteSectionPanel
+        panel={props.panel}
+        pageContent={props.pageContent}
+        officialSiteState={props.officialSiteState}
+        setOfficialSiteState={props.setOfficialSiteState}
+        setPageContent={props.setPageContent}
+        editingVersionId={props.editingVersionId}
+        submitVersionDraft={props.submitVersionDraft}
+        saveOfficialSiteState={props.saveOfficialSiteState}
         setMessage={props.setMessage}
       />
     );
@@ -1617,6 +1785,2628 @@ function CmsMainPanel(props: {
         setVersionSourceId={props.setVersionSourceId}
         setMessage={props.setMessage}
       />
+  );
+}
+
+function splitLines(value: string) {
+  return value
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+}
+
+function serializeIndustries(items: OfficialCmsIndustryListItem[]) {
+  return items.map((item) => [item.slug, item.name, item.zhName ?? "", item.img, item.cls ?? ""].join(" | ")).join("\n");
+}
+
+function parseIndustries(value: string): OfficialCmsIndustryListItem[] {
+  return splitLines(value)
+    .map((line) => {
+      const [slug = "", name = "", zhName = "", img = "", cls = ""] = line.split("|").map((part) => part.trim());
+      return { slug, name, zhName, img, cls };
+    })
+    .filter((item) => item.slug && item.name && item.img);
+}
+
+function serializeIndustryDetailSections(slug: string, language: Language) {
+  const source =
+    language === "zh"
+      ? zhIndustryDetailDefaults[slug as IndustrySlug]?.sections
+      : industryDetailDefaults[slug as IndustrySlug]?.sections;
+
+  return (
+    source
+      ?.map((section) => [section.title, ...("items" in section && section.items ? section.items : [])].join("\n"))
+      .join("\n\n") ?? ""
+  );
+}
+
+const emptyLocalizedText = { en: "", zh: "" };
+
+function createEmptyHonorYear(): OfficialCmsHonorYear {
+  return {
+    year: String(new Date().getFullYear()),
+    count: {
+      en: honorCountText(0, "en"),
+      zh: honorCountText(0, "zh"),
+    },
+    awards: [],
+  };
+}
+
+function createEmptyHonorAward(): OfficialCmsHonorAward {
+  return {
+    title: { ...emptyLocalizedText },
+    date: "",
+    body: { ...emptyLocalizedText },
+    href: "",
+  };
+}
+
+function createEmptyChronicleYearForExisting(existingYears: string[]): OfficialCmsChronicleYear {
+  const numericYears = existingYears.map((year) => Number(year)).filter(Number.isFinite);
+  const nextYear = numericYears.length ? Math.max(...numericYears) + 1 : new Date().getFullYear();
+
+  return {
+    year: String(nextYear),
+    events: [],
+  };
+}
+
+function createEmptyChronicleEvent(): OfficialCmsChronicleEvent {
+  return {
+    month: { en: "JANUARY", zh: "一月" },
+    side: "left",
+    text: { ...emptyLocalizedText },
+  };
+}
+
+function createTeamProfileOverride(slug: string): OfficialCmsTeamProfileContent {
+  return { slug };
+}
+
+function createEmptyTeamProfileOverride(slug: string, group: "partner" | "seniorAssociate"): OfficialCmsTeamProfileContent {
+  return {
+    slug,
+    name: "",
+    zhName: "",
+    title: group === "partner" ? "Partner" : "Senior Associate",
+    zhTitle: group === "partner" ? "合伙人" : "资深律师",
+    image: "",
+    phone: "",
+    email: "",
+    serviceIndustries: [],
+    zhServiceIndustries: [],
+    education: "",
+    zhEducation: "",
+    qualification: "",
+    zhQualification: "",
+    languages: [],
+    zhLanguages: [],
+    socialEngagements: "",
+    zhSocialEngagements: "",
+    practiceArea: "",
+    zhPracticeArea: "",
+    practiceExperience: "",
+    zhPracticeExperience: "",
+    honors: [],
+    zhHonors: [],
+    achievements: [],
+    zhAchievements: [],
+  };
+}
+
+function createUniqueTeamSlug(profiles: Record<string, OfficialCmsTeamProfileContent>, group: "partner" | "seniorAssociate") {
+  const prefix = group === "partner" ? "partner" : "senior-associate";
+  let index = Object.keys(profiles).length + 1;
+  let slug = `${prefix}-${index}`;
+
+  while (profiles[slug]) {
+    index += 1;
+    slug = `${prefix}-${index}`;
+  }
+
+  return slug;
+}
+
+function createLocalizedEventOverride(): OfficialCmsLocalizedEventOverride {
+  return {
+    category: "",
+    title: "",
+    summary: "",
+    content: [],
+  };
+}
+
+function createEventOverride(): OfficialCmsEventOverride {
+  return {
+    image: "",
+    en: createLocalizedEventOverride(),
+    zh: createLocalizedEventOverride(),
+  };
+}
+
+function createDefaultHonorContent(): OfficialCmsHonorYear[] {
+  const zhByYear = new Map(withZhSponsorHonors(zhHonorData).map((item) => [item.year, item]));
+
+  return honorData.map((item) => {
+    const zhItem = zhByYear.get(item.year);
+
+    return {
+      year: item.year,
+      count: {
+        en: item.count,
+        zh: zhItem?.count ?? item.count,
+      },
+      awards: item.awards.map((award, index) => {
+        const zhAward = zhItem?.awards[index];
+
+        return {
+          title: {
+            en: award.title,
+            zh: zhAward?.title ?? award.title,
+          },
+          date: award.date,
+          body: {
+            en: award.body,
+            zh: zhAward?.body ?? award.body,
+          },
+          href: award.href ?? zhAward?.href,
+        };
+      }),
+    };
+  });
+}
+
+function createDefaultChronicleContent(): OfficialCmsChronicleYear[] {
+  const zhByYear = new Map(zhChronicleGroups.map((item) => [item.year, item]));
+
+  return chronicleGroups.map((item) => {
+    const zhItem = zhByYear.get(item.year);
+
+    return {
+      year: item.year,
+      events: item.events.map((event, index) => {
+        const zhEvent = zhItem?.events[index];
+
+        return {
+          month: {
+            en: event.month,
+            zh: zhEvent?.month ?? event.month,
+          },
+          side: event.side,
+          text: {
+            en: event.text,
+            zh: zhEvent?.text ?? event.text,
+          },
+        };
+      }),
+    };
+  });
+}
+
+function createDefaultTeamProfileContent(): Record<string, OfficialCmsTeamProfileContent> {
+  return Object.fromEntries(
+    teamProfiles.map((profile) => [
+      profile.slug,
+      {
+        slug: profile.slug,
+        name: profile.name,
+        zhName: profile.zhName,
+        title: profile.title,
+        zhTitle: profile.zhTitle,
+        image: profile.image,
+        phone: profile.phone,
+        email: profile.email,
+        serviceIndustries: profile.serviceIndustries,
+        zhServiceIndustries: profile.zh.serviceIndustries,
+        education: profile.education,
+        zhEducation: profile.zh.education,
+        qualification: profile.qualification,
+        zhQualification: profile.zh.qualification,
+        languages: profile.languages,
+        zhLanguages: profile.zh.languages,
+        socialEngagements: profile.socialEngagements,
+        zhSocialEngagements: profile.zh.socialEngagements,
+        practiceArea: profile.practiceArea,
+        zhPracticeArea: profile.zh.practiceArea,
+        practiceExperience: profile.practiceExperience,
+        zhPracticeExperience: profile.zh.practiceExperience,
+        honors: profile.honors,
+        zhHonors: profile.zh.honors,
+        achievements: profile.achievements,
+        zhAchievements: profile.zh.achievements,
+      },
+    ]),
+  );
+}
+
+function createDefaultEventOverrides(): Record<string, OfficialCmsEventOverride> {
+  return Object.fromEntries(
+    officialEventsData.map((event) => [
+      event.slug,
+      {
+        image: event.image,
+        en: {
+          category: event.category,
+          title: event.title,
+          summary: event.summary,
+          content: event.content,
+        },
+        zh: {
+          category: event.zh?.category ?? event.category,
+          title: event.zh?.title ?? event.title,
+          summary: event.zh?.summary ?? event.summary,
+          content: event.zh?.content ?? event.content,
+        },
+      },
+    ]),
+  );
+}
+
+function mergeLocalizedEventOverride(
+  defaults: OfficialCmsLocalizedEventOverride | undefined,
+  override: OfficialCmsLocalizedEventOverride | undefined,
+): OfficialCmsLocalizedEventOverride {
+  return {
+    ...(defaults ?? {}),
+    ...(override ?? {}),
+    content: override?.content ?? defaults?.content ?? [],
+  };
+}
+
+function mergeEventOverrides(
+  overrides: Record<string, OfficialCmsEventOverride>,
+): Record<string, OfficialCmsEventOverride> {
+  const defaults = createDefaultEventOverrides();
+  const slugs = Array.from(new Set([...Object.keys(defaults), ...Object.keys(overrides)]));
+
+  return Object.fromEntries(
+    slugs.map((slug) => {
+      const defaultOverride = defaults[slug] ?? createEventOverride();
+      const override = overrides[slug] ?? createEventOverride();
+
+      return [
+        slug,
+        {
+          ...defaultOverride,
+          ...override,
+          image: override.image ?? defaultOverride.image,
+          en: mergeLocalizedEventOverride(defaultOverride.en, override.en),
+          zh: mergeLocalizedEventOverride(defaultOverride.zh, override.zh),
+        },
+      ];
+    }),
+  );
+}
+
+function mergeHonorContent(current: OfficialCmsHonorYear[]): OfficialCmsHonorYear[] {
+  if (current.length) {
+    return current
+      .map((item) => normalizeHonorCount({ ...item, awards: [...item.awards] }))
+      .sort((a, b) => Number(b.year) - Number(a.year));
+  }
+
+  return createDefaultHonorContent()
+    .map((item) => normalizeHonorCount(item))
+    .sort((a, b) => Number(b.year) - Number(a.year));
+}
+
+function mergeChronicleContent(current: OfficialCmsChronicleYear[]): OfficialCmsChronicleYear[] {
+  if (current.length) {
+    return current
+      .map((item) => ({ ...item, events: [...item.events] }))
+      .sort((a, b) => Number(b.year) - Number(a.year));
+  }
+
+  const defaults = createDefaultChronicleContent();
+  const groups = new Map(current.map((item) => [item.year, { ...item, events: [...item.events] }]));
+
+  defaults.forEach((defaultYear) => {
+    const group = groups.get(defaultYear.year);
+
+    if (!group) {
+      groups.set(defaultYear.year, defaultYear);
+      return;
+    }
+
+    const seen = new Set(group.events.map((event) => `${event.month.en}::${event.month.zh}::${event.text.en}::${event.text.zh}`.toLowerCase()));
+    const missingEvents = defaultYear.events.filter(
+      (event) => !seen.has(`${event.month.en}::${event.month.zh}::${event.text.en}::${event.text.zh}`.toLowerCase()),
+    );
+
+    if (missingEvents.length) {
+      group.events = [...group.events, ...missingEvents];
+    }
+  });
+
+  return Array.from(groups.values()).sort((a, b) => Number(b.year) - Number(a.year));
+}
+
+function mergeTeamProfileContent(
+  overrides: Record<string, OfficialCmsTeamProfileContent>,
+): Record<string, OfficialCmsTeamProfileContent> {
+  const defaults = createDefaultTeamProfileContent();
+  const slugs = Array.from(new Set([...Object.keys(defaults), ...Object.keys(overrides)]));
+
+  return Object.fromEntries(
+    slugs.map((slug) => [
+      slug,
+      {
+        ...(defaults[slug] ?? createTeamProfileOverride(slug)),
+        ...(overrides[slug] ?? {}),
+      },
+    ]),
+  );
+}
+
+const defaultPartnerSlugs = ["yuxuan-liu", "min-xu", "li-wan", "zoe-zhang"];
+const defaultSeniorAssociateSlugs = ["mengcheng-yun", "weifan-qiu"];
+
+function mergeOrderedSlugs(current: string[], defaults: string[]) {
+  return Array.from(new Set([...current, ...defaults])).filter(Boolean);
+}
+
+function teamProfileGroup(profile: OfficialCmsTeamProfileContent) {
+  return /senior associate|资深律师/i.test(`${profile.title ?? ""} ${profile.zhTitle ?? ""}`) ? "seniorAssociate" : "partner";
+}
+
+function slugsFromTeamProfiles(
+  profiles: Record<string, OfficialCmsTeamProfileContent>,
+  group: "partner" | "seniorAssociate",
+) {
+  return Object.entries(profiles)
+    .filter(([, profile]) => teamProfileGroup(profile) === group)
+    .map(([slug]) => slug);
+}
+
+function studioField(id: string, label: string, kind: PageContentField["kind"], value = ""): PageContentField {
+  return { id, label, kind, value };
+}
+
+function studioItem(id: string, label: string, fields: PageContentField[]): PageContentRepeaterItem {
+  return { id, label, fields };
+}
+
+function updatePageSection(
+  pageContent: PageContentState,
+  language: Language,
+  pageId: CmsPageId,
+  sectionId: string,
+  updater: (section: PageContentSection) => PageContentSection,
+) {
+  return {
+    ...pageContent,
+    [language]: {
+      ...pageContent[language],
+      [pageId]: {
+        ...pageContent[language][pageId],
+        sections: pageContent[language][pageId].sections.map((section) =>
+          section.id === sectionId ? updater(section) : section,
+        ),
+      },
+    },
+    updatedAt: new Date().toISOString(),
+  };
+}
+
+function replaceSectionItems(
+  pageContent: PageContentState,
+  language: Language,
+  pageId: CmsPageId,
+  sectionId: string,
+  items: PageContentRepeaterItem[],
+) {
+  return updatePageSection(pageContent, language, pageId, sectionId, (section) => ({ ...section, items }));
+}
+
+function profileLineList(value: string[] | undefined) {
+  return (value ?? []).join("\n");
+}
+
+function honorCountText(count: number, language: Language) {
+  if (language === "zh") return `${count}项荣誉`;
+  return `${count} ${count === 1 ? "Distinction" : "Distinctions"}`;
+}
+
+function normalizeHonorCount(year: OfficialCmsHonorYear): OfficialCmsHonorYear {
+  return {
+    ...year,
+    count: {
+      en: honorCountText(year.awards.length, "en"),
+      zh: honorCountText(year.awards.length, "zh"),
+    },
+  };
+}
+
+function getExistingPageItemField(
+  pageContent: PageContentState,
+  language: Language,
+  pageId: CmsPageId,
+  sectionId: string,
+  itemId: string,
+  fieldId: string,
+) {
+  const section = pageContent[language]?.[pageId]?.sections.find((item) => item.id === sectionId);
+  const item = section?.items?.find((sectionItem) => sectionItem.id === itemId);
+  return item?.fields.find((field) => field.id === fieldId)?.value ?? "";
+}
+
+function getExistingOrDefaultPageItemField(
+  pageContent: PageContentState,
+  language: Language,
+  pageId: CmsPageId,
+  sectionId: string,
+  itemId: string,
+  fieldId: string,
+) {
+  return (
+    getExistingPageItemField(pageContent, language, pageId, sectionId, itemId, fieldId) ||
+    getExistingPageItemField(defaultPageContentState, language, pageId, sectionId, itemId, fieldId)
+  );
+}
+
+function homeHonorItemId(year: string, index: number, date: string) {
+  return `${year}-${index + 1}-${date || "award"}`;
+}
+
+function homeHonorItemIds(honors: OfficialCmsHonorYear[]) {
+  return honors.flatMap((year) => year.awards.map((award, index) => homeHonorItemId(year.year, index, award.date)));
+}
+
+function eventLocalizedCopyForLanguage(
+  event: (typeof officialEventsData)[number] | undefined,
+  override: OfficialCmsEventOverride | undefined,
+  language: Language,
+) {
+  const localizedOverride = language === "zh" ? override?.zh : override?.en;
+  const title = localizedOverride?.title ?? (language === "zh" ? event?.zh?.title : event?.title) ?? "";
+  const summary = localizedOverride?.summary ?? (language === "zh" ? event?.zh?.summary : event?.summary) ?? "";
+  const category = localizedOverride?.category ?? (language === "zh" ? event?.zh?.category : event?.category) ?? "";
+  const content = localizedOverride?.content ?? (language === "zh" ? event?.zh?.content : event?.content) ?? [];
+  const displayDate =
+    localizedOverride?.displayDate ?? (event?.date ? formatEventDate(event.date, language) : "");
+
+  return { title, summary, category, content, displayDate };
+}
+
+function syncPageContentFromOfficialSiteState(pageContent: PageContentState, officialState: OfficialCmsSiteState) {
+  let next = mergePageContentDefaults(cloneValue(pageContent));
+
+  (["en", "zh"] as Language[]).forEach((language) => {
+    const isZh = language === "zh";
+    const honors = officialState.content.honors.flatMap((year) =>
+      year.awards.map((award, index) =>
+        studioItem(`${year.year}-${index + 1}-${award.date || "award"}`, isZh ? award.title.zh : award.title.en, [
+          studioField("year", isZh ? "年份" : "Year", "text", year.year),
+          studioField("date", isZh ? "日期" : "Date", "text", award.date),
+          studioField("title", isZh ? "标题" : "Title", "textarea", isZh ? award.title.zh : award.title.en),
+          studioField("body", isZh ? "正文" : "Body", "textarea", isZh ? award.body.zh : award.body.en),
+          studioField("href", isZh ? "链接" : "Link", "url", award.href ?? ""),
+        ]),
+      ),
+    );
+    const honorsById = new Map(honors.map((item) => [item.id, item]));
+    const selectedHomeHonors = officialState.lists.homeHonorItems
+      .map((id) => honorsById.get(id))
+      .filter((item): item is (typeof honors)[number] => Boolean(item));
+    const homeHonorYears = officialState.lists.homeHonorYears.length ? officialState.lists.homeHonorYears : officialState.lists.honorYears;
+    const yearOrderedHomeHonors = homeHonorYears.flatMap((year) => honors.filter((item) => item.id.startsWith(`${year}-`)));
+    const homeHonors = selectedHomeHonors.length ? selectedHomeHonors : yearOrderedHomeHonors;
+    next = replaceSectionItems(next, language, "home", "honors", homeHonors.length ? homeHonors : honors);
+    next = replaceSectionItems(next, language, "about", "honors", honors);
+
+    const chronicle = officialState.content.chronicle.flatMap((year) =>
+      year.events.map((event, index) =>
+        studioItem(`${year.year}-${index + 1}`, `${year.year} ${isZh ? event.month.zh : event.month.en}`, [
+          studioField("year", isZh ? "年份" : "Year", "text", year.year),
+          studioField("month", isZh ? "月份" : "Month", "text", isZh ? event.month.zh : event.month.en),
+          studioField("side", isZh ? "位置 left/right" : "Side left/right", "text", event.side),
+          studioField("text", isZh ? "正文" : "Text", "textarea", isZh ? event.text.zh : event.text.en),
+        ]),
+      ),
+    );
+    next = replaceSectionItems(next, language, "about", "chronicle", chronicle);
+
+    const industries = officialState.lists.industries.map((industry) =>
+      studioItem(industry.slug, isZh ? industry.zhName || industry.name : industry.name, [
+        studioField("slug", isZh ? "标识" : "Slug", "text", industry.slug),
+        studioField("title", isZh ? "标题" : "Title", "text", isZh ? industry.zhName || industry.name : industry.name),
+        studioField("image", isZh ? "图片" : "Image", "image", industry.img),
+        studioField("description", isZh ? "描述" : "Description", "textarea", isZh ? industry.zhIntro ?? "" : industry.intro ?? ""),
+        studioField("href", isZh ? "链接" : "Link", "url", `/industries/${industry.slug}?from=home`),
+        studioField("layoutClass", isZh ? "布局类名" : "Layout class", "text", industry.cls ?? ""),
+      ]),
+    );
+    next = replaceSectionItems(next, language, "home", "industries", industries);
+    next = replaceSectionItems(next, language, "media", "cards", industries);
+
+    const industryDetailItems = officialState.lists.industries.map((industry) =>
+      studioItem(industry.slug, isZh ? industry.zhName || industry.name : industry.name, [
+        studioField("slug", isZh ? "标识" : "Slug", "text", industry.slug),
+        studioField("title", isZh ? "详情页标题" : "Detail title", "text", isZh ? industry.zhName || industry.name : industry.name),
+        studioField("image", isZh ? "首屏背景图片" : "Hero image", "image", industry.img),
+        studioField("intro", isZh ? "详情页简介" : "Detail intro", "textarea", isZh ? industry.zhIntro ?? "" : industry.intro ?? ""),
+        studioField(
+          "sections",
+          isZh ? "详情卡片" : "Detail cards",
+          "textarea",
+          (isZh ? industry.zhSections : industry.sections) ??
+            (getExistingOrDefaultPageItemField(next, language, "media", "detailPages", industry.slug, "sections") ||
+              serializeIndustryDetailSections(industry.slug, language)),
+        ),
+      ]),
+    );
+    next = replaceSectionItems(next, language, "media", "detailPages", industryDetailItems);
+
+    const homeEventItems = officialState.home.eventSlugs.map((slug) => {
+      const event = officialEventsData.find((item) => item.slug === slug);
+      const override = officialState.home.eventOverrides?.[slug] ?? officialState.events.overrides[slug];
+      const localized = eventLocalizedCopyForLanguage(event, override, language);
+
+      return studioItem(slug, localized.title || slug, [
+        studioField("slug", isZh ? "轮播标识" : "Slide slug", "text", slug),
+        studioField("image", isZh ? "轮播图片" : "Slide image", "image", override?.image ?? event?.image ?? ""),
+        studioField("displayDate", isZh ? "展示日期" : "Display date", "text", localized.displayDate),
+        studioField("category", isZh ? "分类" : "Category", "text", localized.category),
+        studioField("title", isZh ? "标题" : "Title", "textarea", localized.title),
+        studioField("summary", isZh ? "轮播摘要" : "Slide summary", "textarea", localized.summary),
+        studioField("href", isZh ? "点击链接" : "Click link", "url", override?.href ?? `/events/${slug}?from=home`),
+      ]);
+    });
+    next = replaceSectionItems(next, language, "home", "events", homeEventItems);
+
+    const clientLogoItems = officialState.lists.clientLogos.map((logo, index) =>
+      studioItem(`client-logo-${String(index + 1).padStart(2, "0")}`, `${isZh ? "客户 Logo" : "Client Logo"} ${index + 1}`, [
+        studioField("logo", isZh ? "Logo 图片" : "Logo image", "image", logo),
+        studioField("alt", isZh ? "替代文字" : "Alt text", "text", `${isZh ? "客户" : "Client"} ${index + 1}`),
+      ]),
+    );
+    next = replaceSectionItems(next, language, "home", "clients", clientLogoItems);
+
+    const teamProfileItems = Object.values(officialState.content.teamProfiles).map((profile) =>
+      studioItem(profile.slug, isZh ? profile.zhName || profile.name || profile.slug : profile.name || profile.slug, [
+        studioField("slug", isZh ? "标识" : "Slug", "text", profile.slug),
+        studioField("image", isZh ? "缩略图" : "Thumbnail", "image", profile.image ?? ""),
+        studioField("name", isZh ? "姓名" : "Name", "text", isZh ? profile.zhName ?? profile.name ?? "" : profile.name ?? ""),
+        studioField("title", isZh ? "职位" : "Title", "text", isZh ? profile.zhTitle ?? profile.title ?? "" : profile.title ?? ""),
+        studioField("phone", isZh ? "电话" : "Phone", "text", profile.phone ?? ""),
+        studioField("email", isZh ? "邮箱" : "Email", "text", profile.email ?? ""),
+        studioField("serviceIndustries", isZh ? "服务行业" : "Service industries", "textarea", profileLineList(isZh ? profile.zhServiceIndustries : profile.serviceIndustries)),
+        studioField("education", isZh ? "教育背景" : "Education", "textarea", isZh ? profile.zhEducation ?? "" : profile.education ?? ""),
+        studioField("qualification", isZh ? "专业资格" : "Qualification", "textarea", isZh ? profile.zhQualification ?? "" : profile.qualification ?? ""),
+        studioField("languages", isZh ? "工作语言" : "Languages", "textarea", profileLineList(isZh ? profile.zhLanguages : profile.languages)),
+        studioField("socialEngagements", isZh ? "社会任职" : "Social engagements", "textarea", isZh ? profile.zhSocialEngagements ?? "" : profile.socialEngagements ?? ""),
+        studioField("practiceArea", isZh ? "专业领域" : "Practice area", "textarea", isZh ? profile.zhPracticeArea ?? "" : profile.practiceArea ?? ""),
+        studioField("practiceExperience", isZh ? "执业经验" : "Practice experience", "textarea", isZh ? profile.zhPracticeExperience ?? "" : profile.practiceExperience ?? ""),
+        studioField("honors", isZh ? "荣誉" : "Honors", "textarea", profileLineList(isZh ? profile.zhHonors : profile.honors)),
+        studioField("achievements", isZh ? "个人业绩" : "Performance & Achievements", "textarea", profileLineList(isZh ? profile.zhAchievements : profile.achievements)),
+      ]),
+    );
+    next = replaceSectionItems(next, language, "podcast", "memberProfiles", teamProfileItems);
+
+    const teamListItems = (slugs: string[]) =>
+      slugs.map((slug) => {
+        const profile = officialState.content.teamProfiles[slug] ?? { slug };
+        return studioItem(slug, isZh ? profile.zhName || profile.name || slug : profile.name || slug, [
+          studioField("slug", isZh ? "标识" : "Slug", "text", slug),
+          studioField("image", isZh ? "缩略图" : "Thumbnail", "image", profile.image ?? ""),
+          studioField("name", isZh ? "姓名" : "Name", "text", isZh ? profile.zhName ?? profile.name ?? "" : profile.name ?? ""),
+          studioField("title", isZh ? "职位" : "Title", "text", isZh ? profile.zhTitle ?? profile.title ?? "" : profile.title ?? ""),
+          studioField("ctaLabel", isZh ? "CTA 文案" : "CTA label", "text", isZh ? "了解更多" : "Find out more"),
+          studioField("href", isZh ? "链接" : "Link", "url", `/team/${slug}`),
+        ]);
+      });
+    next = replaceSectionItems(next, language, "podcast", "partners", teamListItems(officialState.lists.partnerSlugs));
+    next = replaceSectionItems(next, language, "podcast", "seniorAssociates", teamListItems(officialState.lists.seniorAssociateSlugs));
+
+    const eventListItems = officialState.lists.eventSlugs.map((slug) => {
+      const event = officialEventsData.find((item) => item.slug === slug);
+      const override = officialState.events.overrides[slug] ?? {};
+      const localized = eventLocalizedCopyForLanguage(event, override, language);
+      return studioItem(slug, localized.title || slug, [
+        studioField("slug", isZh ? "标识" : "Slug", "text", slug),
+        studioField("image", isZh ? "缩略图" : "Thumbnail", "image", override.image ?? event?.image ?? ""),
+        studioField("sortDate", isZh ? "排序日期（YYYYMMDD）" : "Sort date (YYYYMMDD)", "text", event?.date ?? ""),
+        studioField("displayDate", isZh ? "展示日期" : "Display date", "text", localized.displayDate),
+        studioField("category", isZh ? "分类" : "Category", "text", localized.category),
+        studioField("title", isZh ? "标题" : "Title", "textarea", localized.title),
+      ]);
+    });
+    next = replaceSectionItems(next, language, "event", "list", eventListItems);
+
+    const eventDetailItems = officialState.lists.eventSlugs.map((slug) => {
+      const event = officialEventsData.find((item) => item.slug === slug);
+      const override = officialState.events.overrides[slug] ?? {};
+      const localized = eventLocalizedCopyForLanguage(event, override, language);
+      const content = localized.content.join("\n\n");
+      const detailImages = override.detailImages ?? event?.detailImages ?? [];
+      const detailVideos = override.detailVideos ?? event?.detailVideos ?? [];
+
+      return studioItem(slug, localized.title || slug, [
+        studioField("slug", isZh ? "标识" : "Slug", "text", slug),
+        studioField("sortDate", isZh ? "排序日期（YYYYMMDD）" : "Sort date (YYYYMMDD)", "text", event?.date ?? ""),
+        studioField("displayDate", isZh ? "展示日期" : "Display date", "text", localized.displayDate),
+        studioField("category", isZh ? "分类" : "Category", "text", localized.category),
+        studioField("title", isZh ? "详情页标题" : "Detail title", "textarea", localized.title),
+        studioField("summary", isZh ? "详情页摘要" : "Detail summary", "textarea", localized.summary),
+        studioField("content", isZh ? "详情正文" : "Detail content", "textarea", content),
+        ...detailImages.map((image, index) =>
+          studioField(`detailImage${index + 1}`, `${isZh ? "详情图片" : "Detail image"} ${index + 1}`, "image", image),
+        ),
+        ...detailVideos.map((video, index) =>
+          studioField(`detailVideo${index + 1}`, `${isZh ? "详情视频" : "Detail video"} ${index + 1}`, "url", video),
+        ),
+      ]);
+    });
+    next = replaceSectionItems(next, language, "event", "detailPages", eventDetailItems);
+  });
+
+  return next;
+}
+
+function normalizeOfficialSiteStateForEditor(current: OfficialCmsSiteState): OfficialCmsSiteState {
+  const honors = mergeHonorContent(current.content.honors);
+  const chronicle = mergeChronicleContent(current.content.chronicle);
+  const teamProfileOverrides = mergeTeamProfileContent(current.content.teamProfiles);
+  const eventOverrides = mergeEventOverrides(current.events.overrides);
+  const honorYearDefaults = honors.map((item) => item.year);
+  const homeHonorItemDefaults = homeHonorItemIds(honors);
+  const chronicleYearDefaults = chronicle.map((item) => item.year);
+
+  return {
+    ...current,
+    content: {
+      ...current.content,
+      honors,
+      chronicle,
+      teamProfiles: teamProfileOverrides,
+    },
+    events: {
+      ...current.events,
+      overrides: eventOverrides,
+    },
+    lists: {
+      ...current.lists,
+      homeHonorYears: mergeOrderedSlugs(current.lists.homeHonorYears, honorYearDefaults),
+      homeHonorItems: current.lists.homeHonorItems?.length
+        ? current.lists.homeHonorItems.filter((item) => homeHonorItemDefaults.includes(item))
+        : [],
+      honorYears: mergeOrderedSlugs(current.lists.honorYears, honorYearDefaults),
+      chronicleYears: mergeOrderedSlugs(current.lists.chronicleYears, chronicleYearDefaults),
+      eventSlugs: current.lists.eventSlugs.length ? current.lists.eventSlugs : officialEventsData.map((event) => event.slug),
+      partnerSlugs: mergeOrderedSlugs(
+        current.lists.partnerSlugs,
+        [...defaultPartnerSlugs, ...slugsFromTeamProfiles(teamProfileOverrides, "partner")],
+      ),
+      seniorAssociateSlugs: mergeOrderedSlugs(
+        current.lists.seniorAssociateSlugs,
+        [...defaultSeniorAssociateSlugs, ...slugsFromTeamProfiles(teamProfileOverrides, "seniorAssociate")],
+      ),
+    },
+  };
+}
+
+function moveArrayItem<T>(items: T[], fromIndex: number, toIndex: number) {
+  if (toIndex < 0 || toIndex >= items.length) return items;
+  const next = [...items];
+  const [item] = next.splice(fromIndex, 1);
+  next.splice(toIndex, 0, item);
+  return next;
+}
+
+function MultilingualField(props: {
+  label: string;
+  en: string;
+  zh: string;
+  onChange: (language: Language, value: string) => void;
+  textarea?: boolean;
+}) {
+  return (
+    <section className="space-y-3 rounded-[22px] border border-slate-200 bg-slate-50 p-4">
+      <h4 className="text-sm font-semibold text-slate-900">{props.label}</h4>
+      {(["en", "zh"] as Language[]).map((language) => (
+        <label key={language} className="block space-y-2">
+          <span className="text-sm font-medium text-slate-700">{language === "en" ? "English" : "中文"}</span>
+          {props.textarea ? (
+            <textarea
+              value={language === "en" ? props.en : props.zh}
+              rows={5}
+              onChange={(event) => props.onChange(language, event.target.value)}
+              className="min-h-32 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-4 focus:ring-[#2563eb]/10"
+            />
+          ) : (
+            <input
+              value={language === "en" ? props.en : props.zh}
+              onChange={(event) => props.onChange(language, event.target.value)}
+              className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-4 focus:ring-[#2563eb]/10"
+            />
+          )}
+        </label>
+      ))}
+    </section>
+  );
+}
+
+function OfficialSiteSectionPanel(props: {
+  panel: Extract<
+    StudioPanel,
+    | "homeEventCarousel"
+    | "homeHonorsCarousel"
+    | "officialIndustries"
+    | "officialHonors"
+    | "officialChronicle"
+    | "officialPartners"
+    | "officialSeniorAssociates"
+    | "officialEvents"
+  >;
+  pageContent: PageContentState;
+  officialSiteState: OfficialCmsSiteState | null;
+  setOfficialSiteState: Dispatch<SetStateAction<OfficialCmsSiteState | null>>;
+  setPageContent: Dispatch<SetStateAction<PageContentState>>;
+  editingVersionId: number | null;
+  submitVersionDraft: (
+    versionId: number,
+    nextState?: { siteContent?: SiteContent; visualEditor?: VisualEditorState; pageContent?: PageContentState; officialSiteState?: OfficialCmsSiteState | null },
+  ) => Promise<boolean>;
+  saveOfficialSiteState: (nextState: OfficialCmsSiteState) => Promise<boolean>;
+  setMessage: (message: string) => void;
+}) {
+  const rawState = props.officialSiteState;
+  const state = useMemo(() => (rawState ? normalizeOfficialSiteStateForEditor(rawState) : null), [rawState]);
+  const [expandedOfficialItemIds, setExpandedOfficialItemIds] = useState<Record<string, boolean>>({});
+  const [selectedHomeEventSlug, setSelectedHomeEventSlug] = useState("");
+  const [selectedHomeHonorYear, setSelectedHomeHonorYear] = useState("");
+  const [selectedOfficialEventSlug, setSelectedOfficialEventSlug] = useState("");
+
+  useEffect(() => {
+    setExpandedOfficialItemIds({});
+    setSelectedHomeEventSlug("");
+    setSelectedHomeHonorYear("");
+    setSelectedOfficialEventSlug("");
+  }, [props.panel]);
+
+  const updateState = (updater: (current: OfficialCmsSiteState) => OfficialCmsSiteState) => {
+    props.setOfficialSiteState((current) => (current ? updater(current) : current));
+  };
+
+  useEffect(() => {
+    if (!rawState || !state || JSON.stringify(rawState) === JSON.stringify(state)) return;
+    props.setOfficialSiteState(state);
+  }, [
+    rawState,
+    state,
+    props,
+  ]);
+
+  if (!state) {
+    return (
+      <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+        <h2 className="text-2xl font-semibold text-slate-950">官网内容管理</h2>
+        <p className="mt-3 text-sm leading-6 text-slate-500">正在加载真实官网内容数据。</p>
+      </section>
+    );
+  }
+
+  const updateList = (key: Exclude<keyof OfficialCmsSiteState["lists"], "industries">, value: string[]) => {
+    updateState((current) => ({
+      ...current,
+      lists: {
+        ...current.lists,
+        [key]: value,
+      },
+    }));
+  };
+
+  const panelTitles: Record<typeof props.panel, string> = {
+    homeEventCarousel: "首页 event 事件轮播",
+    homeHonorsCarousel: "首页 HONORS 轮播",
+    officialIndustries: "服务行业",
+    officialHonors: "虎诉荣誉",
+    officialChronicle: "虎诉大事记",
+    officialPartners: "合伙人",
+    officialSeniorAssociates: "资深律师",
+    officialEvents: "虎诉动态",
+  };
+  const panelDescriptions: Record<typeof props.panel, string> = {
+    homeEventCarousel: "控制首页 Events 轮播显示哪些动态，以及它们的显示顺序。",
+    homeHonorsCarousel: "控制首页 HONORS 轮播显示哪些年份，以及年份显示顺序。",
+    officialIndustries: "管理首页服务行业模块的中英文名称、背景图和布局类名。",
+    officialHonors: "管理 About 页虎诉荣誉年份范围和显示顺序。",
+    officialChronicle: "管理 About 页 CHRONICLE 年份范围和显示顺序。",
+    officialPartners: "管理团队页 Partner 分组成员及排序，个人子页面信息跟随同一份成员数据展示。",
+    officialSeniorAssociates: "管理团队页 Senior Associate 分组成员及排序，个人子页面信息跟随同一份成员数据展示。",
+    officialEvents: "管理 Events 页动态内容与排序。",
+  };
+  const saveCurrentPanel = () => {
+    const normalizedState = normalizeOfficialSiteStateForEditor(state);
+    const syncedPageContent = syncPageContentFromOfficialSiteState(props.pageContent, normalizedState);
+    const stateForSave = { ...normalizedState, previewPageContent: syncedPageContent };
+    props.setOfficialSiteState(stateForSave);
+    props.setPageContent(syncedPageContent);
+
+    void (props.editingVersionId
+      ? props.submitVersionDraft(props.editingVersionId, { officialSiteState: stateForSave, pageContent: syncedPageContent })
+      : props.saveOfficialSiteState(stateForSave));
+  };
+
+  const officialSplitEditorClassName = "grid gap-4 xl:col-span-2 xl:grid-cols-[22rem_minmax(0,1fr)] xl:items-start";
+
+  const toggleExpanded = (id: string) => {
+    setExpandedOfficialItemIds({ [id]: true });
+  };
+
+  const toggleInlineExpanded = (id: string) => {
+    setExpandedOfficialItemIds((current) => ({ ...current, [id]: !(current[id] ?? false) }));
+  };
+
+  const isExpanded = (id: string) => expandedOfficialItemIds[id] ?? false;
+
+  const renderItemShell = (params: {
+    id: string;
+    title: string;
+    summary?: string;
+    thumbnail?: string;
+    layout?: "inline" | "split";
+    defaultOpen?: boolean;
+    children: React.ReactNode;
+    onMoveUp?: () => void;
+    onMoveDown?: () => void;
+    onDelete?: () => void;
+  }) => {
+    const hasSelectedSplitItem = Object.values(expandedOfficialItemIds).some(Boolean);
+    const open = params.layout === "inline" ? isExpanded(params.id) : hasSelectedSplitItem ? isExpanded(params.id) : Boolean(params.defaultOpen);
+
+    if (params.layout === "inline") {
+      return (
+        <article key={params.id} className="rounded-[28px] border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="flex min-w-0 flex-wrap items-center gap-4">
+            {params.thumbnail ? (
+              <img
+                src={params.thumbnail}
+                alt=""
+                className="h-20 w-28 shrink-0 rounded-2xl border border-slate-200 bg-slate-100 object-cover"
+              />
+            ) : null}
+            <button type="button" onClick={() => toggleInlineExpanded(params.id)} className="min-w-[220px] flex-1 text-left">
+              <p className="text-sm font-semibold text-slate-950">{params.title}</p>
+              {params.summary ? <p className="mt-1 line-clamp-2 text-xs leading-5 text-slate-500">{params.summary}</p> : null}
+            </button>
+            <div className="flex flex-wrap items-center gap-2">
+              {params.onMoveUp ? (
+                <button
+                  type="button"
+                  onClick={params.onMoveUp}
+                  className="inline-flex items-center gap-1 rounded-xl border border-slate-200 px-3 py-2 text-xs font-bold text-slate-600 transition hover:border-[#2563eb] hover:text-[#2563eb]"
+                >
+                  <ArrowUp className="h-3.5 w-3.5" />
+                  上移
+                </button>
+              ) : null}
+              {params.onMoveDown ? (
+                <button
+                  type="button"
+                  onClick={params.onMoveDown}
+                  className="inline-flex items-center gap-1 rounded-xl border border-slate-200 px-3 py-2 text-xs font-bold text-slate-600 transition hover:border-[#2563eb] hover:text-[#2563eb]"
+                >
+                  <ArrowDown className="h-3.5 w-3.5" />
+                  下移
+                </button>
+              ) : null}
+              <button
+                type="button"
+                onClick={() => toggleInlineExpanded(params.id)}
+                className="inline-flex items-center gap-1 rounded-xl border border-slate-200 px-3 py-2 text-xs font-bold text-slate-600 transition hover:border-[#2563eb] hover:text-[#2563eb]"
+              >
+                <ChevronDown className={`h-3.5 w-3.5 transition-transform ${open ? "rotate-180" : ""}`} />
+                {open ? "折叠" : "展开"}
+              </button>
+              {params.onDelete ? (
+                <button
+                  type="button"
+                  onClick={params.onDelete}
+                  className="inline-flex items-center gap-1 rounded-xl px-3 py-2 text-xs font-bold text-rose-500 transition hover:bg-rose-50"
+                >
+                  <Trash2 className="h-3.5 w-3.5" />
+                  删除
+                </button>
+              ) : null}
+            </div>
+          </div>
+          <div className={open ? "mt-5 space-y-4 rounded-[24px] border border-slate-100 bg-slate-50/60 p-4" : "hidden"}>
+            {params.children}
+          </div>
+        </article>
+      );
+    }
+
+    return [
+      <article
+        key={`${params.id}-nav`}
+        className={`rounded-[28px] border p-5 shadow-sm transition xl:col-start-1 ${
+          open ? "border-[#2563eb] bg-[#eef4ff]" : "border-slate-200 bg-white"
+        }`}
+      >
+        <div className="flex min-w-0 flex-wrap items-center gap-4 xl:flex-col xl:items-stretch">
+          {params.thumbnail ? (
+            <img
+              src={params.thumbnail}
+              alt=""
+              className="h-20 w-28 shrink-0 rounded-2xl border border-slate-200 bg-slate-100 object-cover xl:h-36 xl:w-full"
+            />
+          ) : null}
+          <button type="button" onClick={() => toggleExpanded(params.id)} className="min-w-[220px] flex-1 text-left xl:min-w-0">
+            <p className="text-sm font-semibold text-slate-950">{params.title}</p>
+            {params.summary ? <p className="mt-1 line-clamp-2 text-xs leading-5 text-slate-500">{params.summary}</p> : null}
+          </button>
+          <div className="flex flex-wrap items-center gap-2">
+            {params.onMoveUp ? (
+              <button
+                type="button"
+                onClick={params.onMoveUp}
+                className="inline-flex items-center gap-1 rounded-xl border border-slate-200 px-3 py-2 text-xs font-bold text-slate-600 transition hover:border-[#2563eb] hover:text-[#2563eb]"
+              >
+                <ArrowUp className="h-3.5 w-3.5" />
+                上移
+              </button>
+            ) : null}
+            {params.onMoveDown ? (
+              <button
+                type="button"
+                onClick={params.onMoveDown}
+                className="inline-flex items-center gap-1 rounded-xl border border-slate-200 px-3 py-2 text-xs font-bold text-slate-600 transition hover:border-[#2563eb] hover:text-[#2563eb]"
+              >
+                <ArrowDown className="h-3.5 w-3.5" />
+                下移
+              </button>
+            ) : null}
+            <button
+              type="button"
+              onClick={() => toggleExpanded(params.id)}
+              className="inline-flex items-center gap-1 rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-bold text-slate-600 transition hover:border-[#2563eb] hover:text-[#2563eb]"
+            >
+              <ChevronDown className={`h-3.5 w-3.5 transition-transform ${open ? "rotate-180" : ""}`} />
+              {open ? "折叠" : "展开"}
+            </button>
+            {params.onDelete ? (
+              <button
+                type="button"
+                onClick={params.onDelete}
+                className="inline-flex items-center gap-1 rounded-xl px-3 py-2 text-xs font-bold text-rose-500 transition hover:bg-rose-50"
+              >
+                <Trash2 className="h-3.5 w-3.5" />
+                删除
+              </button>
+            ) : null}
+          </div>
+        </div>
+      </article>,
+      open ? (
+        <section
+          key={`${params.id}-editor`}
+          className="min-w-0 space-y-4 rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm xl:col-start-2 xl:row-start-1 xl:row-span-[999]"
+        >
+          <div className="border-b border-slate-100 pb-4">
+            <p className="text-sm font-semibold text-slate-950">{params.title}</p>
+            {params.summary ? <p className="mt-1 text-xs leading-5 text-slate-500">{params.summary}</p> : null}
+          </div>
+          {params.children}
+        </section>
+      ) : null,
+    ];
+  };
+
+  const renderStickySplitNodes = (nodes: ReactNode) => {
+    const items = Children.toArray(nodes);
+    const navNodes: ReactNode[] = [];
+    const editorNodes: ReactNode[] = [];
+
+    items.forEach((node) => {
+      const key = isValidElement(node) ? String(node.key ?? "") : "";
+      if (key.includes("-editor")) {
+        editorNodes.push(node);
+      } else {
+        navNodes.push(node);
+      }
+    });
+
+    return (
+      <>
+        <aside className="space-y-4 xl:sticky xl:top-24 xl:col-start-1 xl:max-h-[calc(100vh-7rem)] xl:overflow-y-auto xl:pr-1">
+          {navNodes}
+        </aside>
+        <div className="min-w-0 space-y-4 xl:col-start-2">
+          {editorNodes.length ? (
+            editorNodes
+          ) : (
+            <section className="rounded-[28px] border border-dashed border-slate-300 bg-white p-8 text-sm text-slate-500">
+              点击左侧导航后在这里编辑内容。
+            </section>
+          )}
+        </div>
+      </>
+    );
+  };
+
+  const renderIndustriesEditor = () => (
+    <div className={officialSplitEditorClassName}>
+      {renderStickySplitNodes([
+      <div key="industry-actions" className="flex justify-end">
+        <button
+          type="button"
+          onClick={() =>
+            updateState((current) => ({
+              ...current,
+              lists: {
+                ...current.lists,
+                industries: [
+                  ...current.lists.industries,
+                  { slug: `industry-${Date.now()}`, name: "", zhName: "", img: "", cls: "" },
+                ],
+              },
+            }))
+          }
+          className="rounded-2xl bg-[#2563eb] px-4 py-3 text-sm font-semibold text-white"
+        >
+          新增服务行业
+        </button>
+      </div>,
+      ...state.lists.industries.map((industry, index) =>
+        renderItemShell({
+          id: `industry-${industry.slug}-${index}`,
+          defaultOpen: index === 0,
+          title: `${industry.zhName || "未填写中文"} / ${industry.name || "Untitled"}`,
+          summary: industry.img,
+          thumbnail: industry.img,
+          onMoveUp:
+            index > 0
+              ? () =>
+                  updateState((current) => ({
+                    ...current,
+                    lists: { ...current.lists, industries: moveArrayItem(current.lists.industries, index, index - 1) },
+                  }))
+              : undefined,
+          onMoveDown:
+            index < state.lists.industries.length - 1
+              ? () =>
+                  updateState((current) => ({
+                    ...current,
+                    lists: { ...current.lists, industries: moveArrayItem(current.lists.industries, index, index + 1) },
+                  }))
+              : undefined,
+          onDelete: () =>
+            updateState((current) => ({
+              ...current,
+              lists: { ...current.lists, industries: current.lists.industries.filter((_, itemIndex) => itemIndex !== index) },
+            })),
+          children: (
+            <div className="grid gap-4 xl:grid-cols-2">
+              {[
+                ["slug", "Slug"],
+                ["name", "英文名称"],
+                ["zhName", "中文名称"],
+                ["img", "背景图片"],
+                ["cls", "布局类名"],
+              ].map(([key, label]) => (
+                <label key={key} className="block space-y-2">
+                  <span className="text-sm font-medium text-slate-700">{label}</span>
+                  <input
+                    value={String(industry[key as keyof OfficialCmsIndustryListItem] ?? "")}
+                    onChange={(event) =>
+                      updateState((current) => ({
+                        ...current,
+                        lists: {
+                          ...current.lists,
+                          industries: current.lists.industries.map((item, itemIndex) =>
+                            itemIndex === index ? { ...item, [key]: event.target.value } : item,
+                          ),
+                        },
+                      }))
+                    }
+                    className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
+                  />
+                </label>
+              ))}
+              {[
+                ["intro", "英文子页面描述"],
+                ["zhIntro", "中文子页面描述"],
+                ["sections", "英文子页面详情卡片"],
+                ["zhSections", "中文子页面详情卡片"],
+              ].map(([key, label]) => (
+                <label key={key} className="block space-y-2 xl:col-span-2">
+                  <span className="text-sm font-medium text-slate-700">{label}</span>
+                  <textarea
+                    value={String(
+                      industry[key as keyof OfficialCmsIndustryListItem] ||
+                        (key === "sections"
+                          ? getExistingOrDefaultPageItemField(
+                              props.pageContent,
+                              "en",
+                              "media",
+                              "detailPages",
+                              industry.slug,
+                              "sections",
+                            ) || serializeIndustryDetailSections(industry.slug, "en")
+                          : key === "zhSections"
+                            ? getExistingOrDefaultPageItemField(
+                                props.pageContent,
+                                "zh",
+                                "media",
+                                "detailPages",
+                                industry.slug,
+                                "sections",
+                              ) || serializeIndustryDetailSections(industry.slug, "zh")
+                            : key === "intro"
+                              ? getExistingOrDefaultPageItemField(
+                                  props.pageContent,
+                                  "en",
+                                  "media",
+                                  "detailPages",
+                                  industry.slug,
+                                  "intro",
+                                )
+                              : key === "zhIntro"
+                                ? getExistingOrDefaultPageItemField(
+                                    props.pageContent,
+                                    "zh",
+                                    "media",
+                                    "detailPages",
+                                    industry.slug,
+                                    "intro",
+                                  )
+                            : ""),
+                    )}
+                    rows={5}
+                    onChange={(event) =>
+                      updateState((current) => ({
+                        ...current,
+                        lists: {
+                          ...current.lists,
+                          industries: current.lists.industries.map((item, itemIndex) =>
+                            itemIndex === index ? { ...item, [key]: event.target.value } : item,
+                          ),
+                        },
+                      }))
+                    }
+                    className="min-h-32 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
+                  />
+                  {key === "sections" || key === "zhSections" ? (
+                    <p className="text-xs leading-5 text-slate-500">
+                      Detail cards 格式：每个卡片用一个空行分隔；第一行是卡片标题，后续每行是该卡片的正文或要点。留空时使用页面默认内容。
+                    </p>
+                  ) : null}
+                </label>
+              ))}
+            </div>
+          ),
+          }),
+      ),
+      ])}
+    </div>
+  );
+
+  const updateEventOverride = (slug: string, updater: (override: OfficialCmsEventOverride) => OfficialCmsEventOverride) => {
+    updateState((current) => ({
+      ...current,
+      events: {
+        ...current.events,
+        overrides: {
+          ...current.events.overrides,
+          [slug]: updater(current.events.overrides[slug] ?? createEventOverride()),
+        },
+      },
+    }));
+  };
+
+  const updateLocalizedEventOverride = (
+    slug: string,
+    language: "en" | "zh",
+    updater: (override: OfficialCmsLocalizedEventOverride) => OfficialCmsLocalizedEventOverride,
+  ) => {
+    updateEventOverride(slug, (override) => ({
+      ...override,
+      [language]: updater(override[language] ?? createLocalizedEventOverride()),
+    }));
+  };
+
+  const renderHomeEventCarouselEditor = () => {
+    const selectedSlugs = state.home.eventSlugs;
+    const availableEvents = officialEventsData.filter((event) => !selectedSlugs.includes(event.slug));
+    const updateHomeEventOverride = (slug: string, updater: (override: OfficialCmsEventOverride) => OfficialCmsEventOverride) => {
+      updateState((current) => ({
+        ...current,
+        home: {
+          ...current.home,
+          eventOverrides: {
+            ...(current.home.eventOverrides ?? {}),
+            [slug]: updater(current.home.eventOverrides?.[slug] ?? current.events.overrides[slug] ?? createEventOverride()),
+          },
+        },
+      }));
+    };
+    const updateLocalizedHomeEventOverride = (
+      slug: string,
+      language: "en" | "zh",
+      updater: (override: OfficialCmsLocalizedEventOverride) => OfficialCmsLocalizedEventOverride,
+    ) => {
+      updateHomeEventOverride(slug, (override) => ({
+        ...override,
+        [language]: updater(override[language] ?? createLocalizedEventOverride()),
+      }));
+    };
+
+    return (
+      <div className="space-y-4 xl:col-span-2">
+        <div className="flex flex-wrap justify-end gap-3">
+          <select
+            value={selectedHomeEventSlug}
+            onChange={(event) => setSelectedHomeEventSlug(event.target.value)}
+            className="min-w-[18rem] rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
+          >
+            <option value="">选择要加入首页轮播的事件</option>
+            {availableEvents.map((event) => (
+              <option key={event.slug} value={event.slug}>
+                {event.date} / {event.zh?.title ?? event.title}
+              </option>
+            ))}
+          </select>
+          <button
+            type="button"
+            onClick={() => {
+              if (!selectedHomeEventSlug) return;
+              updateState((current) => ({
+                ...current,
+                home: { ...current.home, eventSlugs: [...current.home.eventSlugs, selectedHomeEventSlug] },
+              }));
+              setSelectedHomeEventSlug("");
+            }}
+            className="rounded-2xl bg-[#2563eb] px-4 py-3 text-sm font-semibold text-white"
+          >
+            新增到轮播
+          </button>
+        </div>
+        {selectedSlugs.map((slug, index) => {
+          const event = officialEventsData.find((item) => item.slug === slug);
+          const override = state.home.eventOverrides?.[slug] ?? state.events.overrides[slug] ?? createEventOverride();
+          const title = override.zh?.title || override.en?.title || event?.zh?.title || event?.title || slug;
+          const thumbnail = override.image || event?.image;
+
+          return renderItemShell({
+            id: `home-event-${slug}`,
+            title,
+            summary: slug,
+            thumbnail,
+            layout: "inline",
+            onMoveUp:
+              index > 0
+                ? () =>
+                    updateState((current) => ({
+                      ...current,
+                      home: { ...current.home, eventSlugs: moveArrayItem(current.home.eventSlugs, index, index - 1) },
+                    }))
+                : undefined,
+            onMoveDown:
+              index < selectedSlugs.length - 1
+                ? () =>
+                    updateState((current) => ({
+                      ...current,
+                      home: { ...current.home, eventSlugs: moveArrayItem(current.home.eventSlugs, index, index + 1) },
+                    }))
+                : undefined,
+            onDelete: () =>
+              updateState((current) => ({
+                ...current,
+                home: { ...current.home, eventSlugs: current.home.eventSlugs.filter((item) => item !== slug) },
+              })),
+            children: (
+              <div className="grid gap-4 xl:grid-cols-2">
+                <label className="block space-y-2 xl:col-span-2">
+                  <span className="text-sm font-medium text-slate-700">封面图片</span>
+                  <input
+                    value={override.image ?? ""}
+                    placeholder={event?.image}
+                    onChange={(inputEvent) =>
+                      updateHomeEventOverride(slug, (currentOverride) => ({ ...currentOverride, image: inputEvent.target.value }))
+                    }
+                    className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
+                  />
+                </label>
+                <label className="block space-y-2 xl:col-span-2">
+                  <span className="text-sm font-medium text-slate-700">点击链接</span>
+                  <input
+                    value={override.href ?? ""}
+                    placeholder={`/events/${slug}?from=home`}
+                    onChange={(inputEvent) =>
+                      updateHomeEventOverride(slug, (currentOverride) => ({ ...currentOverride, href: inputEvent.target.value }))
+                    }
+                    className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
+                  />
+                </label>
+                {(["en", "zh"] as const).map((language) => {
+                  const localized = override[language] ?? createLocalizedEventOverride();
+
+                  return (
+                    <section key={language} className="space-y-4 rounded-[22px] border border-slate-200 bg-slate-50 p-4">
+                      <h4 className="text-sm font-semibold text-slate-900">{language === "en" ? "English" : "中文"}</h4>
+                      {(["displayDate", "category", "title", "summary"] as const).map((field) => (
+                        <label key={field} className="block space-y-2">
+                          <span className="text-sm font-medium text-slate-700">{field}</span>
+                          <input
+                            value={String(localized[field] ?? "")}
+                            onChange={(inputEvent) =>
+                              updateLocalizedHomeEventOverride(slug, language, (currentLocalized) => ({
+                                ...currentLocalized,
+                                [field]: inputEvent.target.value,
+                              }))
+                            }
+                            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
+                          />
+                        </label>
+                      ))}
+                      {false ? (
+                      <label className="block space-y-2">
+                        <span className="text-sm font-medium text-slate-700">content（每行一段）</span>
+                        <textarea
+                          value={(localized.content ?? []).join("\n")}
+                          rows={8}
+                          onChange={(inputEvent) =>
+                            updateLocalizedEventOverride(slug, language, (currentLocalized) => ({
+                              ...currentLocalized,
+                              content: splitLines(inputEvent.target.value),
+                            }))
+                          }
+                          className="min-h-44 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
+                        />
+                      </label>
+                      ) : null}
+                    </section>
+                  );
+                })}
+              </div>
+            ),
+          });
+        })}
+      </div>
+    );
+  };
+
+  const renderHomeHonorsCarouselEditor = () => (
+    <div className={officialSplitEditorClassName}>
+      {(state.lists.homeHonorYears.length ? state.lists.homeHonorYears : state.content.honors.map((item) => item.year)).map((year, index, years) =>
+        renderItemShell({
+          id: `home-honor-${year}-${index}`,
+          defaultOpen: index === 0,
+          title: year,
+          summary: state.content.honors.find((item) => item.year === year)?.awards.map((award) => award.title.zh || award.title.en).join("，"),
+          onMoveUp:
+            index > 0 ? () => updateList("homeHonorYears", moveArrayItem(years, index, index - 1)) : undefined,
+          onMoveDown:
+            index < years.length - 1 ? () => updateList("homeHonorYears", moveArrayItem(years, index, index + 1)) : undefined,
+          onDelete: () => updateList("homeHonorYears", years.filter((item) => item !== year)),
+          children: (
+            <p className="rounded-2xl bg-slate-50 p-4 text-sm text-slate-600">
+              首页 HONORS 轮播会展示这个年份下的荣誉内容。具体荣誉正文在“虎诉荣誉”里编辑。
+            </p>
+          ),
+        }),
+      )}
+      <div className="flex flex-wrap justify-end gap-3 xl:col-start-1">
+        <select
+          value=""
+          onChange={(event) => {
+            const year = event.target.value;
+            if (!year) return;
+            updateList("homeHonorYears", [...state.lists.homeHonorYears, year]);
+          }}
+          className="min-w-[14rem] rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
+        >
+          <option value="">新增年份到首页轮播</option>
+          {state.content.honors
+            .map((item) => item.year)
+            .filter((year) => !state.lists.homeHonorYears.includes(year))
+            .map((year) => (
+              <option key={year} value={year}>
+                {year}
+              </option>
+            ))}
+        </select>
+      </div>
+    </div>
+  );
+
+  const renderHomeHonorsSelectionEditor = () => {
+    const selectedYears = state.lists.homeHonorYears;
+    const honorYearOptions = state.content.honors.map((item) => item.year).filter(Boolean);
+
+    return (
+      <div className="space-y-4 xl:col-span-2">
+        <div className="flex flex-wrap justify-end gap-3 xl:col-start-1">
+          <select
+            value={selectedHomeHonorYear}
+            onChange={(event) => setSelectedHomeHonorYear(event.target.value)}
+            className="min-w-[18rem] rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
+          >
+            <option value="">选择要加入首页 HONORS 轮播的年份</option>
+            {honorYearOptions.map((year) => {
+              const honorYear = state.content.honors.find((item) => item.year === year);
+              const alreadySelected = selectedYears.includes(year);
+              return (
+                <option key={year} value={year} disabled={alreadySelected}>
+                  {year} / {honorYear?.awards[0]?.title.zh || honorYear?.awards[0]?.title.en || "HONORS"}
+                  {alreadySelected ? "（已在轮播）" : ""}
+                </option>
+              );
+            })}
+          </select>
+          <button
+            type="button"
+            onClick={() => {
+              if (!selectedHomeHonorYear) return;
+              if (selectedYears.includes(selectedHomeHonorYear)) {
+                setSelectedHomeHonorYear("");
+                return;
+              }
+              updateList("homeHonorYears", [...selectedYears, selectedHomeHonorYear]);
+              setSelectedHomeHonorYear("");
+            }}
+            className="rounded-2xl bg-[#2563eb] px-4 py-3 text-sm font-semibold text-white"
+          >
+            新增到轮播
+          </button>
+        </div>
+        {selectedYears.map((year, index, years) =>
+          renderItemShell({
+            id: `home-honor-${year}-${index}`,
+            defaultOpen: index === 0,
+            title: year,
+            summary: state.content.honors
+              .find((item) => item.year === year)
+              ?.awards.map((award) => award.title.zh || award.title.en)
+              .join("，"),
+            onMoveUp:
+              index > 0 ? () => updateList("homeHonorYears", moveArrayItem(years, index, index - 1)) : undefined,
+            onMoveDown:
+              index < years.length - 1 ? () => updateList("homeHonorYears", moveArrayItem(years, index, index + 1)) : undefined,
+            onDelete: () => updateList("homeHonorYears", years.filter((item) => item !== year)),
+            children: (
+              <p className="rounded-2xl bg-slate-50 p-4 text-sm text-slate-600">
+                首页 HONORS 轮播会展示这个年份下的荣誉内容。具体荣誉正文在“虎诉荣誉”里编辑。
+              </p>
+            ),
+          }),
+        )}
+      </div>
+    );
+  };
+
+  const renderHomeHonorItemsSelectionEditor = () => {
+    const honorItems = state.content.honors.flatMap((year) =>
+      year.awards.map((award, awardIndex) => ({
+        id: homeHonorItemId(year.year, awardIndex, award.date),
+        year: year.year,
+        title: award.title.zh || award.title.en || "HONORS",
+        date: award.date,
+        body: award.body.zh || award.body.en || "",
+      })),
+    );
+    const selectedItemIds = state.lists.homeHonorItems;
+    const selectedItems = selectedItemIds
+      .map((id) => honorItems.find((item) => item.id === id))
+      .filter((item): item is (typeof honorItems)[number] => Boolean(item));
+    const honorItemsByYear = state.content.honors.map((year) => ({
+      year: year.year,
+      items: honorItems.filter((item) => item.year === year.year),
+    }));
+
+    return (
+      <div className={officialSplitEditorClassName}>
+        <div className="flex flex-wrap justify-end gap-3 xl:col-start-1">
+          <select
+            value={selectedHomeHonorYear}
+            onChange={(event) => setSelectedHomeHonorYear(event.target.value)}
+            className="min-w-[18rem] rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
+          >
+            <option value="">选择要加入首页 HONORS 轮播的具体荣誉</option>
+            {honorItemsByYear.map((group) => (
+              <optgroup key={group.year} label={group.year}>
+                {group.items.map((item) => {
+                  const alreadySelected = selectedItemIds.includes(item.id);
+
+                  return (
+                    <option key={item.id} value={item.id} disabled={alreadySelected}>
+                      {item.date} / {item.title}
+                      {alreadySelected ? "（已加入）" : ""}
+                    </option>
+                  );
+                })}
+              </optgroup>
+            ))}
+          </select>
+          <button
+            type="button"
+            onClick={() => {
+              if (!selectedHomeHonorYear) return;
+              if (selectedItemIds.includes(selectedHomeHonorYear)) {
+                setSelectedHomeHonorYear("");
+                return;
+              }
+              updateList("homeHonorItems", [...selectedItemIds, selectedHomeHonorYear]);
+              setSelectedHomeHonorYear("");
+            }}
+            className="rounded-2xl bg-[#2563eb] px-4 py-3 text-sm font-semibold text-white"
+          >
+            新增到轮播
+          </button>
+        </div>
+        {selectedItems.map((item, index) =>
+          renderItemShell({
+            id: `home-honor-${item.id}`,
+            defaultOpen: index === 0,
+            title: item.year,
+            summary: [item.title, item.date, item.body].filter(Boolean).join(" / "),
+            onMoveUp:
+              index > 0 ? () => updateList("homeHonorItems", moveArrayItem(selectedItemIds, index, index - 1)) : undefined,
+            onMoveDown:
+              index < selectedItemIds.length - 1
+                ? () => updateList("homeHonorItems", moveArrayItem(selectedItemIds, index, index + 1))
+                : undefined,
+            onDelete: () => updateList("homeHonorItems", selectedItemIds.filter((id) => id !== item.id)),
+            children: (
+              <p className="rounded-2xl bg-slate-50 p-4 text-sm text-slate-600">
+                首页 HONORS 轮播按这里选中的具体荣誉展示。具体标题、日期、正文在“虎诉荣誉”里编辑。
+              </p>
+            ),
+          }),
+        )}
+      </div>
+    );
+  };
+
+  const renderHomeHonorYearNavigationEditor = () => {
+    const honorItems = state.content.honors.flatMap((year) =>
+      year.awards.map((award, awardIndex) => ({
+        id: homeHonorItemId(year.year, awardIndex, award.date),
+        year: year.year,
+        title: award.title.zh || award.title.en || "HONORS",
+        date: award.date,
+        body: award.body.zh || award.body.en || "",
+      })),
+    );
+    const years = state.lists.homeHonorYears.length ? state.lists.homeHonorYears : state.content.honors.map((item) => item.year);
+    const selectedItemIds = state.lists.homeHonorItems;
+    const findHonorItem = (id: string) => honorItems.find((item) => item.id === id);
+    const selectedItemsForYear = (year: string) =>
+      selectedItemIds
+        .map((id) => findHonorItem(id))
+        .filter((item): item is (typeof honorItems)[number] => item?.year === year);
+
+    return (
+      <div className={officialSplitEditorClassName}>
+        <div className="flex flex-wrap justify-end gap-3 xl:col-start-1">
+          <select
+            value=""
+            onChange={(event) => {
+              const year = event.target.value;
+              if (!year) return;
+              updateList("homeHonorYears", [...years, year]);
+            }}
+            className="min-w-[14rem] rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
+          >
+            <option value="">新增年份到首页 HONORS</option>
+            {state.content.honors
+              .map((item) => item.year)
+              .filter((year) => year && !years.includes(year))
+              .map((year) => (
+                <option key={year} value={year}>
+                  {year}
+                </option>
+              ))}
+          </select>
+        </div>
+        {years.map((year, yearIndex) => {
+          const sourceItems = honorItems.filter((item) => item.year === year);
+          const selectedYearItems = selectedItemsForYear(year);
+          const availableYearItems = sourceItems.filter((item) => !selectedItemIds.includes(item.id));
+          const yearSelectValue = availableYearItems.some((item) => item.id === selectedHomeHonorYear)
+            ? selectedHomeHonorYear
+            : "";
+
+          return renderItemShell({
+            id: `home-honor-year-${year}-${yearIndex}`,
+            defaultOpen: yearIndex === 0,
+            title: year,
+            summary: selectedYearItems.length
+              ? selectedYearItems.map((item) => item.title).join("，")
+              : `${sourceItems.length} 条虎诉荣誉可加入首页 HONORS`,
+            onMoveUp: yearIndex > 0 ? () => updateList("homeHonorYears", moveArrayItem(years, yearIndex, yearIndex - 1)) : undefined,
+            onMoveDown:
+              yearIndex < years.length - 1
+                ? () => updateList("homeHonorYears", moveArrayItem(years, yearIndex, yearIndex + 1))
+                : undefined,
+            onDelete: () => {
+              updateList("homeHonorYears", years.filter((item) => item !== year));
+              updateList(
+                "homeHonorItems",
+                selectedItemIds.filter((id) => findHonorItem(id)?.year !== year),
+              );
+            },
+            children: (
+              <div className="space-y-4">
+                <div className="flex flex-wrap gap-3">
+                  <select
+                    value={yearSelectValue}
+                    onChange={(event) => setSelectedHomeHonorYear(event.target.value)}
+                    className="min-w-[18rem] rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
+                  >
+                    <option value="">选择这个年份下的具体荣誉</option>
+                    {availableYearItems.map((item) => (
+                      <option key={item.id} value={item.id}>
+                        {item.date} / {item.title}
+                      </option>
+                    ))}
+                  </select>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (!yearSelectValue) return;
+                      updateList("homeHonorItems", [...selectedItemIds, yearSelectValue]);
+                      setSelectedHomeHonorYear("");
+                    }}
+                    className="rounded-2xl bg-[#2563eb] px-4 py-3 text-sm font-semibold text-white"
+                  >
+                    新增到轮播
+                  </button>
+                </div>
+                {selectedYearItems.length ? (
+                  <div className="space-y-3">
+                    {selectedYearItems.map((item) => {
+                      const itemIndex = selectedItemIds.indexOf(item.id);
+
+                      return (
+                        <article key={item.id} className="rounded-[22px] border border-slate-200 bg-slate-50 p-4">
+                          <div className="flex flex-wrap items-start justify-between gap-3">
+                            <div>
+                              <p className="text-sm font-semibold text-slate-950">{item.title}</p>
+                              <p className="mt-1 text-xs text-slate-500">{item.date}</p>
+                            </div>
+                            <div className="flex flex-wrap gap-2">
+                              {itemIndex > 0 ? (
+                                <button
+                                  type="button"
+                                  onClick={() => updateList("homeHonorItems", moveArrayItem(selectedItemIds, itemIndex, itemIndex - 1))}
+                                  className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-bold text-slate-600"
+                                >
+                                  上移
+                                </button>
+                              ) : null}
+                              {itemIndex < selectedItemIds.length - 1 ? (
+                                <button
+                                  type="button"
+                                  onClick={() => updateList("homeHonorItems", moveArrayItem(selectedItemIds, itemIndex, itemIndex + 1))}
+                                  className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-bold text-slate-600"
+                                >
+                                  下移
+                                </button>
+                              ) : null}
+                              <button
+                                type="button"
+                                onClick={() => updateList("homeHonorItems", selectedItemIds.filter((id) => id !== item.id))}
+                                className="rounded-xl px-3 py-2 text-xs font-bold text-rose-500 hover:bg-rose-50"
+                              >
+                                删除
+                              </button>
+                            </div>
+                          </div>
+                          {item.body ? <p className="mt-3 text-sm leading-6 text-slate-600">{item.body}</p> : null}
+                        </article>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <p className="rounded-2xl bg-slate-50 p-4 text-sm text-slate-600">
+                    这个年份还没有选择具体荣誉。未选择任何具体荣誉时，首页 HONORS 会按年份列表回退展示。
+                  </p>
+                )}
+              </div>
+            ),
+          });
+        })}
+      </div>
+    );
+  };
+
+  const renderHomeHonorStickyYearEditor = () => {
+    const honorItems = state.content.honors.flatMap((year) =>
+      year.awards.map((award, awardIndex) => ({
+        id: homeHonorItemId(year.year, awardIndex, award.date),
+        year: year.year,
+        title: award.title.zh || award.title.en || "HONORS",
+        date: award.date,
+        body: award.body.zh || award.body.en || "",
+      })),
+    );
+    const years = state.lists.homeHonorYears.length ? state.lists.homeHonorYears : state.content.honors.map((item) => item.year);
+    const selectedItemIds = state.lists.homeHonorItems;
+    const findHonorItem = (id: string) => honorItems.find((item) => item.id === id);
+    const selectedItemsForYear = (year: string) =>
+      selectedItemIds
+        .map((id) => findHonorItem(id))
+        .filter((item): item is (typeof honorItems)[number] => item?.year === year);
+    const activeYear = years.find((year) => expandedOfficialItemIds[`home-honor-year-${year}`]) ?? years[0] ?? "";
+    const sourceItems = honorItems.filter((item) => item.year === activeYear);
+    const selectedYearItems = selectedItemsForYear(activeYear);
+    const availableYearItems = sourceItems.filter((item) => !selectedItemIds.includes(item.id));
+    const yearSelectValue = availableYearItems.some((item) => item.id === selectedHomeHonorYear) ? selectedHomeHonorYear : "";
+
+    return (
+      <div className={officialSplitEditorClassName}>
+        <aside className="space-y-4 xl:sticky xl:top-24 xl:col-start-1 xl:max-h-[calc(100vh-7rem)] xl:overflow-y-auto xl:pr-1">
+          <select
+            value=""
+            onChange={(event) => {
+              const year = event.target.value;
+              if (!year) return;
+              updateList("homeHonorYears", [...years, year]);
+            }}
+            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
+          >
+            <option value="">新增年份到首页 HONORS</option>
+            {state.content.honors
+              .map((item) => item.year)
+              .filter((year) => year && !years.includes(year))
+              .map((year) => (
+                <option key={year} value={year}>
+                  {year}
+                </option>
+              ))}
+          </select>
+          <div className="space-y-3">
+            {years.map((year, yearIndex) => {
+              const sourceCount = honorItems.filter((item) => item.year === year).length;
+              const selectedCount = selectedItemsForYear(year).length;
+              const active = year === activeYear;
+
+              return (
+                <article
+                  key={year}
+                  className={`rounded-[24px] border p-4 shadow-sm transition ${
+                    active ? "border-[#2563eb] bg-[#eef4ff]" : "border-slate-200 bg-white"
+                  }`}
+                >
+                  <button
+                    type="button"
+                    onClick={() => setExpandedOfficialItemIds({ [`home-honor-year-${year}`]: true })}
+                    className="block w-full text-left"
+                  >
+                    <p className="text-sm font-semibold text-slate-950">{year}</p>
+                    <p className="mt-1 text-xs leading-5 text-slate-500">
+                      已选 {selectedCount} 条 / 可选 {sourceCount} 条
+                    </p>
+                  </button>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {yearIndex > 0 ? (
+                      <button
+                        type="button"
+                        onClick={() => updateList("homeHonorYears", moveArrayItem(years, yearIndex, yearIndex - 1))}
+                        className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-bold text-slate-600"
+                      >
+                        上移
+                      </button>
+                    ) : null}
+                    {yearIndex < years.length - 1 ? (
+                      <button
+                        type="button"
+                        onClick={() => updateList("homeHonorYears", moveArrayItem(years, yearIndex, yearIndex + 1))}
+                        className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-bold text-slate-600"
+                      >
+                        下移
+                      </button>
+                    ) : null}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        updateList("homeHonorYears", years.filter((item) => item !== year));
+                        updateList(
+                          "homeHonorItems",
+                          selectedItemIds.filter((id) => findHonorItem(id)?.year !== year),
+                        );
+                      }}
+                      className="rounded-xl px-3 py-2 text-xs font-bold text-rose-500 hover:bg-rose-50"
+                    >
+                      删除
+                    </button>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </aside>
+        <section className="min-w-0 space-y-4 rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm xl:col-start-2">
+          <div className="border-b border-slate-100 pb-4">
+            <p className="text-sm font-semibold text-slate-950">{activeYear || "未选择年份"}</p>
+            <p className="mt-1 text-xs leading-5 text-slate-500">从该年份的虎诉荣誉中选择具体条目加入首页 HONORS 轮播。</p>
+          </div>
+          <div className="space-y-4">
+            <div className="flex flex-wrap gap-3">
+              <select
+                value={yearSelectValue}
+                onChange={(event) => setSelectedHomeHonorYear(event.target.value)}
+                className="min-w-[18rem] rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
+              >
+                <option value="">选择这个年份下的具体荣誉</option>
+                {availableYearItems.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.date} / {item.title}
+                  </option>
+                ))}
+              </select>
+              <button
+                type="button"
+                onClick={() => {
+                  if (!yearSelectValue) return;
+                  updateList("homeHonorItems", [...selectedItemIds, yearSelectValue]);
+                  setSelectedHomeHonorYear("");
+                }}
+                className="rounded-2xl bg-[#2563eb] px-4 py-3 text-sm font-semibold text-white"
+              >
+                新增到轮播
+              </button>
+            </div>
+            {selectedYearItems.length ? (
+              <div className="space-y-3">
+                {selectedYearItems.map((item) => {
+                  const itemIndex = selectedItemIds.indexOf(item.id);
+
+                  return (
+                    <article key={item.id} className="rounded-[22px] border border-slate-200 bg-slate-50 p-4">
+                      <div className="flex flex-wrap items-start justify-between gap-3">
+                        <div>
+                          <p className="text-sm font-semibold text-slate-950">{item.title}</p>
+                          <p className="mt-1 text-xs text-slate-500">{item.date}</p>
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                          {itemIndex > 0 ? (
+                            <button
+                              type="button"
+                              onClick={() => updateList("homeHonorItems", moveArrayItem(selectedItemIds, itemIndex, itemIndex - 1))}
+                              className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-bold text-slate-600"
+                            >
+                              上移
+                            </button>
+                          ) : null}
+                          {itemIndex < selectedItemIds.length - 1 ? (
+                            <button
+                              type="button"
+                              onClick={() => updateList("homeHonorItems", moveArrayItem(selectedItemIds, itemIndex, itemIndex + 1))}
+                              className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-bold text-slate-600"
+                            >
+                              下移
+                            </button>
+                          ) : null}
+                          <button
+                            type="button"
+                            onClick={() => updateList("homeHonorItems", selectedItemIds.filter((id) => id !== item.id))}
+                            className="rounded-xl px-3 py-2 text-xs font-bold text-rose-500 hover:bg-rose-50"
+                          >
+                            删除
+                          </button>
+                        </div>
+                      </div>
+                      {item.body ? <p className="mt-3 text-sm leading-6 text-slate-600">{item.body}</p> : null}
+                    </article>
+                  );
+                })}
+              </div>
+            ) : (
+              <p className="rounded-2xl bg-slate-50 p-4 text-sm text-slate-600">
+                这个年份还没有选择具体荣誉。未选择任何具体荣誉时，首页 HONORS 会按年份列表回退展示。
+              </p>
+            )}
+          </div>
+        </section>
+      </div>
+    );
+  };
+
+  const renderHonorsEditor = () => {
+    const updateYear = (yearIndex: number, updater: (year: OfficialCmsHonorYear) => OfficialCmsHonorYear) => {
+      updateState((current) => ({
+          ...current,
+          content: {
+            ...current.content,
+          honors: current.content.honors.map((item, index) => (index === yearIndex ? normalizeHonorCount(updater(item)) : item)),
+          },
+        }));
+    };
+
+    return (
+      <div className={officialSplitEditorClassName}>
+        {renderStickySplitNodes([
+        <div key="honor-actions" className="flex justify-end">
+          <button
+            type="button"
+            onClick={() =>
+              updateState((current) => ({
+                ...current,
+                content: { ...current.content, honors: [createEmptyHonorYear(), ...current.content.honors] },
+              }))
+            }
+            className="rounded-2xl bg-[#2563eb] px-4 py-3 text-sm font-semibold text-white"
+          >
+            新增年份
+          </button>
+        </div>,
+        ...state.content.honors.map((year, yearIndex) =>
+          renderItemShell({
+            id: `honor-${yearIndex}`,
+            defaultOpen: yearIndex === 0,
+            title: `${year.year || "未填写年份"} / ${honorCountText(year.awards.length, "zh")}`,
+            summary: year.awards.map((award) => award.title.zh || award.title.en).filter(Boolean).join("，"),
+            onMoveUp: yearIndex > 0
+              ? () =>
+                  updateState((current) => ({
+                    ...current,
+                    content: { ...current.content, honors: moveArrayItem(current.content.honors, yearIndex, yearIndex - 1) },
+                  }))
+              : undefined,
+            onMoveDown: yearIndex < state.content.honors.length - 1
+              ? () =>
+                  updateState((current) => ({
+                    ...current,
+                    content: { ...current.content, honors: moveArrayItem(current.content.honors, yearIndex, yearIndex + 1) },
+                  }))
+              : undefined,
+            onDelete: () =>
+              updateState((current) => ({
+                ...current,
+                content: { ...current.content, honors: current.content.honors.filter((_, index) => index !== yearIndex) },
+              })),
+            children: (
+              <div className="space-y-4">
+                <div className="grid gap-4 xl:grid-cols-3">
+                  <label className="block space-y-2">
+                    <span className="text-sm font-medium text-slate-700">年份</span>
+                    <input
+                      value={year.year}
+                      onChange={(event) => updateYear(yearIndex, (item) => ({ ...item, year: event.target.value }))}
+                      className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
+                    />
+                  </label>
+                  <div className="space-y-2 rounded-[22px] border border-slate-200 bg-slate-50 p-4">
+                    <span className="text-sm font-medium text-slate-700">数量文案</span>
+                    <p className="text-sm font-semibold text-slate-950">{honorCountText(year.awards.length, "zh")}</p>
+                    <p className="text-xs text-slate-500">{honorCountText(year.awards.length, "en")}</p>
+                    <p className="text-xs leading-5 text-slate-400">根据当前年份下荣誉条目数量自动生成。</p>
+                  </div>
+                </div>
+                <div className="flex justify-end">
+                  <button
+                    type="button"
+                    onClick={() => updateYear(yearIndex, (item) => ({ ...item, awards: [...item.awards, createEmptyHonorAward()] }))}
+                    className="rounded-xl border border-slate-200 px-3 py-2 text-xs font-bold text-slate-600"
+                  >
+                    新增荣誉
+                  </button>
+                </div>
+                {year.awards.map((award, awardIndex) => (
+                  <div key={`${yearIndex}-${awardIndex}`} className="space-y-4 rounded-[22px] border border-slate-200 bg-slate-50 p-4">
+                    <div className="flex justify-between gap-3">
+                      <p className="text-sm font-semibold text-slate-900">荣誉 {awardIndex + 1}</p>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          updateYear(yearIndex, (item) => ({
+                            ...item,
+                            awards: item.awards.filter((_, index) => index !== awardIndex),
+                          }))
+                        }
+                        className="text-xs font-bold text-rose-500"
+                      >
+                        删除荣誉
+                      </button>
+                    </div>
+                    <div className="grid gap-4 xl:grid-cols-2">
+                      <MultilingualField
+                        label="标题"
+                        en={award.title.en}
+                        zh={award.title.zh}
+                        onChange={(language, value) =>
+                          updateYear(yearIndex, (item) => ({
+                            ...item,
+                            awards: item.awards.map((currentAward, index) =>
+                              index === awardIndex
+                                ? { ...currentAward, title: { ...currentAward.title, [language]: value } }
+                                : currentAward,
+                            ),
+                          }))
+                        }
+                      />
+                      <section className="space-y-3 rounded-[22px] border border-slate-200 bg-white p-4">
+                        <label className="block space-y-2">
+                          <span className="text-sm font-medium text-slate-700">日期</span>
+                          <input
+                            value={award.date}
+                            onChange={(event) =>
+                              updateYear(yearIndex, (item) => ({
+                                ...item,
+                                awards: item.awards.map((currentAward, index) =>
+                                  index === awardIndex ? { ...currentAward, date: event.target.value } : currentAward,
+                                ),
+                              }))
+                            }
+                            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
+                          />
+                        </label>
+                        <label className="block space-y-2">
+                          <span className="text-sm font-medium text-slate-700">链接</span>
+                          <input
+                            value={award.href ?? ""}
+                            onChange={(event) =>
+                              updateYear(yearIndex, (item) => ({
+                                ...item,
+                                awards: item.awards.map((currentAward, index) =>
+                                  index === awardIndex ? { ...currentAward, href: event.target.value } : currentAward,
+                                ),
+                              }))
+                            }
+                            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
+                          />
+                        </label>
+                      </section>
+                      <MultilingualField
+                        label="正文"
+                        en={award.body.en}
+                        zh={award.body.zh}
+                        textarea
+                        onChange={(language, value) =>
+                          updateYear(yearIndex, (item) => ({
+                            ...item,
+                            awards: item.awards.map((currentAward, index) =>
+                              index === awardIndex
+                                ? { ...currentAward, body: { ...currentAward.body, [language]: value } }
+                                : currentAward,
+                            ),
+                          }))
+                        }
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ),
+          }),
+        ),
+        ])}
+      </div>
+    );
+  };
+
+  const renderChronicleEditor = () => {
+    const updateYear = (yearIndex: number, updater: (year: OfficialCmsChronicleYear) => OfficialCmsChronicleYear) => {
+      updateState((current) => {
+        const nextChronicle = state.content.chronicle.map((item, index) => (index === yearIndex ? updater(item) : item));
+        return {
+          ...current,
+          content: {
+            ...current.content,
+            chronicle: nextChronicle,
+          },
+          lists: {
+            ...current.lists,
+            chronicleYears: nextChronicle.map((item) => item.year).filter(Boolean),
+          },
+        };
+      });
+    };
+
+    return (
+      <div className={officialSplitEditorClassName}>
+        {renderStickySplitNodes([
+        <div key="chronicle-actions" className="flex justify-end">
+          <button
+            type="button"
+            onClick={() =>
+              updateState((current) => {
+                const newYear = createEmptyChronicleYearForExisting(state.content.chronicle.map((item) => item.year));
+                const nextChronicle = [newYear, ...state.content.chronicle];
+                return {
+                  ...current,
+                  content: { ...current.content, chronicle: nextChronicle },
+                  lists: {
+                    ...current.lists,
+                    chronicleYears: nextChronicle.map((item) => item.year).filter(Boolean),
+                  },
+                };
+              })
+            }
+            className="rounded-2xl bg-[#2563eb] px-4 py-3 text-sm font-semibold text-white"
+          >
+            新增年份
+          </button>
+        </div>,
+        ...state.content.chronicle.map((year, yearIndex) =>
+          renderItemShell({
+            id: `chronicle-${yearIndex}`,
+            defaultOpen: yearIndex === 0,
+            title: `${year.year || "未填写年份"} / ${year.events.length} 条事件`,
+            summary: year.events.map((event) => `${event.month.zh || event.month.en}：${event.text.zh || event.text.en}`).join("，"),
+            onMoveUp: yearIndex > 0
+              ? () =>
+                  updateState((current) => {
+                    const nextChronicle = moveArrayItem(state.content.chronicle, yearIndex, yearIndex - 1);
+                    return {
+                      ...current,
+                      content: { ...current.content, chronicle: nextChronicle },
+                      lists: { ...current.lists, chronicleYears: nextChronicle.map((item) => item.year).filter(Boolean) },
+                    };
+                  })
+              : undefined,
+            onMoveDown: yearIndex < state.content.chronicle.length - 1
+              ? () =>
+                  updateState((current) => {
+                    const nextChronicle = moveArrayItem(state.content.chronicle, yearIndex, yearIndex + 1);
+                    return {
+                      ...current,
+                      content: { ...current.content, chronicle: nextChronicle },
+                      lists: { ...current.lists, chronicleYears: nextChronicle.map((item) => item.year).filter(Boolean) },
+                    };
+                  })
+              : undefined,
+            onDelete: () =>
+              updateState((current) => {
+                const nextChronicle = state.content.chronicle.filter((_, index) => index !== yearIndex);
+                return {
+                  ...current,
+                  content: { ...current.content, chronicle: nextChronicle },
+                  lists: {
+                    ...current.lists,
+                    chronicleYears: nextChronicle.map((item) => item.year).filter(Boolean),
+                  },
+                };
+              }),
+            children: (
+              <div className="space-y-4">
+                <label className="block max-w-xs space-y-2">
+                  <span className="text-sm font-medium text-slate-700">年份</span>
+                  <input
+                    value={year.year}
+                    onChange={(event) => {
+                      const nextYear = event.target.value;
+                      updateState((current) => {
+                        const nextChronicle = state.content.chronicle.map((item, index) =>
+                          index === yearIndex ? { ...item, year: nextYear } : item,
+                        );
+                        return {
+                          ...current,
+                          content: {
+                            ...current.content,
+                            chronicle: nextChronicle,
+                          },
+                          lists: {
+                            ...current.lists,
+                            chronicleYears: nextChronicle.map((item) => item.year).filter(Boolean),
+                          },
+                        };
+                      });
+                    }}
+                    className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
+                  />
+                </label>
+                <div className="flex justify-end">
+                  <button
+                    type="button"
+                    onClick={() => updateYear(yearIndex, (item) => ({ ...item, events: [...item.events, createEmptyChronicleEvent()] }))}
+                    className="rounded-xl border border-slate-200 px-3 py-2 text-xs font-bold text-slate-600"
+                  >
+                    新增事件
+                  </button>
+                </div>
+                {year.events.map((chronicleEvent, eventIndex) => (
+                  <div key={`${yearIndex}-${eventIndex}`} className="space-y-4 rounded-[22px] border border-slate-200 bg-slate-50 p-4">
+                    <div className="flex justify-between gap-3">
+                      <p className="text-sm font-semibold text-slate-900">事件 {eventIndex + 1}</p>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          updateYear(yearIndex, (item) => ({
+                            ...item,
+                            events: item.events.filter((_, index) => index !== eventIndex),
+                          }))
+                        }
+                        className="text-xs font-bold text-rose-500"
+                      >
+                        删除事件
+                      </button>
+                    </div>
+                    <div className="grid gap-4 xl:grid-cols-2">
+                      <MultilingualField
+                        label="月份"
+                        en={chronicleEvent.month.en}
+                        zh={chronicleEvent.month.zh}
+                        onChange={(language, value) =>
+                          updateYear(yearIndex, (item) => ({
+                            ...item,
+                            events: item.events.map((currentEvent, index) =>
+                              index === eventIndex
+                                ? { ...currentEvent, month: { ...currentEvent.month, [language]: value } }
+                                : currentEvent,
+                            ),
+                          }))
+                        }
+                      />
+                      <section className="space-y-3 rounded-[22px] border border-slate-200 bg-white p-4">
+                        <label className="block space-y-2">
+                          <span className="text-sm font-medium text-slate-700">左右位置</span>
+                          <select
+                            value={chronicleEvent.side}
+                            onChange={(event) =>
+                              updateYear(yearIndex, (item) => ({
+                                ...item,
+                                events: item.events.map((currentEvent, index) =>
+                                  index === eventIndex
+                                    ? { ...currentEvent, side: event.target.value === "right" ? "right" : "left" }
+                                    : currentEvent,
+                                ),
+                              }))
+                            }
+                            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
+                          >
+                            <option value="left">左侧</option>
+                            <option value="right">右侧</option>
+                          </select>
+                        </label>
+                      </section>
+                      <MultilingualField
+                        label="正文"
+                        en={chronicleEvent.text.en}
+                        zh={chronicleEvent.text.zh}
+                        textarea
+                        onChange={(language, value) =>
+                          updateYear(yearIndex, (item) => ({
+                            ...item,
+                            events: item.events.map((currentEvent, index) =>
+                              index === eventIndex
+                                ? { ...currentEvent, text: { ...currentEvent.text, [language]: value } }
+                                : currentEvent,
+                            ),
+                          }))
+                        }
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ),
+          }),
+        ),
+        ])}
+      </div>
+    );
+  };
+
+  const renderTeamEditor = () => {
+    const slugs = props.panel === "officialPartners" ? state.lists.partnerSlugs : state.lists.seniorAssociateSlugs;
+    const listKey = props.panel === "officialPartners" ? "partnerSlugs" : "seniorAssociateSlugs";
+    const group = props.panel === "officialPartners" ? "partner" : "seniorAssociate";
+    const allSlugs = slugs;
+
+    const updateProfile = (slug: string, updater: (profile: OfficialCmsTeamProfileContent) => OfficialCmsTeamProfileContent) => {
+      updateState((current) => ({
+        ...current,
+        content: {
+          ...current.content,
+          teamProfiles: {
+            ...current.content.teamProfiles,
+            [slug]: updater(current.content.teamProfiles[slug] ?? createTeamProfileOverride(slug)),
+          },
+        },
+      }));
+    };
+
+    const setProfileStringArray = (slug: string, key: keyof OfficialCmsTeamProfileContent, value: string) => {
+      updateProfile(slug, (profile) => ({ ...profile, [key]: splitLines(value) }));
+    };
+
+    return (
+      <div className={officialSplitEditorClassName}>
+        {renderStickySplitNodes([
+        <div key="team-actions" className="flex flex-wrap justify-end gap-3">
+          <button
+            type="button"
+            onClick={() => {
+              updateState((current) => {
+                const slug = createUniqueTeamSlug(current.content.teamProfiles, group);
+                return {
+                  ...current,
+                  content: {
+                    ...current.content,
+                    teamProfiles: {
+                      ...current.content.teamProfiles,
+                      [slug]: createEmptyTeamProfileOverride(slug, group),
+                    },
+                  },
+                  lists: {
+                    ...current.lists,
+                    [listKey]: [...current.lists[listKey], slug],
+                  },
+                };
+              });
+            }}
+            className="rounded-2xl bg-[#2563eb] px-4 py-3 text-sm font-semibold text-white"
+          >
+            新增成员
+          </button>
+        </div>,
+        ...allSlugs.map((slug, index) => {
+          const profile = state.content.teamProfiles[slug] ?? createTeamProfileOverride(slug);
+          const sourceProfile = teamProfiles.find((item) => item.slug === slug);
+
+          return renderItemShell({
+            id: `team-${slug}`,
+            defaultOpen: index === 0,
+            title: `${profile.zhName || sourceProfile?.zhName || slug} / ${profile.name || sourceProfile?.name || ""}`,
+            summary: profile.zhTitle || profile.title || sourceProfile?.zhTitle || sourceProfile?.title,
+            thumbnail: profile.image || sourceProfile?.image,
+            onMoveUp:
+              index > 0 && slugs.includes(slug)
+                ? () => updateList(listKey, moveArrayItem(slugs, slugs.indexOf(slug), slugs.indexOf(slug) - 1))
+                : undefined,
+            onMoveDown:
+              index < slugs.length - 1 && slugs.includes(slug)
+                ? () => updateList(listKey, moveArrayItem(slugs, slugs.indexOf(slug), slugs.indexOf(slug) + 1))
+                : undefined,
+            onDelete: slugs.includes(slug)
+              ? () =>
+                  updateState((current) => {
+                    const { [slug]: _removedProfile, ...teamProfiles } = current.content.teamProfiles;
+
+                    return {
+                      ...current,
+                      content: {
+                        ...current.content,
+                        teamProfiles,
+                      },
+                      lists: {
+                        ...current.lists,
+                        [listKey]: current.lists[listKey].filter((item) => item !== slug),
+                      },
+                    };
+                  })
+              : undefined,
+            children: (
+              <div className="grid gap-4 xl:grid-cols-2">
+                {[
+                  ["name", "英文姓名"],
+                  ["zhName", "中文姓名"],
+                  ["title", "英文职位"],
+                  ["zhTitle", "中文职位"],
+                  ["image", "卡片图片"],
+                  ["phone", "电话"],
+                  ["email", "邮箱"],
+                ].map(([key, label]) => (
+                  <label key={key} className="block space-y-2">
+                    <span className="text-sm font-medium text-slate-700">{label}</span>
+                    <input
+                      value={String(profile[key as keyof OfficialCmsTeamProfileContent] ?? "")}
+                      placeholder={String(sourceProfile?.[key as keyof typeof sourceProfile] ?? "")}
+                      onChange={(event) =>
+                        updateProfile(slug, (currentProfile) => ({ ...currentProfile, [key]: event.target.value }))
+                      }
+                      className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
+                    />
+                  </label>
+                ))}
+                {[
+                  ["serviceIndustries", "英文服务行业"],
+                  ["zhServiceIndustries", "中文服务行业"],
+                  ["languages", "英文工作语言"],
+                  ["zhLanguages", "中文工作语言"],
+                  ["honors", "英文荣誉"],
+                  ["zhHonors", "中文荣誉"],
+                  ["achievements", "英文个人业绩"],
+                  ["zhAchievements", "中文个人业绩"],
+                ].map(([key, label]) => (
+                  <label key={key} className="block space-y-2">
+                    <span className="text-sm font-medium text-slate-700">{label}（每行一条）</span>
+                    <textarea
+                      value={((profile[key as keyof OfficialCmsTeamProfileContent] as string[] | undefined) ?? []).join("\n")}
+                      rows={6}
+                      onChange={(event) => setProfileStringArray(slug, key as keyof OfficialCmsTeamProfileContent, event.target.value)}
+                      className="min-h-32 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
+                    />
+                  </label>
+                ))}
+                {[
+                  ["education", "英文教育背景"],
+                  ["zhEducation", "中文教育背景"],
+                  ["qualification", "英文专业资格"],
+                  ["zhQualification", "中文专业资格"],
+                  ["socialEngagements", "英文社会任职"],
+                  ["zhSocialEngagements", "中文社会任职"],
+                  ["practiceArea", "英文专业领域"],
+                  ["zhPracticeArea", "中文专业领域"],
+                  ["practiceExperience", "英文执业经验"],
+                  ["zhPracticeExperience", "中文执业经验"],
+                ].map(([key, label]) => (
+                  <label key={key} className="block space-y-2">
+                    <span className="text-sm font-medium text-slate-700">{label}</span>
+                    <textarea
+                      value={String(profile[key as keyof OfficialCmsTeamProfileContent] ?? "")}
+                      rows={5}
+                      onChange={(event) =>
+                        updateProfile(slug, (currentProfile) => ({ ...currentProfile, [key]: event.target.value }))
+                      }
+                      className="min-h-32 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
+                    />
+                  </label>
+                ))}
+              </div>
+            ),
+          });
+        }),
+        ])}
+      </div>
+    );
+  };
+
+  const renderEventOverridesEditor = () => {
+    const slugs = state.lists.eventSlugs.length ? state.lists.eventSlugs : officialEventsData.map((event) => event.slug);
+    const availableEvents = officialEventsData.filter((event) => !slugs.includes(event.slug));
+
+    const updateOverride = (slug: string, updater: (override: OfficialCmsEventOverride) => OfficialCmsEventOverride) => {
+      updateState((current) => ({
+        ...current,
+        events: {
+          ...current.events,
+          overrides: {
+            ...current.events.overrides,
+            [slug]: updater(current.events.overrides[slug] ?? createEventOverride()),
+          },
+        },
+      }));
+    };
+
+    const updateLocalizedOverride = (
+      slug: string,
+      language: "en" | "zh",
+      updater: (override: OfficialCmsLocalizedEventOverride) => OfficialCmsLocalizedEventOverride,
+    ) => {
+      updateOverride(slug, (override) => ({
+        ...override,
+        [language]: updater(override[language] ?? createLocalizedEventOverride()),
+      }));
+    };
+
+    return (
+      <div className="space-y-4 xl:col-span-2">
+        <div className="flex flex-wrap justify-end gap-3">
+          <select
+            value={selectedOfficialEventSlug}
+            onChange={(event) => setSelectedOfficialEventSlug(event.target.value)}
+            className="min-w-[18rem] rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
+          >
+            <option value="">选择要加入 Events 页的动态</option>
+            {availableEvents.map((event) => (
+              <option key={event.slug} value={event.slug}>
+                {event.date} / {event.zh?.title ?? event.title}
+              </option>
+            ))}
+          </select>
+          <button
+            type="button"
+            onClick={() => {
+              if (!selectedOfficialEventSlug) return;
+              updateList("eventSlugs", [...slugs, selectedOfficialEventSlug]);
+              setSelectedOfficialEventSlug("");
+            }}
+            className="rounded-2xl bg-[#2563eb] px-4 py-3 text-sm font-semibold text-white"
+          >
+            新增动态
+          </button>
+        </div>
+        {slugs.map((slug, index) => {
+          const sourceEvent = officialEventsData.find((event) => event.slug === slug);
+          const override = state.events.overrides[slug] ?? createEventOverride();
+
+          return renderItemShell({
+            id: `event-${slug}`,
+            title: override.zh?.title || override.en?.title || sourceEvent?.zh?.title || sourceEvent?.title || slug,
+            summary: slug,
+            thumbnail: override.image || sourceEvent?.image,
+            layout: "inline",
+            onMoveUp:
+              index > 0 ? () => updateList("eventSlugs", moveArrayItem(slugs, index, index - 1)) : undefined,
+            onMoveDown:
+              index < slugs.length - 1 ? () => updateList("eventSlugs", moveArrayItem(slugs, index, index + 1)) : undefined,
+            onDelete: () => updateList("eventSlugs", slugs.filter((item) => item !== slug)),
+            children: (
+              <div className="grid gap-4 xl:grid-cols-2">
+                <label className="block space-y-2 xl:col-span-2">
+                  <span className="text-sm font-medium text-slate-700">封面图片</span>
+                  <input
+                    value={override.image ?? ""}
+                    placeholder={sourceEvent?.image}
+                    onChange={(event) => updateOverride(slug, (currentOverride) => ({ ...currentOverride, image: event.target.value }))}
+                    className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
+                  />
+                </label>
+                {(["en", "zh"] as const).map((language) => {
+                  const localized = override[language] ?? createLocalizedEventOverride();
+
+                  return (
+                    <section key={language} className="space-y-4 rounded-[22px] border border-slate-200 bg-slate-50 p-4">
+                      <h4 className="text-sm font-semibold text-slate-900">{language === "en" ? "English" : "中文"}</h4>
+                      {(["category", "title", "summary"] as const).map((field) => (
+                        <label key={field} className="block space-y-2">
+                          <span className="text-sm font-medium text-slate-700">{field}</span>
+                          <input
+                            value={String(localized[field] ?? "")}
+                            onChange={(event) =>
+                              updateLocalizedOverride(slug, language, (currentLocalized) => ({
+                                ...currentLocalized,
+                                [field]: event.target.value,
+                              }))
+                            }
+                            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
+                          />
+                        </label>
+                      ))}
+                      <label className="block space-y-2">
+                        <span className="text-sm font-medium text-slate-700">正文（每行一段，图片占位用 [IMAGE] / [图片]）</span>
+                        <textarea
+                          value={(localized.content ?? []).join("\n")}
+                          rows={12}
+                          onChange={(event) =>
+                            updateLocalizedOverride(slug, language, (currentLocalized) => ({
+                              ...currentLocalized,
+                              content: event.target.value.split(/\r?\n/),
+                            }))
+                          }
+                          className="min-h-64 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
+                        />
+                      </label>
+                    </section>
+                  );
+                })}
+              </div>
+            ),
+          });
+        })}
+      </div>
+    );
+  };
+
+  return (
+    <section className="space-y-6">
+      <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+          <div>
+            <h2 className="text-2xl font-semibold text-slate-950">{panelTitles[props.panel]}</h2>
+            <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-500">
+              {panelDescriptions[props.panel]} 保存到真实前台数据 data/cms-site.json。
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={saveCurrentPanel}
+            className="inline-flex items-center justify-center gap-2 rounded-2xl bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
+          >
+            <Save className="h-4 w-4" />
+            保存{panelTitles[props.panel]}
+          </button>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
+        {props.panel === "officialIndustries" ? renderIndustriesEditor() : null}
+        {props.panel === "homeEventCarousel" ? renderHomeEventCarouselEditor() : null}
+        {props.panel === "homeHonorsCarousel" ? renderHomeHonorStickyYearEditor() : null}
+        {props.panel === "officialHonors" ? renderHonorsEditor() : null}
+        {props.panel === "officialChronicle" ? renderChronicleEditor() : null}
+        {props.panel === "officialPartners" || props.panel === "officialSeniorAssociates" ? renderTeamEditor() : null}
+        {props.panel === "officialEvents" ? renderEventOverridesEditor() : null}
+      </div>
+    </section>
   );
 }
 
@@ -1878,7 +4668,7 @@ function CmsVersionSelect(props: {
   editingVersionId: number | null;
   loadVersionForEditing: (versionId: number | null) => Promise<void>;
 }) {
-  const selectedVersionId = props.editingVersionId ?? props.versions[0]?.id ?? "";
+  const selectedVersionId = props.editingVersionId ? String(props.editingVersionId) : "";
 
   return (
     <label className="flex items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-semibold text-slate-600">
@@ -1886,15 +4676,16 @@ function CmsVersionSelect(props: {
       <select
         value={selectedVersionId}
         onChange={(event) => {
+          if (!event.target.value) return;
           void props.loadVersionForEditing(Number(event.target.value));
         }}
         disabled={props.versions.length === 0}
         className="min-w-[180px] rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-4 focus:ring-[#2563eb]/10"
       >
-        {props.versions.length === 0 ? <option value="">暂无版本</option> : null}
+        <option value="">{props.versions.length ? "未选择版本" : "暂无版本"}</option>
         {props.versions.map((version) => (
           <option key={version.id} value={version.id}>
-            {version.name}
+            {version.name}{version.isPublished ? "（已发布）" : ""}
           </option>
         ))}
       </select>
@@ -1924,11 +4715,6 @@ function SiteContentPanel(props: {
     : props.value;
 
   const saveSiteContent = async () => {
-    if (!props.editingVersionId && props.versions.length > 0) {
-      props.setMessage("默认版本正在加载，请稍后再保存。");
-      return;
-    }
-
     const ok = props.editingVersionId
       ? await props.submitVersionDraft(props.editingVersionId, { siteContent: props.siteContent })
       : await props.persistWorkspace({ siteContent: props.siteContent });
@@ -1946,11 +4732,6 @@ function SiteContentPanel(props: {
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <CmsVersionSelect
-              versions={props.versions}
-              editingVersionId={props.editingVersionId}
-              loadVersionForEditing={props.loadVersionForEditing}
-            />
             <button
               type="button"
               onClick={saveSiteContent}
@@ -2186,11 +4967,6 @@ function RepeatableContentManagerPanel(props: {
   };
 
   const savePageContent = async () => {
-    if (!props.editingVersionId && props.versions.length > 0) {
-      props.setMessage("默认版本正在加载，请稍后再保存。");
-      return;
-    }
-
     const ok = props.editingVersionId
       ? await props.submitVersionDraft(props.editingVersionId, { pageContent: props.pageContent })
       : await props.persistWorkspace({ pageContent: props.pageContent });
@@ -2205,11 +4981,6 @@ function RepeatableContentManagerPanel(props: {
           <p className="mt-2 text-sm text-slate-500">{props.description}</p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
-          <CmsVersionSelect
-            versions={props.versions}
-            editingVersionId={props.editingVersionId}
-            loadVersionForEditing={props.loadVersionForEditing}
-          />
           <span className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm font-semibold text-slate-600">
             中文 / English
           </span>
@@ -3051,10 +5822,14 @@ function AssetsPanel(props: {
   assetInputRef: RefObject<HTMLInputElement>;
   setMessage: (message: string) => void;
 }) {
-  const [assetFilter, setAssetFilter] = useState<keyof typeof assetKindLabels>("all");
-  const [assetPageFilter, setAssetPageFilter] = useState<AssetPageCategoryId>("all");
   const [assetUploadPage, setAssetUploadPage] = useState<Exclude<AssetPageCategoryId, "all">>("home");
-  const [assetSearch, setAssetSearch] = useState("");
+  const [officialAssetSummary, setOfficialAssetSummary] = useState({
+    count: 0,
+    file: 0,
+    image: 0,
+    totalBytes: 0,
+    video: 0,
+  });
   const assetStats = useMemo(() => {
     return props.assets.reduce(
       (stats, asset) => {
@@ -3066,24 +5841,12 @@ function AssetsPanel(props: {
       { file: 0, image: 0, totalBytes: 0, video: 0 },
     );
   }, [props.assets]);
-  const visibleAssets = useMemo(() => {
-    const keyword = assetSearch.trim().toLowerCase();
-
-    return props.assets.filter((asset) => {
-      const kind = getAssetKind(asset);
-      const matchesKind = assetFilter === "all" || assetFilter === kind;
-      const pageCategory = getAssetPageCategory(asset);
-      const matchesPage = assetPageFilter === "all" || pageCategory === assetPageFilter;
-      const matchesKeyword =
-        !keyword ||
-        asset.originalName.toLowerCase().includes(keyword) ||
-        asset.url.toLowerCase().includes(keyword) ||
-        asset.mimeType.toLowerCase().includes(keyword);
-
-      return matchesKind && matchesPage && matchesKeyword;
-    });
-  }, [assetFilter, assetPageFilter, assetSearch, props.assets]);
-
+  const totalAssetStats = {
+    file: assetStats.file + officialAssetSummary.file,
+    image: assetStats.image + officialAssetSummary.image,
+    totalBytes: assetStats.totalBytes + officialAssetSummary.totalBytes,
+    video: assetStats.video + officialAssetSummary.video,
+  };
   const applyAssetPayload = (payload: { assets: CmsAsset[]; dashboard?: CmsDashboardMetrics }) => {
     props.setAssets(payload.assets);
     if (payload.dashboard) {
@@ -3140,28 +5903,6 @@ function AssetsPanel(props: {
     event.target.value = "";
   };
 
-  const deleteAsset = async (id: number) => {
-    const response = await fetch("/api/cms/assets", {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id }),
-    });
-
-    if (!response.ok) {
-      props.setMessage("素材删除失败。");
-      return;
-    }
-
-    const payload = (await response.json()) as { assets: CmsAsset[]; dashboard?: CmsDashboardMetrics };
-    applyAssetPayload(payload);
-    props.setMessage("文件已删除。");
-  };
-
-  const copyUrl = async (url: string) => {
-    await navigator.clipboard?.writeText(url);
-    props.setMessage("文件地址已复制。");
-  };
-
   return (
     <section className="space-y-5">
       <div className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
@@ -3169,9 +5910,9 @@ function AssetsPanel(props: {
           <div>
             <h2 className="text-2xl font-semibold text-slate-950">文件管理</h2>
             <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-500">
-              查看和管理文章、新闻、页面编辑时上传过的图片、视频和其他附件。刷新时会同步扫描
+              查看和管理 OSS 静态资源、文章、新闻、页面编辑时上传过的图片、视频和其他附件。刷新时会同步扫描
               <span className="font-mono text-slate-700"> public/uploads </span>
-              中的历史文件。
+              中的历史文件，并在下方扫描 <span className="font-mono text-slate-700"> public/assets </span>。
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
@@ -3220,136 +5961,178 @@ function AssetsPanel(props: {
         <div className="mt-6 grid gap-4 md:grid-cols-4">
           <div className="rounded-2xl bg-slate-50 p-4">
             <p className="text-xs text-slate-500">全部文件</p>
-            <p className="mt-2 text-2xl font-semibold text-slate-950">{props.assets.length}</p>
+            <p className="mt-2 text-2xl font-semibold text-slate-950">{props.assets.length + officialAssetSummary.count}</p>
           </div>
           <div className="rounded-2xl bg-slate-50 p-4">
             <p className="text-xs text-slate-500">图片</p>
-            <p className="mt-2 text-2xl font-semibold text-slate-950">{assetStats.image}</p>
+            <p className="mt-2 text-2xl font-semibold text-slate-950">{totalAssetStats.image}</p>
           </div>
           <div className="rounded-2xl bg-slate-50 p-4">
             <p className="text-xs text-slate-500">视频</p>
-            <p className="mt-2 text-2xl font-semibold text-slate-950">{assetStats.video}</p>
+            <p className="mt-2 text-2xl font-semibold text-slate-950">{totalAssetStats.video}</p>
           </div>
           <div className="rounded-2xl bg-slate-50 p-4">
             <p className="text-xs text-slate-500">附件空间</p>
-            <p className="mt-2 text-2xl font-semibold text-slate-950">{formatBytes(assetStats.totalBytes)}</p>
+            <p className="mt-2 text-2xl font-semibold text-slate-950">{formatBytes(totalAssetStats.totalBytes)}</p>
           </div>
         </div>
       </div>
 
-      <div className="flex flex-col gap-3 rounded-[24px] border border-slate-200 bg-white p-4 shadow-sm xl:flex-row xl:items-center xl:justify-between">
-        <div className="space-y-3">
-          <div className="flex flex-wrap gap-2">
-            {assetPageCategories.map((category) => (
-              <button
-                key={category.id}
-                type="button"
-                onClick={() => setAssetPageFilter(category.id)}
-                className={`rounded-2xl px-4 py-2 text-sm font-semibold transition ${
-                  assetPageFilter === category.id
-                    ? "bg-[#2563eb] text-white"
-                    : "border border-slate-200 bg-white text-slate-600 hover:border-[#2563eb] hover:text-[#2563eb]"
-                }`}
-              >
-                {category.label}
-              </button>
-            ))}
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {(Object.keys(assetKindLabels) as Array<keyof typeof assetKindLabels>).map((kind) => (
-              <button
-                key={kind}
-                type="button"
-                onClick={() => setAssetFilter(kind)}
-                className={`rounded-2xl px-4 py-2 text-sm font-semibold transition ${
-                  assetFilter === kind
-                    ? "bg-slate-900 text-white"
-                    : "border border-slate-200 bg-white text-slate-600 hover:border-[#2563eb] hover:text-[#2563eb]"
-                }`}
-              >
-                {assetKindLabels[kind]}
-              </button>
-            ))}
-          </div>
+      <OfficialAssetBrowser setMessage={props.setMessage} onSummary={setOfficialAssetSummary} />
+    </section>
+  );
+}
+
+type OfficialAssetBrowserItem = {
+  path: string;
+  url: string;
+  category: string;
+  name: string;
+  type: "file" | "image" | "video";
+  sizeBytes: number;
+};
+
+function OfficialAssetBrowser(props: {
+  setMessage: (message: string) => void;
+  onSummary: (summary: { count: number; file: number; image: number; totalBytes: number; video: number }) => void;
+}) {
+  const [assets, setAssets] = useState<OfficialAssetBrowserItem[]>([]);
+  const [categories, setCategories] = useState<string[]>([]);
+  const [activeCategory, setActiveCategory] = useState("all");
+  const [search, setSearch] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const refresh = async () => {
+    setIsLoading(true);
+    const response = await fetch("/api/cms/official-assets");
+    setIsLoading(false);
+
+    if (!response.ok) {
+      props.setMessage("OSS 文件列表刷新失败。");
+      return;
+    }
+
+    const payload = (await response.json()) as {
+      assets: OfficialAssetBrowserItem[];
+      categories: string[];
+    };
+    setAssets(payload.assets);
+    setCategories(payload.categories);
+    props.onSummary(
+      payload.assets.reduce(
+        (summary, asset) => {
+          summary.count += 1;
+          summary.totalBytes += asset.sizeBytes;
+          summary[asset.type] += 1;
+          return summary;
+        },
+        { count: 0, file: 0, image: 0, totalBytes: 0, video: 0 },
+      ),
+    );
+    props.setMessage("OSS 文件列表已刷新。");
+  };
+
+  useEffect(() => {
+    void refresh();
+  }, []);
+
+  const visibleAssets = useMemo(() => {
+    const keyword = search.trim().toLowerCase();
+
+    return assets.filter((asset) => {
+      const matchesCategory = activeCategory === "all" || asset.category === activeCategory;
+      const matchesKeyword =
+        !keyword || asset.path.toLowerCase().includes(keyword) || asset.url.toLowerCase().includes(keyword);
+
+      return matchesCategory && matchesKeyword;
+    });
+  }, [activeCategory, assets, search]);
+
+  const copyUrl = async (url: string) => {
+    await navigator.clipboard?.writeText(url);
+    props.setMessage("OSS 地址已复制。");
+  };
+
+  return (
+    <div className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+        <div>
+          <h3 className="text-xl font-semibold text-slate-950">OSS 静态资源</h3>
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-500">
+            扫描 public/assets 并生成对应 OSS 地址，按一级目录分类，方便检查线上资源路径。
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={() => void refresh()}
+          className="inline-flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 transition hover:border-[#2563eb] hover:text-[#2563eb]"
+        >
+          <RefreshCcw className={`h-4 w-4 ${isLoading ? "animate-spin" : ""}`} />
+          刷新 OSS 列表
+        </button>
+      </div>
+
+      <div className="mt-5 flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
+        <div className="flex flex-wrap gap-2">
+          {["all", ...categories].map((category) => (
+            <button
+              key={category}
+              type="button"
+              onClick={() => setActiveCategory(category)}
+              className={`rounded-2xl px-4 py-2 text-sm font-semibold transition ${
+                activeCategory === category
+                  ? "bg-slate-900 text-white"
+                  : "border border-slate-200 bg-white text-slate-600 hover:border-[#2563eb] hover:text-[#2563eb]"
+              }`}
+            >
+              {category === "all" ? "全部" : category}
+            </button>
+          ))}
         </div>
         <input
-          value={assetSearch}
-          onChange={(event) => setAssetSearch(event.target.value)}
-          placeholder="搜索文件名、类型或 URL..."
+          value={search}
+          onChange={(event) => setSearch(event.target.value)}
+          placeholder="搜索 OSS 路径..."
           className="h-11 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm outline-none transition focus:border-[#2563eb] focus:bg-white xl:w-[320px]"
         />
       </div>
 
-      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-        {visibleAssets.map((asset) => {
-          const publicUrl = resolvePublicAssetUrl(asset.url);
-
-          return (
-          <article key={asset.id} className="rounded-[28px] border border-slate-200 bg-white p-5 shadow-sm">
-            {asset.mimeType.startsWith("image/") ? (
-              <div className="mb-4 flex h-72 w-full items-center justify-center overflow-hidden rounded-[20px] bg-[#d8dce0] p-3">
-                <img
-                  src={publicUrl}
-                  alt={asset.altText || asset.originalName}
-                  className="block max-h-full w-auto max-w-full object-contain"
-                />
+      <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        {visibleAssets.slice(0, 80).map((asset) => (
+          <article key={asset.path} className="rounded-2xl border border-slate-200 bg-slate-50 p-3">
+            {asset.type === "image" ? (
+              <div className="mb-3 flex h-32 items-center justify-center overflow-hidden rounded-xl bg-white">
+                <img src={asset.url} alt={asset.name} className="max-h-full max-w-full object-contain" />
               </div>
-            ) : asset.mimeType.startsWith("video/") ? (
-              <div className="mb-4 flex h-72 w-full items-center justify-center overflow-hidden rounded-[20px] bg-[#d8dce0] p-3">
-                <video
-                  src={publicUrl}
-                  className="block max-h-full w-auto max-w-full bg-black object-contain"
-                  controls
-                  preload="metadata"
-                />
+            ) : asset.type === "video" ? (
+              <div className="mb-3 flex h-32 items-center justify-center overflow-hidden rounded-xl bg-black">
+                <video src={asset.url} className="h-full w-full object-contain" controls preload="metadata" />
               </div>
             ) : (
-              <div className="mb-4 flex h-44 w-full items-center justify-center rounded-[20px] bg-slate-100 text-slate-400">
-                <FolderOpen className="h-10 w-10" />
+              <div className="mb-3 flex h-32 items-center justify-center rounded-xl bg-white text-slate-400">
+                <FileText className="h-8 w-8" />
               </div>
             )}
-            <p className="line-clamp-1 text-sm font-semibold text-slate-900">{asset.originalName}</p>
-            <p className="mt-2 text-xs text-slate-500">{asset.mimeType}</p>
-            <p className="mt-1 text-xs text-slate-500">{formatBytes(asset.sizeBytes)}</p>
-            <p className="mt-1 text-xs text-slate-400">上传时间：{formatDateTime(asset.createdAt)}</p>
-            <p className="mt-3 break-all text-xs text-[#2563eb]">{publicUrl}</p>
-            <div className="mt-4 flex flex-wrap justify-end gap-2">
-              <a
-                href={publicUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold text-slate-600 transition hover:bg-slate-100"
-              >
-                <ExternalLink className="h-3.5 w-3.5" />
-                打开
-              </a>
+            <p className="line-clamp-1 text-sm font-semibold text-slate-900">{asset.name}</p>
+            <p className="mt-1 text-xs text-slate-500">{asset.category} / {formatBytes(asset.sizeBytes)}</p>
+            <p className="mt-2 break-all font-mono text-[11px] leading-5 text-blue-600">{asset.url}</p>
+            <div className="mt-3 flex justify-end">
               <button
                 type="button"
-                onClick={() => copyUrl(publicUrl)}
-                className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold text-slate-600 transition hover:bg-slate-100"
+                onClick={() => void copyUrl(asset.url)}
+                className="rounded-full px-3 py-1 text-xs font-semibold text-slate-600 transition hover:bg-white"
               >
                 复制地址
               </button>
-              <button
-                type="button"
-                onClick={() => deleteAsset(asset.id)}
-                className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold text-rose-500 transition hover:bg-rose-50"
-              >
-                <Trash2 className="h-3.5 w-3.5" />
-                删除
-              </button>
             </div>
           </article>
-          );
-        })}
+        ))}
       </div>
 
-      {visibleAssets.length === 0 ? (
-        <div className="rounded-[28px] border border-dashed border-slate-300 bg-white p-10 text-center text-sm text-slate-500">
-          当前筛选条件下没有文件。
-        </div>
+      {visibleAssets.length > 80 ? (
+        <p className="mt-4 text-xs text-slate-400">当前筛选共有 {visibleAssets.length} 个文件，已先显示前 80 个。</p>
       ) : null}
-    </section>
+    </div>
   );
 }
 
@@ -3366,6 +6149,8 @@ function VersionsPanel(props: {
   setVersionSourceId: Dispatch<SetStateAction<number | "current">>;
   setMessage: (message: string) => void;
 }) {
+  const [runningAction, setRunningAction] = useState<"restore" | "publish" | null>(null);
+
   const createVersionAction = async () => {
     const response = await fetch("/api/cms/versions", {
       method: "POST",
@@ -3394,17 +6179,24 @@ function VersionsPanel(props: {
   };
 
   const runVersionAction = async (id: number, action: "restore" | "publish") => {
-    const response = await fetch(`/api/cms/versions/${id}/${action}`, { method: "POST" });
+    setRunningAction(action);
 
-    if (!response.ok) {
-      props.setMessage(action === "restore" ? "恢复版本失败。" : "发布版本失败。");
-      return;
+    try {
+      const response = await fetch(`/api/cms/versions/${id}/${action}`, { method: "POST" });
+
+      if (!response.ok) {
+        props.setMessage(action === "restore" ? "恢复版本失败。" : "发布版本失败。");
+        return;
+      }
+
+      const payload = (await response.json()) as { versions: CmsVersionSnapshot[] };
+      props.setVersions(payload.versions);
+      props.setVersionSourceId(id);
+      await props.loadVersionForEditing(id);
+      props.setMessage(action === "restore" ? "版本已恢复。" : "版本已发布。");
+    } finally {
+      setRunningAction(null);
     }
-
-    const payload = (await response.json()) as { versions: CmsVersionSnapshot[] };
-    props.setVersions(payload.versions);
-    props.setMessage(action === "restore" ? "版本已恢复。" : "版本已发布。");
-    window.location.reload();
   };
 
   return (
@@ -3500,16 +6292,18 @@ function VersionsPanel(props: {
                 <button
                   type="button"
                   onClick={() => runVersionAction(version.id, "restore")}
-                  className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700"
+                  disabled={runningAction !== null}
+                  className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 disabled:cursor-not-allowed disabled:text-slate-400"
                 >
-                  恢复
+                  {runningAction === "restore" ? "恢复中..." : "恢复"}
                 </button>
                 <button
                   type="button"
                   onClick={() => runVersionAction(version.id, "publish")}
-                  className="rounded-2xl bg-[#2563eb] px-4 py-3 text-sm font-semibold text-white shadow-[0_10px_20px_rgba(37,99,235,0.2)]"
+                  disabled={runningAction !== null}
+                  className="rounded-2xl bg-[#2563eb] px-4 py-3 text-sm font-semibold text-white shadow-[0_10px_20px_rgba(37,99,235,0.2)] disabled:cursor-not-allowed disabled:bg-blue-300"
                 >
-                  发布
+                  {runningAction === "publish" ? "发布中..." : "发布"}
                 </button>
               </div>
             </div>
@@ -3528,6 +6322,14 @@ function getPanelHeadline(panel: StudioPanel) {
       visual: "可视化编辑",
       articles: "旧内容集合",
       carousel: "轮播管理",
+      homeEventCarousel: "首页 event 事件轮播",
+      homeHonorsCarousel: "首页 HONORS 轮播",
+      officialIndustries: "服务行业",
+      officialHonors: "虎诉荣誉",
+      officialChronicle: "虎诉大事记",
+      officialPartners: "合伙人",
+      officialSeniorAssociates: "资深律师",
+      officialEvents: "虎诉动态",
       eventAwards: "事件和奖项管理",
       site: "站点信息配置",
       assets: "文件管理",
@@ -3548,6 +6350,14 @@ function getPanelDescription(panel: StudioPanel) {
       visual: "通过拖拽组件调整页面结构和布局层级。",
       articles: "发布、编辑和删除站点文章与新闻内容。",
       carousel: "集中管理首页、关于页、活动页和播客页的轮播内容。",
+      homeEventCarousel: "控制首页 Events 轮播显示哪些动态，以及它们的排序。",
+      homeHonorsCarousel: "控制首页 HONORS 轮播展示年份和顺序。",
+      officialIndustries: "单独管理服务行业模块。",
+      officialHonors: "单独管理虎诉荣誉模块。",
+      officialChronicle: "单独管理虎诉大事记模块。",
+      officialPartners: "单独管理合伙人和对应子页面内容。",
+      officialSeniorAssociates: "单独管理资深律师和对应子页面内容。",
+      officialEvents: "单独管理虎诉动态内容。",
       eventAwards: "集中管理奖项、过往活动和媒体节目露出内容。",
       site: "配置网站名称、Logo、导航和联系信息。",
       assets: "统一管理已上传的图片、视频和内容附件。",

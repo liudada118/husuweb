@@ -3,12 +3,14 @@
 import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
+import { getPreviewPageItemField, getPreviewPageSectionItems } from "@/cms/preview-page-content";
+import { usePublicCms } from "@/cms/PublicCmsProvider";
 import { useLanguage } from "@/i18n/LanguageProvider";
 
 type CoreValueItem = {
   number: string;
   title: string;
-  body: ReactNode;
+  body: ReactNode | string;
   image: string;
 };
 
@@ -171,6 +173,20 @@ function CoreImageStack({ items, progress }: { items: CoreValueItem[]; progress:
   );
 }
 
+function renderCoreValueBody(body: ReactNode | string) {
+  if (typeof body !== "string") return body;
+
+  return body
+    .split(/\r?\n+/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean)
+    .map((paragraph) => (
+      <p key={paragraph} className="mb-5 last:mb-0">
+        {paragraph}
+      </p>
+    ));
+}
+
 function CoreValueBlock({ item, active, isZh }: { item: CoreValueItem; active: boolean; isZh: boolean }) {
   const bodyClassName = isZh
     ? "text-justify leading-[1.65]"
@@ -187,7 +203,7 @@ function CoreValueBlock({ item, active, isZh }: { item: CoreValueItem; active: b
           {[item.number, item.title].filter(Boolean).join(" ")}
         </h2>
         <div className={`mt-8 text-[1.5rem] font-normal text-[#d1d5dc] ${bodyClassName}`}>
-          {item.body}
+          {renderCoreValueBody(item.body)}
         </div>
       </div>
     </article>
@@ -200,7 +216,16 @@ export function CoreValueScrollFlow() {
   const nearViewportRef = useRef(true);
   const [progress, setProgress] = useState(0);
   const { language } = useLanguage();
-  const items = language === "zh" ? zhCoreValueItems : coreValueItems;
+  const cms = usePublicCms();
+  const cmsItems = getPreviewPageSectionItems(cms, language, "coreValue", "values")
+    .map((item) => ({
+      number: getPreviewPageItemField(item, "number", ""),
+      title: getPreviewPageItemField(item, "title", item.label),
+      body: getPreviewPageItemField(item, "body", ""),
+      image: getPreviewPageItemField(item, "image", ""),
+    }))
+    .filter((item) => item.title || item.body || item.image);
+  const items = cmsItems.length ? cmsItems : language === "zh" ? zhCoreValueItems : coreValueItems;
   const isZh = language === "zh";
   const itemCount = items.length;
   const activeIndex = Math.min(Math.floor(progress), itemCount - 1);
@@ -264,7 +289,7 @@ export function CoreValueScrollFlow() {
                   isZh ? "text-justify leading-[1.65]" : "text-left leading-[1.55] [word-spacing:normal]"
                 }`}
               >
-                {item.body}
+                {renderCoreValueBody(item.body)}
               </div>
             </div>
           </article>

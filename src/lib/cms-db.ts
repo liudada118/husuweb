@@ -27,6 +27,7 @@ import type {
   PublicCmsData,
   VisualEditorState,
 } from "./cms-types";
+import { getCmsSiteStateSync, saveCmsSiteStateSync } from "./cms-store";
 import { defaultVisualEditorState } from "./cms-visual";
 import type { Language } from "./site-types";
 import { defaultSiteSettings } from "./site-settings";
@@ -1303,6 +1304,7 @@ function createVersionPayload(): CmsVersionPayload {
     siteContent: state.siteContent,
     visualEditor: state.visualEditor,
     pageContent: state.pageContent,
+    officialSiteState: getCmsSiteStateSync(),
     articles: listArticles(true),
     caseStudies: listCaseStudies(true),
     mediaItems: listMediaItems(true),
@@ -1335,9 +1337,12 @@ export function updateVersionPayload(input: {
   payload: CmsVersionPayload;
   name?: string;
   description?: string;
+  updatedBy?: number;
 }) {
   const db = getCmsDb();
-  const existing = db.prepare("SELECT id FROM versions WHERE id = ?").get(input.versionId);
+  const existing = db.prepare("SELECT id, is_published FROM versions WHERE id = ?").get(input.versionId) as
+    | { id: number; is_published: number }
+    | undefined;
 
   if (!existing) {
     throw new Error("Version not found.");
@@ -1358,6 +1363,12 @@ export function updateVersionPayload(input: {
     description: input.description ?? null,
     updatedAt: getNow(),
   });
+
+  if (existing.is_published) {
+    restoreVersion(input.versionId, input.updatedBy);
+  }
+
+  return { appliedToCurrentSite: Boolean(existing.is_published) };
 }
 
 export function getVersionEditorData(versionId: number) {
@@ -1373,6 +1384,7 @@ export function getVersionEditorData(versionId: number) {
       siteContent: preview.siteContent,
       visualEditor: preview.publicData.visualEditor,
       pageContent: preview.publicData.pageContent,
+      officialSiteState: preview.publicData.officialSiteState,
       articles: preview.publicData.articles,
       caseStudies: preview.publicData.caseStudies,
       mediaItems: preview.publicData.mediaItems,
@@ -1398,12 +1410,26 @@ export function restoreVersion(versionId: number, updatedBy?: number) {
   }
 
   const restore = db.transaction(() => {
+    const restoredPageContent = payload.pageContent ?? cloneValue(defaultPageContentState);
+
     saveSiteState({
       siteContent: payload.siteContent,
       visualEditor: payload.visualEditor,
-      pageContent: payload.pageContent ?? cloneValue(defaultPageContentState),
+      pageContent: restoredPageContent,
       updatedBy,
     });
+
+    saveCmsSiteStateSync(
+      payload.officialSiteState
+        ? {
+            ...payload.officialSiteState,
+            previewPageContent: payload.officialSiteState.previewPageContent ?? restoredPageContent,
+          }
+        : {
+            ...getCmsSiteStateSync(),
+            previewPageContent: restoredPageContent,
+          },
+    );
 
     db.prepare("DELETE FROM articles").run();
     db.prepare("DELETE FROM case_studies").run();
@@ -1459,6 +1485,15 @@ export function getVersionPreviewData(versionId: number) {
   const siteContent = mergeContent(getSeedSiteContent(), payload.siteContent);
   const visualEditor = mergeContent(cloneValue(defaultVisualEditorState), payload.visualEditor);
   const pageContent = mergePageContentState(cloneValue(defaultPageContentState), payload.pageContent);
+  const officialSiteState = payload.officialSiteState
+    ? {
+        ...payload.officialSiteState,
+        previewPageContent: payload.officialSiteState.previewPageContent ?? pageContent,
+      }
+    : {
+        ...getCmsSiteStateSync(),
+        previewPageContent: pageContent,
+      };
 
   return {
     version: {
@@ -1475,6 +1510,7 @@ export function getVersionPreviewData(versionId: number) {
       siteSettings: siteContent.siteSettings,
       visualEditor,
       pageContent,
+      officialSiteState,
       articles: payload.articles,
       caseStudies: payload.caseStudies,
       mediaItems: payload.mediaItems,
@@ -1497,6 +1533,7 @@ export function getCmsBootstrapData(userId: number): CmsBootstrapData {
     siteContent: state.siteContent,
     visualEditor: state.visualEditor,
     pageContent: state.pageContent,
+    officialSiteState: getCmsSiteStateSync(),
     articles: listArticles(true),
     caseStudies: listCaseStudies(true),
     mediaItems: listMediaItems(true),

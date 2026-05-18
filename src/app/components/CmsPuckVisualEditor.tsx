@@ -4,18 +4,23 @@ import "@puckeditor/core/puck.css";
 
 import { Puck } from "@puckeditor/core";
 import type { Config, Data, Plugin, PuckAction, Viewports } from "@puckeditor/core";
-import type { CSSProperties, Dispatch, SetStateAction } from "react";
+import type { ChangeEvent, CSSProperties, Dispatch, SetStateAction } from "react";
 import { useEffect, useMemo, useRef, useState, type MouseEvent as ReactMouseEvent } from "react";
-import { ArrowDown, ArrowUp, ChevronDown, ChevronLeft, Trash2, X } from "lucide-react";
+import { ArrowDown, ArrowUp, ChevronDown, ChevronLeft, Trash2, Upload, X } from "lucide-react";
 import { PublicCmsProvider as OfficialPublicCmsProvider } from "@/cms/PublicCmsProvider";
 import type { OfficialCmsPublicState } from "@/cms/official-state";
 import { AboutPage } from "@/components/pages/AboutPage";
 import { ContactPage } from "@/components/pages/ContactPage";
+import { CoreValuePage } from "@/components/pages/CoreValuePage";
+import { EventDetailPage } from "@/components/pages/EventDetailPage";
 import { EventsPage } from "@/components/pages/EventsPage";
 import { HomePage } from "@/components/pages/HomePage";
+import { IndustryDetailPage } from "@/components/pages/IndustryDetailPage";
 import { IndustriesPage } from "@/components/pages/IndustriesPage";
 import { TeamPage } from "@/components/pages/TeamPage";
+import { TeamProfilePage } from "@/components/pages/TeamProfilePage";
 import { LanguageProvider as OfficialLanguageProvider } from "@/i18n/LanguageProvider";
+import { createEmptyTeamProfile, getTeamProfile, teamProfiles } from "@/data/teamProfiles";
 import {
   createPastEventPlatformFields,
   createPastEventProgramFields,
@@ -24,6 +29,8 @@ import {
   getPastEventProgramNumber,
   getPastEventProgramNumbersFromFields,
   getPageContentField,
+  getPageContentItemField,
+  getPageContentSectionItems,
   isPastEventPlatformFieldId,
   pageContentItemFieldKey,
   type PageContentField,
@@ -78,6 +85,13 @@ type LivePageProps = {
 };
 
 type CmsPreviewDevice = "desktop" | "mobile";
+type DetailParentPage = Extract<VisualPage, "event" | "media" | "podcast">;
+type SubpageSelection = {
+  page: DetailParentPage;
+  sectionId: string;
+  slug: string;
+  itemIndex: number;
+};
 type VisualEditorTab = VisualPage | "header" | "footer";
 
 type CmsPuckComponents = {
@@ -98,6 +112,7 @@ type EditableFieldMatch = {
 type CarouselDrawerState = {
   itemIndex?: number;
   sectionId: string;
+  slug?: string;
 };
 
 const puckViewports: Viewports = [
@@ -114,11 +129,11 @@ const pageTabs: Array<{ id: VisualEditorTab; label: string; navLabel: string; ro
   { id: "header", label: "Header", navLabel: "TITLE", route: "/" },
   { id: "home", label: "首页", navLabel: "/", route: "/" },
   { id: "about", label: "关于我们", navLabel: "ABOUT US", route: "/about" },
-  { id: "awards", label: "虎诉荣誉", navLabel: "HONORS", route: "/about#honors" },
-  { id: "event", label: "虎诉动态", navLabel: "EVENTS", route: "/events" },
-  { id: "media", label: "服务行业", navLabel: "INDUSTRIES", route: "/industries" },
   { id: "podcast", label: "虎诉团队", navLabel: "OUR TEAM", route: "/team" },
+  { id: "media", label: "服务行业", navLabel: "INDUSTRIES", route: "/industries" },
+  { id: "event", label: "虎诉动态", navLabel: "EVENTS", route: "/events" },
   { id: "contact", label: "联系我们", navLabel: "CONTACT", route: "/contact" },
+  { id: "coreValue", label: "虎诉文化", navLabel: "CORE VALUE", route: "/about/core-value" },
   { id: "footer", label: "Footer", navLabel: "FOOTER", route: "/" },
 ];
 
@@ -144,11 +159,23 @@ function getSectionItemCount(section: PageContentSection) {
 }
 
 function sectionHasDateItems(section: PageContentSection) {
-  return Boolean(section.items?.some((item) => item.fields.some((field) => field.id === "date")));
+  return Boolean(section.items?.some((item) => item.fields.some((field) => field.id === "date" || field.id === "sortDate")));
 }
 
 function getItemFieldValue(item: PageContentRepeaterItem, fieldId: string) {
   return item.fields.find((field) => field.id === fieldId)?.value ?? "";
+}
+
+function getSectionItemBySlugOrIndex(section: PageContentSection | undefined, itemIndex: number, slug?: string) {
+  if (!section?.items?.length) return undefined;
+
+  if (slug) {
+    const matchedItem = section.items.find((item) => getItemFieldValue(item, "slug") === slug || item.id === slug);
+
+    if (matchedItem) return matchedItem;
+  }
+
+  return section.items[itemIndex];
 }
 
 function moveRepeaterItem(items: PageContentRepeaterItem[], fromIndex: number, toIndex: number) {
@@ -165,9 +192,10 @@ function moveRepeaterItem(items: PageContentRepeaterItem[], fromIndex: number, t
 function getRepeaterThumbnail(
   sectionsByLanguage: Partial<Record<Language, PageContentSection | undefined>>,
   itemIndex: number,
+  slug?: string,
 ) {
   for (const language of ["zh", "en"] as Language[]) {
-    const item = sectionsByLanguage[language]?.items?.[itemIndex];
+    const item = getSectionItemBySlugOrIndex(sectionsByLanguage[language], itemIndex, slug);
     const imageField = item?.fields.find((fieldItem) => isRepeaterImageField(fieldItem));
 
     if (imageField?.value.trim()) {
@@ -182,11 +210,12 @@ function getRepeaterDisplayTitle(
   sectionsByLanguage: Partial<Record<Language, PageContentSection | undefined>>,
   itemIndex: number,
   fallback: string,
+  slug?: string,
 ) {
   const preferredFieldIds = ["title", "name", "award", "platform", "brand", "label", "tag"];
 
   for (const language of ["zh", "en"] as Language[]) {
-    const item = sectionsByLanguage[language]?.items?.[itemIndex];
+    const item = getSectionItemBySlugOrIndex(sectionsByLanguage[language], itemIndex, slug);
     const value =
       getPreferredRepeaterFieldValue(item, preferredFieldIds) ||
       item?.label ||
@@ -204,6 +233,7 @@ function getRepeaterDisplaySummary(
   sectionsByLanguage: Partial<Record<Language, PageContentSection | undefined>>,
   itemIndex: number,
   fallback: string,
+  slug?: string,
 ) {
   const preferredFieldIds = [
     "description",
@@ -220,7 +250,7 @@ function getRepeaterDisplaySummary(
   ];
 
   for (const language of ["zh", "en"] as Language[]) {
-    const item = sectionsByLanguage[language]?.items?.[itemIndex];
+    const item = getSectionItemBySlugOrIndex(sectionsByLanguage[language], itemIndex, slug);
     const value =
       getPreferredRepeaterFieldValue(item, preferredFieldIds) ||
       item?.fields.find((fieldItem) => fieldItem.kind !== "image")?.value;
@@ -264,16 +294,47 @@ function truncateRepeaterText(value: string, maxLength: number) {
   return normalized.length > maxLength ? `${normalized.slice(0, maxLength - 1)}...` : normalized;
 }
 
+const homeEventSlideFields: Array<{ fieldId: string; label: string; kind: PageContentField["kind"] }> = [
+  { fieldId: "slug", label: "Slide slug / 轮播标识", kind: "text" },
+  { fieldId: "image", label: "Slide image / 轮播图片", kind: "image" },
+  { fieldId: "displayDate", label: "Display date / 展示日期", kind: "text" },
+  { fieldId: "category", label: "Category / 分类", kind: "text" },
+  { fieldId: "title", label: "Title / 标题", kind: "textarea" },
+  { fieldId: "summary", label: "Slide summary / 轮播摘要", kind: "textarea" },
+  { fieldId: "href", label: "Click link / 点击链接", kind: "url" },
+];
+
 function getPairedDrawerFields(
   sectionsByLanguage: Partial<Record<Language, PageContentSection | undefined>>,
   itemIndex: number,
+  pageId?: VisualPage,
+  sectionId?: string,
+  slug?: string,
 ) {
   const fieldMap = new Map<string, { fieldId: string; label: string; kind: PageContentField["kind"] }>();
+  const ensureField = (fieldId: string, label: string, kind: PageContentField["kind"], force = false) => {
+    if (force || !fieldMap.has(fieldId)) {
+      fieldMap.set(fieldId, { fieldId, label, kind });
+    }
+  };
 
   (["en", "zh"] as Language[]).forEach((language) => {
-    const item = sectionsByLanguage[language]?.items?.[itemIndex];
+    const item = getSectionItemBySlugOrIndex(sectionsByLanguage[language], itemIndex, slug);
 
     item?.fields.forEach((field) => {
+      if (pageId === "home" && sectionId === "events" && !homeEventSlideFields.some((item) => item.fieldId === field.id)) {
+        return;
+      }
+      if (
+        sectionId === "list" &&
+        (field.id === "content" ||
+          field.id === "summary" ||
+          field.id === "detailImages" ||
+          field.id === "detailVideos" ||
+          isGeneratedEventMediaField(field.id))
+      ) {
+        return;
+      }
       if (!fieldMap.has(field.id)) {
         fieldMap.set(field.id, {
           fieldId: field.id,
@@ -284,7 +345,131 @@ function getPairedDrawerFields(
     });
   });
 
+  if (pageId === "home" && sectionId === "events") {
+    return homeEventSlideFields;
+  }
+
+  if (pageId === "event" && sectionId === "list") {
+    ensureField("slug", "标识", "text");
+    ensureField("image", "缩略图", "image");
+    ensureField("sortDate", "排序日期（YYYYMMDD）", "text");
+    ensureField("displayDate", "展示日期", "text");
+    ensureField("category", "分类", "text");
+    ensureField("title", "标题", "textarea");
+  }
+
+  if (pageId === "media" && sectionId === "detailPages") {
+    ensureField("slug", "标识", "text");
+    ensureField("title", "详情页标题", "text");
+    ensureField("image", "首屏背景图片", "image");
+    ensureField("intro", "详情页简介", "textarea");
+    ensureField("sections", "详情卡片（留空则使用页面默认内容）", "textarea");
+  }
+
+  if (pageId === "event" && sectionId === "detailPages") {
+    ensureField("slug", "Slug / 标识", "text", true);
+    ensureField("sortDate", "Sort date (YYYYMMDD) / 排序日期", "text", true);
+    ensureField("displayDate", "Display date / 展示日期", "text", true);
+    ensureField("category", "Category / 分类", "text", true);
+    ensureField("title", "Detail title / 详情页标题", "textarea", true);
+    ensureField("summary", "Detail summary / 详情页摘要", "textarea", true);
+    ensureField("content", "Detail content / 详情正文", "textarea", true);
+    addGeneratedEventMediaFields(fieldMap, sectionsByLanguage, itemIndex, slug);
+    ensureField("detailImage1", "Detail image 1 / 详情图片 1", "image", true);
+    ensureField("detailVideo1", "Detail video 1 / 详情视频 1", "url", true);
+  }
+
   return Array.from(fieldMap.values());
+}
+
+const eventDetailImagePlaceholderPattern = /\[(?:IMAGE|Image|\u56fe\u7247|\u9365\u5267\u5896)\]?/g;
+const eventDetailVideoPlaceholderText = "\u6682\u65f6\u65e0\u6cd5\u5728\u98de\u4e66\u6587\u6863\u5916\u5c55\u793a\u6b64\u5185\u5bb9";
+const detailImageFieldPattern = /^detailImage(\d+)$/;
+const detailVideoFieldPattern = /^detailVideo(\d+)$/;
+
+function countEventDetailImagePlaceholders(value: string) {
+  return [...value.matchAll(eventDetailImagePlaceholderPattern)].length;
+}
+
+function countEventDetailVideoPlaceholders(value: string) {
+  return value.split(eventDetailVideoPlaceholderText).length - 1;
+}
+
+function isGeneratedEventMediaField(fieldId: string) {
+  return detailImageFieldPattern.test(fieldId) || detailVideoFieldPattern.test(fieldId);
+}
+
+function splitDrawerList(value: string) {
+  return value
+    .split(/\r?\n/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+function numberedEventMediaCount(item: PageContentRepeaterItem | undefined, pattern: RegExp) {
+  return Math.max(
+    0,
+    ...(item?.fields.map((field) => {
+      const match = field.id.match(pattern);
+      return match ? Number(match[1]) : 0;
+    }) ?? []),
+  );
+}
+
+function isPageContentRepeaterItem(item: PageContentRepeaterItem | undefined): item is PageContentRepeaterItem {
+  return Boolean(item);
+}
+
+function addGeneratedEventMediaFields(
+  fieldMap: Map<string, { fieldId: string; label: string; kind: PageContentField["kind"] }>,
+  sectionsByLanguage: Partial<Record<Language, PageContentSection | undefined>>,
+  itemIndex: number,
+  slug?: string,
+) {
+  const items = (["en", "zh"] as Language[])
+    .map((language) => getSectionItemBySlugOrIndex(sectionsByLanguage[language], itemIndex, slug))
+    .filter(isPageContentRepeaterItem);
+  const imageCount = Math.max(
+    0,
+    ...items.map((item) => countEventDetailImagePlaceholders(getItemFieldValue(item, "content"))),
+    ...items.map((item) => splitDrawerList(getItemFieldValue(item, "detailImages")).length),
+    ...items.map((item) => numberedEventMediaCount(item, detailImageFieldPattern)),
+  );
+  const videoCount = Math.max(
+    0,
+    ...items.map((item) => countEventDetailVideoPlaceholders(getItemFieldValue(item, "content"))),
+    ...items.map((item) => splitDrawerList(getItemFieldValue(item, "detailVideos")).length),
+    ...items.map((item) => numberedEventMediaCount(item, detailVideoFieldPattern)),
+  );
+
+  Array.from({ length: imageCount }, (_, index) => {
+    const fieldId = `detailImage${index + 1}`;
+    if (!fieldMap.has(fieldId)) {
+      fieldMap.set(fieldId, { fieldId, label: `详情图片 ${index + 1}`, kind: "image" });
+    }
+  });
+  Array.from({ length: videoCount }, (_, index) => {
+    const fieldId = `detailVideo${index + 1}`;
+    if (!fieldMap.has(fieldId)) {
+      fieldMap.set(fieldId, { fieldId, label: `详情视频 ${index + 1}`, kind: "url" });
+    }
+  });
+}
+
+function getGeneratedEventMediaValue(item: PageContentRepeaterItem | undefined, fieldId: string) {
+  if (!item) return "";
+
+  const imageMatch = fieldId.match(detailImageFieldPattern);
+  if (imageMatch) {
+    return splitDrawerList(getItemFieldValue(item, "detailImages"))[Number(imageMatch[1]) - 1] ?? "";
+  }
+
+  const videoMatch = fieldId.match(detailVideoFieldPattern);
+  if (videoMatch) {
+    return splitDrawerList(getItemFieldValue(item, "detailVideos"))[Number(videoMatch[1]) - 1] ?? "";
+  }
+
+  return "";
 }
 
 function getPastEventPlatformNumbersForDrawer(
@@ -349,23 +534,37 @@ function SiteChromeInput({
   focused: boolean;
   label: string;
   value: string;
-  type?: "text" | "url";
+  type?: "text" | "url" | "textarea";
   onChange: (value: string) => void;
 }) {
   return (
     <label className="block space-y-1.5">
       <span className={`text-xs font-bold ${focused ? "text-[#2563eb]" : "text-slate-600"}`}>{label}</span>
-      <input
-        name={fieldKey}
-        data-cms-editor-field={fieldKey}
-        data-cms-editor-language="site"
-        value={value}
-        type={type}
-        onChange={(event) => onChange(event.target.value)}
-        className={`w-full rounded-2xl border bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-4 focus:ring-[#2563eb]/10 ${
-          focused ? "border-[#2563eb] ring-4 ring-[#2563eb]/10" : "border-slate-200"
-        }`}
-      />
+      {type === "textarea" ? (
+        <textarea
+          name={fieldKey}
+          data-cms-editor-field={fieldKey}
+          data-cms-editor-language="site"
+          value={value}
+          rows={4}
+          onChange={(event) => onChange(event.target.value)}
+          className={`w-full rounded-2xl border bg-white px-3 py-2 text-sm leading-6 text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-4 focus:ring-[#2563eb]/10 ${
+            focused ? "border-[#2563eb] ring-4 ring-[#2563eb]/10" : "border-slate-200"
+          }`}
+        />
+      ) : (
+        <input
+          name={fieldKey}
+          data-cms-editor-field={fieldKey}
+          data-cms-editor-language="site"
+          value={value}
+          type={type}
+          onChange={(event) => onChange(event.target.value)}
+          className={`w-full rounded-2xl border bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-4 focus:ring-[#2563eb]/10 ${
+            focused ? "border-[#2563eb] ring-4 ring-[#2563eb]/10" : "border-slate-200"
+          }`}
+        />
+      )}
     </label>
   );
 }
@@ -401,11 +600,18 @@ function SiteChromeFields({
   ];
   const footerLeftFields = [
     { path: ["siteSettings", "footerLeftLogoUrl"] as PathSegment[], label: "左侧 Logo", value: settings.footerLeftLogoUrl },
+    { path: ["siteSettings", "footerAddressZh"] as PathSegment[], label: "地址 / 中文", value: settings.footerAddressZh, type: "textarea" as const },
+    { path: ["siteSettings", "footerAddressEn"] as PathSegment[], label: "Address / English", value: settings.footerAddressEn, type: "textarea" as const },
     { path: ["siteSettings", "footerEmail"] as PathSegment[], label: "邮箱", value: settings.footerEmail },
     { path: ["siteSettings", "footerPhone"] as PathSegment[], label: "联系方式", value: settings.footerPhone },
+    { path: ["siteSettings", "footerAddressIconUrl"] as PathSegment[], label: "地址图标", value: settings.footerAddressIconUrl },
+    { path: ["siteSettings", "footerPhoneIconUrl"] as PathSegment[], label: "电话图标", value: settings.footerPhoneIconUrl },
+    { path: ["siteSettings", "footerEmailIconUrl"] as PathSegment[], label: "邮箱图标", value: settings.footerEmailIconUrl },
   ];
   const footerRightFields = [
     { path: ["siteSettings", "footerRightLogoUrl"] as PathSegment[], label: "右侧 Logo", value: settings.footerRightLogoUrl },
+    { path: ["siteSettings", "footerTaglineZh"] as PathSegment[], label: "右侧正文 / 中文", value: settings.footerTaglineZh, type: "textarea" as const },
+    { path: ["siteSettings", "footerTaglineEn"] as PathSegment[], label: "Right body / English", value: settings.footerTaglineEn, type: "textarea" as const },
     {
       path: ["siteSettings", "officialSiteUrl"] as PathSegment[],
       label: "官网链接",
@@ -414,9 +620,19 @@ function SiteChromeFields({
     },
     { path: ["siteSettings", "officialSiteLabel"] as PathSegment[], label: "官网文字", value: settings.officialSiteLabel },
     { path: ["siteSettings", "footerOfficialLogoUrl"] as PathSegment[], label: "官网图片", value: settings.footerOfficialLogoUrl },
+    { path: ["siteSettings", "footerWechatIconUrl"] as PathSegment[], label: "微信图标", value: settings.footerWechatIconUrl },
   ];
   const footerQuoteFields = [
     { path: ["siteSettings", "footerQuote"] as PathSegment[], label: "最下面一行引言", value: settings.footerQuote },
+    { path: ["siteSettings", "footerRightsZh"] as PathSegment[], label: "版权文字 / 中文", value: settings.footerRightsZh },
+    { path: ["siteSettings", "footerRightsEn"] as PathSegment[], label: "Copyright / English", value: settings.footerRightsEn },
+    { path: ["siteSettings", "footerDisclaimerLabelZh"] as PathSegment[], label: "免责声明按钮 / 中文", value: settings.footerDisclaimerLabelZh },
+    { path: ["siteSettings", "footerDisclaimerLabelEn"] as PathSegment[], label: "Disclaimer label / English", value: settings.footerDisclaimerLabelEn },
+    { path: ["siteSettings", "footerPublicSecurityText"] as PathSegment[], label: "公安备案文字", value: settings.footerPublicSecurityText },
+    { path: ["siteSettings", "footerPublicSecurityUrl"] as PathSegment[], label: "公安备案链接", value: settings.footerPublicSecurityUrl, type: "url" as const },
+    { path: ["siteSettings", "footerIcpText"] as PathSegment[], label: "ICP备案文字", value: settings.footerIcpText },
+    { path: ["siteSettings", "footerIcpUrl"] as PathSegment[], label: "ICP备案链接", value: settings.footerIcpUrl, type: "url" as const },
+    { path: ["siteSettings", "footerChinaIconUrl"] as PathSegment[], label: "备案图标", value: settings.footerChinaIconUrl },
   ];
   const sections =
     mode === "header"
@@ -453,7 +669,7 @@ function SiteChromeFields({
                   focused={focusedFieldKey === fieldKey}
                   label={field.label}
                   value={field.value ?? ""}
-                  type={("type" in field ? field.type : undefined) as "text" | "url" | undefined}
+                  type={("type" in field ? field.type : undefined) as "text" | "url" | "textarea" | undefined}
                   onChange={(value) => onChange(field.path, value)}
                 />
               );
@@ -567,6 +783,43 @@ function upsertRepeaterField(
   ];
 }
 
+function trimTrailingEmptyItems(items: string[]) {
+  const nextItems = [...items];
+
+  while (nextItems.length && !nextItems[nextItems.length - 1]?.trim()) {
+    nextItems.pop();
+  }
+
+  return nextItems;
+}
+
+function upsertGeneratedEventMediaField(
+  fields: PageContentField[],
+  fieldId: string,
+  value: string,
+  fallback: PageContentField | null,
+) {
+  const imageMatch = fieldId.match(detailImageFieldPattern);
+  const videoMatch = fieldId.match(detailVideoFieldPattern);
+  const match = imageMatch ?? videoMatch;
+
+  if (!match) return upsertRepeaterField(fields, fieldId, value, fallback);
+
+  const legacyFieldId = imageMatch ? "detailImages" : "detailVideos";
+  const legacyField = fields.find((field) => field.id === legacyFieldId);
+  const mediaItems = splitDrawerList(legacyField?.value ?? "");
+
+  mediaItems[Number(match[1]) - 1] = value.trim();
+
+  const nextFields = upsertRepeaterField(fields, fieldId, value, fallback);
+  return upsertRepeaterField(nextFields, legacyFieldId, trimTrailingEmptyItems(mediaItems).join("\n"), {
+    id: legacyFieldId,
+    label: legacyField?.label ?? legacyFieldId,
+    kind: legacyField?.kind ?? "textarea",
+    value: legacyField?.value ?? "",
+  });
+}
+
 function parseSortableDate(value: string) {
   const normalized = value.trim();
 
@@ -580,6 +833,14 @@ function parseSortableDate(value: string) {
 
   const [, year, month, day] = numericMatch;
   return new Date(Number(year), Number(month) - 1, Number(day)).getTime();
+}
+
+function getTodayNumericDate() {
+  const now = new Date();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+
+  return `${now.getFullYear()}${month}${day}`;
 }
 
 function normalizeMatchText(value: string) {
@@ -678,6 +939,23 @@ function siteSettingsFieldLabel(path: PathSegment[]) {
     footerEmail: "页脚邮箱",
     footerPhone: "页脚电话",
     footerQuote: "页脚引言",
+    footerTaglineEn: "页脚右侧正文 English",
+    footerTaglineZh: "页脚右侧正文中文",
+    footerAddressEn: "页脚地址 English",
+    footerAddressZh: "页脚地址中文",
+    footerRightsEn: "页脚版权 English",
+    footerRightsZh: "页脚版权中文",
+    footerDisclaimerLabelEn: "免责声明按钮 English",
+    footerDisclaimerLabelZh: "免责声明按钮中文",
+    footerPublicSecurityText: "公安备案文字",
+    footerPublicSecurityUrl: "公安备案链接",
+    footerIcpText: "ICP备案文字",
+    footerIcpUrl: "ICP备案链接",
+    footerWechatIconUrl: "微信图标",
+    footerAddressIconUrl: "地址图标",
+    footerPhoneIconUrl: "电话图标",
+    footerEmailIconUrl: "邮箱图标",
+    footerChinaIconUrl: "备案图标",
     href: "链接地址",
     label: "名称",
     labelEn: "英文导航文字",
@@ -697,9 +975,15 @@ function siteSettingsFieldKind(path: PathSegment[]): PageContentField["kind"] {
     last === "headerOfficialLogoUrl" ||
     last === "footerLeftLogoUrl" ||
     last === "footerRightLogoUrl" ||
-    last === "footerOfficialLogoUrl"
+    last === "footerOfficialLogoUrl" ||
+    last === "footerWechatIconUrl" ||
+    last === "footerAddressIconUrl" ||
+    last === "footerPhoneIconUrl" ||
+    last === "footerEmailIconUrl" ||
+    last === "footerChinaIconUrl"
   ) return "image";
-  if (last === "officialSiteUrl" || last === "href") return "url";
+  if (last === "footerTaglineEn" || last === "footerTaglineZh" || last === "footerAddressEn" || last === "footerAddressZh") return "textarea";
+  if (last === "officialSiteUrl" || last === "href" || last.endsWith("Url")) return "url";
   return "text";
 }
 
@@ -852,6 +1136,44 @@ function getPageContentFingerprint(page: PageContentPage) {
     .join("\n");
 }
 
+function getSiteSettingsFingerprint(siteSettings: PublicCmsData["siteSettings"]) {
+  return JSON.stringify({
+    siteName: siteSettings.siteName,
+    siteSubtitle: siteSettings.siteSubtitle,
+    logoUrl: siteSettings.logoUrl,
+    officialSiteUrl: siteSettings.officialSiteUrl,
+    officialSiteLabel: siteSettings.officialSiteLabel,
+    headerLanguageZhLabel: siteSettings.headerLanguageZhLabel,
+    headerLanguageEnLabel: siteSettings.headerLanguageEnLabel,
+    headerOfficialLogoUrl: siteSettings.headerOfficialLogoUrl,
+    footerLeftLogoUrl: siteSettings.footerLeftLogoUrl,
+    footerRightLogoUrl: siteSettings.footerRightLogoUrl,
+    footerOfficialLogoUrl: siteSettings.footerOfficialLogoUrl,
+    footerEmail: siteSettings.footerEmail,
+    footerPhone: siteSettings.footerPhone,
+    footerQuote: siteSettings.footerQuote,
+    footerTaglineEn: siteSettings.footerTaglineEn,
+    footerTaglineZh: siteSettings.footerTaglineZh,
+    footerAddressEn: siteSettings.footerAddressEn,
+    footerAddressZh: siteSettings.footerAddressZh,
+    footerRightsEn: siteSettings.footerRightsEn,
+    footerRightsZh: siteSettings.footerRightsZh,
+    footerDisclaimerLabelEn: siteSettings.footerDisclaimerLabelEn,
+    footerDisclaimerLabelZh: siteSettings.footerDisclaimerLabelZh,
+    footerPublicSecurityText: siteSettings.footerPublicSecurityText,
+    footerPublicSecurityUrl: siteSettings.footerPublicSecurityUrl,
+    footerIcpText: siteSettings.footerIcpText,
+    footerIcpUrl: siteSettings.footerIcpUrl,
+    footerWechatIconUrl: siteSettings.footerWechatIconUrl,
+    footerAddressIconUrl: siteSettings.footerAddressIconUrl,
+    footerPhoneIconUrl: siteSettings.footerPhoneIconUrl,
+    footerEmailIconUrl: siteSettings.footerEmailIconUrl,
+    footerChinaIconUrl: siteSettings.footerChinaIconUrl,
+    navigation: siteSettings.navigation,
+    socialLinks: siteSettings.socialLinks,
+  });
+}
+
 function getLivePageProps(data: CmsPuckData): LivePageProps {
   return (data.content.find((item) => item.type === "Live3UiPage")?.props ?? {}) as LivePageProps;
 }
@@ -908,8 +1230,16 @@ function serializePuckData(data: CmsPuckData): PuckSerializedData {
   return data as unknown as PuckSerializedData;
 }
 
-function PreviewPageFrame({ page }: { page: VisualPage }) {
+function PreviewPageFrame({ page, subpage }: { page: VisualPage; subpage: SubpageSelection | null }) {
+  if (subpage?.page === "event") return <EventDetailPage slug={subpage.slug} />;
+  if (subpage?.page === "media") return <IndustryDetailPage slug={subpage.slug} />;
+  if (subpage?.page === "podcast") {
+    const profile = getTeamProfile(subpage.slug) ?? createEmptyTeamProfile(subpage.slug);
+    return <TeamProfilePage profile={profile} />;
+  }
+
   if (page === "home") return <HomePage />;
+  if (page === "coreValue") return <CoreValuePage />;
   if (page === "about" || page === "awards") return <AboutPage />;
   if (page === "event") return <EventsPage />;
   if (page === "media") return <IndustriesPage />;
@@ -917,10 +1247,489 @@ function PreviewPageFrame({ page }: { page: VisualPage }) {
   return <ContactPage />;
 }
 
-function officialPreviewState(previewData: PublicCmsData): OfficialCmsPublicState {
+function pageItems(previewData: PublicCmsData, language: Language, pageId: VisualPage, sectionId: string) {
+  return getPageContentSectionItems(previewData.pageContent, language, pageId, sectionId);
+}
+
+function homeHonorItemId(year: string, index: number, date: string) {
+  return `${year}-${index + 1}-${date || "award"}`;
+}
+
+function homeHonorItemIds(honors: OfficialCmsPublicState["content"]["honors"]) {
+  return honors.flatMap((year) => year.awards.map((award, index) => homeHonorItemId(year.year, index, award.date)));
+}
+
+function syncIndustriesFromPageContent(previewData: PublicCmsData, officialSiteState: OfficialCmsPublicState) {
+  const enItems = pageItems(previewData, "en", "home", "industries");
+  const zhItems = pageItems(previewData, "zh", "home", "industries");
+  const sourceItems = enItems.length ? enItems : pageItems(previewData, "en", "media", "cards");
+
+  if (!sourceItems.length) {
+    return officialSiteState.lists.industries;
+  }
+
+  return sourceItems.map((item, index) => {
+    const zhItem = zhItems[index] ?? pageItems(previewData, "zh", "media", "cards")[index];
+    const fallback = officialSiteState.lists.industries[index];
+    const slug = getPageContentItemField(item, "slug", fallback?.slug ?? item.id);
+    const href = getPageContentItemField(item, "href", slug ? `/industries/${slug}` : fallback?.slug ?? "");
+    const hrefSlug = href.split("/industries/").pop()?.replace(/^\/+|\/+$/g, "") || slug;
+
+    return {
+      slug: hrefSlug,
+      name: getPageContentItemField(item, "title", fallback?.name ?? item.label),
+      zhName: getPageContentItemField(zhItem, "title", fallback?.zhName ?? fallback?.name ?? item.label),
+      img: getPageContentItemField(item, "image", fallback?.img ?? ""),
+      cls: getPageContentItemField(item, "layoutClass", fallback?.cls ?? ""),
+      intro: getPageContentItemField(item, "description", fallback?.intro ?? ""),
+      zhIntro: getPageContentItemField(zhItem, "description", fallback?.zhIntro ?? ""),
+    };
+  });
+}
+
+function syncClientLogosFromPageContent(previewData: PublicCmsData, officialSiteState: OfficialCmsPublicState) {
+  const logos = pageItems(previewData, "en", "home", "clients")
+    .map((item) => getPageContentItemField(item, "logo", ""))
+    .filter(Boolean);
+
+  return logos.length ? logos : officialSiteState.lists.clientLogos;
+}
+
+function syncHomeEventsFromPageContent(
+  previewData: PublicCmsData,
+  officialSiteState: OfficialCmsPublicState,
+  language: Language = "en",
+) {
+  const enItems = pageItems(previewData, "en", "home", "events");
+  const zhItems = pageItems(previewData, "zh", "home", "events");
+  const enListItems = pageItems(previewData, "en", "event", "list");
+  const zhListItems = pageItems(previewData, "zh", "event", "list");
+  const enDetailItems = pageItems(previewData, "en", "event", "detailPages");
+  const zhDetailItems = pageItems(previewData, "zh", "event", "detailPages");
+  const slugs = enItems.map((item) => getPageContentItemField(item, "slug", item.id)).filter(Boolean);
+  const listSlugs = enListItems.map((item) => getPageContentItemField(item, "slug", item.id)).filter(Boolean);
+  const overrides = { ...officialSiteState.events.overrides };
+  const homeOverrides = { ...(officialSiteState.home.eventOverrides ?? {}) };
+
+  [...enItems, ...enListItems].forEach((item, index) => {
+    const isListItem = index >= enItems.length;
+    const localIndex = isListItem ? index - enItems.length : index;
+    const slug = isListItem ? listSlugs[localIndex] : slugs[localIndex];
+    const zhItem = isListItem ? zhListItems[localIndex] : zhItems[localIndex];
+
+    if (!slug) return;
+
+    const targetOverrides = isListItem ? overrides : homeOverrides;
+    const existingOverride = targetOverrides[slug];
+
+    targetOverrides[slug] = {
+      ...existingOverride,
+      image: getPageContentItemField(item, "image", existingOverride?.image ?? ""),
+      ...(isListItem ? {} : { href: getPageContentItemField(item, "href", existingOverride?.href ?? "") }),
+      en: {
+        ...existingOverride?.en,
+        ...(isListItem ? {} : { displayDate: getPageContentItemField(item, "displayDate", existingOverride?.en?.displayDate ?? "") }),
+        category: getPageContentItemField(item, "category", existingOverride?.en?.category ?? ""),
+        title: getPageContentItemField(item, "title", existingOverride?.en?.title ?? ""),
+        summary: getPageContentItemField(item, "summary", existingOverride?.en?.summary ?? ""),
+      },
+      zh: {
+        ...existingOverride?.zh,
+        ...(isListItem ? {} : { displayDate: getPageContentItemField(zhItem, "displayDate", existingOverride?.zh?.displayDate ?? "") }),
+        category: getPageContentItemField(zhItem, "category", existingOverride?.zh?.category ?? ""),
+        title: getPageContentItemField(zhItem, "title", existingOverride?.zh?.title ?? ""),
+        summary: getPageContentItemField(zhItem, "summary", existingOverride?.zh?.summary ?? ""),
+      },
+    };
+  });
+
+  enDetailItems.forEach((item, index) => {
+    const slug = getPageContentItemField(item, "slug", item.id);
+    const zhItem = zhDetailItems[index];
+
+    if (!slug) return;
+
+    const primaryMediaItem = language === "zh" ? zhItem : item;
+    const secondaryMediaItem = language === "zh" ? item : zhItem;
+    const detailImages = collectMergedNumberedDetailMedia(primaryMediaItem, secondaryMediaItem, "detailImages", detailImageFieldPattern);
+    const detailVideos = collectMergedNumberedDetailMedia(primaryMediaItem, secondaryMediaItem, "detailVideos", detailVideoFieldPattern);
+    const existingOverride = overrides[slug];
+
+    overrides[slug] = {
+      ...existingOverride,
+      detailImages: detailImages.length ? detailImages : existingOverride?.detailImages,
+      detailVideos: detailVideos.length ? detailVideos : existingOverride?.detailVideos,
+      en: {
+        ...existingOverride?.en,
+        content: splitTextareaList(getPageContentItemField(item, "content", "")),
+      },
+      zh: {
+        ...existingOverride?.zh,
+        content: splitTextareaList(getPageContentItemField(zhItem, "content", "")),
+      },
+    };
+  });
+
   return {
+    eventSlugs: slugs.length ? slugs : officialSiteState.home.eventSlugs,
+    homeOverrides,
+    listSlugs: listSlugs.length ? listSlugs : officialSiteState.lists.eventSlugs,
+    overrides,
+  };
+}
+
+function collectNumberedDetailMedia(item: PageContentRepeaterItem | undefined, legacyFieldId: string, pattern: RegExp) {
+  if (!item) return [];
+
+  const list = getPageContentItemField(item, legacyFieldId, "")
+    .split(/\r?\n/)
+    .map((value) => value.trim());
+
+  item.fields.forEach((field) => {
+    const match = field.id.match(pattern);
+    if (!match) return;
+
+    list[Number(match[1]) - 1] = field.value.trim();
+  });
+
+  return trimTrailingEmptyItems(list);
+}
+
+function collectMergedNumberedDetailMedia(
+  primaryItem: PageContentRepeaterItem | undefined,
+  secondaryItem: PageContentRepeaterItem | undefined,
+  legacyFieldId: string,
+  pattern: RegExp,
+) {
+  const primary = collectNumberedDetailMedia(primaryItem, legacyFieldId, pattern);
+  const secondary = collectNumberedDetailMedia(secondaryItem, legacyFieldId, pattern);
+  const size = Math.max(primary.length, secondary.length);
+
+  return trimTrailingEmptyItems(Array.from({ length: size }, (_, index) => primary[index] || secondary[index] || ""));
+}
+
+function syncHonorsFromPageContent(previewData: PublicCmsData, officialSiteState: OfficialCmsPublicState) {
+  const aboutEnItems = pageItems(previewData, "en", "about", "honors");
+  const aboutZhItems = pageItems(previewData, "zh", "about", "honors");
+  const enItems = aboutEnItems;
+  const zhItems = aboutZhItems;
+
+  if (!enItems.length) {
+    return officialSiteState.content.honors;
+  }
+
+  const groups = new Map<string, NonNullable<OfficialCmsPublicState["content"]["honors"]>[number]>();
+
+  enItems.forEach((item, index) => {
+    const zhItem = zhItems[index];
+    const year = getPageContentItemField(item, "year", "2026");
+    const group =
+      groups.get(year) ??
+      ({
+        year,
+        count: { en: "", zh: "" },
+        awards: [],
+      } satisfies OfficialCmsPublicState["content"]["honors"][number]);
+
+    group.awards.push({
+      title: {
+        en: getPageContentItemField(item, "title", item.label),
+        zh: getPageContentItemField(zhItem, "title", item.label),
+      },
+      date: getPageContentItemField(item, "date", getPageContentItemField(zhItem, "date", "")),
+      body: {
+        en: getPageContentItemField(item, "body", ""),
+        zh: getPageContentItemField(zhItem, "body", ""),
+      },
+      href: getPageContentItemField(item, "href", ""),
+    });
+
+    group.count = {
+      en: `${group.awards.length} Honors`,
+      zh: `${group.awards.length}项荣誉`,
+    };
+    groups.set(year, group);
+  });
+
+  officialSiteState.content.honors.forEach((existingYear) => {
+    const group = groups.get(existingYear.year);
+
+    if (!group) {
+      groups.set(existingYear.year, existingYear);
+      return;
+    }
+
+    const seen = new Set(group.awards.map((award) => `${award.date}::${award.title.en}::${award.title.zh}`.toLowerCase()));
+    const missingAwards = existingYear.awards.filter(
+      (award) => !seen.has(`${award.date}::${award.title.en}::${award.title.zh}`.toLowerCase()),
+    );
+
+    if (missingAwards.length) {
+      group.awards = [...group.awards, ...missingAwards];
+      group.count = {
+        en: `${group.awards.length} Honors`,
+        zh: `${group.awards.length}项荣誉`,
+      };
+    }
+  });
+
+  return Array.from(groups.values()).sort((a, b) => Number(b.year) - Number(a.year));
+}
+
+function syncHomeHonorListsFromPageContent(previewData: PublicCmsData, officialSiteState: OfficialCmsPublicState) {
+  const homeItems = pageItems(previewData, "en", "home", "honors");
+  const validItemIds = new Set(homeHonorItemIds(officialSiteState.content.honors));
+  const homeHonorItems = homeItems.map((item) => item.id).filter((id) => validItemIds.has(id));
+  const yearSet = new Set(
+    homeItems
+      .map((item) => getPageContentItemField(item, "year", ""))
+      .filter(Boolean),
+  );
+
+  return {
+    homeHonorItems: homeHonorItems.length ? homeHonorItems : officialSiteState.lists.homeHonorItems,
+    homeHonorYears: yearSet.size ? Array.from(yearSet) : officialSiteState.lists.homeHonorYears,
+  };
+}
+
+function syncChronicleFromPageContent(previewData: PublicCmsData, officialSiteState: OfficialCmsPublicState) {
+  const enItems = pageItems(previewData, "en", "about", "chronicle");
+  const zhItems = pageItems(previewData, "zh", "about", "chronicle");
+
+  if (!enItems.length) {
+    return officialSiteState.content.chronicle;
+  }
+
+  const groups = new Map<string, NonNullable<OfficialCmsPublicState["content"]["chronicle"]>[number]>();
+
+  enItems.forEach((item, index) => {
+    const zhItem = zhItems[index];
+    const year = getPageContentItemField(item, "year", getPageContentItemField(zhItem, "year", "2026"));
+    const side = getPageContentItemField(item, "side", getPageContentItemField(zhItem, "side", "left")) === "right" ? "right" : "left";
+    const group =
+      groups.get(year) ??
+      ({
+        year,
+        events: [],
+      } satisfies OfficialCmsPublicState["content"]["chronicle"][number]);
+
+    group.events.push({
+      month: {
+        en: getPageContentItemField(item, "month", ""),
+        zh: getPageContentItemField(zhItem, "month", getPageContentItemField(item, "month", "")),
+      },
+      side,
+      text: {
+        en: getPageContentItemField(item, "text", ""),
+        zh: getPageContentItemField(zhItem, "text", getPageContentItemField(item, "text", "")),
+      },
+    });
+    groups.set(year, group);
+  });
+
+  officialSiteState.content.chronicle.forEach((existingYear) => {
+    const group = groups.get(existingYear.year);
+
+    if (!group) {
+      groups.set(existingYear.year, existingYear);
+      return;
+    }
+
+    const seen = new Set(group.events.map((event) => `${event.month.en}::${event.month.zh}::${event.text.en}::${event.text.zh}`.toLowerCase()));
+    const missingEvents = existingYear.events.filter(
+      (event) => !seen.has(`${event.month.en}::${event.month.zh}::${event.text.en}::${event.text.zh}`.toLowerCase()),
+    );
+
+    if (missingEvents.length) {
+      group.events = [...group.events, ...missingEvents];
+    }
+  });
+
+  return Array.from(groups.values()).sort((a, b) => Number(b.year) - Number(a.year));
+}
+
+function splitTextareaList(value: string) {
+  return value
+    .split(/\n+/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+function syncTeamProfilesFromPageContent(previewData: PublicCmsData, officialSiteState: OfficialCmsPublicState) {
+  const enItems = pageItems(previewData, "en", "podcast", "memberProfiles");
+  const zhItems = pageItems(previewData, "zh", "podcast", "memberProfiles");
+
+  if (!enItems.length) {
+    return {
+      profiles: officialSiteState.content.teamProfiles,
+      partnerSlugs: officialSiteState.lists.partnerSlugs,
+      seniorAssociateSlugs: officialSiteState.lists.seniorAssociateSlugs,
+    };
+  }
+
+  const profiles = { ...officialSiteState.content.teamProfiles };
+  const partnerSlugs: string[] = [...officialSiteState.lists.partnerSlugs];
+  const seniorAssociateSlugs: string[] = [...officialSiteState.lists.seniorAssociateSlugs];
+  const zhItemsBySlug = new Map(zhItems.map((item) => [getPageContentItemField(item, "slug", item.id), item]));
+
+  enItems.forEach((item, index) => {
+    const slug = getPageContentItemField(item, "slug", item.id);
+    const zhItem = zhItemsBySlug.get(slug) ?? zhItems[index];
+    const title = getPageContentItemField(item, "title", "");
+
+    if (!slug) return;
+
+    profiles[slug] = {
+      ...profiles[slug],
+      slug,
+      name: getPageContentItemField(item, "name", ""),
+      zhName: getPageContentItemField(zhItem, "name", ""),
+      title,
+      zhTitle: getPageContentItemField(zhItem, "title", ""),
+      image: getPageContentItemField(item, "image", ""),
+      phone: getPageContentItemField(item, "phone", ""),
+      email: getPageContentItemField(item, "email", ""),
+      serviceIndustries: splitTextareaList(getPageContentItemField(item, "serviceIndustries", "")),
+      zhServiceIndustries: splitTextareaList(getPageContentItemField(zhItem, "serviceIndustries", "")),
+      education: getPageContentItemField(item, "education", ""),
+      zhEducation: getPageContentItemField(zhItem, "education", ""),
+      qualification: getPageContentItemField(item, "qualification", ""),
+      zhQualification: getPageContentItemField(zhItem, "qualification", ""),
+      languages: splitTextareaList(getPageContentItemField(item, "languages", "")),
+      zhLanguages: splitTextareaList(getPageContentItemField(zhItem, "languages", "")),
+      socialEngagements: getPageContentItemField(item, "socialEngagements", ""),
+      zhSocialEngagements: getPageContentItemField(zhItem, "socialEngagements", ""),
+      practiceArea: getPageContentItemField(item, "practiceArea", ""),
+      zhPracticeArea: getPageContentItemField(zhItem, "practiceArea", ""),
+      practiceExperience: getPageContentItemField(item, "practiceExperience", ""),
+      zhPracticeExperience: getPageContentItemField(zhItem, "practiceExperience", ""),
+      honors: splitTextareaList(getPageContentItemField(item, "honors", "")),
+      zhHonors: splitTextareaList(getPageContentItemField(zhItem, "honors", "")),
+      achievements: splitTextareaList(getPageContentItemField(item, "achievements", "")),
+      zhAchievements: splitTextareaList(getPageContentItemField(zhItem, "achievements", "")),
+    };
+
+    const zhTitle = getPageContentItemField(zhItem, "title", "");
+
+    if (/senior associate|资深律师/i.test(`${title} ${zhTitle}`)) {
+      if (!seniorAssociateSlugs.includes(slug)) seniorAssociateSlugs.push(slug);
+      const partnerIndex = partnerSlugs.indexOf(slug);
+      if (partnerIndex >= 0) partnerSlugs.splice(partnerIndex, 1);
+    } else {
+      if (!partnerSlugs.includes(slug)) partnerSlugs.push(slug);
+      const seniorIndex = seniorAssociateSlugs.indexOf(slug);
+      if (seniorIndex >= 0) seniorAssociateSlugs.splice(seniorIndex, 1);
+    }
+  });
+
+  return { profiles, partnerSlugs, seniorAssociateSlugs };
+}
+
+function getSubpageSectionId(page: VisualPage) {
+  if (page === "event") return "detailPages";
+  if (page === "media") return "detailPages";
+  if (page === "podcast") return "memberProfiles";
+  return null;
+}
+
+function getSubpageOptions(pageContent: PageContentState, page: VisualPage, language: Language) {
+  const sectionId = getSubpageSectionId(page);
+
+  if (!sectionId) return [];
+
+  const detailOptions = getPageContentSectionItems(pageContent, language, page, sectionId).map((item, index) => ({
+    sectionId,
+    itemIndex: index,
+    slug: getPageContentItemField(item, "slug", item.id),
+    label: getPageContentItemField(item, "title", getPageContentItemField(item, "name", item.label)),
+  }));
+
+  if (page === "podcast") {
+    const detailSlugs = new Set(detailOptions.map((item) => item.slug));
+    const listOnlyOptions = ["partners", "seniorAssociates"].flatMap((listSectionId) =>
+      getPageContentSectionItems(pageContent, language, page, listSectionId)
+        .map((item) => ({
+          sectionId,
+          itemIndex: -1,
+          slug: getPageContentItemField(item, "slug", item.id),
+          label: getPageContentItemField(item, "name", getPageContentItemField(item, "title", item.label)),
+        }))
+        .filter((item) => item.slug && !detailSlugs.has(item.slug)),
+    );
+
+    return [...detailOptions, ...listOnlyOptions];
+  }
+
+  if (page !== "event") return detailOptions;
+
+  const detailSlugs = new Set(detailOptions.map((item) => item.slug));
+  const listOnlyOptions = getPageContentSectionItems(pageContent, language, page, "list")
+    .map((item) => ({
+      sectionId,
+      itemIndex: -1,
+      slug: getPageContentItemField(item, "slug", item.id),
+      label: getPageContentItemField(item, "title", getPageContentItemField(item, "name", item.label)),
+    }))
+    .filter((item) => item.slug && !detailSlugs.has(item.slug));
+
+  return [...detailOptions, ...listOnlyOptions];
+}
+
+function isUploadableDrawerField(fieldId: string, kind: PageContentField["kind"]) {
+  const normalized = fieldId.toLowerCase();
+  return kind === "image" || normalized.includes("image") || normalized.includes("video") || normalized.includes("logo");
+}
+
+function uploadAcceptForField(fieldId: string) {
+  return fieldId.toLowerCase().includes("video") ? "video/*" : "image/*";
+}
+
+function uploadLabelForField(fieldId: string) {
+  return fieldId.toLowerCase().includes("video") ? "上传视频" : "上传图片";
+}
+
+function shouldAppendUploadedAsset(fieldId: string) {
+  const normalized = fieldId.toLowerCase();
+  return normalized.endsWith("images") || normalized.endsWith("videos");
+}
+
+function officialPreviewState(
+  previewData: PublicCmsData,
+  officialSiteState: OfficialCmsPublicState | null,
+  language: Language = "en",
+): OfficialCmsPublicState {
+  const previewState: OfficialCmsPublicState = {
     version: 1,
-    updatedAt: new Date().toISOString(),
+    updatedAt: previewData.pageContent.updatedAt,
+    header: {
+      siteName: previewData.siteSettings.siteName || "Tiger Partners",
+      siteSubtitle: previewData.siteSettings.siteSubtitle || "Law Firm",
+      languageZhLabel: previewData.siteSettings.headerLanguageZhLabel || "CN",
+      languageEnLabel: previewData.siteSettings.headerLanguageEnLabel || "EN",
+      officialSiteUrl: previewData.siteSettings.officialSiteUrl || "https://www.tigerpartners.cn",
+      officialSiteLabel: previewData.siteSettings.officialSiteLabel || "www.tigerpartners.cn",
+      officialLogoUrl: previewData.siteSettings.headerOfficialLogoUrl || "",
+      navigation: (previewData.siteSettings.navigation ?? [])
+        .filter((item) => item.visible !== false)
+        .map((item) => ({
+          id: item.id,
+          href: item.href,
+          labelZh: item.labelZh,
+          labelEn: item.labelEn,
+          visible: item.visible,
+          order: item.order,
+        })),
+      socialLinks: (previewData.siteSettings.socialLinks ?? [])
+        .filter((item) => item.visible !== false)
+        .map((item) => ({
+          id: item.id,
+          label: item.label,
+          href: item.href,
+          iconSrc: item.iconSrc,
+          visible: item.visible,
+          order: item.order,
+        })),
+    },
     assets: {
       titleLogo: previewData.siteSettings.logoUrl || "/assets/title/logo.svg",
       footerLogo: previewData.siteSettings.footerLeftLogoUrl || "/assets/foot/logo.svg",
@@ -929,6 +1738,31 @@ function officialPreviewState(previewData: PublicCmsData): OfficialCmsPublicStat
     footer: {
       phone: previewData.siteSettings.footerPhone || "010-85885228",
       email: previewData.siteSettings.footerEmail || "contact@tigerpartners.cn",
+      tagline: {
+        en: previewData.siteSettings.footerTaglineEn || previewData.siteSettings.footerQuote || "WE KNOW HOW TO WIN",
+        zh: previewData.siteSettings.footerTaglineZh || previewData.siteSettings.footerQuote || "WE KNOW HOW TO WIN",
+      },
+      address: {
+        en: previewData.siteSettings.footerAddressEn || "",
+        zh: previewData.siteSettings.footerAddressZh || "",
+      },
+      rights: {
+        en: previewData.siteSettings.footerRightsEn || "All Rights Reserved \u00a9 2019 Tiger Partners",
+        zh: previewData.siteSettings.footerRightsZh || "\u7248\u6743\u6240\u6709\u00a9 2019 \u864e\u8bc9\u5f8b\u5e08\u4e8b\u52a1\u6240",
+      },
+      disclaimerLabel: {
+        en: previewData.siteSettings.footerDisclaimerLabelEn || "Disclaimer and Privacy",
+        zh: previewData.siteSettings.footerDisclaimerLabelZh || "Disclaimer and Privacy",
+      },
+      publicSecurityText: previewData.siteSettings.footerPublicSecurityText || "\u4eac\u516c\u7f51\u5b89\u5907 11010502052714\u53f7",
+      publicSecurityUrl: previewData.siteSettings.footerPublicSecurityUrl || "https://beian.mps.gov.cn/#/query/webSearch",
+      icpText: previewData.siteSettings.footerIcpText || "\u4eacICP\u590720002490\u53f7",
+      icpUrl: previewData.siteSettings.footerIcpUrl || "https://beian.miit.gov.cn/#/Integrated/index",
+      wechatIcon: previewData.siteSettings.footerWechatIconUrl || "/assets/foot/weixin.png",
+      addressIcon: previewData.siteSettings.footerAddressIconUrl || "/assets/foot/address.png",
+      phoneIcon: previewData.siteSettings.footerPhoneIconUrl || "/assets/foot/phone.png",
+      emailIcon: previewData.siteSettings.footerEmailIconUrl || "/assets/foot/email.png",
+      chinaIcon: previewData.siteSettings.footerChinaIconUrl || "/assets/foot/china.png",
     },
     home: {
       heroTitle: {
@@ -941,7 +1775,7 @@ function officialPreviewState(previewData: PublicCmsData): OfficialCmsPublicStat
       },
       heroVideo:
         getPageContentField(previewData.pageContent, "en", "home", "hero", "video", "") ||
-        "/assets/home/海浪0508.mp4",
+        "/assets/home/娴锋氮0508.mp4",
       eventSlugs: [
         "kinsey-kang-hong-kong-legal-counsel",
         "official-account-mini-program-upgrade",
@@ -949,10 +1783,133 @@ function officialPreviewState(previewData: PublicCmsData): OfficialCmsPublicStat
         "civil-code-contract-termination-rules-part-one",
         "wuhan-kingold-fake-gold-jurisdiction-objection",
       ],
+      eventOverrides: {},
     },
     events: {
       overrides: {},
     },
+    content: {
+      honors: [],
+      chronicle: [],
+      teamProfiles: {},
+    },
+    lists: {
+      industries: [],
+      eventSlugs: [],
+      clientLogos: [],
+      homeHonorYears: [],
+      homeHonorItems: [],
+      honorYears: [],
+      chronicleYears: [],
+      partnerSlugs: [],
+      seniorAssociateSlugs: [],
+    },
+  };
+
+  const sourceOfficialState = officialSiteState ?? previewState;
+  const sourceHeader = sourceOfficialState.header ?? previewState.header;
+  const syncedHomeEvents = syncHomeEventsFromPageContent(previewData, sourceOfficialState, language);
+  const syncedHonors = syncHonorsFromPageContent(previewData, sourceOfficialState);
+  const syncedHomeHonors = syncHomeHonorListsFromPageContent(previewData, sourceOfficialState);
+  const syncedChronicle = syncChronicleFromPageContent(previewData, sourceOfficialState);
+  const syncedTeam = syncTeamProfilesFromPageContent(previewData, sourceOfficialState);
+
+  return {
+    ...sourceOfficialState,
+    header: {
+      ...sourceHeader,
+      ...previewState.header,
+      navigation: previewState.header.navigation.length
+        ? previewState.header.navigation
+        : sourceHeader.navigation,
+      socialLinks: previewState.header.socialLinks.length
+        ? previewState.header.socialLinks
+        : sourceHeader.socialLinks,
+    },
+    assets: {
+      ...sourceOfficialState.assets,
+      titleLogo: previewState.assets.titleLogo || sourceOfficialState.assets.titleLogo,
+      footerLogo: previewState.assets.footerLogo || sourceOfficialState.assets.footerLogo,
+      footerQr: previewState.assets.footerQr || sourceOfficialState.assets.footerQr,
+    },
+    footer: {
+      ...sourceOfficialState.footer,
+      phone: previewState.footer.phone || sourceOfficialState.footer.phone,
+      email: previewState.footer.email || sourceOfficialState.footer.email,
+      tagline: {
+        ...sourceOfficialState.footer.tagline,
+        ...previewState.footer.tagline,
+      },
+      address: {
+        ...sourceOfficialState.footer.address,
+        ...previewState.footer.address,
+      },
+      rights: {
+        ...sourceOfficialState.footer.rights,
+        ...previewState.footer.rights,
+      },
+      disclaimerLabel: {
+        ...sourceOfficialState.footer.disclaimerLabel,
+        ...previewState.footer.disclaimerLabel,
+      },
+      publicSecurityText: previewState.footer.publicSecurityText || sourceOfficialState.footer.publicSecurityText,
+      publicSecurityUrl: previewState.footer.publicSecurityUrl || sourceOfficialState.footer.publicSecurityUrl,
+      icpText: previewState.footer.icpText || sourceOfficialState.footer.icpText,
+      icpUrl: previewState.footer.icpUrl || sourceOfficialState.footer.icpUrl,
+      wechatIcon: previewState.footer.wechatIcon || sourceOfficialState.footer.wechatIcon,
+      addressIcon: previewState.footer.addressIcon || sourceOfficialState.footer.addressIcon,
+      phoneIcon: previewState.footer.phoneIcon || sourceOfficialState.footer.phoneIcon,
+      emailIcon: previewState.footer.emailIcon || sourceOfficialState.footer.emailIcon,
+      chinaIcon: previewState.footer.chinaIcon || sourceOfficialState.footer.chinaIcon,
+    },
+    home: {
+      ...sourceOfficialState.home,
+      heroTitle: {
+        en: previewState.home.heroTitle.en || sourceOfficialState.home.heroTitle.en,
+        zh: previewState.home.heroTitle.zh || sourceOfficialState.home.heroTitle.zh,
+      },
+      heroVideo: previewState.home.heroVideo || sourceOfficialState.home.heroVideo,
+      eventSlugs: syncedHomeEvents.eventSlugs,
+      eventOverrides: syncedHomeEvents.homeOverrides,
+    },
+    events: {
+      ...sourceOfficialState.events,
+      overrides: syncedHomeEvents.overrides,
+    },
+    content: {
+      ...sourceOfficialState.content,
+      honors: syncedHonors,
+      chronicle: syncedChronicle,
+      teamProfiles: syncedTeam.profiles,
+    },
+    lists: {
+      ...sourceOfficialState.lists,
+      industries: syncIndustriesFromPageContent(previewData, sourceOfficialState),
+      eventSlugs: syncedHomeEvents.listSlugs,
+      clientLogos: syncClientLogosFromPageContent(previewData, sourceOfficialState),
+      homeHonorYears: syncedHomeHonors.homeHonorYears,
+      homeHonorItems: syncedHomeHonors.homeHonorItems,
+      honorYears: syncedHonors.length ? syncedHonors.map((item) => item.year) : sourceOfficialState.lists.honorYears,
+      chronicleYears: syncedChronicle.length ? syncedChronicle.map((item) => item.year) : sourceOfficialState.lists.chronicleYears,
+      partnerSlugs: syncedTeam.partnerSlugs,
+      seniorAssociateSlugs: syncedTeam.seniorAssociateSlugs,
+    },
+    previewPageContent: previewData.pageContent,
+  } as OfficialCmsPublicState;
+}
+
+function stripPreviewOnlyCmsState(state: OfficialCmsPublicState): OfficialCmsPublicState {
+  return {
+    version: state.version,
+    updatedAt: state.updatedAt,
+    header: state.header,
+    assets: state.assets,
+    footer: state.footer,
+    home: state.home,
+    events: state.events,
+    content: state.content,
+    lists: state.lists,
+    previewPageContent: state.previewPageContent,
   };
 }
 
@@ -962,6 +1919,8 @@ function createPuckConfig({
   activeLanguage,
   previewDevice,
   previewData,
+  officialSiteState,
+  subpage,
   siteContent,
   onFieldClick,
   onOpenCarouselDrawer,
@@ -971,6 +1930,8 @@ function createPuckConfig({
   activeLanguage: Language;
   previewDevice: CmsPreviewDevice;
   previewData: PublicCmsData;
+  officialSiteState: OfficialCmsPublicState | null;
+  subpage: SubpageSelection | null;
   siteContent: SiteContent;
   onFieldClick: (match: EditableFieldMatch) => void;
   onOpenCarouselDrawer: (sectionId: string) => void;
@@ -987,14 +1948,14 @@ function createPuckConfig({
 
       livePageFields[puckFieldKey(section.id, field.id)] = {
         type: field.kind === "textarea" ? "textarea" : "text",
-        label: `${labelSection?.label ?? section.label} / ${labelField?.label ?? field.label}`,
+        label: `${labelSection?.label ?? section.label} - ${labelField?.label ?? field.label}`,
       };
     });
 
     if (section.items?.length) {
       livePageFields[carouselSummaryFieldKey(section.id)] = {
         type: "custom",
-        label: `${labelSection?.label ?? section.label} / 内容管理`,
+        label: `${labelSection?.label ?? section.label} - 内容管理`,
         render: () => (
           <div className="space-y-3 rounded-2xl border border-slate-200 bg-slate-50 p-4">
             <div>
@@ -1033,21 +1994,25 @@ function createPuckConfig({
         fields: {
           pageId: { type: "text", label: "页面 ID", visible: false },
           language: { type: "text", label: "内容语言", visible: false },
+          __contentFingerprint: { type: "text", label: "Content fingerprint", visible: false },
           ...livePageFields,
         },
         defaultProps: {
           id: `${activeLanguage}-${activePage.id}-live-page`,
           pageId: activePage.id,
           language: activeLanguage,
+          __contentFingerprint: getPageContentFingerprint(activePage),
         },
         render: (props) => {
           const pageId = activePage.id;
           const language = activeLanguage;
           const pageContent = applyPuckPropsToPageContent(previewData.pageContent, language, pageId, props);
+          const contentFingerprint = getPageContentFingerprint(pageContent[language][pageId]);
           const publicData: PublicCmsData = {
             ...previewData,
             pageContent,
           };
+          const siteSettingsFingerprint = getSiteSettingsFingerprint(publicData.siteSettings);
           const device = previewDeviceOptions.find((item) => item.id === previewDevice) ?? previewDeviceOptions[0];
 
           return (
@@ -1112,19 +2077,22 @@ function createPuckConfig({
                   zoom: min(1, calc((100cqw - 40px) / var(--cms-device-width)));
                 }
 
-                .cms-puck-preview [data-cms-field] {
+                .cms-puck-preview [data-cms-field],
+                .cms-puck-preview [data-cms-site-field] {
                   cursor: pointer;
                   outline: 0 solid transparent;
                   outline-offset: 6px;
                   transition: outline-color 160ms ease, background-color 160ms ease;
                 }
 
-                .cms-puck-preview [data-cms-field]:hover {
+                .cms-puck-preview [data-cms-field]:hover,
+                .cms-puck-preview [data-cms-site-field]:hover {
                   outline: 2px solid rgba(37, 99, 235, 0.9);
                   background-color: rgba(37, 99, 235, 0.08);
                 }
 
-                .cms-puck-preview .pointer-events-none [data-cms-field] {
+                .cms-puck-preview .pointer-events-none [data-cms-field],
+                .cms-puck-preview .pointer-events-none [data-cms-site-field] {
                   pointer-events: auto;
                 }
 
@@ -1154,9 +2122,13 @@ function createPuckConfig({
                 }}
               >
                 <div className="cms-puck-device-shell">
-                  <OfficialPublicCmsProvider initialState={officialPreviewState(publicData)}>
+                  <OfficialPublicCmsProvider
+                    key={`${language}-${pageId}-${subpage?.slug ?? "index"}-${contentFingerprint}-${siteSettingsFingerprint}`}
+                    initialState={officialPreviewState(publicData, officialSiteState, language)}
+                    fetchOnMount={false}
+                  >
                     <OfficialLanguageProvider key={`${language}-${pageId}`} initialLanguage={language} persist={false}>
-                      <PreviewPageFrame page={pageId} />
+                      <PreviewPageFrame page={pageId} subpage={subpage} />
                     </OfficialLanguageProvider>
                   </OfficialPublicCmsProvider>
                 </div>
@@ -1173,6 +2145,7 @@ export function CmsPuckVisualEditor({
   siteContent,
   visualEditor,
   pageContent,
+  officialSiteState,
   setVisualEditor,
   setPageContent,
   updateSiteContent,
@@ -1185,7 +2158,6 @@ export function CmsPuckVisualEditor({
   assets,
   versions,
   editingVersionId,
-  loadVersionForEditing,
   submitVersionDraft,
   setPanel,
   persistWorkspace,
@@ -1194,6 +2166,7 @@ export function CmsPuckVisualEditor({
   siteContent: SiteContent;
   visualEditor: VisualEditorState;
   pageContent: PageContentState;
+  officialSiteState: OfficialCmsPublicState | null;
   setVisualEditor: (updater: (current: VisualEditorState) => VisualEditorState) => void;
   setPageContent: Dispatch<SetStateAction<PageContentState>>;
   activeLanguage: Language;
@@ -1209,10 +2182,9 @@ export function CmsPuckVisualEditor({
   assets: CmsAsset[];
   versions: CmsVersionSnapshot[];
   editingVersionId: number | null;
-  loadVersionForEditing: (versionId: number | null) => Promise<void>;
   submitVersionDraft: (
     versionId: number,
-    nextState?: { siteContent?: SiteContent; visualEditor?: VisualEditorState; pageContent?: PageContentState },
+    nextState?: { siteContent?: SiteContent; visualEditor?: VisualEditorState; pageContent?: PageContentState; officialSiteState?: OfficialCmsPublicState | null },
   ) => Promise<boolean>;
   setPanel: (panel: StudioPanel) => void;
   persistWorkspace: (nextState?: {
@@ -1231,8 +2203,41 @@ export function CmsPuckVisualEditor({
   const [previewDevice, setPreviewDevice] = useState<CmsPreviewDevice>("desktop");
   const [carouselDrawer, setCarouselDrawer] = useState<CarouselDrawerState | null>(null);
   const [expandedCarouselItems, setExpandedCarouselItems] = useState<Record<string, boolean>>({});
+  const [subpageSelection, setSubpageSelection] = useState<SubpageSelection | null>(null);
+  const [selectedHomeHonorSourceId, setSelectedHomeHonorSourceId] = useState("");
   const editorLanguages = ["en", "zh"] as Language[];
+
+  useEffect(() => {
+    const eventPrototype = Event.prototype as Event & { getModifierState?: unknown };
+
+    if (typeof eventPrototype.getModifierState !== "function") {
+      Object.defineProperty(Event.prototype, "getModifierState", {
+        configurable: true,
+        value: () => false,
+      });
+    }
+
+    const ensureModifierState = (event: Event) => {
+      const eventWithModifier = event as Event & { getModifierState?: unknown };
+
+      if (typeof eventWithModifier.getModifierState !== "function") {
+        Object.defineProperty(event, "getModifierState", {
+          configurable: true,
+          value: () => false,
+        });
+      }
+    };
+
+    document.addEventListener("keydown", ensureModifierState, true);
+    document.addEventListener("keyup", ensureModifierState, true);
+
+    return () => {
+      document.removeEventListener("keydown", ensureModifierState, true);
+      document.removeEventListener("keyup", ensureModifierState, true);
+    };
+  }, []);
   const previewPage: VisualPage = isVisualPageTab(page) ? page : "home";
+  const activeSubpage = subpageSelection?.page === previewPage ? subpageSelection : null;
   const isSiteChromeTab = page === "header" || page === "footer";
   const activeTabLabel = pageTabs.find((tab) => tab.id === page)?.label ?? pageContent.zh[previewPage].label;
   const activePage = pageContent[activeLanguage][previewPage];
@@ -1261,12 +2266,32 @@ export function CmsPuckVisualEditor({
       } satisfies Partial<Record<Language, PageContentSection | undefined>>)
     : {};
   const activeCarouselSection = activeCarouselSectionsByLanguage.zh ?? activeCarouselSectionsByLanguage.en;
+  const homeHonorSourceItems = useMemo(
+    () =>
+      (officialSiteState?.content.honors ?? []).flatMap((year) =>
+        year.awards.map((award, index) => ({
+          id: homeHonorItemId(year.year, index, award.date),
+          year: year.year,
+          award,
+        })),
+      ),
+    [officialSiteState],
+  );
+  const getLocalizedCarouselItemIndex = (language: Language, fallbackIndex: number, slug?: string) => {
+    const items = activeCarouselSectionsByLanguage[language]?.items;
+
+    if (!slug || !items?.length) return fallbackIndex;
+
+    const matchedIndex = items.findIndex((item) => getPageContentItemField(item, "slug", item.id) === slug);
+
+    return matchedIndex >= 0 ? matchedIndex : fallbackIndex;
+  };
   const activeSectionHasDate = editorLanguages.some((language) => {
     const section = activeCarouselSectionsByLanguage[language];
     return section ? sectionHasDateItems(section) : false;
   });
   const activeVersion = editingVersionId ? versions.find((version) => version.id === editingVersionId) : null;
-  const selectedVersionId = editingVersionId ?? versions[0]?.id ?? "";
+  const subpageOptions = isVisualPageTab(page) ? getSubpageOptions(pageContent, previewPage, activeLanguage) : [];
   const scrollEditorFieldIntoView = (fieldKey: string, language: Language = activeLanguage, delay = 140) => {
     window.setTimeout(() => {
       const editorControl = findEditorControl(fieldKey, language);
@@ -1331,6 +2356,36 @@ export function CmsPuckVisualEditor({
       };
     });
   };
+  const addHomeHonorSourceItem = () => {
+    const source = homeHonorSourceItems.find((item) => item.id === selectedHomeHonorSourceId);
+
+    if (!source) return;
+
+    editorLanguages.forEach((language) => {
+      updateCarouselItems(language, "honors", (items) => {
+        if (items.some((item) => item.id === source.id)) return items;
+
+        const isZh = language === "zh";
+
+        return [
+          ...items,
+          {
+            id: source.id,
+            label: isZh ? source.award.title.zh : source.award.title.en,
+            fields: [
+              { id: "year", label: isZh ? "年份" : "Year", kind: "text", value: source.year },
+              { id: "date", label: isZh ? "日期" : "Date", kind: "text", value: source.award.date },
+              { id: "title", label: isZh ? "标题" : "Title", kind: "textarea", value: isZh ? source.award.title.zh : source.award.title.en },
+              { id: "body", label: isZh ? "正文" : "Body", kind: "textarea", value: isZh ? source.award.body.zh : source.award.body.en },
+              { id: "href", label: isZh ? "链接" : "Link", kind: "url", value: source.award.href ?? "" },
+            ],
+          },
+        ];
+      });
+    });
+
+    setSelectedHomeHonorSourceId("");
+  };
   const updateCarouselItemField = (
     language: Language,
     sectionId: string,
@@ -1339,13 +2394,82 @@ export function CmsPuckVisualEditor({
     value: string,
     fallback: PageContentField | null = null,
   ) => {
-    updateCarouselItems(language, sectionId, (items) =>
-      items.map((item, index) =>
-        index === itemIndex
-          ? { ...item, fields: upsertRepeaterField(item.fields, fieldId, value, fallback) }
-          : item,
-      ),
+  const sourceItem = pageContent[language][previewPage].sections
+    .find((section) => section.id === sectionId)
+    ?.items?.[itemIndex];
+  const sourceSlug =
+    previewPage === "event" && sourceItem && (sectionId === "list" || sectionId === "detailPages")
+      ? getPageContentItemField(sourceItem, "slug", sourceItem.id)
+      : "";
+  const syncEventSlug =
+    previewPage === "event" && (sectionId === "list" || sectionId === "detailPages") && fieldId === "slug";
+  const targetLanguages =
+    syncEventSlug || (sectionId === "detailPages" && isGeneratedEventMediaField(fieldId)) ? editorLanguages : [language];
+
+  targetLanguages.forEach((targetLanguage) => {
+    updateCarouselItems(targetLanguage, sectionId, (items) =>
+      items.map((item, index) => {
+        const targetIndex = sourceSlug
+          ? items.findIndex((candidate) => getPageContentItemField(candidate, "slug", candidate.id) === sourceSlug)
+          : itemIndex;
+        const effectiveItemIndex = targetIndex >= 0 ? targetIndex : itemIndex;
+
+        return index === effectiveItemIndex
+            ? {
+                ...item,
+                fields:
+                  sectionId === "detailPages" && isGeneratedEventMediaField(fieldId)
+                    ? upsertGeneratedEventMediaField(item.fields, fieldId, value, fallback)
+                    : upsertRepeaterField(item.fields, fieldId, value, fallback),
+              }
+            : item;
+      }),
     );
+  });
+  };
+  const uploadCarouselItemAsset = async (
+    language: Language,
+    sectionId: string,
+    itemIndex: number,
+    fieldId: string,
+    file: File,
+    fallback: PageContentField,
+  ) => {
+    const formData = new FormData();
+    const uploadPage = sectionId === "list" || previewPage === "event" ? "event" : previewPage;
+
+    formData.append("file", file);
+    formData.append("page", uploadPage);
+
+    const response = await fetch("/api/cms/assets", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!response.ok) {
+      setMessage(`上传失败：${file.name}`);
+      return;
+    }
+
+    const payload = (await response.json()) as { assets: CmsAsset[] };
+    const uploaded = payload.assets.find((asset) => asset.originalName === file.name) ?? payload.assets[0];
+
+    if (!uploaded?.url) {
+      setMessage(`上传完成，但未获取到文件地址：${file.name}`);
+      return;
+    }
+
+    const currentItem = pageContent[language][previewPage].sections
+      .find((section) => section.id === sectionId)
+      ?.items?.[itemIndex];
+    const currentValue =
+      getPageContentItemField(currentItem, fieldId, "") || getGeneratedEventMediaValue(currentItem, fieldId);
+    const nextValue = shouldAppendUploadedAsset(fieldId)
+      ? [currentValue.trim(), uploaded.url].filter(Boolean).join("\n")
+      : uploaded.url;
+
+    updateCarouselItemField(language, sectionId, itemIndex, fieldId, nextValue, fallback);
+    setMessage(`已上传并写入字段：${uploaded.url}`);
   };
   const addPastEventPlatform = (sectionId: string, itemIndex: number) => {
     const platformNumber = getNextPastEventPlatformNumber(activeCarouselSectionsByLanguage, itemIndex);
@@ -1414,6 +2538,99 @@ export function CmsPuckVisualEditor({
   };
   const addCarouselItem = (section: PageContentSection) => {
     const nextId = `${section.id}-${Date.now()}`;
+    const today = getTodayNumericDate();
+    const nextItemIndex = Math.max(
+      activeCarouselSectionsByLanguage.zh?.items?.length ?? 0,
+      activeCarouselSectionsByLanguage.en?.items?.length ?? 0,
+    );
+    const nextEventDetailIndex =
+      previewPage === "event" && section.id === "list"
+        ? Math.max(
+            pageContent.zh.event.sections.find((item) => item.id === "detailPages")?.items?.length ?? 0,
+            pageContent.en.event.sections.find((item) => item.id === "detailPages")?.items?.length ?? 0,
+          )
+        : nextItemIndex;
+    const createFallbackField = (
+      fields: PageContentField[],
+      id: string,
+      label: string,
+      kind: PageContentField["kind"],
+      value = "",
+    ) => {
+      if (fields.some((field) => field.id === id)) return fields;
+
+      return [...fields, { id, label, kind, value }];
+    };
+    const createNewFields = (
+      template: PageContentRepeaterItem | undefined,
+      localizedSection: PageContentSection,
+      nextIndex: number,
+    ) => {
+      let fields =
+        template?.fields.map((field) => ({
+          ...field,
+          label: field.label.replace(/\d+/g, String(nextIndex)),
+          value:
+            field.id === "slug"
+              ? nextId
+              : field.id === "sortDate" || field.id === "date"
+                ? today
+                : field.id === "displayDate"
+                  ? today
+                  : "",
+        })) ?? [];
+
+      if (previewPage === "event" && section.id === "list") {
+        fields = createFallbackField(fields, "slug", "Slug", "text", nextId);
+        fields = createFallbackField(fields, "image", "Thumbnail image", "image");
+        fields = createFallbackField(fields, "sortDate", "Sort date", "text", today);
+        fields = createFallbackField(fields, "displayDate", "Display date", "text", today);
+        fields = createFallbackField(fields, "category", "Category", "text");
+        fields = createFallbackField(fields, "title", "Title", "textarea", `${localizedSection.label} ${nextIndex}`);
+      }
+
+      if (previewPage === "home" && section.id === "events") {
+        fields = fields.filter((field) => homeEventSlideFields.some((item) => item.fieldId === field.id));
+        fields = createFallbackField(fields, "slug", "Slide slug", "text", nextId);
+        fields = createFallbackField(fields, "image", "Slide image", "image");
+        fields = createFallbackField(fields, "displayDate", "Display date", "text", today);
+        fields = createFallbackField(fields, "category", "Category", "text");
+        fields = createFallbackField(fields, "title", "Title", "textarea", `${localizedSection.label} ${nextIndex}`);
+        fields = createFallbackField(fields, "summary", "Slide summary", "textarea");
+        fields = createFallbackField(fields, "href", "Click link", "url", "/events");
+      }
+
+      if (previewPage === "event" && section.id === "detailPages") {
+        fields = createFallbackField(fields, "slug", "Slug", "text", nextId);
+        fields = createFallbackField(fields, "sortDate", "Sort date", "text", today);
+        fields = createFallbackField(fields, "displayDate", "Display date", "text", today);
+        fields = createFallbackField(fields, "category", "Category", "text");
+        fields = createFallbackField(fields, "title", "Detail title", "textarea", `${localizedSection.label} ${nextIndex}`);
+        fields = createFallbackField(fields, "summary", "Detail summary", "textarea");
+        fields = createFallbackField(fields, "content", "Detail content", "textarea");
+        fields = createFallbackField(fields, "detailImage1", "Detail image 1", "image");
+        fields = createFallbackField(fields, "detailVideo1", "Detail video 1", "url");
+      }
+
+      if (previewPage === "media" && section.id === "detailPages") {
+        fields = createFallbackField(fields, "slug", "Slug", "text", nextId);
+        fields = createFallbackField(fields, "title", "Detail title", "text", `${localizedSection.label} ${nextIndex}`);
+        fields = createFallbackField(fields, "image", "Hero image", "image");
+        fields = createFallbackField(fields, "intro", "Detail intro", "textarea");
+        fields = createFallbackField(fields, "sections", "Detail cards", "textarea");
+      }
+
+      if (previewPage === "podcast" && (section.id === "partners" || section.id === "seniorAssociates")) {
+        fields = createFallbackField(fields, "slug", "Slug", "text", nextId);
+        fields = createFallbackField(fields, "image", "Thumbnail", "image");
+        fields = createFallbackField(fields, "name", "Name", "text", `${localizedSection.label} ${nextIndex}`);
+        fields = createFallbackField(fields, "title", "Title", "text", section.id === "partners" ? "Partner" : "Senior Associate");
+        fields = createFallbackField(fields, "ctaLabel", "CTA label", "text", "Find out more");
+        fields = createFallbackField(fields, "href", "Link", "url", `/team/${nextId}`);
+      }
+
+      return fields;
+    };
 
     editorLanguages.forEach((language) => {
       updateCarouselItems(language, section.id, (items, localizedSection) => {
@@ -1425,16 +2642,116 @@ export function CmsPuckVisualEditor({
           {
             id: nextId,
             label: `${localizedSection.label} ${nextIndex}`,
-            fields:
-              template?.fields.map((field) => ({
-                ...field,
-                label: field.label.replace(/\d+/g, String(nextIndex)),
-                value: "",
-              })) ?? [],
+            fields: createNewFields(template, localizedSection, nextIndex),
           },
         ];
       });
     });
+
+    if (previewPage === "event" && section.id === "list") {
+      editorLanguages.forEach((language) => {
+        updateCarouselItems(language, "detailPages", (items, localizedSection) => {
+          if (items.some((item) => getPageContentItemField(item, "slug", item.id) === nextId)) return items;
+
+          const nextIndex = items.length + 1;
+
+          return [
+            ...items,
+            {
+              id: nextId,
+              label: `${localizedSection.label} ${nextIndex}`,
+              fields: [
+                { id: "slug", label: "Slug", kind: "text", value: nextId },
+                { id: "sortDate", label: "Sort date", kind: "text", value: today },
+                { id: "displayDate", label: "Display date", kind: "text", value: today },
+                { id: "category", label: "Category", kind: "text", value: "" },
+                { id: "title", label: "Detail title", kind: "textarea", value: "" },
+                { id: "summary", label: "Detail summary", kind: "textarea", value: "" },
+                { id: "content", label: "Detail content", kind: "textarea", value: "" },
+                { id: "detailImage1", label: "Detail image 1", kind: "image", value: "" },
+                { id: "detailVideo1", label: "Detail video 1", kind: "url", value: "" },
+              ],
+            },
+          ];
+        });
+      });
+    }
+
+    if (previewPage === "podcast" && (section.id === "partners" || section.id === "seniorAssociates")) {
+      editorLanguages.forEach((language) => {
+        updateCarouselItems(language, "memberProfiles", (items, localizedSection) => {
+          if (items.some((item) => getPageContentItemField(item, "slug", item.id) === nextId)) return items;
+
+          const nextIndex = items.length + 1;
+          const name = `${localizedSection.label} ${nextIndex}`;
+          const title = section.id === "partners" ? "Partner" : "Senior Associate";
+
+          return [
+            ...items,
+            {
+              id: nextId,
+              label: name,
+              fields: [
+                { id: "slug", label: "Slug", kind: "text", value: nextId },
+                { id: "image", label: "Thumbnail", kind: "image", value: "" },
+                { id: "name", label: "Name", kind: "text", value: name },
+                { id: "title", label: "Title", kind: "text", value: title },
+                { id: "phone", label: "Phone", kind: "text", value: "" },
+                { id: "email", label: "Email", kind: "text", value: "" },
+                { id: "serviceIndustries", label: "Service industries", kind: "textarea", value: "" },
+                { id: "education", label: "Education", kind: "textarea", value: "" },
+                { id: "qualification", label: "Qualification", kind: "textarea", value: "" },
+                { id: "languages", label: "Languages", kind: "textarea", value: "" },
+                { id: "socialEngagements", label: "Social engagements", kind: "textarea", value: "" },
+                { id: "practiceArea", label: "Practice area", kind: "textarea", value: "" },
+                { id: "practiceExperience", label: "Practice experience", kind: "textarea", value: "" },
+                { id: "honors", label: "Honors", kind: "textarea", value: "" },
+                { id: "achievements", label: "Performance & Achievements", kind: "textarea", value: "" },
+              ],
+            },
+          ];
+        });
+      });
+
+      const nextProfileIndex = Math.max(
+        pageContent.zh.podcast.sections.find((item) => item.id === "memberProfiles")?.items?.length ?? 0,
+        pageContent.en.podcast.sections.find((item) => item.id === "memberProfiles")?.items?.length ?? 0,
+      );
+
+      setSubpageSelection({
+        page: "podcast",
+        sectionId: "memberProfiles",
+        slug: nextId,
+        itemIndex: nextProfileIndex,
+      });
+      setCarouselDrawer({ sectionId: "memberProfiles", itemIndex: nextProfileIndex, slug: nextId });
+      setExpandedCarouselItems((current) => ({
+        ...current,
+        [`memberProfiles-${nextId}`]: true,
+      }));
+      return;
+    }
+
+    if (previewPage === "event" && section.id === "list") {
+      setSubpageSelection({
+        page: "event",
+        sectionId: "detailPages",
+        slug: nextId,
+        itemIndex: nextEventDetailIndex,
+      });
+      setCarouselDrawer({ sectionId: "detailPages", itemIndex: nextEventDetailIndex, slug: nextId });
+      setExpandedCarouselItems((current) => ({
+        ...current,
+        [`detailPages-${nextId}`]: true,
+      }));
+      return;
+    }
+
+    setCarouselDrawer({ sectionId: section.id, itemIndex: nextItemIndex, slug: nextId });
+    setExpandedCarouselItems((current) => ({
+      ...current,
+      [`${section.id}-${nextId}`]: true,
+    }));
   };
   const removeCarouselItem = (sectionId: string, itemIndex: number) => {
     editorLanguages.forEach((language) => {
@@ -1452,8 +2769,8 @@ export function CmsPuckVisualEditor({
     editorLanguages.forEach((language) => {
       updateCarouselItems(language, sectionId, (items) =>
         [...items].sort((a, b) => {
-          const aTime = parseSortableDate(getItemFieldValue(a, "date"));
-          const bTime = parseSortableDate(getItemFieldValue(b, "date"));
+          const aTime = parseSortableDate(getItemFieldValue(a, "sortDate") || getItemFieldValue(a, "date"));
+          const bTime = parseSortableDate(getItemFieldValue(b, "sortDate") || getItemFieldValue(b, "date"));
 
           return direction === "asc" ? aTime - bTime : bTime - aTime;
         }),
@@ -1468,6 +2785,8 @@ export function CmsPuckVisualEditor({
         activeLanguage,
         previewDevice,
         previewData: basePreviewData,
+        officialSiteState,
+        subpage: activeSubpage,
         siteContent,
         onOpenCarouselDrawer: (sectionId) => setCarouselDrawer({ sectionId }),
         onFieldClick: (match) => {
@@ -1506,7 +2825,7 @@ export function CmsPuckVisualEditor({
           }, 120);
         },
       }),
-    [activeLanguage, activePage, basePreviewData, isSiteChromeTab, labelPage, page, previewDevice, setMessage, siteContent],
+    [activeLanguage, activePage, activeSubpage, basePreviewData, isSiteChromeTab, labelPage, officialSiteState, page, previewDevice, setMessage, siteContent],
   );
   const puckPlugins = useMemo<Plugin<Config<CmsPuckComponents>>[]>(
     () => [
@@ -1532,6 +2851,7 @@ export function CmsPuckVisualEditor({
     const nextPreviewPage = isVisualPageTab(nextPage) ? nextPage : "home";
     setFocusedFieldKey(null);
     setCarouselDrawer(null);
+    setSubpageSelection((current) => (current?.page === nextPreviewPage ? current : null));
     setPuckData(getInitialPuckData(pageContent, activeLanguage, nextPreviewPage));
     setPage(nextPage);
   };
@@ -1540,6 +2860,142 @@ export function CmsPuckVisualEditor({
     setFocusedFieldKey(null);
     setPuckData(getInitialPuckData(pageContent, nextLanguage, previewPage));
     setActiveLanguage(nextLanguage);
+  };
+  const selectSubpage = (value: string) => {
+    if (!isVisualPageTab(page)) return;
+
+    if (!value) {
+      setSubpageSelection(null);
+      setCarouselDrawer(null);
+      return;
+    }
+
+    const option = subpageOptions.find((item) => item.slug === value);
+
+    if (!option) return;
+
+    let itemIndex = option.itemIndex;
+
+    if (previewPage === "event" && option.itemIndex < 0) {
+      const activeDetailItems = getPageContentSectionItems(pageContent, activeLanguage, "event", option.sectionId);
+      itemIndex = activeDetailItems.length;
+
+      setPageContent((current) => {
+        const next = { ...current, zh: { ...current.zh }, en: { ...current.en }, updatedAt: new Date().toISOString() };
+
+        editorLanguages.forEach((language) => {
+          const currentPage = current[language].event;
+          const listItem = currentPage.sections
+            .find((section) => section.id === "list")
+            ?.items?.find((item) => getPageContentItemField(item, "slug", item.id) === option.slug);
+          const detailTitle = getPageContentItemField(listItem, "title", option.label || option.slug);
+          const detailSummary = getPageContentItemField(listItem, "summary", "");
+          const detailCategory = getPageContentItemField(listItem, "category", "");
+          const detailDate = getPageContentItemField(listItem, "sortDate", getPageContentItemField(listItem, "date", getTodayNumericDate()));
+
+          next[language] = {
+            ...current[language],
+            event: {
+              ...currentPage,
+              sections: currentPage.sections.map((section) => {
+                if (section.id !== option.sectionId) return section;
+                if (section.items?.some((item) => getPageContentItemField(item, "slug", item.id) === option.slug)) return section;
+
+                const item: PageContentRepeaterItem = {
+                  id: option.slug,
+                  label: detailTitle,
+                  fields: [
+                    { id: "slug", label: language === "zh" ? "标识" : "Slug", kind: "text", value: option.slug },
+                    { id: "date", label: language === "zh" ? "日期" : "Date", kind: "text", value: detailDate },
+                    { id: "category", label: language === "zh" ? "分类" : "Category", kind: "text", value: detailCategory },
+                    { id: "title", label: language === "zh" ? "详情页标题" : "Detail title", kind: "textarea", value: detailTitle },
+                    { id: "summary", label: language === "zh" ? "详情页摘要" : "Detail summary", kind: "textarea", value: detailSummary },
+                    { id: "content", label: language === "zh" ? "详情正文" : "Detail content", kind: "textarea", value: "" },
+                    { id: "detailImage1", label: language === "zh" ? "详情图片 1" : "Detail image 1", kind: "image", value: "" },
+                    { id: "detailVideo1", label: language === "zh" ? "详情视频 1" : "Detail video 1", kind: "url", value: "" },
+                  ],
+                };
+
+                return { ...section, items: [...(section.items ?? []), item] };
+              }),
+            },
+          };
+        });
+
+        return next;
+      });
+    }
+
+    if (previewPage === "podcast" && option.itemIndex < 0) {
+      const activeDetailItems = getPageContentSectionItems(pageContent, activeLanguage, "podcast", option.sectionId);
+      itemIndex = activeDetailItems.length;
+
+      setPageContent((current) => {
+        const next = { ...current, zh: { ...current.zh }, en: { ...current.en }, updatedAt: new Date().toISOString() };
+
+        editorLanguages.forEach((language) => {
+          const currentPage = current[language].podcast;
+          const listItem = currentPage.sections
+            .filter((section) => section.id === "partners" || section.id === "seniorAssociates")
+            .flatMap((section) => section.items ?? [])
+            .find((item) => getPageContentItemField(item, "slug", item.id) === option.slug);
+          const name = getPageContentItemField(listItem, "name", option.label || option.slug);
+          const title = getPageContentItemField(listItem, "title", "");
+          const image = getPageContentItemField(listItem, "image", "");
+
+          next[language] = {
+            ...current[language],
+            podcast: {
+              ...currentPage,
+              sections: currentPage.sections.map((section) => {
+                if (section.id !== option.sectionId) return section;
+                if (section.items?.some((item) => getPageContentItemField(item, "slug", item.id) === option.slug)) return section;
+
+                const item: PageContentRepeaterItem = {
+                  id: option.slug,
+                  label: name,
+                  fields: [
+                    { id: "slug", label: "Slug", kind: "text", value: option.slug },
+                    { id: "image", label: "Thumbnail", kind: "image", value: image },
+                    { id: "name", label: "Name", kind: "text", value: name },
+                    { id: "title", label: "Title", kind: "text", value: title },
+                    { id: "phone", label: "Phone", kind: "text", value: "" },
+                    { id: "email", label: "Email", kind: "text", value: "" },
+                    { id: "serviceIndustries", label: "Service industries", kind: "textarea", value: "" },
+                    { id: "education", label: "Education", kind: "textarea", value: "" },
+                    { id: "qualification", label: "Qualification", kind: "textarea", value: "" },
+                    { id: "languages", label: "Languages", kind: "textarea", value: "" },
+                    { id: "socialEngagements", label: "Social engagements", kind: "textarea", value: "" },
+                    { id: "practiceArea", label: "Practice area", kind: "textarea", value: "" },
+                    { id: "practiceExperience", label: "Practice experience", kind: "textarea", value: "" },
+                    { id: "honors", label: "Honors", kind: "textarea", value: "" },
+                    { id: "achievements", label: "Performance & Achievements", kind: "textarea", value: "" },
+                  ],
+                };
+
+                return { ...section, items: [...(section.items ?? []), item] };
+              }),
+            },
+          };
+        });
+
+        return next;
+      });
+    }
+
+    const nextSelection: SubpageSelection = {
+      page: previewPage as DetailParentPage,
+      sectionId: option.sectionId,
+      slug: option.slug,
+      itemIndex,
+    };
+
+    setSubpageSelection(nextSelection);
+    setCarouselDrawer({ sectionId: option.sectionId, itemIndex, slug: option.slug });
+    setExpandedCarouselItems((current) => ({
+      ...current,
+      [`${option.sectionId}-${option.slug}`]: true,
+    }));
   };
 
   const updateDraftContent = (nextData: CmsPuckData) => {
@@ -1550,11 +3006,6 @@ export function CmsPuckVisualEditor({
   };
 
   const savePuckData = async (nextData: CmsPuckData, publish: boolean) => {
-    if (!editingVersionId && versions.length > 0) {
-      setMessage("默认版本正在加载，请稍后再保存。");
-      return;
-    }
-
     setMessage(editingVersionId ? "正在提交版本..." : publish ? "正在发布当前页..." : "正在保存草稿...");
 
     const nextPageContent = isVisualPageTab(page)
@@ -1576,6 +3027,19 @@ export function CmsPuckVisualEditor({
           ...visualEditor,
           updatedAt: new Date().toISOString(),
         };
+    const nextOfficialSiteState = officialSiteState
+      ? stripPreviewOnlyCmsState(
+          officialPreviewState(
+            {
+              ...basePreviewData,
+              visualEditor: nextVisualEditor,
+              pageContent: nextPageContent,
+            },
+            officialSiteState,
+            activeLanguage,
+          ),
+        )
+      : null;
 
     setPuckData(nextData);
     setPageContent(nextPageContent);
@@ -1586,12 +3050,26 @@ export function CmsPuckVisualEditor({
           siteContent,
           visualEditor: nextVisualEditor,
           pageContent: nextPageContent,
+          officialSiteState: nextOfficialSiteState,
         })
       : await persistWorkspace({
           siteContent,
           visualEditor: nextVisualEditor,
           pageContent: nextPageContent,
         });
+
+    if (ok && !editingVersionId && nextOfficialSiteState) {
+      const officialResponse = await fetch("/api/cms/official", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ state: nextOfficialSiteState }),
+      });
+
+      if (!officialResponse.ok) {
+        setMessage("页面内容已保存，但真实官网数据同步失败。");
+        return;
+      }
+    }
 
     if (ok) {
       setMessage(
@@ -1618,25 +3096,6 @@ export function CmsPuckVisualEditor({
 
         <div className="h-6 w-px bg-slate-200" />
 
-        <div className="flex min-w-[220px] items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">
-          <span className="shrink-0 text-xs font-bold text-slate-500">版本</span>
-          <select
-            value={selectedVersionId}
-            onChange={(event) => {
-              void loadVersionForEditing(Number(event.target.value));
-            }}
-            disabled={versions.length === 0}
-            className="min-w-0 flex-1 bg-transparent text-xs font-semibold text-slate-700 outline-none"
-          >
-            {versions.length === 0 ? <option value="">暂无版本</option> : null}
-            {versions.map((version) => (
-              <option key={version.id} value={version.id}>
-                {version.name}
-              </option>
-            ))}
-          </select>
-        </div>
-
         <nav className="flex min-w-0 flex-1 items-center gap-2 overflow-x-auto">
           {pageTabs.map((tab) => (
             <button
@@ -1656,6 +3115,24 @@ export function CmsPuckVisualEditor({
             </button>
           ))}
         </nav>
+
+        {subpageOptions.length ? (
+          <div className="flex min-w-[260px] max-w-[360px] items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">
+            <span className="shrink-0 text-xs font-bold text-slate-500">子页面</span>
+            <select
+              value={activeSubpage?.slug ?? ""}
+              onChange={(event) => selectSubpage(event.target.value)}
+              className="min-w-0 flex-1 bg-transparent text-xs font-semibold text-slate-700 outline-none"
+            >
+              <option value="">当前栏目首页</option>
+              {subpageOptions.map((option) => (
+                <option key={`${option.sectionId}-${option.slug}`} value={option.slug}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+        ) : null}
 
         <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-100 p-1 pl-3">
           <span className="text-xs font-bold text-slate-500">设备</span>
@@ -1914,10 +3391,45 @@ export function CmsPuckVisualEditor({
           </div>
 
           <div className="shrink-0 space-y-3 border-b border-slate-200 px-5 py-4">
+            {previewPage === "home" && activeCarouselSection.id === "honors" ? (
+              <div className="grid gap-2">
+                <select
+                  value={selectedHomeHonorSourceId}
+                  onChange={(event) => setSelectedHomeHonorSourceId(event.target.value)}
+                  className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none focus:border-[#2563eb]"
+                >
+                  <option value="">选择虎诉荣誉里的具体年份 / 月份荣誉</option>
+                  {officialSiteState?.content.honors.map((year) => (
+                    <optgroup key={year.year} label={year.year}>
+                      {year.awards.map((award, index) => {
+                        const id = homeHonorItemId(year.year, index, award.date);
+                        const alreadyAdded = editorLanguages.some((language) =>
+                          activeCarouselSectionsByLanguage[language]?.items?.some((item) => item.id === id),
+                        );
+
+                        return (
+                          <option key={id} value={id} disabled={alreadyAdded}>
+                            {award.date} / {award.title.zh || award.title.en}
+                            {alreadyAdded ? "（已添加）" : ""}
+                          </option>
+                        );
+                      })}
+                    </optgroup>
+                  ))}
+                </select>
+                <button
+                  type="button"
+                  onClick={addHomeHonorSourceItem}
+                  className="w-full rounded-2xl bg-[#2563eb] px-4 py-3 text-sm font-bold text-white transition hover:bg-[#1d4ed8]"
+                >
+                  新增到首页虎诉荣誉
+                </button>
+              </div>
+            ) : null}
             <button
               type="button"
               onClick={() => addCarouselItem(activeCarouselSection)}
-              className="w-full rounded-2xl bg-[#2563eb] px-4 py-3 text-sm font-bold text-white transition hover:bg-[#1d4ed8]"
+              className={`${previewPage === "home" && activeCarouselSection.id === "honors" ? "hidden" : "w-full"} rounded-2xl bg-[#2563eb] px-4 py-3 text-sm font-bold text-white transition hover:bg-[#1d4ed8]`}
             >
               新增内容项
             </button>
@@ -1949,21 +3461,55 @@ export function CmsPuckVisualEditor({
                   activeCarouselSectionsByLanguage.en?.items?.length ?? 0,
                 ),
               }).map((_, itemIndex) => {
-                const primaryItem = activeCarouselSectionsByLanguage.zh?.items?.[itemIndex] ??
-                  activeCarouselSectionsByLanguage.en?.items?.[itemIndex];
-                const itemKey = `${activeCarouselSection.id}-${primaryItem?.id ?? itemIndex}`;
-                const isExpanded = expandedCarouselItems[itemKey] ?? carouselDrawer?.itemIndex === itemIndex;
-                const thumbnail = getRepeaterThumbnail(activeCarouselSectionsByLanguage, itemIndex);
-                const title = getRepeaterDisplayTitle(activeCarouselSectionsByLanguage, itemIndex, `Item ${itemIndex + 1}`);
-                const summary = getRepeaterDisplaySummary(activeCarouselSectionsByLanguage, itemIndex, primaryItem?.id ?? "");
+                const zhItemAtIndex = activeCarouselSectionsByLanguage.zh?.items?.[itemIndex];
+                const enItemAtIndex = activeCarouselSectionsByLanguage.en?.items?.[itemIndex];
+                const zhSlugAtIndex = zhItemAtIndex ? getPageContentItemField(zhItemAtIndex, "slug", zhItemAtIndex.id) : "";
+                const enSlugAtIndex = enItemAtIndex ? getPageContentItemField(enItemAtIndex, "slug", enItemAtIndex.id) : "";
+                const rowSlug =
+                  carouselDrawer?.slug && (zhSlugAtIndex === carouselDrawer.slug || enSlugAtIndex === carouselDrawer.slug)
+                    ? carouselDrawer.slug
+                    : zhSlugAtIndex || enSlugAtIndex || undefined;
+                const primaryItem =
+                  (rowSlug ? getSectionItemBySlugOrIndex(activeCarouselSectionsByLanguage.zh, itemIndex, rowSlug) : undefined) ??
+                  (rowSlug ? getSectionItemBySlugOrIndex(activeCarouselSectionsByLanguage.en, itemIndex, rowSlug) : undefined) ??
+                  zhItemAtIndex ??
+                  enItemAtIndex;
+                const itemKey = `${activeCarouselSection.id}-${rowSlug ?? primaryItem?.id ?? itemIndex}`;
+                const selectedBySlug = Boolean(rowSlug && carouselDrawer?.slug === rowSlug);
+                const isExpanded =
+                  expandedCarouselItems[itemKey] ?? (selectedBySlug || carouselDrawer?.itemIndex === itemIndex);
+                const thumbnail = getRepeaterThumbnail(activeCarouselSectionsByLanguage, itemIndex, rowSlug);
+                const title = getRepeaterDisplayTitle(activeCarouselSectionsByLanguage, itemIndex, `Item ${itemIndex + 1}`, rowSlug);
+                const summary =
+                  previewPage === "event" && activeCarouselSection.id === "list"
+                    ? ""
+                    : getRepeaterDisplaySummary(activeCarouselSectionsByLanguage, itemIndex, primaryItem?.id ?? "", rowSlug);
+                const honorYear =
+                  previewPage === "home" && activeCarouselSection.id === "honors" && primaryItem
+                    ? getPageContentItemField(primaryItem, "year", "")
+                    : "";
+                const previousHonorYear =
+                  previewPage === "home" && activeCarouselSection.id === "honors"
+                    ? getPageContentItemField(
+                        activeCarouselSectionsByLanguage.zh?.items?.[itemIndex - 1] ??
+                          activeCarouselSectionsByLanguage.en?.items?.[itemIndex - 1],
+                        "year",
+                        "",
+                      )
+                    : "";
 
                 return (
                 <section
                   key={primaryItem?.id ?? `drawer-item-${itemIndex}`}
                   className={`rounded-[24px] border p-4 ${
-                    carouselDrawer?.itemIndex === itemIndex ? "border-[#2563eb] bg-[#eef4ff]" : "border-slate-200 bg-slate-50"
+                    selectedBySlug || carouselDrawer?.itemIndex === itemIndex ? "border-[#2563eb] bg-[#eef4ff]" : "border-slate-200 bg-slate-50"
                   }`}
                 >
+                  {honorYear && honorYear !== previousHonorYear ? (
+                    <div className="mb-3 rounded-2xl bg-[#2563eb]/10 px-4 py-2 text-sm font-bold text-[#2563eb]">
+                      {honorYear}
+                    </div>
+                  ) : null}
                   <div className="flex flex-wrap items-center gap-3">
                     {thumbnail ? (
                       <img
@@ -1978,7 +3524,7 @@ export function CmsPuckVisualEditor({
                       className="min-w-[160px] flex-1 text-left"
                     >
                       <p className="text-sm font-bold text-slate-900">{title}</p>
-                      <p className="mt-1 line-clamp-2 text-xs leading-5 text-slate-500">{summary}</p>
+                      {summary ? <p className="mt-1 line-clamp-2 text-xs leading-5 text-slate-500">{summary}</p> : null}
                     </button>
                     <div className="hidden">
                       <p className="text-sm font-bold text-slate-900">{primaryItem?.label || `Item ${itemIndex + 1}`}</p>
@@ -2016,8 +3562,28 @@ export function CmsPuckVisualEditor({
                       className="inline-flex items-center gap-1 rounded-xl border border-slate-200 px-2.5 py-2 text-xs font-bold text-slate-600 transition hover:border-[#2563eb] hover:text-[#2563eb]"
                     >
                       <ChevronDown className={`h-3.5 w-3.5 transition-transform ${isExpanded ? "rotate-180" : ""}`} />
-                      {isExpanded ? "折叠" : "展开"}
+                      {isExpanded ? "收起" : "展开"}
                     </button>
+                    {previewPage === "event" && activeCarouselSection.id === "list" && rowSlug ? (
+                      <button
+                        type="button"
+                        onClick={() => selectSubpage(rowSlug)}
+                        className="inline-flex items-center gap-1 rounded-xl border border-[#2563eb]/30 px-2.5 py-2 text-xs font-bold text-[#2563eb] transition hover:bg-[#2563eb]/10"
+                      >
+                        Edit detail
+                      </button>
+                    ) : null}
+                    {previewPage === "podcast" &&
+                    (activeCarouselSection.id === "partners" || activeCarouselSection.id === "seniorAssociates") &&
+                    rowSlug ? (
+                      <button
+                        type="button"
+                        onClick={() => selectSubpage(rowSlug)}
+                        className="inline-flex items-center gap-1 rounded-xl border border-[#2563eb]/30 px-2.5 py-2 text-xs font-bold text-[#2563eb] transition hover:bg-[#2563eb]/10"
+                      >
+                        Edit profile
+                      </button>
+                    ) : null}
                     <button
                       type="button"
                       onClick={() => removeCarouselItem(activeCarouselSection.id, itemIndex)}
@@ -2030,39 +3596,66 @@ export function CmsPuckVisualEditor({
                   </div>
 
                   <div className={`${isExpanded ? "mt-4 space-y-4" : "hidden"}`}>
-                    {getPairedDrawerFields(activeCarouselSectionsByLanguage, itemIndex)
+                    {previewPage === "event" && activeCarouselSection.id === "detailPages" ? (
+                      <div className="rounded-[20px] border border-[#2563eb]/20 bg-[#eef4ff] p-4 text-xs leading-6 text-slate-700">
+                        <p className="font-bold text-slate-900">正文编辑格式说明</p>
+                        <p className="mt-2">普通正文直接写在 Detail content 里，段落之间空一行。</p>
+                        <p>插入图片：在正文对应位置写一行 [IMAGE]，然后在下方对应的 Detail image 1、Detail image 2 上传或填写图片地址。</p>
+                        <p>插入视频：在正文对应位置写一行 暂时无法在飞书文档外展示此内容，然后在下方对应的 Detail video 1、Detail video 2 上传或填写视频地址。</p>
+                        <p>如果只填写图片/视频地址但正文里没有占位符，系统会把剩余图片或视频追加到正文末尾。</p>
+                      </div>
+                    ) : null}
+                    {previewPage === "media" && activeCarouselSection.id === "detailPages" ? (
+                      <div className="rounded-[20px] border border-[#2563eb]/20 bg-[#eef4ff] p-4 text-xs leading-6 text-slate-700">
+                        <p className="font-bold text-slate-900">Detail cards format</p>
+                        <p className="mt-2">Edit the Detail cards field. Separate cards with one blank line.</p>
+                        <p>The first line of each block is the card title. The following lines are bullet items.</p>
+                        <p>Example: Service scope, then new lines such as - Contract review and - Arbitration strategy.</p>
+                      </div>
+                    ) : null}
+                    {getPairedDrawerFields(activeCarouselSectionsByLanguage, itemIndex, previewPage, activeCarouselSection.id, rowSlug)
                       .filter(({ fieldId }) => activeCarouselSection.id !== "pastEvents" || !isPastEventPlatformFieldId(fieldId))
                       .map(({ fieldId, label, kind }) => (
                       <section key={fieldId} className="space-y-3 rounded-[20px] border border-slate-200 bg-white p-4">
                         <h3 className="text-xs font-bold text-slate-700">{label}</h3>
+                        {fieldId === "slug" ? (
+                          <p className="rounded-2xl bg-slate-50 px-3 py-2 text-xs leading-5 text-slate-500">
+                            Slug 是页面 URL 标识，也是中英文同一条内容的绑定标识。动态详情页地址会使用 /events/slug；同一条动态的中文和英文 Slug 必须保持一致。建议只使用小写英文、数字和连字符，例如 alb-china-awards-2026。
+                          </p>
+                        ) : null}
                         {editorLanguages.map((language) => {
-                          const localizedItem = activeCarouselSectionsByLanguage[language]?.items?.[itemIndex];
+                          const localizedItemIndex = getLocalizedCarouselItemIndex(language, itemIndex, rowSlug);
+                          const localizedItem = activeCarouselSectionsByLanguage[language]?.items?.[localizedItemIndex];
                           const field = localizedItem?.fields.find(
                             (fieldItem) => fieldItem.id === fieldId,
                           );
+                          const fieldValue = field?.value ?? getGeneratedEventMediaValue(localizedItem, fieldId);
                           const fieldKey = localizedItem
                             ? pageContentItemFieldKey(activeCarouselSection.id, localizedItem.id, fieldId)
                             : `${activeCarouselSection.id}__${itemIndex}__${fieldId}`;
                           const focused = focusedFieldKey === fieldKey && activeLanguage === language;
+                          const effectiveKind = field?.kind ?? kind;
+                          const uploadable = isUploadableDrawerField(fieldId, effectiveKind);
+                          const fallbackField = {
+                            id: fieldId,
+                            label,
+                            kind,
+                            value: fieldValue,
+                          } satisfies PageContentField;
 
                           return (
                             <label key={language} className="block space-y-1.5">
                               <span className={`text-xs font-bold ${focused ? "text-[#2563eb]" : "text-slate-500"}`}>
                                 {language === "en" ? "English" : "中文"}
                               </span>
-                              {(field?.kind ?? kind) === "textarea" ? (
+                              {effectiveKind === "textarea" ? (
                                 <textarea
                                   name={`${language}-${fieldKey}`}
                                   data-cms-editor-field={fieldKey}
                                   data-cms-editor-language={language}
-                                  value={field?.value ?? ""}
+                                  value={fieldValue}
                                   onChange={(event) =>
-                                    updateCarouselItemField(language, activeCarouselSection.id, itemIndex, fieldId, event.target.value, {
-                                      id: fieldId,
-                                      label,
-                                      kind,
-                                      value: "",
-                                    })
+                                    updateCarouselItemField(language, activeCarouselSection.id, localizedItemIndex, fieldId, event.target.value, fallbackField)
                                   }
                                   rows={4}
                                   className={`w-full rounded-2xl border bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-4 focus:ring-[#2563eb]/10 ${
@@ -2074,20 +3667,37 @@ export function CmsPuckVisualEditor({
                                   name={`${language}-${fieldKey}`}
                                   data-cms-editor-field={fieldKey}
                                   data-cms-editor-language={language}
-                                  value={field?.value ?? ""}
+                                  value={fieldValue}
                                   onChange={(event) =>
-                                    updateCarouselItemField(language, activeCarouselSection.id, itemIndex, fieldId, event.target.value, {
-                                      id: fieldId,
-                                      label,
-                                      kind,
-                                      value: "",
-                                    })
+                                    updateCarouselItemField(language, activeCarouselSection.id, localizedItemIndex, fieldId, event.target.value, fallbackField)
                                   }
                                   className={`w-full rounded-2xl border bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-4 focus:ring-[#2563eb]/10 ${
                                     focused ? "border-[#2563eb] ring-4 ring-[#2563eb]/10" : "border-slate-200"
                                   }`}
                                 />
                               )}
+                              {uploadable ? (
+                                <div className="flex flex-wrap items-center gap-2">
+                                  <span className="inline-flex items-center gap-2 rounded-xl bg-slate-100 px-3 py-2 text-xs font-semibold text-slate-500">
+                                    <Upload className="h-3.5 w-3.5" />
+                                    {uploadLabelForField(fieldId)}
+                                  </span>
+                                  <input
+                                    type="file"
+                                    accept={uploadAcceptForField(fieldId)}
+                                    className="text-xs text-slate-500 file:mr-3 file:rounded-xl file:border-0 file:bg-[#2563eb] file:px-3 file:py-2 file:text-xs file:font-bold file:text-white"
+                                    onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                                      const file = event.target.files?.[0];
+                                      event.target.value = "";
+                                      if (!file) return;
+                                      void uploadCarouselItemAsset(language, activeCarouselSection.id, localizedItemIndex, fieldId, file, fallbackField);
+                                    }}
+                                  />
+                                  {effectiveKind === "image" && fieldValue ? (
+                                    <img src={fieldValue} alt="" className="h-14 w-20 rounded-xl border border-slate-200 object-cover" />
+                                  ) : null}
+                                </div>
+                              ) : null}
                             </label>
                           );
                         })}

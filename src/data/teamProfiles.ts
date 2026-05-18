@@ -542,3 +542,36 @@ export const teamProfiles: TeamProfile[] = [
 export function getTeamProfile(slug: string) {
   return teamProfiles.find((profile) => profile.slug === slug);
 }
+
+export function createEmptyTeamProfile(slug: string): TeamProfile {
+  return {
+    slug,
+    name: slug,
+    zhName: slug,
+    title: "",
+    zhTitle: "",
+    image: "",
+    phone: "",
+    email: "",
+    serviceIndustries: [],
+    education: "",
+    qualification: "",
+    languages: [],
+    socialEngagements: "",
+    practiceArea: "",
+    practiceExperience: "",
+    honors: [],
+    achievements: [],
+    zh: {
+      serviceIndustries: [],
+      education: "",
+      qualification: "",
+      languages: [],
+      socialEngagements: "",
+      practiceArea: "",
+      practiceExperience: "",
+      honors: [],
+      achievements: [],
+    },
+  };
+}

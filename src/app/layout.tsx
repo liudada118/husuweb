@@ -2,7 +2,10 @@ import type { Metadata, Viewport } from "next";
 import { AppProviders } from "@/components/layout/AppProviders";
 import { ViewportZoomLock } from "@/components/layout/ViewportZoomLock";
 import { assetUrl } from "@/lib/assets";
+import { getPublicCmsState } from "@/lib/cms-store";
 import "./globals.css";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: {
@@ -22,8 +25,9 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const poppinsUrl = assetUrl("/font/poppins.ttf");
+  const cmsState = await getPublicCmsState();
 
   return (
     <html lang="en">
@@ -44,7 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <ViewportZoomLock />
-        <AppProviders>{children}</AppProviders>
+        <AppProviders cmsState={cmsState}>{children}</AppProviders>
       </body>
     </html>
   );

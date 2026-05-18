@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type ImgHTMLAttributes } from "react";
+import { useEffect, useState, type ImgHTMLAttributes } from "react";
 import { assetUrl } from "@/lib/assets";
 
 const ERROR_IMG_SRC =
@@ -15,6 +15,15 @@ export function ImageWithFallback({
 }: ImgHTMLAttributes<HTMLImageElement>) {
   const [didError, setDidError] = useState(false);
   const resolvedSrc = typeof src === "string" ? assetUrl(src) : src;
+  const hasSrc = typeof resolvedSrc === "string" ? resolvedSrc.trim().length > 0 : Boolean(resolvedSrc);
+
+  useEffect(() => {
+    setDidError(false);
+  }, [resolvedSrc]);
+
+  if (!hasSrc) {
+    return <div aria-label={alt} className={`inline-block bg-[#2f2f2f] ${className ?? ""}`} />;
+  }
 
   if (didError) {
     return (

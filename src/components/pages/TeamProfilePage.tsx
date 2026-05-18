@@ -7,6 +7,8 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { BackToTop } from "@/components/shared/BackToTop";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
 import { SubpageBreadcrumb } from "@/components/shared/SubpageBreadcrumb";
+import { usePublicCms } from "@/cms/PublicCmsProvider";
+import { applyTeamProfileOverride } from "@/cms/team-profile-overrides";
 import type { TeamProfile } from "@/data/teamProfiles";
 import { pick, useLanguage } from "@/i18n/LanguageProvider";
 import { copy } from "@/i18n/copy";
@@ -108,18 +110,20 @@ function AchievementCard({ item, className = "" }: { item: string; className?: s
 
 export function TeamProfilePage({ profile }: { profile: TeamProfile }) {
   const { language } = useLanguage();
+  const cms = usePublicCms();
+  const displayProfile = applyTeamProfileOverride(profile, cms?.content?.teamProfiles?.[profile.slug]);
   const [honorsOpen, setHonorsOpen] = useState(false);
   const [achievementsOpen, setAchievementsOpen] = useState(false);
-  const details = language === "zh" ? profile.zh : profile;
-  const displayName = language === "zh" ? profile.zhName : profile.name;
-  const displayTitle = language === "zh" ? profile.zhTitle : profile.title;
-  const heroImage = profileHeroImages[profile.slug] ?? profile.image;
-  const mobileHeroImage = mobileProfileHeroImages[profile.slug] ?? profile.image;
+  const details = language === "zh" ? displayProfile.zh : displayProfile;
+  const displayName = language === "zh" ? displayProfile.zhName : displayProfile.name;
+  const displayTitle = language === "zh" ? displayProfile.zhTitle : displayProfile.title;
+  const heroImage = profileHeroImages[displayProfile.slug] ?? (displayProfile.image || "/assets/team/hero.png");
+  const mobileHeroImage = mobileProfileHeroImages[displayProfile.slug] ?? (displayProfile.image || heroImage);
   const hasHonors = details.honors.length > 0;
   const hasSocialEngagements = details.socialEngagements.trim().length > 0;
   const regularAchievementTail =
-    profile.slug === "li-wan" ? details.achievements.slice(6, -3) : details.achievements.slice(6);
-  const liWanAchievementTail = profile.slug === "li-wan" ? details.achievements.slice(-3) : [];
+    displayProfile.slug === "li-wan" ? details.achievements.slice(6, -3) : details.achievements.slice(6);
+  const liWanAchievementTail = displayProfile.slug === "li-wan" ? details.achievements.slice(-3) : [];
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-[#171717] text-white">
@@ -152,18 +156,18 @@ export function TeamProfilePage({ profile }: { profile: TeamProfile }) {
             </p>
             <div className="mt-8 h-px w-full max-w-[28rem] bg-white/80 md:mt-10" />
             <a
-              href={`tel:${profile.phone.replace(/[^+\d]/g, "")}`}
+              href={`tel:${displayProfile.phone.replace(/[^+\d]/g, "")}`}
               className="mt-8 flex w-max max-w-full items-center gap-3 text-[1.15rem] font-light text-white underline underline-offset-4 transition hover:text-[#d9b27a] md:mt-10 md:gap-4 md:text-[1.75rem]"
             >
               <Phone className="size-5 shrink-0 text-white md:size-7" strokeWidth={1.5} />
-              {profile.phone}
+              {displayProfile.phone}
             </a>
             <a
-              href={`mailto:${profile.email}`}
+              href={`mailto:${displayProfile.email}`}
               className="mt-4 inline-flex max-w-full items-center gap-3 break-all text-[1.15rem] font-light text-white underline underline-offset-4 transition hover:text-[#d9b27a] md:mt-5 md:gap-4 md:text-[1.75rem]"
             >
               <Mail className="size-5 shrink-0 text-white md:size-7" strokeWidth={1.5} />
-              {profile.email}
+              {displayProfile.email}
             </a>
           </div>
         </div>

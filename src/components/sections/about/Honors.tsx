@@ -3,13 +3,16 @@
 import { useState } from "react";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
+import { usePublicCms } from "@/cms/PublicCmsProvider";
+import { getPreviewPageField } from "@/cms/preview-page-content";
+import type { OfficialCmsHonorYear } from "@/cms/official-state";
 import { pick, useLanguage } from "@/i18n/LanguageProvider";
 import { copy } from "@/i18n/copy";
 
-type Award = { title: string; date: string; body: string; href?: string };
-type YearItem = { year: string; count: string; awards: Award[] };
+export type Award = { title: string; date: string; body: string; href?: string };
+export type YearItem = { year: string; count: string; awards: Award[] };
 
-const data: YearItem[] = [
+export const honorData: YearItem[] = [
   {
     year: "2026",
     count: "2 Distinctions",
@@ -262,7 +265,7 @@ const data: YearItem[] = [
   },
 ];
 
-const zhData: YearItem[] = [
+export const zhHonorData: YearItem[] = [
   {
     year: "2026",
     count: "2项荣誉",
@@ -523,7 +526,7 @@ const zhChambers2023: YearItem = {
   ],
 };
 
-function withZhSponsorHonors(items: YearItem[]) {
+export function withZhSponsorHonors(items: YearItem[]) {
   return items.flatMap((item) => {
     if (item.year === "2024") {
       const [diamondSponsor, wauSponsor] = zhSponsorHonors["2024"];
@@ -557,6 +560,60 @@ function sortAwardsByDateDesc(items: YearItem[]) {
     ...item,
     awards: [...item.awards].sort((a, b) => b.date.localeCompare(a.date)),
   }));
+}
+
+function applyManagedYears(items: YearItem[], years?: string[]) {
+  if (!years?.length) return items;
+
+  const byYear = new Map(items.map((item) => [item.year, item]));
+  const ordered = years.map((year) => byYear.get(year)).filter((item): item is YearItem => Boolean(item));
+  return ordered.length ? ordered : items;
+}
+
+function localizeCmsHonors(items: OfficialCmsHonorYear[] | undefined, language: "en" | "zh"): YearItem[] | null {
+  if (!items?.length) return null;
+
+  return items.map((item) => ({
+    year: item.year,
+    count: language === "zh"
+      ? `${item.awards.length}项荣誉`
+      : `${item.awards.length} ${item.awards.length === 1 ? "Distinction" : "Distinctions"}`,
+    awards: item.awards.map((award) => ({
+      title: award.title[language],
+      date: award.date,
+      body: award.body[language],
+      href: award.href,
+    })),
+  }));
+}
+
+function mergeHonorsWithFallback(cmsItems: YearItem[] | null, fallbackItems: YearItem[]) {
+  if (!cmsItems?.length) return fallbackItems;
+
+  const cmsByYear = new Map(cmsItems.map((item) => [item.year, item]));
+
+  return fallbackItems.map((fallbackYear) => {
+    const cmsYear = cmsByYear.get(fallbackYear.year);
+    if (!cmsYear) return fallbackYear;
+
+    const seen = new Set(cmsYear.awards.map((item) => `${item.date}::${item.title}`.toLowerCase()));
+    const awards = [
+      ...cmsYear.awards,
+      ...fallbackYear.awards.filter((item) => !seen.has(`${item.date}::${item.title}`.toLowerCase())),
+    ];
+
+    return {
+      ...cmsYear,
+      awards,
+      count: languageAwareHonorCount(awards.length, cmsYear.count || fallbackYear.count),
+    };
+  });
+}
+
+function languageAwareHonorCount(count: number, fallback: string) {
+  return /项荣誉/.test(fallback)
+    ? `${count}项荣誉`
+    : `${count} ${count === 1 ? "Distinction" : "Distinctions"}`;
 }
 
 function YearRow({ item, open, onToggle }: { item: YearItem; open: boolean; onToggle: () => void }) {
@@ -652,8 +709,16 @@ function YearRow({ item, open, onToggle }: { item: YearItem; open: boolean; onTo
 export function Honors() {
   const [openYear, setOpenYear] = useState<string | null>("2026");
   const { language } = useLanguage();
-  const displayData = sortAwardsByDateDesc(language === "zh" ? withZhSponsorHonors(zhData) : data).sort(
-    (a, b) => Number(b.year) - Number(a.year),
+  const cms = usePublicCms();
+  const honorsTitle = getPreviewPageField(cms, language, "about", "honors", "title", pick(language, copy.about.honorsTitle));
+  const honorsSubtitle = getPreviewPageField(cms, language, "about", "honors", "subtitle", pick(language, copy.about.honorsSubtitle).join("\n"));
+  const cmsData = localizeCmsHonors(cms?.content?.honors, language);
+  const fallbackData = language === "zh" ? withZhSponsorHonors(zhHonorData) : honorData;
+  const displayData = applyManagedYears(
+    sortAwardsByDateDesc(mergeHonorsWithFallback(cmsData, fallbackData)).sort(
+      (a, b) => Number(b.year) - Number(a.year),
+    ),
+    cms?.lists?.honorYears,
   );
 
   return (
@@ -668,10 +733,10 @@ export function Honors() {
             lineHeight: 1.12,
           }}
         >
-          {pick(language, copy.about.honorsTitle)}
+          {honorsTitle}
         </h2>
         <p className="max-w-full justify-self-start pb-3 text-left text-[1.05rem] font-medium leading-relaxed text-[#c2c2c2]/85 md:pb-7 md:text-[1.5rem] md:leading-[2rem] lg:max-w-[calc(100vw-var(--shell-md)*2)] lg:justify-self-end lg:text-right">
-          {pick(language, copy.about.honorsSubtitle).map((line) => (
+          {honorsSubtitle.split(/\r?\n/).filter(Boolean).map((line) => (
             <span key={line} className="block">
               {line}
             </span>

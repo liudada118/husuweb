@@ -1,4 +1,5 @@
 import type { SiteContent } from "@/app/translations/translations";
+import type { OfficialCmsSiteState } from "@/cms/official-state";
 import type { CmsPageId, PageContentState } from "./cms-page-content";
 import type { Language } from "./site-types";
 import type { HomeCarouselItem, SiteNavigationItem, SiteSettings, SiteSocialLink } from "./site-settings";
@@ -172,6 +173,7 @@ export interface CmsVersionPayload {
   siteContent: SiteContent;
   visualEditor: VisualEditorState;
   pageContent: PageContentState;
+  officialSiteState?: OfficialCmsSiteState;
   articles: CmsArticle[];
   caseStudies: CmsCaseStudy[];
   mediaItems: CmsMediaItem[];
@@ -187,6 +189,7 @@ export interface PublicCmsData {
   mediaItems: CmsMediaItem[];
   podcastEpisodes: CmsPodcastEpisode[];
   assets: CmsAsset[];
+  officialSiteState?: OfficialCmsSiteState;
 }
 
 export interface CmsBootstrapData {
@@ -195,6 +198,7 @@ export interface CmsBootstrapData {
   siteContent: SiteContent;
   visualEditor: VisualEditorState;
   pageContent: PageContentState;
+  officialSiteState?: OfficialCmsSiteState;
   articles: CmsArticle[];
   caseStudies: CmsCaseStudy[];
   mediaItems: CmsMediaItem[];

@@ -9,16 +9,24 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 export function PublicCmsProvider({
   children,
   initialState,
+  fetchOnMount = true,
 }: {
   children: React.ReactNode;
   initialState: OfficialCmsPublicState | null;
+  fetchOnMount?: boolean;
 }) {
   const [state, setState] = useState<OfficialCmsPublicState | null>(initialState);
 
   useEffect(() => {
+    setState(initialState);
+  }, [initialState]);
+
+  useEffect(() => {
+    if (!fetchOnMount) return;
+
     let cancelled = false;
 
-    fetch(`${basePath}/api/cms/public`, { cache: "no-store" })
+    fetch(`${basePath}/api/cms/public?t=${Date.now()}`, { cache: "no-store" })
       .then((response) => (response.ok ? response.json() : null))
       .then((data) => {
         if (!cancelled && data?.state) {
@@ -30,7 +38,7 @@ export function PublicCmsProvider({
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [fetchOnMount]);
 
   const value = useMemo(() => state, [state]);
 

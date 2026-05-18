@@ -2,14 +2,23 @@
 
 import { useState } from "react";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
+import { getPreviewPageField } from "@/cms/preview-page-content";
+import { usePublicCms } from "@/cms/PublicCmsProvider";
 import { pick, useLanguage } from "@/i18n/LanguageProvider";
 import { copy } from "@/i18n/copy";
 
 export function VisionCard({ className = "" }: { className?: string }) {
   const { language } = useLanguage();
+  const cms = usePublicCms();
   const [expanded, setExpanded] = useState(false);
-  const paragraphs = pick(language, copy.about.visionParagraphs);
-  const moreParagraphs = pick(language, copy.about.visionMoreParagraphs);
+  const previewSubtitle = getPreviewPageField(cms, language, "about", "vision", "subtitle", pick(language, copy.about.visionSubtitle).join("\n"));
+  const previewBody = getPreviewPageField(cms, language, "about", "vision", "body", pick(language, copy.about.visionParagraphs).join("\n"));
+  const paragraphs = previewBody.split(/\r?\n/).filter(Boolean);
+  const moreBody = getPreviewPageField(cms, language, "about", "vision", "moreBody", pick(language, copy.about.visionMoreParagraphs).join("\n"));
+  const moreParagraphs = moreBody.split(/\r?\n/).filter(Boolean);
+  const visionTitle = getPreviewPageField(cms, language, "about", "vision", "title", pick(language, copy.about.visionTitle));
+  const seeMoreLabel = getPreviewPageField(cms, language, "about", "vision", "seeMoreLabel", pick(language, copy.common.seeMore));
+  const collapseLabel = getPreviewPageField(cms, language, "about", "vision", "collapseLabel", pick(language, copy.common.collapse));
 
   return (
     <div className={className}>
@@ -30,7 +39,7 @@ export function VisionCard({ className = "" }: { className?: string }) {
         <div className="relative z-10 mx-auto max-w-[95rem]">
           <div className="mb-8 flex min-w-0 flex-col items-start justify-end gap-5 lg:flex-row lg:items-center lg:pl-[7rem] lg:text-right">
             <p className="relative min-w-0 max-w-full break-words text-[1.1rem] font-medium leading-relaxed text-[#D9B27A] md:max-w-[56rem] md:text-[1.5rem]">
-              {pick(language, copy.about.visionSubtitle).map((line, index, lines) => (
+              {previewSubtitle.split(/\r?\n/).filter(Boolean).map((line, index, lines) => (
                 <span key={line} className={language === "en" && index === 1 ? "md:whitespace-nowrap" : undefined}>
                   {line}
                   {index < lines.length - 1 ? <br /> : null}
@@ -45,7 +54,7 @@ export function VisionCard({ className = "" }: { className?: string }) {
                 backgroundImage: "linear-gradient(153deg, #dbdbdb 10%, #946c32 130%)",
               }}
             >
-              {pick(language, copy.about.visionTitle)}
+              {visionTitle}
             </h2>
           </div>
 
@@ -87,7 +96,7 @@ export function VisionCard({ className = "" }: { className?: string }) {
               className="relative mx-auto mb-8 mt-10 flex w-max flex-col items-center"
             >
               <span className="text-[1.15rem] font-semibold text-[#e1ab5c] md:text-[1.5rem]">
-                {expanded ? pick(language, copy.common.collapse) : pick(language, copy.common.seeMore)}
+                {expanded ? collapseLabel : seeMoreLabel}
               </span>
               <span className="mt-1 block h-0.5 w-28 bg-[#e1ab5c]" />
             </button>

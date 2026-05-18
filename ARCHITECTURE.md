@@ -1,39 +1,39 @@
 ﻿# Husuweb Official Site Architecture
 
-最后更新于：2026-05-15 22:51
+最后更新于：2026-05-18 01:03
 
-## 项目概述
+## 椤圭洰姒傝堪
 
-本项目是基于既有 Figma/Vite 原型重新搭建的官网首版，当前纳入公开官网的九类运行页面：
+鏈」鐩槸鍩轰簬鏃㈡湁 Figma/Vite 鍘熷瀷閲嶆柊鎼缓鐨勫畼缃戦鐗堬紝褰撳墠绾冲叆鍏紑瀹樼綉鐨勪節绫昏繍琛岄〉闈細
 
-- 首页：`/`
-- About 页面：`/about`
-- Core Value 子页面：`/about/core-value`
-- 团队页面：`/team`
-- 团队个人详情页：`/team/[slug]`，其中 `/team/yuxuan-liu` 保持兼容入口
-- 服务行业页面：`/industries`
-- 行业详情页面：`/industries/[slug]`
-- 事件页面：`/events`
-- 事件详情页面：`/events/[slug]`
-- 联系我们页面：`/contact`
+- 棣栭〉锛歚/`
+- About 椤甸潰锛歚/about`
+- Core Value 瀛愰〉闈細`/about/core-value`
+- 鍥㈤槦椤甸潰锛歚/team`
+- 鍥㈤槦涓汉璇︽儏椤碉細`/team/[slug]`锛屽叾涓?`/team/yuxuan-liu` 淇濇寔鍏煎鍏ュ彛
+- 鏈嶅姟琛屼笟椤甸潰锛歚/industries`
+- 琛屼笟璇︽儏椤甸潰锛歚/industries/[slug]`
+- 浜嬩欢椤甸潰锛歚/events`
+- 浜嬩欢璇︽儏椤甸潰锛歚/events/[slug]`
+- 鑱旂郴鎴戜滑椤甸潰锛歚/contact`
 
-`首页/`、`about 页/` 以及后来加入的 `事件/`、`事件详情/`、`服务行业/`、`联系我们/`、`我的团队/`、`core value/`、`个人介绍详情/` 目录仍保留为原型素材目录，不进入当前 Next 主应用运行链路。
+`棣栭〉/`銆乣about 椤?` 浠ュ強鍚庢潵鍔犲叆鐨?`浜嬩欢/`銆乣浜嬩欢璇︽儏/`銆乣鏈嶅姟琛屼笟/`銆乣鑱旂郴鎴戜滑/`銆乣鎴戠殑鍥㈤槦/`銆乣core value/`銆乣涓汉浠嬬粛璇︽儏/` 鐩綍浠嶄繚鐣欎负鍘熷瀷绱犳潗鐩綍锛屼笉杩涘叆褰撳墠 Next 涓诲簲鐢ㄨ繍琛岄摼璺€?
 
-## 技术栈
+## 鎶€鏈爤
 
-| 类型 | 当前使用 | 说明 |
+| 绫诲瀷 | 褰撳墠浣跨敤 | 璇存槑 |
 | :--- | :--- | :--- |
-| 框架 | Next.js App Router `15.5.14` | 使用 `src/app` 路由结构，生产输出为 standalone |
-| UI 运行时 | React `18.3.1` / React DOM `18.3.1` | 与 `tech.md` 中上一版网站保持一致 |
-| 语言 | TypeScript | 新项目不启用 `allowJs` |
-| 样式 | Tailwind CSS v4 + CSS variables | `src/app/globals.css` 引入 Tailwind 和响应式 token |
-| 字体 | Poppins 字体文件 | `src/app/layout.tsx` 注入 `@font-face`，本地默认读取 `/font/poppins.ttf`，生产可通过 OSS 资源前缀读取远程字体 |
-| 图标 | `lucide-react` | 当前用于导航、卡片入口和少量控制图标 |
-| 包管理器 | Yarn `1.22.22` | 用户决定改用 Yarn；`packageManager` 已切换 |
+| 妗嗘灦 | Next.js App Router `15.5.14` | 浣跨敤 `src/app` 璺敱缁撴瀯锛岀敓浜ц緭鍑轰负 standalone |
+| UI 杩愯鏃?| React `18.3.1` / React DOM `18.3.1` | 涓?`tech.md` 涓笂涓€鐗堢綉绔欎繚鎸佷竴鑷?|
+| 璇█ | TypeScript | 鏂伴」鐩笉鍚敤 `allowJs` |
+| 鏍峰紡 | Tailwind CSS v4 + CSS variables | `src/app/globals.css` 寮曞叆 Tailwind 鍜屽搷搴斿紡 token |
+| 瀛椾綋 | Poppins 瀛椾綋鏂囦欢 | `src/app/layout.tsx` 娉ㄥ叆 `@font-face`锛屾湰鍦伴粯璁よ鍙?`/font/poppins.ttf`锛岀敓浜у彲閫氳繃 OSS 璧勬簮鍓嶇紑璇诲彇杩滅▼瀛椾綋 |
+| 鍥炬爣 | `lucide-react` | 褰撳墠鐢ㄤ簬瀵艰埅銆佸崱鐗囧叆鍙ｅ拰灏戦噺鎺у埗鍥炬爣 |
+| 鍖呯鐞嗗櫒 | Yarn `1.22.22` | 鐢ㄦ埛鍐冲畾鏀圭敤 Yarn锛沗packageManager` 宸插垏鎹?|
 
-当前没有引入 CMS、Radix UI、MUI、motion、轮播库、Three、图表、拖拽等依赖；这些库在当前页面实现中没有实际运行需求。
+褰撳墠娌℃湁寮曞叆 CMS銆丷adix UI銆丮UI銆乵otion銆佽疆鎾簱銆乀hree銆佸浘琛ㄣ€佹嫋鎷界瓑渚濊禆锛涜繖浜涘簱鍦ㄥ綋鍓嶉〉闈㈠疄鐜颁腑娌℃湁瀹為檯杩愯闇€姹傘€?
 
-## 目录结构
+## 鐩綍缁撴瀯
 
 ```text
 src/
@@ -172,7 +172,7 @@ tsconfig.json
 package.json
 ```
 
-## 核心模块与数据流
+## 鏍稿績妯″潡涓庢暟鎹祦
 
 ```mermaid
 flowchart TD
@@ -265,915 +265,1063 @@ flowchart TD
   Globals[src/app/globals.css] --> Tokens[src/styles/tokens.css]
 ```
 
-`src/app/**/page.tsx` 只保留路由入口和 metadata；页面展示组件统一放在 `src/components/pages/*` 下，业务区块和共享组件继续放在 `src/components/sections/*`、`src/components/layout/*`、`src/components/shared/*`。
+`src/app/**/page.tsx` 鍙繚鐣欒矾鐢卞叆鍙ｅ拰 metadata锛涢〉闈㈠睍绀虹粍浠剁粺涓€鏀惧湪 `src/components/pages/*` 涓嬶紝涓氬姟鍖哄潡鍜屽叡浜粍浠剁户缁斁鍦?`src/components/sections/*`銆乣src/components/layout/*`銆乣src/components/shared/*`銆?
+CMS 鐪熷疄瀹樼綉鏁版嵁鐢?`src/lib/cms-store.ts` 鍚堝苟 `data/cms-site.json` 涓庨潤鎬侀粯璁ゅ€煎悗閫氳繃 `PublicCmsProvider` 娉ㄥ叆鍓嶅彴锛涢椤佃疆鎾€佹湇鍔¤涓氥€丠onors銆丆hronicle銆佸洟闃熷拰 Events 椤甸潰鍧囦互 CMS 瑕嗙洊鏁版嵁浼樺厛銆侀潤鎬佹暟鎹厹搴曘€傛牴甯冨眬鏈嶅姟绔細璇诲彇褰撳墠鍏紑 CMS 鐘舵€佷綔涓洪灞忔暟鎹紝瀹㈡埛绔啀浠?no-store 璇锋眰 `/api/cms/public` 鍒锋柊锛岀増鏈彂甯?鎭㈠浼氬埛鏂扮湡瀹炲畼缃戣矾鐢卞拰鍏紑 CMS 鎺ュ彛锛岄伩鍏嶉瑙堢増鏈凡鏇存柊浣嗘寮忕珯浠嶈鏃х紦瀛樸€傛寮?CMS 鐘舵€佷細淇濆瓨 `previewPageContent`锛岄椤?Vision銆両ndustries銆丠onors銆丒vents銆丆lients 浠ュ強 About Hero/Vision/Honors/Culture/Chronicle 鍜?Core Value 瀛愰〉闈㈠瓧娈靛湪姝ｅ紡绔欎笌棰勮绔欎娇鐢ㄥ悓涓€浠介〉闈㈠瓧娈碉紱鏃х増鏈噸鏂板彂甯冩椂浼氱敤鐗堟湰 `pageContent` 鍥炲～ `previewPageContent`銆侰MS 鍚庡彴鐨?`CmsStudio` 浼氭寜 slug 閫愰」琛ラ綈 Team 鍜?Events 榛樿鍐呭锛岄伩鍏嶆棫鐘舵€佸彧淇濆瓨閮ㄥ垎鏉＄洰鏃跺嚭鐜扮┖鍗＄墖鎴栫己澶辨垚鍛橈紱鐗堟湰閫夋嫨鍏ュ彛鍙垪鍑虹増鏈鐞嗕腑鍒涘缓鐨勭増鏈紝杩涘叆鍚庡彴鏃朵細榛樿鍔犺浇宸插彂甯冪増鏈紝鏈€夋嫨鐗堟湰鏃舵樉绀哄崰浣嶇姸鎬侊紝閬垮厤鎶婂綋鍓嶇珯鐐瑰唴瀹硅璁や负涓€涓彲绠＄悊鐗堟湰銆傞椤佃檸璇夊姩鎬佽疆鎾娇鐢?`home.eventOverrides` 鐙珛淇濆瓨鏍囬銆佹憳瑕併€佸皝闈㈠拰 CTA锛屼笉鐩存帴瑕嗙洊 Events 鍒楄〃绠＄悊涓殑鍔ㄦ€佽鎯咃紱铏庤瘔鍔ㄦ€佽鎯呭浘浼氭牴鎹鏂囧浘鐗?瑙嗛鍗犱綅绗︾敓鎴?`detailImageN`銆乣detailVideoN` 鐙珛瀛楁锛屼慨鏀硅繖浜涚敓鎴愬瓧娈垫椂浼氬悓姝ュ啓鍥炲簳灞?`detailImages`/`detailVideos` 鍒楄〃骞朵繚鐣欏崰浣嶉『搴忥紝淇濆瓨鏃跺啀鍚堝苟涓哄墠鍙拌鎯呴〉娑堣垂鐨勫獟浣撴暟缁勶紱鏂板 Events 鐖跺垪琛ㄩ」浼氬悓姝ュ垱寤哄悓 slug 鐨勫姩鎬佸瓙椤甸潰楠ㄦ灦锛屾柊澧炲姩鎬佸瓙椤甸潰涔熶細鏄惧紡鍐欏叆 `Detail content`銆佽鎯呭浘鐗囧拰璇︽儏瑙嗛瀛楁銆傞〉闈㈠唴瀹瑰姞杞芥椂浼氬悎骞?`defaultPageContentState` 涓柊澧炲瓧娈碉紝淇濊瘉鏃х増鏈篃鑳界湅鍒版柊鍔犵殑 CMS 瀛楁銆傚彲瑙嗗寲缂栬緫椤堕儴鏍忎繚鐣?Header 涓?Footer 涓や釜绔欑偣绾ф爮鐩紝鍜屽叚涓埗椤甸潰/铏庤瘔鏂囧寲瀛愰〉闈㈠叡鍚岃繘鍏ュ彸渚у瓧娈垫娊灞夈€?
+`src/components/shared/PageTriangle.tsx` 鎻愪緵璺ㄩ〉闈㈠鐢ㄧ殑浣庡眰绾х洿瑙掍笁瑙掑舰鑳屾櫙瑁呴グ锛屽綋鍓嶇敤浜庨椤点€丄bout銆乀eam銆両ndustries 鍜?Events 椤甸潰锛岄粯璁ゅ眰绾т负 `z-0`锛屽簳閮ㄥ乏渚ч《鐐逛綅浜?Footer 椤堕儴宸︿晶 40% 浣嶇疆銆傞椤靛拰 About 浣跨敤 `isolate` 寤虹珛鐙珛灞傜骇锛屼笁瑙掑舰淇濇寔 `z-0`锛屽湪椤甸潰瀹為檯鍐呭 `z-10` 涔嬩笅锛屽苟灏嗛€忔槑搴﹂檷鍒?10%锛屼互鑳屾櫙绾圭悊鏂瑰紡瀛樺湪鑰屼笉鍘嬩綇鏂囧瓧銆佹寜閽拰鍗＄墖锛汿eam 椤靛唴瀹瑰尯缁熶竴鎻愬崌涓?`z-10`锛屼笁瑙掑舰閫忔槑搴﹂檷涓?20%锛岄伩鍏嶉伄鎸″洟闃熷垪琛紱棣栭〉 `SiteHeader` 浣滀负 `main` 椤跺眰鍥哄畾鍏冪礌娓叉煋锛岄伩鍏嶈 Hero section 鐨?stacking context 闄愬埗銆?
+CMS 内容管理的 `OfficialSiteSectionPanel` 复用左右分栏编辑 shell：首页 HONORS、虎诉荣誉、虎诉大事记按年份导航，服务行业按行业导航，合伙人和资深律师按成员姓名导航；首页 HONORS 轮播通过 `homeHonorItems` 记录来自虎诉荣誉的具体荣誉条目，未选择具体条目时继续回退到 `homeHonorYears` 年份列表。
+`src/components/shared/SubpageBreadcrumb.tsx` 鎻愪緵瀛愰〉闈㈢粺涓€闈㈠寘灞戯紝瀛楀彿鎸?24px 鎹㈢畻涓?`1.5rem`锛屽垎闅旂涓?`/`锛岀埗绾у拰褰撳墠椤圭偣鍑绘椂浼樺厛鎵ц `router.back()` 杩斿洖涓婁竴椤碉紝鏃犲巻鍙茶褰曟椂鍥為€€鍒版寚瀹氱埗绾ц矾鐢便€俙src/components/shared/BackToTop.tsx` 鎻愪緵瀛愰〉闈㈠彸涓嬭鍥哄畾杩斿洖鎸夐挳锛屼腑鏂囦负鈥滆繑鍥炩€濓紝鑻辨枃涓?`Back`锛岀偣鍑讳紭鍏堣繑鍥炰笂涓€椤点€佹棤鍘嗗彶璁板綍鏃跺洖鍒伴椤碉紝浣跨敤閲戣壊鏂囧瓧銆侀噾鑹蹭笅鍒掔嚎鍜?hover 鏀剁缉鍔ㄦ晥銆?
 
-`src/components/shared/PageTriangle.tsx` 提供跨页面复用的低层级直角三角形背景装饰，当前用于首页、About、Team、Industries 和 Events 页面，默认层级为 `z-0`，底部左侧顶点位于 Footer 顶部左侧 40% 位置。首页和 About 使用 `isolate` 建立独立层级，三角形保持 `z-0`，在页面实际内容 `z-10` 之下，并将透明度降到 10%，以背景纹理方式存在而不压住文字、按钮和卡片；Team 页内容区统一提升为 `z-10`，三角形透明度降为 20%，避免遮挡团队列表；首页 `SiteHeader` 作为 `main` 顶层固定元素渲染，避免被 Hero section 的 stacking context 限制。
+## 鍥剧墖鍔犺浇涓庡獟浣撲紭鍖?
 
-`src/components/shared/SubpageBreadcrumb.tsx` 提供子页面统一面包屑，字号按 24px 换算为 `1.5rem`，分隔符为 `/`，父级和当前项点击时优先执行 `router.back()` 返回上一页，无历史记录时回退到指定父级路由。`src/components/shared/BackToTop.tsx` 提供子页面右下角固定返回按钮，中文为“返回”，英文为 `Back`，点击优先返回上一页、无历史记录时回到首页，使用金色文字、金色下划线和 hover 收缩动效。
+`src/lib/assets.ts` 鎻愪緵 `assetUrl()` 缁熶竴澶勭悊闈欐€佽祫婧?URL锛涙湭閰嶇疆 `NEXT_PUBLIC_ASSET_BASE_URL` 鏃剁户缁娇鐢ㄦ湰鍦?`/assets/*` 涓?`/font/*`锛岄厤缃悗浼氬皢鍥剧墖銆佽棰戝拰瀛椾綋鍒囨崲鍒?OSS 鍓嶇紑銆俙src/components/shared/ImageWithFallback.tsx` 缁熶竴涓哄浘鐗囪緭鍑?`decoding="async"`锛屽苟閫氳繃 `assetUrl()` 鍚屾椂澶勭悊 OSS 鍓嶇紑鍜?`/offweb` 瀛愯矾寰勯儴缃蹭笅鐨?basePath 鍓嶇紑銆?
 
-## 图片加载与媒体优化
+- 棣栧睆 Hero銆佸洟闃熻鎯呴灞忎汉鐗╁浘绛夊叧閿灞忓浘鐗囨樉寮忎娇鐢?`loading="eager"` 鍜?`fetchPriority="high"`銆?
+- 椤甸潰绾?Hero 濯掍綋榛樿淇濇寔涓婁竴鐗堢Щ鍔ㄧ `h-full w-screen min-w-full max-w-none object-cover` 閾烘弧绛栫暐锛涗粎 Our Team 鍒楄〃椤?Hero 鍥惧湪鎵嬫満绔娇鐢?`!w-full !h-auto max-w-none`锛屽彇娑?`height: 100%` 骞惰鍥剧墖鎸夊搴?100% 灞曠ず锛屾闈㈢浠嶉€氳繃 `md:inset-0 md:!h-full` 閾烘弧瀹瑰櫒楂樺害銆傞椤点€丄bout銆佸洟闃熻鎯呫€両ndustries銆佽涓氳鎯呫€丒vents銆丆ontact 鍜?Core Value 鐨勯灞忔爣棰樺鍔犵Щ鍔ㄧ杈冨皬瀛楀彿锛宍md` 浠ヤ笂淇濇寔鍘熻璁＄瀛楀彿銆?
+- About Hero 褰撳墠寮曠敤 `/assets/about/hero.png`锛汿eam 椤?Hero 楂樺害涓?`67.5rem`锛屽洟闃熶釜浜鸿鎯呴〉棣栧睆浣跨敤 `profileHeroImages` 鎸?`yuxuan-liu` 鍒?`weifan-qiu` 鏄犲皠 `/assets/team/1.png` 鑷?`/assets/team/6.png`锛孒ero 楂樺害涓?`45.9375rem`锛屽浘鐗囦互 `object-cover` 閾烘弧瀵瑰簲 Hero 瀹瑰櫒瀹介珮銆?
+- 瀹㈡埛 Logo銆侀〉鑴氬浘鏍囥€丄bout 灞曞紑鑳屾櫙銆丆ore Value 绉诲姩绔浘鏂囧崱鐗囩瓑闈為灞忕函灞曠ず鍥剧墖浣跨敤 `loading="lazy"`锛涘甫 `group-hover:scale-*` 鐨勪氦浜掑浘鐗囨敼鐢ㄩ粯璁ゅ姞杞藉苟鏄惧紡 `decoding="sync"`锛岄伩鍏嶉娆?hover 鏃跺浘鐗囨墠瑙ｇ爜瀵艰嚧鐩存帴璺冲埌鏀惧ぇ鐘舵€併€?
+- `public/assets` 涓綋鍓嶉〉闈㈠疄闄呭紩鐢ㄧ殑澶у浘鐢熸垚 WebP 鐗堟湰骞跺垏鎹唬鐮佸紩鐢紱棣栭〉 Hero 鏀圭敤 `/assets/home/娴锋氮0508.mp4`锛屼笉鍐嶄娇鐢ㄥ帇缂╁浘鐗囷紝骞堕€氳繃 `assetUrl()` 鍦ㄧ敓浜х幆澧冭鍙?OSS 瑙嗛锛汚bout銆乀eam銆両ndustries銆丒vents銆丆ontact 鍜?Core Value 鐨?Hero 鍥句繚鎸?PNG 灞曠ず锛屽叾浠栭潪 Hero 椤甸潰鍜屽崱鐗囧ぇ鍥剧户缁娇鐢?WebP銆?
+- `public/font/poppins.ttf` 涓烘湰鍦板紑鍙戝拰鏈厤缃?OSS 鐨勯儴缃叉彁渚涘瓧浣撻潤鎬佽闂紱鍚屼竴瀛椾綋宸蹭笂浼犲埌 OSS 鐨?`/husuweb/font/poppins.ttf`銆?
+- Core Value 闀挎粴鍔ㄥ浘鐗囧姩鐢诲湪 `CoreValueScrollFlow` 涓€氳繃 `requestAnimationFrame` 鍚堝苟婊氬姩鏇存柊锛屽苟鐢?`IntersectionObserver` 鍦ㄥ尯鍧楄繙绂昏鍙ｆ椂鏆傚仠婊氬姩璁＄畻銆?
+- `/offweb` 鍙戝竷鍖呮暣鐞嗘椂浼氫粠 `dist/offweb/public` 绉婚櫎宸茬粡鐢?WebP 鏇夸唬鐨勫師濮嬪ぇ鍥撅紝鍑忓皯涓婁紶浣撶Н鍜屾湇鍔″櫒纾佺洏鍗犵敤锛涙簮鐮?public 鐩綍淇濈暀鍘熷浘浣滀负绱犳潗澶囦唤銆?
 
-`src/lib/assets.ts` 提供 `assetUrl()` 统一处理静态资源 URL；未配置 `NEXT_PUBLIC_ASSET_BASE_URL` 时继续使用本地 `/assets/*` 与 `/font/*`，配置后会将图片、视频和字体切换到 OSS 前缀。`src/components/shared/ImageWithFallback.tsx` 统一为图片输出 `decoding="async"`，并通过 `assetUrl()` 同时处理 OSS 前缀和 `/offweb` 子路径部署下的 basePath 前缀。
+## 涓枃鏂囨涓庤瑷€鍒囨崲
 
-- 首屏 Hero、团队详情首屏人物图等关键首屏图片显式使用 `loading="eager"` 和 `fetchPriority="high"`。
-- 页面级 Hero 媒体默认保持上一版移动端 `h-full w-screen min-w-full max-w-none object-cover` 铺满策略；仅 Our Team 列表页 Hero 图在手机端使用 `!w-full !h-auto max-w-none`，取消 `height: 100%` 并让图片按宽度 100% 展示，桌面端仍通过 `md:inset-0 md:!h-full` 铺满容器高度。首页、About、团队详情、Industries、行业详情、Events、Contact 和 Core Value 的首屏标题增加移动端较小字号，`md` 以上保持原设计稿字号。
-- About Hero 当前引用 `/assets/about/hero.png`；Team 页 Hero 高度为 `67.5rem`，团队个人详情页首屏使用 `profileHeroImages` 按 `yuxuan-liu` 到 `weifan-qiu` 映射 `/assets/team/1.png` 至 `/assets/team/6.png`，Hero 高度为 `45.9375rem`，图片以 `object-cover` 铺满对应 Hero 容器宽高。
-- 客户 Logo、页脚图标、About 展开背景、Core Value 移动端图文卡片等非首屏纯展示图片使用 `loading="lazy"`；带 `group-hover:scale-*` 的交互图片改用默认加载并显式 `decoding="sync"`，避免首次 hover 时图片才解码导致直接跳到放大状态。
-- `public/assets` 中当前页面实际引用的大图生成 WebP 版本并切换代码引用；首页 Hero 改用 `/assets/home/海浪0508.mp4`，不再使用压缩图片，并通过 `assetUrl()` 在生产环境读取 OSS 视频；About、Team、Industries、Events、Contact 和 Core Value 的 Hero 图保持 PNG 展示，其他非 Hero 页面和卡片大图继续使用 WebP。
-- `public/font/poppins.ttf` 为本地开发和未配置 OSS 的部署提供字体静态访问；同一字体已上传到 OSS 的 `/husuweb/font/poppins.ttf`。
-- Core Value 长滚动图片动画在 `CoreValueScrollFlow` 中通过 `requestAnimationFrame` 合并滚动更新，并用 `IntersectionObserver` 在区块远离视口时暂停滚动计算。
-- `/offweb` 发布包整理时会从 `dist/offweb/public` 移除已经由 WebP 替代的原始大图，减少上传体积和服务器磁盘占用；源码 public 目录保留原图作为素材备份。
+`src/app/layout.tsx` 閫氳繃 `src/components/layout/AppProviders.tsx` 鍖呰９鍏ㄧ珯鍐呭锛宍AppProviders` 鍙礋璐ｆ寕杞?`src/i18n/LanguageProvider.tsx`銆?
 
-## 中文文案与语言切换
+- `LanguageProvider` 鏄鎴风涓婁笅鏂囷紝淇濆瓨 `en` / `zh` 褰撳墠璇█锛屽苟鍐欏叆 `localStorage` 鐨?`tiger-language`锛涘垏鎹㈡椂鍚屾鏇存柊 `document.documentElement.lang` 涓?`en` 鎴?`zh-CN`銆?
+- `src/i18n/copy.ts` 闆嗕腑缁存姢椤甸潰绾т腑鑻辨枃鏂囨锛屼腑鏂囨潵婧愬搴?`Chinese/*page.md`锛屽寘鎷椤点€丄bout銆丆ore Value銆乀eam銆両ndustries銆丒vents銆丆ontact銆侀〉鑴氬拰閫氱敤鎸夐挳鏂囨锛涘洟闃熼〉涓枃鍙ｅ彿鏄剧ず涓衡€滄垜浠紝/ 鍗充负绮鹃攼涔嬪笀鈥濓紝Contact 涓枃鑱旂郴鏂囨缁熶竴涓衡€滃鎮ㄦ湁浠讳綍娉曞緥鐤戦棶鎴栦簤璁紝娆㈣繋闅忔椂涓庢垜浠仈绯汇€傛垜浠瘹鎸氭湡寰呬负鎮ㄦ彁渚涗笓涓氱殑娉曞緥鏈嶅姟锛岃嚧鍔涗簬缁存姢鎮ㄧ殑鍚堟硶鏉冪泭銆傗€濄€?
+- `SiteHeader` 鐨勮瑷€鎸夐挳涓嶅啀缁存姢灞€閮ㄧ姸鎬侊紝鑰屾槸璋冪敤鍏ㄧ珯 `toggleLanguage`锛涘洜姝ら〉澶淬€侀〉鑴氬拰椤甸潰涓讳綋浼氬悓姝ュ垏鎹€傛寜閽樉绀虹洰鏍囪瑷€锛岃嫳鏂囬〉闈㈡樉绀?`CN`锛屼腑鏂囬〉闈㈡樉绀衡€滆嫳鈥濄€?
+- `src/data/events.ts` 浠?`EN/event.md` 鐨?28 鏉′簨浠舵棩鏈熶綔涓哄畼缃?Events 瀵煎嚭鑼冨洿锛屽苟淇濈暀浜嬩欢鐨勪腑鑻辨枃 category銆乼itle銆乻ummary銆佹鏂囨钀藉拰鐪熷疄浜嬩欢鍥剧墖锛汦vents 鍒楄〃椤靛拰浜嬩欢璇︽儏椤甸€氳繃 `localizeEvent` 鎸夊綋鍓嶈瑷€鏄剧ず锛涗腑鏂囨棩鏈熸樉绀轰负 `YYYY.MM.DD`锛岃嫳鏂囨棩鏈熸樉绀轰负 `Mon. D, YYYY`锛涗腑鏂囨湰鍦板寲杈撳嚭浼氳瘑鍒爣棰樹腑鐨勨€滆檸璇夊姩鎬?/ 琛屼笟璧勮 / 铏庣溂瑙傚療鈥濆墠缂€骞惰鑼冨寲涓?category锛屾棤鍒嗙被鏍囬涓嶄細娓叉煋鍓嶇疆鍒嗛殧绗︺€?
+- `src/data/eventInfoImages.ts` 鎸夋棫 28 鏉?Events 鐨勫鍑洪『搴忥紝灏?`src/assets/event/eventinfo` 涓?22 寮犺鎯呭浘鐗囨槧灏勫埌鍚崰浣嶇鐨勬棫浜嬩欢锛沗src/data/event2Events.ts` 鎵胯浇 `EN/event2.md` 鍜?`Chinese/event2.md` 鐨?15 鏉℃柊澧炰簨浠讹紝鍒楄〃鍥捐鍙?`/assets/event/event2/*`锛屽叾涓?2026 骞村墠涓夋潯鎸夋柊鐗堢礌鏉愪娇鐢?`1.jpg`銆乣2.jpg`銆乣3.png`锛屽悓鏃?public 鍜?OSS 淇濈暀 `1.png`銆乣2.png`銆乣3.jpg` 鍏煎鏃?URL锛涜鎯呴〉鍗犱綅鍥炬寜浜嬩欢椤哄簭鏄犲皠 `/assets/event/eventinfo2/*`锛屽苟涓烘寚瀹氫簨浠堕€氳繃 `detailVideos` 缁戝畾璇︽儏瑙嗛锛沗src/data/events.ts` 灏嗘柊澧炰簨浠跺墠缃悎骞跺埌瀹樼綉 Events 鏁版嵁锛屽苟閫氳繃鍙€?`detailImages` / `detailVideos` 鏀寔璇︽儏椤垫鏂囨彃鍥惧拰瑙嗛锛汦vents 鍒楄〃杩涘叆璇︽儏鏃朵細鍚屾椂淇濆瓨婊氬姩浣嶇疆鍜?See More 灞曞紑鐘舵€侊紝杩斿洖鍚庡厛鎭㈠灞曞紑鐘舵€佸啀婊氬姩鍒板師浣嶇疆銆?
+- 棣栭〉 `HONORS` 鐨勪腑鏂囧勾搴﹁崳瑾夋暟鎹潵鑷?`Chinese/awards.md`锛岄椤?`Events` 涓夊崱杞挱閫氳繃 slug 澶嶇敤 `src/data/events.ts` 鐨勭湡瀹炰簨浠舵暟鎹紝骞剁敱 `localizeEvent` 鎸夎瑷€杈撳嚭鏍囬銆佹憳瑕併€佹棩鏈熷拰鍥剧墖銆?
+- About 椤?`Honors` 灞曞紑鍒楄〃鎸?`Chinese/awards.md` 澧炲姞涓枃闀滃儚鏁版嵁锛屽苟淇濈暀鑻辨枃鏁版嵁閲岀殑寰俊鍏紬鍙烽摼鎺ワ紱`Chronicle` 鎸?`EN/CHRONICLE.md` 鍜?`Chinese/CHRONICLE.md` 鐨勫畬鏁村彞瀛愮敓鎴愪腑鑻辨枃骞翠唤鏃堕棿绾匡紝骞舵寜婧愭枃妗ｆ牎鍑?2026 骞翠竴鏈堛€佷笁鏈堛€佸洓鏈堛€佷簲鏈堣褰曘€?
+- 鍥㈤槦椤典汉鐗╁崱鐗囧湪 `src/data/teamProfiles.ts` 涓ˉ鍏?`zhName`銆乣zhTitle`锛屽洟闃熶釜浜鸿鎯呴〉鍦ㄥ悓涓€鏁版嵁婧愪腑琛ュ厖 `zh` 璇︽儏瀵硅薄锛屾潵婧愬潎涓?`Chinese/teamInfo.md`锛涗釜浜轰笟缁╂潯鐩凡鎸?`EN/teamInfo.md` 鍜?`Chinese/teamInfo.md` 瀹屾暣鍚屾锛岄伩鍏嶅帇缂╂垨閬楁紡銆?
+- 琛屼笟璇︽儏椤靛湪 `src/components/pages/IndustryDetailPage.tsx` 涓负鍏釜琛屼笟琛ュ厖 `zhIndustries`锛屼腑鏂囨爣棰樸€佺畝浠嬪拰鏈嶅姟鑼冨洿鏉ユ簮涓?`Chinese/industriesInfo.md`锛涜嫳鏂囩姸鎬佷笅 Private Equity銆丷eal Estate銆丼ports and E-Sports銆丆yber Tech and Game 鐨勬湇鍔¤寖鍥存寜 `EN/industriesInfo.md` 琛ラ綈淇濆叏鑼冨洿鍜屽墠缃鏄庯紱鏈嶅姟绔?`generateMetadata` 鍜?`generateStaticParams` 浣跨敤 `src/data/industryMetadata.ts`锛岄伩鍏嶄粠瀹㈡埛绔〉闈㈢粍浠惰鍙栨暟鎹€?
+- 褰撳墠涓枃鎺ュ叆浠ラ〉闈㈢骇鏂囨鍜屼富瑕佸垪琛ㄦ憳瑕佷负涓伙紝鏈敼鍙樿矾鐢遍€昏緫銆?
 
-`src/app/layout.tsx` 通过 `src/components/layout/AppProviders.tsx` 包裹全站内容，`AppProviders` 只负责挂载 `src/i18n/LanguageProvider.tsx`。
+## Title 瀵艰埅
 
-- `LanguageProvider` 是客户端上下文，保存 `en` / `zh` 当前语言，并写入 `localStorage` 的 `tiger-language`；切换时同步更新 `document.documentElement.lang` 为 `en` 或 `zh-CN`。
-- `src/i18n/copy.ts` 集中维护页面级中英文文案，中文来源对应 `Chinese/*page.md`，包括首页、About、Core Value、Team、Industries、Events、Contact、页脚和通用按钮文案；团队页中文口号显示为“我们，/ 即为精锐之师”，Contact 中文联系文案统一为“如您有任何法律疑问或争议，欢迎随时与我们联系。我们诚挚期待为您提供专业的法律服务，致力于维护您的合法权益。”。
-- `SiteHeader` 的语言按钮不再维护局部状态，而是调用全站 `toggleLanguage`；因此页头、页脚和页面主体会同步切换。按钮显示目标语言，英文页面显示 `CN`，中文页面显示“英”。
-- `src/data/events.ts` 以 `EN/event.md` 的 28 条事件日期作为官网 Events 导出范围，并保留事件的中英文 category、title、summary、正文段落和真实事件图片；Events 列表页和事件详情页通过 `localizeEvent` 按当前语言显示；中文日期显示为 `YYYY.MM.DD`，英文日期显示为 `Mon. D, YYYY`；中文本地化输出会识别标题中的“虎诉动态 / 行业资讯 / 虎眼观察”前缀并规范化为 category，无分类标题不会渲染前置分隔符。
-- `src/data/eventInfoImages.ts` 按旧 28 条 Events 的导出顺序，将 `src/assets/event/eventinfo` 中 22 张详情图片映射到含占位符的旧事件；`src/data/event2Events.ts` 承载 `EN/event2.md` 和 `Chinese/event2.md` 的 15 条新增事件，列表图读取 `/assets/event/event2/*`，其中 2026 年前三条按新版素材使用 `1.jpg`、`2.jpg`、`3.png`，同时 public 和 OSS 保留 `1.png`、`2.png`、`3.jpg` 兼容旧 URL；详情页占位图按事件顺序映射 `/assets/event/eventinfo2/*`，并为指定事件通过 `detailVideos` 绑定详情视频；`src/data/events.ts` 将新增事件前置合并到官网 Events 数据，并通过可选 `detailImages` / `detailVideos` 支持详情页正文插图和视频；Events 列表进入详情时会同时保存滚动位置和 See More 展开状态，返回后先恢复展开状态再滚动到原位置。
-- 首页 `HONORS` 的中文年度荣誉数据来自 `Chinese/awards.md`，首页 `Events` 三卡轮播通过 slug 复用 `src/data/events.ts` 的真实事件数据，并由 `localizeEvent` 按语言输出标题、摘要、日期和图片。
-- About 页 `Honors` 展开列表按 `Chinese/awards.md` 增加中文镜像数据，并保留英文数据里的微信公众号链接；`Chronicle` 按 `EN/CHRONICLE.md` 和 `Chinese/CHRONICLE.md` 的完整句子生成中英文年份时间线，并按源文档校准 2026 年一月、三月、四月、五月记录。
-- 团队页人物卡片在 `src/data/teamProfiles.ts` 中补充 `zhName`、`zhTitle`，团队个人详情页在同一数据源中补充 `zh` 详情对象，来源均为 `Chinese/teamInfo.md`；个人业绩条目已按 `EN/teamInfo.md` 和 `Chinese/teamInfo.md` 完整同步，避免压缩或遗漏。
-- 行业详情页在 `src/components/pages/IndustryDetailPage.tsx` 中为六个行业补充 `zhIndustries`，中文标题、简介和服务范围来源为 `Chinese/industriesInfo.md`；英文状态下 Private Equity、Real Estate、Sports and E-Sports、Cyber Tech and Game 的服务范围按 `EN/industriesInfo.md` 补齐保全范围和前置说明；服务端 `generateMetadata` 和 `generateStaticParams` 使用 `src/data/industryMetadata.ts`，避免从客户端页面组件读取数据。
-- 当前中文接入以页面级文案和主要列表摘要为主，未改变路由逻辑。
+`src/components/layout/SiteHeader.tsx` 鏍规嵁 `OVERALL/title/word.md` 瀹炵幇椤堕儴 title 瀵艰埅锛?
 
-## Title 导航
+- 浣跨敤 `public/assets/title/logo.svg` 浣滀负宸︿晶 logo锛?
+- logo 浣跨敤 SVG锛屽搴﹀浐瀹氫负 `5.375rem`锛屽嵆 86px锛岄珮搴﹁嚜閫傚簲锛?
+- Header 鍐呭眰涓婁笅 padding 涓?`1.2rem`锛?
+- 椤堕儴鍥哄畾鍚搁《锛岄灞忛€忔槑锛屾粴鍔ㄥ悗娓愬彉涓烘繁鑹插崐閫忔槑鑳屾櫙锛?
+- 婊氬姩鍚庡嚭鐜板簳閮ㄥ垎闅旂嚎鍜岃交寰瘺鐜荤拑锛?
+- 妗岄潰瀵艰埅鏀寔鑻辨枃 / 涓枃鏍囬鍒囨崲锛?
+- 璇█鐘舵€佹潵鑷?`LanguageProvider`锛屽彲鍚屾椹卞姩椤甸潰涓讳綋鍜岄〉鑴氭枃妗堬紱
+- 妗岄潰涓庣Щ鍔ㄧ瀵艰埅鏂囧瓧鍦?16:24 鐗堟湰鍩虹涓婄户缁斁澶?`1.4` 鍊嶏紱
+- 鑻辨枃鏍囬锛欻OME銆丄BOUT US銆丱UR TEAM銆両NDUSTRIES銆丒VENTS銆丆ONTACT锛屾簮鐮佺洿鎺ヤ娇鐢ㄥぇ鍐欐枃妗堣€屼笉鏄?CSS 寮哄埗杞崲锛?
+- 涓枃鏍囬锛氶椤点€佸叧浜庢垜浠€佽檸璇夊洟闃熴€佹湇鍔¤涓氥€佽檸璇夊姩鎬併€佽仈绯绘垜浠紱
+- Our team 瀵艰埅鎸囧悜 `/team`锛?
+- 褰撳墠椤甸潰鏂囧瓧淇濇寔鐧借壊骞舵樉绀洪噾鑹蹭笅鍒掔嚎锛屼笅鍒掔嚎鍘氬害涓?`0.125rem`锛?
+- hover 鏃舵枃瀛楁彁浜紝涓嬪垝绾夸粠宸﹀悜鍙冲睍寮€锛屽睍寮€绾挎潯鍘氬害鍚屾牱涓?`0.125rem`锛?
+- 绉诲姩绔樉绀鸿彍鍗曟寜閽紝鐐瑰嚮鍚庡垏鎹㈠叧闂浘鏍囧苟灞曠ず绾靛悜鑿滃崟銆?
 
-`src/components/layout/SiteHeader.tsx` 根据 `OVERALL/title/word.md` 实现顶部 title 导航：
+## Footer 椤佃剼
 
-- 使用 `public/assets/title/logo.svg` 作为左侧 logo；
-- logo 使用 SVG，宽度固定为 `5.375rem`，即 86px，高度自适应；
-- Header 内层上下 padding 为 `1.2rem`；
-- 顶部固定吸顶，首屏透明，滚动后渐变为深色半透明背景；
-- 滚动后出现底部分隔线和轻微毛玻璃；
-- 桌面导航支持英文 / 中文标题切换；
-- 语言状态来自 `LanguageProvider`，可同步驱动页面主体和页脚文案；
-- 桌面与移动端导航文字在 16:24 版本基础上继续放大 `1.4` 倍；
-- 英文标题：HOME、ABOUT US、OUR TEAM、INDUSTRIES、EVENTS、CONTACT，源码直接使用大写文案而不是 CSS 强制转换；
-- 中文标题：首页、关于我们、虎诉团队、服务行业、虎诉动态、联系我们；
-- Our team 导航指向 `/team`；
-- 当前页面文字保持白色并显示金色下划线，下划线厚度为 `0.125rem`；
-- hover 时文字提亮，下划线从左向右展开，展开线条厚度同样为 `0.125rem`；
-- 移动端显示菜单按钮，点击后切换关闭图标并展示纵向菜单。
+`src/components/layout/SiteFooter.tsx` 鏍规嵁 `OVERALL/foot/word.md` 缁熶竴涓哄叏绔欏叕鍏遍〉鑴氾細
 
-## Footer 页脚
+- 鎵€鏈夊叕寮€椤甸潰鍧囦娇鐢ㄥ悓涓€涓?`SiteFooter`锛?
+- 椤佃剼绱犳潗鏉ヨ嚜 `public/assets/foot/*`锛岀敱 `src/assets/foot/*` 鍙戝竷鍒?public锛?
+- 绗竴琛屽乏渚т娇鐢?`logo.svg`锛屽搴﹀浐瀹氫负 `9.5rem`锛屽嵆 152px锛岄珮搴﹁嚜閫傚簲锛涘彸渚т笁琛屽睍绀哄搧鐗岀悊蹇垫枃妗堬紱
+- 绗竴琛屽彸渚у搧鐗岀悊蹇点€佺浜岃鍦板潃銆佺増鏉冩枃妗堜細鏍规嵁褰撳墠璇█鍦?English / 涓枃涔嬮棿鍒囨崲锛?
+- 绗簩琛屽乏渚у湴鍧€鍓嶄娇鐢?`address.png`锛屽彸渚т娇鐢?`weixin.png`锛?
+- 绗笁琛岀數璇濆拰閭鍒嗗埆浣跨敤 `phone.png`銆乣email.png`锛屽彸渚ф樉绀虹敱 `src/assets/foot/QRcode.png` 鍙戝竷鐨?`QRcode.png`锛岃祫婧愭浛鎹㈠悗闇€鍚屾瑕嗙洊 `public/assets/foot/QRcode.png`銆乣dist/offweb/public/assets/foot/QRcode.png` 鍜?OSS锛汧ooter 浜岀淮鐮佽矾寰勫甫 `?v=202605112333` 鐗堟湰鍙傛暟浠ラ伩寮€娴忚鍣ㄦ棫缂撳瓨锛屽睍绀烘牱寮忎娇鐢?`object-contain` 閬垮厤浜岀淮鐮佽瑁佸垏锛?
+- 绗洓琛屽睍绀虹増鏉冦€侀殣绉佸０鏄庛€佸叕瀹夊妗堝拰 ICP 澶囨锛屽叾涓叕瀹夊妗堝墠浣跨敤 `china.png`锛涘叕瀹夊妗堝彿閾炬帴鍒?`beian.mps.gov.cn`锛孖CP 澶囨鍙烽摼鎺ュ埌 `beian.miit.gov.cn`锛沗Disclaimer and Privacy` 涓烘寜閽紝鐐瑰嚮鍚庢墦寮€绔欏唴 modal锛屽苟鏍规嵁褰撳墠璇█灞曠ず涓嫳鏂囧厤璐ｅ０鏄庝笌闅愮鏉℃锛屽彸涓婅鍏抽棴鎸夐挳鍙叧闂脊绐椼€?
 
-`src/components/layout/SiteFooter.tsx` 根据 `OVERALL/foot/word.md` 统一为全站公共页脚：
+## 椤甸潰璇存槑
 
-- 所有公开页面均使用同一个 `SiteFooter`；
-- 页脚素材来自 `public/assets/foot/*`，由 `src/assets/foot/*` 发布到 public；
-- 第一行左侧使用 `logo.svg`，宽度固定为 `9.5rem`，即 152px，高度自适应；右侧三行展示品牌理念文案；
-- 第一行右侧品牌理念、第二行地址、版权文案会根据当前语言在 English / 中文之间切换；
-- 第二行左侧地址前使用 `address.png`，右侧使用 `weixin.png`；
-- 第三行电话和邮箱分别使用 `phone.png`、`email.png`，右侧显示由 `src/assets/foot/QRcode.png` 发布的 `QRcode.png`，资源替换后需同步覆盖 `public/assets/foot/QRcode.png`、`dist/offweb/public/assets/foot/QRcode.png` 和 OSS；Footer 二维码路径带 `?v=202605112333` 版本参数以避开浏览器旧缓存，展示样式使用 `object-contain` 避免二维码被裁切；
-- 第四行展示版权、隐私声明、公安备案和 ICP 备案，其中公安备案前使用 `china.png`；公安备案号链接到 `beian.mps.gov.cn`，ICP 备案号链接到 `beian.miit.gov.cn`；`Disclaimer and Privacy` 为按钮，点击后打开站内 modal，并根据当前语言展示中英文免责声明与隐私条款，右上角关闭按钮可关闭弹窗。
+### 棣栭〉 `/`
 
-## 页面说明
+棣栭〉鐢卞崟鏂囦欢椤甸潰瀹炵幇锛屽寘鍚細
 
-### 首页 `/`
+- 棣栧睆 Hero 浣跨敤鏈湴瑙嗛 `/assets/home/娴锋氮0508.mp4` 浣滀负鍏ㄥ睆鑳屾櫙锛岃棰?`autoPlay/muted/loop/playsInline` 骞朵繚鎸?`opacity-90`锛涗富鏍囬淇濇寔鍗曡鏄剧ず锛屾枃鏈洿鎺ヤ娇鐢ㄥぇ鍐?`WE KNOW HOW TO WIN`锛屾寜 1920 璁捐鍩哄噯灏?100px 鎹㈢畻涓?`6.25rem`锛岄€氳繃 `.hero-flow-text` 浣跨敤澶氭閲戣壊娓愬彉鍜?`hero-flow-shine` keyframes 瀹炵幇娴佸厜鏂囧瓧鏁堟灉锛?
+- Vision 寮曞灞忓灞備笉鍐嶄娇鐢ㄤ笓闂ㄨ儗鏅浘锛岃儗鏅壊涓?`#171717`锛涘唴閮?Vision 鍗＄墖鑳屾櫙涓轰粠宸︿笂鍒板彸涓嬬殑 `rgb(36, 36, 36) 9%`銆乣#303033`銆乣#403f3f`銆乣#514c45` 瀵硅绾挎笎鍙橈紱
+- Vision 鍗＄墖澶栦晶宸﹀彸杈硅窛涓?`2.5rem`锛屽唴閮ㄥ唴瀹归€氳繃璁＄畻 padding 缁х画鍜屽叏绔?title / `.site-shell` 鍐呭绾垮榻愶紱
+- Vision 鍗＄墖涓嶅啀鍙犲姞涓婁笅榛戣壊閬僵锛屽苟灏嗘棆杞?270 搴︺€佹甯稿瓧閲嶄笖涓嶅己鍒跺ぇ鍐欑殑 Vision 鏍囪瘑鏀惧埌鍗＄墖鏈€鍙充晶锛涜嫳鏂?Vision 鏍囪瘑涓?`8.75rem`锛屼腑鏂団€滆檸璇夋効鏅€濈缉灏忓埌 80%锛屽嵆 `7rem`锛?
+- Vision 姝ｆ枃鑻辨枃鍥哄畾涓轰笁琛岋紝鎸?1920 璁捐鍩哄噯灏?40px 鎹㈢畻涓?`2.5rem`锛屽叾涓?`We are committed to` 浣跨敤缁嗕綋鏂滀綋锛屽悗缁唴瀹逛娇鐢ㄧ矖浣擄紱涓枃鐘舵€佸瓧鍙风缉灏忓埌鑻辨枃鐨?80%锛屽嵆 `2rem`锛?
+- Vision 鐨?Get To Know Us 鎸夐挳涓洪潪鍏ㄥ鎸夐挳锛岄粯璁ょ櫧鑹茶儗鏅€侀粦鑹叉枃瀛楋紝hover 鏃跺弽鑹诧紱鏂囧瓧鎸?24px 鎹㈢畻涓?`1.5rem`锛?
+- Industries & Services 缃戞牸锛屾爣棰樹娇鐢?`#f6ebe4` 鍒?`#d9b27a` 鐨勬笎鍙樺苟鎸?90px 鎹㈢畻涓?`5.625rem`锛涜鏄庢鏂囨寜 28px 鎹㈢畻涓?`1.75rem`銆佺粏浣撴枩浣撳苟鍗犳弧鐖跺鍣ㄥ搴︼紝姝ｆ枃涓嬫柟鏄剧ず涓€鏉＄伆鑹叉í绾匡紱鍓嶄簲寮犲崱鐗囧浘鐗囦娇鐢ㄦ湰鍦?`/assets/home/INDUSTRIES1.webp` 鍒?`/assets/home/INDUSTRIES5.webp`锛岀鍏紶鍦?`INDUSTRIES6` 灏氭湭鎻愪緵鍓嶄繚鐣欏師鍥剧墖锛汻eal Estate 鍥剧墖鐢?`src/assets/home/INDUSTRIES3.png` 閲嶆柊鍙戝竷骞剁敓鎴?`/assets/home/INDUSTRIES3.webp`锛涘崱鐗囨爣棰樻寜 36px 鎹㈢畻涓?`2.25rem`锛屽崱鐗囧姞鍏ュ弬鑰冨師鍨嬬殑鍥剧墖鐏板害鎭㈠銆侀《閮ㄩ珮浜嚎銆佺澶村叆鍦哄拰鍗＄墖涓婃诞鏁堟灉锛涙瘡寮犲崱鐗囨寜鑷韩 slug 璺宠浆鍒?`/industries/[slug]`锛?
+- Honors 骞翠唤鏃堕棿杞达紝浣跨敤 `useState` 鏀寔宸﹀彸鎸夐挳鍒囨崲鍜岀偣鍑诲勾浠藉垏鎹紱榛樿 active 涓?2026锛涢椤靛勾浠芥寜閽ˉ榻?2026銆?025銆?024銆?023銆?022銆?021銆?020銆?019 鍏釜骞翠唤锛屼絾骞翠唤鏉′竴娆″彧灞曠ず 5 涓勾浠斤紱宸﹀彸鎸夐挳鎺у埗褰撳墠閫変腑骞翠唤閫愰」宸﹀彸绉诲姩锛岀Щ鍔ㄥ埌 2026 宸︿晶浼氬惊鐜埌鏈€鍙充晶 2019锛岀Щ鍔ㄥ埌 2019 鍙充晶浼氬惊鐜洖 2026锛岃嫢鏂伴€変腑骞翠唤涓嶅湪褰撳墠 5 涓彲瑙侀」鍐呭垯鍚屾璋冩暣鍙绐楀彛锛涙闈㈡爣棰樻寜 110px 鎹㈢畻涓?`6.875rem`锛岀Щ鍔ㄧ闄嶄负 `4rem`锛屽彸渚ц鏄庡拰 active 鍐呭鍦ㄧЩ鍔ㄧ鍚屾缂╁皬骞跺厑璁搁暱鏂囨鎹㈣锛岄伩鍏嶈秴鍑鸿绐楋紱
+- Events 涓夊崱涓績杞挱锛屼娇鐢ㄨ嚜瀹氫箟鐘舵€併€乣useEffect` 鑷姩杞挱鍜?CSS transition 瀹炵幇涓棿涓诲崱绐佸嚭銆佷袱渚у急鍖栥€佺澶翠笌鍒嗛〉鐐瑰垏鎹紱棣栭〉杞挱鎸?slug 浠?`src/data/events.ts` 璇诲彇 `20231117`銆乣20230406`銆乣20230329`銆乣20221218`銆乣20221108` 浜旀潯 `EN/event.md` 鑼冨洿鍐呯殑鐪熷疄浜嬩欢锛屽浘鐗囥€佹爣棰樸€佹憳瑕佸拰璺宠浆涓?Events 鍒楄〃/璇︽儏椤典繚鎸佸悓婧愶紱姣忓紶杞挱鍗＄偣鍑昏烦杞埌瀵瑰簲 `/events/[slug]` 璇︽儏椤碉紱妗岄潰杞挱鑸炲彴楂樺害涓?`58rem`锛岀Щ鍔ㄧ闄嶄负 `34rem`锛涚Щ鍔ㄧ杞挱鏂囧瓧銆佽鏄庣洅鍐呰窛鍜岃鏄庤鏁版敹绱э紝杞挱鎸夐挳涓?See More 鏀逛负绾靛悜鎺掑垪锛岄伩鍏嶆寜閽噸鍙犲苟缂╃煭涓庤疆鎾殑璺濈锛?
+- Clients 涓夎妯悜婊氬姩 Logo 澧欙紝绱犳潗鏉ヨ嚜 `src/assets/home/clientLogo/*` 骞堕『搴忓彂甯冧负 `public/assets/home/clientLogo/client-logo-01` 鍒?`client-logo-42`锛屾爣棰樿窛绂昏绐楀乏渚?`5rem`锛屽瓧鍙锋寜 36px 鎹㈢畻涓?`2.25rem`锛屼笁琛屽垎鍒娇鐢ㄤ簰涓嶉噸鍙犵殑 Logo 鍒嗙粍浠ラ伩鍏嶅悓涓€瑙嗙獥璺ㄨ鍑虹幇閲嶅 Logo锛汱ogo 鍗＄墖涓虹函鐧藉簳銆佹祬鑹叉弿杈瑰拰灏忓渾瑙掞紝鍗＄墖鍐?logo 鍥剧墖楂樺害鍥哄畾鍗犵埗瀹瑰櫒 80%銆佸搴﹁嚜閫傚簲骞堕檺鍒朵笉瓒呰繃鐖跺鍣ㄥ搴︼紱鏀寔鍙嶅悜婊氬姩鍜屾棤缂濆惊鐜紝鍔ㄧ敾鏃堕暱涓?`103.85s`锛岀浉瀵瑰師 `135s` 閫熷害鎻愬崌鍒?1.3 鍊嶏紝宸﹀彸榛戣壊娓愰殣钂欏眰宸茬Щ闄わ紱
+- Footer / Contact 淇℃伅銆?
 
-首页由单文件页面实现，包含：
-
-- 首屏 Hero 使用本地视频 `/assets/home/海浪0508.mp4` 作为全屏背景，视频 `autoPlay/muted/loop/playsInline` 并保持 `opacity-90`；主标题保持单行显示，文本直接使用大写 `WE KNOW HOW TO WIN`，按 1920 设计基准将 100px 换算为 `6.25rem`，通过 `.hero-flow-text` 使用多段金色渐变和 `hero-flow-shine` keyframes 实现流光文字效果；
-- Vision 引导屏外层不再使用专门背景图，背景色为 `#171717`；内部 Vision 卡片背景为从左上到右下的 `rgb(36, 36, 36) 9%`、`#303033`、`#403f3f`、`#514c45` 对角线渐变；
-- Vision 卡片外侧左右边距为 `2.5rem`，内部内容通过计算 padding 继续和全站 title / `.site-shell` 内容线对齐；
-- Vision 卡片不再叠加上下黑色遮罩，并将旋转 270 度、正常字重且不强制大写的 Vision 标识放到卡片最右侧；英文 Vision 标识为 `8.75rem`，中文“虎诉愿景”缩小到 80%，即 `7rem`；
-- Vision 正文英文固定为三行，按 1920 设计基准将 40px 换算为 `2.5rem`，其中 `We are committed to` 使用细体斜体，后续内容使用粗体；中文状态字号缩小到英文的 80%，即 `2rem`；
-- Vision 的 Get To Know Us 按钮为非全宽按钮，默认白色背景、黑色文字，hover 时反色；文字按 24px 换算为 `1.5rem`；
-- Industries & Services 网格，标题使用 `#f6ebe4` 到 `#d9b27a` 的渐变并按 90px 换算为 `5.625rem`；说明正文按 28px 换算为 `1.75rem`、细体斜体并占满父容器宽度，正文下方显示一条灰色横线；前五张卡片图片使用本地 `/assets/home/INDUSTRIES1.webp` 到 `/assets/home/INDUSTRIES5.webp`，第六张在 `INDUSTRIES6` 尚未提供前保留原图片；Real Estate 图片由 `src/assets/home/INDUSTRIES3.png` 重新发布并生成 `/assets/home/INDUSTRIES3.webp`；卡片标题按 36px 换算为 `2.25rem`，卡片加入参考原型的图片灰度恢复、顶部高亮线、箭头入场和卡片上浮效果；每张卡片按自身 slug 跳转到 `/industries/[slug]`；
-- Honors 年份时间轴，使用 `useState` 支持左右按钮切换和点击年份切换；默认 active 为 2026；首页年份按钮补齐 2026、2025、2024、2023、2022、2021、2020、2019 八个年份，但年份条一次只展示 5 个年份；左右按钮控制当前选中年份逐项左右移动，移动到 2026 左侧会循环到最右侧 2019，移动到 2019 右侧会循环回 2026，若新选中年份不在当前 5 个可见项内则同步调整可见窗口；桌面标题按 110px 换算为 `6.875rem`，移动端降为 `4rem`，右侧说明和 active 内容在移动端同步缩小并允许长文案换行，避免超出视窗；
-- Events 三卡中心轮播，使用自定义状态、`useEffect` 自动轮播和 CSS transition 实现中间主卡突出、两侧弱化、箭头与分页点切换；首页轮播按 slug 从 `src/data/events.ts` 读取 `20231117`、`20230406`、`20230329`、`20221218`、`20221108` 五条 `EN/event.md` 范围内的真实事件，图片、标题、摘要和跳转与 Events 列表/详情页保持同源；每张轮播卡点击跳转到对应 `/events/[slug]` 详情页；桌面轮播舞台高度为 `58rem`，移动端降为 `34rem`；移动端轮播文字、说明盒内距和说明行数收紧，轮播按钮与 See More 改为纵向排列，避免按钮重叠并缩短与轮播的距离；
-- Clients 三行横向滚动 Logo 墙，素材来自 `src/assets/home/clientLogo/*` 并顺序发布为 `public/assets/home/clientLogo/client-logo-01` 到 `client-logo-42`，标题距离视窗左侧 `5rem`，字号按 36px 换算为 `2.25rem`，三行分别使用互不重叠的 Logo 分组以避免同一视窗跨行出现重复 Logo；Logo 卡片为纯白底、浅色描边和小圆角，卡片内 logo 图片高度固定占父容器 80%、宽度自适应并限制不超过父容器宽度；支持反向滚动和无缝循环，动画时长为 `103.85s`，相对原 `135s` 速度提升到 1.3 倍，左右黑色渐隐蒙层已移除；
-- Footer / Contact 信息。
-
-2026-05-07 本地调整：
-- 首页 Honors 数据按 `EN/award.md` 整理为年度列表，每个年份展示最近荣誉事件，并额外补入 2022/2023/2024 年虎诉赞助活动和 Wan Li 大连国际仲裁院仲裁员条目；See More 居中显示，并跳转到 `/about#honors`。
-- 中文状态下，首页 Honors 切换到 `Chinese/awards.md` 对应的年度中文荣誉条目。
-- 首页 Events 轮播五条事件统一复用 `src/data/events.ts`：`20231117`、`20230406`、`20230329`、`20221218`、`20221108`，不再单独维护首页图片和文案；轮播上一张/下一张和分页点按钮水平居中，See More 保持在右侧入口。
-- 中文状态下，首页 Events 五条轮播事件使用 `localizeEvent` 输出对应中文标题、日期和摘要。
-- 首页 Clients 屏背景恢复为深色，客户 Logo 卡片保持纯白底和浅色描边。
+2026-05-07 鏈湴璋冩暣锛?
+- 棣栭〉 Honors 鏁版嵁鎸?`EN/award.md` 鏁寸悊涓哄勾搴﹀垪琛紝姣忎釜骞翠唤灞曠ず鏈€杩戣崳瑾変簨浠讹紝骞堕澶栬ˉ鍏?2022/2023/2024 骞磋檸璇夎禐鍔╂椿鍔ㄥ拰 Wan Li 澶ц繛鍥介檯浠茶闄徊瑁佸憳鏉＄洰锛汼ee More 灞呬腑鏄剧ず锛屽苟璺宠浆鍒?`/about#honors`銆?
+- 涓枃鐘舵€佷笅锛岄椤?Honors 鍒囨崲鍒?`Chinese/awards.md` 瀵瑰簲鐨勫勾搴︿腑鏂囪崳瑾夋潯鐩€?
+- 棣栭〉 Events 杞挱浜旀潯浜嬩欢缁熶竴澶嶇敤 `src/data/events.ts`锛歚20231117`銆乣20230406`銆乣20230329`銆乣20221218`銆乣20221108`锛屼笉鍐嶅崟鐙淮鎶ら椤靛浘鐗囧拰鏂囨锛涜疆鎾笂涓€寮?涓嬩竴寮犲拰鍒嗛〉鐐规寜閽按骞冲眳涓紝See More 淇濇寔鍦ㄥ彸渚у叆鍙ｃ€?
+- 涓枃鐘舵€佷笅锛岄椤?Events 浜旀潯杞挱浜嬩欢浣跨敤 `localizeEvent` 杈撳嚭瀵瑰簲涓枃鏍囬銆佹棩鏈熷拰鎽樿銆?
+- 棣栭〉 Clients 灞忚儗鏅仮澶嶄负娣辫壊锛屽鎴?Logo 鍗＄墖淇濇寔绾櫧搴曞拰娴呰壊鎻忚竟銆?
 
 ### About `/about`
 
-About 页面由多个区块组件组成：
+About 椤甸潰鐢卞涓尯鍧楃粍浠剁粍鎴愶細
 
 - `AboutHero`
 - `Honors`
 - `Culture`
 - `Chronicle`
 
-其中：
+鍏朵腑锛?
 
-- `AboutHero` 使用本地 `/assets/about/hero.png` 作为首屏背景，并直接渲染 `VisionCard`；首屏 `100svh` 内不叠加蒙层，纵向/横向渐变蒙层从 `top-[100svh]` 开始，仅作用于首屏之后的延展区域；About 标题组从首屏 55% 位置开始并保持 `12rem` 内容线，左侧增加金色竖线；About us 标题按 96px 换算为 `6rem`、semibold，正文按 32px 换算为 `2rem`、medium italic；Vision 卡片不再依赖 `calc(100svh + 36rem)` 固定高度和绝对定位父容器，改为首屏后相对流式布局并通过 `-mt-[10svh]` 叠入首屏底部，外层 `pb-20` 为 See More 预留自然下边距；灰色方块桌面左右外距为 `5rem`，卡片背景使用 `#585551` 到 `#2f2f2f` 的左上到右下渐变；
-- `Vision.tsx` 保留 `VisionCard` 复用导出，卡片背景接入本地 `/assets/about/aboutVision.png` 并叠加深色渐变以保证文字可读，背景图片使用 `h-full w-full object-cover` 适应卡片完整高度；右侧 Vision 标题与说明文字桌面同排，`VISION` 标题桌面按 80px 换算为 `5rem` 并使用 extrabold；移动端标题和黄色说明缩小，英文第二行仅在 `md` 以上保持不换行，正文移动端改为左对齐并允许断词换行，避免黄色说明和正文越过视窗；
-- `Honors` 使用 `useState` 做年份折叠交互，数据按 `EN/award.md` 的英文条目整理为年度奖项列表；展示前先按年份降序，再对每个年份内的奖项按 `YYYY-MM` 日期降序排序，确保月份大的荣誉排在上方；展开内容使用 `grid-rows` 过渡动画；标题 `HONORS` 桌面按 120px 换算为 `7.5rem`、semibold italic，移动端降为 `4rem`；右侧说明移动端改为左对齐并缩小字号；年份头部、奖项标题、正文和日期均增加移动端字号与断行约束，避免 About Honors 横向溢出；
-- `Culture` 左侧图片按指定使用 `/assets/home/INDUSTRIES3.png` 原图，参考 Contact us 双栏效果做镜像布局：图片在左、文字色块在右，图片右缘使用棕金到透明的衔接渐变，右侧背景为 `#A1865F` 并保留低透明度抽象品牌水印；标题和正文改为黑色，标题按 Contact us 规格使用 `clamp(2.5rem,2.708vw,3.25rem)`，正文按 `clamp(1.25rem,1.46vw,1.75rem)` italic，`READ FULL MANIFESTO` 按钮使用 `#D9B27A` 背景并按 18px 换算为 `1.125rem` medium；
-- `Chronicle` 使用 `useState` 做年份折叠交互，英文数据按 `EN/CHRONICLE.md` 的年份、月份、内容整理为 2026 到 2018 的完整时间线，中文数据按 `Chinese/CHRONICLE.md` 提供同样年份结构，页面文案保留源文档完整句子；默认展示前三个年份，See More 使用与 Culture 的 READ FULL MANIFESTO 一致的金色按钮动效，展开全部年份后英文按钮文案切换为 `COLLAPSE`、中文按钮文案切换为 `收起`；年份按钮背景为 `#202020` 且边框为金色，hover 时切换为金色实底；`CHRONICLE` 标题按 80px 换算为 `5rem` medium，右侧说明按 28px 换算为 `1.75rem` light，年份按钮按 36px 换算为 `2.25rem` medium；展开卡片在靠近中轴一侧显示金色边框，月份按 24px 换算为 `1.5rem` semibold 且颜色 `#D9B27A`，月份标题下划线靠近中轴，正文为 `1.5rem` light 灰色并占卡片宽度 85%。
+- `AboutHero` 浣跨敤鏈湴 `/assets/about/hero.png` 浣滀负棣栧睆鑳屾櫙锛屽苟鐩存帴娓叉煋 `VisionCard`锛涢灞?`100svh` 鍐呬笉鍙犲姞钂欏眰锛岀旱鍚?妯悜娓愬彉钂欏眰浠?`top-[100svh]` 寮€濮嬶紝浠呬綔鐢ㄤ簬棣栧睆涔嬪悗鐨勫欢灞曞尯鍩燂紱About 鏍囬缁勪粠棣栧睆 55% 浣嶇疆寮€濮嬪苟淇濇寔 `12rem` 鍐呭绾匡紝宸︿晶澧炲姞閲戣壊绔栫嚎锛汚bout us 鏍囬鎸?96px 鎹㈢畻涓?`6rem`銆乻emibold锛屾鏂囨寜 32px 鎹㈢畻涓?`2rem`銆乵edium italic锛沄ision 鍗＄墖涓嶅啀渚濊禆 `calc(100svh + 36rem)` 鍥哄畾楂樺害鍜岀粷瀵瑰畾浣嶇埗瀹瑰櫒锛屾敼涓洪灞忓悗鐩稿娴佸紡甯冨眬骞堕€氳繃 `-mt-[10svh]` 鍙犲叆棣栧睆搴曢儴锛屽灞?`pb-20` 涓?See More 棰勭暀鑷劧涓嬭竟璺濓紱鐏拌壊鏂瑰潡妗岄潰宸﹀彸澶栬窛涓?`5rem`锛屽崱鐗囪儗鏅娇鐢?`#585551` 鍒?`#2f2f2f` 鐨勫乏涓婂埌鍙充笅娓愬彉锛?
+- `Vision.tsx` 淇濈暀 `VisionCard` 澶嶇敤瀵煎嚭锛屽崱鐗囪儗鏅帴鍏ユ湰鍦?`/assets/about/aboutVision.png` 骞跺彔鍔犳繁鑹叉笎鍙樹互淇濊瘉鏂囧瓧鍙锛岃儗鏅浘鐗囦娇鐢?`h-full w-full object-cover` 閫傚簲鍗＄墖瀹屾暣楂樺害锛涘彸渚?Vision 鏍囬涓庤鏄庢枃瀛楁闈㈠悓鎺掞紝`VISION` 鏍囬妗岄潰鎸?80px 鎹㈢畻涓?`5rem` 骞朵娇鐢?extrabold锛涚Щ鍔ㄧ鏍囬鍜岄粍鑹茶鏄庣缉灏忥紝鑻辨枃绗簩琛屼粎鍦?`md` 浠ヤ笂淇濇寔涓嶆崲琛岋紝姝ｆ枃绉诲姩绔敼涓哄乏瀵归綈骞跺厑璁告柇璇嶆崲琛岋紝閬垮厤榛勮壊璇存槑鍜屾鏂囪秺杩囪绐楋紱
+- `Honors` 浣跨敤 `useState` 鍋氬勾浠芥姌鍙犱氦浜掞紝鏁版嵁鎸?`EN/award.md` 鐨勮嫳鏂囨潯鐩暣鐞嗕负骞村害濂栭」鍒楄〃锛涘睍绀哄墠鍏堟寜骞翠唤闄嶅簭锛屽啀瀵规瘡涓勾浠藉唴鐨勫椤规寜 `YYYY-MM` 鏃ユ湡闄嶅簭鎺掑簭锛岀‘淇濇湀浠藉ぇ鐨勮崳瑾夋帓鍦ㄤ笂鏂癸紱灞曞紑鍐呭浣跨敤 `grid-rows` 杩囨浮鍔ㄧ敾锛涙爣棰?`HONORS` 妗岄潰鎸?120px 鎹㈢畻涓?`7.5rem`銆乻emibold italic锛岀Щ鍔ㄧ闄嶄负 `4rem`锛涘彸渚ц鏄庣Щ鍔ㄧ鏀逛负宸﹀榻愬苟缂╁皬瀛楀彿锛涘勾浠藉ご閮ㄣ€佸椤规爣棰樸€佹鏂囧拰鏃ユ湡鍧囧鍔犵Щ鍔ㄧ瀛楀彿涓庢柇琛岀害鏉燂紝閬垮厤 About Honors 妯悜婧㈠嚭锛?
+- `Culture` 宸︿晶鍥剧墖鎸夋寚瀹氫娇鐢?`/assets/home/INDUSTRIES3.png` 鍘熷浘锛屽弬鑰?Contact us 鍙屾爮鏁堟灉鍋氶暅鍍忓竷灞€锛氬浘鐗囧湪宸︺€佹枃瀛楄壊鍧楀湪鍙筹紝鍥剧墖鍙崇紭浣跨敤妫曢噾鍒伴€忔槑鐨勮鎺ユ笎鍙橈紝鍙充晶鑳屾櫙涓?`#A1865F` 骞朵繚鐣欎綆閫忔槑搴︽娊璞″搧鐗屾按鍗帮紱鏍囬鍜屾鏂囨敼涓洪粦鑹诧紝鏍囬鎸?Contact us 瑙勬牸浣跨敤 `clamp(2.5rem,2.708vw,3.25rem)`锛屾鏂囨寜 `clamp(1.25rem,1.46vw,1.75rem)` italic锛宍READ FULL MANIFESTO` 鎸夐挳浣跨敤 `#D9B27A` 鑳屾櫙骞舵寜 18px 鎹㈢畻涓?`1.125rem` medium锛?
+- `Chronicle` 浣跨敤 `useState` 鍋氬勾浠芥姌鍙犱氦浜掞紝鑻辨枃鏁版嵁鎸?`EN/CHRONICLE.md` 鐨勫勾浠姐€佹湀浠姐€佸唴瀹规暣鐞嗕负 2026 鍒?2018 鐨勫畬鏁存椂闂寸嚎锛屼腑鏂囨暟鎹寜 `Chinese/CHRONICLE.md` 鎻愪緵鍚屾牱骞翠唤缁撴瀯锛岄〉闈㈡枃妗堜繚鐣欐簮鏂囨。瀹屾暣鍙ュ瓙锛涢粯璁ゅ睍绀哄墠涓変釜骞翠唤锛孲ee More 浣跨敤涓?Culture 鐨?READ FULL MANIFESTO 涓€鑷寸殑閲戣壊鎸夐挳鍔ㄦ晥锛屽睍寮€鍏ㄩ儴骞翠唤鍚庤嫳鏂囨寜閽枃妗堝垏鎹负 `COLLAPSE`銆佷腑鏂囨寜閽枃妗堝垏鎹负 `鏀惰捣`锛涘勾浠芥寜閽儗鏅负 `#202020` 涓旇竟妗嗕负閲戣壊锛宧over 鏃跺垏鎹负閲戣壊瀹炲簳锛沗CHRONICLE` 鏍囬鎸?80px 鎹㈢畻涓?`5rem` medium锛屽彸渚ц鏄庢寜 28px 鎹㈢畻涓?`1.75rem` light锛屽勾浠芥寜閽寜 36px 鎹㈢畻涓?`2.25rem` medium锛涘睍寮€鍗＄墖鍦ㄩ潬杩戜腑杞翠竴渚ф樉绀洪噾鑹茶竟妗嗭紝鏈堜唤鎸?24px 鎹㈢畻涓?`1.5rem` semibold 涓旈鑹?`#D9B27A`锛屾湀浠芥爣棰樹笅鍒掔嚎闈犺繎涓酱锛屾鏂囦负 `1.5rem` light 鐏拌壊骞跺崰鍗＄墖瀹藉害 85%銆?
 
-About Honors 区块新增 `id="honors"` 和 `scroll-mt-[var(--header-height)]`，供首页 `/about#honors` 锚点跳转定位；年度数据补入 202211、202304、20240515、20241129 和 202203 五条荣誉/赞助活动，其中 2023 独立成年度折叠项，View Award 绑定对应微信公众号链接。
+About Honors 鍖哄潡鏂板 `id="honors"` 鍜?`scroll-mt-[var(--header-height)]`锛屼緵棣栭〉 `/about#honors` 閿氱偣璺宠浆瀹氫綅锛涘勾搴︽暟鎹ˉ鍏?202211銆?02304銆?0240515銆?0241129 鍜?202203 浜旀潯鑽ｈ獕/璧炲姪娲诲姩锛屽叾涓?2023 鐙珛鎴愬勾搴︽姌鍙犻」锛孷iew Award 缁戝畾瀵瑰簲寰俊鍏紬鍙烽摼鎺ャ€?
 
 ### Core Value `/about/core-value`
 
-Core Value 页面基于 `core value/` 原型重建，仍归属 About 路由层级：
+Core Value 椤甸潰鍩轰簬 `core value/` 鍘熷瀷閲嶅缓锛屼粛褰掑睘 About 璺敱灞傜骇锛?
 
-- 页面入口为 `src/app/about/core-value/page.tsx`，展示组件为 `src/components/pages/CoreValuePage.tsx`；
-- 复用全站 `SiteHeader` 与 `SiteFooter`，顶部导航 active 仍为 ABOUT US；
-- Hero 使用原型背景图，正文包含统一 `SubpageBreadcrumb` 面包屑，显示 About us / Core Value，字号为 `1.5rem`，点击返回上一页或回退到 `/about`；
-- 三个价值观段落改由 `src/components/sections/core-value/CoreValueScrollFlow.tsx` 承载，文案按 `EN/coreValue.md` 和 `Chinese/corevalue.md` 补齐第三条“属人性 / Hands-on”的解释段与结尾段；英文正文使用左对齐、正常词距和 `leading-[1.55]`，避免两端对齐拉大单词间隔，中文正文保留两端对齐并收紧到 `leading-[1.65]`；参考 `事件 copy/src/app/components/FeaturesSection.tsx` 的滚动逻辑：桌面端外层高度为条目数乘以 `100vh`，滚动进度直接由 `container.getBoundingClientRect().top / window.innerHeight` 计算，左侧内容按滚动进度激活，右侧图片区使用和参考实现一致的 `sticky top-0 h-screen flex items-center justify-center` 结构固定在视窗内；`IntersectionObserver` 使用合法的 `rootMargin: "100% 0px"` 判断区域是否接近视口；滚动区背景为 `#171717`，不显示额外的 `CORE VALUES`/`Principles behind every dispute we take on` 引导文案；右侧图片堆内层保留 `translate-y-[5rem]` 和 `scale-90` 控制视觉位置，两个包裹层均设置 `w-full` 以避免图片栈宽度塌陷，图片栈使用 `aspect-[16/14]` 横向比例并放宽右侧列宽；Core Value 页面级 `<main>` 不再设置 `overflow-x-hidden`，避免祖先 overflow 创建裁剪/滚动上下文导致 sticky 失效；
-- 右侧图片堆叠对齐 `事件 copy/src/app/components/FeaturesSection.tsx` 的 `ImageStack` 动效：外层使用 `aspect-[16/14]`，每张图片使用 `absolute inset-0` 叠放在同一容器内，通过 `clip-path: inset(...)` 按滚动进度逐张揭示，并用 `translateY(px)` 形成入场堆叠动效；移动端回退为普通纵向图文卡片；
-- 价值观标题按 28px 换算为 `1.75rem`、`#D9B27A` semibold，英文以 `No.1 Our Spiritual Totem: Tiger` 的合并格式展示，中文不展示 `number` 前缀；标题下方不显示下划线；正文按 24px 换算为 `1.5rem` regular，其中 No.1 文案补充 `Bi An (狴犴)`；中文 `number` 为空时组件使用图片路径和索引生成稳定 key，避免 React 重复 key 警告；
-- 滚动区图片使用 `/assets/core/core1.webp`、`core2.webp`、`core3.webp`，来源为 `src/assets/core/core1.png` 到 `core3.png` 生成的 WebP 版本；
-- 结尾保留原型引用段落与引号图形。
-- 页面右下角使用 `BackToTop` 提供中英文返回入口。
+- 椤甸潰鍏ュ彛涓?`src/app/about/core-value/page.tsx`锛屽睍绀虹粍浠朵负 `src/components/pages/CoreValuePage.tsx`锛?
+- 澶嶇敤鍏ㄧ珯 `SiteHeader` 涓?`SiteFooter`锛岄《閮ㄥ鑸?active 浠嶄负 ABOUT US锛?
+- Hero 浣跨敤鍘熷瀷鑳屾櫙鍥撅紝姝ｆ枃鍖呭惈缁熶竴 `SubpageBreadcrumb` 闈㈠寘灞戯紝鏄剧ず About us / Core Value锛屽瓧鍙蜂负 `1.5rem`锛岀偣鍑昏繑鍥炰笂涓€椤垫垨鍥為€€鍒?`/about`锛?
+- 涓変釜浠峰€艰娈佃惤鏀圭敱 `src/components/sections/core-value/CoreValueScrollFlow.tsx` 鎵胯浇锛屾枃妗堟寜 `EN/coreValue.md` 鍜?`Chinese/corevalue.md` 琛ラ綈绗笁鏉♀€滃睘浜烘€?/ Hands-on鈥濈殑瑙ｉ噴娈典笌缁撳熬娈碉紱鑻辨枃姝ｆ枃浣跨敤宸﹀榻愩€佹甯歌瘝璺濆拰 `leading-[1.55]`锛岄伩鍏嶄袱绔榻愭媺澶у崟璇嶉棿闅旓紝涓枃姝ｆ枃淇濈暀涓ょ瀵归綈骞舵敹绱у埌 `leading-[1.65]`锛涘弬鑰?`浜嬩欢 copy/src/app/components/FeaturesSection.tsx` 鐨勬粴鍔ㄩ€昏緫锛氭闈㈢澶栧眰楂樺害涓烘潯鐩暟涔樹互 `100vh`锛屾粴鍔ㄨ繘搴︾洿鎺ョ敱 `container.getBoundingClientRect().top / window.innerHeight` 璁＄畻锛屽乏渚у唴瀹规寜婊氬姩杩涘害婵€娲伙紝鍙充晶鍥剧墖鍖轰娇鐢ㄥ拰鍙傝€冨疄鐜颁竴鑷寸殑 `sticky top-0 h-screen flex items-center justify-center` 缁撴瀯鍥哄畾鍦ㄨ绐楀唴锛沗IntersectionObserver` 浣跨敤鍚堟硶鐨?`rootMargin: "100% 0px"` 鍒ゆ柇鍖哄煙鏄惁鎺ヨ繎瑙嗗彛锛涙粴鍔ㄥ尯鑳屾櫙涓?`#171717`锛屼笉鏄剧ず棰濆鐨?`CORE VALUES`/`Principles behind every dispute we take on` 寮曞鏂囨锛涘彸渚у浘鐗囧爢鍐呭眰淇濈暀 `translate-y-[5rem]` 鍜?`scale-90` 鎺у埗瑙嗚浣嶇疆锛屼袱涓寘瑁瑰眰鍧囪缃?`w-full` 浠ラ伩鍏嶅浘鐗囨爤瀹藉害濉岄櫡锛屽浘鐗囨爤浣跨敤 `aspect-[16/14]` 妯悜姣斾緥骞舵斁瀹藉彸渚у垪瀹斤紱Core Value 椤甸潰绾?`<main>` 涓嶅啀璁剧疆 `overflow-x-hidden`锛岄伩鍏嶇鍏?overflow 鍒涘缓瑁佸壀/婊氬姩涓婁笅鏂囧鑷?sticky 澶辨晥锛?
+- 鍙充晶鍥剧墖鍫嗗彔瀵归綈 `浜嬩欢 copy/src/app/components/FeaturesSection.tsx` 鐨?`ImageStack` 鍔ㄦ晥锛氬灞備娇鐢?`aspect-[16/14]`锛屾瘡寮犲浘鐗囦娇鐢?`absolute inset-0` 鍙犳斁鍦ㄥ悓涓€瀹瑰櫒鍐咃紝閫氳繃 `clip-path: inset(...)` 鎸夋粴鍔ㄨ繘搴﹂€愬紶鎻ず锛屽苟鐢?`translateY(px)` 褰㈡垚鍏ュ満鍫嗗彔鍔ㄦ晥锛涚Щ鍔ㄧ鍥為€€涓烘櫘閫氱旱鍚戝浘鏂囧崱鐗囷紱
+- 浠峰€艰鏍囬鎸?28px 鎹㈢畻涓?`1.75rem`銆乣#D9B27A` semibold锛岃嫳鏂囦互 `No.1 Our Spiritual Totem: Tiger` 鐨勫悎骞舵牸寮忓睍绀猴紝涓枃涓嶅睍绀?`number` 鍓嶇紑锛涙爣棰樹笅鏂逛笉鏄剧ず涓嬪垝绾匡紱姝ｆ枃鎸?24px 鎹㈢畻涓?`1.5rem` regular锛屽叾涓?No.1 鏂囨琛ュ厖 `Bi An (鐙寸姶)`锛涗腑鏂?`number` 涓虹┖鏃剁粍浠朵娇鐢ㄥ浘鐗囪矾寰勫拰绱㈠紩鐢熸垚绋冲畾 key锛岄伩鍏?React 閲嶅 key 璀﹀憡锛?
+- 婊氬姩鍖哄浘鐗囦娇鐢?`/assets/core/core1.webp`銆乣core2.webp`銆乣core3.webp`锛屾潵婧愪负 `src/assets/core/core1.png` 鍒?`core3.png` 鐢熸垚鐨?WebP 鐗堟湰锛?
+- 缁撳熬淇濈暀鍘熷瀷寮曠敤娈佃惤涓庡紩鍙峰浘褰€?
+- 椤甸潰鍙充笅瑙掍娇鐢?`BackToTop` 鎻愪緵涓嫳鏂囪繑鍥炲叆鍙ｃ€?
 
-页面需要的 Core Value Hero 原型图片已复制到 `public/assets/prototypes/core-value/*`；滚动区图片已发布到 `public/assets/core/*`。
+椤甸潰闇€瑕佺殑 Core Value Hero 鍘熷瀷鍥剧墖宸插鍒跺埌 `public/assets/prototypes/core-value/*`锛涙粴鍔ㄥ尯鍥剧墖宸插彂甯冨埌 `public/assets/core/*`銆?
 
 ### Team `/team`
 
-团队页面基于 `我的团队/` 原型重建，包含：
+鍥㈤槦椤甸潰鍩轰簬 `鎴戠殑鍥㈤槦/` 鍘熷瀷閲嶅缓锛屽寘鍚細
 
-- Our team Hero，使用本地 `/assets/team/hero.webp` 和灰色混合遮罩；移动端 Hero 高度为 `100svh`，图片按 `width: 100%`、`height: auto` 展示，`Our team` 标题贴近首屏底部；桌面端恢复 `67.5rem` 高并让图片以 `h-full w-full object-cover` 铺满父容器；`#`、`Our team` 和副标题在移动端使用较小字号，`md` 以上保持 90px / 120px / 28px 对应规格；
-- WE ARE SPECIAL FORCES / 我们，即为精锐之师标语区，标题分两行左对齐并使用 96px 对应 `6rem` italic，说明文案右对齐且分三行，字号为 28px 对应 `1.75rem` medium；标题与说明下方有一整条横向下划线；
-- Partner 与 Senior Associate 双列人物卡片分区，标题使用一致的 64px 对应 `4rem` italic uppercase 格式；
-- 人物卡片数据来自 `teamInfo.md` 的姓名和职位，只展示职位和名字；中文状态使用 `Chinese/teamInfo.md` 的 `zhName`、`zhTitle`；Yuxuan Liu、Min Xu、Li Wan、Zoe Zhang、Weifan Qiu 使用本地 `/assets/team/team1.webp` 到 `/assets/team/team6.webp`，Mengcheng Yun 使用替换后的 `/assets/team/team5.png`；`src/assets/team/*.png` 替换后会重新发布到 `public/assets/team`；图片以绝对定位填满父元素并移除灰色蒙层，保留轻微放大；姓名为 55px 对应 `3.4375rem` medium，职位为 36px 对应 `2.25rem` extra light，Find out more 为 28px 对应 `1.75rem` medium，黄色文字和黄色下划线，不显示旁侧 icon；
-- Find out more 使用 Next `Link` 按成员 slug 跳转到同一团队路由层级下的 `/team/[slug]`；
-- 复用全站导航和页脚；页面级三角形背景透明度降为 20%，并将团队内容区提升为 `z-10`，避免背景三角形遮挡团队列表内容。
+- Our team Hero锛屼娇鐢ㄦ湰鍦?`/assets/team/hero.webp` 鍜岀伆鑹叉贩鍚堥伄缃╋紱绉诲姩绔?Hero 楂樺害涓?`100svh`锛屽浘鐗囨寜 `width: 100%`銆乣height: auto` 灞曠ず锛宍Our team` 鏍囬璐磋繎棣栧睆搴曢儴锛涙闈㈢鎭㈠ `67.5rem` 楂樺苟璁╁浘鐗囦互 `h-full w-full object-cover` 閾烘弧鐖跺鍣紱`#`銆乣Our team` 鍜屽壇鏍囬鍦ㄧЩ鍔ㄧ浣跨敤杈冨皬瀛楀彿锛宍md` 浠ヤ笂淇濇寔 90px / 120px / 28px 瀵瑰簲瑙勬牸锛?
+- WE ARE SPECIAL FORCES / 鎴戜滑锛屽嵆涓虹簿閿愪箣甯堟爣璇尯锛屾爣棰樺垎涓よ宸﹀榻愬苟浣跨敤 96px 瀵瑰簲 `6rem` italic锛岃鏄庢枃妗堝彸瀵归綈涓斿垎涓夎锛屽瓧鍙蜂负 28px 瀵瑰簲 `1.75rem` medium锛涙爣棰樹笌璇存槑涓嬫柟鏈変竴鏁存潯妯悜涓嬪垝绾匡紱
+- Partner 涓?Senior Associate 鍙屽垪浜虹墿鍗＄墖鍒嗗尯锛屾爣棰樹娇鐢ㄤ竴鑷寸殑 64px 瀵瑰簲 `4rem` italic uppercase 鏍煎紡锛?
+- 浜虹墿鍗＄墖鏁版嵁鏉ヨ嚜 `teamInfo.md` 鐨勫鍚嶅拰鑱屼綅锛屽彧灞曠ず鑱屼綅鍜屽悕瀛楋紱涓枃鐘舵€佷娇鐢?`Chinese/teamInfo.md` 鐨?`zhName`銆乣zhTitle`锛沋uxuan Liu銆丮in Xu銆丩i Wan銆乑oe Zhang銆乄eifan Qiu 浣跨敤鏈湴 `/assets/team/team1.webp` 鍒?`/assets/team/team6.webp`锛孧engcheng Yun 浣跨敤鏇挎崲鍚庣殑 `/assets/team/team5.png`锛沗src/assets/team/*.png` 鏇挎崲鍚庝細閲嶆柊鍙戝竷鍒?`public/assets/team`锛涘浘鐗囦互缁濆瀹氫綅濉弧鐖跺厓绱犲苟绉婚櫎鐏拌壊钂欏眰锛屼繚鐣欒交寰斁澶э紱濮撳悕涓?55px 瀵瑰簲 `3.4375rem` medium锛岃亴浣嶄负 36px 瀵瑰簲 `2.25rem` extra light锛孎ind out more 涓?28px 瀵瑰簲 `1.75rem` medium锛岄粍鑹叉枃瀛楀拰榛勮壊涓嬪垝绾匡紝涓嶆樉绀烘梺渚?icon锛?
+- Find out more 浣跨敤 Next `Link` 鎸夋垚鍛?slug 璺宠浆鍒板悓涓€鍥㈤槦璺敱灞傜骇涓嬬殑 `/team/[slug]`锛?
+- 澶嶇敤鍏ㄧ珯瀵艰埅鍜岄〉鑴氾紱椤甸潰绾т笁瑙掑舰鑳屾櫙閫忔槑搴﹂檷涓?20%锛屽苟灏嗗洟闃熷唴瀹瑰尯鎻愬崌涓?`z-10`锛岄伩鍏嶈儗鏅笁瑙掑舰閬尅鍥㈤槦鍒楄〃鍐呭銆?
 
-页面需要的团队 Hero 图和成员图已复制到 `public/assets/team/*`；旧原型团队图仍保留在 `public/assets/prototypes/team/*` 作为备用。
+椤甸潰闇€瑕佺殑鍥㈤槦 Hero 鍥惧拰鎴愬憳鍥惧凡澶嶅埗鍒?`public/assets/team/*`锛涙棫鍘熷瀷鍥㈤槦鍥句粛淇濈暀鍦?`public/assets/prototypes/team/*` 浣滀负澶囩敤銆?
 
 ### Team Profile `/team/[slug]`
 
-团队个人详情页基于 `个人介绍详情/` 原型重建：
+鍥㈤槦涓汉璇︽儏椤靛熀浜?`涓汉浠嬬粛璇︽儏/` 鍘熷瀷閲嶅缓锛?
 
-- 页面入口为 `src/app/team/[slug]/page.tsx`，`src/app/team/yuxuan-liu/page.tsx` 保留 Yuxuan Liu 的兼容静态入口，展示组件为 `src/components/pages/TeamProfilePage.tsx`；
-- 团队列表和个人详情共用 `src/data/teamProfiles.ts`，包含 Yuxuan Liu、Min Xu、Li Wan、Zoe Zhang、Mengcheng Yun、Weifan Qiu 的 slug、姓名、职位、图片、邮箱、服务行业、教育背景、执业资格、语言、社会职务、执业领域、执业经历、荣誉和业绩；Performance & Achievements 按 `EN/teamInfo.md` 的英文个人业绩条目整理，避免使用截断或占位内容；英文状态下 Li Wan 的 Social Engagements / Practice Area、Zoe Zhang 的 Educational Background / Social Engagements / Practice Area / Work Experience / Awards and Recognition、Mengcheng Yun 的 Practice Area / Practice Experience、Weifan Qiu 的 Practice Area / Performance & Achievements 均按 `EN/teamInfo.md` 对齐；中文状态使用 `Chinese/teamInfo.md` 中的 `zh` 详情对象切换姓名、职位、服务行业、教育背景、专业资格、工作语言、社会任职、专业领域、执业经验、荣誉和个人业绩；荣誉条目中以中英文冒号结尾的引导说明按普通段落渲染，不显示列表圆点；教育背景按英文分号 `;` 或中文分号 `；` 拆分为多段展示，执业经验按换行拆分为多段展示，Zoe Zhang / 张莉的教育背景固定拆为四段、中文执业经验固定拆为两段；Social Engagements 仅在存在非空内容时渲染，Mengcheng Yun / 云梦成不展示该区块；
-- 复用全站 `SiteHeader` 与 `SiteFooter`，顶部导航 active 保持 OUR TEAM；
-- Hero 高度按 735px 换算为 `45.9375rem`，使用左上 `#919191` 到右下 `#5a5a5a` 对角线渐变，左侧人物图片使用当前 slug 对应的 `/assets/team/1.png` 到 `/assets/team/6.png` 并与 title logo 内容线对齐，右侧显示当前成员姓名、职位、下划线、带 Phone icon 的电话入口和带 Mail icon 的邮箱入口；姓名按 100px 换算为 `6.25rem` semibold，职位按 40px 换算为 `2.5rem` light；
-- Hero 下方保留统一 `SubpageBreadcrumb`，显示 Our Team / 当前成员姓名，字号为 `1.5rem`，分隔符为 `/`，父级和当前项点击均返回上一页或回退到 `/team`；
-- 信息介绍及后续内容左右边距统一为 128px，对应 `8rem`；
-- 信息介绍屏背景为 `#333231` 到 `#433e38` 的纵向渐变，包含 Service Industries、Professional Qualification、Educational Background、Language Skills，并在成员存在内容时追加 Social Engagements；Language Skills 与 Professional Qualification 放在同一列，Social Engagements 存在时单独占一整行；Service Industries 标题为 `2rem` semibold，列表为 `1.5rem` light；
-- 第二屏背景为 `#171717`，展示 Experience& capabilities；左侧为 Practice Area 与 Practice Experience，右侧仅在成员存在真实 Honors 数据时展示 Honors 和竖向分隔线；Mengcheng Yun、Weifan Qiu 等无 Honors 条目的成员不渲染该区块；
-- 第三屏背景为 `#262626`，展示 Performance & Achievements、六张默认业绩卡片；View More 按钮位于默认卡片下方，样式对齐 About 的 See More，并使用 `useState`、`grid-rows` 和 opacity 过渡实现与 About Honors 卡片一致的展开/收起动画；页面右下角使用 `BackToTop` 提供中英文返回入口。
+- 椤甸潰鍏ュ彛涓?`src/app/team/[slug]/page.tsx`锛宍src/app/team/yuxuan-liu/page.tsx` 淇濈暀 Yuxuan Liu 鐨勫吋瀹归潤鎬佸叆鍙ｏ紝灞曠ず缁勪欢涓?`src/components/pages/TeamProfilePage.tsx`锛?
+- 鍥㈤槦鍒楄〃鍜屼釜浜鸿鎯呭叡鐢?`src/data/teamProfiles.ts`锛屽寘鍚?Yuxuan Liu銆丮in Xu銆丩i Wan銆乑oe Zhang銆丮engcheng Yun銆乄eifan Qiu 鐨?slug銆佸鍚嶃€佽亴浣嶃€佸浘鐗囥€侀偖绠便€佹湇鍔¤涓氥€佹暀鑲茶儗鏅€佹墽涓氳祫鏍笺€佽瑷€銆佺ぞ浼氳亴鍔°€佹墽涓氶鍩熴€佹墽涓氱粡鍘嗐€佽崳瑾夊拰涓氱哗锛汸erformance & Achievements 鎸?`EN/teamInfo.md` 鐨勮嫳鏂囦釜浜轰笟缁╂潯鐩暣鐞嗭紝閬垮厤浣跨敤鎴柇鎴栧崰浣嶅唴瀹癸紱鑻辨枃鐘舵€佷笅 Li Wan 鐨?Social Engagements / Practice Area銆乑oe Zhang 鐨?Educational Background / Social Engagements / Practice Area / Work Experience / Awards and Recognition銆丮engcheng Yun 鐨?Practice Area / Practice Experience銆乄eifan Qiu 鐨?Practice Area / Performance & Achievements 鍧囨寜 `EN/teamInfo.md` 瀵归綈锛涗腑鏂囩姸鎬佷娇鐢?`Chinese/teamInfo.md` 涓殑 `zh` 璇︽儏瀵硅薄鍒囨崲濮撳悕銆佽亴浣嶃€佹湇鍔¤涓氥€佹暀鑲茶儗鏅€佷笓涓氳祫鏍笺€佸伐浣滆瑷€銆佺ぞ浼氫换鑱屻€佷笓涓氶鍩熴€佹墽涓氱粡楠屻€佽崳瑾夊拰涓汉涓氱哗锛涜崳瑾夋潯鐩腑浠ヤ腑鑻辨枃鍐掑彿缁撳熬鐨勫紩瀵艰鏄庢寜鏅€氭钀芥覆鏌擄紝涓嶆樉绀哄垪琛ㄥ渾鐐癸紱鏁欒偛鑳屾櫙鎸夎嫳鏂囧垎鍙?`;` 鎴栦腑鏂囧垎鍙?`锛沗 鎷嗗垎涓哄娈靛睍绀猴紝鎵т笟缁忛獙鎸夋崲琛屾媶鍒嗕负澶氭灞曠ず锛孼oe Zhang / 寮犺帀鐨勬暀鑲茶儗鏅浐瀹氭媶涓哄洓娈点€佷腑鏂囨墽涓氱粡楠屽浐瀹氭媶涓轰袱娈碉紱Social Engagements 浠呭湪瀛樺湪闈炵┖鍐呭鏃舵覆鏌擄紝Mengcheng Yun / 浜戞ⅵ鎴愪笉灞曠ず璇ュ尯鍧楋紱
+- 澶嶇敤鍏ㄧ珯 `SiteHeader` 涓?`SiteFooter`锛岄《閮ㄥ鑸?active 淇濇寔 OUR TEAM锛?
+- Hero 楂樺害鎸?735px 鎹㈢畻涓?`45.9375rem`锛屼娇鐢ㄥ乏涓?`#919191` 鍒板彸涓?`#5a5a5a` 瀵硅绾挎笎鍙橈紝宸︿晶浜虹墿鍥剧墖浣跨敤褰撳墠 slug 瀵瑰簲鐨?`/assets/team/1.png` 鍒?`/assets/team/6.png` 骞朵笌 title logo 鍐呭绾垮榻愶紝鍙充晶鏄剧ず褰撳墠鎴愬憳濮撳悕銆佽亴浣嶃€佷笅鍒掔嚎銆佸甫 Phone icon 鐨勭數璇濆叆鍙ｅ拰甯?Mail icon 鐨勯偖绠卞叆鍙ｏ紱濮撳悕鎸?100px 鎹㈢畻涓?`6.25rem` semibold锛岃亴浣嶆寜 40px 鎹㈢畻涓?`2.5rem` light锛?
+- Hero 涓嬫柟淇濈暀缁熶竴 `SubpageBreadcrumb`锛屾樉绀?Our Team / 褰撳墠鎴愬憳濮撳悕锛屽瓧鍙蜂负 `1.5rem`锛屽垎闅旂涓?`/`锛岀埗绾у拰褰撳墠椤圭偣鍑诲潎杩斿洖涓婁竴椤垫垨鍥為€€鍒?`/team`锛?
+- 淇℃伅浠嬬粛鍙婂悗缁唴瀹瑰乏鍙宠竟璺濈粺涓€涓?128px锛屽搴?`8rem`锛?
+- 淇℃伅浠嬬粛灞忚儗鏅负 `#333231` 鍒?`#433e38` 鐨勭旱鍚戞笎鍙橈紝鍖呭惈 Service Industries銆丳rofessional Qualification銆丒ducational Background銆丩anguage Skills锛屽苟鍦ㄦ垚鍛樺瓨鍦ㄥ唴瀹规椂杩藉姞 Social Engagements锛汱anguage Skills 涓?Professional Qualification 鏀惧湪鍚屼竴鍒楋紝Social Engagements 瀛樺湪鏃跺崟鐙崰涓€鏁磋锛汼ervice Industries 鏍囬涓?`2rem` semibold锛屽垪琛ㄤ负 `1.5rem` light锛?
+- 绗簩灞忚儗鏅负 `#171717`锛屽睍绀?Experience& capabilities锛涘乏渚т负 Practice Area 涓?Practice Experience锛屽彸渚т粎鍦ㄦ垚鍛樺瓨鍦ㄧ湡瀹?Honors 鏁版嵁鏃跺睍绀?Honors 鍜岀珫鍚戝垎闅旂嚎锛汳engcheng Yun銆乄eifan Qiu 绛夋棤 Honors 鏉＄洰鐨勬垚鍛樹笉娓叉煋璇ュ尯鍧楋紱
+- 绗笁灞忚儗鏅负 `#262626`锛屽睍绀?Performance & Achievements銆佸叚寮犻粯璁や笟缁╁崱鐗囷紱View More 鎸夐挳浣嶄簬榛樿鍗＄墖涓嬫柟锛屾牱寮忓榻?About 鐨?See More锛屽苟浣跨敤 `useState`銆乣grid-rows` 鍜?opacity 杩囨浮瀹炵幇涓?About Honors 鍗＄墖涓€鑷寸殑灞曞紑/鏀惰捣鍔ㄧ敾锛涢〉闈㈠彸涓嬭浣跨敤 `BackToTop` 鎻愪緵涓嫳鏂囪繑鍥炲叆鍙ｃ€?
 
-页面需要的个人简介图片已复制到 `public/assets/prototypes/team-profile/*`。
+椤甸潰闇€瑕佺殑涓汉绠€浠嬪浘鐗囧凡澶嶅埗鍒?`public/assets/prototypes/team-profile/*`銆?
 
 ### Industries `/industries`
 
-服务行业页面基于 `服务行业/` 原型重建，包含：
+鏈嶅姟琛屼笟椤甸潰鍩轰簬 `鏈嶅姟琛屼笟/` 鍘熷瀷閲嶅缓锛屽寘鍚細
 
-- 顶部 Industries Hero 使用本地 `/assets/industries/hero.png`，标题左对齐并按 96px 换算为 `6rem` medium，标题在 1920 设计基准下距离屏幕顶部 `590px`，对应 `36.875rem`；
-- 行业服务说明卡片紧接在 Industries 标题下方，背景为 `#464646` 到 `#787269` 渐变，正文按 28px 换算为 `1.75rem` regular，两个对角边框与卡片边缘保留内距；
-- 行业卡片网格按 1 / 2列 / 2 三段布局，桌面左右外距为 `9rem`；第二段左侧为 International Trade 大卡，右侧为 Finance 与 Real Estate 两行一列上下排列；卡片图片使用 `/assets/industries/in1.webp` 到 `/assets/industries/in6.webp`，文字位于左下方并带黄色下划线，标题按 48px 换算为 `3rem` semibold，按 Private Equity、International Trade、Finance、Real Estate、Sports and E-Sports、Cyber Tech and Game 的顺序展示并保留指定换行；中文标题随卡片 slug 绑定为私募股权、国际贸易行业、金融、房地产行业、体育及电子竞技行业、互联网科技及游戏行业，避免复用首页 labels 数组造成文案与跳转目标错位；第三行高度为第一行约 1.5 倍；
-- 六个行业卡片均使用 Next `Link` 跳转到 `/industries/[slug]` 详情页；
-- 复用页脚。
+- 椤堕儴 Industries Hero 浣跨敤鏈湴 `/assets/industries/hero.png`锛屾爣棰樺乏瀵归綈骞舵寜 96px 鎹㈢畻涓?`6rem` medium锛屾爣棰樺湪 1920 璁捐鍩哄噯涓嬭窛绂诲睆骞曢《閮?`590px`锛屽搴?`36.875rem`锛?
+- 琛屼笟鏈嶅姟璇存槑鍗＄墖绱ф帴鍦?Industries 鏍囬涓嬫柟锛岃儗鏅负 `#464646` 鍒?`#787269` 娓愬彉锛屾鏂囨寜 28px 鎹㈢畻涓?`1.75rem` regular锛屼袱涓瑙掕竟妗嗕笌鍗＄墖杈圭紭淇濈暀鍐呰窛锛?
+- 琛屼笟鍗＄墖缃戞牸鎸?1 / 2鍒?/ 2 涓夋甯冨眬锛屾闈㈠乏鍙冲璺濅负 `9rem`锛涚浜屾宸︿晶涓?International Trade 澶у崱锛屽彸渚т负 Finance 涓?Real Estate 涓よ涓€鍒椾笂涓嬫帓鍒楋紱鍗＄墖鍥剧墖浣跨敤 `/assets/industries/in1.webp` 鍒?`/assets/industries/in6.webp`锛屾枃瀛椾綅浜庡乏涓嬫柟骞跺甫榛勮壊涓嬪垝绾匡紝鏍囬鎸?48px 鎹㈢畻涓?`3rem` semibold锛屾寜 Private Equity銆両nternational Trade銆丗inance銆丷eal Estate銆丼ports and E-Sports銆丆yber Tech and Game 鐨勯『搴忓睍绀哄苟淇濈暀鎸囧畾鎹㈣锛涗腑鏂囨爣棰橀殢鍗＄墖 slug 缁戝畾涓虹鍕熻偂鏉冦€佸浗闄呰锤鏄撹涓氥€侀噾铻嶃€佹埧鍦颁骇琛屼笟銆佷綋鑲插強鐢靛瓙绔炴妧琛屼笟銆佷簰鑱旂綉绉戞妧鍙婃父鎴忚涓氾紝閬垮厤澶嶇敤棣栭〉 labels 鏁扮粍閫犳垚鏂囨涓庤烦杞洰鏍囬敊浣嶏紱绗笁琛岄珮搴︿负绗竴琛岀害 1.5 鍊嶏紱
+- 鍏釜琛屼笟鍗＄墖鍧囦娇鐢?Next `Link` 璺宠浆鍒?`/industries/[slug]` 璇︽儏椤碉紱
+- 澶嶇敤椤佃剼銆?
 
-页面需要的原型图片已复制到 `public/assets/prototypes/industries/*`；行业卡片图片已从 `src/assets/industries/in1.png` 到 `in6.png` 发布到 `public/assets/industries/`。
+椤甸潰闇€瑕佺殑鍘熷瀷鍥剧墖宸插鍒跺埌 `public/assets/prototypes/industries/*`锛涜涓氬崱鐗囧浘鐗囧凡浠?`src/assets/industries/in1.png` 鍒?`in6.png` 鍙戝竷鍒?`public/assets/industries/`銆?
 
 ### Industry Detail `/industries/[slug]`
 
-行业详情页面基于 `行业详情/` 原型重建：
+琛屼笟璇︽儏椤甸潰鍩轰簬 `琛屼笟璇︽儏/` 鍘熷瀷閲嶅缓锛?
 
-- 页面入口为 `src/app/industries/[slug]/page.tsx`，展示组件为 `src/components/pages/IndustryDetailPage.tsx`；
-- `generateStaticParams` 和 `generateMetadata` 从服务端安全的 `src/data/industryMetadata.ts` 读取六个行业 slug、英文标题和简介，未知 slug 回退到 Private Equity metadata；
-- 复用全站 `SiteHeader` 与 `SiteFooter`，顶部导航 active 保持 INDUSTRIES；
-- Hero 顶部使用统一 `SubpageBreadcrumb`，显示 home / 当前行业（中文为 首页 / 当前行业），字号为 `1.5rem`，分隔符为 `/`，父级和当前项点击均返回上一页或回退到 `/`；
-- Hero 背景图片使用列表页对应行业卡片的同一张 WebP 图片，即 `/assets/industries/in1.webp` 到 `/assets/industries/in6.webp`；
-- 内容区参考原型的左侧留白结构，使用深色内容卡片和圆点列表展示来自 `industriesInfo.md` 的对应行业介绍与服务范围；中文状态下使用 `Chinese/industriesInfo.md` 对应六个行业的标题、简介和服务范围；页面右下角使用 `BackToTop` 提供中英文返回入口。
+- 椤甸潰鍏ュ彛涓?`src/app/industries/[slug]/page.tsx`锛屽睍绀虹粍浠朵负 `src/components/pages/IndustryDetailPage.tsx`锛?
+- `generateStaticParams` 鍜?`generateMetadata` 浠庢湇鍔＄瀹夊叏鐨?`src/data/industryMetadata.ts` 璇诲彇鍏釜琛屼笟 slug銆佽嫳鏂囨爣棰樺拰绠€浠嬶紝鏈煡 slug 鍥為€€鍒?Private Equity metadata锛?
+- 澶嶇敤鍏ㄧ珯 `SiteHeader` 涓?`SiteFooter`锛岄《閮ㄥ鑸?active 淇濇寔 INDUSTRIES锛?
+- Hero 椤堕儴浣跨敤缁熶竴 `SubpageBreadcrumb`锛屾樉绀?home / 褰撳墠琛屼笟锛堜腑鏂囦负 棣栭〉 / 褰撳墠琛屼笟锛夛紝瀛楀彿涓?`1.5rem`锛屽垎闅旂涓?`/`锛岀埗绾у拰褰撳墠椤圭偣鍑诲潎杩斿洖涓婁竴椤垫垨鍥為€€鍒?`/`锛?
+- Hero 鑳屾櫙鍥剧墖浣跨敤鍒楄〃椤靛搴旇涓氬崱鐗囩殑鍚屼竴寮?WebP 鍥剧墖锛屽嵆 `/assets/industries/in1.webp` 鍒?`/assets/industries/in6.webp`锛?
+- 鍐呭鍖哄弬鑰冨師鍨嬬殑宸︿晶鐣欑櫧缁撴瀯锛屼娇鐢ㄦ繁鑹插唴瀹瑰崱鐗囧拰鍦嗙偣鍒楄〃灞曠ず鏉ヨ嚜 `industriesInfo.md` 鐨勫搴旇涓氫粙缁嶄笌鏈嶅姟鑼冨洿锛涗腑鏂囩姸鎬佷笅浣跨敤 `Chinese/industriesInfo.md` 瀵瑰簲鍏釜琛屼笟鐨勬爣棰樸€佺畝浠嬪拰鏈嶅姟鑼冨洿锛涢〉闈㈠彸涓嬭浣跨敤 `BackToTop` 鎻愪緵涓嫳鏂囪繑鍥炲叆鍙ｃ€?
 
 ### Events `/events`
 
-事件页面基于 `事件/` 原型重建，包含：
+浜嬩欢椤甸潰鍩轰簬 `浜嬩欢/` 鍘熷瀷閲嶅缓锛屽寘鍚細
 
-- Events 标题 Hero 使用本地 `/assets/event/hero.webp` 作为背景图，标题和正文居中放在左右外距 `8rem`、高度 `40svh` 的渐变背景块中，页面外层仍保持深色背景；标题按 100px 换算为 `6.25rem` semibold italic，说明文字按 36px 换算为 `2.25rem` regular；
-- 事件数据集中在 `src/data/events.ts`，以 `EN/event.md` 中的 28 条事件日期作为导出范围；数据包含 slug、category、title、`YYYYMMDD` 日期、summary、正文段落、中文镜像和事件图片，列表页和详情页共用该数据源；
-- 事件卡片默认展示 9 条，按一行三个、三行展示，第二屏左右外距为 `6rem`，横向卡片间距为当前版 3 倍，纵向间距保持原来的 `gap-y-16`，不再显示 LATEST UPDATES 标题和下划线；
-- 卡片图片保持彩色，位于卡片左上角，并相对容器向左上方偏移；事件逐条绑定 `/assets/event/*` 下的真实图片；列表小图框使用 `4:3` 比例，图片本身使用 `object-cover` 自适应填满图框，不额外叠加模糊背景或蒙层；
-- 卡片内容只保留日期行和标题行，日期与图片保持自然间距，日期按 24px 换算为 `1.5rem` regular，日期行右侧显示黄色箭头，标题中 `Tiger Dynamics` 为 `#D1CECA`、30px 对应 `1.875rem`、normal italic，分隔线后正文为 `1.875rem` medium，右下角浅色三角形高度为 `6%`；
-- 卡片使用 Next `Link` 跳转到 `/events/[slug]` 事件详情页；
-- See More 使用与 About Culture 的 READ FULL MANIFESTO 一致的金色描边/实底按钮和箭头 hover 平移动效，点击后展开全部 42 条事件并可收起；
-- 复用页脚。
+- Events 鏍囬 Hero 浣跨敤鏈湴 `/assets/event/hero.webp` 浣滀负鑳屾櫙鍥撅紝鏍囬鍜屾鏂囧眳涓斁鍦ㄥ乏鍙冲璺?`8rem`銆侀珮搴?`40svh` 鐨勬笎鍙樿儗鏅潡涓紝椤甸潰澶栧眰浠嶄繚鎸佹繁鑹茶儗鏅紱鏍囬鎸?100px 鎹㈢畻涓?`6.25rem` semibold italic锛岃鏄庢枃瀛楁寜 36px 鎹㈢畻涓?`2.25rem` regular锛?
+- 浜嬩欢鏁版嵁闆嗕腑鍦?`src/data/events.ts`锛屼互 `EN/event.md` 涓殑 28 鏉′簨浠舵棩鏈熶綔涓哄鍑鸿寖鍥达紱鏁版嵁鍖呭惈 slug銆乧ategory銆乼itle銆乣YYYYMMDD` 鏃ユ湡銆乻ummary銆佹鏂囨钀姐€佷腑鏂囬暅鍍忓拰浜嬩欢鍥剧墖锛屽垪琛ㄩ〉鍜岃鎯呴〉鍏辩敤璇ユ暟鎹簮锛?
+- 浜嬩欢鍗＄墖榛樿灞曠ず 9 鏉★紝鎸変竴琛屼笁涓€佷笁琛屽睍绀猴紝绗簩灞忓乏鍙冲璺濅负 `6rem`锛屾í鍚戝崱鐗囬棿璺濅负褰撳墠鐗?3 鍊嶏紝绾靛悜闂磋窛淇濇寔鍘熸潵鐨?`gap-y-16`锛屼笉鍐嶆樉绀?LATEST UPDATES 鏍囬鍜屼笅鍒掔嚎锛?
+- 鍗＄墖鍥剧墖淇濇寔褰╄壊锛屼綅浜庡崱鐗囧乏涓婅锛屽苟鐩稿瀹瑰櫒鍚戝乏涓婃柟鍋忕Щ锛涗簨浠堕€愭潯缁戝畾 `/assets/event/*` 涓嬬殑鐪熷疄鍥剧墖锛涘垪琛ㄥ皬鍥炬浣跨敤 `4:3` 姣斾緥锛屽浘鐗囨湰韬娇鐢?`object-cover` 鑷€傚簲濉弧鍥炬锛屼笉棰濆鍙犲姞妯＄硦鑳屾櫙鎴栬挋灞傦紱
+- 鍗＄墖鍐呭鍙繚鐣欐棩鏈熻鍜屾爣棰樿锛屾棩鏈熶笌鍥剧墖淇濇寔鑷劧闂磋窛锛屾棩鏈熸寜 24px 鎹㈢畻涓?`1.5rem` regular锛屾棩鏈熻鍙充晶鏄剧ず榛勮壊绠ご锛屾爣棰樹腑 `Tiger Dynamics` 涓?`#D1CECA`銆?0px 瀵瑰簲 `1.875rem`銆乶ormal italic锛屽垎闅旂嚎鍚庢鏂囦负 `1.875rem` medium锛屽彸涓嬭娴呰壊涓夎褰㈤珮搴︿负 `6%`锛?
+- 鍗＄墖浣跨敤 Next `Link` 璺宠浆鍒?`/events/[slug]` 浜嬩欢璇︽儏椤碉紱
+- See More 浣跨敤涓?About Culture 鐨?READ FULL MANIFESTO 涓€鑷寸殑閲戣壊鎻忚竟/瀹炲簳鎸夐挳鍜岀澶?hover 骞崇Щ鍔ㄦ晥锛岀偣鍑诲悗灞曞紑鍏ㄩ儴 42 鏉′簨浠跺苟鍙敹璧凤紱
+- 澶嶇敤椤佃剼銆?
 
-页面需要的事件卡片图已复制到 `public/assets/prototypes/events/card.png`；当前 Events 列表真实图片已从 `src/assets/event/event1-42` 同步发布到 `public/assets/event/`。
+椤甸潰闇€瑕佺殑浜嬩欢鍗＄墖鍥惧凡澶嶅埗鍒?`public/assets/prototypes/events/card.png`锛涘綋鍓?Events 鍒楄〃鐪熷疄鍥剧墖宸蹭粠 `src/assets/event/event1-42` 鍚屾鍙戝竷鍒?`public/assets/event/`銆?
 
 ### Event Detail `/events/[slug]`
 
-事件详情页面基于 `事件详情/` 原型重建：
+浜嬩欢璇︽儏椤甸潰鍩轰簬 `浜嬩欢璇︽儏/` 鍘熷瀷閲嶅缓锛?
 
-- 页面入口为 `src/app/events/[slug]/page.tsx`，展示组件为 `src/components/pages/EventDetailPage.tsx`；
-- `generateStaticParams` 从 `src/data/events.ts` 为全部事件生成静态参数；
-- 复用全站 `SiteHeader` 与 `SiteFooter`，顶部导航 active 保持 EVENTS；
-- 顶部包含统一 `SubpageBreadcrumb`，显示 Events / 当前事件，字号为 `1.5rem`，分隔符为 `/`，点击返回上一页或回退到 `/events`；事件标题按 64px 换算为 `4rem` semibold，日期按 28px 换算为 `1.75rem` regular；
-- 正文区先展示当前事件 summary，再继续渲染真实正文段落；英文状态显示 `EN/event.md` 中已有正文或补充英文摘要，中文状态显示 `Chinese/event.md` 对应正文；渲染时会识别 `[图片]` / `[Image]` 占位并按 `detailImages` 插入正文图片，识别“暂时无法在飞书文档外展示此内容”占位并按 `detailVideos` 在对应位置插入原生 `video` 播放器，无对应媒体时清理占位文本；正文内容占满 `max-w-[108rem]` 父容器，不再保留右侧封面图列；正文插图和视频桌面宽度为父容器 70%，移动端不超出容器；主说明按 24px 换算为 `1.5rem` light italic；页面右下角使用 `BackToTop` 提供中英文返回入口。
+- 椤甸潰鍏ュ彛涓?`src/app/events/[slug]/page.tsx`锛屽睍绀虹粍浠朵负 `src/components/pages/EventDetailPage.tsx`锛?
+- `generateStaticParams` 浠?`src/data/events.ts` 涓哄叏閮ㄤ簨浠剁敓鎴愰潤鎬佸弬鏁帮紱
+- 澶嶇敤鍏ㄧ珯 `SiteHeader` 涓?`SiteFooter`锛岄《閮ㄥ鑸?active 淇濇寔 EVENTS锛?
+- 椤堕儴鍖呭惈缁熶竴 `SubpageBreadcrumb`锛屾樉绀?Events / 褰撳墠浜嬩欢锛屽瓧鍙蜂负 `1.5rem`锛屽垎闅旂涓?`/`锛岀偣鍑昏繑鍥炰笂涓€椤垫垨鍥為€€鍒?`/events`锛涗簨浠舵爣棰樻寜 64px 鎹㈢畻涓?`4rem` semibold锛屾棩鏈熸寜 28px 鎹㈢畻涓?`1.75rem` regular锛?
+- 姝ｆ枃鍖哄厛灞曠ず褰撳墠浜嬩欢 summary锛屽啀缁х画娓叉煋鐪熷疄姝ｆ枃娈佃惤锛涜嫳鏂囩姸鎬佹樉绀?`EN/event.md` 涓凡鏈夋鏂囨垨琛ュ厖鑻辨枃鎽樿锛屼腑鏂囩姸鎬佹樉绀?`Chinese/event.md` 瀵瑰簲姝ｆ枃锛涙覆鏌撴椂浼氳瘑鍒?`[鍥剧墖]` / `[Image]` 鍗犱綅骞舵寜 `detailImages` 鎻掑叆姝ｆ枃鍥剧墖锛岃瘑鍒€滄殏鏃舵棤娉曞湪椋炰功鏂囨。澶栧睍绀烘鍐呭鈥濆崰浣嶅苟鎸?`detailVideos` 鍦ㄥ搴斾綅缃彃鍏ュ師鐢?`video` 鎾斁鍣紝鏃犲搴斿獟浣撴椂娓呯悊鍗犱綅鏂囨湰锛涙鏂囧唴瀹瑰崰婊?`max-w-[108rem]` 鐖跺鍣紝涓嶅啀淇濈暀鍙充晶灏侀潰鍥惧垪锛涙鏂囨彃鍥惧拰瑙嗛妗岄潰瀹藉害涓虹埗瀹瑰櫒 70%锛岀Щ鍔ㄧ涓嶈秴鍑哄鍣紱涓昏鏄庢寜 24px 鎹㈢畻涓?`1.5rem` light italic锛涢〉闈㈠彸涓嬭浣跨敤 `BackToTop` 鎻愪緵涓嫳鏂囪繑鍥炲叆鍙ｃ€?
 
-页面需要的事件详情图片已复制到 `public/assets/prototypes/event-detail/*`。
+椤甸潰闇€瑕佺殑浜嬩欢璇︽儏鍥剧墖宸插鍒跺埌 `public/assets/prototypes/event-detail/*`銆?
 
 ### Contact `/contact`
 
-联系我们页面基于 `联系我们/` 原型重建，包含：
+鑱旂郴鎴戜滑椤甸潰鍩轰簬 `鑱旂郴鎴戜滑/` 鍘熷瀷閲嶅缓锛屽寘鍚細
 
-- Contact 标题区使用本地 `/assets/contact/hero.webp` 作为顶部背景图；标题按 96px 换算为 `6rem` medium italic，正文按 36px 换算为 `2.25rem` light；中文联系说明使用“如您有任何法律疑问或争议，欢迎随时与我们联系。我们诚挚期待为您提供专业的法律服务，致力于维护您的合法权益。”；
-- Hero 下方 Contact us 双栏模块，左侧背景为 `#A1865F`、黑色标题、黑色正文、黑色电话/邮箱和图标，右侧为城市图片；Contact us 标题按 52px 换算为 `3.25rem` semibold，说明正文按 28px 换算为 `1.75rem` italic，电话和邮箱均为 `1.75rem` regular，邮箱显示下划线；
-- Join Us 招聘说明，Welcome / To / Join Us 按 90px 换算为 `5.625rem` light italic，右侧招聘说明按 28px 换算为 `1.75rem` regular；
-- 候选人要求卡片，卡片顶部使用金色下划线替代数字编号，下划线顶部间距加大且高度为当前版三倍；右侧三角形层级高于卡片背景、低于卡片内容，因此覆盖卡片背景但不遮挡文字和下划线；卡片背景为深色暖灰渐变，正文为 `1.75rem` semibold；
-- 简历邮箱提示，内容右对齐，提示文字按 32px 换算为 `2rem` light italic，邮箱为 `2rem` regular 且使用 `#D9B27A`；
-- 联系信息页脚。
+- Contact 鏍囬鍖轰娇鐢ㄦ湰鍦?`/assets/contact/hero.webp` 浣滀负椤堕儴鑳屾櫙鍥撅紱鏍囬鎸?96px 鎹㈢畻涓?`6rem` medium italic锛屾鏂囨寜 36px 鎹㈢畻涓?`2.25rem` light锛涗腑鏂囪仈绯昏鏄庝娇鐢ㄢ€滃鎮ㄦ湁浠讳綍娉曞緥鐤戦棶鎴栦簤璁紝娆㈣繋闅忔椂涓庢垜浠仈绯汇€傛垜浠瘹鎸氭湡寰呬负鎮ㄦ彁渚涗笓涓氱殑娉曞緥鏈嶅姟锛岃嚧鍔涗簬缁存姢鎮ㄧ殑鍚堟硶鏉冪泭銆傗€濓紱
+- Hero 涓嬫柟 Contact us 鍙屾爮妯″潡锛屽乏渚ц儗鏅负 `#A1865F`銆侀粦鑹叉爣棰樸€侀粦鑹叉鏂囥€侀粦鑹茬數璇?閭鍜屽浘鏍囷紝鍙充晶涓哄煄甯傚浘鐗囷紱Contact us 鏍囬鎸?52px 鎹㈢畻涓?`3.25rem` semibold锛岃鏄庢鏂囨寜 28px 鎹㈢畻涓?`1.75rem` italic锛岀數璇濆拰閭鍧囦负 `1.75rem` regular锛岄偖绠辨樉绀轰笅鍒掔嚎锛?
+- Join Us 鎷涜仒璇存槑锛學elcome / To / Join Us 鎸?90px 鎹㈢畻涓?`5.625rem` light italic锛屽彸渚ф嫑鑱樿鏄庢寜 28px 鎹㈢畻涓?`1.75rem` regular锛?
+- 鍊欓€変汉瑕佹眰鍗＄墖锛屽崱鐗囬《閮ㄤ娇鐢ㄩ噾鑹蹭笅鍒掔嚎鏇夸唬鏁板瓧缂栧彿锛屼笅鍒掔嚎椤堕儴闂磋窛鍔犲ぇ涓旈珮搴︿负褰撳墠鐗堜笁鍊嶏紱鍙充晶涓夎褰㈠眰绾ч珮浜庡崱鐗囪儗鏅€佷綆浜庡崱鐗囧唴瀹癸紝鍥犳瑕嗙洊鍗＄墖鑳屾櫙浣嗕笉閬尅鏂囧瓧鍜屼笅鍒掔嚎锛涘崱鐗囪儗鏅负娣辫壊鏆栫伆娓愬彉锛屾鏂囦负 `1.75rem` semibold锛?
+- 绠€鍘嗛偖绠辨彁绀猴紝鍐呭鍙冲榻愶紝鎻愮ず鏂囧瓧鎸?32px 鎹㈢畻涓?`2rem` light italic锛岄偖绠变负 `2rem` regular 涓斾娇鐢?`#D9B27A`锛?
+- 鑱旂郴淇℃伅椤佃剼銆?
 
-Contact 页常规内容区使用页面内 `contactShell`，桌面左边距为 `9rem`，右侧仍沿用全站内容线；Hero 下方 Contact us 双栏模块为全宽结构，左侧内容同样使用 `9rem` 左边距。
-Join Us、候选人卡片和简历邮箱区域包裹在同一个相对容器内，右侧叠加 `#1d1d1d` 直角三角形背景；该容器通过 `pb-20 -mb-20` 抵消 Footer 自带顶部外边距，使斜边从 Contact us 图片右下方延伸到 Footer 顶部中间。
+Contact 椤靛父瑙勫唴瀹瑰尯浣跨敤椤甸潰鍐?`contactShell`锛屾闈㈠乏杈硅窛涓?`9rem`锛屽彸渚т粛娌跨敤鍏ㄧ珯鍐呭绾匡紱Hero 涓嬫柟 Contact us 鍙屾爮妯″潡涓哄叏瀹界粨鏋勶紝宸︿晶鍐呭鍚屾牱浣跨敤 `9rem` 宸﹁竟璺濄€?
+Join Us銆佸€欓€変汉鍗＄墖鍜岀畝鍘嗛偖绠卞尯鍩熷寘瑁瑰湪鍚屼竴涓浉瀵瑰鍣ㄥ唴锛屽彸渚у彔鍔?`#1d1d1d` 鐩磋涓夎褰㈣儗鏅紱璇ュ鍣ㄩ€氳繃 `pb-20 -mb-20` 鎶垫秷 Footer 鑷甫椤堕儴澶栬竟璺濓紝浣挎枩杈逛粠 Contact us 鍥剧墖鍙充笅鏂瑰欢浼稿埌 Footer 椤堕儴涓棿銆?
 
-页面需要的顶部 Hero 图已复制到 `public/assets/contact/hero.png`；城市图、logo、二维码已复制到 `public/assets/prototypes/contact/*`。
+椤甸潰闇€瑕佺殑椤堕儴 Hero 鍥惧凡澶嶅埗鍒?`public/assets/contact/hero.png`锛涘煄甯傚浘銆乴ogo銆佷簩缁寸爜宸插鍒跺埌 `public/assets/prototypes/contact/*`銆?
 
-## 配置
+## 閰嶇疆
 
-`next.config.ts`：
+`next.config.ts`锛?
 
-- `output: "standalone"`；
-- 读取 `NEXT_SNAPSHOT_BASE_PATH` 配置 `basePath`、`assetPrefix`、`trailingSlash`。
-- 读取 `NEXT_PUBLIC_ASSET_BASE_URL` 并注入客户端，生产构建时可将 `/assets/*` 和 `/font/*` 切换到 OSS。
+- `output: "standalone"`锛?
+- 璇诲彇 `NEXT_SNAPSHOT_BASE_PATH` 閰嶇疆 `basePath`銆乣assetPrefix`銆乣trailingSlash`銆?
+- 璇诲彇 `NEXT_PUBLIC_ASSET_BASE_URL` 骞舵敞鍏ュ鎴风锛岀敓浜ф瀯寤烘椂鍙皢 `/assets/*` 鍜?`/font/*` 鍒囨崲鍒?OSS銆?
 
-`tsconfig.json`：
+`tsconfig.json`锛?
 
-- `strict: true`；
-- `allowJs: false`；
-- 排除原型目录：`首页`、`about 页`、`事件`、`事件 copy`、`服务行业`、`联系我们`、`官网首页设计`、`我的团队`、`core value`、`个人介绍详情`、`事件详情`、`行业详情`，并排除根目录参考文件 `EventLandingPage.tsx` 和独立 `cms` 工作区，避免旧 Vite/CMS 原型依赖参与当前 Next 主应用类型检查。
+- `strict: true`锛?
+- `allowJs: false`锛?
+- 鎺掗櫎鍘熷瀷鐩綍锛歚棣栭〉`銆乣about 椤礰銆乣浜嬩欢`銆乣浜嬩欢 copy`銆乣鏈嶅姟琛屼笟`銆乣鑱旂郴鎴戜滑`銆乣瀹樼綉棣栭〉璁捐`銆乣鎴戠殑鍥㈤槦`銆乣core value`銆乣涓汉浠嬬粛璇︽儏`銆乣浜嬩欢璇︽儏`銆乣琛屼笟璇︽儏`锛屽苟鎺掗櫎鏍圭洰褰曞弬鑰冩枃浠?`EventLandingPage.tsx` 鍜岀嫭绔?`cms` 宸ヤ綔鍖猴紝閬垮厤鏃?Vite/CMS 鍘熷瀷渚濊禆鍙備笌褰撳墠 Next 涓诲簲鐢ㄧ被鍨嬫鏌ャ€?
 
-`src/app/globals.css`：
+`src/app/globals.css`锛?
 
-- `body` 使用 `var(--font-poppins), Arial, Helvetica, sans-serif`，其中 `--font-poppins` 由 `src/app/layout.tsx` 注入的 `@font-face` 设置为 Poppins；
-- `html` 与 `body` 设置 `touch-action: pan-x pan-y`，配合客户端缩放锁限制移动端 pinch/double-tap 等浏览器缩放手势；
-- 定义 `client-logo-scroll` keyframes；
-- `.client-logo-track` 使用 `animation: client-logo-scroll 103.85s linear infinite` 和 `will-change: transform` 保持 Clients Logo 墙持续滚动，第二行通过 `.client-logo-track-reverse` 反向滚动；
-- `prefers-reduced-motion` 仅关闭 `html` 的平滑滚动，不再全局覆盖 `animation-duration`、`animation-iteration-count` 和 `transition-duration`，避免系统减少动态效果设置导致 See More、图片 hover、Clients Logo 等页面动效全部瞬间完成或停止。
+- `body` 浣跨敤 `var(--font-poppins), Arial, Helvetica, sans-serif`锛屽叾涓?`--font-poppins` 鐢?`src/app/layout.tsx` 娉ㄥ叆鐨?`@font-face` 璁剧疆涓?Poppins锛?
+- `html` 涓?`body` 璁剧疆 `touch-action: pan-x pan-y`锛岄厤鍚堝鎴风缂╂斁閿侀檺鍒剁Щ鍔ㄧ pinch/double-tap 绛夋祻瑙堝櫒缂╂斁鎵嬪娍锛?
+- 瀹氫箟 `client-logo-scroll` keyframes锛?
+- `.client-logo-track` 浣跨敤 `animation: client-logo-scroll 103.85s linear infinite` 鍜?`will-change: transform` 淇濇寔 Clients Logo 澧欐寔缁粴鍔紝绗簩琛岄€氳繃 `.client-logo-track-reverse` 鍙嶅悜婊氬姩锛?
+- `prefers-reduced-motion` 浠呭叧闂?`html` 鐨勫钩婊戞粴鍔紝涓嶅啀鍏ㄥ眬瑕嗙洊 `animation-duration`銆乣animation-iteration-count` 鍜?`transition-duration`锛岄伩鍏嶇郴缁熷噺灏戝姩鎬佹晥鏋滆缃鑷?See More銆佸浘鐗?hover銆丆lients Logo 绛夐〉闈㈠姩鏁堝叏閮ㄧ灛闂村畬鎴愭垨鍋滄銆?
 
-`src/app/layout.tsx`：
+`src/app/layout.tsx`锛?
 
-- 通过 `assetUrl("/font/poppins.ttf")` 生成字体地址，并以内联 `@font-face` 注入页面；本地读取 `public/font/poppins.ttf`，生产可读取 OSS 字体；
-- `viewport` metadata 输出 `width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover`，作为禁用浏览器缩放的首层规则；
-- 通过 `ViewportZoomLock` 在客户端持续同步 viewport meta，拦截 iOS gesture、多点触控、双击、Ctrl/Command + 滚轮和 Ctrl/Command + `+/-/0` 等常见缩放入口；
-- 通过 `AppProviders` 挂载全站语言上下文。
+- 閫氳繃 `assetUrl("/font/poppins.ttf")` 鐢熸垚瀛椾綋鍦板潃锛屽苟浠ュ唴鑱?`@font-face` 娉ㄥ叆椤甸潰锛涙湰鍦拌鍙?`public/font/poppins.ttf`锛岀敓浜у彲璇诲彇 OSS 瀛椾綋锛?
+- `viewport` metadata 杈撳嚭 `width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover`锛屼綔涓虹鐢ㄦ祻瑙堝櫒缂╂斁鐨勯灞傝鍒欙紱
+- 閫氳繃 `ViewportZoomLock` 鍦ㄥ鎴风鎸佺画鍚屾 viewport meta锛屾嫤鎴?iOS gesture銆佸鐐硅Е鎺с€佸弻鍑汇€丆trl/Command + 婊氳疆鍜?Ctrl/Command + `+/-/0` 绛夊父瑙佺缉鏀惧叆鍙ｏ紱
+- 閫氳繃 `AppProviders` 鎸傝浇鍏ㄧ珯璇█涓婁笅鏂囥€?
 
-## 响应式与大屏缩放
+## 鍝嶅簲寮忎笌澶у睆缂╂斁
 
-`src/styles/tokens.css` 定义全局响应式 token，并使用 `--root-font-size` 控制大屏 rem 缩放：
+`src/styles/tokens.css` 瀹氫箟鍏ㄥ眬鍝嶅簲寮?token锛屽苟浣跨敤 `--root-font-size` 鎺у埗澶у睆 rem 缂╂斁锛?
 
-  - rem 以 `1920px` 设计稿为基准，`1920px` 时 `1rem = 16px`；
-  - `1440px` 时按比例缩放为 `1rem = 12px`；
-  - `--root-font-size: clamp(12px, calc(100vw / 120), 16px)`；
-  - 超宽屏最多保持 `16px`，避免 2K / 4K 屏无限放大；
-- `--shell-sm` 和 `--shell-md` 在 `90rem` 以上统一为 `12rem`，因此全站 title 导航和 `.site-shell` 内容壳层桌面左右边距一致；
-- `html` 在 `src/app/globals.css` 中通过 `font-size: var(--root-font-size)` 接入该策略。
+  - rem 浠?`1920px` 璁捐绋夸负鍩哄噯锛宍1920px` 鏃?`1rem = 16px`锛?
+  - `1440px` 鏃舵寜姣斾緥缂╂斁涓?`1rem = 12px`锛?
+  - `--root-font-size: clamp(12px, calc(100vw / 120), 16px)`锛?
+  - 瓒呭灞忔渶澶氫繚鎸?`16px`锛岄伩鍏?2K / 4K 灞忔棤闄愭斁澶э紱
+- `--shell-sm` 鍜?`--shell-md` 鍦?`90rem` 浠ヤ笂缁熶竴涓?`12rem`锛屽洜姝ゅ叏绔?title 瀵艰埅鍜?`.site-shell` 鍐呭澹冲眰妗岄潰宸﹀彸杈硅窛涓€鑷达紱
+- `html` 鍦?`src/app/globals.css` 涓€氳繃 `font-size: var(--root-font-size)` 鎺ュ叆璇ョ瓥鐣ャ€?
 
-页面壳层、标题、正文、按钮、卡片间距等优先使用 rem / token / Tailwind rem 类；图片、全屏高度和网格仍按语义使用 `svh`、百分比、宽高比和 `max-width`。
+椤甸潰澹冲眰銆佹爣棰樸€佹鏂囥€佹寜閽€佸崱鐗囬棿璺濈瓑浼樺厛浣跨敤 rem / token / Tailwind rem 绫伙紱鍥剧墖銆佸叏灞忛珮搴﹀拰缃戞牸浠嶆寜璇箟浣跨敤 `svh`銆佺櫨鍒嗘瘮銆佸楂樻瘮鍜?`max-width`銆?
 
-## 环境变量
+## 鐜鍙橀噺
 
-| 变量 | 用途 | 默认 |
+| 鍙橀噺 | 鐢ㄩ€?| 榛樿 |
 | :--- | :--- | :--- |
-| `NEXT_SNAPSHOT_BASE_PATH` | 子路径部署时设置 Next basePath 和静态资源前缀 | 空字符串 |
-| `NEXT_PUBLIC_BASE_PATH` | 由 `next.config.ts` 从 `NEXT_SNAPSHOT_BASE_PATH` 注入客户端，供 `ImageWithFallback` 为 `/assets/*` 自动补子路径前缀 | 跟随 `NEXT_SNAPSHOT_BASE_PATH` |
-| `NEXT_PUBLIC_ASSET_BASE_URL` | 生产静态资源 CDN/OSS 前缀；配置后 `assetUrl()` 会把 `/assets/*` 和 `/font/*` 指向该前缀 | `.env.production` 中为 `https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb` |
+| `NEXT_SNAPSHOT_BASE_PATH` | 瀛愯矾寰勯儴缃叉椂璁剧疆 Next basePath 鍜岄潤鎬佽祫婧愬墠缂€ | 绌哄瓧绗︿覆 |
+| `NEXT_PUBLIC_BASE_PATH` | 鐢?`next.config.ts` 浠?`NEXT_SNAPSHOT_BASE_PATH` 娉ㄥ叆瀹㈡埛绔紝渚?`ImageWithFallback` 涓?`/assets/*` 鑷姩琛ュ瓙璺緞鍓嶇紑 | 璺熼殢 `NEXT_SNAPSHOT_BASE_PATH` |
+| `NEXT_PUBLIC_ASSET_BASE_URL` | 鐢熶骇闈欐€佽祫婧?CDN/OSS 鍓嶇紑锛涢厤缃悗 `assetUrl()` 浼氭妸 `/assets/*` 鍜?`/font/*` 鎸囧悜璇ュ墠缂€ | `.env.production` 涓负 `https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb` |
 
-当前首版公开页没有 CMS、数据库或后台登录环境变量；OSS AccessKey 不写入项目环境文件，上传完成后前端只需要公开资源域名。
+褰撳墠棣栫増鍏紑椤垫病鏈?CMS銆佹暟鎹簱鎴栧悗鍙扮櫥褰曠幆澧冨彉閲忥紱OSS AccessKey 涓嶅啓鍏ラ」鐩幆澧冩枃浠讹紝涓婁紶瀹屾垚鍚庡墠绔彧闇€瑕佸叕寮€璧勬簮鍩熷悕銆?
 
-## 部署
+## 閮ㄧ讲
 
-当前 offweb 环境使用 Next.js standalone 运行包部署：
+褰撳墠 offweb 鐜浣跨敤 Next.js standalone 杩愯鍖呴儴缃诧細
 
-- 公网地址：`http://8.140.238.44/offweb/`；
-- 构建前设置：`NEXT_SNAPSHOT_BASE_PATH=/offweb`、`NEXT_TELEMETRY_DISABLED=1`；
-- 本地发布包：`dist/offweb-standalone.tgz`；
-- 服务器目录：`/opt/husuweb-offweb/current` 指向 `/opt/husuweb-offweb/releases/*` 版本目录；
-- systemd 服务：`husuweb-offweb.service`；
-- 应用监听：`127.0.0.1:3003`；
-- Nginx 入口：`location /offweb/` 反向代理到 `http://127.0.0.1:3003/offweb/`。
-- public 静态图片统一通过 `ImageWithFallback` 输出，首页视频和字体通过 `assetUrl()` 输出；当配置 `NEXT_PUBLIC_ASSET_BASE_URL` 时资源请求会走 OSS，未配置时若 `NEXT_PUBLIC_BASE_PATH=/offweb`，组件会把 `/assets/...` 和 `/font/...` 转换为 `/offweb/assets/...`、`/offweb/font/...`，避免子路径部署下静态资源请求落到域名根路径。
-- 子路径内部跳转统一使用 Next `Link`，例如 About Culture 的 Core Value 入口输出为 `/offweb/about/core-value/`；自定义 404 页面 `src/app/not-found.tsx` 的 Return Home 输出为 `/offweb/`。
-- `next.config.ts` 配置旧语言前缀兼容 redirect：`/zh`、`/en` 临时跳转到 `/`，`/zh/:path*`、`/en/:path*` 临时跳转到对应的无语言前缀路径，避免旧站默认入口 `https://www.tigerpartners.cn/zh`、`/en` 访问 404；旧 URL 上的 `#...` fragment 由浏览器在跳转后保留。
+- 鍏綉鍦板潃锛歚http://8.140.238.44/offweb/`锛?
+- 鏋勫缓鍓嶈缃細`NEXT_SNAPSHOT_BASE_PATH=/offweb`銆乣NEXT_TELEMETRY_DISABLED=1`锛?
+- 鏈湴鍙戝竷鍖咃細`dist/offweb-standalone.tgz`锛?
+- 鏈嶅姟鍣ㄧ洰褰曪細`/opt/husuweb-offweb/current` 鎸囧悜 `/opt/husuweb-offweb/releases/*` 鐗堟湰鐩綍锛?
+- systemd 鏈嶅姟锛歚husuweb-offweb.service`锛?
+- 搴旂敤鐩戝惉锛歚127.0.0.1:3003`锛?
+- Nginx 鍏ュ彛锛歚location /offweb/` 鍙嶅悜浠ｇ悊鍒?`http://127.0.0.1:3003/offweb/`銆?
+- public 闈欐€佸浘鐗囩粺涓€閫氳繃 `ImageWithFallback` 杈撳嚭锛岄椤佃棰戝拰瀛椾綋閫氳繃 `assetUrl()` 杈撳嚭锛涘綋閰嶇疆 `NEXT_PUBLIC_ASSET_BASE_URL` 鏃惰祫婧愯姹備細璧?OSS锛屾湭閰嶇疆鏃惰嫢 `NEXT_PUBLIC_BASE_PATH=/offweb`锛岀粍浠朵細鎶?`/assets/...` 鍜?`/font/...` 杞崲涓?`/offweb/assets/...`銆乣/offweb/font/...`锛岄伩鍏嶅瓙璺緞閮ㄧ讲涓嬮潤鎬佽祫婧愯姹傝惤鍒板煙鍚嶆牴璺緞銆?
+- 瀛愯矾寰勫唴閮ㄨ烦杞粺涓€浣跨敤 Next `Link`锛屼緥濡?About Culture 鐨?Core Value 鍏ュ彛杈撳嚭涓?`/offweb/about/core-value/`锛涜嚜瀹氫箟 404 椤甸潰 `src/app/not-found.tsx` 鐨?Return Home 杈撳嚭涓?`/offweb/`銆?
+- `next.config.ts` 閰嶇疆鏃ц瑷€鍓嶇紑鍏煎 redirect锛歚/zh`銆乣/en` 涓存椂璺宠浆鍒?`/`锛宍/zh/:path*`銆乣/en/:path*` 涓存椂璺宠浆鍒板搴旂殑鏃犺瑷€鍓嶇紑璺緞锛岄伩鍏嶆棫绔欓粯璁ゅ叆鍙?`https://www.tigerpartners.cn/zh`銆乣/en` 璁块棶 404锛涙棫 URL 涓婄殑 `#...` fragment 鐢辨祻瑙堝櫒鍦ㄨ烦杞悗淇濈暀銆?
 
-当前根路径环境使用同一套 Next.js standalone 运行包部署：
+褰撳墠鏍硅矾寰勭幆澧冧娇鐢ㄥ悓涓€濂?Next.js standalone 杩愯鍖呴儴缃诧細
 
-- 服务器 IP：`39.106.226.65`，正式访问入口使用绑定域名；
-- 正式域名：`https://www.tigerpartners.cn/`，`www.tigerpartners.cn` 的 A 记录指向 `39.106.226.65`；
-- 裸域 `tigerpartners.cn` 当前仍由阿里云 URL 转发入口解析到 `203.107.45.167`，并 302 跳转到 `https://www.tigerpartners.cn`；
-- 构建前设置：`NEXT_SNAPSHOT_BASE_PATH=`、`NEXT_PUBLIC_ASSET_BASE_URL=`、`NEXT_TELEMETRY_DISABLED=1`；
-- 本地发布包：`dist/tigerpartners-root-latest.tgz`；
-- 服务器目录：`/opt/tigerpartners-web/current` 指向 `/opt/tigerpartners-web/releases/20260515-0122`；
-- systemd 服务：`tigerpartners-web.service`；
-- 应用监听：`127.0.0.1:3004`；
-- Nginx 入口：`server_name www.tigerpartners.cn`，80/443 监听，`location /` 反向代理到 `http://127.0.0.1:3004`；
-- HTTPS 证书由 Certbot / Let's Encrypt 签发，证书路径为 `/etc/letsencrypt/live/www.tigerpartners.cn/fullchain.pem`，HTTP 自动跳转 HTTPS，Certbot timer 负责自动续期；
-- 根路径构建不配置 OSS 资源前缀，图片、视频和字体随发布包内 `public` 目录直接由 Next 服务提供。
+- 鏈嶅姟鍣?IP锛歚39.106.226.65`锛屾寮忚闂叆鍙ｄ娇鐢ㄧ粦瀹氬煙鍚嶏紱
+- 姝ｅ紡鍩熷悕锛歚https://www.tigerpartners.cn/`锛宍www.tigerpartners.cn` 鐨?A 璁板綍鎸囧悜 `39.106.226.65`锛?
+- 瑁稿煙 `tigerpartners.cn` 褰撳墠浠嶇敱闃块噷浜?URL 杞彂鍏ュ彛瑙ｆ瀽鍒?`203.107.45.167`锛屽苟 302 璺宠浆鍒?`https://www.tigerpartners.cn`锛?
+- 鏋勫缓鍓嶈缃細`NEXT_SNAPSHOT_BASE_PATH=`銆乣NEXT_PUBLIC_ASSET_BASE_URL=`銆乣NEXT_TELEMETRY_DISABLED=1`锛?
+- 鏈湴鍙戝竷鍖咃細`dist/tigerpartners-root-latest.tgz`锛?
+- 鏈嶅姟鍣ㄧ洰褰曪細`/opt/tigerpartners-web/current` 鎸囧悜 `/opt/tigerpartners-web/releases/20260515-0122`锛?
+- systemd 鏈嶅姟锛歚tigerpartners-web.service`锛?
+- 搴旂敤鐩戝惉锛歚127.0.0.1:3004`锛?
+- Nginx 鍏ュ彛锛歚server_name www.tigerpartners.cn`锛?0/443 鐩戝惉锛宍location /` 鍙嶅悜浠ｇ悊鍒?`http://127.0.0.1:3004`锛?
+- HTTPS 璇佷功鐢?Certbot / Let's Encrypt 绛惧彂锛岃瘉涔﹁矾寰勪负 `/etc/letsencrypt/live/www.tigerpartners.cn/fullchain.pem`锛孒TTP 鑷姩璺宠浆 HTTPS锛孋ertbot timer 璐熻矗鑷姩缁湡锛?
+- 鏍硅矾寰勬瀯寤轰笉閰嶇疆 OSS 璧勬簮鍓嶇紑锛屽浘鐗囥€佽棰戝拰瀛椾綋闅忓彂甯冨寘鍐?`public` 鐩綍鐩存帴鐢?Next 鏈嶅姟鎻愪緵銆?
 
-## 安装与构建状态
+## 瀹夎涓庢瀯寤虹姸鎬?
 
-当前会话已使用现有 `node_modules` 执行过 `npm run build` 并通过：
+褰撳墠浼氳瘽宸蹭娇鐢ㄧ幇鏈?`node_modules` 鎵ц杩?`npm run build` 骞堕€氳繃锛?
 
-- Next.js 编译成功；
-- TypeScript 检查成功；
-- 静态页面生成成功，包含 `/`、`/about`、`/industries`、`/events`、`/contact`。
+- Next.js 缂栬瘧鎴愬姛锛?
+- TypeScript 妫€鏌ユ垚鍔燂紱
+- 闈欐€侀〉闈㈢敓鎴愭垚鍔燂紝鍖呭惈 `/`銆乣/about`銆乣/industries`銆乣/events`銆乣/contact`銆?
 
-本次 offweb 发布前已停止本地 `next dev` 进程，使用 `NEXT_SNAPSHOT_BASE_PATH=/offweb` 重新执行 `npm run build`，整理 `.next/standalone`、`.next/static` 和 `public` 到 `dist/offweb`，并生成 `dist/offweb-standalone.tgz`。服务器端已验证 `husuweb-offweb.service` 为 `active`，`http://8.140.238.44/offweb/` 返回 `200 OK`。
+鏈 offweb 鍙戝竷鍓嶅凡鍋滄鏈湴 `next dev` 杩涚▼锛屼娇鐢?`NEXT_SNAPSHOT_BASE_PATH=/offweb` 閲嶆柊鎵ц `npm run build`锛屾暣鐞?`.next/standalone`銆乣.next/static` 鍜?`public` 鍒?`dist/offweb`锛屽苟鐢熸垚 `dist/offweb-standalone.tgz`銆傛湇鍔″櫒绔凡楠岃瘉 `husuweb-offweb.service` 涓?`active`锛宍http://8.140.238.44/offweb/` 杩斿洖 `200 OK`銆?
 
-2026-05-12 已按根路径重新执行 `npm run build`，整理 `.next/standalone`、`.next/static` 和 `public` 到 `dist/root`，生成 `dist/root-standalone.tgz`，上传到 `39.106.226.65:/opt/tigerpartners-web/tigerpartners-root-20260512-0136.tgz`，解压到 `/opt/tigerpartners-web/releases/20260512-0136`，并切换 `current` 后重启 `tigerpartners-web.service`。服务器本机 `http://127.0.0.1:3004/` 和公网 `https://www.tigerpartners.cn/` 均返回 `200 OK`。
-随后已将 Nginx `server_name` 调整为 `www.tigerpartners.cn`，使用 Certbot 签发 Let's Encrypt 证书并启用 HTTP 到 HTTPS 跳转；公网验证 `https://www.tigerpartners.cn/`、`/about`、`/events` 和静态资源均返回 `200 OK`，`http://www.tigerpartners.cn/` 返回 `301` 到 HTTPS，裸域 `http://tigerpartners.cn/` 经阿里云 URL 转发返回 `302` 到 HTTPS www 域名。
+2026-05-12 宸叉寜鏍硅矾寰勯噸鏂版墽琛?`npm run build`锛屾暣鐞?`.next/standalone`銆乣.next/static` 鍜?`public` 鍒?`dist/root`锛岀敓鎴?`dist/root-standalone.tgz`锛屼笂浼犲埌 `39.106.226.65:/opt/tigerpartners-web/tigerpartners-root-20260512-0136.tgz`锛岃В鍘嬪埌 `/opt/tigerpartners-web/releases/20260512-0136`锛屽苟鍒囨崲 `current` 鍚庨噸鍚?`tigerpartners-web.service`銆傛湇鍔″櫒鏈満 `http://127.0.0.1:3004/` 鍜屽叕缃?`https://www.tigerpartners.cn/` 鍧囪繑鍥?`200 OK`銆?
+闅忓悗宸插皢 Nginx `server_name` 璋冩暣涓?`www.tigerpartners.cn`锛屼娇鐢?Certbot 绛惧彂 Let's Encrypt 璇佷功骞跺惎鐢?HTTP 鍒?HTTPS 璺宠浆锛涘叕缃戦獙璇?`https://www.tigerpartners.cn/`銆乣/about`銆乣/events` 鍜岄潤鎬佽祫婧愬潎杩斿洖 `200 OK`锛宍http://www.tigerpartners.cn/` 杩斿洖 `301` 鍒?HTTPS锛岃８鍩?`http://tigerpartners.cn/` 缁忛樋閲屼簯 URL 杞彂杩斿洖 `302` 鍒?HTTPS www 鍩熷悕銆?
 
-2026-05-13 已按根路径重新执行 `npm run build`，整理 `.next/standalone`、`.next/static` 和 `public` 到 `dist/root`，生成 `dist/tigerpartners-root-latest.tgz`，上传到 `39.106.226.65:/opt/tigerpartners-web/tigerpartners-root-20260513-0028.tgz`，解压到 `/opt/tigerpartners-web/releases/20260513-0028`，并切换 `current` 后重启 `tigerpartners-web.service`。服务器本机 `http://127.0.0.1:3004/` 返回 `200 OK`，公网验证 `https://www.tigerpartners.cn/`、`/about`、`/events`、`/team` 均返回 `200 OK`，`/zh` 和 `/en` 返回临时跳转。
+2026-05-13 宸叉寜鏍硅矾寰勯噸鏂版墽琛?`npm run build`锛屾暣鐞?`.next/standalone`銆乣.next/static` 鍜?`public` 鍒?`dist/root`锛岀敓鎴?`dist/tigerpartners-root-latest.tgz`锛屼笂浼犲埌 `39.106.226.65:/opt/tigerpartners-web/tigerpartners-root-20260513-0028.tgz`锛岃В鍘嬪埌 `/opt/tigerpartners-web/releases/20260513-0028`锛屽苟鍒囨崲 `current` 鍚庨噸鍚?`tigerpartners-web.service`銆傛湇鍔″櫒鏈満 `http://127.0.0.1:3004/` 杩斿洖 `200 OK`锛屽叕缃戦獙璇?`https://www.tigerpartners.cn/`銆乣/about`銆乣/events`銆乣/team` 鍧囪繑鍥?`200 OK`锛宍/zh` 鍜?`/en` 杩斿洖涓存椂璺宠浆銆?
 
-2026-05-13 已再次执行根路径构建与发布，先将 `public/assets/about` 全量同步到 OSS 并完成回源 SHA256 校验，再生成 `dist/tigerpartners-root-latest.tgz`，上传到 `39.106.226.65:/opt/tigerpartners-web/tigerpartners-root-20260513-0058.tgz`，解压到 `/opt/tigerpartners-web/releases/20260513-0058`，切换 `current` 后重启 `tigerpartners-web.service`。公网验证 `https://www.tigerpartners.cn/`、`/about`、`/events`、`/team` 和 `/events/cietac-cup-voice-of-moot-diamond-sponsor` 均返回 `200 OK`；OSS 中 About Hero、About bg 和旧 Events 详情图均返回 `200 OK`。
+2026-05-13 宸插啀娆℃墽琛屾牴璺緞鏋勫缓涓庡彂甯冿紝鍏堝皢 `public/assets/about` 鍏ㄩ噺鍚屾鍒?OSS 骞跺畬鎴愬洖婧?SHA256 鏍￠獙锛屽啀鐢熸垚 `dist/tigerpartners-root-latest.tgz`锛屼笂浼犲埌 `39.106.226.65:/opt/tigerpartners-web/tigerpartners-root-20260513-0058.tgz`锛岃В鍘嬪埌 `/opt/tigerpartners-web/releases/20260513-0058`锛屽垏鎹?`current` 鍚庨噸鍚?`tigerpartners-web.service`銆傚叕缃戦獙璇?`https://www.tigerpartners.cn/`銆乣/about`銆乣/events`銆乣/team` 鍜?`/events/cietac-cup-voice-of-moot-diamond-sponsor` 鍧囪繑鍥?`200 OK`锛汷SS 涓?About Hero銆丄bout bg 鍜屾棫 Events 璇︽儏鍥惧潎杩斿洖 `200 OK`銆?
 
-2026-05-15 已执行根路径构建与发布，生成 `dist/tigerpartners-root-latest.tgz`，上传到 `39.106.226.65:/opt/tigerpartners-web/tigerpartners-root-20260515-0122.tgz`，解压到 `/opt/tigerpartners-web/releases/20260515-0122`，切换 `current` 后重启 `tigerpartners-web.service`。服务器本机 `http://127.0.0.1:3004/` 返回 `200 OK`。随后新增的 Zoe Zhang 个人页 Performance & Achievements 数据修正仅保留在本地工作区，尚未部署。
+2026-05-15 宸叉墽琛屾牴璺緞鏋勫缓涓庡彂甯冿紝鐢熸垚 `dist/tigerpartners-root-latest.tgz`锛屼笂浼犲埌 `39.106.226.65:/opt/tigerpartners-web/tigerpartners-root-20260515-0122.tgz`锛岃В鍘嬪埌 `/opt/tigerpartners-web/releases/20260515-0122`锛屽垏鎹?`current` 鍚庨噸鍚?`tigerpartners-web.service`銆傛湇鍔″櫒鏈満 `http://127.0.0.1:3004/` 杩斿洖 `200 OK`銆傞殢鍚庢柊澧炵殑 Zoe Zhang 涓汉椤?Performance & Achievements 鏁版嵁淇浠呬繚鐣欏湪鏈湴宸ヤ綔鍖猴紝灏氭湭閮ㄧ讲銆?
 
-## 更新日志
+## 鏇存柊鏃ュ織
 
-| 时间 | 分支 | 变更类型 | 描述 |
+| 鏃堕棿 | 鍒嗘敮 | 鍙樻洿绫诲瀷 | 鎻忚堪 |
 | :--- | :--- | :--- | :--- |
-| 2026-05-15 22:51 | cms | 分支合并 | 按 `main` 优先策略将 `main` 合并到 `cms`，并将 `AppProviders` 的 CMS 初始状态参数改为可选以兼容 `main` 根布局 |
-| 2026-05-15 22:33 | main | 部署发布 | 将 `/client` 首页重定向与首页 SEO 标题优化发布到生产环境；服务器版本目录为 `/opt/tigerpartners-web/releases/20260515-2230`，验证 `/client` 返回 307 到 `/`，首页 title/og:title 为 `虎诉律师事务所 | Tiger Partners`，`WE KNOW HOW TO WIN` 不再作为 `h1` |
-| 2026-05-15 22:25 | main | SEO 与路由调整 | 首页 metadata title 改为 `虎诉律师事务所 | Tiger Partners`，首屏视觉口号 `WE KNOW HOW TO WIN` 从语义 `h1` 改为纯视觉文本，新增隐藏语义标题 `虎诉律师事务所 Tiger Partners`；`/client` 已配置重定向到首页；生产构建通过，未部署 |
-| 2026-05-15 22:15 | main | UI 调整 | 万力个人页最后三条业绩布局保持固定 `gap-6` 间距，改由第 23 条卡片拉伸吸收额外高度，实现左上/右上与左下/右下同时对齐；清理 `.next` 后生产构建通过，未部署 |
-| 2026-05-15 22:13 | main | UI 调整 | 万力个人页 Performance & Achievements 展开区最后三条改为专门桌面布局：左列第 23 和第 25 条，右列第 24 条，并在两列底部对齐；生产构建通过，未部署 |
-| 2026-05-15 22:01 | main | UI 调整 | 个人简历详情页移动端 hero 区块调整为图片在个人信息上方；确认万力中英文个人业绩均为 25 条且最后三条尾部顺序一致；生产构建通过，未部署 |
-| 2026-05-15 21:59 | main | 资源更新 | 同步替换 event 页面封面图 `event2.png`、`event8.png`、`event10.png`、`event16.png`，并将 `event16` 数据引用从 `.jpg` 改为 `.png`；4 张图已上传 OSS，根路径生产构建通过并发布到 `/opt/tigerpartners-web/releases/20260515-2155` |
-| 2026-05-15 10:07 | main | 部署发布 | 根路径生产构建通过，并发布到 `https://www.tigerpartners.cn/`；服务器版本目录为 `/opt/tigerpartners-web/releases/20260515-0957`，`tigerpartners-web.service` 已重启且公网校验通过 |
-| 2026-05-15 09:54 | main | 资源更新 | 将 `src/assets/event/event2` 中 1-9 号封面同步覆盖到 `public/assets/event/event2`，确保 event2 页面前 9 张封面按 `1.jpg`、`2.jpg`、`3.png` 至 `9.png` 的命名顺序读取；未构建、未部署 |
-| 2026-05-15 09:46 | main | 数据更新 | 按 `EN/liwanPerformance.md` 同步万力个人详情页中英文 Performance & Achievements，共 25 条，中文与英文均按源文档顺序展示；未构建、未部署 |
-| 2026-05-15 09:41 | main | 数据更新 | 从 Events 导出白名单移除 `20200902`，事件页不再展示“枪炮一响 黄金万两 | 关于民间借贷利率司法保护规则调整的解读”；源数据与闲置详情图映射保留，未部署 |
-| 2026-05-15 09:29 | main | 视觉与文案更新 | Cyber Tech and Game 在首页、Industries 列表页和详情页统一使用 `/assets/home/INDUSTRIES6.png`；Home/About Honors 英文说明统一为指定三行，避免 `By Multiple...` 被拆开；本地类型检查通过，未部署 |
-| 2026-05-15 09:22 | main | 数据更新 | Events 页面新增事件在导出时按 `/assets/event/event2/` 图片文件名数字顺序排序，确保卡片按 `1` 至 `15` 的命名顺序展示；本地类型检查通过，未部署 |
-| 2026-05-15 09:08 | main | 数据更新 | Events 旧事件详情图改用 `eventinfo` 中指定命名文件：`20210414-1`、`20210720-1/2/3`，并为 `20210414`、`20210315` 英文正文补图片占位；`20210315-1` 当前未在目录中，先按现有两张 `20210315-2` 文件渲染 |
-| 2026-05-15 09:01 | main | 数据更新 | 按 `EN/event.md` 修正 Events 中 `20210720`、`20200927` 两条事件英文标题、摘要和正文，并为 `20210720` 详情页新增三张插图映射；本地类型检查通过，未部署 |
-| 2026-05-15 08:56 | main | 视觉优化 | 团队个人详情页手机端 Hero 改为使用 `team1.png` 至 `team6.png` 团队卡片图，并将个人信息置于图片上方避免重叠；本地类型检查通过，未部署 |
-| 2026-05-15 08:52 | main | 数据更新 | 为 Events 旧事件 `20210414` 和 `20210315` 增加详情页图片映射，分别复用现有 `event25.png`、`event27.png`；本地类型检查通过，未部署 |
-| 2026-05-15 08:48 | main | 数据更新 | Zoe Zhang 个人页服务行业改为指定中英文五项，并将 Events 已有的 `20210720`、`20200927` 两条事件加入导出白名单；未改动事件源 md 文件，未部署 |
-| 2026-05-15 01:25 | main | 文案更新 | 按 `EN/zoePerformance.md` 将 Zoe Zhang 个人详情页 Performance & Achievements 更新为 24 条中英文业绩，本次修改未部署 |
-| 2026-05-15 01:24 | main | 资源发布 | 将 01:20 的文案与资源调整构建发布到 `/opt/tigerpartners-web/releases/20260515-0122`，服务重启并通过服务器本机 3004 验证 |
-| 2026-05-15 01:20 | main | 文案与资源更新 | 更新首页、About、Footer、Team 多处英文分行文案，修正 Home 行业第六张背景图、About Honors 年份黄线对齐，并同步 event2 1/2 图和 Mengcheng Yun 图片到 OSS |
-| 2026-05-13 01:02 | main | 资源发布 | 同步 About 图片目录到 OSS，并将当前根路径构建发布到 `/opt/tigerpartners-web/releases/20260513-0058`，公网验证通过 |
-| 2026-05-13 00:46 | main | 文案修复 | 清理 `src/data/event2Events.ts` 中英文事件数据里的 mojibake 标点，按 `EN/event2.md` 恢复智能引号、所有格和连接号 |
-| 2026-05-13 00:39 | main | 文案修复 | 按 `EN/event2.md` 修正 2024.11.13 CIETAC Cup 事件英文段落中的乱码引号和所有格 |
-| 2026-05-13 00:35 | main | 资源发布 | 将当前根路径构建发布到 `/opt/tigerpartners-web/releases/20260513-0028` 并重启正式站服务，公网 HTTPS 验证通过 |
-| 2026-05-13 00:25 | main | 视觉优化 | 修复 About Chronicle 手机端年份按钮、时间线卡片和标题说明的横向溢出 |
-| 2026-05-13 00:20 | main | 视觉优化 | 修复移动端 Home Honors、Home Events 轮播控制、About Vision、About Honors 和 Our Team 首屏的横向溢出与间距问题 |
-| 2026-05-13 00:09 | main | 视觉优化 | 仅保留 Our Team 手机端 Hero 图按宽度自适应，其他页面恢复上一版 Hero 媒体铺满，并压小移动端首屏标题字号 |
-| 2026-05-13 00:02 | main | 视觉优化 | 手机端 Hero 媒体取消 `height: 100%`，仅强制宽度 100%，桌面端继续保持容器高度铺满 |
-| 2026-05-12 23:55 | main | 视觉优化 | 手机端页面级 Hero 图片和首页 Hero 视频改为 `w-screen` 视口宽度铺满屏幕，桌面端保持父容器宽度 |
-| 2026-05-12 23:49 | main | 修复缺陷 | 修正 event2 详情图 `detailImages` 乱码文件名，恢复为 public 中真实 `微信图片_*` 路径 |
-| 2026-05-12 23:46 | main | 修复缺陷 | 从 `Chinese/event2.md` 重新同步 15 条 event2 中文事件，修复前 15 条中文乱码 |
-| 2026-05-12 23:41 | main | 修复缺陷 | 修复 `src/data/event2Events.ts` 中文字符串缺少闭合引号导致的 Unterminated string constant |
-| 2026-05-12 23:38 | main | 修复缺陷 | Events 详情视频改为按飞书视频占位符位置渲染，而不是统一追加到正文末尾 |
-| 2026-05-12 23:30 | main | 视觉优化 | 统一移动端各页面 Hero 媒体宽度铺满父容器，避免按图片自身尺寸收缩 |
-| 2026-05-12 23:24 | main | 新增功能 | Events 详情页为 2025.06.17 和 2024.11.13 两条动态接入视频播放 |
-| 2026-05-12 23:12 | main | 视觉优化 | 虎诉动态 Events 列表卡片顶部图片比例从 16:9 调整为 4:3 |
-| 2026-05-12 22:40 | main | 文档更新 | 确认 About Chronicle 2026 年一月钱伯斯大中华区指南记录已保留，并修正架构文档对 2026 年记录范围的描述 |
-| 2026-05-12 22:39 | main | 配置变更 | 为旧站英文前缀 `/en` 和 `/en/:path*` 补充临时跳转，兼容带 hash 的旧英文入口 |
-| 2026-05-12 22:37 | main | 配置变更 | 为旧站中文前缀 `/zh` 和 `/zh/:path*` 添加临时跳转，兼容旧默认入口避免 404 |
-| 2026-05-12 22:34 | main | 修复缺陷 | 修复 Events 点击 See More 后进入详情再返回时展开状态丢失，导致无法回到原列表位置的问题 |
-| 2026-05-12 22:30 | main | 文案更新 | 刘煜暄中英文荣誉说明改为冒号结尾，并让荣誉引导说明不显示列表圆点 |
-| 2026-05-12 22:20 | main | 文案更新 | 按中英文 CHRONICLE.md 校准 About Chronicle 2026 年 3-5 月新增事件，修复中文乱码并补齐五月主要裁判领域 |
-| 2026-05-12 22:18 | main | 资源发布 | 同步新版 About Hero、Mengcheng Yun 团队卡片图和个人详情图到 public，并让团队卡片读取新版 PNG |
-| 2026-05-12 22:07 | main | 新增功能 | 新增全站禁用浏览器缩放规则，结合 viewport metadata、客户端事件拦截和全局 touch-action |
-| 2026-05-12 22:03 | main | 视觉优化 | Core Value 英文正文取消两端对齐，改为左对齐和更紧凑行高，避免单词间距被拉开 |
-| 2026-05-12 21:55 | main | 修复缺陷 | 修正 Home 标签页标题、移动端 Hero 媒体铺满、About Chronicle 完整文案、团队个人业绩完整文案和 Core Value 缺失段落，并同步新版 event2 图片到 public/OSS |
-| 2026-05-12 02:01 | main | 资源发布 | 整批上传 OSS 中 `husuweb/assets/home/clientLogo/` 的 42 个客户 Logo，删除误用的 `client-logo-26.png` 和 `client-logo-42.png`，并完成线上校验 |
-| 2026-05-12 01:57 | main | 资源发布 | 整批上传 OSS 中 `husuweb/assets/event/event2/` 和 `husuweb/assets/event/eventinfo2/` 共 40 个图片文件，并逐个完成下载回源哈希校验 |
-| 2026-05-12 01:52 | main | 资源发布 | 覆盖上传 OSS 中 About Hero、Footer 二维码和邱伟帆团队图 `team6.webp`，并完成线上哈希校验 |
-| 2026-05-12 01:40 | main | 配置变更 | 将虎诉官网从 `/opt/daxuanweb-root` 迁移到独立目录 `/opt/tigerpartners-web`，新建 `tigerpartners-web.service` 并改用 `127.0.0.1:3004` |
-| 2026-05-12 01:18 | main | 配置变更 | 为 `www.tigerpartners.cn` 配置 Nginx `server_name` 和 Let's Encrypt HTTPS 证书，启用 HTTP 自动跳转 HTTPS |
-| 2026-05-12 00:52 | main | 配置变更 | 将当前 Next standalone 发布包部署到新服务器根路径 `http://39.106.226.65/`，沿用 `daxuanweb-root.service` 和 Nginx `/` 反代 |
-| 2026-05-11 23:49 | main | 修复缺陷 | About Honors 同一年内按月份降序展示，月份大的荣誉排在上方 |
-| 2026-05-11 23:45 | main | 视觉优化 | 首页 Clients Logo 墙滚动速度提升到原来的 1.3 倍 |
-| 2026-05-11 23:41 | main | 资源发布 | About Hero 切换回 `/assets/about/hero.png` 并同步新版 hero 图到 public |
-| 2026-05-11 23:36 | main | 视觉优化 | 事件详情页取消右侧封面图列，正文占满父容器，正文插图桌面宽度改为 70% |
-| 2026-05-11 23:33 | main | 资源发布 | 同步新版 Footer 二维码到 public，并刷新 `SiteFooter` 二维码 URL 版本参数 |
-| 2026-05-11 23:28 | main | 新增功能 | 旧 28 条 Events 详情页接入 eventinfo 顺序图片，并支持行内 `[图片` 占位符插图渲染 |
-| 2026-05-11 23:21 | main | 新增功能 | Events 新增 event2 中英文 15 条事件，接入 event2 列表图和 eventinfo2 详情占位图顺序渲染 |
-| 2026-05-11 23:00 | main | 文案更新 | 按用户指定中文精确措辞更新 About Chronicle 2026 年 3-5 月三条中文记录 |
-| 2026-05-11 22:49 | main | 修复缺陷 | Events 数据按 `EN/event.md` 收敛到 28 条，中文日期改为 `YYYY.MM.DD`，修复无分类事件标题前置 `|`，并为详情返回增加滚动位置恢复 |
-| 2026-05-04 17:32 | main | 新增功能 | 基于 `tech.md` 和 `ada.md` 搭建 Next 官网首版，迁移首页与 About 页面，最小化依赖并切换 Yarn |
-| 2026-05-04 17:57 | main | 新增功能 | 接入服务行业、事件、联系我们三个新增原型页面，补充对应路由和公共素材 |
-| 2026-05-04 18:03 | main | 优化重构 | 根据大屏自适应规范加入 rem 根字号缩放策略，并封顶到 22px |
-| 2026-05-04 18:08 | main | 优化重构 | 将所有页面展示组件从 `src/app` 抽到 `src/components/pages`，路由文件仅保留 metadata 和入口 |
-| 2026-05-04 18:33 | main | 优化重构 | 根据 `OVERALL/title/word.md` 重做顶部 title 导航，加入 logo、中英文切换、滚动背景和 hover 下划线动画 |
-| 2026-05-04 22:54 | main | 新增功能 | 根据 `OVERALL/home/word.md` 重做首页 Hero、Vision、行业卡片、Honors 时间轴、Events 三卡轮播和 Clients Logo 墙交互 |
-| 2026-05-04 22:54 | main | 配置变更 | 扩展 `tsconfig.json` 原型目录排除范围，使当前 Next 主应用构建和类型检查通过 |
-| 2026-05-04 23:07 | main | 优化重构 | 根据 `OVERALL/about/word.md` 调整 About Hero 下方 Vision 卡片、Honors 折叠样式和 Chronicle 折叠时间轴 |
-| 2026-05-04 23:21 | main | 优化重构 | 根据 `OVERALL/foot/word.md` 统一全站 Footer，并接入 foot 目录下的 logo、联系图标、二维码和备案图标 |
-| 2026-05-04 23:29 | main | 优化重构 | 根据 `OVERALL/events/word.md` 调整 Events Hero 文案渐变、LATEST UPDATES 卡片 hover 动效和图片偏移 |
-| 2026-05-04 23:41 | main | 优化重构 | 微调 About Honors 展开头部背景、Chronicle 中轴展开动效和 Culture 左图 hover/leave 动效 |
-| 2026-05-04 23:41 | main | 配置变更 | 将 `我的团队` 原型目录加入 `tsconfig.json` 排除列表，避免旧原型依赖影响主应用类型检查 |
-| 2026-05-04 23:43 | main | 新增功能 | 基于 `我的团队/` 原型新增 `/team` 团队页，接入导航、团队素材、人物卡片和全站页脚 |
-| 2026-05-05 13:06 | main | 优化重构 | 根据首页补充反馈调整 Hero 单行、Vision 边距和旋转标题、按钮样式、标题字号、文案换行、Events 卡片间距和客户 Logo 速度 |
-| 2026-05-05 13:21 | main | 优化重构 | 修正首页 Hero 字号、Vision 裁切、Industries 标题尺寸和 Events 轮播图片/灰卡连接问题 |
-| 2026-05-05 13:21 | main | 配置变更 | 追加排除 `core value`、`个人介绍详情`、`事件详情`、`行业详情` 原型目录，恢复主应用类型检查 |
-| 2026-05-05 13:31 | main | 新增功能 | 基于 `core value/` 原型新增 `/about/core-value` 子页面，并接入 Culture 的 Read Full Manifesto 按钮 |
-| 2026-05-05 13:31 | main | 优化重构 | 调整 About Hero 灰色 Vision 卡片位置，简化 Culture 文案并更新右侧背景与左图渐变 |
-| 2026-05-05 13:36 | main | 优化重构 | 调整 Team Hero 字号和全宽图片、Special Forces 两行排版、Senior Associate 标题位置，并移除人物图灰色蒙层 |
-| 2026-05-05 13:39 | main | 新增功能 | 基于 `个人介绍详情/` 原型新增 `/team/yuxuan-liu` 个人详情页，并将 Team 卡片 Find out more 链接接入该路由 |
-| 2026-05-05 13:48 | main | 新增功能 | 基于 `行业详情/` 原型新增 `/industries/[slug]` 行业详情页，并将 Industries 六个卡片接入详情路由 |
-| 2026-05-05 13:48 | main | 优化重构 | 调整 Industries 卡片网格为 1 / 3 / 2 三行布局，第二行左侧 40% 宽、右侧两卡平分剩余宽度 |
-| 2026-05-05 13:52 | main | 新增功能 | 基于 `事件详情/` 原型新增 `/events/[slug]` 事件详情页，并将 Events 卡片接入详情路由 |
-| 2026-05-05 13:52 | main | 优化重构 | 调整 Events Hero 为居中标题正文和全屏渐变背景，并将 Latest Updates 改为三列三行 |
-| 2026-05-05 16:13 | main | 优化重构 | 将全站 title 导航和主要内容壳层桌面左右边距统一调整为 `12rem` |
-| 2026-05-05 16:20 | main | 优化重构 | 将全站 rem 缩放策略改为以 1920px 为基准，1440px 等比缩小 |
-| 2026-05-05 16:24 | main | 优化重构 | 将公共 title logo 放大 1.3 倍，导航文字放大 1.4 倍 |
-| 2026-05-05 16:26 | main | 优化重构 | 将公共 title logo 继续放大 1.2 倍、导航文字继续放大 1.4 倍，并设置上下 padding 为 `1.2rem` |
-| 2026-05-05 16:27 | main | 优化重构 | 将首页 Hero 标题 `we know how to win` 字号放大 1.1 倍 |
-| 2026-05-05 16:34 | main | 优化重构 | 调整首页 Vision 屏背景、卡片边距、三行正文和 Get To Know Us 按钮样式 |
-| 2026-05-05 16:38 | main | 优化重构 | 修正首页 Vision 按钮默认白底黑字、卡片外距和右侧 Vision 定位 |
-| 2026-05-05 16:41 | main | 优化重构 | 将首页 Vision 正文字号继续放大 1.2 倍，并修正左侧文字到视窗 12rem 内容线 |
-| 2026-05-05 16:42 | main | 优化重构 | 将首页 Vision 右侧标识改为旋转 180 度，并将字号缩小到当前 90% |
-| 2026-05-05 16:43 | main | 优化重构 | 将首页 Vision 右侧标识从 180 度调整为 270 度旋转 |
-| 2026-05-05 16:44 | main | 优化重构 | 将首页 Industries & Services 说明正文放大到 1.8 倍并占满父容器 |
-| 2026-05-05 16:46 | main | 优化重构 | 移除首页 Industries 卡片 hover 后标题下方的正文描述 |
-| 2026-05-05 16:47 | main | 优化重构 | 移除首页 Industries 卡片区底部横线，并将 Honors 右侧说明文字放大 1.4 倍 |
-| 2026-05-05 16:52 | main | 优化重构 | 调整首页 Honors 对齐与内容字号，移除 See More，并放大 Events 右侧说明和轮播卡片间距 |
-| 2026-05-05 16:55 | main | 优化重构 | 调整首页 Clients 标题左边距为 `5rem`，并移除 Logo 墙左右黑色渐隐蒙层 |
-| 2026-05-05 16:58 | main | 优化重构 | 调整 About Hero 标题组和灰色 Vision 方块的首屏垂直位置 |
-| 2026-05-05 17:01 | main | 优化重构 | 将首页第二屏 Vision 背景改为重复纹理叠加横向渐变 |
-| 2026-05-05 17:01 | main | 优化重构 | 修正首页 Vision 渐变纹理作用范围，将其从整屏背景移到卡片背景 |
-| 2026-05-05 17:02 | main | 优化重构 | 移除首页 Vision 卡片背景纹理，改为左上到右下对角线渐变 |
-| 2026-05-05 17:03 | main | 优化重构 | 移除首页 Vision 卡片上下黑色遮罩 |
-| 2026-05-05 17:04 | main | 优化重构 | 调整首页 Vision 卡片渐变上部颜色，使其更偏灰 |
-| 2026-05-05 17:05 | main | 优化重构 | 继续压暗首页 Vision 卡片渐变上部颜色 |
-| 2026-05-05 17:05 | main | 优化重构 | 再次压暗首页 Vision 卡片渐变上部颜色 |
-| 2026-05-05 17:17 | main | 优化重构 | 将首页 Vision 卡片渐变起始色标调整为 `rgb(36, 36, 36) 9%` |
-| 2026-05-05 17:35 | main | 优化重构 | 接入 `src/font/poppins.ttf` 本地字体，使全站文字默认使用 Poppins |
-| 2026-05-05 17:52 | main | 优化重构 | 调整 About Hero、Honors、Culture、Chronicle 的排版、渐变、颜色和展开样式 |
-| 2026-05-05 17:59 | main | 优化重构 | 调整 Team 页 Special Forces 标题间距、Partner 分区和人物卡片链接样式 |
-| 2026-05-05 18:08 | main | 优化重构 | 调整 Industries 页 Hero 对齐、说明卡片渐变和行业卡片网格尺寸 |
-| 2026-05-05 18:12 | main | 优化重构 | 恢复 Industries 说明卡片引号装饰，并拉满行业卡片标题下划线 |
-| 2026-05-05 18:17 | main | 优化重构 | 调整 Events Hero 渐变背景范围，移除第二屏标题并恢复卡片图片彩色 |
-| 2026-05-05 18:22 | main | 优化重构 | 调整 Events Hero 与第二屏外距，并精简事件卡片内容 |
-| 2026-05-05 18:23 | main | 优化重构 | 将 Events 第二屏事件卡片之间的间距扩大 3 倍 |
-| 2026-05-05 18:24 | main | 优化重构 | 将 Events 卡片图片向上向左偏移量缩小到原来的 33% |
-| 2026-05-05 18:26 | main | 优化重构 | 调整 Events 卡片日期与图片间距，并缩小右下角三角形高度 |
-| 2026-05-05 18:27 | main | 优化重构 | 将 Events 卡片日期与图片间距继续增加 3rem |
-| 2026-05-05 18:28 | main | 优化重构 | 缩小 Events 卡片标题字号并恢复卡片纵向间距 |
-| 2026-05-05 20:40 | main | 优化重构 | 将 Contact 页主要内容左边距统一调整为 `9rem` |
-| 2026-05-05 20:49 | main | 优化重构 | 修正 About Culture 区块背景色、图片压暗遮罩和右侧水印效果 |
-| 2026-05-05 20:55 | main | 优化重构 | 降低 About Culture 主遮罩左侧透明度，避免覆盖整张左图 |
-| 2026-05-05 20:59 | main | 优化重构 | 拉宽 About Culture 左图到右侧背景的棕金渐变过渡范围 |
-| 2026-05-05 21:00 | main | 优化重构 | 去除 About Culture 左图主体区域的雾化遮罩效果 |
-| 2026-05-05 21:02 | main | 优化重构 | 取消 About Culture 外层背景色和左图区域棕色蒙层 |
-| 2026-05-05 21:03 | main | 优化重构 | 将 About Culture 区块改为全宽无外边距且高度约 80vh |
-| 2026-05-05 21:05 | main | 优化重构 | 为 About Culture 左图右侧 30% 增加背景色到透明的渐变 |
-| 2026-05-05 21:16 | main | 优化重构 | 将 Contact 城市图片模块移动到 Hero 下方，并改为左信息右图片双栏 |
-| 2026-05-05 21:18 | main | 优化重构 | 将 Contact us 双栏模块左侧文字和图标改为黑色 |
-| 2026-05-05 21:23 | main | 优化重构 | 调整 Contact 招聘卡片编号、简历邮箱对齐和右侧三角形背景 |
-| 2026-05-05 21:25 | main | 优化重构 | 修正 Contact 右侧三角形背景终点，使其连接到 Footer 顶部中间 |
-| 2026-05-05 21:26 | main | 优化重构 | 调整 Contact 候选人卡片下划线上边距和三角形覆盖层级 |
-| 2026-05-05 21:28 | main | 优化重构 | 加粗 Contact 候选人卡片下划线，并将三角形改回底层背景 |
-| 2026-05-05 21:29 | main | 优化重构 | 调整 Contact 三角形为高于卡片背景且低于卡片内容的中间层 |
-| 2026-05-05 21:30 | main | 优化重构 | 调整 Contact 候选人卡片为截图效果的深色背景、三角形层级和粗斜体正文 |
-| 2026-05-05 21:32 | main | 优化重构 | 将 Contact 右侧三角形锚点改到候选人卡片区域顶部 |
-| 2026-05-05 21:36 | main | 优化重构 | 撤回上一轮 Contact 三角形锚点改动，恢复到招聘区整体容器 |
-| 2026-05-05 21:50 | main | 新增功能 | 为首页、About、Team、Industries 和 Events 添加页面级低层级斜三角装饰 |
-| 2026-05-05 21:54 | main | 优化重构 | 统一页面三角形形状和层级，并为 Contact 三角形增加 30% 透明度 |
-| 2026-05-05 21:58 | main | 优化重构 | 将页面三角形透明度调整为 50%，并把非 Contact 页底部左顶点改到 40% |
-| 2026-05-06 21:42 | main | 优化重构 | 调整首页 Hero、Vision、Industries、Honors 和 Events 轮播的字重、字号与内容布局 |
-| 2026-05-06 21:55 | main | 优化重构 | 按 1920 设计基准将首页核心字体尺寸换算为 rem，并完善 Events 轮播说明盒渐变和三角形装饰 |
-| 2026-05-06 22:00 | main | 优化重构 | 调整首页 Events 轮播图片与说明盒分离方式，移除外层边框并将图片文案移动到左下角 |
-| 2026-05-06 22:05 | main | 优化重构 | 将首页 Events 轮播舞台改为占满父容器，并把轮播卡图片宽度按 995px 换算为 `62.1875rem` |
-| 2026-05-06 22:06 | main | 修复缺陷 | 移除首页 Events 轮播说明文字的单行截断，使下方卡片完整换行展示文案 |
-| 2026-05-06 22:07 | main | 优化重构 | 将首页 Events 图片文案左距和下方说明卡左右内边距按 89px 换算为 `5.5625rem` |
-| 2026-05-06 22:09 | main | 修复缺陷 | 修正首页 Events 图片文案左距基准和标题左竖线范围，并加高轮播舞台避免说明卡被截断 |
-| 2026-05-06 22:31 | main | 优化重构 | 将 Home、About、Team、Industries、Events 和 Contact 的 Hero 背景切换为导航目录下的本地 `hero.png` 素材 |
-| 2026-05-06 22:33 | main | 优化重构 | 提高首页 Hero 本地背景图亮度，降低首屏黑色遮罩强度并缩短底部暗色过渡高度 |
-| 2026-05-06 22:35 | main | 优化重构 | 移除首页 Hero 整屏遮罩，仅保留底部 30% 暗色渐变过渡 |
-| 2026-05-06 22:37 | main | 优化重构 | 将首页第二屏卡片右侧 Vision 标识改为正常字重，并取消强制大写 |
-| 2026-05-06 22:40 | main | 优化重构 | 为首页 Industries & Services 标题下方增加灰色下划线，并接入本地 Industries 卡片图片素材 |
-| 2026-05-06 22:52 | main | 优化重构 | 将首页 Industries & Services 灰色下划线从标题下方移动到说明正文下方 |
-| 2026-05-06 22:54 | main | 优化重构 | 调整首页 Honors 五个年份按钮为 20px、左对齐、bold 字重 |
-| 2026-05-06 22:55 | main | 优化重构 | 调整首页 Events 轮播，使下方说明卡仅在当前展示的 active 卡片中显示 |
-| 2026-05-06 22:56 | main | 优化重构 | 缩小首页 Events 轮播下方控制按钮与 active 说明卡的垂直距离 |
-| 2026-05-06 23:00 | main | 优化重构 | 调整 About Hero 标题为 96px semibold，正文为 32px medium italic |
-| 2026-05-06 23:01 | main | 优化重构 | 调整 About Vision 卡片说明文字为 24px medium |
-| 2026-05-06 23:06 | main | 优化重构 | 按 1920 基准调整 About Vision、Honors 和 Culture 区块的字号、字重与奖项文案 |
-| 2026-05-06 23:07 | main | 优化重构 | 调整 About Culture 正文/按钮和 Chronicle 区块标题、年份、月份、正文的字号字重 |
-| 2026-05-06 23:09 | main | 优化重构 | 移除 About Hero 首屏蒙层，使渐变蒙层从第一屏之后开始 |
-| 2026-05-06 23:12 | main | 优化重构 | 为 About Vision 卡片接入本地背景图，并将说明文字固定为两行金色文本 |
-| 2026-05-06 23:13 | main | 优化重构 | 修正 About Vision 说明第二行换行问题，强制第二行保持单行显示 |
-| 2026-05-06 23:16 | main | 优化重构 | 调整 About Honors 顶部标题与说明排版，使说明右对齐且第二行不换行 |
-| 2026-05-06 23:17 | main | 优化重构 | 将 About Honors 顶部说明右边界对齐到屏幕右侧内容线，允许超出标题壳层 |
-| 2026-05-06 23:19 | main | 修复缺陷 | 移除 About Honors 顶部说明负右外距，避免右侧正文超出视窗 |
-| 2026-05-06 23:20 | main | 优化重构 | 将 About Honors 顶部说明右边界改为父元素最右侧，并让 Vision 背景图显式满高铺满卡片 |
-| 2026-05-06 23:31 | main | 优化重构 | 根据 `teamInfo.md` 和本地 team 图片调整 Our Team 页 Hero、Special Forces、成员卡片内容和字体规格 |
-| 2026-05-06 23:40 | main | 优化重构 | 根据本地 industries 图片和字号要求调整 Industries 页 Hero 标题、说明卡片和六个行业卡片 |
-| 2026-05-06 23:43 | main | 优化重构 | 调整 Industries 卡片文案换行，并按本地 event 图片和字体要求更新 Events Hero 与事件卡片 |
-| 2026-05-06 23:47 | main | 优化重构 | 按指定字体规格调整 Contact 页 Hero、Contact us、Join Us、候选人卡片和简历邮箱提示 |
-| 2026-05-06 23:48 | main | 优化重构 | 将 Industries 页 Hero 标题顶部位置调整为 590px 设计基准 |
-| 2026-05-06 23:52 | main | 优化重构 | 将 Team 页 Zoe Zhang 的图片切换为本地 `/assets/team/team4.png` |
-| 2026-05-07 00:08 | main | 优化重构 | 按指定截图结构重排 Team 个人详情页 Hero、信息介绍、Experience 和 Performance 区块 |
-| 2026-05-07 00:17 | main | 优化重构 | 调整 Team 个人详情页 Hero 高度、人物图来源、信息区排布和 Experience 双栏内容 |
-| 2026-05-07 00:21 | main | 修复缺陷 | 修复 Team 个人详情页 View more 无响应问题，改用原生 details/summary 展开 Honors 和 Performance 更多内容 |
-| 2026-05-07 00:23 | main | 优化重构 | 调整 Team 个人详情页面包屑条为黑色背景，并将当前项 Yuxuan Liu 改为白色 |
-| 2026-05-07 00:27 | main | 优化重构 | 调整 Industries 第二屏卡片布局，并让行业详情页使用对应卡片图片和 `industriesInfo.md` 内容 |
-| 2026-05-07 00:28 | main | 优化重构 | 按指定字号和内容重排事件详情页，保留标题、日期、主说明和 Educational Background |
-| 2026-05-07 00:42 | main | 优化重构 | Core Value 页面接入参考 EventLandingPage 的滚动内容与右侧图片堆叠揭示动画 |
-| 2026-05-07 00:44 | main | 优化重构 | 调整 Core Value 右侧图片堆叠 sticky 偏移，整体下移 5rem |
-| 2026-05-07 00:46 | main | 优化重构 | 调整 Core Value 价值观标题和正文文字规格，并更新 No.1 Tiger 文案 |
-| 2026-05-07 00:48 | main | 优化重构 | 移除 Core Value 滚动区额外引导文案和标题下划线，背景改为 #171717 并调整右侧图片 sticky 位置 |
-| 2026-05-07 00:50 | main | 优化重构 | 重新对齐 EventLandingPage 的 sticky 图片结构，Core Value 右侧图片改为 top-0 全屏吸顶容器 |
-| 2026-05-07 00:53 | main | 优化重构 | Core Value 图片堆叠动画改为参考事件 copy 项目的 fixed-height absolute stack 实现 |
-| 2026-05-07 00:56 | main | 优化重构 | Core Value 滚动进度计算进一步对齐事件 copy 项目，并排除事件 copy 原型目录的类型检查 |
-| 2026-05-07 01:01 | main | 修复缺陷 | 将 Our Team 的 Find out more 从固定 Yuxuan Liu 改为按成员 slug 跳转对应个人详情 |
-| 2026-05-07 01:02 | main | 修复缺陷 | 修复 Core Value 右侧图片栈包裹层宽度塌陷导致图片不可见的问题 |
-| 2026-05-07 01:04 | main | 修复缺陷 | 移除 Core Value 页面 main 的 overflow-x-hidden，避免祖先 overflow 影响右侧图片 sticky 固定 |
-| 2026-05-07 01:05 | main | 优化重构 | 将 Core Value 右侧 sticky 图片堆整体向上移动 5rem |
-| 2026-05-07 01:17 | main | 配置变更 | 按 `/offweb` 子路径重新打包并部署 standalone 运行包，新增 offweb 部署说明 |
-| 2026-05-07 01:25 | main | 修复缺陷 | 为 `ImageWithFallback` 增加 basePath 静态资源前缀处理，修复 offweb 子路径部署图片加载失败 |
-| 2026-05-07 09:35 | main | 修复缺陷 | 修复 About 到 Core Value 的子路径跳转，并新增自定义 404 Return Home 回到 `/offweb/` |
-| 2026-05-07 22:07 | main | 优化重构 | 调整首页 Honors/Events 数据来源与 See More 布局，并更新 Clients 区域样式 |
-| 2026-05-07 22:16 | main | 优化重构 | 微调首页 Vision 按钮字距、背景三角形层级、Events 控制区与日期格式，并恢复 Clients 屏深色背景 |
-| 2026-05-07 22:22 | main | 修复缺陷 | 修正首页 Header 固定层级、背景三角形可见性、Events 控制区贴右和 About Honors 文案/日期对齐 |
-| 2026-05-07 22:32 | main | 优化重构 | 按 EN 文档重建 About Honors 和 Chronicle 数据，调整 Chronicle See More 展开更多，并弱化首页三角形 |
-| 2026-05-07 22:38 | main | 优化重构 | 将 Title 英文导航改为源码大写，并按参考图调整 About Honors 标题说明与 View Award 对齐方式 |
-| 2026-05-07 22:45 | main | 优化重构 | 按 EN/teamInfo.md 补齐 Team Profile 业绩数据，隐藏空 Honors，并统一 View More 展开动画 |
-| 2026-05-07 22:52 | main | 优化重构 | Events 页接入 EN/event.md 全量事件数据，统一 See More 动效，并微调首页 Events 与 About 按钮样式 |
-| 2026-05-07 22:57 | main | 修复缺陷 | 降低首页和 About 三角形背景层级，统一收起文案为 COLLAPSE，并调整 Chronicle See More 按钮动效 |
-| 2026-05-07 23:04 | main | 优化重构 | 调整首页 Hero 标题渐变、Clients Logo 分组与圆角，并为 About Honors 展开区接入 awardbg 右侧背景 |
-| 2026-05-07 23:12 | main | 优化重构 | 为 About Honors 的 View Award 按钮接入 EN/award.md 中对应的微信公众号链接 |
-| 2026-05-07 23:26 | main | 新增功能 | 新增全站语言 Provider 和中文页面文案配置，接入页头、页脚、首页、About、Core Value、Team、Industries、Events、Contact 的中英文切换 |
-| 2026-05-08 00:05 | main | 新增功能 | 按 Chinese 数据文档补充首页 Honors/Events、About Honors/Chronicle 和 Team 卡片的中文列表数据 |
-| 2026-05-08 00:22 | main | 新增功能 | 团队个人详情页接入 `Chinese/teamInfo.md` 中文详情数据，支持六位成员详情页主体内容中文切换 |
-| 2026-05-08 00:26 | main | 新增功能 | 行业详情页接入 `Chinese/industriesInfo.md` 中文内容，支持六个行业详情页正文中文切换 |
-| 2026-05-08 00:29 | main | 优化重构 | 将公共收起按钮中文文案从 `COLLAPSE` 调整为 `收起` |
-| 2026-05-08 00:33 | main | 修复缺陷 | 将行业详情页 metadata 数据拆到服务端安全模块，修复 `generateMetadata` 读取客户端组件导出导致的 undefined 报错 |
-| 2026-05-08 00:41 | main | 修复缺陷 | 修复服务行业列表页卡片中文文案复用首页 labels 导致与卡片链接目标错位的问题 |
-| 2026-05-08 09:29 | main | 优化重构 | 按 `img.md` 为大图生成 WebP 版本，调整图片加载优先级和 Core Value 滚动计算策略，并优化 offweb 发布包图片体积 |
-| 2026-05-08 21:38 | main | 修复缺陷 | 恢复 hover 图片渐进缩放手感，交互图片不再使用 lazy 并改为同步解码 |
-| 2026-05-08 21:47 | main | 修复缺陷 | 修复 Clients Logo 墙 hover 暂停和动画时长依赖 inline style 导致的不滚动问题 |
-| 2026-05-08 21:51 | main | 修复缺陷 | 收窄 `prefers-reduced-motion` 全局规则，避免系统动效偏好禁用全站 hover/transition/animation |
-| 2026-05-08 22:19 | main | 优化重构 | 首页 Hero 改视频背景和流光标题，补齐 Honors 年份与行业详情跳转，新增两条事件并修复 About 交互 |
-| 2026-05-08 22:21 | main | 文档更新 | 明确首页 Hero 使用视频不走压缩图，其他页面和卡片大图继续使用 WebP |
-| 2026-05-08 22:30 | main | 优化重构 | 首页 Events 轮播接入 `20210218`、`20201023` 和 `event4/event5`，Honors 年份条改为 5 个一屏轮播窗口 |
-| 2026-05-08 22:40 | main | 优化重构 | 更新中文文案、团队教育背景分段展示，并将 Header/Footer logo 切换为 SVG |
-| 2026-05-08 22:44 | main | 优化重构 | 固定 Title logo 宽度为 86px、Footer logo 宽度为 152px |
-| 2026-05-08 22:46 | main | 优化重构 | 将 Title/Footer logo 宽度按 rem 表达并整体放大两倍 |
-| 2026-05-08 22:55 | main | 优化重构 | 同步替换后的二维码、Real Estate、Culture 和团队图片资源，并缩小首页 Vision 中文标识 |
-| 2026-05-08 22:58 | main | 优化重构 | 调整首页 Honors 左右按钮为移动当前选中年份并支持首尾循环 |
-| 2026-05-08 23:02 | main | 优化重构 | 同步新版 logo.svg，并将 Title/Footer logo 显示宽度缩回当前的 50% |
-| 2026-05-08 23:05 | main | 优化重构 | 将首页 Clients logo 图片高度调整为占父容器 80% |
-| 2026-05-08 23:08 | main | 优化重构 | 补齐新增 Events 英文标题，并为首页 Events 轮播加入 5 秒自动播放 |
-| 2026-05-08 23:18 | main | 修复缺陷 | 首页 Events 自动轮播在 active 变化后重新计时，避免首尾手动切换时叠加跳动 |
-| 2026-05-08 23:22 | main | 优化重构 | About Vision 改为自然高度布局，Culture 左图去蒙层，Contact us 左栏背景改为 `#A1865F` |
-| 2026-05-09 08:50 | main | 优化重构 | Mengcheng Yun 个人详情页隐藏空 Social Engagements 区块 |
-| 2026-05-09 08:53 | main | 配置变更 | 新增 OSS 资源前缀切换，图片、视频和字体可在生产环境加载 OSS 资源 |
-| 2026-05-09 08:57 | main | 资源整理 | 将 `src/assets/event` 中 156-193 号微信图片按顺序重命名为 `event2` 到 `event39` |
-| 2026-05-09 09:07 | main | 资源整理 | 按缺图编号跳过 `event7`、`event10`、`event18`，将事件源素材顺序延伸到 `event42` |
-| 2026-05-09 09:16 | main | 数据与资源更新 | Events 页面接入 42 条真实事件图片和中英文真实内容，详情页渲染真实正文段落 |
-| 2026-05-09 09:25 | main | 资源发布 | 将 42 张真实 Events 图片同步上传到 OSS 的 `husuweb/assets/event/` 前缀 |
-| 2026-05-09 09:29 | main | 子页面交互优化 | Culture 改为 Contact us 镜像双栏效果，子页面统一面包屑和返回顶部，并修复 Team 三角形遮挡 |
-| 2026-05-09 09:33 | main | 修复缺陷 | 清理事件详情页正文中的 `[图片]` 占位文本，并修复重复 React key 警告 |
-| 2026-05-09 09:35 | main | 修复缺陷 | 修正中文事件分类解析残留，去除“虎诉动态”前的 `????` 前缀 |
-| 2026-05-09 09:41 | main | 视觉与资源调整 | Core Value 滚动图片改为 16:14 横向比例，各页面 Hero 图引用从 WebP 切回 PNG |
-| 2026-05-10 00:09 | main | 首页与子页面交互优化 | 语言按钮显示目标语言，首页 Events 卡片跳转详情，Clients/二维码/团队资源同步，行业详情面包屑回首页，Zoe 教育背景改为四段 |
-| 2026-05-10 00:15 | main | 修复缺陷 | 修复 Core Value 中文空编号导致的重复 key 警告，并为 About Vision See More 接入三段展开文案 |
-| 2026-05-10 00:21 | main | 交互优化 | About Vision See More 展开后切换为 Collapse/收起，支持再次点击收起 |
-| 2026-05-10 00:28 | main | 资源发布 | 覆盖上传 Footer 图片到 OSS，并为 Footer 二维码 URL 增加版本参数避免旧缓存 |
-| 2026-05-10 11:02 | main | 修复缺陷 | 修复 Zoe 中文执业经验字符串语法错误，并在团队个人详情 Hero 邮箱上方添加电话 |
-| 2026-05-10 11:03 | main | 文案排版 | 将 Zoe Zhang 中文执业经验按换行拆分为两段显示 |
-| 2026-05-10 11:07 | main | 新增功能 | Footer 的 Disclaimer and Privacy 改为点击弹窗展示免责声明与隐私条款 |
-| 2026-05-10 11:10 | main | 优化重构 | Footer 二维码引用切换到新的版本参数，并将公安备案号和 ICP 备案号改为外链 |
-| 2026-05-10 11:14 | main | 数据更新 | 补齐首页和 About 虎诉荣誉中 2022、2023、2024 年缺失的五条荣誉/赞助活动 |
-| 2026-05-10 11:16 | main | 文案更新 | 更新 Min Xu 英文 Social Engagements，补充中国体育仲裁委员会仲裁员身份并修复字符串引号 |
-| 2026-05-10 11:26 | main | 文案更新 | 按 `EN/teamInfo.md` 对齐 Li Wan、Zoe Zhang、Mengcheng Yun、Weifan Qiu 英文团队详情字段 |
-| 2026-05-10 11:31 | main | 文案更新 | 行业详情面包屑改为 industries / 当前行业，并补齐四个英文行业详情缺失内容 |
-| 2026-05-10 11:51 | main | 文案更新 | 中文状态下 Footer 隐私弹窗与 About Vision See More 展开内容切换为中文文案 |
-| 2026-05-10 11:53 | main | 修复缺陷 | 虎诉动态列表卡片图片改为完整展示，避免真实事件图被裁切 |
-| 2026-05-10 11:55 | main | 视觉优化 | 顶部导航 title active 与 hover 下划线加粗 |
-| 2026-05-10 12:02 | main | 修复缺陷 | 首页 Events 轮播改为复用事件库真实图文，修正后两条虎眼观察图文错位 |
-| 2026-05-10 12:26 | main | 修复缺陷 | Footer 二维码刷新版本号并同步发布目录，改为完整展示避免裁切 |
-| 2026-05-10 12:27 | main | 视觉优化 | Events 列表卡片图片增加同图模糊自适应背景，消除 object-contain 白边 |
-| 2026-05-10 12:28 | main | 配置变更 | 主项目 tsconfig 排除独立 cms 工作区，避免其未接入依赖影响官网构建 |
-| 2026-05-10 12:29 | main | 视觉优化 | Events 列表卡片去除模糊底图，改为图片本身自适应填满图框 |
-| 2026-05-10 16:16 | main | 资源与视觉更新 | About Hero 引用用户指定 about 图片，团队个人详情 Hero 改为按成员使用 `1.png` 到 `6.png` 全屏展示 |
-| 2026-05-10 15:23 | main | 视觉优化 | 团队个人详情 Hero 取消强制整屏高度，图片宽高跟随固定 Hero 容器 |
-| 2026-05-10 15:25 | main | 视觉优化 | Team 页 Hero 取消视口高度绑定，个人详情 Hero 信息块桌面左距改为 `55.625rem` |
-| 2026-05-10 15:27 | main | 视觉优化 | 取消团队个人详情页 Hero 图片蒙层，保留原图直接展示 |
-| 2026-05-10 15:43 | main | 交互优化 | 事件详情页面包屑父级改为首页，并将兜底返回路径切换为 `/` |
-| 2026-05-10 15:44 | main | 交互优化 | 服务行业详情页面包屑父级改为首页，并将兜底返回路径切换为 `/` |
-| 2026-05-10 15:50 | main | 修复缺陷 | 移除 Footer 二维码外层白色背景和内边距，保留透明 PNG 原始显示 |
-| 2026-05-10 15:55 | main | 视觉优化 | About Vision 左上图标改为空心上引号，Culture 小 logo 背景切换为 `/assets/about/bg.png` |
-| 2026-05-10 15:58 | main | 视觉优化 | About Vision 空心引号改为白色并下移到正文首段左侧，Culture 背景小图缩小到 60% |
-| 2026-05-10 16:00 | main | 视觉优化 | About Vision 正文保持与标题同列对齐，引号改为贴近正文首行的白色描边装饰 |
-| 2026-05-10 16:04 | main | 视觉优化 | About Vision 引号改用 `Icon.svg`，内容居中对齐标题区，Contact us 背景装饰改用 Culture 同款图片 |
-| 2026-05-10 16:08 | main | 视觉优化 | About Vision 标题和正文改为同一满宽容器边界，`Icon.svg` 以内嵌浮动方式进入正文首段 |
-| 2026-05-10 16:11 | main | 视觉优化 | About Vision 标题行和正文容器统一左侧内缩，`Icon.svg` 从浮动改为正文首行行内图片 |
-| 2026-05-10 23:07 | main | 视觉优化 | About Vision 正文恢复与标题同边界，`Icon.svg` 改为首段左侧绝对定位装饰并向左偏移 |
-| 2026-05-10 23:08 | main | 视觉优化 | About Vision 首段 `Icon.svg` 改为仅预留 `2rem` 行内占位，图标向左伸出并贴齐首行 |
-| 2026-05-10 23:10 | main | 视觉优化 | About Vision 首段 `Icon.svg` 定位改到 `2rem` 行内占位起点 |
-| 2026-05-10 23:12 | main | 视觉优化 | About Vision 内容最大宽度从 `88rem` 调整为 `95rem` |
-| 2026-05-10 23:13 | main | 视觉优化 | About Vision 正文取消左内边距，首段 `Icon.svg` 在保持右侧位置基础上放大三倍 |
-| 2026-05-10 23:16 | main | 视觉优化 | About Vision 首段 `Icon.svg` 改为贴近正文第一行左侧，并将上一版尺寸缩小 50% |
-| 2026-05-10 23:22 | main | 视觉优化 | About Vision 首段正文和 `Icon.svg` 整体向左偏移 `3rem` |
-| 2026-05-10 23:23 | main | 视觉优化 | About Vision 首段偏移改为仅作用于第一行，后续换行文本保持原对齐 |
-| 2026-05-10 23:36 | main | 视觉优化 | 首页 Events 轮播改为指定 4 条事件，active 说明卡最多显示 5 行并省略超出内容 |
-| 2026-05-11 00:51 | main | 交互优化 | Events 和 Industries 详情页面包屑按入口来源显示 Home、Events 或 Industries，并保留静态构建 Suspense 边界 |
-| 2026-05-11 00:55 | main | 修复缺陷 | 首页 Events 轮播补回 Kinsey Kang Yanan 事件，OSS bucket 新增 GET/HEAD CORS 规则以支持字体跨域加载 |
+| 2026-05-18 01:03 | cms | UI 调整 | 内容管理所有左侧导航分栏统一包入 sticky 可滚动容器，服务行业、虎诉荣誉、大事记、合伙人和资深律师均固定在视窗内滚动 |
+| 2026-05-18 00:57 | cms | 修复缺陷 | 首页 HONORS 内容管理改为 sticky 年份导航，点击年份直接显示右侧编辑；可视化同步改为首页 Honors 维护 `homeHonorItems`、About Honors 维护虎诉荣誉内容 |
+| 2026-05-18 00:48 | cms | UI 调整 | 首页 HONORS 轮播内容管理恢复为左侧年份导航，右侧按当前年份添加、排序和删除具体荣誉条目 |
+| 2026-05-18 00:42 | cms | 修复缺陷 | 内容管理左右分栏导航固定左列、编辑表单固定右列；首页 HONORS 下拉按虎诉荣誉年份分组列出具体荣誉，并按 `homeHonorItems` 同步首页预览 |
+| 2026-05-18 00:19 | cms | UI 调整 | 官网内容管理条目统一改为左右编辑结构，左侧显示年份、行业或成员身份与排序/删除操作，右侧展示对应可编辑表单 |
+| 2026-05-18 00:28 | cms | 修复缺陷 | 官网内容管理改为左侧条目导航、右侧当前条目编辑；虎诉大事记删除、改年和排序统一基于归一化 Chronicle 数据写回，避免 2026 年最后一条事件被旧状态补回 |
+| 2026-05-18 00:33 | cms | UI 调整 | CMS 内容管理布局按模块分流：首页 Events 轮播与虎诉动态恢复逐条展开布局，首页 HONORS、虎诉荣誉、虎诉大事记、服务行业、合伙人和资深律师保留左侧导航右侧编辑 |
+| 2026-05-18 00:16 | cms | 修复缺陷 | 首页 Events 轮播内容管理改为写入 `home.eventOverrides` 并与可视化首页 Events 字段一致；可视化首页 Honors 抽屉按年份分级展示，并从虎诉荣誉具体年份/月度条目下拉添加 |
+| 2026-05-18 00:04 | cms | 修复缺陷 | CMS 首页 HONORS 轮播改为按具体荣誉项选择；服务行业详情卡片回填默认正文并补充格式说明；大事记年份改名、团队新增成员删除与前台读取同步修复 |
+| 2026-05-18 00:19 | cms | 内容管理左右结构 | 首页 HONORS、服务行业、虎诉荣誉、虎诉大事记、合伙人和资深律师等内容面板复用左右两栏编辑 shell，贴近旧事件和奖项管理的操作方式 |
+| 2026-05-18 00:28 | cms | Chronicle 导航式编辑 | 内容管理列表编辑器切换为左侧导航选择条目、右侧集中编辑表单；大事记事件删除同步写回当前年份列表数据 |
+| 2026-05-18 00:33 | cms | 内容管理分组布局 | 首页 Events 轮播与虎诉动态使用原逐条展开编辑；年份类、行业类和人物类模块使用左侧导航定位年份、行业或成员姓名 |
+| 2026-05-18 00:16 | cms | 首页轮播与荣誉可视化对齐 | 首页 Events 轮播编辑统一使用首页专属覆盖数据；首页 Honors 可视化列表增加年度分级和基于虎诉荣誉内容的具体荣誉项新增入口 |
+| 2026-05-18 00:04 | cms | CMS 内容管理细化 | 首页 HONORS 轮播按具体荣誉项保存 `homeHonorItems`；服务行业详情卡片字段回填行业默认 cards；大事记年份和新增团队成员删除在列表与内容数据中同步更新 |
+| 2026-05-17 23:51 | cms | UI 璋冩暣 | 棣栭〉 HONORS 涓嬫媺鍒楄〃鏀逛负濮嬬粓灞曠ず铏庤瘔鑽ｈ獕骞翠唤鍐呭骞舵爣璁板凡鍔犲叆椤癸紱澶т簨璁版柊澧炲勾浠藉悓姝ュ啓鍏ュ勾浠藉垪琛紱鍥㈤槦鏂板鎴愬憳鏀逛负鐩存帴鍒涘缓鍚屾牸寮忕┖鐧芥垚鍛橈紱棣栭〉琛屼笟閾炬帴瀛楁琛?`from=home` |
+| 2026-05-17 23:46 | cms | 淇缂洪櫡 | 鏈嶅姟琛屼笟鍐呭绠＄悊琛ラ綈琛屼笟璇︽儏鍗＄墖姝ｆ枃锛涜檸璇夎崳瑾夋暟閲忔枃妗堟敼涓烘寜骞翠唤鑽ｈ獕鏉＄洰鏁拌嚜鍔ㄧ敓鎴愶紝鍒犻櫎鑽ｈ獕鍚庝笉鍐嶈榛樿鍐呭琛ュ洖锛涘ぇ浜嬭鍒犻櫎浜嬩欢鍚庝笉鍐嶈榛樿闈欐€佸唴瀹归噸鏂拌ˉ鍥?|
+| 2026-05-17 23:36 | cms | UI 璋冩暣 | 棣栭〉 HONORS 杞挱绠＄悊鏀逛负涓庨椤?Events 杞挱涓€鑷寸殑鈥滈€夋嫨骞翠唤鍚庣偣鍑绘柊澧炲埌杞挱鈥濇搷浣滄柟寮忥紝骞朵繚鐣欏凡閫夊勾浠界殑鎺掑簭鍜屽垹闄?|
+| 2026-05-17 23:20 | cms | 淇缂洪櫡 | CMS 澶栭儴鍐呭绠＄悊淇濆瓨鏃跺悓姝ョ敓鎴?`pageContent`锛岄椤典簨浠惰疆鎾€佸鎴?Logo銆佹湇鍔¤涓氥€佽崳瑾夈€佸ぇ浜嬭銆佸洟闃熶笌鍔ㄦ€佸瓙椤甸潰鍦ㄥ彲瑙嗗寲缂栬緫涓娇鐢ㄥ悓涓€浠藉唴瀹规暟鎹?|
+| 2026-05-17 23:11 | cms | UI 璋冩暣 | CMS 鐗堟湰閫夋嫨涓婄Щ鍒板悗鍙板乏渚у叏灞€鍏ュ彛锛涘彲瑙嗗寲缂栬緫銆佺珯鐐逛俊鎭拰椤甸潰鍐呭闈㈡澘涓嶅啀鎻愪緵灞€閮ㄧ増鏈笅鎷夛紝缁熶竴璺熼殢褰撳墠 CMS 鐗堟湰涓婁笅鏂?|
+| 2026-05-17 23:05 | cms | 淇缂洪櫡 | CMS 鐖剁骇鍔犺浇鍜岀増鏈?payload 鏋勫缓鏃剁粺涓€褰掍竴鍖栧畼缃戠姸鎬侊紱鍐呭绠＄悊淇濆瓨璺熼殢褰撳墠鍏ㄥ眬鐗堟湰锛屼笉鍐嶇粫杩囩増鏈洿鎺ュ啓姝ｅ紡瀹樼綉鐘舵€?|
+| 2026-05-17 22:54 | cms | 淇缂洪櫡 | 瀹樼綉鍐呭绠＄悊闈㈡澘娓叉煋鍓嶅厛褰掍竴鍖?CMS 鐘舵€侊紝铏庤瘔鑽ｈ獕琛ラ綈鍐呭鍙珛鍗虫樉绀哄苟闅忎繚瀛樺啓鍏ュ綋鍓嶇増鏈?瀹樼綉鐘舵€?|
+| 2026-05-17 22:48 | cms | 淇缂洪櫡 | CMS 铏庤瘔鑽ｈ獕榛樿鍐呭鎺ュ叆 About 鍓嶅彴涓枃璧炲姪鑽ｈ獕琛ュ厖閫昏緫锛岄伩鍏?2024銆?022 绛夊勾浠借崳瑾夋潯鐩湪鍐呭绠＄悊涓粛缂哄け |
+| 2026-05-17 22:44 | cms | 淇缂洪櫡 | CMS 瀹樼綉鍐呭鍔犺浇鏃惰嚜鍔ㄨˉ榻愰潤鎬佸畬鏁?Honors 涓?Chronicle 鏉＄洰锛涘彲瑙嗗寲鏂板鍥㈤槦鎴愬憳浼氬悓姝ヨ繘鍏ュ悎浼欎汉/璧勬繁寰嬪笀鍐呭绠＄悊鍒楄〃 |
+| 2026-05-17 22:39 | cms | 淇缂洪櫡 | 鐗堟湰鍙戝竷/鎭㈠鍜屽凡鍙戝竷鐗堟湰淇濆瓨鏃跺悓姝ュ埛鏂板姩鎬佸瓙椤甸潰璺敱锛涜€佺増鏈仮澶嶆椂鐢ㄧ増鏈〉闈㈠瓧娈靛洖濉叕寮€ CMS 鐘舵€侊紝閬垮厤姝ｅ紡绔欓儴鍒嗛〉闈粛鏄剧ず鏃у唴瀹?|
+| 2026-05-17 22:30 | cms | UI 璋冩暣 | 鍚庡彴鈥滃唴瀹圭鐞嗏€濆鑸Щ闄も€滀簨浠跺拰濂栭」绠＄悊鈥濆拰鈥滆仈绯绘彁浜も€濆叆鍙ｏ紝搴曞眰鏁版嵁/API 淇濈暀 |
+| 2026-05-17 22:27 | cms | 淇缂洪櫡 | 鍏变韩鍥剧墖缁勪欢閬囧埌绌?`src` 鏃舵覆鏌撳崰浣嶅鍣紝閬垮厤鏂板棣栭〉鍔ㄦ€佽疆鎾瓑鏈笂浼犲浘鐗囩姸鎬佽Е鍙戞祻瑙堝櫒绌?src 璀﹀憡 |
+| 2026-05-17 22:26 | cms | 淇缂洪櫡 | 棣栭〉铏庤瘔鍔ㄦ€佽疆鎾娊灞夌‖杩囨护涓?slide 瀛楁锛屾棫鏁版嵁娈嬬暀鐨?Detail content銆佽鎯呭浘鐗囧拰璇︽儏瑙嗛瀛楁涓嶅啀鏄剧ず鎴栬鏂板椤圭户鎵?|
+| 2026-05-17 22:23 | cms | 淇缂洪櫡 | About 澶т簨璁颁笉鍐嶈涓嶅畬鏁寸殑 CMS 骞翠唤鍒楄〃瑁佸壀锛涙柊澧炲洟闃熸垚鍛樺瓙椤甸潰浣跨敤鑷韩 slug 绌烘。妗堟壙鎺?CMS 瑕嗙洊鍐呭锛屼笉鍐嶅洖閫€鍒扮涓€涓悎浼欎汉 |
+| 2026-05-17 22:18 | cms | 浼樺寲閲嶆瀯 | 棣栭〉铏庤瘔鍔ㄦ€佽疆鎾敼涓虹嫭绔?slide 瀛楁锛屽彧缁存姢杞挱鍥惧睍绀烘墍闇€淇℃伅锛屼笉鍐嶈姹傛垨鐢熸垚鍔ㄦ€佸瓙椤甸潰鍐呭 |
+| 2026-05-17 22:13 | cms | 淇缂洪櫡 | About 澶т簨璁板睍绀轰笌鍚屾淇濈暀瀹屾暣榛樿浜嬩欢锛涙柊澧炲悎浼欎汉/璧勬繁寰嬪笀鏃跺悓姝ュ垱寤轰釜浜哄瓙椤甸潰骞跺彲浠庡垪琛ㄧ洿鎺ヨ繘鍏ョ紪杈戯紱琛屼笟璇︽儏鍗＄墖浼樺厛璇诲彇 CMS 涓庡弻璇厹搴曞瓧娈?|
+| 2026-05-17 22:03 | cms | 淇缂洪櫡 | 棣栭〉鍜?About 鑽ｈ獕灞曠ず浼氬皢 CMS 閮ㄥ垎鏁版嵁涓庡畬鏁撮潤鎬佽崳瑾夊悎骞讹紝閬垮厤鍙鍖栭粯璁?3 鏉¤崳瑾夎鐩栧畬鏁村垪琛?|
+| 2026-05-17 21:58 | cms | UI 璋冩暣 | CMS Events 鐖跺垪琛ㄩ殣钘?Summary 缂栬緫鍜屽崱鐗囨憳瑕侀瑙堬紝Slug 瀛楁澧炲姞 URL 涓庝腑鑻辨枃缁戝畾鐢ㄩ€旇鏄?|
+| 2026-05-17 21:42 | cms | 鏂板鍔熻兘 | CMS 鍔ㄦ€佸瓙椤甸潰鎶藉眽鏂板 Detail content 姝ｆ枃鏍煎紡鎻愮ず锛岃鏄庡浘鐗囧拰瑙嗛鍗犱綅绗︿笌璇︽儏濯掍綋瀛楁鐨勫搴斿叧绯?|
+| 2026-05-17 21:34 | cms | 淇缂洪櫡 | Events 鍔ㄦ€?slug 瀛楁鏀逛负涓嫳鏂囧悓姝ユ洿鏂帮紝骞跺湪鐖跺垪琛ㄦ潯鐩笂澧炲姞 Edit detail 鍏ュ彛璺宠浆鍒板搴斿姩鎬佸瓙椤甸潰 |
+| 2026-05-17 21:25 | cms | 淇缂洪櫡 | CMS 鍔ㄦ€佸瓙椤甸潰瀛楁鍒楄〃銆佹爣棰樻憳瑕佸拰濯掍綋妲戒綅鐢熸垚鍏ㄩ儴鏀逛负 slug 浼樺厛锛屼慨澶嶇 20 鏉＄瓑闈為鏉″姩鎬佽鎯?content 涓嶆樉绀虹殑闂 |
+| 2026-05-17 21:02 | cms | 淇缂洪櫡 | CMS 鍔ㄦ€佸瓙椤甸潰鎶藉眽鏀逛负鎸?slug 瀵归綈涓嫳鏂囨潯鐩紝閬垮厤闈炵涓€涓瓙椤甸潰鍥?index 閿欎綅鐪嬩笉鍒?Detail content |
+| 2026-05-17 20:55 | cms | 淇缂洪櫡 | Events 鐖跺垪琛ㄦ柊澧炲唴瀹归」鍚庤嚜鍔ㄥ垏鎹㈠埌鍚?slug 鍔ㄦ€佸瓙椤甸潰鎶藉眽锛岄伩鍏嶅仠鐣欏湪鐖跺垪琛ㄦ椂鐪嬩笉鍒?Detail content |
+| 2026-05-17 20:15 | cms | 淇缂洪櫡 | CMS 鏂板 Events 鐖跺垪琛ㄩ」鏃跺悓姝ュ垱寤哄姩鎬佸瓙椤甸潰楠ㄦ灦锛屾柊澧炲姩鎬佸瓙椤甸潰鏃跺己鍒跺啓鍏?Detail content銆佽鎯呭浘鐗囧拰璇︽儏瑙嗛瀛楁 |
+| 2026-05-17 20:09 | cms | 淇缂洪櫡 | 鍔ㄦ€佸瓙椤甸潰鎶藉眽鍥哄畾琛ラ綈 Detail content銆佽鎯呭浘鐗囧拰璇︽儏瑙嗛瀛楁锛涗簨浠惰鎯呴〉浼氭覆鏌撴湭琚崰浣嶇娑堣垂鐨勫墿浣欏浘鐗?瑙嗛 |
+| 2026-05-17 20:00 | cms | 淇缂洪櫡 | 淇 CMS 鍔ㄦ€佸垪琛ㄦ柊澧炲悗瀛愰〉闈㈤€夋嫨鍣ㄦ棤娉曢€夋嫨鐨勯棶棰橈紝閫夋嫨鍒楄〃鏂板 slug 鏃惰嚜鍔ㄥ垱寤哄悓 slug 鍔ㄦ€佽鎯呴」锛涗簨浠惰鎯呴〉閬垮厤鎽樿涓庢鏂囬噸澶嶆覆鏌?|
+| 2026-05-17 19:52 | cms | 淇缂洪櫡 | 淇 Events 鐖堕〉闈?CMS 鍒楄〃鏂板椤逛笉鏄剧ず銆佸睍绀烘棩鏈熶笉鐢熸晥鐨勯棶棰橈紝鍒楄〃鍗＄墖鏀逛负璇诲彇 `event.list` 骞舵媶鍒嗘帓搴忔棩鏈熷拰灞曠ず鏃ユ湡锛涜ˉ榻愭湇鍔¤涓氬瓙椤甸潰鎶藉眽瀛楁鍏滃簳 |
+| 2026-05-17 19:39 | cms | 浼樺寲閲嶆瀯 | CMS 鍙鍖栧皢 Events 鐖堕〉闈㈠姩鎬佸垪琛ㄤ笌鍔ㄦ€佸瓙椤甸潰璇︽儏鎷嗗垎绠＄悊锛岀埗椤甸潰鍙繚鐣欏崱鐗囧瓧娈碉紝璇︽儏椤电洿鎺ヨ鍙?`event.detailPages`锛涙湇鍔¤涓氬瓙椤甸潰榛樿琛ラ綈璇︽儏椤甸灞忓浘鍜岀畝浠?|
+| 2026-05-17 19:03 | cms | 淇缂洪櫡 | 淇 CMS 鍙鍖栫紪杈戝櫒鍐呴《閮ㄩ〉绛俱€佽瑷€鍒囨崲銆丠eader/Footer 瀛楁銆佸唴瀹规娊灞夋寜閽拰鎻愮ず娑堟伅涓殑涓枃涔辩爜 |
+| 2026-05-17 18:50 | cms | 鏂板鍔熻兘 | 鏈嶅姟琛屼笟瀛愰〉闈㈡帴鍏?CMS 鍙鍖栫紪杈戯紝鏀寔鎸夊叿浣撹涓氱淮鎶よ鎯呴〉鏍囬銆侀灞忚儗鏅浘銆佺畝浠嬪拰璇︽儏鍗＄墖锛屽苟璁╅瑙堜笌鍓嶅彴璇︽儏椤佃鍙栧悓涓€浠介〉闈㈠瓧娈?|
+| 2026-05-17 18:47 | cms | 鏂板鍔熻兘 | Contact 椤?CMS 鍙鍖栬ˉ榻?Hero 姝ｆ枃/鑳屾櫙鍥俱€佽仈绯诲尯鐢佃瘽/閭/鍙冲浘銆佸姞鍏ヨ檸璇夊彸渚ф鏂囥€佸洓涓嫑鑱樻爮鐩拰绠€鍘嗘姇閫掑瓧娈碉紝骞舵柊澧炲墠鍙版牸寮忓寲鏂囨湰娓叉煋 |
+| 2026-05-17 18:24 | cms | 鏂板鍔熻兘 | Team銆佹湇鍔¤涓氬拰铏庤瘔鍔ㄦ€侀〉闈㈣ˉ榻?CMS 鍙鍖栧瓧娈碉紱鍥㈤槦鍒楄〃鎷嗕负鐙珛鍚堜紮浜?璧勬繁寰嬪笀鍗＄墖锛屾湇鍔¤涓氬垪琛ㄦ敼涓烘湰椤靛崱鐗囧唴瀹癸紝浜嬩欢璇︽儏濯掍綋浼樺厛璇诲彇鍙鍖栨潯鐩殑 `detailImageN/detailVideoN` |
+| 2026-05-17 18:09 | cms | 淇缂洪櫡 | 淇鐗堟湰鍙戝竷/鎭㈠鍚?CMS 宸︿晶瀵艰埅鍙兘鏃犲搷搴旂殑闂锛岀増鏈搷浣滄垚鍔熷悗涓嶅啀 `window.location.reload()`锛屾敼涓哄師鍦板埛鏂扮増鏈垪琛ㄥ苟閲嶆柊鍔犺浇褰撳墠鍙戝竷鐗堟湰 |
+| 2026-05-17 17:55 | cms | 鏂板鍔熻兘 | About 椤?CMS 鍙鍖栬ˉ榻?Hero 鍥剧墖銆佹効鏅乏渚?灞曞紑鏂囨涓庢寜閽€佽崳瑾夊彸渚ф鏂囥€佹枃鍖栨鏂?CTA銆丆ore Value 瀛愰〉闈㈡鏂囦互鍙婂ぇ浜嬭鍒楄〃绠＄悊锛屽苟鍚屾 Honors/Chronicle 鍒版寮?CMS 鐘舵€?|
+| 2026-05-17 17:43 | cms | 鏂板鍔熻兘 | Footer 鍙鍖栫紪杈戣ˉ榻愬彸渚ф鏂囥€佸湴鍧€銆佺増鏉冦€佸厤璐ｅ０鏄庢寜閽€佸妗堟枃瀛?閾炬帴鍜屽浘鏍囧瓧娈碉紝`SiteFooter` 鏀逛负璇诲彇 CMS footer 閰嶇疆 |
+| 2026-05-17 17:28 | cms | 淇缂洪櫡 | 淇 CMS 鍙鍖?Header/TITLE 淇敼鍚庨瑙堜笉鐢熸晥鐨勯棶棰橈紝姝ｅ紡 CMS 鐘舵€佹柊澧?`header` 閰嶇疆锛岄瑙?Provider 鍒锋柊 key 绾冲叆 `siteSettings` 鎸囩汗锛宍SiteHeader` 鏀逛负璇诲彇 CMS 瀵艰埅銆丩ogo 涓庤瑷€鎸夐挳鏂囨 |
+| 2026-05-17 14:45 | cms | 淇缂洪櫡 | 淇棣栭〉鍙鍖栧瓧娈靛彂甯冨悗姝ｅ紡绔欎笉鐢熸晥鐨勯棶棰橈紝姝ｅ紡 CMS 鐘舵€佷繚鐣?`previewPageContent`锛屾棫鐗堟湰鍙戝竷鏃剁敤 `pageContent` 鍥炲～ |
+| 2026-05-17 14:40 | cms | 淇缂洪櫡 | 淇 CMS 瀹樼綉鍐呭绠＄悊鍒楄〃 key 璀﹀憡锛涙寮忕珯鏀逛负鏈嶅姟绔鍙栧綋鍓?CMS锛屽叕寮€ CMS 鎺ュ彛鍜岀増鏈彂甯?鎭㈠鎺ュ彛寮哄埗鍔ㄦ€佸苟琛ラ綈鐪熷疄瀹樼綉璺緞鍒锋柊 |
+| 2026-05-17 14:37 | cms | 淇缂洪櫡 | 娣卞害淇铏庤瘔鍔ㄦ€佸瓙椤甸潰鏇挎崲璇︽儏鍥剧墖涓嶇敓鏁堢殑闂锛岀敓鎴愬獟浣撳瓧娈靛悓姝ュ啓鍥炲簳灞傚垪琛ㄥ苟淇濈暀鍥剧墖鍗犱綅椤哄簭 |
+| 2026-05-17 14:31 | cms | 鏂板鍔熻兘 | 棣栭〉铏庤瘔鍔ㄦ€佽疆鎾柊澧炵嫭绔?`home.eventOverrides` 鍜?See More CTA 瀛楁锛涘彲瑙嗗寲缂栬緫鎭㈠ Header/Footer 鏍忕洰骞惰棣栭〉 Vision銆両ndustries銆丠onors銆丒vents銆丆lients 鏂囨浼樺厛璇诲彇 CMS |
+| 2026-05-17 14:11 | cms | 淇缂洪櫡 | 娣卞害淇铏庤瘔鍔ㄦ€佸瓙椤甸潰鏇挎崲鍥剧墖鍚庨瑙堜笉鏇存柊鐨勯棶棰橈紝灏嗗垪琛?item 瀛楁鎸囩汗娉ㄥ叆 Puck 闅愯棌 prop 骞剁敤浜?CMS Provider 鍒锋柊 key |
+| 2026-05-17 14:02 | cms | 浼樺寲閲嶆瀯 | CMS 榛樿鍔犺浇宸插彂甯冪増鏈紱棣栭〉 Honors 鏌ョ湅鏇村鎸夐挳鏂板 `ctaLabel` 鍜?`ctaHref` 瀛楁骞跺吋瀹规棫鐗堟湰鍐呭 |
+| 2026-05-16 16:18 | cms | 淇缂洪櫡 | 淇 Puck 鎸?`pageContent.updatedAt` 鏁翠綋閲嶆寕杞藉鑷寸殑鏈€澶ф洿鏂版繁搴﹂敊璇紝鏀逛负鍙埛鏂?CMS Provider 棰勮涓婁笅鏂?|
+| 2026-05-16 16:11 | cms | 淇缂洪櫡 | 淇 CMS 鎶藉眽瀛楁鏀瑰浘鍚庝簨浠惰鎯呭浘鐗囧鐢ㄦ棫鑺傜偣鐨勯棶棰橈紝浜嬩欢璇︽儏鍥剧墖鑺傜偣鎸?src 閲嶅缓骞跺湪 Provider 灞傚埛鏂伴瑙堜笂涓嬫枃 |
+| 2026-05-16 15:57 | cms | 淇缂洪櫡 | 淇 CMS 棰勮缂哄皯 `officialSiteState` 鏃惰烦杩囪檸璇夊姩鎬佽鎯呭獟浣撳悓姝ョ殑闂锛岄粯璁ら瑙堢姸鎬佷篃浼氬悎鎴愪簨浠跺浘鐗囪鐩?|
+| 2026-05-16 15:50 | cms | 淇缂洪櫡 | 淇铏庤瘔鍔ㄦ€佽鎯呭浘鐗囧湴鍧€淇敼鍚庨瑙堜笉鏇存柊鐨勯棶棰橈紝璇︽儏濯掍綋妲戒綅鏀逛负涓嫳鏂囧叡鐢ㄥ苟鎸夊綋鍓嶉瑙堣瑷€浼樺厛鍚屾 |
+| 2026-05-16 15:44 | cms | 淇缂洪櫡 | CMS 铏庤瘔鍔ㄦ€佸瓙椤甸潰濯掍綋瀛楁鎸夋鏂囧崰浣嶇鐢熸垚鐙珛鍥剧墖/瑙嗛妲戒綅锛屼笂浼犳椂鏇挎崲瀵瑰簲妲戒綅骞朵繚瀛樹负璇︽儏濯掍綋鏁扮粍 |
+| 2026-05-16 15:34 | cms | UI 璋冩暣 | CMS 鐗堟湰涓嬫媺绉婚櫎鈥滃綋鍓嶇嚎涓婄増鏈€濋€夐」锛屽彧淇濈暀鐗堟湰绠＄悊涓垱寤虹殑鐗堟湰锛屾湭閫夋嫨鏃舵樉绀哄崰浣嶇姸鎬?|
+| 2026-05-16 15:04 | cms | 淇缂洪櫡 | CMS 榛樿涓嶅啀鑷姩鍔犺浇绗竴涓祴璇曠増鏈紱鐗堟湰 payload 绾冲叆 `officialSiteState`锛屽彂甯?鎭㈠鐗堟湰鏃跺悓姝ョ湡瀹炲畼缃戞暟鎹?|
+| 2026-05-16 14:47 | cms | 淇缂洪櫡 | 淇宸插彂甯冩祴璇曠増鏈彁浜ゆ洿鏂板悗鏈悓姝ュ埌褰撳墠绔欑偣鐨勯棶棰橈紝鐗堟湰 PUT 鏃惰嫢鐗堟湰宸插彂甯冧細鑷姩鎭㈠鍒扮珯鐐圭姸鎬?|
+| 2026-05-16 14:42 | cms | UI 璋冩暣 | 鍙鍖栫紪杈戦《閮ㄩ〉闈㈡爮鏀舵暃涓哄叚涓埗椤甸潰骞舵柊澧炶檸璇夋枃鍖栧瓙椤甸潰鍏ュ彛锛孋ore Value 椤甸潰鏍囬鍜岀粨灏炬枃妗堟帴鍏?CMS 棰勮瀛楁 |
+| 2026-05-16 14:15 | cms | 淇缂洪櫡 | 淇 CMS 鐗堟湰棰勮鐐瑰嚮 Events銆両ndustries銆乀eam 瀛愰〉闈㈤摼鎺ヤ細绂诲紑棰勮椤电殑闂锛屽苟绂佺敤鐗堟湰棰勮涓殑 public CMS 浜屾鎷夊彇 |
+| 2026-05-16 12:01 | cms | 鏂板鍔熻兘 | Events 瀛愰〉闈㈢紪杈戝鍔犺鎯呭浘鐗囧拰璇︽儏瑙嗛瀛楁锛屽唴瀹规娊灞変腑鐨勫浘鐗?瑙嗛瀛楁鏀寔鐩存帴涓婁紶骞跺啓鍥炲綋鍓嶄簨浠?|
+| 2026-05-16 11:52 | cms | 鏂板鍔熻兘 | 鍙鍖栫紪杈戦《閮ㄦ爮鏂板瀛愰〉闈㈤€夋嫨鍣紝Events銆両ndustries銆乀eam 鍙€夋嫨鍏蜂綋鍔ㄦ€併€佽涓氭垨鎴愬憳骞跺湪棰勮鍖烘墦寮€瀵瑰簲璇︽儏椤?|
+| 2026-05-16 11:45 | cms | 鏂板鍔熻兘 | 鍙鍖栫紪杈戦粯璁ゅ唴瀹硅ˉ榻愰椤垫湇鍔¤涓氥€佽檸璇夎崳瑾夈€佽檸璇夊姩鎬佸拰瀹㈡埛 Logo 鏉＄洰锛屽苟灏嗚繖浜涙潯鐩悓姝ュ埌鐪熷疄瀹樼綉棰勮鐘舵€?|
+| 2026-05-16 11:35 | cms | 淇缂洪櫡 | 淇 Puck 鐑敭鐩戝惉鍦ㄩ儴鍒嗚緭鍏ヤ簨浠朵笂瑙﹀彂 `getModifierState` 杩愯鏃堕敊璇紝骞跺皢鍙鍖栫紪杈戠殑 `pageContent` 浣滀负棰勮涓撶敤鍐呭娉ㄥ叆鐪熷疄瀹樼綉椤甸潰瀛楁 |
+| 2026-05-16 11:24 | cms | 淇缂洪櫡 | 淇鍙鍖栫紪杈戦瑙堜笉鍝嶅簲鍙充晶杈撳叆鐨勯棶棰橈細棰勮 CMS Provider 璺熼殢鍒濆鐘舵€佹洿鏂板苟绂佺敤浜屾 public 鎷夊彇锛岄椤甸灞忓拰椤佃剼璇诲彇 CMS 棰勮鎬?|
+| 2026-05-16 11:13 | cms | UI 璋冩暣 | 鏂囦欢绠＄悊闈㈡澘绉婚櫎绗簩濂楁棫涓婁紶鏂囦欢绛涢€夊拰鍗＄墖鍒楄〃锛屼粎淇濈暀鎬昏銆佷笂浼犲叆鍙ｅ拰 OSS 闈欐€佽祫婧愭祻瑙?|
+| 2026-05-16 10:30 | cms | 淇缂洪櫡 | CMS 鎸?slug 閫愰」琛ラ綈鍥㈤槦鎴愬憳鍜?Events 榛樿鍐呭锛涙湇鍔¤涓氬鍔犱腑鑻辨枃璇︽儏椤垫弿杩扮紪杈戝苟鎺ュ叆琛屼笟璇︽儏椤碉紱棣栭〉浜嬩欢杞挱琛ュ厖姝ｆ枃缂栬緫 |
+| 2026-05-16 09:14 | cms | 鏂板鍔熻兘 | 鏂板鐪熷疄瀹樼綉鍒楄〃绠＄悊 API 鍜?CMS 闈㈡澘锛屾湇鍔¤涓氥€侀椤佃疆鎾€丒vents銆丆lients銆丠onors銆丆hronicle銆丳artner銆丼enior Associate 鍒楄〃淇濆瓨鍒?`data/cms-site.json` 骞剁敱鍓嶅彴璇诲彇 |
+| 2026-05-16 09:36 | cms | 浼樺寲閲嶆瀯 | CMS 鍐呭绠＄悊鎷嗗垎涓洪椤?Events 杞挱銆侀椤?HONORS 杞挱銆佹湇鍔¤涓氥€佽檸璇夎崳瑾夈€佽檸璇夊ぇ浜嬭銆佸悎浼欎汉銆佽祫娣卞緥甯堝拰铏庤瘔鍔ㄦ€侊紱鏂囦欢绠＄悊鏂板 `public/assets` 鍒嗙被 OSS 璧勬簮娴忚 |
+| 2026-05-16 09:45 | cms | 鏂板鍔熻兘 | 鐪熷疄瀹樼綉 CMS 澧炲姞鍐呭瑕嗙洊鏁版嵁锛岃檸璇夎崳瑾夈€佽檸璇夊ぇ浜嬭銆佸洟闃熶釜浜轰俊鎭拰铏庤瘔鍔ㄦ€佸彲鍦ㄥ悗鍙扮紪杈戝苟鐢卞墠鍙颁紭鍏堣鍙?|
+| 2026-05-16 09:53 | cms | 浼樺寲閲嶆瀯 | 灏嗙湡瀹炲畼缃戝唴瀹硅鐩栫紪杈戜粠 JSON 鏂囨湰妗嗘敼涓哄崱鐗囧紡琛ㄥ崟锛屾敮鎸佷腑鑻辨枃杈撳叆銆佹柊澧炪€佸垹闄ゃ€佸睍寮€鎶樺彔鍜屼笂涓嬬Щ鍔?|
+| 2026-05-16 10:01 | cms | 浼樺寲閲嶆瀯 | 绉婚櫎鐪熷疄瀹樼綉鍐呭绠＄悊涓殑 slug/骞翠唤 textarea 鍒楄〃锛屾湇鍔¤涓氥€侀椤佃疆鎾€侀椤?HONORS銆佸洟闃熷拰鍔ㄦ€佹敼涓哄崱鐗囧紡鎺掑簭銆佹柊澧炲拰鍒犻櫎锛涙枃浠剁鐞嗙粺璁＄撼鍏?`public/assets` 闈欐€佽祫婧?|
+| 2026-05-16 10:16 | cms | 浼樺寲閲嶆瀯 | CMS 鍐呭闈㈡澘鑷姩鐢ㄥ綋鍓嶅畼缃?Honors銆丆hronicle銆乀eam 鍜?Events 闈欐€佹暟鎹垵濮嬪寲锛涢椤典簨浠惰疆鎾敮鎸佷腑鑻辨枃缂栬緫锛屾湇鍔¤涓氥€佸洟闃熷拰鍔ㄦ€佸崱鐗囧鍔犵缉鐣ュ浘 |
+| 2026-05-15 22:51 | cms | 鍒嗘敮鍚堝苟 | 鎸?`main` 浼樺厛绛栫暐灏?`main` 鍚堝苟鍒?`cms`锛屽苟灏?`AppProviders` 鐨?CMS 鍒濆鐘舵€佸弬鏁版敼涓哄彲閫変互鍏煎 `main` 鏍瑰竷灞€ |
+| 2026-05-15 22:33 | main | 閮ㄧ讲鍙戝竷 | 灏?`/client` 棣栭〉閲嶅畾鍚戜笌棣栭〉 SEO 鏍囬浼樺寲鍙戝竷鍒扮敓浜х幆澧冿紱鏈嶅姟鍣ㄧ増鏈洰褰曚负 `/opt/tigerpartners-web/releases/20260515-2230`锛岄獙璇?`/client` 杩斿洖 307 鍒?`/`锛岄椤?title/og:title 涓?`铏庤瘔寰嬪笀浜嬪姟鎵€ | Tiger Partners`锛宍WE KNOW HOW TO WIN` 涓嶅啀浣滀负 `h1` |
+| 2026-05-15 22:25 | main | SEO 涓庤矾鐢辫皟鏁?| 棣栭〉 metadata title 鏀逛负 `铏庤瘔寰嬪笀浜嬪姟鎵€ | Tiger Partners`锛岄灞忚瑙夊彛鍙?`WE KNOW HOW TO WIN` 浠庤涔?`h1` 鏀逛负绾瑙夋枃鏈紝鏂板闅愯棌璇箟鏍囬 `铏庤瘔寰嬪笀浜嬪姟鎵€ Tiger Partners`锛沗/client` 宸查厤缃噸瀹氬悜鍒伴椤碉紱鐢熶骇鏋勫缓閫氳繃锛屾湭閮ㄧ讲 |
+| 2026-05-15 22:15 | main | UI 璋冩暣 | 涓囧姏涓汉椤垫渶鍚庝笁鏉′笟缁╁竷灞€淇濇寔鍥哄畾 `gap-6` 闂磋窛锛屾敼鐢辩 23 鏉″崱鐗囨媺浼稿惛鏀堕澶栭珮搴︼紝瀹炵幇宸︿笂/鍙充笂涓庡乏涓?鍙充笅鍚屾椂瀵归綈锛涙竻鐞?`.next` 鍚庣敓浜ф瀯寤洪€氳繃锛屾湭閮ㄧ讲 |
+| 2026-05-15 22:13 | main | UI 璋冩暣 | 涓囧姏涓汉椤?Performance & Achievements 灞曞紑鍖烘渶鍚庝笁鏉℃敼涓轰笓闂ㄦ闈㈠竷灞€锛氬乏鍒楃 23 鍜岀 25 鏉★紝鍙冲垪绗?24 鏉★紝骞跺湪涓ゅ垪搴曢儴瀵归綈锛涚敓浜ф瀯寤洪€氳繃锛屾湭閮ㄧ讲 |
+| 2026-05-15 22:01 | main | UI 璋冩暣 | 涓汉绠€鍘嗚鎯呴〉绉诲姩绔?hero 鍖哄潡璋冩暣涓哄浘鐗囧湪涓汉淇℃伅涓婃柟锛涚‘璁や竾鍔涗腑鑻辨枃涓汉涓氱哗鍧囦负 25 鏉′笖鏈€鍚庝笁鏉″熬閮ㄩ『搴忎竴鑷达紱鐢熶骇鏋勫缓閫氳繃锛屾湭閮ㄧ讲 |
+| 2026-05-15 21:59 | main | 璧勬簮鏇存柊 | 鍚屾鏇挎崲 event 椤甸潰灏侀潰鍥?`event2.png`銆乣event8.png`銆乣event10.png`銆乣event16.png`锛屽苟灏?`event16` 鏁版嵁寮曠敤浠?`.jpg` 鏀逛负 `.png`锛? 寮犲浘宸蹭笂浼?OSS锛屾牴璺緞鐢熶骇鏋勫缓閫氳繃骞跺彂甯冨埌 `/opt/tigerpartners-web/releases/20260515-2155` |
+| 2026-05-15 10:07 | main | 閮ㄧ讲鍙戝竷 | 鏍硅矾寰勭敓浜ф瀯寤洪€氳繃锛屽苟鍙戝竷鍒?`https://www.tigerpartners.cn/`锛涙湇鍔″櫒鐗堟湰鐩綍涓?`/opt/tigerpartners-web/releases/20260515-0957`锛宍tigerpartners-web.service` 宸查噸鍚笖鍏綉鏍￠獙閫氳繃 |
+| 2026-05-15 09:54 | main | 璧勬簮鏇存柊 | 灏?`src/assets/event/event2` 涓?1-9 鍙峰皝闈㈠悓姝ヨ鐩栧埌 `public/assets/event/event2`锛岀‘淇?event2 椤甸潰鍓?9 寮犲皝闈㈡寜 `1.jpg`銆乣2.jpg`銆乣3.png` 鑷?`9.png` 鐨勫懡鍚嶉『搴忚鍙栵紱鏈瀯寤恒€佹湭閮ㄧ讲 |
+| 2026-05-15 09:46 | main | 鏁版嵁鏇存柊 | 鎸?`EN/liwanPerformance.md` 鍚屾涓囧姏涓汉璇︽儏椤典腑鑻辨枃 Performance & Achievements锛屽叡 25 鏉★紝涓枃涓庤嫳鏂囧潎鎸夋簮鏂囨。椤哄簭灞曠ず锛涙湭鏋勫缓銆佹湭閮ㄧ讲 |
+| 2026-05-15 09:41 | main | 鏁版嵁鏇存柊 | 浠?Events 瀵煎嚭鐧藉悕鍗曠Щ闄?`20200902`锛屼簨浠堕〉涓嶅啀灞曠ず鈥滄灙鐐竴鍝?榛勯噾涓囦袱 | 鍏充簬姘戦棿鍊熻捶鍒╃巼鍙告硶淇濇姢瑙勫垯璋冩暣鐨勮В璇烩€濓紱婧愭暟鎹笌闂茬疆璇︽儏鍥炬槧灏勪繚鐣欙紝鏈儴缃?|
+| 2026-05-15 09:29 | main | 瑙嗚涓庢枃妗堟洿鏂?| Cyber Tech and Game 鍦ㄩ椤点€両ndustries 鍒楄〃椤靛拰璇︽儏椤电粺涓€浣跨敤 `/assets/home/INDUSTRIES6.png`锛汬ome/About Honors 鑻辨枃璇存槑缁熶竴涓烘寚瀹氫笁琛岋紝閬垮厤 `By Multiple...` 琚媶寮€锛涙湰鍦扮被鍨嬫鏌ラ€氳繃锛屾湭閮ㄧ讲 |
+| 2026-05-15 09:22 | main | 鏁版嵁鏇存柊 | Events 椤甸潰鏂板浜嬩欢鍦ㄥ鍑烘椂鎸?`/assets/event/event2/` 鍥剧墖鏂囦欢鍚嶆暟瀛楅『搴忔帓搴忥紝纭繚鍗＄墖鎸?`1` 鑷?`15` 鐨勫懡鍚嶉『搴忓睍绀猴紱鏈湴绫诲瀷妫€鏌ラ€氳繃锛屾湭閮ㄧ讲 |
+| 2026-05-15 09:08 | main | 鏁版嵁鏇存柊 | Events 鏃т簨浠惰鎯呭浘鏀圭敤 `eventinfo` 涓寚瀹氬懡鍚嶆枃浠讹細`20210414-1`銆乣20210720-1/2/3`锛屽苟涓?`20210414`銆乣20210315` 鑻辨枃姝ｆ枃琛ュ浘鐗囧崰浣嶏紱`20210315-1` 褰撳墠鏈湪鐩綍涓紝鍏堟寜鐜版湁涓ゅ紶 `20210315-2` 鏂囦欢娓叉煋 |
+| 2026-05-15 09:01 | main | 鏁版嵁鏇存柊 | 鎸?`EN/event.md` 淇 Events 涓?`20210720`銆乣20200927` 涓ゆ潯浜嬩欢鑻辨枃鏍囬銆佹憳瑕佸拰姝ｆ枃锛屽苟涓?`20210720` 璇︽儏椤垫柊澧炰笁寮犳彃鍥炬槧灏勶紱鏈湴绫诲瀷妫€鏌ラ€氳繃锛屾湭閮ㄧ讲 |
+| 2026-05-15 08:56 | main | 瑙嗚浼樺寲 | 鍥㈤槦涓汉璇︽儏椤垫墜鏈虹 Hero 鏀逛负浣跨敤 `team1.png` 鑷?`team6.png` 鍥㈤槦鍗＄墖鍥撅紝骞跺皢涓汉淇℃伅缃簬鍥剧墖涓婃柟閬垮厤閲嶅彔锛涙湰鍦扮被鍨嬫鏌ラ€氳繃锛屾湭閮ㄧ讲 |
+| 2026-05-15 08:52 | main | 鏁版嵁鏇存柊 | 涓?Events 鏃т簨浠?`20210414` 鍜?`20210315` 澧炲姞璇︽儏椤靛浘鐗囨槧灏勶紝鍒嗗埆澶嶇敤鐜版湁 `event25.png`銆乣event27.png`锛涙湰鍦扮被鍨嬫鏌ラ€氳繃锛屾湭閮ㄧ讲 |
+| 2026-05-15 08:48 | main | 鏁版嵁鏇存柊 | Zoe Zhang 涓汉椤垫湇鍔¤涓氭敼涓烘寚瀹氫腑鑻辨枃浜旈」锛屽苟灏?Events 宸叉湁鐨?`20210720`銆乣20200927` 涓ゆ潯浜嬩欢鍔犲叆瀵煎嚭鐧藉悕鍗曪紱鏈敼鍔ㄤ簨浠舵簮 md 鏂囦欢锛屾湭閮ㄧ讲 |
+| 2026-05-15 01:25 | main | 鏂囨鏇存柊 | 鎸?`EN/zoePerformance.md` 灏?Zoe Zhang 涓汉璇︽儏椤?Performance & Achievements 鏇存柊涓?24 鏉′腑鑻辨枃涓氱哗锛屾湰娆′慨鏀规湭閮ㄧ讲 |
+| 2026-05-15 01:24 | main | 璧勬簮鍙戝竷 | 灏?01:20 鐨勬枃妗堜笌璧勬簮璋冩暣鏋勫缓鍙戝竷鍒?`/opt/tigerpartners-web/releases/20260515-0122`锛屾湇鍔￠噸鍚苟閫氳繃鏈嶅姟鍣ㄦ湰鏈?3004 楠岃瘉 |
+| 2026-05-15 01:20 | main | 鏂囨涓庤祫婧愭洿鏂?| 鏇存柊棣栭〉銆丄bout銆丗ooter銆乀eam 澶氬鑻辨枃鍒嗚鏂囨锛屼慨姝?Home 琛屼笟绗叚寮犺儗鏅浘銆丄bout Honors 骞翠唤榛勭嚎瀵归綈锛屽苟鍚屾 event2 1/2 鍥惧拰 Mengcheng Yun 鍥剧墖鍒?OSS |
+| 2026-05-13 01:02 | main | 璧勬簮鍙戝竷 | 鍚屾 About 鍥剧墖鐩綍鍒?OSS锛屽苟灏嗗綋鍓嶆牴璺緞鏋勫缓鍙戝竷鍒?`/opt/tigerpartners-web/releases/20260513-0058`锛屽叕缃戦獙璇侀€氳繃 |
+| 2026-05-13 00:46 | main | 鏂囨淇 | 娓呯悊 `src/data/event2Events.ts` 涓嫳鏂囦簨浠舵暟鎹噷鐨?mojibake 鏍囩偣锛屾寜 `EN/event2.md` 鎭㈠鏅鸿兘寮曞彿銆佹墍鏈夋牸鍜岃繛鎺ュ彿 |
+| 2026-05-13 00:39 | main | 鏂囨淇 | 鎸?`EN/event2.md` 淇 2024.11.13 CIETAC Cup 浜嬩欢鑻辨枃娈佃惤涓殑涔辩爜寮曞彿鍜屾墍鏈夋牸 |
+| 2026-05-13 00:35 | main | 璧勬簮鍙戝竷 | 灏嗗綋鍓嶆牴璺緞鏋勫缓鍙戝竷鍒?`/opt/tigerpartners-web/releases/20260513-0028` 骞堕噸鍚寮忕珯鏈嶅姟锛屽叕缃?HTTPS 楠岃瘉閫氳繃 |
+| 2026-05-13 00:25 | main | 瑙嗚浼樺寲 | 淇 About Chronicle 鎵嬫満绔勾浠芥寜閽€佹椂闂寸嚎鍗＄墖鍜屾爣棰樿鏄庣殑妯悜婧㈠嚭 |
+| 2026-05-13 00:20 | main | 瑙嗚浼樺寲 | 淇绉诲姩绔?Home Honors銆丠ome Events 杞挱鎺у埗銆丄bout Vision銆丄bout Honors 鍜?Our Team 棣栧睆鐨勬í鍚戞孩鍑轰笌闂磋窛闂 |
+| 2026-05-13 00:09 | main | 瑙嗚浼樺寲 | 浠呬繚鐣?Our Team 鎵嬫満绔?Hero 鍥炬寜瀹藉害鑷€傚簲锛屽叾浠栭〉闈㈡仮澶嶄笂涓€鐗?Hero 濯掍綋閾烘弧锛屽苟鍘嬪皬绉诲姩绔灞忔爣棰樺瓧鍙?|
+| 2026-05-13 00:02 | main | 瑙嗚浼樺寲 | 鎵嬫満绔?Hero 濯掍綋鍙栨秷 `height: 100%`锛屼粎寮哄埗瀹藉害 100%锛屾闈㈢缁х画淇濇寔瀹瑰櫒楂樺害閾烘弧 |
+| 2026-05-12 23:55 | main | 瑙嗚浼樺寲 | 鎵嬫満绔〉闈㈢骇 Hero 鍥剧墖鍜岄椤?Hero 瑙嗛鏀逛负 `w-screen` 瑙嗗彛瀹藉害閾烘弧灞忓箷锛屾闈㈢淇濇寔鐖跺鍣ㄥ搴?|
+| 2026-05-12 23:49 | main | 淇缂洪櫡 | 淇 event2 璇︽儏鍥?`detailImages` 涔辩爜鏂囦欢鍚嶏紝鎭㈠涓?public 涓湡瀹?`寰俊鍥剧墖_*` 璺緞 |
+| 2026-05-12 23:46 | main | 淇缂洪櫡 | 浠?`Chinese/event2.md` 閲嶆柊鍚屾 15 鏉?event2 涓枃浜嬩欢锛屼慨澶嶅墠 15 鏉′腑鏂囦贡鐮?|
+| 2026-05-12 23:41 | main | 淇缂洪櫡 | 淇 `src/data/event2Events.ts` 涓枃瀛楃涓茬己灏戦棴鍚堝紩鍙峰鑷寸殑 Unterminated string constant |
+| 2026-05-12 23:38 | main | 淇缂洪櫡 | Events 璇︽儏瑙嗛鏀逛负鎸夐涔﹁棰戝崰浣嶇浣嶇疆娓叉煋锛岃€屼笉鏄粺涓€杩藉姞鍒版鏂囨湯灏?|
+| 2026-05-12 23:30 | main | 瑙嗚浼樺寲 | 缁熶竴绉诲姩绔悇椤甸潰 Hero 濯掍綋瀹藉害閾烘弧鐖跺鍣紝閬垮厤鎸夊浘鐗囪嚜韬昂瀵告敹缂?|
+| 2026-05-12 23:24 | main | 鏂板鍔熻兘 | Events 璇︽儏椤典负 2025.06.17 鍜?2024.11.13 涓ゆ潯鍔ㄦ€佹帴鍏ヨ棰戞挱鏀?|
+| 2026-05-12 23:12 | main | 瑙嗚浼樺寲 | 铏庤瘔鍔ㄦ€?Events 鍒楄〃鍗＄墖椤堕儴鍥剧墖姣斾緥浠?16:9 璋冩暣涓?4:3 |
+| 2026-05-12 22:40 | main | 鏂囨。鏇存柊 | 纭 About Chronicle 2026 骞翠竴鏈堥挶浼柉澶т腑鍗庡尯鎸囧崡璁板綍宸蹭繚鐣欙紝骞朵慨姝ｆ灦鏋勬枃妗ｅ 2026 骞磋褰曡寖鍥寸殑鎻忚堪 |
+| 2026-05-12 22:39 | main | 閰嶇疆鍙樻洿 | 涓烘棫绔欒嫳鏂囧墠缂€ `/en` 鍜?`/en/:path*` 琛ュ厖涓存椂璺宠浆锛屽吋瀹瑰甫 hash 鐨勬棫鑻辨枃鍏ュ彛 |
+| 2026-05-12 22:37 | main | 閰嶇疆鍙樻洿 | 涓烘棫绔欎腑鏂囧墠缂€ `/zh` 鍜?`/zh/:path*` 娣诲姞涓存椂璺宠浆锛屽吋瀹规棫榛樿鍏ュ彛閬垮厤 404 |
+| 2026-05-12 22:34 | main | 淇缂洪櫡 | 淇 Events 鐐瑰嚮 See More 鍚庤繘鍏ヨ鎯呭啀杩斿洖鏃跺睍寮€鐘舵€佷涪澶憋紝瀵艰嚧鏃犳硶鍥炲埌鍘熷垪琛ㄤ綅缃殑闂 |
+| 2026-05-12 22:30 | main | 鏂囨鏇存柊 | 鍒樼厹鏆勪腑鑻辨枃鑽ｈ獕璇存槑鏀逛负鍐掑彿缁撳熬锛屽苟璁╄崳瑾夊紩瀵艰鏄庝笉鏄剧ず鍒楄〃鍦嗙偣 |
+| 2026-05-12 22:20 | main | 鏂囨鏇存柊 | 鎸変腑鑻辨枃 CHRONICLE.md 鏍″噯 About Chronicle 2026 骞?3-5 鏈堟柊澧炰簨浠讹紝淇涓枃涔辩爜骞惰ˉ榻愪簲鏈堜富瑕佽鍒ら鍩?|
+| 2026-05-12 22:18 | main | 璧勬簮鍙戝竷 | 鍚屾鏂扮増 About Hero銆丮engcheng Yun 鍥㈤槦鍗＄墖鍥惧拰涓汉璇︽儏鍥惧埌 public锛屽苟璁╁洟闃熷崱鐗囪鍙栨柊鐗?PNG |
+| 2026-05-12 22:07 | main | 鏂板鍔熻兘 | 鏂板鍏ㄧ珯绂佺敤娴忚鍣ㄧ缉鏀捐鍒欙紝缁撳悎 viewport metadata銆佸鎴风浜嬩欢鎷︽埅鍜屽叏灞€ touch-action |
+| 2026-05-12 22:03 | main | 瑙嗚浼樺寲 | Core Value 鑻辨枃姝ｆ枃鍙栨秷涓ょ瀵归綈锛屾敼涓哄乏瀵归綈鍜屾洿绱у噾琛岄珮锛岄伩鍏嶅崟璇嶉棿璺濊鎷夊紑 |
+| 2026-05-12 21:55 | main | 淇缂洪櫡 | 淇 Home 鏍囩椤垫爣棰樸€佺Щ鍔ㄧ Hero 濯掍綋閾烘弧銆丄bout Chronicle 瀹屾暣鏂囨銆佸洟闃熶釜浜轰笟缁╁畬鏁存枃妗堝拰 Core Value 缂哄け娈佃惤锛屽苟鍚屾鏂扮増 event2 鍥剧墖鍒?public/OSS |
+| 2026-05-12 02:01 | main | 璧勬簮鍙戝竷 | 鏁存壒涓婁紶 OSS 涓?`husuweb/assets/home/clientLogo/` 鐨?42 涓鎴?Logo锛屽垹闄よ鐢ㄧ殑 `client-logo-26.png` 鍜?`client-logo-42.png`锛屽苟瀹屾垚绾夸笂鏍￠獙 |
+| 2026-05-12 01:57 | main | 璧勬簮鍙戝竷 | 鏁存壒涓婁紶 OSS 涓?`husuweb/assets/event/event2/` 鍜?`husuweb/assets/event/eventinfo2/` 鍏?40 涓浘鐗囨枃浠讹紝骞堕€愪釜瀹屾垚涓嬭浇鍥炴簮鍝堝笇鏍￠獙 |
+| 2026-05-12 01:52 | main | 璧勬簮鍙戝竷 | 瑕嗙洊涓婁紶 OSS 涓?About Hero銆丗ooter 浜岀淮鐮佸拰閭变紵甯嗗洟闃熷浘 `team6.webp`锛屽苟瀹屾垚绾夸笂鍝堝笇鏍￠獙 |
+| 2026-05-12 01:40 | main | 閰嶇疆鍙樻洿 | 灏嗚檸璇夊畼缃戜粠 `/opt/daxuanweb-root` 杩佺Щ鍒扮嫭绔嬬洰褰?`/opt/tigerpartners-web`锛屾柊寤?`tigerpartners-web.service` 骞舵敼鐢?`127.0.0.1:3004` |
+| 2026-05-12 01:18 | main | 閰嶇疆鍙樻洿 | 涓?`www.tigerpartners.cn` 閰嶇疆 Nginx `server_name` 鍜?Let's Encrypt HTTPS 璇佷功锛屽惎鐢?HTTP 鑷姩璺宠浆 HTTPS |
+| 2026-05-12 00:52 | main | 閰嶇疆鍙樻洿 | 灏嗗綋鍓?Next standalone 鍙戝竷鍖呴儴缃插埌鏂版湇鍔″櫒鏍硅矾寰?`http://39.106.226.65/`锛屾部鐢?`daxuanweb-root.service` 鍜?Nginx `/` 鍙嶄唬 |
+| 2026-05-11 23:49 | main | 淇缂洪櫡 | About Honors 鍚屼竴骞村唴鎸夋湀浠介檷搴忓睍绀猴紝鏈堜唤澶х殑鑽ｈ獕鎺掑湪涓婃柟 |
+| 2026-05-11 23:45 | main | 瑙嗚浼樺寲 | 棣栭〉 Clients Logo 澧欐粴鍔ㄩ€熷害鎻愬崌鍒板師鏉ョ殑 1.3 鍊?|
+| 2026-05-11 23:41 | main | 璧勬簮鍙戝竷 | About Hero 鍒囨崲鍥?`/assets/about/hero.png` 骞跺悓姝ユ柊鐗?hero 鍥惧埌 public |
+| 2026-05-11 23:36 | main | 瑙嗚浼樺寲 | 浜嬩欢璇︽儏椤靛彇娑堝彸渚у皝闈㈠浘鍒楋紝姝ｆ枃鍗犳弧鐖跺鍣紝姝ｆ枃鎻掑浘妗岄潰瀹藉害鏀逛负 70% |
+| 2026-05-11 23:33 | main | 璧勬簮鍙戝竷 | 鍚屾鏂扮増 Footer 浜岀淮鐮佸埌 public锛屽苟鍒锋柊 `SiteFooter` 浜岀淮鐮?URL 鐗堟湰鍙傛暟 |
+| 2026-05-11 23:28 | main | 鏂板鍔熻兘 | 鏃?28 鏉?Events 璇︽儏椤垫帴鍏?eventinfo 椤哄簭鍥剧墖锛屽苟鏀寔琛屽唴 `[鍥剧墖` 鍗犱綅绗︽彃鍥炬覆鏌?|
+| 2026-05-11 23:21 | main | 鏂板鍔熻兘 | Events 鏂板 event2 涓嫳鏂?15 鏉′簨浠讹紝鎺ュ叆 event2 鍒楄〃鍥惧拰 eventinfo2 璇︽儏鍗犱綅鍥鹃『搴忔覆鏌?|
+| 2026-05-11 23:00 | main | 鏂囨鏇存柊 | 鎸夌敤鎴锋寚瀹氫腑鏂囩簿纭帾杈炴洿鏂?About Chronicle 2026 骞?3-5 鏈堜笁鏉′腑鏂囪褰?|
+| 2026-05-11 22:49 | main | 淇缂洪櫡 | Events 鏁版嵁鎸?`EN/event.md` 鏀舵暃鍒?28 鏉★紝涓枃鏃ユ湡鏀逛负 `YYYY.MM.DD`锛屼慨澶嶆棤鍒嗙被浜嬩欢鏍囬鍓嶇疆 `|`锛屽苟涓鸿鎯呰繑鍥炲鍔犳粴鍔ㄤ綅缃仮澶?|
+| 2026-05-04 17:32 | main | 鏂板鍔熻兘 | 鍩轰簬 `tech.md` 鍜?`ada.md` 鎼缓 Next 瀹樼綉棣栫増锛岃縼绉婚椤典笌 About 椤甸潰锛屾渶灏忓寲渚濊禆骞跺垏鎹?Yarn |
+| 2026-05-04 17:57 | main | 鏂板鍔熻兘 | 鎺ュ叆鏈嶅姟琛屼笟銆佷簨浠躲€佽仈绯绘垜浠笁涓柊澧炲師鍨嬮〉闈紝琛ュ厖瀵瑰簲璺敱鍜屽叕鍏辩礌鏉?|
+| 2026-05-04 18:03 | main | 浼樺寲閲嶆瀯 | 鏍规嵁澶у睆鑷€傚簲瑙勮寖鍔犲叆 rem 鏍瑰瓧鍙风缉鏀剧瓥鐣ワ紝骞跺皝椤跺埌 22px |
+| 2026-05-04 18:08 | main | 浼樺寲閲嶆瀯 | 灏嗘墍鏈夐〉闈㈠睍绀虹粍浠朵粠 `src/app` 鎶藉埌 `src/components/pages`锛岃矾鐢辨枃浠朵粎淇濈暀 metadata 鍜屽叆鍙?|
+| 2026-05-04 18:33 | main | 浼樺寲閲嶆瀯 | 鏍规嵁 `OVERALL/title/word.md` 閲嶅仛椤堕儴 title 瀵艰埅锛屽姞鍏?logo銆佷腑鑻辨枃鍒囨崲銆佹粴鍔ㄨ儗鏅拰 hover 涓嬪垝绾垮姩鐢?|
+| 2026-05-04 22:54 | main | 鏂板鍔熻兘 | 鏍规嵁 `OVERALL/home/word.md` 閲嶅仛棣栭〉 Hero銆乂ision銆佽涓氬崱鐗囥€丠onors 鏃堕棿杞淬€丒vents 涓夊崱杞挱鍜?Clients Logo 澧欎氦浜?|
+| 2026-05-04 22:54 | main | 閰嶇疆鍙樻洿 | 鎵╁睍 `tsconfig.json` 鍘熷瀷鐩綍鎺掗櫎鑼冨洿锛屼娇褰撳墠 Next 涓诲簲鐢ㄦ瀯寤哄拰绫诲瀷妫€鏌ラ€氳繃 |
+| 2026-05-04 23:07 | main | 浼樺寲閲嶆瀯 | 鏍规嵁 `OVERALL/about/word.md` 璋冩暣 About Hero 涓嬫柟 Vision 鍗＄墖銆丠onors 鎶樺彔鏍峰紡鍜?Chronicle 鎶樺彔鏃堕棿杞?|
+| 2026-05-04 23:21 | main | 浼樺寲閲嶆瀯 | 鏍规嵁 `OVERALL/foot/word.md` 缁熶竴鍏ㄧ珯 Footer锛屽苟鎺ュ叆 foot 鐩綍涓嬬殑 logo銆佽仈绯诲浘鏍囥€佷簩缁寸爜鍜屽妗堝浘鏍?|
+| 2026-05-04 23:29 | main | 浼樺寲閲嶆瀯 | 鏍规嵁 `OVERALL/events/word.md` 璋冩暣 Events Hero 鏂囨娓愬彉銆丩ATEST UPDATES 鍗＄墖 hover 鍔ㄦ晥鍜屽浘鐗囧亸绉?|
+| 2026-05-04 23:41 | main | 浼樺寲閲嶆瀯 | 寰皟 About Honors 灞曞紑澶撮儴鑳屾櫙銆丆hronicle 涓酱灞曞紑鍔ㄦ晥鍜?Culture 宸﹀浘 hover/leave 鍔ㄦ晥 |
+| 2026-05-04 23:41 | main | 閰嶇疆鍙樻洿 | 灏?`鎴戠殑鍥㈤槦` 鍘熷瀷鐩綍鍔犲叆 `tsconfig.json` 鎺掗櫎鍒楄〃锛岄伩鍏嶆棫鍘熷瀷渚濊禆褰卞搷涓诲簲鐢ㄧ被鍨嬫鏌?|
+| 2026-05-04 23:43 | main | 鏂板鍔熻兘 | 鍩轰簬 `鎴戠殑鍥㈤槦/` 鍘熷瀷鏂板 `/team` 鍥㈤槦椤碉紝鎺ュ叆瀵艰埅銆佸洟闃熺礌鏉愩€佷汉鐗╁崱鐗囧拰鍏ㄧ珯椤佃剼 |
+| 2026-05-05 13:06 | main | 浼樺寲閲嶆瀯 | 鏍规嵁棣栭〉琛ュ厖鍙嶉璋冩暣 Hero 鍗曡銆乂ision 杈硅窛鍜屾棆杞爣棰樸€佹寜閽牱寮忋€佹爣棰樺瓧鍙枫€佹枃妗堟崲琛屻€丒vents 鍗＄墖闂磋窛鍜屽鎴?Logo 閫熷害 |
+| 2026-05-05 13:21 | main | 浼樺寲閲嶆瀯 | 淇棣栭〉 Hero 瀛楀彿銆乂ision 瑁佸垏銆両ndustries 鏍囬灏哄鍜?Events 杞挱鍥剧墖/鐏板崱杩炴帴闂 |
+| 2026-05-05 13:21 | main | 閰嶇疆鍙樻洿 | 杩藉姞鎺掗櫎 `core value`銆乣涓汉浠嬬粛璇︽儏`銆乣浜嬩欢璇︽儏`銆乣琛屼笟璇︽儏` 鍘熷瀷鐩綍锛屾仮澶嶄富搴旂敤绫诲瀷妫€鏌?|
+| 2026-05-05 13:31 | main | 鏂板鍔熻兘 | 鍩轰簬 `core value/` 鍘熷瀷鏂板 `/about/core-value` 瀛愰〉闈紝骞舵帴鍏?Culture 鐨?Read Full Manifesto 鎸夐挳 |
+| 2026-05-05 13:31 | main | 浼樺寲閲嶆瀯 | 璋冩暣 About Hero 鐏拌壊 Vision 鍗＄墖浣嶇疆锛岀畝鍖?Culture 鏂囨骞舵洿鏂板彸渚ц儗鏅笌宸﹀浘娓愬彉 |
+| 2026-05-05 13:36 | main | 浼樺寲閲嶆瀯 | 璋冩暣 Team Hero 瀛楀彿鍜屽叏瀹藉浘鐗囥€丼pecial Forces 涓よ鎺掔増銆丼enior Associate 鏍囬浣嶇疆锛屽苟绉婚櫎浜虹墿鍥剧伆鑹茶挋灞?|
+| 2026-05-05 13:39 | main | 鏂板鍔熻兘 | 鍩轰簬 `涓汉浠嬬粛璇︽儏/` 鍘熷瀷鏂板 `/team/yuxuan-liu` 涓汉璇︽儏椤碉紝骞跺皢 Team 鍗＄墖 Find out more 閾炬帴鎺ュ叆璇ヨ矾鐢?|
+| 2026-05-05 13:48 | main | 鏂板鍔熻兘 | 鍩轰簬 `琛屼笟璇︽儏/` 鍘熷瀷鏂板 `/industries/[slug]` 琛屼笟璇︽儏椤碉紝骞跺皢 Industries 鍏釜鍗＄墖鎺ュ叆璇︽儏璺敱 |
+| 2026-05-05 13:48 | main | 浼樺寲閲嶆瀯 | 璋冩暣 Industries 鍗＄墖缃戞牸涓?1 / 3 / 2 涓夎甯冨眬锛岀浜岃宸︿晶 40% 瀹姐€佸彸渚т袱鍗″钩鍒嗗墿浣欏搴?|
+| 2026-05-05 13:52 | main | 鏂板鍔熻兘 | 鍩轰簬 `浜嬩欢璇︽儏/` 鍘熷瀷鏂板 `/events/[slug]` 浜嬩欢璇︽儏椤碉紝骞跺皢 Events 鍗＄墖鎺ュ叆璇︽儏璺敱 |
+| 2026-05-05 13:52 | main | 浼樺寲閲嶆瀯 | 璋冩暣 Events Hero 涓哄眳涓爣棰樻鏂囧拰鍏ㄥ睆娓愬彉鑳屾櫙锛屽苟灏?Latest Updates 鏀逛负涓夊垪涓夎 |
+| 2026-05-05 16:13 | main | 浼樺寲閲嶆瀯 | 灏嗗叏绔?title 瀵艰埅鍜屼富瑕佸唴瀹瑰３灞傛闈㈠乏鍙宠竟璺濈粺涓€璋冩暣涓?`12rem` |
+| 2026-05-05 16:20 | main | 浼樺寲閲嶆瀯 | 灏嗗叏绔?rem 缂╂斁绛栫暐鏀逛负浠?1920px 涓哄熀鍑嗭紝1440px 绛夋瘮缂╁皬 |
+| 2026-05-05 16:24 | main | 浼樺寲閲嶆瀯 | 灏嗗叕鍏?title logo 鏀惧ぇ 1.3 鍊嶏紝瀵艰埅鏂囧瓧鏀惧ぇ 1.4 鍊?|
+| 2026-05-05 16:26 | main | 浼樺寲閲嶆瀯 | 灏嗗叕鍏?title logo 缁х画鏀惧ぇ 1.2 鍊嶃€佸鑸枃瀛楃户缁斁澶?1.4 鍊嶏紝骞惰缃笂涓?padding 涓?`1.2rem` |
+| 2026-05-05 16:27 | main | 浼樺寲閲嶆瀯 | 灏嗛椤?Hero 鏍囬 `we know how to win` 瀛楀彿鏀惧ぇ 1.1 鍊?|
+| 2026-05-05 16:34 | main | 浼樺寲閲嶆瀯 | 璋冩暣棣栭〉 Vision 灞忚儗鏅€佸崱鐗囪竟璺濄€佷笁琛屾鏂囧拰 Get To Know Us 鎸夐挳鏍峰紡 |
+| 2026-05-05 16:38 | main | 浼樺寲閲嶆瀯 | 淇棣栭〉 Vision 鎸夐挳榛樿鐧藉簳榛戝瓧銆佸崱鐗囧璺濆拰鍙充晶 Vision 瀹氫綅 |
+| 2026-05-05 16:41 | main | 浼樺寲閲嶆瀯 | 灏嗛椤?Vision 姝ｆ枃瀛楀彿缁х画鏀惧ぇ 1.2 鍊嶏紝骞朵慨姝ｅ乏渚ф枃瀛楀埌瑙嗙獥 12rem 鍐呭绾?|
+| 2026-05-05 16:42 | main | 浼樺寲閲嶆瀯 | 灏嗛椤?Vision 鍙充晶鏍囪瘑鏀逛负鏃嬭浆 180 搴︼紝骞跺皢瀛楀彿缂╁皬鍒板綋鍓?90% |
+| 2026-05-05 16:43 | main | 浼樺寲閲嶆瀯 | 灏嗛椤?Vision 鍙充晶鏍囪瘑浠?180 搴﹁皟鏁翠负 270 搴︽棆杞?|
+| 2026-05-05 16:44 | main | 浼樺寲閲嶆瀯 | 灏嗛椤?Industries & Services 璇存槑姝ｆ枃鏀惧ぇ鍒?1.8 鍊嶅苟鍗犳弧鐖跺鍣?|
+| 2026-05-05 16:46 | main | 浼樺寲閲嶆瀯 | 绉婚櫎棣栭〉 Industries 鍗＄墖 hover 鍚庢爣棰樹笅鏂圭殑姝ｆ枃鎻忚堪 |
+| 2026-05-05 16:47 | main | 浼樺寲閲嶆瀯 | 绉婚櫎棣栭〉 Industries 鍗＄墖鍖哄簳閮ㄦí绾匡紝骞跺皢 Honors 鍙充晶璇存槑鏂囧瓧鏀惧ぇ 1.4 鍊?|
+| 2026-05-05 16:52 | main | 浼樺寲閲嶆瀯 | 璋冩暣棣栭〉 Honors 瀵归綈涓庡唴瀹瑰瓧鍙凤紝绉婚櫎 See More锛屽苟鏀惧ぇ Events 鍙充晶璇存槑鍜岃疆鎾崱鐗囬棿璺?|
+| 2026-05-05 16:55 | main | 浼樺寲閲嶆瀯 | 璋冩暣棣栭〉 Clients 鏍囬宸﹁竟璺濅负 `5rem`锛屽苟绉婚櫎 Logo 澧欏乏鍙抽粦鑹叉笎闅愯挋灞?|
+| 2026-05-05 16:58 | main | 浼樺寲閲嶆瀯 | 璋冩暣 About Hero 鏍囬缁勫拰鐏拌壊 Vision 鏂瑰潡鐨勯灞忓瀭鐩翠綅缃?|
+| 2026-05-05 17:01 | main | 浼樺寲閲嶆瀯 | 灏嗛椤电浜屽睆 Vision 鑳屾櫙鏀逛负閲嶅绾圭悊鍙犲姞妯悜娓愬彉 |
+| 2026-05-05 17:01 | main | 浼樺寲閲嶆瀯 | 淇棣栭〉 Vision 娓愬彉绾圭悊浣滅敤鑼冨洿锛屽皢鍏朵粠鏁村睆鑳屾櫙绉诲埌鍗＄墖鑳屾櫙 |
+| 2026-05-05 17:02 | main | 浼樺寲閲嶆瀯 | 绉婚櫎棣栭〉 Vision 鍗＄墖鑳屾櫙绾圭悊锛屾敼涓哄乏涓婂埌鍙充笅瀵硅绾挎笎鍙?|
+| 2026-05-05 17:03 | main | 浼樺寲閲嶆瀯 | 绉婚櫎棣栭〉 Vision 鍗＄墖涓婁笅榛戣壊閬僵 |
+| 2026-05-05 17:04 | main | 浼樺寲閲嶆瀯 | 璋冩暣棣栭〉 Vision 鍗＄墖娓愬彉涓婇儴棰滆壊锛屼娇鍏舵洿鍋忕伆 |
+| 2026-05-05 17:05 | main | 浼樺寲閲嶆瀯 | 缁х画鍘嬫殫棣栭〉 Vision 鍗＄墖娓愬彉涓婇儴棰滆壊 |
+| 2026-05-05 17:05 | main | 浼樺寲閲嶆瀯 | 鍐嶆鍘嬫殫棣栭〉 Vision 鍗＄墖娓愬彉涓婇儴棰滆壊 |
+| 2026-05-05 17:17 | main | 浼樺寲閲嶆瀯 | 灏嗛椤?Vision 鍗＄墖娓愬彉璧峰鑹叉爣璋冩暣涓?`rgb(36, 36, 36) 9%` |
+| 2026-05-05 17:35 | main | 浼樺寲閲嶆瀯 | 鎺ュ叆 `src/font/poppins.ttf` 鏈湴瀛椾綋锛屼娇鍏ㄧ珯鏂囧瓧榛樿浣跨敤 Poppins |
+| 2026-05-05 17:52 | main | 浼樺寲閲嶆瀯 | 璋冩暣 About Hero銆丠onors銆丆ulture銆丆hronicle 鐨勬帓鐗堛€佹笎鍙樸€侀鑹插拰灞曞紑鏍峰紡 |
+| 2026-05-05 17:59 | main | 浼樺寲閲嶆瀯 | 璋冩暣 Team 椤?Special Forces 鏍囬闂磋窛銆丳artner 鍒嗗尯鍜屼汉鐗╁崱鐗囬摼鎺ユ牱寮?|
+| 2026-05-05 18:08 | main | 浼樺寲閲嶆瀯 | 璋冩暣 Industries 椤?Hero 瀵归綈銆佽鏄庡崱鐗囨笎鍙樺拰琛屼笟鍗＄墖缃戞牸灏哄 |
+| 2026-05-05 18:12 | main | 浼樺寲閲嶆瀯 | 鎭㈠ Industries 璇存槑鍗＄墖寮曞彿瑁呴グ锛屽苟鎷夋弧琛屼笟鍗＄墖鏍囬涓嬪垝绾?|
+| 2026-05-05 18:17 | main | 浼樺寲閲嶆瀯 | 璋冩暣 Events Hero 娓愬彉鑳屾櫙鑼冨洿锛岀Щ闄ょ浜屽睆鏍囬骞舵仮澶嶅崱鐗囧浘鐗囧僵鑹?|
+| 2026-05-05 18:22 | main | 浼樺寲閲嶆瀯 | 璋冩暣 Events Hero 涓庣浜屽睆澶栬窛锛屽苟绮剧畝浜嬩欢鍗＄墖鍐呭 |
+| 2026-05-05 18:23 | main | 浼樺寲閲嶆瀯 | 灏?Events 绗簩灞忎簨浠跺崱鐗囦箣闂寸殑闂磋窛鎵╁ぇ 3 鍊?|
+| 2026-05-05 18:24 | main | 浼樺寲閲嶆瀯 | 灏?Events 鍗＄墖鍥剧墖鍚戜笂鍚戝乏鍋忕Щ閲忕缉灏忓埌鍘熸潵鐨?33% |
+| 2026-05-05 18:26 | main | 浼樺寲閲嶆瀯 | 璋冩暣 Events 鍗＄墖鏃ユ湡涓庡浘鐗囬棿璺濓紝骞剁缉灏忓彸涓嬭涓夎褰㈤珮搴?|
+| 2026-05-05 18:27 | main | 浼樺寲閲嶆瀯 | 灏?Events 鍗＄墖鏃ユ湡涓庡浘鐗囬棿璺濈户缁鍔?3rem |
+| 2026-05-05 18:28 | main | 浼樺寲閲嶆瀯 | 缂╁皬 Events 鍗＄墖鏍囬瀛楀彿骞舵仮澶嶅崱鐗囩旱鍚戦棿璺?|
+| 2026-05-05 20:40 | main | 浼樺寲閲嶆瀯 | 灏?Contact 椤典富瑕佸唴瀹瑰乏杈硅窛缁熶竴璋冩暣涓?`9rem` |
+| 2026-05-05 20:49 | main | 浼樺寲閲嶆瀯 | 淇 About Culture 鍖哄潡鑳屾櫙鑹层€佸浘鐗囧帇鏆楅伄缃╁拰鍙充晶姘村嵃鏁堟灉 |
+| 2026-05-05 20:55 | main | 浼樺寲閲嶆瀯 | 闄嶄綆 About Culture 涓婚伄缃╁乏渚ч€忔槑搴︼紝閬垮厤瑕嗙洊鏁村紶宸﹀浘 |
+| 2026-05-05 20:59 | main | 浼樺寲閲嶆瀯 | 鎷夊 About Culture 宸﹀浘鍒板彸渚ц儗鏅殑妫曢噾娓愬彉杩囨浮鑼冨洿 |
+| 2026-05-05 21:00 | main | 浼樺寲閲嶆瀯 | 鍘婚櫎 About Culture 宸﹀浘涓讳綋鍖哄煙鐨勯浘鍖栭伄缃╂晥鏋?|
+| 2026-05-05 21:02 | main | 浼樺寲閲嶆瀯 | 鍙栨秷 About Culture 澶栧眰鑳屾櫙鑹插拰宸﹀浘鍖哄煙妫曡壊钂欏眰 |
+| 2026-05-05 21:03 | main | 浼樺寲閲嶆瀯 | 灏?About Culture 鍖哄潡鏀逛负鍏ㄥ鏃犲杈硅窛涓旈珮搴︾害 80vh |
+| 2026-05-05 21:05 | main | 浼樺寲閲嶆瀯 | 涓?About Culture 宸﹀浘鍙充晶 30% 澧炲姞鑳屾櫙鑹插埌閫忔槑鐨勬笎鍙?|
+| 2026-05-05 21:16 | main | 浼樺寲閲嶆瀯 | 灏?Contact 鍩庡競鍥剧墖妯″潡绉诲姩鍒?Hero 涓嬫柟锛屽苟鏀逛负宸︿俊鎭彸鍥剧墖鍙屾爮 |
+| 2026-05-05 21:18 | main | 浼樺寲閲嶆瀯 | 灏?Contact us 鍙屾爮妯″潡宸︿晶鏂囧瓧鍜屽浘鏍囨敼涓洪粦鑹?|
+| 2026-05-05 21:23 | main | 浼樺寲閲嶆瀯 | 璋冩暣 Contact 鎷涜仒鍗＄墖缂栧彿銆佺畝鍘嗛偖绠卞榻愬拰鍙充晶涓夎褰㈣儗鏅?|
+| 2026-05-05 21:25 | main | 浼樺寲閲嶆瀯 | 淇 Contact 鍙充晶涓夎褰㈣儗鏅粓鐐癸紝浣垮叾杩炴帴鍒?Footer 椤堕儴涓棿 |
+| 2026-05-05 21:26 | main | 浼樺寲閲嶆瀯 | 璋冩暣 Contact 鍊欓€変汉鍗＄墖涓嬪垝绾夸笂杈硅窛鍜屼笁瑙掑舰瑕嗙洊灞傜骇 |
+| 2026-05-05 21:28 | main | 浼樺寲閲嶆瀯 | 鍔犵矖 Contact 鍊欓€変汉鍗＄墖涓嬪垝绾匡紝骞跺皢涓夎褰㈡敼鍥炲簳灞傝儗鏅?|
+| 2026-05-05 21:29 | main | 浼樺寲閲嶆瀯 | 璋冩暣 Contact 涓夎褰负楂樹簬鍗＄墖鑳屾櫙涓斾綆浜庡崱鐗囧唴瀹圭殑涓棿灞?|
+| 2026-05-05 21:30 | main | 浼樺寲閲嶆瀯 | 璋冩暣 Contact 鍊欓€変汉鍗＄墖涓烘埅鍥炬晥鏋滅殑娣辫壊鑳屾櫙銆佷笁瑙掑舰灞傜骇鍜岀矖鏂滀綋姝ｆ枃 |
+| 2026-05-05 21:32 | main | 浼樺寲閲嶆瀯 | 灏?Contact 鍙充晶涓夎褰㈤敋鐐规敼鍒板€欓€変汉鍗＄墖鍖哄煙椤堕儴 |
+| 2026-05-05 21:36 | main | 浼樺寲閲嶆瀯 | 鎾ゅ洖涓婁竴杞?Contact 涓夎褰㈤敋鐐规敼鍔紝鎭㈠鍒版嫑鑱樺尯鏁翠綋瀹瑰櫒 |
+| 2026-05-05 21:50 | main | 鏂板鍔熻兘 | 涓洪椤点€丄bout銆乀eam銆両ndustries 鍜?Events 娣诲姞椤甸潰绾т綆灞傜骇鏂滀笁瑙掕楗?|
+| 2026-05-05 21:54 | main | 浼樺寲閲嶆瀯 | 缁熶竴椤甸潰涓夎褰㈠舰鐘跺拰灞傜骇锛屽苟涓?Contact 涓夎褰㈠鍔?30% 閫忔槑搴?|
+| 2026-05-05 21:58 | main | 浼樺寲閲嶆瀯 | 灏嗛〉闈笁瑙掑舰閫忔槑搴﹁皟鏁翠负 50%锛屽苟鎶婇潪 Contact 椤靛簳閮ㄥ乏椤剁偣鏀瑰埌 40% |
+| 2026-05-06 21:42 | main | 浼樺寲閲嶆瀯 | 璋冩暣棣栭〉 Hero銆乂ision銆両ndustries銆丠onors 鍜?Events 杞挱鐨勫瓧閲嶃€佸瓧鍙蜂笌鍐呭甯冨眬 |
+| 2026-05-06 21:55 | main | 浼樺寲閲嶆瀯 | 鎸?1920 璁捐鍩哄噯灏嗛椤垫牳蹇冨瓧浣撳昂瀵告崲绠椾负 rem锛屽苟瀹屽杽 Events 杞挱璇存槑鐩掓笎鍙樺拰涓夎褰㈣楗?|
+| 2026-05-06 22:00 | main | 浼樺寲閲嶆瀯 | 璋冩暣棣栭〉 Events 杞挱鍥剧墖涓庤鏄庣洅鍒嗙鏂瑰紡锛岀Щ闄ゅ灞傝竟妗嗗苟灏嗗浘鐗囨枃妗堢Щ鍔ㄥ埌宸︿笅瑙?|
+| 2026-05-06 22:05 | main | 浼樺寲閲嶆瀯 | 灏嗛椤?Events 杞挱鑸炲彴鏀逛负鍗犳弧鐖跺鍣紝骞舵妸杞挱鍗″浘鐗囧搴︽寜 995px 鎹㈢畻涓?`62.1875rem` |
+| 2026-05-06 22:06 | main | 淇缂洪櫡 | 绉婚櫎棣栭〉 Events 杞挱璇存槑鏂囧瓧鐨勫崟琛屾埅鏂紝浣夸笅鏂瑰崱鐗囧畬鏁存崲琛屽睍绀烘枃妗?|
+| 2026-05-06 22:07 | main | 浼樺寲閲嶆瀯 | 灏嗛椤?Events 鍥剧墖鏂囨宸﹁窛鍜屼笅鏂硅鏄庡崱宸﹀彸鍐呰竟璺濇寜 89px 鎹㈢畻涓?`5.5625rem` |
+| 2026-05-06 22:09 | main | 淇缂洪櫡 | 淇棣栭〉 Events 鍥剧墖鏂囨宸﹁窛鍩哄噯鍜屾爣棰樺乏绔栫嚎鑼冨洿锛屽苟鍔犻珮杞挱鑸炲彴閬垮厤璇存槑鍗¤鎴柇 |
+| 2026-05-06 22:31 | main | 浼樺寲閲嶆瀯 | 灏?Home銆丄bout銆乀eam銆両ndustries銆丒vents 鍜?Contact 鐨?Hero 鑳屾櫙鍒囨崲涓哄鑸洰褰曚笅鐨勬湰鍦?`hero.png` 绱犳潗 |
+| 2026-05-06 22:33 | main | 浼樺寲閲嶆瀯 | 鎻愰珮棣栭〉 Hero 鏈湴鑳屾櫙鍥句寒搴︼紝闄嶄綆棣栧睆榛戣壊閬僵寮哄害骞剁缉鐭簳閮ㄦ殫鑹茶繃娓￠珮搴?|
+| 2026-05-06 22:35 | main | 浼樺寲閲嶆瀯 | 绉婚櫎棣栭〉 Hero 鏁村睆閬僵锛屼粎淇濈暀搴曢儴 30% 鏆楄壊娓愬彉杩囨浮 |
+| 2026-05-06 22:37 | main | 浼樺寲閲嶆瀯 | 灏嗛椤电浜屽睆鍗＄墖鍙充晶 Vision 鏍囪瘑鏀逛负姝ｅ父瀛楅噸锛屽苟鍙栨秷寮哄埗澶у啓 |
+| 2026-05-06 22:40 | main | 浼樺寲閲嶆瀯 | 涓洪椤?Industries & Services 鏍囬涓嬫柟澧炲姞鐏拌壊涓嬪垝绾匡紝骞舵帴鍏ユ湰鍦?Industries 鍗＄墖鍥剧墖绱犳潗 |
+| 2026-05-06 22:52 | main | 浼樺寲閲嶆瀯 | 灏嗛椤?Industries & Services 鐏拌壊涓嬪垝绾夸粠鏍囬涓嬫柟绉诲姩鍒拌鏄庢鏂囦笅鏂?|
+| 2026-05-06 22:54 | main | 浼樺寲閲嶆瀯 | 璋冩暣棣栭〉 Honors 浜斾釜骞翠唤鎸夐挳涓?20px銆佸乏瀵归綈銆乥old 瀛楅噸 |
+| 2026-05-06 22:55 | main | 浼樺寲閲嶆瀯 | 璋冩暣棣栭〉 Events 杞挱锛屼娇涓嬫柟璇存槑鍗′粎鍦ㄥ綋鍓嶅睍绀虹殑 active 鍗＄墖涓樉绀?|
+| 2026-05-06 22:56 | main | 浼樺寲閲嶆瀯 | 缂╁皬棣栭〉 Events 杞挱涓嬫柟鎺у埗鎸夐挳涓?active 璇存槑鍗＄殑鍨傜洿璺濈 |
+| 2026-05-06 23:00 | main | 浼樺寲閲嶆瀯 | 璋冩暣 About Hero 鏍囬涓?96px semibold锛屾鏂囦负 32px medium italic |
+| 2026-05-06 23:01 | main | 浼樺寲閲嶆瀯 | 璋冩暣 About Vision 鍗＄墖璇存槑鏂囧瓧涓?24px medium |
+| 2026-05-06 23:06 | main | 浼樺寲閲嶆瀯 | 鎸?1920 鍩哄噯璋冩暣 About Vision銆丠onors 鍜?Culture 鍖哄潡鐨勫瓧鍙枫€佸瓧閲嶄笌濂栭」鏂囨 |
+| 2026-05-06 23:07 | main | 浼樺寲閲嶆瀯 | 璋冩暣 About Culture 姝ｆ枃/鎸夐挳鍜?Chronicle 鍖哄潡鏍囬銆佸勾浠姐€佹湀浠姐€佹鏂囩殑瀛楀彿瀛楅噸 |
+| 2026-05-06 23:09 | main | 浼樺寲閲嶆瀯 | 绉婚櫎 About Hero 棣栧睆钂欏眰锛屼娇娓愬彉钂欏眰浠庣涓€灞忎箣鍚庡紑濮?|
+| 2026-05-06 23:12 | main | 浼樺寲閲嶆瀯 | 涓?About Vision 鍗＄墖鎺ュ叆鏈湴鑳屾櫙鍥撅紝骞跺皢璇存槑鏂囧瓧鍥哄畾涓轰袱琛岄噾鑹叉枃鏈?|
+| 2026-05-06 23:13 | main | 浼樺寲閲嶆瀯 | 淇 About Vision 璇存槑绗簩琛屾崲琛岄棶棰橈紝寮哄埗绗簩琛屼繚鎸佸崟琛屾樉绀?|
+| 2026-05-06 23:16 | main | 浼樺寲閲嶆瀯 | 璋冩暣 About Honors 椤堕儴鏍囬涓庤鏄庢帓鐗堬紝浣胯鏄庡彸瀵归綈涓旂浜岃涓嶆崲琛?|
+| 2026-05-06 23:17 | main | 浼樺寲閲嶆瀯 | 灏?About Honors 椤堕儴璇存槑鍙宠竟鐣屽榻愬埌灞忓箷鍙充晶鍐呭绾匡紝鍏佽瓒呭嚭鏍囬澹冲眰 |
+| 2026-05-06 23:19 | main | 淇缂洪櫡 | 绉婚櫎 About Honors 椤堕儴璇存槑璐熷彸澶栬窛锛岄伩鍏嶅彸渚ф鏂囪秴鍑鸿绐?|
+| 2026-05-06 23:20 | main | 浼樺寲閲嶆瀯 | 灏?About Honors 椤堕儴璇存槑鍙宠竟鐣屾敼涓虹埗鍏冪礌鏈€鍙充晶锛屽苟璁?Vision 鑳屾櫙鍥炬樉寮忔弧楂橀摵婊″崱鐗?|
+| 2026-05-06 23:31 | main | 浼樺寲閲嶆瀯 | 鏍规嵁 `teamInfo.md` 鍜屾湰鍦?team 鍥剧墖璋冩暣 Our Team 椤?Hero銆丼pecial Forces銆佹垚鍛樺崱鐗囧唴瀹瑰拰瀛椾綋瑙勬牸 |
+| 2026-05-06 23:40 | main | 浼樺寲閲嶆瀯 | 鏍规嵁鏈湴 industries 鍥剧墖鍜屽瓧鍙疯姹傝皟鏁?Industries 椤?Hero 鏍囬銆佽鏄庡崱鐗囧拰鍏釜琛屼笟鍗＄墖 |
+| 2026-05-06 23:43 | main | 浼樺寲閲嶆瀯 | 璋冩暣 Industries 鍗＄墖鏂囨鎹㈣锛屽苟鎸夋湰鍦?event 鍥剧墖鍜屽瓧浣撹姹傛洿鏂?Events Hero 涓庝簨浠跺崱鐗?|
+| 2026-05-06 23:47 | main | 浼樺寲閲嶆瀯 | 鎸夋寚瀹氬瓧浣撹鏍艰皟鏁?Contact 椤?Hero銆丆ontact us銆丣oin Us銆佸€欓€変汉鍗＄墖鍜岀畝鍘嗛偖绠辨彁绀?|
+| 2026-05-06 23:48 | main | 浼樺寲閲嶆瀯 | 灏?Industries 椤?Hero 鏍囬椤堕儴浣嶇疆璋冩暣涓?590px 璁捐鍩哄噯 |
+| 2026-05-06 23:52 | main | 浼樺寲閲嶆瀯 | 灏?Team 椤?Zoe Zhang 鐨勫浘鐗囧垏鎹负鏈湴 `/assets/team/team4.png` |
+| 2026-05-07 00:08 | main | 浼樺寲閲嶆瀯 | 鎸夋寚瀹氭埅鍥剧粨鏋勯噸鎺?Team 涓汉璇︽儏椤?Hero銆佷俊鎭粙缁嶃€丒xperience 鍜?Performance 鍖哄潡 |
+| 2026-05-07 00:17 | main | 浼樺寲閲嶆瀯 | 璋冩暣 Team 涓汉璇︽儏椤?Hero 楂樺害銆佷汉鐗╁浘鏉ユ簮銆佷俊鎭尯鎺掑竷鍜?Experience 鍙屾爮鍐呭 |
+| 2026-05-07 00:21 | main | 淇缂洪櫡 | 淇 Team 涓汉璇︽儏椤?View more 鏃犲搷搴旈棶棰橈紝鏀圭敤鍘熺敓 details/summary 灞曞紑 Honors 鍜?Performance 鏇村鍐呭 |
+| 2026-05-07 00:23 | main | 浼樺寲閲嶆瀯 | 璋冩暣 Team 涓汉璇︽儏椤甸潰鍖呭睉鏉′负榛戣壊鑳屾櫙锛屽苟灏嗗綋鍓嶉」 Yuxuan Liu 鏀逛负鐧借壊 |
+| 2026-05-07 00:27 | main | 浼樺寲閲嶆瀯 | 璋冩暣 Industries 绗簩灞忓崱鐗囧竷灞€锛屽苟璁╄涓氳鎯呴〉浣跨敤瀵瑰簲鍗＄墖鍥剧墖鍜?`industriesInfo.md` 鍐呭 |
+| 2026-05-07 00:28 | main | 浼樺寲閲嶆瀯 | 鎸夋寚瀹氬瓧鍙峰拰鍐呭閲嶆帓浜嬩欢璇︽儏椤碉紝淇濈暀鏍囬銆佹棩鏈熴€佷富璇存槑鍜?Educational Background |
+| 2026-05-07 00:42 | main | 浼樺寲閲嶆瀯 | Core Value 椤甸潰鎺ュ叆鍙傝€?EventLandingPage 鐨勬粴鍔ㄥ唴瀹逛笌鍙充晶鍥剧墖鍫嗗彔鎻ず鍔ㄧ敾 |
+| 2026-05-07 00:44 | main | 浼樺寲閲嶆瀯 | 璋冩暣 Core Value 鍙充晶鍥剧墖鍫嗗彔 sticky 鍋忕Щ锛屾暣浣撲笅绉?5rem |
+| 2026-05-07 00:46 | main | 浼樺寲閲嶆瀯 | 璋冩暣 Core Value 浠峰€艰鏍囬鍜屾鏂囨枃瀛楄鏍硷紝骞舵洿鏂?No.1 Tiger 鏂囨 |
+| 2026-05-07 00:48 | main | 浼樺寲閲嶆瀯 | 绉婚櫎 Core Value 婊氬姩鍖洪澶栧紩瀵兼枃妗堝拰鏍囬涓嬪垝绾匡紝鑳屾櫙鏀逛负 #171717 骞惰皟鏁村彸渚у浘鐗?sticky 浣嶇疆 |
+| 2026-05-07 00:50 | main | 浼樺寲閲嶆瀯 | 閲嶆柊瀵归綈 EventLandingPage 鐨?sticky 鍥剧墖缁撴瀯锛孋ore Value 鍙充晶鍥剧墖鏀逛负 top-0 鍏ㄥ睆鍚搁《瀹瑰櫒 |
+| 2026-05-07 00:53 | main | 浼樺寲閲嶆瀯 | Core Value 鍥剧墖鍫嗗彔鍔ㄧ敾鏀逛负鍙傝€冧簨浠?copy 椤圭洰鐨?fixed-height absolute stack 瀹炵幇 |
+| 2026-05-07 00:56 | main | 浼樺寲閲嶆瀯 | Core Value 婊氬姩杩涘害璁＄畻杩涗竴姝ュ榻愪簨浠?copy 椤圭洰锛屽苟鎺掗櫎浜嬩欢 copy 鍘熷瀷鐩綍鐨勭被鍨嬫鏌?|
+| 2026-05-07 01:01 | main | 淇缂洪櫡 | 灏?Our Team 鐨?Find out more 浠庡浐瀹?Yuxuan Liu 鏀逛负鎸夋垚鍛?slug 璺宠浆瀵瑰簲涓汉璇︽儏 |
+| 2026-05-07 01:02 | main | 淇缂洪櫡 | 淇 Core Value 鍙充晶鍥剧墖鏍堝寘瑁瑰眰瀹藉害濉岄櫡瀵艰嚧鍥剧墖涓嶅彲瑙佺殑闂 |
+| 2026-05-07 01:04 | main | 淇缂洪櫡 | 绉婚櫎 Core Value 椤甸潰 main 鐨?overflow-x-hidden锛岄伩鍏嶇鍏?overflow 褰卞搷鍙充晶鍥剧墖 sticky 鍥哄畾 |
+| 2026-05-07 01:05 | main | 浼樺寲閲嶆瀯 | 灏?Core Value 鍙充晶 sticky 鍥剧墖鍫嗘暣浣撳悜涓婄Щ鍔?5rem |
+| 2026-05-07 01:17 | main | 閰嶇疆鍙樻洿 | 鎸?`/offweb` 瀛愯矾寰勯噸鏂版墦鍖呭苟閮ㄧ讲 standalone 杩愯鍖咃紝鏂板 offweb 閮ㄧ讲璇存槑 |
+| 2026-05-07 01:25 | main | 淇缂洪櫡 | 涓?`ImageWithFallback` 澧炲姞 basePath 闈欐€佽祫婧愬墠缂€澶勭悊锛屼慨澶?offweb 瀛愯矾寰勯儴缃插浘鐗囧姞杞藉け璐?|
+| 2026-05-07 09:35 | main | 淇缂洪櫡 | 淇 About 鍒?Core Value 鐨勫瓙璺緞璺宠浆锛屽苟鏂板鑷畾涔?404 Return Home 鍥炲埌 `/offweb/` |
+| 2026-05-07 22:07 | main | 浼樺寲閲嶆瀯 | 璋冩暣棣栭〉 Honors/Events 鏁版嵁鏉ユ簮涓?See More 甯冨眬锛屽苟鏇存柊 Clients 鍖哄煙鏍峰紡 |
+| 2026-05-07 22:16 | main | 浼樺寲閲嶆瀯 | 寰皟棣栭〉 Vision 鎸夐挳瀛楄窛銆佽儗鏅笁瑙掑舰灞傜骇銆丒vents 鎺у埗鍖轰笌鏃ユ湡鏍煎紡锛屽苟鎭㈠ Clients 灞忔繁鑹茶儗鏅?|
+| 2026-05-07 22:22 | main | 淇缂洪櫡 | 淇棣栭〉 Header 鍥哄畾灞傜骇銆佽儗鏅笁瑙掑舰鍙鎬с€丒vents 鎺у埗鍖鸿创鍙冲拰 About Honors 鏂囨/鏃ユ湡瀵归綈 |
+| 2026-05-07 22:32 | main | 浼樺寲閲嶆瀯 | 鎸?EN 鏂囨。閲嶅缓 About Honors 鍜?Chronicle 鏁版嵁锛岃皟鏁?Chronicle See More 灞曞紑鏇村锛屽苟寮卞寲棣栭〉涓夎褰?|
+| 2026-05-07 22:38 | main | 浼樺寲閲嶆瀯 | 灏?Title 鑻辨枃瀵艰埅鏀逛负婧愮爜澶у啓锛屽苟鎸夊弬鑰冨浘璋冩暣 About Honors 鏍囬璇存槑涓?View Award 瀵归綈鏂瑰紡 |
+| 2026-05-07 22:45 | main | 浼樺寲閲嶆瀯 | 鎸?EN/teamInfo.md 琛ラ綈 Team Profile 涓氱哗鏁版嵁锛岄殣钘忕┖ Honors锛屽苟缁熶竴 View More 灞曞紑鍔ㄧ敾 |
+| 2026-05-07 22:52 | main | 浼樺寲閲嶆瀯 | Events 椤垫帴鍏?EN/event.md 鍏ㄩ噺浜嬩欢鏁版嵁锛岀粺涓€ See More 鍔ㄦ晥锛屽苟寰皟棣栭〉 Events 涓?About 鎸夐挳鏍峰紡 |
+| 2026-05-07 22:57 | main | 淇缂洪櫡 | 闄嶄綆棣栭〉鍜?About 涓夎褰㈣儗鏅眰绾э紝缁熶竴鏀惰捣鏂囨涓?COLLAPSE锛屽苟璋冩暣 Chronicle See More 鎸夐挳鍔ㄦ晥 |
+| 2026-05-07 23:04 | main | 浼樺寲閲嶆瀯 | 璋冩暣棣栭〉 Hero 鏍囬娓愬彉銆丆lients Logo 鍒嗙粍涓庡渾瑙掞紝骞朵负 About Honors 灞曞紑鍖烘帴鍏?awardbg 鍙充晶鑳屾櫙 |
+| 2026-05-07 23:12 | main | 浼樺寲閲嶆瀯 | 涓?About Honors 鐨?View Award 鎸夐挳鎺ュ叆 EN/award.md 涓搴旂殑寰俊鍏紬鍙烽摼鎺?|
+| 2026-05-07 23:26 | main | 鏂板鍔熻兘 | 鏂板鍏ㄧ珯璇█ Provider 鍜屼腑鏂囬〉闈㈡枃妗堥厤缃紝鎺ュ叆椤靛ご銆侀〉鑴氥€侀椤点€丄bout銆丆ore Value銆乀eam銆両ndustries銆丒vents銆丆ontact 鐨勪腑鑻辨枃鍒囨崲 |
+| 2026-05-08 00:05 | main | 鏂板鍔熻兘 | 鎸?Chinese 鏁版嵁鏂囨。琛ュ厖棣栭〉 Honors/Events銆丄bout Honors/Chronicle 鍜?Team 鍗＄墖鐨勪腑鏂囧垪琛ㄦ暟鎹?|
+| 2026-05-08 00:22 | main | 鏂板鍔熻兘 | 鍥㈤槦涓汉璇︽儏椤垫帴鍏?`Chinese/teamInfo.md` 涓枃璇︽儏鏁版嵁锛屾敮鎸佸叚浣嶆垚鍛樿鎯呴〉涓讳綋鍐呭涓枃鍒囨崲 |
+| 2026-05-08 00:26 | main | 鏂板鍔熻兘 | 琛屼笟璇︽儏椤垫帴鍏?`Chinese/industriesInfo.md` 涓枃鍐呭锛屾敮鎸佸叚涓涓氳鎯呴〉姝ｆ枃涓枃鍒囨崲 |
+| 2026-05-08 00:29 | main | 浼樺寲閲嶆瀯 | 灏嗗叕鍏辨敹璧锋寜閽腑鏂囨枃妗堜粠 `COLLAPSE` 璋冩暣涓?`鏀惰捣` |
+| 2026-05-08 00:33 | main | 淇缂洪櫡 | 灏嗚涓氳鎯呴〉 metadata 鏁版嵁鎷嗗埌鏈嶅姟绔畨鍏ㄦā鍧楋紝淇 `generateMetadata` 璇诲彇瀹㈡埛绔粍浠跺鍑哄鑷寸殑 undefined 鎶ラ敊 |
+| 2026-05-08 00:41 | main | 淇缂洪櫡 | 淇鏈嶅姟琛屼笟鍒楄〃椤靛崱鐗囦腑鏂囨枃妗堝鐢ㄩ椤?labels 瀵艰嚧涓庡崱鐗囬摼鎺ョ洰鏍囬敊浣嶇殑闂 |
+| 2026-05-08 09:29 | main | 浼樺寲閲嶆瀯 | 鎸?`img.md` 涓哄ぇ鍥剧敓鎴?WebP 鐗堟湰锛岃皟鏁村浘鐗囧姞杞戒紭鍏堢骇鍜?Core Value 婊氬姩璁＄畻绛栫暐锛屽苟浼樺寲 offweb 鍙戝竷鍖呭浘鐗囦綋绉?|
+| 2026-05-08 21:38 | main | 淇缂洪櫡 | 鎭㈠ hover 鍥剧墖娓愯繘缂╂斁鎵嬫劅锛屼氦浜掑浘鐗囦笉鍐嶄娇鐢?lazy 骞舵敼涓哄悓姝ヨВ鐮?|
+| 2026-05-08 21:47 | main | 淇缂洪櫡 | 淇 Clients Logo 澧?hover 鏆傚仠鍜屽姩鐢绘椂闀夸緷璧?inline style 瀵艰嚧鐨勪笉婊氬姩闂 |
+| 2026-05-08 21:51 | main | 淇缂洪櫡 | 鏀剁獎 `prefers-reduced-motion` 鍏ㄥ眬瑙勫垯锛岄伩鍏嶇郴缁熷姩鏁堝亸濂界鐢ㄥ叏绔?hover/transition/animation |
+| 2026-05-08 22:19 | main | 浼樺寲閲嶆瀯 | 棣栭〉 Hero 鏀硅棰戣儗鏅拰娴佸厜鏍囬锛岃ˉ榻?Honors 骞翠唤涓庤涓氳鎯呰烦杞紝鏂板涓ゆ潯浜嬩欢骞朵慨澶?About 浜や簰 |
+| 2026-05-08 22:21 | main | 鏂囨。鏇存柊 | 鏄庣‘棣栭〉 Hero 浣跨敤瑙嗛涓嶈蛋鍘嬬缉鍥撅紝鍏朵粬椤甸潰鍜屽崱鐗囧ぇ鍥剧户缁娇鐢?WebP |
+| 2026-05-08 22:30 | main | 浼樺寲閲嶆瀯 | 棣栭〉 Events 杞挱鎺ュ叆 `20210218`銆乣20201023` 鍜?`event4/event5`锛孒onors 骞翠唤鏉℃敼涓?5 涓竴灞忚疆鎾獥鍙?|
+| 2026-05-08 22:40 | main | 浼樺寲閲嶆瀯 | 鏇存柊涓枃鏂囨銆佸洟闃熸暀鑲茶儗鏅垎娈靛睍绀猴紝骞跺皢 Header/Footer logo 鍒囨崲涓?SVG |
+| 2026-05-08 22:44 | main | 浼樺寲閲嶆瀯 | 鍥哄畾 Title logo 瀹藉害涓?86px銆丗ooter logo 瀹藉害涓?152px |
+| 2026-05-08 22:46 | main | 浼樺寲閲嶆瀯 | 灏?Title/Footer logo 瀹藉害鎸?rem 琛ㄨ揪骞舵暣浣撴斁澶т袱鍊?|
+| 2026-05-08 22:55 | main | 浼樺寲閲嶆瀯 | 鍚屾鏇挎崲鍚庣殑浜岀淮鐮併€丷eal Estate銆丆ulture 鍜屽洟闃熷浘鐗囪祫婧愶紝骞剁缉灏忛椤?Vision 涓枃鏍囪瘑 |
+| 2026-05-08 22:58 | main | 浼樺寲閲嶆瀯 | 璋冩暣棣栭〉 Honors 宸﹀彸鎸夐挳涓虹Щ鍔ㄥ綋鍓嶉€変腑骞翠唤骞舵敮鎸侀灏惧惊鐜?|
+| 2026-05-08 23:02 | main | 浼樺寲閲嶆瀯 | 鍚屾鏂扮増 logo.svg锛屽苟灏?Title/Footer logo 鏄剧ず瀹藉害缂╁洖褰撳墠鐨?50% |
+| 2026-05-08 23:05 | main | 浼樺寲閲嶆瀯 | 灏嗛椤?Clients logo 鍥剧墖楂樺害璋冩暣涓哄崰鐖跺鍣?80% |
+| 2026-05-08 23:08 | main | 浼樺寲閲嶆瀯 | 琛ラ綈鏂板 Events 鑻辨枃鏍囬锛屽苟涓洪椤?Events 杞挱鍔犲叆 5 绉掕嚜鍔ㄦ挱鏀?|
+| 2026-05-08 23:18 | main | 淇缂洪櫡 | 棣栭〉 Events 鑷姩杞挱鍦?active 鍙樺寲鍚庨噸鏂拌鏃讹紝閬垮厤棣栧熬鎵嬪姩鍒囨崲鏃跺彔鍔犺烦鍔?|
+| 2026-05-08 23:22 | main | 浼樺寲閲嶆瀯 | About Vision 鏀逛负鑷劧楂樺害甯冨眬锛孋ulture 宸﹀浘鍘昏挋灞傦紝Contact us 宸︽爮鑳屾櫙鏀逛负 `#A1865F` |
+| 2026-05-09 08:50 | main | 浼樺寲閲嶆瀯 | Mengcheng Yun 涓汉璇︽儏椤甸殣钘忕┖ Social Engagements 鍖哄潡 |
+| 2026-05-09 08:53 | main | 閰嶇疆鍙樻洿 | 鏂板 OSS 璧勬簮鍓嶇紑鍒囨崲锛屽浘鐗囥€佽棰戝拰瀛椾綋鍙湪鐢熶骇鐜鍔犺浇 OSS 璧勬簮 |
+| 2026-05-09 08:57 | main | 璧勬簮鏁寸悊 | 灏?`src/assets/event` 涓?156-193 鍙峰井淇″浘鐗囨寜椤哄簭閲嶅懡鍚嶄负 `event2` 鍒?`event39` |
+| 2026-05-09 09:07 | main | 璧勬簮鏁寸悊 | 鎸夌己鍥剧紪鍙疯烦杩?`event7`銆乣event10`銆乣event18`锛屽皢浜嬩欢婧愮礌鏉愰『搴忓欢浼稿埌 `event42` |
+| 2026-05-09 09:16 | main | 鏁版嵁涓庤祫婧愭洿鏂?| Events 椤甸潰鎺ュ叆 42 鏉＄湡瀹炰簨浠跺浘鐗囧拰涓嫳鏂囩湡瀹炲唴瀹癸紝璇︽儏椤垫覆鏌撶湡瀹炴鏂囨钀?|
+| 2026-05-09 09:25 | main | 璧勬簮鍙戝竷 | 灏?42 寮犵湡瀹?Events 鍥剧墖鍚屾涓婁紶鍒?OSS 鐨?`husuweb/assets/event/` 鍓嶇紑 |
+| 2026-05-09 09:29 | main | 瀛愰〉闈氦浜掍紭鍖?| Culture 鏀逛负 Contact us 闀滃儚鍙屾爮鏁堟灉锛屽瓙椤甸潰缁熶竴闈㈠寘灞戝拰杩斿洖椤堕儴锛屽苟淇 Team 涓夎褰㈤伄鎸?|
+| 2026-05-09 09:33 | main | 淇缂洪櫡 | 娓呯悊浜嬩欢璇︽儏椤垫鏂囦腑鐨?`[鍥剧墖]` 鍗犱綅鏂囨湰锛屽苟淇閲嶅 React key 璀﹀憡 |
+| 2026-05-09 09:35 | main | 淇缂洪櫡 | 淇涓枃浜嬩欢鍒嗙被瑙ｆ瀽娈嬬暀锛屽幓闄も€滆檸璇夊姩鎬佲€濆墠鐨?`????` 鍓嶇紑 |
+| 2026-05-09 09:41 | main | 瑙嗚涓庤祫婧愯皟鏁?| Core Value 婊氬姩鍥剧墖鏀逛负 16:14 妯悜姣斾緥锛屽悇椤甸潰 Hero 鍥惧紩鐢ㄤ粠 WebP 鍒囧洖 PNG |
+| 2026-05-10 00:09 | main | 棣栭〉涓庡瓙椤甸潰浜や簰浼樺寲 | 璇█鎸夐挳鏄剧ず鐩爣璇█锛岄椤?Events 鍗＄墖璺宠浆璇︽儏锛孋lients/浜岀淮鐮?鍥㈤槦璧勬簮鍚屾锛岃涓氳鎯呴潰鍖呭睉鍥為椤碉紝Zoe 鏁欒偛鑳屾櫙鏀逛负鍥涙 |
+| 2026-05-10 00:15 | main | 淇缂洪櫡 | 淇 Core Value 涓枃绌虹紪鍙峰鑷寸殑閲嶅 key 璀﹀憡锛屽苟涓?About Vision See More 鎺ュ叆涓夋灞曞紑鏂囨 |
+| 2026-05-10 00:21 | main | 浜や簰浼樺寲 | About Vision See More 灞曞紑鍚庡垏鎹负 Collapse/鏀惰捣锛屾敮鎸佸啀娆＄偣鍑绘敹璧?|
+| 2026-05-10 00:28 | main | 璧勬簮鍙戝竷 | 瑕嗙洊涓婁紶 Footer 鍥剧墖鍒?OSS锛屽苟涓?Footer 浜岀淮鐮?URL 澧炲姞鐗堟湰鍙傛暟閬垮厤鏃х紦瀛?|
+| 2026-05-10 11:02 | main | 淇缂洪櫡 | 淇 Zoe 涓枃鎵т笟缁忛獙瀛楃涓茶娉曢敊璇紝骞跺湪鍥㈤槦涓汉璇︽儏 Hero 閭涓婃柟娣诲姞鐢佃瘽 |
+| 2026-05-10 11:03 | main | 鏂囨鎺掔増 | 灏?Zoe Zhang 涓枃鎵т笟缁忛獙鎸夋崲琛屾媶鍒嗕负涓ゆ鏄剧ず |
+| 2026-05-10 11:07 | main | 鏂板鍔熻兘 | Footer 鐨?Disclaimer and Privacy 鏀逛负鐐瑰嚮寮圭獥灞曠ず鍏嶈矗澹版槑涓庨殣绉佹潯娆?|
+| 2026-05-10 11:10 | main | 浼樺寲閲嶆瀯 | Footer 浜岀淮鐮佸紩鐢ㄥ垏鎹㈠埌鏂扮殑鐗堟湰鍙傛暟锛屽苟灏嗗叕瀹夊妗堝彿鍜?ICP 澶囨鍙锋敼涓哄閾?|
+| 2026-05-10 11:14 | main | 鏁版嵁鏇存柊 | 琛ラ綈棣栭〉鍜?About 铏庤瘔鑽ｈ獕涓?2022銆?023銆?024 骞寸己澶辩殑浜旀潯鑽ｈ獕/璧炲姪娲诲姩 |
+| 2026-05-10 11:16 | main | 鏂囨鏇存柊 | 鏇存柊 Min Xu 鑻辨枃 Social Engagements锛岃ˉ鍏呬腑鍥戒綋鑲蹭徊瑁佸鍛樹細浠茶鍛樿韩浠藉苟淇瀛楃涓插紩鍙?|
+| 2026-05-10 11:26 | main | 鏂囨鏇存柊 | 鎸?`EN/teamInfo.md` 瀵归綈 Li Wan銆乑oe Zhang銆丮engcheng Yun銆乄eifan Qiu 鑻辨枃鍥㈤槦璇︽儏瀛楁 |
+| 2026-05-10 11:31 | main | 鏂囨鏇存柊 | 琛屼笟璇︽儏闈㈠寘灞戞敼涓?industries / 褰撳墠琛屼笟锛屽苟琛ラ綈鍥涗釜鑻辨枃琛屼笟璇︽儏缂哄け鍐呭 |
+| 2026-05-10 11:51 | main | 鏂囨鏇存柊 | 涓枃鐘舵€佷笅 Footer 闅愮寮圭獥涓?About Vision See More 灞曞紑鍐呭鍒囨崲涓轰腑鏂囨枃妗?|
+| 2026-05-10 11:53 | main | 淇缂洪櫡 | 铏庤瘔鍔ㄦ€佸垪琛ㄥ崱鐗囧浘鐗囨敼涓哄畬鏁村睍绀猴紝閬垮厤鐪熷疄浜嬩欢鍥捐瑁佸垏 |
+| 2026-05-10 11:55 | main | 瑙嗚浼樺寲 | 椤堕儴瀵艰埅 title active 涓?hover 涓嬪垝绾垮姞绮?|
+| 2026-05-10 12:02 | main | 淇缂洪櫡 | 棣栭〉 Events 杞挱鏀逛负澶嶇敤浜嬩欢搴撶湡瀹炲浘鏂囷紝淇鍚庝袱鏉¤檸鐪艰瀵熷浘鏂囬敊浣?|
+| 2026-05-10 12:26 | main | 淇缂洪櫡 | Footer 浜岀淮鐮佸埛鏂扮増鏈彿骞跺悓姝ュ彂甯冪洰褰曪紝鏀逛负瀹屾暣灞曠ず閬垮厤瑁佸垏 |
+| 2026-05-10 12:27 | main | 瑙嗚浼樺寲 | Events 鍒楄〃鍗＄墖鍥剧墖澧炲姞鍚屽浘妯＄硦鑷€傚簲鑳屾櫙锛屾秷闄?object-contain 鐧借竟 |
+| 2026-05-10 12:28 | main | 閰嶇疆鍙樻洿 | 涓婚」鐩?tsconfig 鎺掗櫎鐙珛 cms 宸ヤ綔鍖猴紝閬垮厤鍏舵湭鎺ュ叆渚濊禆褰卞搷瀹樼綉鏋勫缓 |
+| 2026-05-10 12:29 | main | 瑙嗚浼樺寲 | Events 鍒楄〃鍗＄墖鍘婚櫎妯＄硦搴曞浘锛屾敼涓哄浘鐗囨湰韬嚜閫傚簲濉弧鍥炬 |
+| 2026-05-10 16:16 | main | 璧勬簮涓庤瑙夋洿鏂?| About Hero 寮曠敤鐢ㄦ埛鎸囧畾 about 鍥剧墖锛屽洟闃熶釜浜鸿鎯?Hero 鏀逛负鎸夋垚鍛樹娇鐢?`1.png` 鍒?`6.png` 鍏ㄥ睆灞曠ず |
+| 2026-05-10 15:23 | main | 瑙嗚浼樺寲 | 鍥㈤槦涓汉璇︽儏 Hero 鍙栨秷寮哄埗鏁村睆楂樺害锛屽浘鐗囧楂樿窡闅忓浐瀹?Hero 瀹瑰櫒 |
+| 2026-05-10 15:25 | main | 瑙嗚浼樺寲 | Team 椤?Hero 鍙栨秷瑙嗗彛楂樺害缁戝畾锛屼釜浜鸿鎯?Hero 淇℃伅鍧楁闈㈠乏璺濇敼涓?`55.625rem` |
+| 2026-05-10 15:27 | main | 瑙嗚浼樺寲 | 鍙栨秷鍥㈤槦涓汉璇︽儏椤?Hero 鍥剧墖钂欏眰锛屼繚鐣欏師鍥剧洿鎺ュ睍绀?|
+| 2026-05-10 15:43 | main | 浜や簰浼樺寲 | 浜嬩欢璇︽儏椤甸潰鍖呭睉鐖剁骇鏀逛负棣栭〉锛屽苟灏嗗厹搴曡繑鍥炶矾寰勫垏鎹负 `/` |
+| 2026-05-10 15:44 | main | 浜や簰浼樺寲 | 鏈嶅姟琛屼笟璇︽儏椤甸潰鍖呭睉鐖剁骇鏀逛负棣栭〉锛屽苟灏嗗厹搴曡繑鍥炶矾寰勫垏鎹负 `/` |
+| 2026-05-10 15:50 | main | 淇缂洪櫡 | 绉婚櫎 Footer 浜岀淮鐮佸灞傜櫧鑹茶儗鏅拰鍐呰竟璺濓紝淇濈暀閫忔槑 PNG 鍘熷鏄剧ず |
+| 2026-05-10 15:55 | main | 瑙嗚浼樺寲 | About Vision 宸︿笂鍥炬爣鏀逛负绌哄績涓婂紩鍙凤紝Culture 灏?logo 鑳屾櫙鍒囨崲涓?`/assets/about/bg.png` |
+| 2026-05-10 15:58 | main | 瑙嗚浼樺寲 | About Vision 绌哄績寮曞彿鏀逛负鐧借壊骞朵笅绉诲埌姝ｆ枃棣栨宸︿晶锛孋ulture 鑳屾櫙灏忓浘缂╁皬鍒?60% |
+| 2026-05-10 16:00 | main | 瑙嗚浼樺寲 | About Vision 姝ｆ枃淇濇寔涓庢爣棰樺悓鍒楀榻愶紝寮曞彿鏀逛负璐磋繎姝ｆ枃棣栬鐨勭櫧鑹叉弿杈硅楗?|
+| 2026-05-10 16:04 | main | 瑙嗚浼樺寲 | About Vision 寮曞彿鏀圭敤 `Icon.svg`锛屽唴瀹瑰眳涓榻愭爣棰樺尯锛孋ontact us 鑳屾櫙瑁呴グ鏀圭敤 Culture 鍚屾鍥剧墖 |
+| 2026-05-10 16:08 | main | 瑙嗚浼樺寲 | About Vision 鏍囬鍜屾鏂囨敼涓哄悓涓€婊″瀹瑰櫒杈圭晫锛宍Icon.svg` 浠ュ唴宓屾诞鍔ㄦ柟寮忚繘鍏ユ鏂囬娈?|
+| 2026-05-10 16:11 | main | 瑙嗚浼樺寲 | About Vision 鏍囬琛屽拰姝ｆ枃瀹瑰櫒缁熶竴宸︿晶鍐呯缉锛宍Icon.svg` 浠庢诞鍔ㄦ敼涓烘鏂囬琛岃鍐呭浘鐗?|
+| 2026-05-10 23:07 | main | 瑙嗚浼樺寲 | About Vision 姝ｆ枃鎭㈠涓庢爣棰樺悓杈圭晫锛宍Icon.svg` 鏀逛负棣栨宸︿晶缁濆瀹氫綅瑁呴グ骞跺悜宸﹀亸绉?|
+| 2026-05-10 23:08 | main | 瑙嗚浼樺寲 | About Vision 棣栨 `Icon.svg` 鏀逛负浠呴鐣?`2rem` 琛屽唴鍗犱綅锛屽浘鏍囧悜宸︿几鍑哄苟璐撮綈棣栬 |
+| 2026-05-10 23:10 | main | 瑙嗚浼樺寲 | About Vision 棣栨 `Icon.svg` 瀹氫綅鏀瑰埌 `2rem` 琛屽唴鍗犱綅璧风偣 |
+| 2026-05-10 23:12 | main | 瑙嗚浼樺寲 | About Vision 鍐呭鏈€澶у搴︿粠 `88rem` 璋冩暣涓?`95rem` |
+| 2026-05-10 23:13 | main | 瑙嗚浼樺寲 | About Vision 姝ｆ枃鍙栨秷宸﹀唴杈硅窛锛岄娈?`Icon.svg` 鍦ㄤ繚鎸佸彸渚т綅缃熀纭€涓婃斁澶т笁鍊?|
+| 2026-05-10 23:16 | main | 瑙嗚浼樺寲 | About Vision 棣栨 `Icon.svg` 鏀逛负璐磋繎姝ｆ枃绗竴琛屽乏渚э紝骞跺皢涓婁竴鐗堝昂瀵哥缉灏?50% |
+| 2026-05-10 23:22 | main | 瑙嗚浼樺寲 | About Vision 棣栨姝ｆ枃鍜?`Icon.svg` 鏁翠綋鍚戝乏鍋忕Щ `3rem` |
+| 2026-05-10 23:23 | main | 瑙嗚浼樺寲 | About Vision 棣栨鍋忕Щ鏀逛负浠呬綔鐢ㄤ簬绗竴琛岋紝鍚庣画鎹㈣鏂囨湰淇濇寔鍘熷榻?|
+| 2026-05-10 23:36 | main | 瑙嗚浼樺寲 | 棣栭〉 Events 杞挱鏀逛负鎸囧畾 4 鏉′簨浠讹紝active 璇存槑鍗℃渶澶氭樉绀?5 琛屽苟鐪佺暐瓒呭嚭鍐呭 |
+| 2026-05-11 00:51 | main | 浜や簰浼樺寲 | Events 鍜?Industries 璇︽儏椤甸潰鍖呭睉鎸夊叆鍙ｆ潵婧愭樉绀?Home銆丒vents 鎴?Industries锛屽苟淇濈暀闈欐€佹瀯寤?Suspense 杈圭晫 |
+| 2026-05-11 00:55 | main | 淇缂洪櫡 | 棣栭〉 Events 杞挱琛ュ洖 Kinsey Kang Yanan 浜嬩欢锛孫SS bucket 鏂板 GET/HEAD CORS 瑙勫垯浠ユ敮鎸佸瓧浣撹法鍩熷姞杞?|
 
-## 项目进度
+## 椤圭洰杩涘害
 
-| 时间 | 分支 | 完成的功能 / 工作 | 说明 |
+| 鏃堕棿 | 鍒嗘敮 | 瀹屾垚鐨勫姛鑳?/ 宸ヤ綔 | 璇存槑 |
 | :--- | :--- | :--- | :--- |
-| 2026-05-15 22:51 | cms | main 合并到 cms | 冲突文件以 `main` 版本为主完成合并，保留 `cms` 分支 Provider 可选 CMS 状态兼容层 |
-| 2026-05-15 22:33 | main | SEO 与 `/client` 生产发布 | 当前线上版本 `/opt/tigerpartners-web/releases/20260515-2230` 已启用中文首页标题、隐藏语义 h1 和 `/client` 到首页的兼容跳转 |
-| 2026-05-15 22:25 | main | 首页搜索标题优化 | 首页显式提供中文 SEO 标题和语义标题，降低搜索结果继续采用 `WE KNOW HOW TO WIN` 作为标题的概率；同时补齐 `/client` 兼容重定向 |
-| 2026-05-15 22:15 | main | 万力尾部业绩上下对齐 | `TeamProfilePage` 中万力尾部左列改为 `1fr/auto` 行布局，固定卡片间距并让第 23 条承担高度补偿 |
-| 2026-05-15 22:13 | main | 万力业绩尾部布局 | `TeamProfilePage` 为万力最后三条业绩启用定制两列布局，满足左二右一和底部对齐展示 |
-| 2026-05-15 22:01 | main | 个人简历移动端 hero 调整 | `TeamProfilePage` 在移动端先渲染个人照片再显示姓名、职位、电话和邮箱；万力业绩尾部中英文数据已核对一致 |
-| 2026-05-15 21:59 | main | event 图片替换发布 | 本地 `src/assets/event` 替换图已同步到 `public/assets/event` 与 OSS，线上事件页可访问，新版本服务状态为 `active` |
-| 2026-05-15 10:07 | main | 官网生产发布 | 已将当前 Next standalone 构建包部署到 `www.tigerpartners.cn` 根路径，验证首页、Events、万力个人页、About 和关键图片资源均可访问 |
-| 2026-05-15 09:54 | main | event2 前 9 张封面顺序同步 | `public/assets/event/event2` 的 1-9 号封面已与 `src/assets/event/event2` 同名文件逐一匹配，页面静态资源读取顺序与源目录命名一致 |
-| 2026-05-15 09:46 | main | 万力个人业绩同步 | `src/data/teamProfiles.ts` 中万力英文 `liWanAchievements` 与中文 `zhTeamDetails["li-wan"].achievements` 已按 `EN/liwanPerformance.md` 同步为 25 条 |
-| 2026-05-04 17:32 | main | Next App Router 基础工程 | 新增 Next、TypeScript、Tailwind v4、standalone 配置 |
-| 2026-05-04 17:32 | main | 首页迁移 | 将首页原型整理为 `/` 页面，保留主要视觉区块和响应式规则 |
-| 2026-05-04 17:32 | main | About 页迁移 | 将 About 原型拆分为 Hero、Vision、Honors、Culture、Chronicle 区块 |
-| 2026-05-04 17:32 | main | 依赖精简 | 只保留 Next、React、Tailwind、lucide-react 等当前页面实际需要的依赖 |
-| 2026-05-04 17:57 | main | 服务行业页迁移 | 新增 `/industries`，重建 Hero、说明卡片和行业卡片网格 |
-| 2026-05-04 17:57 | main | 事件页迁移 | 新增 `/events`，重建事件标题区和事件卡片列表 |
-| 2026-05-04 17:57 | main | 联系我们页迁移 | 新增 `/contact`，重建招聘说明、要求卡片、城市图和联系页脚 |
-| 2026-05-04 17:57 | main | 公共布局补充 | 新增 `SiteFooter`，扩展 `SiteHeader` 导航到五个公开页面 |
-| 2026-05-04 18:03 | main | 大屏缩放策略 | 通过 `--root-font-size` 和 `html font-size` 实现 1440px 以上整体 rem 放大 |
-| 2026-05-04 18:08 | main | 页面组件归档 | 新增 `src/components/pages/*`，集中承载首页、About、服务行业、事件、联系页面展示实现 |
-| 2026-05-04 18:33 | main | Title 导航实现 | `SiteHeader` 改为固定透明导航，支持滚动毛玻璃、中英文切换、移动端菜单和 active/hover 下划线 |
-| 2026-05-04 22:54 | main | 首页整体交互调整 | 根据首页需求文档完成 Hero 字号、Vision 渐变卡片、行业 hover 卡片、Honors 年份切换、Events 中心轮播和 Clients 三行 Logo 滚动 |
-| 2026-05-04 22:54 | main | 首页客户 Logo 素材发布 | 将 `src/assets/home/clientLogo` 中的 43 个 Logo 复制到 `public/assets/home/clientLogo`，供首页静态访问 |
-| 2026-05-04 22:54 | main | 构建检查修复 | 排除不参与运行的旧原型目录后，`npm run build` 已通过 |
-| 2026-05-04 23:07 | main | About Vision 卡片调整 | 将 Vision 卡片改为灰色背景，右侧说明与 VISION 同行，See More 居中 |
-| 2026-05-04 23:07 | main | About Honors 交互调整 | Honors 标题与正文首行对齐，展开背景改为 `#777777`，折叠动画改为平滑 grid 过渡 |
-| 2026-05-04 23:07 | main | About Chronicle 交互调整 | Chronicle 改为年份折叠时间轴，复用 Honors & Awards 风格展开/折叠动效 |
-| 2026-05-04 23:21 | main | 全站 Footer 统一 | 首页、About、服务行业、事件、联系我们页面统一复用 `SiteFooter` |
-| 2026-05-04 23:21 | main | Footer 素材发布 | 将 `src/assets/foot` 中的 7 个图标/图片复制到 `public/assets/foot`，供页脚静态访问 |
-| 2026-05-04 23:29 | main | Events Hero 调整 | Hero 文案区域加入黑色到 `#2f2a23` 的渐变背景 |
-| 2026-05-04 23:29 | main | Events 卡片交互调整 | 第二屏卡片加入参考原型的边线、背景、图片和 Read More hover 动效，图片向左上偏移 10% |
-| 2026-05-04 23:41 | main | About Honors 展开头部调整 | 展开后年份卡片头部保持深色背景，展开内容继续使用 `#777777` |
-| 2026-05-04 23:41 | main | About Chronicle 动效调整 | Chronicle 改为参考原型的中轴年份按钮、月份项 hover 上移、节点发光和展开位移动效 |
-| 2026-05-04 23:41 | main | About Culture 图片动效调整 | Culture 左侧图片加入 Join Us 图片同款遮罩、灰度、透明度和缩放 hover/leave 过渡 |
-| 2026-05-04 23:43 | main | 团队页迁移 | 新增 `/team` 路由和 `TeamPage`，重建 Hero、Special Forces 标语区和 Senior Associate 人物卡片 |
-| 2026-05-04 23:43 | main | 团队素材发布 | 将 `我的团队/src/imports/OurTeam` 中的图片复制到 `public/assets/prototypes/team` |
-| 2026-05-04 23:43 | main | Team 导航接入 | `SiteHeader` 的 Our team 链接改为 `/team`，并支持团队页 active 状态 |
-| 2026-05-05 13:06 | main | 首页 Hero 与 Vision 调整 | Hero 标题强制单行，Vision 区左右边距改为 `3rem`，Vision 标识旋转放在卡片最右侧，按钮改为 Discover More 风格 |
-| 2026-05-05 13:06 | main | 首页内容排版调整 | Industries 标题放大并改为 `#f6ebe4` 到 `#d9b27a` 渐变，Honors/Events 右侧文案按指定行数换行 |
-| 2026-05-05 13:06 | main | 首页轮播与客户墙调整 | Events 轮播图片和灰色说明盒间距改为 `2.5rem`，客户 Logo 墙动画时长改为 `135s` |
-| 2026-05-05 13:21 | main | 首页 Hero 字号修正 | `we know how to win` 按当前版本缩小到 70%，并继续保持单行 |
-| 2026-05-05 13:21 | main | 首页 Vision 显示修正 | Vision 卡片增加桌面最小高度，右侧旋转文字改为完整居中显示，避免裁切 |
-| 2026-05-05 13:21 | main | 首页 Industries 与 Events 修正 | Industries 标题缩小到上一版约 0.3 倍，Events 轮播图片和灰色内容卡重新连接 |
-| 2026-05-05 13:31 | main | About Hero Vision 位置调整 | 将灰色 Vision 方块嵌入 About Hero 标题与正文下方，移除 AboutPage 中独立 Vision 区块 |
-| 2026-05-05 13:31 | main | About Culture 入口调整 | Culture 右侧背景改为 `#D9B27A`，正文只保留指定一句，并新增跳转 `/about/core-value` 的 Read Full Manifesto 按钮 |
-| 2026-05-05 13:31 | main | Core Value 子页面 | 新增 `/about/core-value` 路由和 `CoreValuePage`，复用全站导航页脚并使用原型图片与三段价值观内容 |
-| 2026-05-05 13:36 | main | Team Hero 与标语调整 | Hero 主图填满屏幕宽度，Our team 与副标题缩小到 85%，WE ARE SPECIAL FORCES 缩小到 80% 并改为两行左对齐 |
-| 2026-05-05 13:36 | main | Team 人物区调整 | Senior Associate 标题移动到最后两张图片上方，人物卡片图片移除灰色蒙层并保持 100% 宽度对齐父元素 |
-| 2026-05-05 13:39 | main | Team 个人详情页 | 新增 `/team/yuxuan-liu` 路由和 `TeamProfilePage`，展示个人照片、简介信息、执业经历和荣誉成就 |
-| 2026-05-05 13:39 | main | Team Find out more 跳转 | 团队人物卡片的 Find out more 改为 Next `Link`，跳转到当前 Team 路由层级下的个人详情页 |
-| 2026-05-05 13:48 | main | Industries 卡片布局调整 | 六个行业卡片改为第一行单卡、第二行三卡、第三行双卡的指定布局 |
-| 2026-05-05 13:48 | main | 行业详情页 | 新增 `/industries/[slug]` 动态路由和 `IndustryDetailPage`，展示行业面包屑、说明文案和服务内容卡片 |
-| 2026-05-05 13:52 | main | Events Hero 与列表调整 | Hero 标题和正文居中，背景改为 `#56524a` 到 `#212121` 全屏渐变，Latest Updates 改为九卡三列网格 |
-| 2026-05-05 13:52 | main | 事件详情页 | 新增 `/events/[slug]` 动态路由和 `EventDetailPage`，复用事件详情原型图片与正文结构 |
-| 2026-05-05 16:13 | main | 全站左右边距统一 | `--shell-sm` / `--shell-md` 桌面值统一为 `12rem`，Header 和 `.site-shell` 内容使用一致横向边距 |
-| 2026-05-05 16:20 | main | rem 基准调整 | `--root-font-size` 改为 `clamp(12px, calc(100vw / 120), 16px)`，实现 1920 为设计基准、1440 等比缩小 |
-| 2026-05-05 16:24 | main | Title 尺寸调整 | `SiteHeader` logo 高度放大 1.3 倍，桌面/移动导航和语言按钮文字放大 1.4 倍 |
-| 2026-05-05 16:26 | main | Title 二次尺寸调整 | `SiteHeader` logo 高度继续放大 1.2 倍，导航和语言按钮文字继续放大 1.4 倍，Header 内层上下 padding 改为 `1.2rem` |
-| 2026-05-05 16:27 | main | 首页 Hero 字号微调 | `we know how to win` 字号 clamp 从 `1.15rem/3.64vw/3.72rem` 放大到 `1.265rem/4.004vw/4.092rem` |
-| 2026-05-05 16:34 | main | 首页 Vision 屏调整 | Vision 屏外层改为纯 `#171717`，卡片左右外距改为 `1.2rem`，正文三行显示并放大 1.1 倍，按钮改为白底黑字 |
-| 2026-05-05 16:38 | main | 首页 Vision 微调 | Vision 卡片左右外距改为 `2.5rem`，右侧旋转 Vision 定位到视窗右侧 `12rem` 内容线，按钮默认样式强制为白底黑字 |
-| 2026-05-05 16:41 | main | 首页 Vision 正文与对齐微调 | 正文字号 clamp 调整为 `1.65rem/2.64vw/2.772rem`，卡片内部 padding 修正为 `calc(var(--shell-md) - 1.3rem)` 以对齐视窗左侧 `12rem` |
-| 2026-05-05 16:42 | main | 首页 Vision 标识微调 | 右侧 Vision 标识从 `rotate-90` 改为 `rotate-180`，字号 clamp 缩小到 `4.275rem/9vw/7.875rem` |
-| 2026-05-05 16:43 | main | 首页 Vision 标识旋转调整 | 右侧 Vision 标识从 `rotate-180` 改为 `rotate-[270deg]` |
-| 2026-05-05 16:44 | main | 首页 Industries 说明正文调整 | 说明段落从 `max-w-[90rem] text-[var(--type-body)]` 改为 `w-full text-[calc(var(--type-body)*1.8)]` |
-| 2026-05-05 16:46 | main | 首页 Industries 卡片描述移除 | 删除行业卡片数据中的 `desc` 字段和卡片底部 hover 描述段落，仅保留标题、图片和箭头交互 |
-| 2026-05-05 16:47 | main | 首页 Industries 与 Honors 微调 | 删除 Industries 卡片网格下方横线；Honors 标题区网格改为 `auto 1fr`，右侧说明字号改为 `clamp(1.4rem,1.68vw,1.96rem)` |
-| 2026-05-05 16:52 | main | 首页 Honors 与 Events 微调 | Honors 顶部网格增加 `items-center`，右侧说明改为 `clamp(1.54rem,1.848vw,2.156rem)`，active 标题/正文放大并移除 See More；Events 右侧说明改为 `clamp(1.3rem,1.56vw,1.82rem)`，轮播图片和灰卡间距为 `2rem` |
-| 2026-05-05 16:55 | main | 首页 Clients 屏微调 | Clients 标题容器改为 `pl-[5rem] pr-[var(--shell-md)]`，删除 Logo 墙左右两侧渐隐遮罩 |
-| 2026-05-05 16:58 | main | About Hero 垂直位置微调 | About 标题组改为首屏 `55svh` 定位，灰色 Vision 方块改为首屏 `90svh` 定位，并增加 Hero 高度避免方块被截断 |
-| 2026-05-05 17:01 | main | 首页 Vision 背景微调 | Vision 第二屏 section 使用 `repeating-linear-gradient` 纹理层和 90 度深灰到暖灰横向渐变背景 |
-| 2026-05-05 17:01 | main | 首页 Vision 卡片背景修正 | 外层 section 恢复为 `#171717`，将 `repeating-linear-gradient` 纹理层和横向渐变移入 Vision 卡片背景 |
-| 2026-05-05 17:02 | main | 首页 Vision 卡片渐变调整 | 删除 `repeating-linear-gradient` 纹理层，卡片背景改为 `linear-gradient(to bottom right, ...)` |
-| 2026-05-05 17:03 | main | 首页 Vision 遮罩调整 | 删除卡片内部纵向黑色 overlay，避免卡片上下边缘继续发黑 |
-| 2026-05-05 17:04 | main | 首页 Vision 上部灰度微调 | 卡片渐变前两个色标改为 `#4f4f52` 和 `#565659`，下部 `#403f3f`、`#514c45` 保持不变 |
-| 2026-05-05 17:05 | main | 首页 Vision 上部亮度微调 | 卡片渐变前两个色标继续压暗为 `#2f2f32` 和 `#38383b`，下部色标保持不变 |
-| 2026-05-05 17:05 | main | 首页 Vision 上部亮度二次微调 | 卡片渐变前两个色标继续压暗为 `#27272a` 和 `#303033`，下部色标保持不变 |
-| 2026-05-05 17:17 | main | 首页 Vision 起始色标调整 | 卡片对角线渐变第一个色标改为 `rgb(36, 36, 36) 9%`，其余色标保持现有设置 |
-| 2026-05-05 17:35 | main | 全站字体接入 | 使用 `next/font/local` 加载 `src/font/poppins.ttf`，并通过 `body` 字体栈覆盖全站默认文字 |
-| 2026-05-05 17:52 | main | About 页视觉细节调整 | Hero 标题增加金色左线并对齐 12rem 内容线，Vision 卡片改为 5rem 外距和新渐变；Honors、Culture、Chronicle 按反馈统一颜色、字号、边框和展开内容样式 |
-| 2026-05-05 17:59 | main | Team 页人物区微调 | 去掉 WE ARE 与 SPECIAL 之间的大间隔，新增 Partner 标题，人物图片填满父容器，Find out more 去掉 icon 并保留黄色下划线 |
-| 2026-05-05 18:08 | main | Industries 页布局微调 | Hero 标题改为右侧 12rem 对齐，说明卡片使用指定灰金渐变和对角黄色边框，行业卡片区改为 9rem 外距、左下文字与 1/2.5/1.5 行高比例 |
-| 2026-05-05 18:12 | main | Industries 页细节修正 | 说明卡片从对角边框恢复为原有引号装饰并改为黄色；行业卡片标题下划线改为内容区域全宽 |
-| 2026-05-05 18:17 | main | Events 页视觉微调 | Hero 渐变块改为 6rem 左右外距和 40svh 高度；第二屏移除 LATEST UPDATES 标题/下划线，卡片图片去除灰度遮罩并保持左上 -10% 偏移 |
-| 2026-05-05 18:22 | main | Events 页卡片内容微调 | Hero 渐变块左右外距改为 8rem，第二屏外距改为 6rem；事件卡片删除摘要和 Read More，只保留日期、黄色箭头和标题 |
-| 2026-05-05 18:23 | main | Events 卡片间距微调 | 第二屏网格间距从 `gap-x-8 gap-y-16` 改为 `gap-x-24 gap-y-48` |
-| 2026-05-05 18:24 | main | Events 卡片图片偏移微调 | 卡片图片容器从 `-left-[10%] -top-[10%]` 改为 `-left-[3.3%] -top-[3.3%]` |
-| 2026-05-05 18:26 | main | Events 卡片内容间距微调 | 内容区顶部 padding 改为 `calc(54% + 3rem)`，右下角三角形高度从 `18%` 改为 `6%` |
-| 2026-05-05 18:27 | main | Events 卡片日期间距二次微调 | 内容区顶部 padding 从 `calc(54% + 3rem)` 改为 `calc(54% + 6rem)` |
-| 2026-05-05 18:28 | main | Events 卡片字号与间距微调 | 标题字号 clamp 调整为当前 70%，第二屏网格纵向间距从 `gap-y-48` 恢复为 `gap-y-16` |
-| 2026-05-05 20:40 | main | Contact 页边距调整 | 新增页面内 `contactShell`，让 Hero、Join Us、候选人卡片和邮箱提示区桌面左边距统一为 `9rem` |
-| 2026-05-05 20:49 | main | About Culture 视觉修正 | Culture 基础背景改为 `#a88d61`，左图降透明并叠加棕金 multiply 遮罩，主过渡改为深棕金多层渐变，右侧增加约 0.1 透明度的抽象品牌水印 |
-| 2026-05-05 20:55 | main | About Culture 遮罩微调 | 主过渡遮罩左侧透明度从较高覆盖改为低透明度，并将实色过渡区域右移，保留左侧图片可见度 |
-| 2026-05-05 20:59 | main | About Culture 渐变范围微调 | 主遮罩改为从 18% 到 78% 持续递增透明度的多段棕金过渡，避免渐变只集中在图片右侧小范围 |
-| 2026-05-05 21:00 | main | About Culture 图片清晰度微调 | 主遮罩 0%-42% 改为透明，图片 opacity 提高到 `0.68`，棕金 multiply 遮罩降低到 `35%`，避免左图雾化 |
-| 2026-05-05 21:02 | main | About Culture 背景与左图蒙层调整 | 删除 section / 容器 `#a88d61` 背景类，并移除左图区域 `#9f8458` multiply 蒙层 |
-| 2026-05-05 21:03 | main | About Culture 尺寸调整 | 删除 `mx-auto max-w-[120rem]` 宽度限制，容器改为 `w-full min-h-[80vh]`，左图桌面高度同步为 `80vh` |
-| 2026-05-05 21:05 | main | About Culture 图片右侧渐变 | 在左图内部增加 `linear-gradient(to left, #a88d61 0%, rgba(168, 141, 97, 0) 30%)`，让图片右缘衔接右侧背景 |
-| 2026-05-05 21:16 | main | Contact 信息模块调整 | 移除底部独立城市图模块，在 Hero 后新增全宽 80vh 双栏模块：左侧 Contact us 文案、电话/邮箱图标信息，右侧展示城市图 |
-| 2026-05-05 21:18 | main | Contact 信息模块颜色调整 | Contact us 模块左侧标题、正文、电话、邮箱和 Phone/Mail 图标统一改为黑色 |
-| 2026-05-05 21:23 | main | Contact 招聘区视觉调整 | 候选人卡片的 1/2/3/4 数字替换为金色下划线，简历邮箱提示右对齐，并为 Contact us 下方到 Footer 前区域增加 `#1d1d1d` 右侧直角三角形背景 |
-| 2026-05-05 21:25 | main | Contact 三角形连接修正 | 三角形背景容器增加 `pb-20 -mb-20`，覆盖 Footer `mt-20` 形成的间隙，让斜边终点对齐 Footer 顶部正中间 |
-| 2026-05-05 21:26 | main | Contact 卡片层级微调 | 候选人卡片下划线增加 `mt-16`，三角形背景层级提高到卡片背景上方，卡片下划线和正文保持更高层级避免被遮挡 |
-| 2026-05-05 21:28 | main | Contact 卡片下划线与背景修正 | 候选人卡片下划线从 `h-0.5` 改为 `h-1.5`，三角形背景层级从 `z-20` 改回 `z-0`，作为区域背景板显示 |
-| 2026-05-05 21:29 | main | Contact 卡片层级二次修正 | 卡片背景拆为内部 `z-0` 背景层，三角形设为 `z-20`，卡片下划线和正文保持 `z-30`，实现三角形盖住卡片背景但不遮挡内容 |
-| 2026-05-05 21:30 | main | Contact 卡片截图效果调整 | 移除卡片区 `z-10` stacking context，确保内容 `z-30` 高于三角形；卡片背景改为深色暖灰渐变，正文改为粗斜体灰白文字 |
-| 2026-05-05 21:32 | main | Contact 三角形位置修正 | 三角形 overlay 从整个招聘区容器移入候选人卡片 grid，起点对齐卡片区右上角，高度向下延伸覆盖到 Footer 前 |
-| 2026-05-05 21:36 | main | Contact 三角形位置回退 | 撤回 `21:32` 的卡片 grid 锚点调整，三角形 overlay 恢复为招聘区整体容器的绝对定位背景 |
-| 2026-05-05 21:50 | main | 页面级三角形背景 | 新增 `PageTriangle` 共享组件，并在 Home、About、Team、Industries、Events 页面按各自区块起点放置低层级 `#1d1d1d` 斜三角背景 |
-| 2026-05-05 21:54 | main | 页面三角形层级与透明度调整 | `PageTriangle` 默认形状改为 `polygon(100% 0, 100% 100%, 50% 100%)` 且层级为 `z-0`；Contact 页三角形保持 `z-20` 并增加 `opacity-30` |
-| 2026-05-05 21:58 | main | 页面三角形透明度与顶点调整 | `PageTriangle` 默认形状改为 `polygon(100% 0, 100% 100%, 40% 100%)`，Home/About/Team/Industries/Events 使用 `opacity-50`；Contact 页三角形从 `opacity-30` 改为 `opacity-50` |
-| 2026-05-06 21:42 | main | 首页字体与轮播微调 | Hero 标题改为实际大写并放大 1.2 倍；Vision 文案拆分细体斜体与粗体；Industries 正文/卡片、Honors 说明和 Events 轮播内容按反馈调整 |
-| 2026-05-06 21:55 | main | 首页 1920 基准 rem 换算 | 将 Hero、Vision、Industries、Honors、Events 和 Clients 文案字号按 16px 基准落到固定 rem，并补充 Events 描述卡渐变与右下角三角形视觉 |
-| 2026-05-06 22:00 | main | 首页 Events 轮播布局修正 | 移除轮播卡外层渐变边框，保持图片与说明盒独立分离，并把图片日期/标题定位到左下角 70% 宽文字区 |
-| 2026-05-06 22:05 | main | 首页 Events 轮播宽度修正 | 轮播容器改为 `w-full` 占满父级内容区，轮播卡宽度设置为 `62.1875rem max-w-full` 对应 995px 设计稿宽度 |
-| 2026-05-06 22:06 | main | 首页 Events 说明卡换行修正 | 删除说明段落 `truncate`，让 Kinsey Kang Yanan 事件描述在下方方块中按内容自然换行 |
-| 2026-05-06 22:07 | main | 首页 Events 横向内距修正 | 图片左下角文字 `left` 与下方说明卡左右 padding 统一设置为 `5.5625rem`，对应 89px 设计稿距离 |
-| 2026-05-06 22:09 | main | 首页 Events 轮播展示修正 | 图片日期和标题文字实际左距保持 `5.5625rem`，标题左竖线仅包裹正文；轮播舞台高度加到 `64rem / 68rem` 展示完整说明卡 |
-| 2026-05-06 22:31 | main | Hero 本地素材接入 | 发布 `src/assets/{home,about,team,industries,event,contact}/hero.png` 到 `public/assets/*/hero.png`，并替换对应页面 Hero 背景引用 |
-| 2026-05-06 22:33 | main | 首页 Hero 亮度调整 | 将首页 Hero 图片 opacity 从 `60%` 提高到 `90%`，整体遮罩从 `black/70` 降低到 `black/38`，让本地背景图更清晰明亮 |
-| 2026-05-06 22:35 | main | 首页 Hero 遮罩移除 | 删除 Hero 全屏渐变遮罩，只保留 `bottom: 0`、高度 `30%` 的底部暗色过渡层 |
-| 2026-05-06 22:37 | main | 首页 Vision 标识字重调整 | 右侧旋转 `Vision` 从 `font-light uppercase` 改为 `font-normal`，按文本本身大小写展示 |
-| 2026-05-06 22:40 | main | 首页 Industries 图片接入 | 发布 `src/assets/home/INDUSTRIES1.png` 到 `INDUSTRIES5.png` 至 `public/assets/home`，并替换首页前五张行业卡片图片 |
-| 2026-05-06 22:52 | main | 首页 Industries 下划线位置修正 | 灰色横线改为跟随说明正文之后显示，不再位于 Industries & Services 标题正下方 |
-| 2026-05-06 22:54 | main | 首页 Honors 年份按钮排版 | 年份按钮改为 `text-[1.25rem] font-bold justify-start text-left px-4`，对应 20px 左对齐粗体样式 |
-| 2026-05-06 22:55 | main | 首页 Events active 说明卡 | Events 轮播下方说明块增加 `position === "active"` 条件渲染，左右预览卡只显示图片区域 |
-| 2026-05-06 22:56 | main | 首页 Events 控制按钮间距 | 轮播舞台高度从 `64rem / 68rem` 调整为 `56rem / 58rem`，控制按钮外边距从 `mt-4` 调整为 `mt-1` |
-| 2026-05-06 23:00 | main | About Hero 字体调整 | About us 标题设置为 `6rem`、`fontWeight: 600`，Hero 正文设置为 `2rem`、`fontWeight: 500`、italic |
-| 2026-05-06 23:01 | main | About Vision 说明字体调整 | `VisionCard` 顶部说明从 clamp 字号改为 `text-[1.5rem] font-medium`，取消 capitalize |
-| 2026-05-06 23:06 | main | About 内容字体系统调整 | Vision 标题/正文/See More、Honors 标题/说明/年份/奖项展开内容、Culture 标题按指定 px 值换算为 rem 并更新字重 |
-| 2026-05-06 23:07 | main | About Culture 与 Chronicle 字体调整 | Culture 正文改为 `1.75rem` regular、按钮改为 `1.125rem` medium；Chronicle 标题/说明/年份/月/正文按指定 rem 和字重落地 |
-| 2026-05-06 23:09 | main | About Hero 蒙层位置调整 | About Hero 的两层渐变遮罩从 `inset-0` 改为 `top-[100svh] bottom-0`，首屏完整展示原图 |
-| 2026-05-06 23:12 | main | About Vision 背景图接入 | 发布 `src/assets/about/aboutVision.png` 到 `public/assets/about/aboutVision.png`，并作为 `VisionCard` 背景图层使用 |
-| 2026-05-06 23:13 | main | About Vision 两行文案修正 | 将说明容器宽度放宽到 `max-w-[56rem]`，并给第二行加 `whitespace-nowrap` |
-| 2026-05-06 23:16 | main | About Honors 顶部说明排版 | Honors 顶部说明改为 `justify-self-end text-right`，拆成两个 block，第二行使用 `whitespace-nowrap` |
-| 2026-05-06 23:17 | main | About Honors 说明右边界调整 | 顶部说明增加 `lg:-mr-[var(--shell-md)]`，让右对齐基准移动到屏幕右侧内容线 |
-| 2026-05-06 23:19 | main | About Honors 说明溢出修正 | 删除 `lg:-mr-[var(--shell-md)]`，并增加 `max-w-[calc(100vw-var(--shell-md)*2)]` 约束右侧说明宽度 |
-| 2026-05-06 23:20 | main | About Honors 与 Vision 背景微调 | Honors 顶部说明删除 max-width 约束并使用父网格右边界对齐；Vision 背景图从 `size-full` 改为 `h-full w-full` |
-| 2026-05-06 23:31 | main | Team 页字体和成员数据调整 | Team Hero、Special Forces、Partner 分区、成员姓名/职位/Find out more 按指定 px 换算为 rem，成员卡片改用 `teamInfo.md` 的姓名职位和本地团队图片 |
-| 2026-05-06 23:40 | main | Industries 页字体与图片调整 | Industries 标题改为左对齐 6rem medium，说明卡片移到标题下方，六个行业卡片接入 `in1.png` 到 `in6.png` 并使用 3rem semibold 标题 |
-| 2026-05-06 23:43 | main | Industries 与 Events 文案图片调整 | Industries 卡片标题改为指定大小写与换行；Events Hero 和卡片文案按 100px/36px/30px/24px 规格更新，并接入 event1-3 图片 |
-| 2026-05-06 23:47 | main | Contact 页字体与文案调整 | Contact Hero、Contact us 双栏、Join Us、候选人卡片和招聘邮箱提示按 96px/52px/36px/32px/28px 规格更新 |
-| 2026-05-06 23:48 | main | Industries Hero 位置调整 | 将 Industries 标题容器从垂直居中改为顶部 `36.875rem` 偏移，对应 1920 设计稿 590px |
-| 2026-05-06 23:52 | main | Team Zoe Zhang 图片接入 | 发布 `src/assets/team/team4.png` 到 public，并将 Zoe Zhang 卡片图片从原型备用图改为 `/assets/team/team4.png` |
-| 2026-05-07 00:08 | main | Team Profile 详情页重排 | 将 `/team/yuxuan-liu` 改为对角渐变 Hero、128px 内容边距的信息介绍屏、Experience 屏和 Performance 屏 |
-| 2026-05-07 00:17 | main | Team Profile 详情页细化 | Hero 固定为 `45.9375rem` 高并改用 `team1.png`，Language Skills 与 Professional Qualification 同列，Experience 区改为左侧 Practice 双块、右侧 Honors |
-| 2026-05-07 00:21 | main | Team Profile 展开交互 | 为 Honors 和 Performance 的 View more 增加可展开/收起内容，并补充 `teamInfo.md` 后续条目 |
-| 2026-05-07 00:23 | main | Team Profile 面包屑视觉 | 将 Our Team / Yuxuan Liu 面包屑条调整为黑色背景，当前项使用白色文字 |
-| 2026-05-07 00:27 | main | Industries 详情内容接入 | Finance 与 Real Estate 在列表第二段右侧上下排列，详情页 Hero 使用对应行业卡片图片并展示 `industriesInfo.md` 文案 |
-| 2026-05-07 00:28 | main | Events 详情页排版 | 事件详情页改为 64px 标题、28px 日期、24px light italic 主说明和 Educational Background 信息结构 |
-| 2026-05-07 00:42 | main | Core Value 滚动动画 | 新增 `CoreValueScrollFlow`，使用 `core1-3.png` 实现桌面滚动进度驱动的右侧图片堆叠揭示与左侧价值观内容切换 |
-| 2026-05-07 00:44 | main | Core Value 图片吸顶位置 | 右侧图片堆 sticky 容器改为 `top-[5rem]`，图片堆整体向下偏移 `5rem` |
-| 2026-05-07 00:46 | main | Core Value 文案规格 | 价值观标题改为 `1.75rem` 金色 semibold，正文改为 `1.5rem` regular，并替换 No.1 Tiger 段落 |
-| 2026-05-07 00:48 | main | Core Value 视觉细化 | 删除滚动区顶部额外引导文案和标题下划线，背景统一为 `#171717`，右侧图片堆改为 `top-[10rem]` sticky |
-| 2026-05-07 00:50 | main | Core Value sticky 动画对齐 | 右侧图片堆恢复为参考动画的 `sticky top-0 h-screen` 居中容器，内层下移 `10rem` 并缩放到 `0.9` |
-| 2026-05-07 00:53 | main | Core Value 图片堆叠对齐 | 右侧图片堆改为 `事件 copy` 的固定高度 absolute 叠放结构，使用 px 级 `translateY` 和 `clip-path` 揭示 |
-| 2026-05-07 00:56 | main | Core Value 事件 copy 动画对齐 | 滚动监听改为与 `FeaturesSection` 一致的 window scroll 进度计算，图片栈高度和 transform 过渡改为 inline 固定值，并从 `tsconfig.json` 排除 `事件 copy` 原型 |
-| 2026-05-07 01:01 | main | Team 动态个人详情 | 新增 `src/data/teamProfiles.ts` 和 `/team/[slug]` 路由，Team 卡片按成员 slug 跳转并渲染对应姓名、图片、职位、邮箱和个人介绍内容 |
-| 2026-05-07 01:02 | main | Core Value 图片显示修复 | 为右侧图片堆的下移和缩放包裹层补充 `w-full`，保证 `CoreImageStack` 能继承 sticky 列宽度正常显示 |
-| 2026-05-07 01:04 | main | Core Value sticky 修复 | 删除 `CoreValuePage` 根 main 上的 `overflow-x-hidden`，让右侧图片区按视窗而不是裁剪祖先执行 sticky 固定 |
-| 2026-05-07 01:05 | main | Core Value 图片位置调整 | 右侧图片堆偏移从 `translate-y-[10rem]` 调整为 `translate-y-[5rem]`，整体向上移动 5rem |
-| 2026-05-07 01:17 | main | offweb 部署 | 使用 `NEXT_SNAPSHOT_BASE_PATH=/offweb` 构建 standalone 包，发布到 `husuweb-offweb.service` 并通过 Nginx 暴露 `/offweb/` |
-| 2026-05-07 01:25 | main | offweb 图片路径修复 | `next.config.ts` 注入 `NEXT_PUBLIC_BASE_PATH`，`ImageWithFallback` 自动将 `/assets/*` 输出为 `/offweb/assets/*` |
-| 2026-05-07 09:35 | main | offweb 子路径跳转修复 | Culture 入口改用 Next `Link`，线上 href 为 `/offweb/about/core-value/`；新增 not-found 页，Return Home href 为 `/offweb/` |
-| 2026-05-07 22:07 | main | 首页 Honors/Events 与 Clients 调整 | Honors 改为按 `EN/award.md` 年度展示最近三条，Events 使用 `EN/event.md` 指定三条和 `assets/home` 图片，Clients 区域样式同步调整 |
-| 2026-05-07 22:16 | main | 首页视觉细节修正 | Vision 按钮字距缩小，首页内容层级高于背景三角形，Events 控制区右对齐且日期改为英文月份格式，See More 增加 hover 位移 |
-| 2026-05-07 22:22 | main | 首页与 About Honors 细节修复 | Header 移到 Home 顶层保持吸顶，三角形位于背景之上内容之下，Events 控制按钮绝对贴右，About Honors 正文不再溢出视窗且日期置顶 |
-| 2026-05-07 22:32 | main | About 数据接入与首页三角形微调 | Honors 使用 `EN/award.md` 年度奖项，Chronicle 使用 `EN/CHRONICLE.md` 全量时间线，See More 展开全部年份，首页三角形下移并降低透明度 |
-| 2026-05-07 22:38 | main | Title 与 About Honors 展示调整 | Header 英文导航使用大写源文案；About Honors 标题改为斜体金色，右侧说明按参考图排版，View Award 支持公众号链接字段 |
-| 2026-05-07 22:45 | main | Team Profile 真实业绩与展开交互 | Team 个人详情页使用 `EN/teamInfo.md` 全量个人业绩；无 Honors 的成员不展示 Honors 区块；View More 使用 About 同款按钮与 grid 展开动画 |
-| 2026-05-07 22:52 | main | Events 数据与按钮交互 | Events 列表和详情页共用 `src/data/events.ts` 的 28 条事件；列表 See More 改为 Culture 同款按钮动效；首页 Events 控制按钮居中，About Vision/Culture 按钮间距同步微调 |
-| 2026-05-07 22:57 | main | 背景层级和收起按钮修复 | Home/About 页面内容统一置于三角形背景之上；Chronicle See More 改为 Culture 同款按钮；所有展开收起态文案统一为 `COLLAPSE` |
-| 2026-05-07 23:04 | main | 首页与 About Honors 视觉微调 | 首页 Hero 标题使用指定金色对角渐变；Clients 三行 Logo 改为互不重复分组并加小圆角；About Honors 展开内容右侧使用 `awardbg.png` 背景 |
-| 2026-05-07 23:12 | main | About Honors 公众号跳转 | View Award 按钮按奖项绑定 `EN/award.md` 里的微信公众号文章链接；无公众号链接的条目不显示按钮 |
-| 2026-05-07 23:26 | main | 中文网站文案接入 | 新增 `src/i18n/LanguageProvider.tsx` 与 `src/i18n/copy.ts`，语言按钮可同步切换页面主体、页脚和主要事件中文摘要 |
-| 2026-05-08 00:05 | main | 中文列表数据接入 | 首页荣誉和动态、About 荣誉和大事记、团队卡片姓名职位按 `Chinese/awards.md`、`Chinese/event.md`、`Chinese/CHRONICLE.md`、`Chinese/teamInfo.md` 切换中文 |
-| 2026-05-08 00:22 | main | 团队详情中文化 | `TeamProfilePage` 按当前语言显示 `Chinese/teamInfo.md` 的基本信息、专业领域、执业经验、荣誉和个人业绩 |
-| 2026-05-08 00:26 | main | 行业详情中文化 | `/industries/[slug]` 按当前语言显示 `Chinese/industriesInfo.md` 的行业简介与服务范围 |
-| 2026-05-08 00:29 | main | 收起按钮中文文案 | 公共 `copy.common.collapse` 中文值改为 `收起`，英文仍保持 `COLLAPSE` |
-| 2026-05-08 00:33 | main | 行业详情 metadata 修复 | 新增 `src/data/industryMetadata.ts` 供 `/industries/[slug]` 服务端 metadata 和静态参数生成使用 |
-| 2026-05-08 00:41 | main | 服务行业卡片文案修复 | `/industries` 卡片标题改为随 slug 绑定的中英文文案，列表显示与详情跳转保持一致 |
-| 2026-05-08 09:29 | main | 图片加载优化 | 关键首屏图使用 eager/high，非首屏图 lazy，页面大图切换为 WebP，Core Value 滚动动画使用 rAF 与 IntersectionObserver 降低无效计算 |
-| 2026-05-08 21:38 | main | hover 图片动画修复 | 首页行业、事件、行业列表、团队、Contact 城市图和 About Culture 的 hover 缩放图片改为先加载同步解码，避免直接放大 |
-| 2026-05-08 21:47 | main | Clients Logo 滚动修复 | 移除 logo 行 hover 暂停规则，并将滚动动画时长写入全局 CSS，保证三行 Logo 持续滚动 |
-| 2026-05-08 21:51 | main | 全局动效规则修复 | `prefers-reduced-motion` 不再压缩所有 transition 和 animation 时长，恢复 See More、Logo 墙和图片 hover 的正常过渡 |
-| 2026-05-08 22:19 | main | 首页与 About 交互更新 | Hero 接入海浪视频和流光文字；首页 Honors 默认 2026 并补 2020/2019；行业卡片跳详情；Events 新增 20210218/20201023；修复 Core Value rootMargin、Culture 图片和 Chronicle 年份按钮 hover |
-| 2026-05-08 22:21 | main | 首页 Hero 资源策略记录 | 首页 Hero 明确保留视频资源，不再纳入 WebP 压缩图策略；除指定原图外其余页面继续使用 WebP |
-| 2026-05-08 22:30 | main | 首页 Events 与 Honors 微调 | 首页 Events 轮播补齐 2021/2020 两条虎眼观察和图片资源；Honors 年份按钮改为每屏 5 个并通过左右按钮循环滑动 |
-| 2026-05-08 22:40 | main | 文案与 Logo 统一 | Awards Won 中文改为“所获奖项”，首页 Vision 中文字号降至 80%，团队口号和联系文案更新，个人教育背景按分号分段，Header/Footer 使用 `logo.svg` |
-| 2026-05-08 22:44 | main | Logo 尺寸校准 | Title/Header logo 改为 86px 宽，Footer logo 改为 152px 宽，均保持 SVG 等比高度 |
-| 2026-05-08 22:46 | main | Logo 尺寸放大 | Title/Header logo 宽度改为 `10.75rem`，Footer logo 宽度改为 `19rem`，均为上一版两倍 |
-| 2026-05-08 22:55 | main | 替换图片资源同步 | 新二维码发布到 Footer；首页 Real Estate 和团队 team2 重新生成 WebP；About Culture 左图同步新 PNG；首页 Vision 中文“虎诉愿景”改为 `7rem` |
-| 2026-05-08 22:58 | main | Honors 选择交互修正 | 首页 Honors 左右按钮改为移动 active 年份，2026 左移到 2019，2019 右移回 2026，并保持 5 个年份窗口跟随 |
-| 2026-05-08 23:02 | main | Logo 资源与尺寸更新 | 新版 `logo.svg` 发布到 Title/Footer public 路径；Header 宽度改为 `5.375rem`，Footer 宽度改为 `9.5rem` |
-| 2026-05-08 23:05 | main | Clients logo 尺寸调整 | 首页客户 Logo 墙中每个 logo 改为 `h-[80%] w-auto max-w-full`，占据卡片父容器高度 80% |
-| 2026-05-08 23:08 | main | Events 轮播与标题修正 | 新增两条事件的英文标题补齐到首页和 `/events` 数据源；首页 Events 使用 `useEffect` 每 5 秒自动切换 |
-| 2026-05-08 23:18 | main | Events 首尾切换优化 | 自动轮播 effect 依赖 active event，手动点击后重启 5 秒计时，减少最后一张点右时的连续跳动感 |
-| 2026-05-08 23:22 | main | About 与 Contact 视觉调整 | About Vision 去除固定高度依赖并为 See More 保留下边距；Culture 左图取消滤镜/蒙层；Contact us 左侧背景色改为 `#A1865F` |
-| 2026-05-09 08:50 | main | Team Profile 信息区调整 | Mengcheng Yun / 云梦成的 `socialEngagements` 清空，详情页仅在 Social Engagements 有内容时渲染该区块 |
-| 2026-05-09 08:53 | main | OSS 静态资源接入 | 新增 `assetUrl()`、`.env.production` 和 `public/font/poppins.ttf`，生产构建默认将 `/assets/*`、首页视频和字体加载到 OSS 前缀 |
-| 2026-05-09 08:57 | main | Events 源素材命名整理 | 将 `src/assets/event` 新增图片从微信原始文件名整理为连续的 `event2` 到 `event39` |
-| 2026-05-09 09:07 | main | Events 源素材跳号整理 | 源素材命名跳过缺图编号 7、10、18，当前事件素材覆盖 `event2` 到 `event42` 的有效编号 |
-| 2026-05-09 09:16 | main | Events 真实内容与图片接入 | 将 Events 列表扩展为 42 条真实事件，逐条绑定真实图片，并在详情页展示中英文真实正文 |
-| 2026-05-09 09:25 | main | Events 图片 OSS 同步 | 上传 `public/assets/event/event1-42` 到 OSS，保证生产环境资源前缀下可访问 |
-| 2026-05-09 09:29 | main | 子页面导航与视觉统一 | 新增 `SubpageBreadcrumb` 和 `BackToTop`，统一详情页返回上一页、返回顶部和面包屑视觉，并调整 Culture/Team 背景层级 |
-| 2026-05-09 09:33 | main | Events 详情占位清理 | 事件详情正文渲染前移除图片占位文本，并用 slug + 序号生成段落 key |
-| 2026-05-09 09:35 | main | Events 中文分类规范化 | `localizeEvent` 将中文标题内的分类前缀拆出，避免列表和详情显示 `???? | 虎诉动态` |
-| 2026-05-09 09:41 | main | Core Value 与 Hero 资源修正 | Core Value 桌面滚动图改为 `16:14` 横向展示，About/Team/Industries/Events/Contact/Core Value Hero 图使用 PNG |
-| 2026-05-10 00:09 | main | 首页与子页面资源交互修正 | 同步 42 张客户 Logo、新二维码和团队图 WebP，首页动态轮播卡片跳详情，Back 按钮改为返回上一页，行业详情面包屑回首页 |
-| 2026-05-10 00:15 | main | Core Value 与 About Vision 修复 | Core Value 中文标题不再显示空编号，组件 key 改为稳定组合；About Vision See More 展开用户指定的三段英文愿景文案 |
-| 2026-05-10 00:21 | main | About Vision 展开收起 | Vision See More 按钮改为展开/收起切换，展开状态显示 `Collapse` / `收起` |
-| 2026-05-10 00:28 | main | Footer 二维码替换生效 | 新二维码同步到 public 和 OSS，Footer 引用增加版本参数确保线上刷新 |
-| 2026-05-10 11:02 | main | Team Profile 电话展示 | 团队个人详情 Hero 信息块新增电话链接，并修复 Zoe Zhang 中文详情数据中的未闭合字符串 |
-| 2026-05-10 11:03 | main | Zoe Zhang 执业经验分段 | `TeamProfilePage` 支持按换行拆分执业经验，Zoe 中文内容拆为两段 |
-| 2026-05-10 11:07 | main | Footer 隐私弹窗 | `SiteFooter` 新增 Disclaimer modal，点击页脚 Disclaimer and Privacy 展示用户指定条款内容 |
-| 2026-05-10 11:10 | main | Footer 二维码与备案链接修正 | Footer 二维码使用 `QRcode.png?v=202605101115` 避免旧缓存，公安备案和 ICP 备案号支持点击跳转 |
-| 2026-05-10 11:14 | main | 虎诉荣誉缺失条目补齐 | 首页 Honors 与 About Honors 补入 202211、202304、20240515、20241129、202203 五条中英文荣誉数据和公众号链接 |
-| 2026-05-10 11:16 | main | Min Xu 英文简介更新 | `src/data/teamProfiles.ts` 与 `EN/teamInfo.md` 同步更新 Min Xu Social Engagements 文案，页面数据构建通过 |
-| 2026-05-10 11:26 | main | 团队英文详情按源文档校准 | Li Wan、Zoe Zhang、Mengcheng Yun、Weifan Qiu 的英文详情字段按 `EN/teamInfo.md` 补全并通过构建 |
-| 2026-05-10 11:31 | main | 行业详情英文内容与面包屑修正 | `/industries/[slug]` 面包屑回到 `/industries`，英文 Private Equity、Real Estate、Sports and E-Sports、Cyber Tech and Game 内容按源文档补齐 |
-| 2026-05-10 11:51 | main | 中文隐私与愿景文案补齐 | `SiteFooter` 隐私弹窗按语言显示中文条款，About Vision See More 中文展开内容替换为用户指定三段文案 |
-| 2026-05-10 11:53 | main | 虎诉动态列表图片完整展示 | `EventsPage` 小卡片图框改为 `16:9` + `object-contain`，保留左上偏移并避免真实事件图裁切 |
-| 2026-05-10 11:55 | main | 顶部导航下划线优化 | `SiteHeader` 桌面和移动 active 下划线由 `1px` 加粗为 `0.125rem`，hover 展开线同步加粗 |
-| 2026-05-10 12:02 | main | 首页 Events 轮播数据同源 | `HomePage` 通过 slug 读取 `src/data/events.ts`，标题、摘要、日期、图片和详情跳转与 Events 页面保持一致 |
-| 2026-05-10 12:26 | main | Footer 二维码缓存与展示修正 | `SiteFooter` 二维码 URL 版本更新为 `202605101205`，dist 发布目录同步当前 QR 文件，图片展示改为 `object-contain` |
-| 2026-05-10 12:27 | main | Events 卡片图片背景自适应 | `EventsPage` 卡片图框增加同图模糊 cover 背景，顶层保持 contain 完整展示图片 |
-| 2026-05-10 12:28 | main | 官网构建范围修正 | `tsconfig.json` 排除未纳入当前官网运行链路的 `cms` 目录，恢复主应用类型检查范围 |
-| 2026-05-10 12:29 | main | Events 图片自适应填充 | `EventsPage` 卡片图片移除额外背景层和遮罩，单图使用 `object-cover` 填满 `16:9` 图框 |
-| 2026-05-10 16:16 | main | About 与团队详情 Hero 图片替换 | `AboutHero` 指向 `/assets/about/about.png`；`TeamProfilePage` 按成员 slug 使用 `/assets/team/1.png` 至 `/assets/team/6.png` 作为全屏首屏图 |
-| 2026-05-10 15:23 | main | Team Profile Hero 高度校准 | `TeamProfilePage` Hero 从 `100svh` 调整为 `45.9375rem`，图片跟随父容器宽高展示 |
-| 2026-05-10 15:25 | main | Team Hero 与个人信息定位 | `TeamPage` Hero 固定为 `67.5rem`，图片跟随父容器高度；`TeamProfilePage` 信息块桌面左距按 890px 换算为 `55.625rem` |
-| 2026-05-10 15:27 | main | Team Profile Hero 蒙层移除 | 删除个人详情 Hero 的左右暗渐变和底部渐变层，让首屏人物图无蒙层显示 |
-| 2026-05-10 15:43 | main | Event Detail 面包屑回首页 | `EventDetailPage` 面包屑父级使用 `copy.nav.home`，fallback 返回首页，匹配首页动态卡片进入详情的路径语义 |
-| 2026-05-10 15:44 | main | Industry Detail 面包屑回首页 | `IndustryDetailPage` 面包屑父级使用 `copy.nav.home`，fallback 返回首页，匹配首页行业卡片进入详情的路径语义 |
-| 2026-05-10 15:50 | main | Footer 二维码透明展示 | `SiteFooter` 去掉二维码容器的 `bg-white p-1`，避免透明 PNG 被外层白底覆盖 |
-| 2026-05-10 15:55 | main | About Vision 与 Culture 图标校准 | `VisionCard` 左上装饰改为描边空心上引号并与标题首行对齐；`Culture` 背景小 logo 改用 `public/assets/about/bg.png` |
-| 2026-05-10 15:58 | main | About Vision 正文对齐 | `VisionCard` 改为标题区和正文区共享两列网格，白色描边引号与首段正文同排；`Culture` 背景图宽度从 `26.25rem` 调为 `15.75rem` |
-| 2026-05-10 16:00 | main | About Vision 引号微调 | `VisionCard` 正文列继续与标题列共用边距，引号改为正文列内绝对定位并靠近首行文字 |
-| 2026-05-10 16:04 | main | Vision 与 Contact 背景资源对齐 | `VisionCard` 使用 `/assets/about/Icon.svg` 作为正文左侧引号并收拢为居中内容容器；`ContactPage` Contact us 左侧背景改用 `/assets/about/bg.png` |
-| 2026-05-10 16:08 | main | Vision 内容边界与图标嵌入 | `VisionCard` 去掉标题和正文的独立左列，标题区和正文区共享 `max-w-[88rem]` 左右边界，首段正文内使用浮动 `Icon.svg` |
-| 2026-05-10 16:11 | main | Vision 引号嵌入方式修正 | `VisionCard` 标题行和正文区均使用 `lg:pl-[7rem]`，`Icon.svg` 改为首段行内元素，避免整段文字围绕图片 |
-| 2026-05-10 23:07 | main | Vision 首段图标定位 | `VisionCard` 将 `Icon.svg` 从文本流中移出，使用 `left-[-7.625rem] top-[-3.125rem]` 贴近首段第一行左侧，正文文本与标题保持统一左边界 |
-| 2026-05-10 23:08 | main | Vision 图标占位微调 | `VisionCard` 首段使用 `w-[2rem]` 行内占位包裹 `Icon.svg`，图标 `left-[-3.625rem]` 向左伸出，避免完整图标宽度挤压正文 |
-| 2026-05-10 23:10 | main | Vision 图标定位点修正 | `VisionCard` 首段 `Icon.svg` 从 `left-[-3.625rem]` 改为 `left-0`，定位到 `2rem` 行内占位起点 |
-| 2026-05-10 23:12 | main | Vision 内容宽度调整 | `VisionCard` 内部内容容器改为 `max-w-[95rem]`，放宽标题与正文排版宽度 |
-| 2026-05-10 23:13 | main | Vision 正文和图标微调 | `VisionCard` 正文区移除 `lg:pl-[7rem]`；`Icon.svg` 宽度改为 `16.875rem`，左偏移改为 `-11.25rem` 以保持右侧锚点 |
-| 2026-05-10 23:16 | main | Vision 首段图标贴合 | `VisionCard` 首段 `Icon.svg` 改为贴近正文第一行左侧，宽度从 `16.875rem` 缩小到 `8.4375rem` |
-| 2026-05-11 22:49 | main | Events 与 About 数据交互修正 | Events 导出范围按 `EN/event.md` 过滤为 28 条，中文日期显示为 `YYYY.MM.DD`；About Chronicle 补入 2026 年 3-5 月三条记录，Honors 年份按降序展示；详情页 Back 可恢复进入前滚动位置 |
-| 2026-05-11 23:00 | main | About Chronicle 中文文案校准 | About Chronicle 2026 年三月、四月、五月中文正文按用户提供版本替换，补充 CCAS、贸仲仲裁员名册和主要裁判领域表述 |
-| 2026-05-11 23:21 | main | Events event2 新增事件接入 | 从 `EN/event2.md` / `Chinese/event2.md` 生成 15 条中英事件数据，复制 event2 与 eventinfo2 图片到 public，并让事件详情页按 `[IMAGE]` 占位顺序插入详情图片 |
-| 2026-05-11 23:28 | main | Events 旧事件详情图接入 | 从 `src/assets/event/eventinfo` 按文件名时间顺序为旧 28 条事件分配 22 张详情图，详情页同时支持整行和行内图片占位符 |
-| 2026-05-11 23:33 | main | Footer 二维码资源同步 | 将新版 `src/assets/foot/QRcode.png` 覆盖到 `public/assets/foot/QRcode.png`，并将 Footer 引用版本刷新到 `202605112333` |
-| 2026-05-11 23:36 | main | Event Detail 版式调整 | `EventDetailPage` 删除右侧事件封面图容器，正文区域占满内容父容器，详情插图使用 `md:w-[70%]` 居中显示 |
-| 2026-05-11 23:41 | main | About Hero 图片同步 | `AboutHero` 背景路径改为 `/assets/about/hero.png`，并将 `src/assets/about/hero.png` 覆盖发布到 `public/assets/about/hero.png` |
-| 2026-05-11 23:45 | main | Clients Logo 滚动速度调整 | `.client-logo-track` 动画时长从 `135s` 缩短到 `103.85s`，实现 1.3 倍滚动速度 |
-| 2026-05-11 23:49 | main | About Honors 月份排序 | `Honors` 增加 `sortAwardsByDateDesc`，在年份降序基础上对每个年份的奖项按 `date` 降序排序 |
-| 2026-05-12 00:52 | main | 根路径服务器部署 | 使用根路径构建的 `dist/root-standalone.tgz` 发布到 `/opt/daxuanweb-root/releases/20260512-0046`，`current` 指向新 release，公网 IP 验证返回 200 |
-| 2026-05-12 01:18 | main | 域名 HTTPS 接入 | `www.tigerpartners.cn` 指向根路径 Next 服务，Certbot 证书签发并启用自动续期；裸域通过阿里云 URL 转发到 HTTPS www 域名 |
-| 2026-05-12 01:40 | main | 独立部署目录迁移 | 改用 `/opt/tigerpartners-web/releases/20260512-0136` 和 `tigerpartners-web.service` 独立承载虎诉官网，Nginx `www.tigerpartners.cn` 反代到 `127.0.0.1:3004`；线上 About Hero、Footer 二维码、邱伟帆图片和 Events 图片已与本地哈希一致 |
-| 2026-05-12 01:52 | main | OSS 关键图片同步 | 覆盖 `husuweb/assets/about/hero.png`、`husuweb/assets/foot/QRcode.png` 和 `husuweb/assets/team/team6.webp`，下载回源校验均与本地 SHA256 一致 |
-| 2026-05-12 01:57 | main | OSS Events 图片同步 | 上传 `public/assets/event/event2` 的 15 张列表图和 `public/assets/event/eventinfo2` 的 25 张详情图到 OSS，全部下载回源校验通过 |
-| 2026-05-12 02:01 | main | OSS Clients Logo 同步 | 上传 `public/assets/home/clientLogo` 的 42 个客户 Logo 到 OSS；`client-logo-41.png` 和代码实际引用的 `client-logo-42.jpg` 返回 200，指定删除的 `client-logo-26.png` 返回 404 |
-| 2026-05-12 21:55 | main | 内容与资源修正 | Home metadata 输出 `Home | Tiger Partners`；Hero 媒体移动端强制铺满父容器；About Chronicle、Team Profile 个人业绩和 Core Value 按源 md 补齐；新版 event2 图片同步到 public 和 OSS，生产构建通过，发布包已生成但远程部署未执行 |
-| 2026-05-12 22:03 | main | Core Value 英文排版优化 | 英文正文使用左对齐、正常词距和 1.55 行高，中文正文保留两端对齐并收紧到 1.65 |
-| 2026-05-12 22:07 | main | 全站禁用浏览器缩放 | 根布局接入 locked viewport metadata 和 `ViewportZoomLock`，全局 CSS 增加 `touch-action: pan-x pan-y`，拦截常见移动端与桌面缩放操作 |
-| 2026-05-12 22:18 | main | About 与团队图片同步 | 将 `src/assets/about/hero.png`、`src/assets/team/team5.png`、`src/assets/team/5.png` 覆盖到 public；Mengcheng Yun 团队卡片改用 `/assets/team/team5.png` |
-| 2026-05-12 22:20 | main | Chronicle 新增事件校准 | About Chronicle 2026 年一月、三月、四月、五月中英文事件按 `EN/CHRONICLE.md` 和 `Chinese/CHRONICLE.md` 同步，中文五月补充国际贸易、公司股权、建设工程和国际商事仲裁领域 |
-| 2026-05-12 22:30 | main | 刘煜暄荣誉说明格式 | 中英文荣誉和认可首句改为冒号结尾，并在团队个人详情页对冒号结尾的荣誉引导句取消圆点标识 |
-| 2026-05-12 22:34 | main | Events 返回位置修复 | Events 卡片进入详情时保存 See More 展开状态，返回列表时先恢复完整列表再执行滚动位置恢复 |
-| 2026-05-12 22:37 | main | 旧中文入口兼容 | `next.config.ts` 增加 `/zh` 到 `/`、`/zh/:path*` 到 `/:path*` 的临时 redirect，兼容旧站中文路径入口 |
-| 2026-05-12 22:39 | main | 旧英文入口兼容 | `next.config.ts` 增加 `/en` 到 `/`、`/en/:path*` 到 `/:path*` 的临时 redirect，兼容旧站英文路径和 hash 入口 |
-| 2026-05-12 22:40 | main | Chronicle 一月记录确认 | 确认 About Chronicle 2026 年一月“虎诉荣登《钱伯斯大中华区指南2026》争议解决（中资律师事务所）榜单。”记录保留在中文时间线中 |
-| 2026-05-12 23:12 | main | 虎诉动态卡片图片比例 | `EventsPage` 卡片顶部图片容器改为 `aspect-[4/3]`，保持 `object-cover` 填满卡片图框 |
-| 2026-05-12 23:24 | main | Events 详情视频接入 | `EventDetailPage` 支持 `detailVideos` 渲染原生视频播放器，2025.06.17 和 2024.11.13 两条 event2 动态绑定新增 mp4 |
-| 2026-05-12 23:30 | main | 移动端 Hero 媒体铺满 | 页面级 Hero 图片和首页 Hero 视频统一增加 `block`、`min-w-full` 与 `max-w-none`，移动端宽度始终占满父容器 |
-| 2026-05-12 23:38 | main | Events 视频占位符排序 | 2025.06.17 和 2024.11.13 两条 event2 正文补回飞书视频占位符，详情页按正文占位顺序插入视频 |
-| 2026-05-12 23:41 | main | event2Events 语法修复 | 批量补齐中文事件数据字符串闭合引号，`tsc --noEmit` 解析通过 |
-| 2026-05-12 23:46 | main | event2 中文数据修复 | `src/data/event2Events.ts` 的 15 条新增事件 `zh` 字段按 `Chinese/event2.md` 重新生成，标题、分类、摘要和正文恢复正常中文 |
-| 2026-05-12 23:55 | main | 手机端 Hero 全屏铺满 | 页面级 Hero 图片和首页 Hero 视频在手机端使用视口宽度铺满屏幕，避免窄图只占父容器局部宽度 |
-| 2026-05-13 00:02 | main | 手机端 Hero 高度调整 | 手机端 Hero 媒体取消强制 `height: 100%`，只保留宽度 100%，桌面端仍按容器高度铺满 |
-| 2026-05-13 00:09 | main | 手机端 Hero 范围收敛 | 仅 Our Team 保留手机端宽度自适应 Hero 图，其余页面恢复上一版铺满方式，并为首屏标题增加移动端字号 |
-| 2026-05-13 00:20 | main | 移动端内容溢出修复 | 收紧 Home Honors、Home Events、About Vision、About Honors 和 Our Team 首屏移动端字号、断行、控制区排列与间距 |
-| 2026-05-13 00:25 | main | About Chronicle 移动端修复 | Chronicle 年份按钮取消手机端负位移，事件卡片和标题说明增加移动端字号、断行和宽度约束 |
-| 2026-05-13 00:35 | main | 正式站发布 | 当前工作区构建包发布到 `www.tigerpartners.cn` 对应的 `20260513-0028` release，服务重启和公网验证完成 |
-| 2026-05-13 00:39 | main | CIETAC Cup 英文乱码修复 | 2024.11.13 event2 事件英文内容按 `EN/event2.md` 修正 `“CIETAC Cup”` 和 `year’s` 等乱码文本 |
-| 2026-05-13 00:46 | main | event2 英文乱码清理 | 将 `event2Events.ts` 中剩余 mojibake 标点全部按 `EN/event2.md` 恢复为 `’`、`“”` 和 `–` |
-| 2026-05-13 01:02 | main | 正式站重新发布 | About 图片目录已同步到 OSS，当前工作区发布到 `20260513-0058` release，服务重启和公网验证完成 |
-| 2026-05-15 01:20 | main | 首页与 About 文案排版修正 | 首页 Vision/Event 英文说明改为指定两行，About Honors/Chronicle 英文说明改为指定分行，Footer 和 Team 标语按指定文案展示 |
-| 2026-05-15 01:20 | main | OSS 图片替换同步 | 本地交换 event2 `1.jpg`/`2.jpg` 及兼容 PNG 后上传 OSS，并覆盖上传 Mengcheng Yun 团队卡片图和个人详情图 |
-| 2026-05-15 01:24 | main | 正式站重新发布 | 01:20 版本已发布到 `20260515-0122` release，`tigerpartners-web.service` 重启成功；此后 Zoe 个人页业绩修改未部署 |
-| 2026-05-15 01:25 | main | Zoe 个人业绩更新 | 从 `EN/zoePerformance.md` 同步 24 条中英文 Performance & Achievements 到 `teamProfiles.ts`，本地 `tsc --noEmit` 通过 |
-| 2026-05-15 08:48 | main | Zoe 服务行业与 Events 展示补齐 | Zoe Zhang 服务行业更新为国际贸易、公司股权、建设工程、金融、国际商事仲裁；Events 页面恢复展示 `20210720` 和 `20200927` 两条已有事件 |
-| 2026-05-15 08:52 | main | Events 旧事件详情图补齐 | `eventInfoImagesByDate` 为 `20210414` 和 `20210315` 增加图片映射，详情页可按 `[图片]` 占位渲染对应图片 |
-| 2026-05-15 08:56 | main | 团队个人页移动端 Hero 调整 | 手机端个人详情页使用进入前对应的 `team1.png` 至 `team6.png` 团队卡片图，信息区在上、图片在下，避免 Hero 内容重叠 |
-| 2026-05-15 09:01 | main | Events 英文内容与插图补齐 | `20210720` 和 `20200927` 英文内容同步 `EN/event.md`，并将 `20210720` 三张新增详情图同步到 `public/assets/event/eventinfo` 后按占位符顺序渲染 |
-| 2026-05-15 09:08 | main | Events 旧事件详情图命名校准 | `eventInfoImagesByDate` 改为引用 `20210414-1.jpg`、`20210720-1.jpg`、`20210720-2.jpg`、`20210720-3.jpg`，并同步到 `public`；`20210315` 暂以当前存在的两张 20210315 图片渲染 |
-| 2026-05-15 09:22 | main | Events 新事件排序校准 | `src/data/events.ts` 对 `event2Events` 按列表图文件名中的数字做稳定排序，Events 页新增 15 条事件按 `event2` 目录图片命名顺序展示 |
-| 2026-05-15 09:29 | main | 行业图片与 Honors 说明修正 | Cyber Tech and Game 背景图统一切到 `INDUSTRIES6.png` 并同步 `public`；Home/About Honors 英文副标题按指定三行展示 |
-| 2026-05-15 09:41 | main | Events 旧事件下线 | `20200902` 已从 `eventDatesFromEnglishSource` 移除，不再进入 Events 页面数据；保留 `allEvents` 中原始事件对象以便后续恢复 |
+| 2026-05-18 01:03 | cms | 通用左侧导航固定滚动 | `OfficialSiteSectionPanel` 新增 sticky split 渲染层，所有左侧导航型内容管理模块共享固定视窗、独立滚动的左栏交互 |
+| 2026-05-18 00:57 | cms | 首页 HONORS 与可视化同步 | 内容管理左侧年份列表固定在视窗内并可独立滚动；`CmsPuckVisualEditor` 分离首页 Honors 列表同步和 About Honors 内容同步，避免首页轮播与可视化区域不对应 |
+| 2026-05-18 00:48 | cms | 首页 HONORS 年份导航 | 首页 HONORS 轮播左侧导航改为年份；每个年份右侧从虎诉荣誉的同年具体条目中选择加入轮播，并继续写入 `homeHonorItems` |
+| 2026-05-18 00:42 | cms | 内容管理导航式编辑修正 | 首页 HONORS、虎诉荣誉、虎诉大事记、服务行业、合伙人和资深律师左侧导航与右侧编辑区稳定分列；首页 HONORS 可从虎诉荣誉具体条目下拉选择并保存到 `homeHonorItems` |
+| 2026-05-17 23:51 | cms | 鍐呭绠＄悊鏂板鏂瑰紡璋冩暣 | 棣栭〉 HONORS 閫夋嫨鍣ㄥ睍绀哄畬鏁磋崳瑾夋潵婧愶紱Chronicle 鏂板骞翠唤鐢熸垚涓嶉噸澶嶅勾浠藉苟鍚屾 `chronicleYears`锛汸artner/Senior Associate 鏂板鎸夐挳鍒涘缓鍙紪杈戠┖鐧芥垚鍛樿€岄潪閫夋嫨宸叉湁鎴愬憳 |
+| 2026-05-17 23:46 | cms | 鏈嶅姟琛屼笟銆佽崳瑾夊拰澶т簨璁扮鐞嗕慨澶?| `OfficialCmsIndustryListItem` 澧炲姞涓嫳鏂囪鎯呭崱鐗囧瓧娈靛苟鍚屾鍒拌涓氬瓙椤甸潰锛汬onors count 鐢?awards 闀垮害璁＄畻骞跺皧閲嶅垹闄わ紱Chronicle CMS 鏁版嵁浼樺厛浜庨粯璁ゅ厹搴曪紝鏀寔鍒犻櫎骞翠唤鍜屼簨浠?|
+| 2026-05-17 23:36 | cms | 棣栭〉 HONORS 杞挱閫夋嫨娣诲姞 | `OfficialSiteSectionPanel` 涓洪椤?HONORS 澧炲姞鐙珛閫夋嫨鐘舵€佸拰椤堕儴閫夋嫨鍣紝鏈姞鍏ョ殑鑽ｈ獕骞翠唤浼氬嚭鐜板湪涓嬫媺鍒楄〃涓紝鐐瑰嚮鈥滄柊澧炲埌杞挱鈥濆悗杩涘叆杞挱鍒楄〃 |
+| 2026-05-17 23:20 | cms | CMS 鍐呭绠＄悊涓庡彲瑙嗗寲鏁版嵁鍚屾 | `OfficialSiteSectionPanel` 淇濆瓨浼氭妸 `officialSiteState` 鍚屾鎶曞奖鍒?`pageContent` 骞跺啓鍏ュ綋鍓嶇増鏈?瀹樼綉鐘舵€侊紝鍔犺浇鐗堟湰鍜屽姞杞藉綋鍓嶇珯鐐规椂涔熶細閲嶆柊鍚屾锛岄伩鍏嶅閮ㄥ唴瀹圭鐞嗕笌鍙鍖栫紪杈戞樉绀轰笉涓€鑷?|
+| 2026-05-17 23:11 | cms | 鍏ㄥ眬鐗堟湰鍏ュ彛涓婄Щ | 鍚庡彴宸︿晶 CMS Studio 鏍囬涓嬫柟鏂板鍏ㄥ眬鐗堟湰閫夋嫨鍣紝`CmsPuckVisualEditor` 涓嶅啀娓叉煋鐗堟湰涓嬫媺锛屽彧淇濈暀褰撳墠缂栬緫鐗堟湰鎻愮ず锛涚珯鐐逛俊鎭拰椤甸潰鍐呭闈㈡澘绉婚櫎灞€閮ㄧ増鏈€夋嫨鍣?|
+| 2026-05-17 23:05 | cms | 鍏ㄥ眬鐗堟湰涓婁笅鏂囩粺涓€ | `CmsStudio` 鍒濆鍖栥€佸姞杞藉畼缃戠姸鎬併€佸姞杞界増鏈拰鏋勫缓鐗堟湰 payload 鏃堕兘浼氬綊涓€鍖?`officialSiteState`锛涘唴瀹圭鐞嗘ā鍧椾繚瀛樻椂濡傛灉姝ｅ湪缂栬緫鐗堟湰锛屼細鎻愪氦鍒拌鐗堟湰鑰屼笉鏄洿鎺ュ啓 `/api/cms/official` |
+| 2026-05-17 22:54 | cms | 鍐呭绠＄悊鑽ｈ獕鍗虫椂琛ラ綈 | `OfficialSiteSectionPanel` 浣跨敤褰掍竴鍖栧悗鐨?`OfficialCmsSiteState` 娓叉煋锛岄伩鍏嶈ˉ榻愰€昏緫鍙洿鏂板悗鍙?state銆佸綋鍓嶅睍寮€闈㈡澘浠嶆樉绀烘棫鑽ｈ獕鍒楄〃 |
+| 2026-05-17 22:48 | cms | 铏庤瘔鑽ｈ獕琛ラ綈婧愪慨姝?| `withZhSponsorHonors` 浠?About 鑽ｈ獕妯″潡瀵煎嚭骞剁敤浜?CMS 榛樿鑽ｈ獕鐢熸垚锛孋MS 鍐呭绠＄悊鍙ˉ鍥炲墠鍙伴澶栨彃鍏ョ殑璧炲姪绫昏崳瑾?|
+| 2026-05-17 22:44 | cms | Honors/Chronicle 鍜屽洟闃熷垪琛ㄦ仮澶?| 鍐呭绠＄悊闈㈡澘鍚堝苟褰撳墠 CMS 鏁版嵁涓庨潤鎬佸畬鏁存暟鎹紝琛ュ洖缂哄け骞翠唤/浜嬩欢/鑽ｈ獕锛涘洟闃熸垚鍛樻寜鑱屼綅浠?`memberProfiles` 鑷姩褰掑叆 Partner 鎴?Senior Associate 鍒楄〃 |
+| 2026-05-17 22:39 | cms | CMS 鐗堟湰鍙戝竷涓€鑷存€т慨澶?| `/api/cms/versions/[id]/[action]` 鍜?`/api/cms/versions/[id]` 瑕嗙洊鍒锋柊 `/events/[slug]`銆乣/industries/[slug]`銆乣/team/[slug]`锛屽苟鍏煎缂哄皯 `officialSiteState` 鐨勫巻鍙茬増鏈?|
+| 2026-05-17 22:30 | cms | 鍐呭绠＄悊瀵艰埅绮剧畝 | `CmsStudio` 鐨勫唴瀹圭鐞嗗垎缁勫彧淇濈暀褰撳墠瀹樼綉鍐呭鍏ュ彛鍜屾枃浠剁鐞嗭紝闅愯棌鏃р€滀簨浠跺拰濂栭」绠＄悊鈥濅互鍙娾€滆仈绯绘彁浜も€濆叆鍙?|
+| 2026-05-17 22:27 | cms | 绌哄浘鐗囧湴鍧€鍏滃簳 | `ImageWithFallback` 瀵圭┖瀛楃涓插浘鐗囧湴鍧€鐩存帴杩斿洖鍗犱綅瀹瑰櫒锛屾柊澧?CMS 杞挱鎴栧崱鐗囧皻鏈笂浼犲浘鐗囨椂涓嶅啀娓叉煋 `<img src="">` |
+| 2026-05-17 22:26 | cms | 棣栭〉鍔ㄦ€佽疆鎾瓧娈甸殧绂?| `CmsPuckVisualEditor` 瀵?`home.events` 鍙毚闇?slug銆佽疆鎾浘銆佸睍绀烘棩鏈熴€佸垎绫汇€佹爣棰樸€佹憳瑕佸拰鐐瑰嚮閾炬帴锛屾柊澧為」浼氬厛娓呯悊妯℃澘璇︽儏瀛楁锛岄伩鍏嶅拰 `event.detailPages` 鑰﹀悎 |
+| 2026-05-17 22:23 | cms | 澶т簨璁板勾浠借ˉ鍏ㄤ笌鏂板鎴愬憳璇︽儏缂栬緫淇 | `Chronicle` 浼氬湪 CMS 鎺掑簭骞翠唤鍚庤拷鍔犵己澶遍潤鎬佸勾浠斤紝淇濈暀 2019-2026 绛夊畬鏁存椂闂寸嚎锛涙柊澧炴垚鍛橀瑙堝拰 `/team/[slug]` 璺敱浣跨敤 `createEmptyTeamProfile`锛岃 CMS memberProfiles 鎸?slug 鏇存柊瀵瑰簲瀛愰〉闈?|
+| 2026-05-17 22:18 | cms | 棣栭〉铏庤瘔鍔ㄦ€佽疆鎾嫭绔嬬鐞?| `home.events` 浣跨敤鐙珛鐨?slide 瀛楁锛歴lug銆佽疆鎾浘銆佸睍绀烘棩鏈熴€佸垎绫汇€佹爣棰樸€佹憳瑕佸拰鐐瑰嚮閾炬帴锛涙柊澧?slide 鍗充娇娌℃湁 `/events/[slug]` 璇︽儏涔熻兘鍦ㄩ椤靛睍绀?|
+| 2026-05-17 22:13 | cms | CMS 澶т簨璁般€佸洟闃熷瓙椤甸潰鍜岃涓氳鎯呬慨澶?| `Chronicle` 鍚堝苟 CMS 閮ㄥ垎鏁版嵁涓庨潤鎬佸畬鏁存椂闂寸嚎锛涘洟闃熸柊澧炲垪琛ㄩ」浼氱敓鎴?`memberProfiles` 瀛愰〉闈㈠苟鎻愪緵 Edit profile锛涜涓氳鎯呴〉璇诲彇 `Detail cards` 骞惰ˉ鍏呯紪杈戞牸寮忚鏄?|
+| 2026-05-17 22:03 | cms | 鑽ｈ獕鍒楄〃瀹屾暣鎬т慨澶?| `HomePage` 涓?About Honors 鍦?CMS 鑽ｈ獕鏁版嵁涓嶅畬鏁存椂琛ラ綈鍐呯疆瀹屾暣鑽ｈ獕锛涘彲瑙嗗寲鍙戝竷鍚屾浼氫繚鐣欏凡鏈夎崳瑾夊勾浠藉拰濂栭」锛岄伩鍏嶅啀娆″帇缂╀负灏戦噺鏉＄洰 |
+| 2026-05-17 21:58 | cms | 鍔ㄦ€佸垪琛ㄥ瓧娈佃鏄庤皟鏁?| 鍔ㄦ€佺埗椤甸潰鍒楄〃鍙淮鎶ゅ墠鍙板崱鐗囧睍绀烘墍闇€瀛楁锛屾鏂囨憳瑕佽浆鍒板瓙椤甸潰缁存姢锛涘悗鍙?Slug 瀛楁璇存槑鍏朵綔涓?`/events/[slug]` URL 鍜屽弻璇粦瀹氭爣璇?|
+| 2026-05-17 21:42 | cms | 鍔ㄦ€佽鎯呮鏂囨搷浣滆鏄?| 鍔ㄦ€佸瓙椤甸潰鍐呭鎶藉眽灞曠ず `[IMAGE]` 鍥剧墖鍗犱綅绗︺€侀涔﹁棰戝崰浣嶇鍜屽墿浣欏獟浣撹嚜鍔ㄨ拷鍔犺鍒欙紝甯姪缂栬緫浜哄憳缁存姢鍥炬枃/瑙嗛姝ｆ枃 |
+| 2026-05-17 21:34 | cms | 鍔ㄦ€佺埗鍒楄〃涓庡瓙椤甸潰鍏ュ彛淇 | 淇敼鍔ㄦ€?slug 鏃跺悓姝ヤ腑鑻辨枃鏉＄洰锛岄伩鍏嶄竴鏉″姩鎬佸嚭鐜颁袱涓?URL 鏍囪瘑锛涚埗鍒楄〃鍗＄墖鎻愪緵 Edit detail 鎸夐挳鐩存帴杩涘叆璇︽儏姝ｆ枃缂栬緫 |
+| 2026-05-17 21:25 | cms | 鍔ㄦ€佽鎯呮娊灞夊叏閾捐矾 slug 瀹氫綅 | `getPairedDrawerFields`銆佺缉鐣ュ浘/鏍囬/鎽樿鍜岀敓鎴愬獟浣撳瓧娈甸兘浼樺厛鎸?slug 鍙栨潯鐩紝閬垮厤鍙灞傝緭鍏ュ€兼寜 slug銆佸瓧娈靛垪琛ㄤ粛鎸?index 鐨勯敊浣嶉棶棰?|
+| 2026-05-17 21:02 | cms | 鍔ㄦ€佸瓙椤甸潰鎸?slug 瀵归綈缂栬緫 | 閫夋嫨浠绘剰铏庤瘔鍔ㄦ€佸瓙椤甸潰鏃讹紝鍙充晶鎶藉眽浼氭寜 slug 鎵惧埌涓嫳鏂囧搴旀潯鐩苟娓叉煋璇︽儏瀛楁锛岄伩鍏嶅彧绗竴涓瓙椤甸潰鑳界湅鍒?`Detail content` |
+| 2026-05-17 20:55 | cms | 鍔ㄦ€佹柊澧炲悗鑷姩杩涘叆璇︽儏缂栬緫 | 鍦ㄥ姩鎬佸垪琛ㄩ噷鏂板鍐呭鏃讹紝CMS 浼氬垱寤虹埗椤甸潰鍗＄墖鍜岃鎯呴〉楠ㄦ灦锛屽苟绔嬪嵆鎵撳紑 `event.detailPages` 鐨勬柊鏉＄洰锛岃 `Detail content`銆佽鎯呭浘鍜岃鎯呰棰戝彲鐩存帴缂栬緫 |
+| 2026-05-17 20:15 | cms | 鏂板鍔ㄦ€佽鎯呭瓧娈靛垵濮嬪寲 | 鍙鍖栫紪杈戦噷鏂板鍔ㄦ€佸崱鐗囨垨鍔ㄦ€佸瓙椤甸潰鏃讹紝鏁版嵁灞傜洿鎺ュ甫涓?`Detail content`銆佽鎯呭浘鍜岃鎯呰棰戝瓧娈碉紝閬垮厤鏂板缓椤瑰彧鏄剧ず鏍囬/鎽樿 |
+| 2026-05-17 20:09 | cms | 鍔ㄦ€佽鎯呮鏂囦笌濯掍綋涓婁紶鍏ュ彛琛ラ綈 | `event.detailPages` 鍙充晶缂栬緫鍖哄缁堟樉绀?Detail content銆丏etail image 1 鍜?Detail video 1锛涙柊澧炲瓙椤甸潰鑷姩甯﹀獟浣撴Ы浣嶏紝鏈啓 `[IMAGE]`/瑙嗛鍗犱綅绗︾殑濯掍綋浼氳拷鍔犳樉绀哄湪璇︽儏姝ｆ枃鏈熬 |
+| 2026-05-17 20:00 | cms | 鏂板鍔ㄦ€佸瓙椤甸潰鏄犲皠淇 | 瀛愰〉闈㈤€夋嫨鍣ㄤ細鍚堝苟鍔ㄦ€佸垪琛ㄤ笌璇︽儏椤?slug锛涘垪琛ㄦ柊澧為」灏氭棤璇︽儏鏃讹紝閫夋嫨璇?slug 浼氳嚜鍔ㄨˉ涓€鏉?`event.detailPages` 璇︽儏椤癸紝骞朵笖璇︽儏椤典笉浼氭妸鎽樿娈佃惤鍦ㄦ鏂囬噷閲嶅鏄剧ず |
+| 2026-05-17 19:52 | cms | Events 鍒楄〃鏂板涓庢棩鏈熷瓧娈典慨澶?| Events 鐖堕〉闈㈠崱鐗囩洿鎺ョ敱 CMS `event.list` 鐢熸垚锛屾柊澧?slug 鍚庡彲鏄剧ず锛涘垪琛ㄥ瓧娈垫柊澧?`sortDate` 涓?`displayDate`锛屾帓搴忓拰灞曠ず浜掍笉褰卞搷锛涙湇鍔¤涓氳鎯呮娊灞夊己鍒舵樉绀?slug銆佹爣棰樸€侀灞忓浘銆佺畝浠嬪拰璇︽儏鍗＄墖瀛楁 |
+| 2026-05-17 19:39 | cms | Events 鐖跺瓙椤甸潰瀛楁鎷嗗垎涓庤涓氳鎯呴粯璁ゅ€间慨姝?| `event.list` 鍙淮鎶ゅ姩鎬佸崱鐗囦俊鎭紝`event.detailPages` 缁存姢璇︽儏鏍囬銆佹憳瑕併€佹鏂囧拰濯掍綋锛岃鎯呴〉涓嶅啀鍙嶅悜瑕嗙洊鐖堕〉闈㈠崱鐗囷紱鏈嶅姟琛屼笟璇︽儏椤归粯璁や娇鐢ㄨ鎯呴〉鍥剧墖涓庣畝浠嬶紝鏃х┖瀛楁浼氳嚜鍔ㄨˉ榛樿鍊?|
+| 2026-05-17 19:03 | cms | CMS 鍙鍖栫紪杈戝櫒涔辩爜淇 | `CmsPuckVisualEditor` 鐨勪腑鏂囨爣绛俱€佹寜閽€佷笂浼犳彁绀恒€佺増鏈?璁惧/璇█鏍忓拰鍐呭鎶藉眽鏂囨鎭㈠涓烘甯镐腑鏂囷紝閬垮厤鍚庡彴鎿嶄綔鐣岄潰鍑虹幇 mojibake |
+| 2026-05-17 18:50 | cms | 鏈嶅姟琛屼笟璇︽儏椤?CMS 瀛楁琛ラ綈 | 鍙鍖栫紪杈戦€夋嫨鏈嶅姟琛屼笟瀛愰〉闈㈡椂鎵撳紑 `detailPages` 瀛楁锛岃涓氳鎯呴〉浼樺厛璇诲彇 CMS 鏍囬銆佽儗鏅浘銆佺畝浠嬪拰鎸夌┖琛?椤圭洰绗﹀彿瑙ｆ瀽鐨勮鎯呭崱鐗?|
+| 2026-05-17 18:47 | cms | Contact 椤?CMS 瀛楁琛ラ綈涓庡瘜鏂囨湰鏍囪 | 鑱旂郴鎴戜滑棣栧睆銆佽仈绯绘枃妗堛€佸彸鍥俱€佹嫑鑱樻鏂囥€佸洓涓爮鐩拰绠€鍘嗘姇閫掗偖绠卞潎杩涘叆鍙鍖栧唴瀹圭鐞嗭紱Contact 鍓嶅彴鏀寔 `**鍔犵矖**`銆乣*鏂滀綋*`銆乣[color=#d9b27a]鏂囧瓧[/color]` |
+| 2026-05-17 18:24 | cms | Team/鏈嶅姟琛屼笟/鍔ㄦ€侀〉 CMS 瀛楁琛ラ綈 | Team Hero 鍥剧墖姝ｆ枃銆佸洟闃熷彛鍙峰彸渚ф鏂囥€佸悎浼欎汉/璧勬繁寰嬪笀鍒楄〃銆佹湇鍔¤涓?Hero 鍥剧墖鍜屽崱鐗囨弿杩般€佽檸璇夊姩鎬?Hero 姝ｆ枃鍥剧墖鍧囧彲鍦ㄥ彲瑙嗗寲鍐呭閲岀淮鎶わ紱浜嬩欢璇︽儏鍥剧墖鏀逛负鐩存帴鎸夊崰浣嶇璇诲彇 CMS 鏉＄洰瀛楁 |
+| 2026-05-17 18:09 | cms | CMS 鐗堟湰鍙戝竷浜や簰淇 | 鐗堟湰鍙戝竷/鎭㈠瀹屾垚鍚庝繚鎸佸綋鍓嶅悗鍙颁細璇濆拰宸︿晶瀵艰埅鍙偣鍑伙紝鎸夐挳鏄剧ず澶勭悊涓姸鎬侊紝骞剁敤 `loadVersionForEditing` 鍚屾缂栬緫鎬?|
+| 2026-05-17 17:55 | cms | About 椤靛彲瑙嗗寲鍐呭琛ラ綈 | `defaultPageContentState` 鏂板 About Hero 鍥剧墖銆乂ision 鏂囨/鎸夐挳銆丠onors 鍙充晶姝ｆ枃銆丆ulture CTA銆丆hronicle 鍒楄〃鍜?Core Value 瀛愰〉闈㈡潯鐩紱鍓嶅彴鍖哄潡璇诲彇 CMS 瀛楁锛屼繚瀛樻椂鍚屾鑽ｈ獕鍜屽ぇ浜嬭鍐呭 |
+| 2026-05-17 17:43 | cms | Footer 鍙鍖栧瓧娈佃ˉ榻?| `SiteSettings` 鍜?`OfficialCmsSiteState.footer` 鏂板 Footer 鍙充晶姝ｆ枃銆佸湴鍧€銆佺増鏉冦€佸妗堝拰鍥炬爣瀛楁锛孎ooter 闈㈡澘鏀寔 textarea锛屽墠鍙?Footer 浣跨敤 CMS 鍊煎苟鏀寔鐐瑰嚮瀹氫綅瀵瑰簲瀛楁 |
+| 2026-05-17 17:28 | cms | Header/TITLE 鍙鍖栧悓姝ヤ慨澶?| Header/TITLE 鐨勭珯鐐瑰悕銆丩ogo銆佸鑸拰璇█鎸夐挳鏂囨杩涘叆 `OfficialCmsSiteState.header`锛岄瑙堜笌姝ｅ紡 Header 缁熶竴璇诲彇 CMS 鐘舵€侊紝鍏ㄧ珯瀛楁淇敼浼氳Е鍙戝彲瑙嗗寲鍖哄煙鍒锋柊 |
+| 2026-05-17 14:45 | cms | 棣栭〉姝ｅ紡绔欏瓧娈靛悓姝?| `OfficialCmsSiteState` 鏂板 `previewPageContent`锛宍stripPreviewOnlyCmsState` 涓嶅啀涓㈠純鍙鍖栭〉闈㈠瓧娈碉紝`restoreVersion` 鍏煎鏃х増鏈?payload 鍥炲～椤甸潰鍐呭 |
+| 2026-05-17 14:40 | cms | 姝ｅ紡绔?CMS 鍙戝竷鍚屾淇 | `RootLayout` 娉ㄥ叆褰撳墠鍏紑 CMS 鐘舵€侊紝`/api/cms/public` 绂佺紦瀛樺苟鍔犳椂闂存埑璇锋眰锛涚増鏈彂甯?鎭㈠鍒锋柊 `/`銆丄bout銆丒vents銆両ndustries銆乀eam銆丆ontact 鍜屽叕寮€ CMS 鎺ュ彛 |
+| 2026-05-17 14:37 | cms | 浜嬩欢璇︽儏濯掍綋鏇挎崲淇 | `detailImageN`/`detailVideoN` 淇敼鏃跺悓姝ョ淮鎶?`detailImages`/`detailVideos`锛孋MS 浜嬩欢瑕嗙洊涓嶅啀杩囨护绌轰綅锛岃鎯呴〉鎸夋鏂囧崰浣嶇绱㈠紩娓叉煋鏇挎崲鍚庣殑鍥剧墖 |
+| 2026-05-17 14:31 | cms | 棣栭〉鍙鍖栧唴瀹硅ˉ榻?| 棣栭〉铏庤瘔鍔ㄦ€佽疆鎾拰瀹屾暣 Events 绠＄悊鎷嗗垎淇濆瓨锛岃疆鎾?See More 鎸夐挳鏂囧瓧/閾炬帴鍙紪杈戯紱Header/Footer 閲嶆柊鎴愪负鍙鍖栫紪杈戝皬鏍忕洰锛岄椤靛悇灞忎富瑕佹爣棰樹笌璇存槑瀛楁鎺ュ叆褰撳墠 CMS 鏂囨 |
+| 2026-05-17 14:11 | cms | 浜嬩欢璇︽儏鍥剧墖棰勮娣卞害淇 | `getPageContentFingerprint` 鐜板湪浣滀负 Puck 闅愯棌瀛楁杩涘叆 Live3UiPage props锛屾娊灞夊唴璇︽儏鍥剧墖銆佽鎯呰棰戠瓑鍒楄〃 item 瀛楁鍙樺寲浼氳Е鍙戦瑙堢粍浠堕噸鏂板悎鎴?CMS state |
+| 2026-05-17 14:02 | cms | 宸插彂甯冪増鏈粯璁よ繘鍏ヤ笌 Honors CTA 缂栬緫 | CMS 杩涘叆鍚庤嚜鍔ㄥ垏鎹㈠埌 `isPublished` 鐗堟湰锛涢椤佃檸璇夎崳瑾?See more 鎸夐挳鏂囧瓧鍜岄摼鎺ユ帴鍏ュ彲瑙嗗寲鍐呭绠＄悊锛屾棫鐗堟湰浼氳嚜鍔ㄨˉ榻愭柊澧炲瓧娈?|
+| 2026-05-16 16:18 | cms | Puck 棰勮鍒锋柊闃插惊鐜?| 鍙鍖栫紪杈戜笉鍐嶇敤 `pageContent.updatedAt` 閲嶆寕杞芥暣涓?Puck锛屽彧鍦?`OfficialPublicCmsProvider` 灞傞殢椤甸潰鍐呭鏇存柊鏃堕棿鍒锋柊棰勮鐘舵€?|
+| 2026-05-16 16:11 | cms | 鍙鍖栧浘鐗囨浛鎹㈠埛鏂?| 浜嬩欢璇︽儏鍥剧墖鍜岃棰戣妭鐐?key 鍖呭惈璧勬簮鍦板潃锛宍ImageWithFallback` 鍦?src 鏀瑰彉鏃舵竻闄ら敊璇姸鎬?|
+| 2026-05-16 15:57 | cms | 浜嬩欢濯掍綋鍏滃簳棰勮鍚屾 | `officialPreviewState` 鍦ㄦ病鏈夌湡瀹炲畼缃戠姸鎬佹椂浠嶄互榛樿鐘舵€佺户缁墽琛?Events銆丠onors銆乀eam 鍚屾锛岄伩鍏嶈鎯呭浘鐗囧湴鍧€宸叉敼浣嗛瑙堜粛鏄剧ず闈欐€佹棫鍥?|
+| 2026-05-16 15:50 | cms | 璇︽儏濯掍綋棰勮鍗虫椂鍚屾 | Event 璇︽儏鍥剧墖/瑙嗛瀛楁浠绘剰璇█杈撳叆閮戒細鍚屾鍒板叡鍚屽獟浣撴Ы浣嶏紝棰勮鐘舵€佹寜褰撳墠璇█浼樺厛鍚堝苟濯掍綋鏁扮粍锛屾墜鍔ㄦ浛鎹?URL 鍚庡彲绔嬪嵆鍒锋柊鍙鍖栧尯鍩?|
+| 2026-05-16 15:44 | cms | 铏庤瘔鍔ㄦ€佽鎯呭獟浣撴Ы浣?| Event 瀛愰〉闈㈢紪杈戞牴鎹?`[IMAGE]`銆乣[鍥剧墖]` 鍜岃棰戝崰浣嶇鍔ㄦ€佹樉绀鸿鎯呭浘鐗?瑙嗛 1銆?銆? 绛夊瓧娈碉紝鏀寔閫愬紶鏇挎崲骞跺吋瀹规棫鐨勫琛屽獟浣撴暟鎹?|
+| 2026-05-16 15:34 | cms | CMS 鐗堟湰閫夋嫨鏀舵暃 | 鍙鍖栫紪杈戝拰鍐呭缂栬緫闈㈡澘鐨勭増鏈笅鎷夊彧灞曠ず宸插垱寤虹増鏈紝涓嶅啀鎻愪緵鈥滃綋鍓嶇嚎涓婄増鏈€濅綔涓洪€夐」锛岄檷浣庢祴璇曠増鏈拰褰撳墠绔欑偣鍐呭鐨勬贩娣?|
+| 2026-05-16 15:04 | cms | 鐗堟湰鍙戝竷鏁版嵁涓€鑷存€?| 鍙鍖栫紪杈戦粯璁ゆ樉绀哄綋鍓嶇嚎涓婄増鏈紝鎵嬪姩閫夋嫨娴嬭瘯鐗堟湰鎵嶈繘鍏ョ増鏈紪杈戯紱娴嬭瘯鐗堟湰淇濆瓨鍜屽彂甯冧細鎼哄甫鏈嶅姟琛屼笟銆佽檸璇夊姩鎬併€佸洟闃熴€佽崳瑾夌瓑鐪熷疄瀹樼綉 CMS 鏁版嵁 |
+| 2026-05-16 14:47 | cms | 宸插彂甯冪増鏈彁浜ゅ嵆鍚屾 | `/api/cms/versions/[id]` 鏇存柊宸插彂甯冪増鏈椂浼氳皟鐢ㄧ増鏈仮澶嶉€昏緫鍐欏叆褰撳墠绔欑偣鏁版嵁锛屽悗鍙版彁绀哄悓姝ョ粨鏋?|
+| 2026-05-16 14:42 | cms | CMS 椤甸潰灞傜骇璋冩暣 | 鍙鍖栫紪杈戠埗椤甸潰淇濈暀棣栭〉銆佸叧浜庢垜浠€佽檸璇夊洟闃熴€佹湇鍔¤涓氥€佽檸璇夊姩鎬併€佽仈绯绘垜浠紱鍙︽彁渚涜檸璇夋枃鍖?`/about/core-value` 瀛愰〉闈㈢紪杈戝拰鐗堟湰棰勮 |
+| 2026-05-16 14:15 | cms | 鐗堟湰棰勮璇︽儏椤靛唴閮ㄨ烦杞?| `/cms/version-preview/[id]` 鍙湪棰勮瀹瑰櫒鍐呮嫤鎴?`/events/[slug]`銆乣/industries/[slug]`銆乣/team/[slug]` 骞舵覆鏌撳搴旇鎯呴〉锛屼繚鎸佺増鏈瑙堜笂涓嬫枃 |
+| 2026-05-16 12:01 | cms | 浜嬩欢瀛愰〉闈㈠獟浣撲笂浼?| 浜嬩欢璇︽儏瀛楁鏀寔璇︽儏鍥剧墖銆佽鎯呰棰戝琛岀淮鎶わ紱鍙充晶鎶藉眽鍙笂浼犲浘鐗囨垨瑙嗛鍒?`/uploads/event` 骞惰嚜鍔ㄥ～鍏ュ綋鍓嶅瓧娈碉紝棰勮璇︽儏椤佃鍙?CMS 瑕嗙洊濯掍綋 |
+| 2026-05-16 11:52 | cms | 瀛愰〉闈㈠彲瑙嗗寲缂栬緫鍏ュ彛 | 铏庤瘔鍔ㄦ€併€佹湇鍔¤涓氬拰铏庤瘔鍥㈤槦鏍忕洰鍙湪椤堕儴閫夋嫨瀛愰〉闈紝鍙充晶鑷姩鎵撳紑瀵瑰簲鏉＄洰缂栬緫鍖猴紝鏀寔缂栬緫璇︽儏鏍囬銆佹鏂囥€佸浘鐗囧拰鍥㈤槦涓汉淇℃伅 |
+| 2026-05-16 11:45 | cms | 鍙鍖栫紪杈戝叿浣撴潯鐩ˉ榻?| 棣栭〉 Industries銆丠onors銆丒vents銆丆lients 浠ュ強 Events 鍒楄〃銆両ndustries 鍗＄墖鍦ㄥ唴瀹规娊灞変腑鍙寜鏉＄洰缂栬緫锛岄瑙堝尯浼氫娇鐢ㄨ繖浜涙潯鐩鐩栧畼缃戝垪琛ㄣ€佽疆鎾€佽崳瑾夊拰瀹㈡埛 Logo |
+| 2026-05-16 11:35 | cms | 鍙鍖栫紪杈戝瓧娈垫槧灏勬墿灞?| 棣栭〉 Vision/Industries/Events/Clients銆丄bout Hero/Vision/Honors/Culture/Chronicle銆丒vents銆両ndustries銆乀eam 鍜?Contact 鐨勪富瑕佸彸渚ц緭鍏ュ瓧娈靛彲鍗虫椂鍙嶆槧鍒伴瑙堝尯 |
+| 2026-05-16 11:24 | cms | 鍙鍖栭瑙堢姸鎬佸悓姝?| `PublicCmsProvider` 鏀寔绂佺敤鎷夊彇骞跺悓姝ュ垵濮嬬姸鎬侊紝Puck 棰勮浼氬皢鍙充晶杈撳叆妗嗘敼鍔ㄥ彔鍔犲埌鐪熷疄瀹樼綉 CMS 鐘舵€佷腑 |
+| 2026-05-16 11:13 | cms | 鏂囦欢绠＄悊闈㈡澘绮剧畝 | 鍒犻櫎鈥滃叏閮ㄩ〉闈⑩€濈瓑鏃т笂浼犳枃浠剁瓫閫夊尯鍩燂紝閬垮厤鏂囦欢绠＄悊鍑虹幇绗簩濂楀垪琛ㄦ爣棰樺拰閲嶅璧勬簮鍗＄墖 |
+| 2026-05-16 10:30 | cms | CMS 缂哄け鍐呭琛ラ綈 | 鍚堜紮浜恒€佽祫娣卞緥甯堝拰棣栭〉浜嬩欢杞挱鍦ㄦ棫 CMS 鐘舵€佷笅涔熶細鑷姩琛ラ綈瀹屾暣榛樿鍐呭锛涙湇鍔¤涓氬彲缂栬緫骞跺睍绀鸿鎯呴〉涓嫳鏂囨弿杩?|
+| 2026-05-16 09:14 | cms | 鐪熷疄瀹樼綉鍒楄〃绠＄悊 | `/api/cms/official` 鏀寔璇诲彇/淇濆瓨 `OfficialCmsSiteState`锛孋MS 鏂板鈥滃畼缃戝垪琛ㄧ鐞嗏€濓紝棣栭〉銆丒vents銆丄bout 鍜?Team 椤甸潰鏀逛负浼樺厛璇诲彇 CMS 鍒楄〃骞跺洖閫€闈欐€佹暟鎹?|
+| 2026-05-16 09:36 | cms | CMS 鍐呭鍒嗗尯涓庤祫婧愬垎绫?| 鍚庡彴鐪熷疄瀹樼綉鍐呭鎷嗕负鐙珛绠＄悊鍏ュ彛锛岄椤?HONORS 浣跨敤鐙珛骞翠唤鍒楄〃锛沗/api/cms/official-assets` 鎵弿 `public/assets` 骞舵寜鐩綍鐢熸垚 OSS 璧勬簮娓呭崟 |
+| 2026-05-16 09:45 | cms | CMS 鍐呭鍙紪杈?| `OfficialCmsSiteState.content` 淇濆瓨 Honors銆丆hronicle 鍜?Team Profile 瑕嗙洊鍐呭锛孍vents 瑕嗙洊鍐呭鍦ㄢ€滆檸璇夊姩鎬佲€濅腑缂栬緫锛涘墠鍙伴〉闈紭鍏堣鍙?CMS 瑕嗙洊骞跺洖閫€闈欐€佹暟鎹?|
+| 2026-05-16 09:53 | cms | CMS 琛ㄥ崟鍖栫紪杈?| 铏庤瘔鑽ｈ獕銆佽檸璇夊ぇ浜嬭銆佸悎浼欎汉銆佽祫娣卞緥甯堝拰铏庤瘔鍔ㄦ€佺鐞嗛〉鏀逛负绫讳技鈥滀簨浠跺拰濂栭」绠＄悊鈥濈殑鍗＄墖琛ㄥ崟锛屼笉鍐嶈姹傜洿鎺ョ紪杈?JSON |
+| 2026-05-16 10:01 | cms | CMS 鍗＄墖鍖栨搷浣滃畬鍠?| 棣栭〉 Events 杞挱銆侀椤?HONORS銆佹湇鍔¤涓氥€佸洟闃熷垎缁勫拰铏庤瘔鍔ㄦ€佸潎閫氳繃鍗＄墖鎿嶄綔缁存姢锛涘彲瑙嗗寲棰勮浣跨敤鐪熷疄瀹樼綉 CMS 鐘舵€侊紝鏂囦欢绠＄悊鎬绘暟鍖呭惈 OSS 闈欐€佽祫婧?|
+| 2026-05-16 10:16 | cms | CMS 榛樿鍐呭涓庣缉鐣ュ浘 | Honors銆丆hronicle銆乀eam銆丒vents 闈㈡澘鎵撳紑鍚庝粠褰撳墠瀹樼綉鏁版嵁琛ラ綈鍙紪杈戝唴瀹癸紱棣栭〉浜嬩欢杞挱鍙紪杈戜腑鑻辨枃鏍囬銆佸垎绫汇€佹憳瑕佸拰灏侀潰锛涘崱鐗囨爣棰樺尯灞曠ず灏侀潰鎴栦汉鍛樼缉鐣ュ浘 |
+| 2026-05-15 22:51 | cms | main 鍚堝苟鍒?cms | 鍐茬獊鏂囦欢浠?`main` 鐗堟湰涓轰富瀹屾垚鍚堝苟锛屼繚鐣?`cms` 鍒嗘敮 Provider 鍙€?CMS 鐘舵€佸吋瀹瑰眰 |
+| 2026-05-15 22:33 | main | SEO 涓?`/client` 鐢熶骇鍙戝竷 | 褰撳墠绾夸笂鐗堟湰 `/opt/tigerpartners-web/releases/20260515-2230` 宸插惎鐢ㄤ腑鏂囬椤垫爣棰樸€侀殣钘忚涔?h1 鍜?`/client` 鍒伴椤电殑鍏煎璺宠浆 |
+| 2026-05-15 22:25 | main | 棣栭〉鎼滅储鏍囬浼樺寲 | 棣栭〉鏄惧紡鎻愪緵涓枃 SEO 鏍囬鍜岃涔夋爣棰橈紝闄嶄綆鎼滅储缁撴灉缁х画閲囩敤 `WE KNOW HOW TO WIN` 浣滀负鏍囬鐨勬鐜囷紱鍚屾椂琛ラ綈 `/client` 鍏煎閲嶅畾鍚?|
+| 2026-05-15 22:15 | main | 涓囧姏灏鹃儴涓氱哗涓婁笅瀵归綈 | `TeamProfilePage` 涓竾鍔涘熬閮ㄥ乏鍒楁敼涓?`1fr/auto` 琛屽竷灞€锛屽浐瀹氬崱鐗囬棿璺濆苟璁╃ 23 鏉℃壙鎷呴珮搴﹁ˉ鍋?|
+| 2026-05-15 22:13 | main | 涓囧姏涓氱哗灏鹃儴甯冨眬 | `TeamProfilePage` 涓轰竾鍔涙渶鍚庝笁鏉′笟缁╁惎鐢ㄥ畾鍒朵袱鍒楀竷灞€锛屾弧瓒冲乏浜屽彸涓€鍜屽簳閮ㄥ榻愬睍绀?|
+| 2026-05-15 22:01 | main | 涓汉绠€鍘嗙Щ鍔ㄧ hero 璋冩暣 | `TeamProfilePage` 鍦ㄧЩ鍔ㄧ鍏堟覆鏌撲釜浜虹収鐗囧啀鏄剧ず濮撳悕銆佽亴浣嶃€佺數璇濆拰閭锛涗竾鍔涗笟缁╁熬閮ㄤ腑鑻辨枃鏁版嵁宸叉牳瀵逛竴鑷?|
+| 2026-05-15 21:59 | main | event 鍥剧墖鏇挎崲鍙戝竷 | 鏈湴 `src/assets/event` 鏇挎崲鍥惧凡鍚屾鍒?`public/assets/event` 涓?OSS锛岀嚎涓婁簨浠堕〉鍙闂紝鏂扮増鏈湇鍔＄姸鎬佷负 `active` |
+| 2026-05-15 10:07 | main | 瀹樼綉鐢熶骇鍙戝竷 | 宸插皢褰撳墠 Next standalone 鏋勫缓鍖呴儴缃插埌 `www.tigerpartners.cn` 鏍硅矾寰勶紝楠岃瘉棣栭〉銆丒vents銆佷竾鍔涗釜浜洪〉銆丄bout 鍜屽叧閿浘鐗囪祫婧愬潎鍙闂?|
+| 2026-05-15 09:54 | main | event2 鍓?9 寮犲皝闈㈤『搴忓悓姝?| `public/assets/event/event2` 鐨?1-9 鍙峰皝闈㈠凡涓?`src/assets/event/event2` 鍚屽悕鏂囦欢閫愪竴鍖归厤锛岄〉闈㈤潤鎬佽祫婧愯鍙栭『搴忎笌婧愮洰褰曞懡鍚嶄竴鑷?|
+| 2026-05-15 09:46 | main | 涓囧姏涓汉涓氱哗鍚屾 | `src/data/teamProfiles.ts` 涓竾鍔涜嫳鏂?`liWanAchievements` 涓庝腑鏂?`zhTeamDetails["li-wan"].achievements` 宸叉寜 `EN/liwanPerformance.md` 鍚屾涓?25 鏉?|
+| 2026-05-04 17:32 | main | Next App Router 鍩虹宸ョ▼ | 鏂板 Next銆乀ypeScript銆乀ailwind v4銆乻tandalone 閰嶇疆 |
+| 2026-05-04 17:32 | main | 棣栭〉杩佺Щ | 灏嗛椤靛師鍨嬫暣鐞嗕负 `/` 椤甸潰锛屼繚鐣欎富瑕佽瑙夊尯鍧楀拰鍝嶅簲寮忚鍒?|
+| 2026-05-04 17:32 | main | About 椤佃縼绉?| 灏?About 鍘熷瀷鎷嗗垎涓?Hero銆乂ision銆丠onors銆丆ulture銆丆hronicle 鍖哄潡 |
+| 2026-05-04 17:32 | main | 渚濊禆绮剧畝 | 鍙繚鐣?Next銆丷eact銆乀ailwind銆乴ucide-react 绛夊綋鍓嶉〉闈㈠疄闄呴渶瑕佺殑渚濊禆 |
+| 2026-05-04 17:57 | main | 鏈嶅姟琛屼笟椤佃縼绉?| 鏂板 `/industries`锛岄噸寤?Hero銆佽鏄庡崱鐗囧拰琛屼笟鍗＄墖缃戞牸 |
+| 2026-05-04 17:57 | main | 浜嬩欢椤佃縼绉?| 鏂板 `/events`锛岄噸寤轰簨浠舵爣棰樺尯鍜屼簨浠跺崱鐗囧垪琛?|
+| 2026-05-04 17:57 | main | 鑱旂郴鎴戜滑椤佃縼绉?| 鏂板 `/contact`锛岄噸寤烘嫑鑱樿鏄庛€佽姹傚崱鐗囥€佸煄甯傚浘鍜岃仈绯婚〉鑴?|
+| 2026-05-04 17:57 | main | 鍏叡甯冨眬琛ュ厖 | 鏂板 `SiteFooter`锛屾墿灞?`SiteHeader` 瀵艰埅鍒颁簲涓叕寮€椤甸潰 |
+| 2026-05-04 18:03 | main | 澶у睆缂╂斁绛栫暐 | 閫氳繃 `--root-font-size` 鍜?`html font-size` 瀹炵幇 1440px 浠ヤ笂鏁翠綋 rem 鏀惧ぇ |
+| 2026-05-04 18:08 | main | 椤甸潰缁勪欢褰掓。 | 鏂板 `src/components/pages/*`锛岄泦涓壙杞介椤点€丄bout銆佹湇鍔¤涓氥€佷簨浠躲€佽仈绯婚〉闈㈠睍绀哄疄鐜?|
+| 2026-05-04 18:33 | main | Title 瀵艰埅瀹炵幇 | `SiteHeader` 鏀逛负鍥哄畾閫忔槑瀵艰埅锛屾敮鎸佹粴鍔ㄦ瘺鐜荤拑銆佷腑鑻辨枃鍒囨崲銆佺Щ鍔ㄧ鑿滃崟鍜?active/hover 涓嬪垝绾?|
+| 2026-05-04 22:54 | main | 棣栭〉鏁翠綋浜や簰璋冩暣 | 鏍规嵁棣栭〉闇€姹傛枃妗ｅ畬鎴?Hero 瀛楀彿銆乂ision 娓愬彉鍗＄墖銆佽涓?hover 鍗＄墖銆丠onors 骞翠唤鍒囨崲銆丒vents 涓績杞挱鍜?Clients 涓夎 Logo 婊氬姩 |
+| 2026-05-04 22:54 | main | 棣栭〉瀹㈡埛 Logo 绱犳潗鍙戝竷 | 灏?`src/assets/home/clientLogo` 涓殑 43 涓?Logo 澶嶅埗鍒?`public/assets/home/clientLogo`锛屼緵棣栭〉闈欐€佽闂?|
+| 2026-05-04 22:54 | main | 鏋勫缓妫€鏌ヤ慨澶?| 鎺掗櫎涓嶅弬涓庤繍琛岀殑鏃у師鍨嬬洰褰曞悗锛宍npm run build` 宸查€氳繃 |
+| 2026-05-04 23:07 | main | About Vision 鍗＄墖璋冩暣 | 灏?Vision 鍗＄墖鏀逛负鐏拌壊鑳屾櫙锛屽彸渚ц鏄庝笌 VISION 鍚岃锛孲ee More 灞呬腑 |
+| 2026-05-04 23:07 | main | About Honors 浜や簰璋冩暣 | Honors 鏍囬涓庢鏂囬琛屽榻愶紝灞曞紑鑳屾櫙鏀逛负 `#777777`锛屾姌鍙犲姩鐢绘敼涓哄钩婊?grid 杩囨浮 |
+| 2026-05-04 23:07 | main | About Chronicle 浜や簰璋冩暣 | Chronicle 鏀逛负骞翠唤鎶樺彔鏃堕棿杞达紝澶嶇敤 Honors & Awards 椋庢牸灞曞紑/鎶樺彔鍔ㄦ晥 |
+| 2026-05-04 23:21 | main | 鍏ㄧ珯 Footer 缁熶竴 | 棣栭〉銆丄bout銆佹湇鍔¤涓氥€佷簨浠躲€佽仈绯绘垜浠〉闈㈢粺涓€澶嶇敤 `SiteFooter` |
+| 2026-05-04 23:21 | main | Footer 绱犳潗鍙戝竷 | 灏?`src/assets/foot` 涓殑 7 涓浘鏍?鍥剧墖澶嶅埗鍒?`public/assets/foot`锛屼緵椤佃剼闈欐€佽闂?|
+| 2026-05-04 23:29 | main | Events Hero 璋冩暣 | Hero 鏂囨鍖哄煙鍔犲叆榛戣壊鍒?`#2f2a23` 鐨勬笎鍙樿儗鏅?|
+| 2026-05-04 23:29 | main | Events 鍗＄墖浜や簰璋冩暣 | 绗簩灞忓崱鐗囧姞鍏ュ弬鑰冨師鍨嬬殑杈圭嚎銆佽儗鏅€佸浘鐗囧拰 Read More hover 鍔ㄦ晥锛屽浘鐗囧悜宸︿笂鍋忕Щ 10% |
+| 2026-05-04 23:41 | main | About Honors 灞曞紑澶撮儴璋冩暣 | 灞曞紑鍚庡勾浠藉崱鐗囧ご閮ㄤ繚鎸佹繁鑹茶儗鏅紝灞曞紑鍐呭缁х画浣跨敤 `#777777` |
+| 2026-05-04 23:41 | main | About Chronicle 鍔ㄦ晥璋冩暣 | Chronicle 鏀逛负鍙傝€冨師鍨嬬殑涓酱骞翠唤鎸夐挳銆佹湀浠介」 hover 涓婄Щ銆佽妭鐐瑰彂鍏夊拰灞曞紑浣嶇Щ鍔ㄦ晥 |
+| 2026-05-04 23:41 | main | About Culture 鍥剧墖鍔ㄦ晥璋冩暣 | Culture 宸︿晶鍥剧墖鍔犲叆 Join Us 鍥剧墖鍚屾閬僵銆佺伆搴︺€侀€忔槑搴﹀拰缂╂斁 hover/leave 杩囨浮 |
+| 2026-05-04 23:43 | main | 鍥㈤槦椤佃縼绉?| 鏂板 `/team` 璺敱鍜?`TeamPage`锛岄噸寤?Hero銆丼pecial Forces 鏍囪鍖哄拰 Senior Associate 浜虹墿鍗＄墖 |
+| 2026-05-04 23:43 | main | 鍥㈤槦绱犳潗鍙戝竷 | 灏?`鎴戠殑鍥㈤槦/src/imports/OurTeam` 涓殑鍥剧墖澶嶅埗鍒?`public/assets/prototypes/team` |
+| 2026-05-04 23:43 | main | Team 瀵艰埅鎺ュ叆 | `SiteHeader` 鐨?Our team 閾炬帴鏀逛负 `/team`锛屽苟鏀寔鍥㈤槦椤?active 鐘舵€?|
+| 2026-05-05 13:06 | main | 棣栭〉 Hero 涓?Vision 璋冩暣 | Hero 鏍囬寮哄埗鍗曡锛孷ision 鍖哄乏鍙宠竟璺濇敼涓?`3rem`锛孷ision 鏍囪瘑鏃嬭浆鏀惧湪鍗＄墖鏈€鍙充晶锛屾寜閽敼涓?Discover More 椋庢牸 |
+| 2026-05-05 13:06 | main | 棣栭〉鍐呭鎺掔増璋冩暣 | Industries 鏍囬鏀惧ぇ骞舵敼涓?`#f6ebe4` 鍒?`#d9b27a` 娓愬彉锛孒onors/Events 鍙充晶鏂囨鎸夋寚瀹氳鏁版崲琛?|
+| 2026-05-05 13:06 | main | 棣栭〉杞挱涓庡鎴峰璋冩暣 | Events 杞挱鍥剧墖鍜岀伆鑹茶鏄庣洅闂磋窛鏀逛负 `2.5rem`锛屽鎴?Logo 澧欏姩鐢绘椂闀挎敼涓?`135s` |
+| 2026-05-05 13:21 | main | 棣栭〉 Hero 瀛楀彿淇 | `we know how to win` 鎸夊綋鍓嶇増鏈缉灏忓埌 70%锛屽苟缁х画淇濇寔鍗曡 |
+| 2026-05-05 13:21 | main | 棣栭〉 Vision 鏄剧ず淇 | Vision 鍗＄墖澧炲姞妗岄潰鏈€灏忛珮搴︼紝鍙充晶鏃嬭浆鏂囧瓧鏀逛负瀹屾暣灞呬腑鏄剧ず锛岄伩鍏嶈鍒?|
+| 2026-05-05 13:21 | main | 棣栭〉 Industries 涓?Events 淇 | Industries 鏍囬缂╁皬鍒颁笂涓€鐗堢害 0.3 鍊嶏紝Events 杞挱鍥剧墖鍜岀伆鑹插唴瀹瑰崱閲嶆柊杩炴帴 |
+| 2026-05-05 13:31 | main | About Hero Vision 浣嶇疆璋冩暣 | 灏嗙伆鑹?Vision 鏂瑰潡宓屽叆 About Hero 鏍囬涓庢鏂囦笅鏂癸紝绉婚櫎 AboutPage 涓嫭绔?Vision 鍖哄潡 |
+| 2026-05-05 13:31 | main | About Culture 鍏ュ彛璋冩暣 | Culture 鍙充晶鑳屾櫙鏀逛负 `#D9B27A`锛屾鏂囧彧淇濈暀鎸囧畾涓€鍙ワ紝骞舵柊澧炶烦杞?`/about/core-value` 鐨?Read Full Manifesto 鎸夐挳 |
+| 2026-05-05 13:31 | main | Core Value 瀛愰〉闈?| 鏂板 `/about/core-value` 璺敱鍜?`CoreValuePage`锛屽鐢ㄥ叏绔欏鑸〉鑴氬苟浣跨敤鍘熷瀷鍥剧墖涓庝笁娈典环鍊艰鍐呭 |
+| 2026-05-05 13:36 | main | Team Hero 涓庢爣璇皟鏁?| Hero 涓诲浘濉弧灞忓箷瀹藉害锛孫ur team 涓庡壇鏍囬缂╁皬鍒?85%锛學E ARE SPECIAL FORCES 缂╁皬鍒?80% 骞舵敼涓轰袱琛屽乏瀵归綈 |
+| 2026-05-05 13:36 | main | Team 浜虹墿鍖鸿皟鏁?| Senior Associate 鏍囬绉诲姩鍒版渶鍚庝袱寮犲浘鐗囦笂鏂癸紝浜虹墿鍗＄墖鍥剧墖绉婚櫎鐏拌壊钂欏眰骞朵繚鎸?100% 瀹藉害瀵归綈鐖跺厓绱?|
+| 2026-05-05 13:39 | main | Team 涓汉璇︽儏椤?| 鏂板 `/team/yuxuan-liu` 璺敱鍜?`TeamProfilePage`锛屽睍绀轰釜浜虹収鐗囥€佺畝浠嬩俊鎭€佹墽涓氱粡鍘嗗拰鑽ｈ獕鎴愬氨 |
+| 2026-05-05 13:39 | main | Team Find out more 璺宠浆 | 鍥㈤槦浜虹墿鍗＄墖鐨?Find out more 鏀逛负 Next `Link`锛岃烦杞埌褰撳墠 Team 璺敱灞傜骇涓嬬殑涓汉璇︽儏椤?|
+| 2026-05-05 13:48 | main | Industries 鍗＄墖甯冨眬璋冩暣 | 鍏釜琛屼笟鍗＄墖鏀逛负绗竴琛屽崟鍗°€佺浜岃涓夊崱銆佺涓夎鍙屽崱鐨勬寚瀹氬竷灞€ |
+| 2026-05-05 13:48 | main | 琛屼笟璇︽儏椤?| 鏂板 `/industries/[slug]` 鍔ㄦ€佽矾鐢卞拰 `IndustryDetailPage`锛屽睍绀鸿涓氶潰鍖呭睉銆佽鏄庢枃妗堝拰鏈嶅姟鍐呭鍗＄墖 |
+| 2026-05-05 13:52 | main | Events Hero 涓庡垪琛ㄨ皟鏁?| Hero 鏍囬鍜屾鏂囧眳涓紝鑳屾櫙鏀逛负 `#56524a` 鍒?`#212121` 鍏ㄥ睆娓愬彉锛孡atest Updates 鏀逛负涔濆崱涓夊垪缃戞牸 |
+| 2026-05-05 13:52 | main | 浜嬩欢璇︽儏椤?| 鏂板 `/events/[slug]` 鍔ㄦ€佽矾鐢卞拰 `EventDetailPage`锛屽鐢ㄤ簨浠惰鎯呭師鍨嬪浘鐗囦笌姝ｆ枃缁撴瀯 |
+| 2026-05-05 16:13 | main | 鍏ㄧ珯宸﹀彸杈硅窛缁熶竴 | `--shell-sm` / `--shell-md` 妗岄潰鍊肩粺涓€涓?`12rem`锛孒eader 鍜?`.site-shell` 鍐呭浣跨敤涓€鑷存í鍚戣竟璺?|
+| 2026-05-05 16:20 | main | rem 鍩哄噯璋冩暣 | `--root-font-size` 鏀逛负 `clamp(12px, calc(100vw / 120), 16px)`锛屽疄鐜?1920 涓鸿璁″熀鍑嗐€?440 绛夋瘮缂╁皬 |
+| 2026-05-05 16:24 | main | Title 灏哄璋冩暣 | `SiteHeader` logo 楂樺害鏀惧ぇ 1.3 鍊嶏紝妗岄潰/绉诲姩瀵艰埅鍜岃瑷€鎸夐挳鏂囧瓧鏀惧ぇ 1.4 鍊?|
+| 2026-05-05 16:26 | main | Title 浜屾灏哄璋冩暣 | `SiteHeader` logo 楂樺害缁х画鏀惧ぇ 1.2 鍊嶏紝瀵艰埅鍜岃瑷€鎸夐挳鏂囧瓧缁х画鏀惧ぇ 1.4 鍊嶏紝Header 鍐呭眰涓婁笅 padding 鏀逛负 `1.2rem` |
+| 2026-05-05 16:27 | main | 棣栭〉 Hero 瀛楀彿寰皟 | `we know how to win` 瀛楀彿 clamp 浠?`1.15rem/3.64vw/3.72rem` 鏀惧ぇ鍒?`1.265rem/4.004vw/4.092rem` |
+| 2026-05-05 16:34 | main | 棣栭〉 Vision 灞忚皟鏁?| Vision 灞忓灞傛敼涓虹函 `#171717`锛屽崱鐗囧乏鍙冲璺濇敼涓?`1.2rem`锛屾鏂囦笁琛屾樉绀哄苟鏀惧ぇ 1.1 鍊嶏紝鎸夐挳鏀逛负鐧藉簳榛戝瓧 |
+| 2026-05-05 16:38 | main | 棣栭〉 Vision 寰皟 | Vision 鍗＄墖宸﹀彸澶栬窛鏀逛负 `2.5rem`锛屽彸渚ф棆杞?Vision 瀹氫綅鍒拌绐楀彸渚?`12rem` 鍐呭绾匡紝鎸夐挳榛樿鏍峰紡寮哄埗涓虹櫧搴曢粦瀛?|
+| 2026-05-05 16:41 | main | 棣栭〉 Vision 姝ｆ枃涓庡榻愬井璋?| 姝ｆ枃瀛楀彿 clamp 璋冩暣涓?`1.65rem/2.64vw/2.772rem`锛屽崱鐗囧唴閮?padding 淇涓?`calc(var(--shell-md) - 1.3rem)` 浠ュ榻愯绐楀乏渚?`12rem` |
+| 2026-05-05 16:42 | main | 棣栭〉 Vision 鏍囪瘑寰皟 | 鍙充晶 Vision 鏍囪瘑浠?`rotate-90` 鏀逛负 `rotate-180`锛屽瓧鍙?clamp 缂╁皬鍒?`4.275rem/9vw/7.875rem` |
+| 2026-05-05 16:43 | main | 棣栭〉 Vision 鏍囪瘑鏃嬭浆璋冩暣 | 鍙充晶 Vision 鏍囪瘑浠?`rotate-180` 鏀逛负 `rotate-[270deg]` |
+| 2026-05-05 16:44 | main | 棣栭〉 Industries 璇存槑姝ｆ枃璋冩暣 | 璇存槑娈佃惤浠?`max-w-[90rem] text-[var(--type-body)]` 鏀逛负 `w-full text-[calc(var(--type-body)*1.8)]` |
+| 2026-05-05 16:46 | main | 棣栭〉 Industries 鍗＄墖鎻忚堪绉婚櫎 | 鍒犻櫎琛屼笟鍗＄墖鏁版嵁涓殑 `desc` 瀛楁鍜屽崱鐗囧簳閮?hover 鎻忚堪娈佃惤锛屼粎淇濈暀鏍囬銆佸浘鐗囧拰绠ご浜や簰 |
+| 2026-05-05 16:47 | main | 棣栭〉 Industries 涓?Honors 寰皟 | 鍒犻櫎 Industries 鍗＄墖缃戞牸涓嬫柟妯嚎锛汬onors 鏍囬鍖虹綉鏍兼敼涓?`auto 1fr`锛屽彸渚ц鏄庡瓧鍙锋敼涓?`clamp(1.4rem,1.68vw,1.96rem)` |
+| 2026-05-05 16:52 | main | 棣栭〉 Honors 涓?Events 寰皟 | Honors 椤堕儴缃戞牸澧炲姞 `items-center`锛屽彸渚ц鏄庢敼涓?`clamp(1.54rem,1.848vw,2.156rem)`锛宎ctive 鏍囬/姝ｆ枃鏀惧ぇ骞剁Щ闄?See More锛汦vents 鍙充晶璇存槑鏀逛负 `clamp(1.3rem,1.56vw,1.82rem)`锛岃疆鎾浘鐗囧拰鐏板崱闂磋窛涓?`2rem` |
+| 2026-05-05 16:55 | main | 棣栭〉 Clients 灞忓井璋?| Clients 鏍囬瀹瑰櫒鏀逛负 `pl-[5rem] pr-[var(--shell-md)]`锛屽垹闄?Logo 澧欏乏鍙充袱渚ф笎闅愰伄缃?|
+| 2026-05-05 16:58 | main | About Hero 鍨傜洿浣嶇疆寰皟 | About 鏍囬缁勬敼涓洪灞?`55svh` 瀹氫綅锛岀伆鑹?Vision 鏂瑰潡鏀逛负棣栧睆 `90svh` 瀹氫綅锛屽苟澧炲姞 Hero 楂樺害閬垮厤鏂瑰潡琚埅鏂?|
+| 2026-05-05 17:01 | main | 棣栭〉 Vision 鑳屾櫙寰皟 | Vision 绗簩灞?section 浣跨敤 `repeating-linear-gradient` 绾圭悊灞傚拰 90 搴︽繁鐏板埌鏆栫伆妯悜娓愬彉鑳屾櫙 |
+| 2026-05-05 17:01 | main | 棣栭〉 Vision 鍗＄墖鑳屾櫙淇 | 澶栧眰 section 鎭㈠涓?`#171717`锛屽皢 `repeating-linear-gradient` 绾圭悊灞傚拰妯悜娓愬彉绉诲叆 Vision 鍗＄墖鑳屾櫙 |
+| 2026-05-05 17:02 | main | 棣栭〉 Vision 鍗＄墖娓愬彉璋冩暣 | 鍒犻櫎 `repeating-linear-gradient` 绾圭悊灞傦紝鍗＄墖鑳屾櫙鏀逛负 `linear-gradient(to bottom right, ...)` |
+| 2026-05-05 17:03 | main | 棣栭〉 Vision 閬僵璋冩暣 | 鍒犻櫎鍗＄墖鍐呴儴绾靛悜榛戣壊 overlay锛岄伩鍏嶅崱鐗囦笂涓嬭竟缂樼户缁彂榛?|
+| 2026-05-05 17:04 | main | 棣栭〉 Vision 涓婇儴鐏板害寰皟 | 鍗＄墖娓愬彉鍓嶄袱涓壊鏍囨敼涓?`#4f4f52` 鍜?`#565659`锛屼笅閮?`#403f3f`銆乣#514c45` 淇濇寔涓嶅彉 |
+| 2026-05-05 17:05 | main | 棣栭〉 Vision 涓婇儴浜害寰皟 | 鍗＄墖娓愬彉鍓嶄袱涓壊鏍囩户缁帇鏆椾负 `#2f2f32` 鍜?`#38383b`锛屼笅閮ㄨ壊鏍囦繚鎸佷笉鍙?|
+| 2026-05-05 17:05 | main | 棣栭〉 Vision 涓婇儴浜害浜屾寰皟 | 鍗＄墖娓愬彉鍓嶄袱涓壊鏍囩户缁帇鏆椾负 `#27272a` 鍜?`#303033`锛屼笅閮ㄨ壊鏍囦繚鎸佷笉鍙?|
+| 2026-05-05 17:17 | main | 棣栭〉 Vision 璧峰鑹叉爣璋冩暣 | 鍗＄墖瀵硅绾挎笎鍙樼涓€涓壊鏍囨敼涓?`rgb(36, 36, 36) 9%`锛屽叾浣欒壊鏍囦繚鎸佺幇鏈夎缃?|
+| 2026-05-05 17:35 | main | 鍏ㄧ珯瀛椾綋鎺ュ叆 | 浣跨敤 `next/font/local` 鍔犺浇 `src/font/poppins.ttf`锛屽苟閫氳繃 `body` 瀛椾綋鏍堣鐩栧叏绔欓粯璁ゆ枃瀛?|
+| 2026-05-05 17:52 | main | About 椤佃瑙夌粏鑺傝皟鏁?| Hero 鏍囬澧炲姞閲戣壊宸︾嚎骞跺榻?12rem 鍐呭绾匡紝Vision 鍗＄墖鏀逛负 5rem 澶栬窛鍜屾柊娓愬彉锛汬onors銆丆ulture銆丆hronicle 鎸夊弽棣堢粺涓€棰滆壊銆佸瓧鍙枫€佽竟妗嗗拰灞曞紑鍐呭鏍峰紡 |
+| 2026-05-05 17:59 | main | Team 椤典汉鐗╁尯寰皟 | 鍘绘帀 WE ARE 涓?SPECIAL 涔嬮棿鐨勫ぇ闂撮殧锛屾柊澧?Partner 鏍囬锛屼汉鐗╁浘鐗囧～婊＄埗瀹瑰櫒锛孎ind out more 鍘绘帀 icon 骞朵繚鐣欓粍鑹蹭笅鍒掔嚎 |
+| 2026-05-05 18:08 | main | Industries 椤靛竷灞€寰皟 | Hero 鏍囬鏀逛负鍙充晶 12rem 瀵归綈锛岃鏄庡崱鐗囦娇鐢ㄦ寚瀹氱伆閲戞笎鍙樺拰瀵硅榛勮壊杈规锛岃涓氬崱鐗囧尯鏀逛负 9rem 澶栬窛銆佸乏涓嬫枃瀛椾笌 1/2.5/1.5 琛岄珮姣斾緥 |
+| 2026-05-05 18:12 | main | Industries 椤电粏鑺備慨姝?| 璇存槑鍗＄墖浠庡瑙掕竟妗嗘仮澶嶄负鍘熸湁寮曞彿瑁呴グ骞舵敼涓洪粍鑹诧紱琛屼笟鍗＄墖鏍囬涓嬪垝绾挎敼涓哄唴瀹瑰尯鍩熷叏瀹?|
+| 2026-05-05 18:17 | main | Events 椤佃瑙夊井璋?| Hero 娓愬彉鍧楁敼涓?6rem 宸﹀彸澶栬窛鍜?40svh 楂樺害锛涚浜屽睆绉婚櫎 LATEST UPDATES 鏍囬/涓嬪垝绾匡紝鍗＄墖鍥剧墖鍘婚櫎鐏板害閬僵骞朵繚鎸佸乏涓?-10% 鍋忕Щ |
+| 2026-05-05 18:22 | main | Events 椤靛崱鐗囧唴瀹瑰井璋?| Hero 娓愬彉鍧楀乏鍙冲璺濇敼涓?8rem锛岀浜屽睆澶栬窛鏀逛负 6rem锛涗簨浠跺崱鐗囧垹闄ゆ憳瑕佸拰 Read More锛屽彧淇濈暀鏃ユ湡銆侀粍鑹茬澶村拰鏍囬 |
+| 2026-05-05 18:23 | main | Events 鍗＄墖闂磋窛寰皟 | 绗簩灞忕綉鏍奸棿璺濅粠 `gap-x-8 gap-y-16` 鏀逛负 `gap-x-24 gap-y-48` |
+| 2026-05-05 18:24 | main | Events 鍗＄墖鍥剧墖鍋忕Щ寰皟 | 鍗＄墖鍥剧墖瀹瑰櫒浠?`-left-[10%] -top-[10%]` 鏀逛负 `-left-[3.3%] -top-[3.3%]` |
+| 2026-05-05 18:26 | main | Events 鍗＄墖鍐呭闂磋窛寰皟 | 鍐呭鍖洪《閮?padding 鏀逛负 `calc(54% + 3rem)`锛屽彸涓嬭涓夎褰㈤珮搴︿粠 `18%` 鏀逛负 `6%` |
+| 2026-05-05 18:27 | main | Events 鍗＄墖鏃ユ湡闂磋窛浜屾寰皟 | 鍐呭鍖洪《閮?padding 浠?`calc(54% + 3rem)` 鏀逛负 `calc(54% + 6rem)` |
+| 2026-05-05 18:28 | main | Events 鍗＄墖瀛楀彿涓庨棿璺濆井璋?| 鏍囬瀛楀彿 clamp 璋冩暣涓哄綋鍓?70%锛岀浜屽睆缃戞牸绾靛悜闂磋窛浠?`gap-y-48` 鎭㈠涓?`gap-y-16` |
+| 2026-05-05 20:40 | main | Contact 椤佃竟璺濊皟鏁?| 鏂板椤甸潰鍐?`contactShell`锛岃 Hero銆丣oin Us銆佸€欓€変汉鍗＄墖鍜岄偖绠辨彁绀哄尯妗岄潰宸﹁竟璺濈粺涓€涓?`9rem` |
+| 2026-05-05 20:49 | main | About Culture 瑙嗚淇 | Culture 鍩虹鑳屾櫙鏀逛负 `#a88d61`锛屽乏鍥鹃檷閫忔槑骞跺彔鍔犳閲?multiply 閬僵锛屼富杩囨浮鏀逛负娣辨閲戝灞傛笎鍙橈紝鍙充晶澧炲姞绾?0.1 閫忔槑搴︾殑鎶借薄鍝佺墝姘村嵃 |
+| 2026-05-05 20:55 | main | About Culture 閬僵寰皟 | 涓昏繃娓￠伄缃╁乏渚ч€忔槑搴︿粠杈冮珮瑕嗙洊鏀逛负浣庨€忔槑搴︼紝骞跺皢瀹炶壊杩囨浮鍖哄煙鍙崇Щ锛屼繚鐣欏乏渚у浘鐗囧彲瑙佸害 |
+| 2026-05-05 20:59 | main | About Culture 娓愬彉鑼冨洿寰皟 | 涓婚伄缃╂敼涓轰粠 18% 鍒?78% 鎸佺画閫掑閫忔槑搴︾殑澶氭妫曢噾杩囨浮锛岄伩鍏嶆笎鍙樺彧闆嗕腑鍦ㄥ浘鐗囧彸渚у皬鑼冨洿 |
+| 2026-05-05 21:00 | main | About Culture 鍥剧墖娓呮櫚搴﹀井璋?| 涓婚伄缃?0%-42% 鏀逛负閫忔槑锛屽浘鐗?opacity 鎻愰珮鍒?`0.68`锛屾閲?multiply 閬僵闄嶄綆鍒?`35%`锛岄伩鍏嶅乏鍥鹃浘鍖?|
+| 2026-05-05 21:02 | main | About Culture 鑳屾櫙涓庡乏鍥捐挋灞傝皟鏁?| 鍒犻櫎 section / 瀹瑰櫒 `#a88d61` 鑳屾櫙绫伙紝骞剁Щ闄ゅ乏鍥惧尯鍩?`#9f8458` multiply 钂欏眰 |
+| 2026-05-05 21:03 | main | About Culture 灏哄璋冩暣 | 鍒犻櫎 `mx-auto max-w-[120rem]` 瀹藉害闄愬埗锛屽鍣ㄦ敼涓?`w-full min-h-[80vh]`锛屽乏鍥炬闈㈤珮搴﹀悓姝ヤ负 `80vh` |
+| 2026-05-05 21:05 | main | About Culture 鍥剧墖鍙充晶娓愬彉 | 鍦ㄥ乏鍥惧唴閮ㄥ鍔?`linear-gradient(to left, #a88d61 0%, rgba(168, 141, 97, 0) 30%)`锛岃鍥剧墖鍙崇紭琛旀帴鍙充晶鑳屾櫙 |
+| 2026-05-05 21:16 | main | Contact 淇℃伅妯″潡璋冩暣 | 绉婚櫎搴曢儴鐙珛鍩庡競鍥炬ā鍧楋紝鍦?Hero 鍚庢柊澧炲叏瀹?80vh 鍙屾爮妯″潡锛氬乏渚?Contact us 鏂囨銆佺數璇?閭鍥炬爣淇℃伅锛屽彸渚у睍绀哄煄甯傚浘 |
+| 2026-05-05 21:18 | main | Contact 淇℃伅妯″潡棰滆壊璋冩暣 | Contact us 妯″潡宸︿晶鏍囬銆佹鏂囥€佺數璇濄€侀偖绠卞拰 Phone/Mail 鍥炬爣缁熶竴鏀逛负榛戣壊 |
+| 2026-05-05 21:23 | main | Contact 鎷涜仒鍖鸿瑙夎皟鏁?| 鍊欓€変汉鍗＄墖鐨?1/2/3/4 鏁板瓧鏇挎崲涓洪噾鑹蹭笅鍒掔嚎锛岀畝鍘嗛偖绠辨彁绀哄彸瀵归綈锛屽苟涓?Contact us 涓嬫柟鍒?Footer 鍓嶅尯鍩熷鍔?`#1d1d1d` 鍙充晶鐩磋涓夎褰㈣儗鏅?|
+| 2026-05-05 21:25 | main | Contact 涓夎褰㈣繛鎺ヤ慨姝?| 涓夎褰㈣儗鏅鍣ㄥ鍔?`pb-20 -mb-20`锛岃鐩?Footer `mt-20` 褰㈡垚鐨勯棿闅欙紝璁╂枩杈圭粓鐐瑰榻?Footer 椤堕儴姝ｄ腑闂?|
+| 2026-05-05 21:26 | main | Contact 鍗＄墖灞傜骇寰皟 | 鍊欓€変汉鍗＄墖涓嬪垝绾垮鍔?`mt-16`锛屼笁瑙掑舰鑳屾櫙灞傜骇鎻愰珮鍒板崱鐗囪儗鏅笂鏂癸紝鍗＄墖涓嬪垝绾垮拰姝ｆ枃淇濇寔鏇撮珮灞傜骇閬垮厤琚伄鎸?|
+| 2026-05-05 21:28 | main | Contact 鍗＄墖涓嬪垝绾夸笌鑳屾櫙淇 | 鍊欓€変汉鍗＄墖涓嬪垝绾夸粠 `h-0.5` 鏀逛负 `h-1.5`锛屼笁瑙掑舰鑳屾櫙灞傜骇浠?`z-20` 鏀瑰洖 `z-0`锛屼綔涓哄尯鍩熻儗鏅澘鏄剧ず |
+| 2026-05-05 21:29 | main | Contact 鍗＄墖灞傜骇浜屾淇 | 鍗＄墖鑳屾櫙鎷嗕负鍐呴儴 `z-0` 鑳屾櫙灞傦紝涓夎褰㈣涓?`z-20`锛屽崱鐗囦笅鍒掔嚎鍜屾鏂囦繚鎸?`z-30`锛屽疄鐜颁笁瑙掑舰鐩栦綇鍗＄墖鑳屾櫙浣嗕笉閬尅鍐呭 |
+| 2026-05-05 21:30 | main | Contact 鍗＄墖鎴浘鏁堟灉璋冩暣 | 绉婚櫎鍗＄墖鍖?`z-10` stacking context锛岀‘淇濆唴瀹?`z-30` 楂樹簬涓夎褰紱鍗＄墖鑳屾櫙鏀逛负娣辫壊鏆栫伆娓愬彉锛屾鏂囨敼涓虹矖鏂滀綋鐏扮櫧鏂囧瓧 |
+| 2026-05-05 21:32 | main | Contact 涓夎褰綅缃慨姝?| 涓夎褰?overlay 浠庢暣涓嫑鑱樺尯瀹瑰櫒绉诲叆鍊欓€変汉鍗＄墖 grid锛岃捣鐐瑰榻愬崱鐗囧尯鍙充笂瑙掞紝楂樺害鍚戜笅寤朵几瑕嗙洊鍒?Footer 鍓?|
+| 2026-05-05 21:36 | main | Contact 涓夎褰綅缃洖閫€ | 鎾ゅ洖 `21:32` 鐨勫崱鐗?grid 閿氱偣璋冩暣锛屼笁瑙掑舰 overlay 鎭㈠涓烘嫑鑱樺尯鏁翠綋瀹瑰櫒鐨勭粷瀵瑰畾浣嶈儗鏅?|
+| 2026-05-05 21:50 | main | 椤甸潰绾т笁瑙掑舰鑳屾櫙 | 鏂板 `PageTriangle` 鍏变韩缁勪欢锛屽苟鍦?Home銆丄bout銆乀eam銆両ndustries銆丒vents 椤甸潰鎸夊悇鑷尯鍧楄捣鐐规斁缃綆灞傜骇 `#1d1d1d` 鏂滀笁瑙掕儗鏅?|
+| 2026-05-05 21:54 | main | 椤甸潰涓夎褰㈠眰绾т笌閫忔槑搴﹁皟鏁?| `PageTriangle` 榛樿褰㈢姸鏀逛负 `polygon(100% 0, 100% 100%, 50% 100%)` 涓斿眰绾т负 `z-0`锛汣ontact 椤典笁瑙掑舰淇濇寔 `z-20` 骞跺鍔?`opacity-30` |
+| 2026-05-05 21:58 | main | 椤甸潰涓夎褰㈤€忔槑搴︿笌椤剁偣璋冩暣 | `PageTriangle` 榛樿褰㈢姸鏀逛负 `polygon(100% 0, 100% 100%, 40% 100%)`锛孒ome/About/Team/Industries/Events 浣跨敤 `opacity-50`锛汣ontact 椤典笁瑙掑舰浠?`opacity-30` 鏀逛负 `opacity-50` |
+| 2026-05-06 21:42 | main | 棣栭〉瀛椾綋涓庤疆鎾井璋?| Hero 鏍囬鏀逛负瀹為檯澶у啓骞舵斁澶?1.2 鍊嶏紱Vision 鏂囨鎷嗗垎缁嗕綋鏂滀綋涓庣矖浣擄紱Industries 姝ｆ枃/鍗＄墖銆丠onors 璇存槑鍜?Events 杞挱鍐呭鎸夊弽棣堣皟鏁?|
+| 2026-05-06 21:55 | main | 棣栭〉 1920 鍩哄噯 rem 鎹㈢畻 | 灏?Hero銆乂ision銆両ndustries銆丠onors銆丒vents 鍜?Clients 鏂囨瀛楀彿鎸?16px 鍩哄噯钀藉埌鍥哄畾 rem锛屽苟琛ュ厖 Events 鎻忚堪鍗℃笎鍙樹笌鍙充笅瑙掍笁瑙掑舰瑙嗚 |
+| 2026-05-06 22:00 | main | 棣栭〉 Events 杞挱甯冨眬淇 | 绉婚櫎杞挱鍗″灞傛笎鍙樿竟妗嗭紝淇濇寔鍥剧墖涓庤鏄庣洅鐙珛鍒嗙锛屽苟鎶婂浘鐗囨棩鏈?鏍囬瀹氫綅鍒板乏涓嬭 70% 瀹芥枃瀛楀尯 |
+| 2026-05-06 22:05 | main | 棣栭〉 Events 杞挱瀹藉害淇 | 杞挱瀹瑰櫒鏀逛负 `w-full` 鍗犳弧鐖剁骇鍐呭鍖猴紝杞挱鍗″搴﹁缃负 `62.1875rem max-w-full` 瀵瑰簲 995px 璁捐绋垮搴?|
+| 2026-05-06 22:06 | main | 棣栭〉 Events 璇存槑鍗℃崲琛屼慨姝?| 鍒犻櫎璇存槑娈佃惤 `truncate`锛岃 Kinsey Kang Yanan 浜嬩欢鎻忚堪鍦ㄤ笅鏂规柟鍧椾腑鎸夊唴瀹硅嚜鐒舵崲琛?|
+| 2026-05-06 22:07 | main | 棣栭〉 Events 妯悜鍐呰窛淇 | 鍥剧墖宸︿笅瑙掓枃瀛?`left` 涓庝笅鏂硅鏄庡崱宸﹀彸 padding 缁熶竴璁剧疆涓?`5.5625rem`锛屽搴?89px 璁捐绋胯窛绂?|
+| 2026-05-06 22:09 | main | 棣栭〉 Events 杞挱灞曠ず淇 | 鍥剧墖鏃ユ湡鍜屾爣棰樻枃瀛楀疄闄呭乏璺濅繚鎸?`5.5625rem`锛屾爣棰樺乏绔栫嚎浠呭寘瑁规鏂囷紱杞挱鑸炲彴楂樺害鍔犲埌 `64rem / 68rem` 灞曠ず瀹屾暣璇存槑鍗?|
+| 2026-05-06 22:31 | main | Hero 鏈湴绱犳潗鎺ュ叆 | 鍙戝竷 `src/assets/{home,about,team,industries,event,contact}/hero.png` 鍒?`public/assets/*/hero.png`锛屽苟鏇挎崲瀵瑰簲椤甸潰 Hero 鑳屾櫙寮曠敤 |
+| 2026-05-06 22:33 | main | 棣栭〉 Hero 浜害璋冩暣 | 灏嗛椤?Hero 鍥剧墖 opacity 浠?`60%` 鎻愰珮鍒?`90%`锛屾暣浣撻伄缃╀粠 `black/70` 闄嶄綆鍒?`black/38`锛岃鏈湴鑳屾櫙鍥炬洿娓呮櫚鏄庝寒 |
+| 2026-05-06 22:35 | main | 棣栭〉 Hero 閬僵绉婚櫎 | 鍒犻櫎 Hero 鍏ㄥ睆娓愬彉閬僵锛屽彧淇濈暀 `bottom: 0`銆侀珮搴?`30%` 鐨勫簳閮ㄦ殫鑹茶繃娓″眰 |
+| 2026-05-06 22:37 | main | 棣栭〉 Vision 鏍囪瘑瀛楅噸璋冩暣 | 鍙充晶鏃嬭浆 `Vision` 浠?`font-light uppercase` 鏀逛负 `font-normal`锛屾寜鏂囨湰鏈韩澶у皬鍐欏睍绀?|
+| 2026-05-06 22:40 | main | 棣栭〉 Industries 鍥剧墖鎺ュ叆 | 鍙戝竷 `src/assets/home/INDUSTRIES1.png` 鍒?`INDUSTRIES5.png` 鑷?`public/assets/home`锛屽苟鏇挎崲棣栭〉鍓嶄簲寮犺涓氬崱鐗囧浘鐗?|
+| 2026-05-06 22:52 | main | 棣栭〉 Industries 涓嬪垝绾夸綅缃慨姝?| 鐏拌壊妯嚎鏀逛负璺熼殢璇存槑姝ｆ枃涔嬪悗鏄剧ず锛屼笉鍐嶄綅浜?Industries & Services 鏍囬姝ｄ笅鏂?|
+| 2026-05-06 22:54 | main | 棣栭〉 Honors 骞翠唤鎸夐挳鎺掔増 | 骞翠唤鎸夐挳鏀逛负 `text-[1.25rem] font-bold justify-start text-left px-4`锛屽搴?20px 宸﹀榻愮矖浣撴牱寮?|
+| 2026-05-06 22:55 | main | 棣栭〉 Events active 璇存槑鍗?| Events 杞挱涓嬫柟璇存槑鍧楀鍔?`position === "active"` 鏉′欢娓叉煋锛屽乏鍙抽瑙堝崱鍙樉绀哄浘鐗囧尯鍩?|
+| 2026-05-06 22:56 | main | 棣栭〉 Events 鎺у埗鎸夐挳闂磋窛 | 杞挱鑸炲彴楂樺害浠?`64rem / 68rem` 璋冩暣涓?`56rem / 58rem`锛屾帶鍒舵寜閽杈硅窛浠?`mt-4` 璋冩暣涓?`mt-1` |
+| 2026-05-06 23:00 | main | About Hero 瀛椾綋璋冩暣 | About us 鏍囬璁剧疆涓?`6rem`銆乣fontWeight: 600`锛孒ero 姝ｆ枃璁剧疆涓?`2rem`銆乣fontWeight: 500`銆乮talic |
+| 2026-05-06 23:01 | main | About Vision 璇存槑瀛椾綋璋冩暣 | `VisionCard` 椤堕儴璇存槑浠?clamp 瀛楀彿鏀逛负 `text-[1.5rem] font-medium`锛屽彇娑?capitalize |
+| 2026-05-06 23:06 | main | About 鍐呭瀛椾綋绯荤粺璋冩暣 | Vision 鏍囬/姝ｆ枃/See More銆丠onors 鏍囬/璇存槑/骞翠唤/濂栭」灞曞紑鍐呭銆丆ulture 鏍囬鎸夋寚瀹?px 鍊兼崲绠椾负 rem 骞舵洿鏂板瓧閲?|
+| 2026-05-06 23:07 | main | About Culture 涓?Chronicle 瀛椾綋璋冩暣 | Culture 姝ｆ枃鏀逛负 `1.75rem` regular銆佹寜閽敼涓?`1.125rem` medium锛汣hronicle 鏍囬/璇存槑/骞翠唤/鏈?姝ｆ枃鎸夋寚瀹?rem 鍜屽瓧閲嶈惤鍦?|
+| 2026-05-06 23:09 | main | About Hero 钂欏眰浣嶇疆璋冩暣 | About Hero 鐨勪袱灞傛笎鍙橀伄缃╀粠 `inset-0` 鏀逛负 `top-[100svh] bottom-0`锛岄灞忓畬鏁村睍绀哄師鍥?|
+| 2026-05-06 23:12 | main | About Vision 鑳屾櫙鍥炬帴鍏?| 鍙戝竷 `src/assets/about/aboutVision.png` 鍒?`public/assets/about/aboutVision.png`锛屽苟浣滀负 `VisionCard` 鑳屾櫙鍥惧眰浣跨敤 |
+| 2026-05-06 23:13 | main | About Vision 涓よ鏂囨淇 | 灏嗚鏄庡鍣ㄥ搴︽斁瀹藉埌 `max-w-[56rem]`锛屽苟缁欑浜岃鍔?`whitespace-nowrap` |
+| 2026-05-06 23:16 | main | About Honors 椤堕儴璇存槑鎺掔増 | Honors 椤堕儴璇存槑鏀逛负 `justify-self-end text-right`锛屾媶鎴愪袱涓?block锛岀浜岃浣跨敤 `whitespace-nowrap` |
+| 2026-05-06 23:17 | main | About Honors 璇存槑鍙宠竟鐣岃皟鏁?| 椤堕儴璇存槑澧炲姞 `lg:-mr-[var(--shell-md)]`锛岃鍙冲榻愬熀鍑嗙Щ鍔ㄥ埌灞忓箷鍙充晶鍐呭绾?|
+| 2026-05-06 23:19 | main | About Honors 璇存槑婧㈠嚭淇 | 鍒犻櫎 `lg:-mr-[var(--shell-md)]`锛屽苟澧炲姞 `max-w-[calc(100vw-var(--shell-md)*2)]` 绾︽潫鍙充晶璇存槑瀹藉害 |
+| 2026-05-06 23:20 | main | About Honors 涓?Vision 鑳屾櫙寰皟 | Honors 椤堕儴璇存槑鍒犻櫎 max-width 绾︽潫骞朵娇鐢ㄧ埗缃戞牸鍙宠竟鐣屽榻愶紱Vision 鑳屾櫙鍥句粠 `size-full` 鏀逛负 `h-full w-full` |
+| 2026-05-06 23:31 | main | Team 椤靛瓧浣撳拰鎴愬憳鏁版嵁璋冩暣 | Team Hero銆丼pecial Forces銆丳artner 鍒嗗尯銆佹垚鍛樺鍚?鑱屼綅/Find out more 鎸夋寚瀹?px 鎹㈢畻涓?rem锛屾垚鍛樺崱鐗囨敼鐢?`teamInfo.md` 鐨勫鍚嶈亴浣嶅拰鏈湴鍥㈤槦鍥剧墖 |
+| 2026-05-06 23:40 | main | Industries 椤靛瓧浣撲笌鍥剧墖璋冩暣 | Industries 鏍囬鏀逛负宸﹀榻?6rem medium锛岃鏄庡崱鐗囩Щ鍒版爣棰樹笅鏂癸紝鍏釜琛屼笟鍗＄墖鎺ュ叆 `in1.png` 鍒?`in6.png` 骞朵娇鐢?3rem semibold 鏍囬 |
+| 2026-05-06 23:43 | main | Industries 涓?Events 鏂囨鍥剧墖璋冩暣 | Industries 鍗＄墖鏍囬鏀逛负鎸囧畾澶у皬鍐欎笌鎹㈣锛汦vents Hero 鍜屽崱鐗囨枃妗堟寜 100px/36px/30px/24px 瑙勬牸鏇存柊锛屽苟鎺ュ叆 event1-3 鍥剧墖 |
+| 2026-05-06 23:47 | main | Contact 椤靛瓧浣撲笌鏂囨璋冩暣 | Contact Hero銆丆ontact us 鍙屾爮銆丣oin Us銆佸€欓€変汉鍗＄墖鍜屾嫑鑱橀偖绠辨彁绀烘寜 96px/52px/36px/32px/28px 瑙勬牸鏇存柊 |
+| 2026-05-06 23:48 | main | Industries Hero 浣嶇疆璋冩暣 | 灏?Industries 鏍囬瀹瑰櫒浠庡瀭鐩村眳涓敼涓洪《閮?`36.875rem` 鍋忕Щ锛屽搴?1920 璁捐绋?590px |
+| 2026-05-06 23:52 | main | Team Zoe Zhang 鍥剧墖鎺ュ叆 | 鍙戝竷 `src/assets/team/team4.png` 鍒?public锛屽苟灏?Zoe Zhang 鍗＄墖鍥剧墖浠庡師鍨嬪鐢ㄥ浘鏀逛负 `/assets/team/team4.png` |
+| 2026-05-07 00:08 | main | Team Profile 璇︽儏椤甸噸鎺?| 灏?`/team/yuxuan-liu` 鏀逛负瀵硅娓愬彉 Hero銆?28px 鍐呭杈硅窛鐨勪俊鎭粙缁嶅睆銆丒xperience 灞忓拰 Performance 灞?|
+| 2026-05-07 00:17 | main | Team Profile 璇︽儏椤电粏鍖?| Hero 鍥哄畾涓?`45.9375rem` 楂樺苟鏀圭敤 `team1.png`锛孡anguage Skills 涓?Professional Qualification 鍚屽垪锛孍xperience 鍖烘敼涓哄乏渚?Practice 鍙屽潡銆佸彸渚?Honors |
+| 2026-05-07 00:21 | main | Team Profile 灞曞紑浜や簰 | 涓?Honors 鍜?Performance 鐨?View more 澧炲姞鍙睍寮€/鏀惰捣鍐呭锛屽苟琛ュ厖 `teamInfo.md` 鍚庣画鏉＄洰 |
+| 2026-05-07 00:23 | main | Team Profile 闈㈠寘灞戣瑙?| 灏?Our Team / Yuxuan Liu 闈㈠寘灞戞潯璋冩暣涓洪粦鑹茶儗鏅紝褰撳墠椤逛娇鐢ㄧ櫧鑹叉枃瀛?|
+| 2026-05-07 00:27 | main | Industries 璇︽儏鍐呭鎺ュ叆 | Finance 涓?Real Estate 鍦ㄥ垪琛ㄧ浜屾鍙充晶涓婁笅鎺掑垪锛岃鎯呴〉 Hero 浣跨敤瀵瑰簲琛屼笟鍗＄墖鍥剧墖骞跺睍绀?`industriesInfo.md` 鏂囨 |
+| 2026-05-07 00:28 | main | Events 璇︽儏椤垫帓鐗?| 浜嬩欢璇︽儏椤垫敼涓?64px 鏍囬銆?8px 鏃ユ湡銆?4px light italic 涓昏鏄庡拰 Educational Background 淇℃伅缁撴瀯 |
+| 2026-05-07 00:42 | main | Core Value 婊氬姩鍔ㄧ敾 | 鏂板 `CoreValueScrollFlow`锛屼娇鐢?`core1-3.png` 瀹炵幇妗岄潰婊氬姩杩涘害椹卞姩鐨勫彸渚у浘鐗囧爢鍙犳彮绀轰笌宸︿晶浠峰€艰鍐呭鍒囨崲 |
+| 2026-05-07 00:44 | main | Core Value 鍥剧墖鍚搁《浣嶇疆 | 鍙充晶鍥剧墖鍫?sticky 瀹瑰櫒鏀逛负 `top-[5rem]`锛屽浘鐗囧爢鏁翠綋鍚戜笅鍋忕Щ `5rem` |
+| 2026-05-07 00:46 | main | Core Value 鏂囨瑙勬牸 | 浠峰€艰鏍囬鏀逛负 `1.75rem` 閲戣壊 semibold锛屾鏂囨敼涓?`1.5rem` regular锛屽苟鏇挎崲 No.1 Tiger 娈佃惤 |
+| 2026-05-07 00:48 | main | Core Value 瑙嗚缁嗗寲 | 鍒犻櫎婊氬姩鍖洪《閮ㄩ澶栧紩瀵兼枃妗堝拰鏍囬涓嬪垝绾匡紝鑳屾櫙缁熶竴涓?`#171717`锛屽彸渚у浘鐗囧爢鏀逛负 `top-[10rem]` sticky |
+| 2026-05-07 00:50 | main | Core Value sticky 鍔ㄧ敾瀵归綈 | 鍙充晶鍥剧墖鍫嗘仮澶嶄负鍙傝€冨姩鐢荤殑 `sticky top-0 h-screen` 灞呬腑瀹瑰櫒锛屽唴灞備笅绉?`10rem` 骞剁缉鏀惧埌 `0.9` |
+| 2026-05-07 00:53 | main | Core Value 鍥剧墖鍫嗗彔瀵归綈 | 鍙充晶鍥剧墖鍫嗘敼涓?`浜嬩欢 copy` 鐨勫浐瀹氶珮搴?absolute 鍙犳斁缁撴瀯锛屼娇鐢?px 绾?`translateY` 鍜?`clip-path` 鎻ず |
+| 2026-05-07 00:56 | main | Core Value 浜嬩欢 copy 鍔ㄧ敾瀵归綈 | 婊氬姩鐩戝惉鏀逛负涓?`FeaturesSection` 涓€鑷寸殑 window scroll 杩涘害璁＄畻锛屽浘鐗囨爤楂樺害鍜?transform 杩囨浮鏀逛负 inline 鍥哄畾鍊硷紝骞朵粠 `tsconfig.json` 鎺掗櫎 `浜嬩欢 copy` 鍘熷瀷 |
+| 2026-05-07 01:01 | main | Team 鍔ㄦ€佷釜浜鸿鎯?| 鏂板 `src/data/teamProfiles.ts` 鍜?`/team/[slug]` 璺敱锛孴eam 鍗＄墖鎸夋垚鍛?slug 璺宠浆骞舵覆鏌撳搴斿鍚嶃€佸浘鐗囥€佽亴浣嶃€侀偖绠卞拰涓汉浠嬬粛鍐呭 |
+| 2026-05-07 01:02 | main | Core Value 鍥剧墖鏄剧ず淇 | 涓哄彸渚у浘鐗囧爢鐨勪笅绉诲拰缂╂斁鍖呰９灞傝ˉ鍏?`w-full`锛屼繚璇?`CoreImageStack` 鑳界户鎵?sticky 鍒楀搴︽甯告樉绀?|
+| 2026-05-07 01:04 | main | Core Value sticky 淇 | 鍒犻櫎 `CoreValuePage` 鏍?main 涓婄殑 `overflow-x-hidden`锛岃鍙充晶鍥剧墖鍖烘寜瑙嗙獥鑰屼笉鏄鍓鍏堟墽琛?sticky 鍥哄畾 |
+| 2026-05-07 01:05 | main | Core Value 鍥剧墖浣嶇疆璋冩暣 | 鍙充晶鍥剧墖鍫嗗亸绉讳粠 `translate-y-[10rem]` 璋冩暣涓?`translate-y-[5rem]`锛屾暣浣撳悜涓婄Щ鍔?5rem |
+| 2026-05-07 01:17 | main | offweb 閮ㄧ讲 | 浣跨敤 `NEXT_SNAPSHOT_BASE_PATH=/offweb` 鏋勫缓 standalone 鍖咃紝鍙戝竷鍒?`husuweb-offweb.service` 骞堕€氳繃 Nginx 鏆撮湶 `/offweb/` |
+| 2026-05-07 01:25 | main | offweb 鍥剧墖璺緞淇 | `next.config.ts` 娉ㄥ叆 `NEXT_PUBLIC_BASE_PATH`锛宍ImageWithFallback` 鑷姩灏?`/assets/*` 杈撳嚭涓?`/offweb/assets/*` |
+| 2026-05-07 09:35 | main | offweb 瀛愯矾寰勮烦杞慨澶?| Culture 鍏ュ彛鏀圭敤 Next `Link`锛岀嚎涓?href 涓?`/offweb/about/core-value/`锛涙柊澧?not-found 椤碉紝Return Home href 涓?`/offweb/` |
+| 2026-05-07 22:07 | main | 棣栭〉 Honors/Events 涓?Clients 璋冩暣 | Honors 鏀逛负鎸?`EN/award.md` 骞村害灞曠ず鏈€杩戜笁鏉★紝Events 浣跨敤 `EN/event.md` 鎸囧畾涓夋潯鍜?`assets/home` 鍥剧墖锛孋lients 鍖哄煙鏍峰紡鍚屾璋冩暣 |
+| 2026-05-07 22:16 | main | 棣栭〉瑙嗚缁嗚妭淇 | Vision 鎸夐挳瀛楄窛缂╁皬锛岄椤靛唴瀹瑰眰绾ч珮浜庤儗鏅笁瑙掑舰锛孍vents 鎺у埗鍖哄彸瀵归綈涓旀棩鏈熸敼涓鸿嫳鏂囨湀浠芥牸寮忥紝See More 澧炲姞 hover 浣嶇Щ |
+| 2026-05-07 22:22 | main | 棣栭〉涓?About Honors 缁嗚妭淇 | Header 绉诲埌 Home 椤跺眰淇濇寔鍚搁《锛屼笁瑙掑舰浣嶄簬鑳屾櫙涔嬩笂鍐呭涔嬩笅锛孍vents 鎺у埗鎸夐挳缁濆璐村彸锛孉bout Honors 姝ｆ枃涓嶅啀婧㈠嚭瑙嗙獥涓旀棩鏈熺疆椤?|
+| 2026-05-07 22:32 | main | About 鏁版嵁鎺ュ叆涓庨椤典笁瑙掑舰寰皟 | Honors 浣跨敤 `EN/award.md` 骞村害濂栭」锛孋hronicle 浣跨敤 `EN/CHRONICLE.md` 鍏ㄩ噺鏃堕棿绾匡紝See More 灞曞紑鍏ㄩ儴骞翠唤锛岄椤典笁瑙掑舰涓嬬Щ骞堕檷浣庨€忔槑搴?|
+| 2026-05-07 22:38 | main | Title 涓?About Honors 灞曠ず璋冩暣 | Header 鑻辨枃瀵艰埅浣跨敤澶у啓婧愭枃妗堬紱About Honors 鏍囬鏀逛负鏂滀綋閲戣壊锛屽彸渚ц鏄庢寜鍙傝€冨浘鎺掔増锛孷iew Award 鏀寔鍏紬鍙烽摼鎺ュ瓧娈?|
+| 2026-05-07 22:45 | main | Team Profile 鐪熷疄涓氱哗涓庡睍寮€浜や簰 | Team 涓汉璇︽儏椤典娇鐢?`EN/teamInfo.md` 鍏ㄩ噺涓汉涓氱哗锛涙棤 Honors 鐨勬垚鍛樹笉灞曠ず Honors 鍖哄潡锛沄iew More 浣跨敤 About 鍚屾鎸夐挳涓?grid 灞曞紑鍔ㄧ敾 |
+| 2026-05-07 22:52 | main | Events 鏁版嵁涓庢寜閽氦浜?| Events 鍒楄〃鍜岃鎯呴〉鍏辩敤 `src/data/events.ts` 鐨?28 鏉′簨浠讹紱鍒楄〃 See More 鏀逛负 Culture 鍚屾鎸夐挳鍔ㄦ晥锛涢椤?Events 鎺у埗鎸夐挳灞呬腑锛孉bout Vision/Culture 鎸夐挳闂磋窛鍚屾寰皟 |
+| 2026-05-07 22:57 | main | 鑳屾櫙灞傜骇鍜屾敹璧锋寜閽慨澶?| Home/About 椤甸潰鍐呭缁熶竴缃簬涓夎褰㈣儗鏅箣涓婏紱Chronicle See More 鏀逛负 Culture 鍚屾鎸夐挳锛涙墍鏈夊睍寮€鏀惰捣鎬佹枃妗堢粺涓€涓?`COLLAPSE` |
+| 2026-05-07 23:04 | main | 棣栭〉涓?About Honors 瑙嗚寰皟 | 棣栭〉 Hero 鏍囬浣跨敤鎸囧畾閲戣壊瀵硅娓愬彉锛汣lients 涓夎 Logo 鏀逛负浜掍笉閲嶅鍒嗙粍骞跺姞灏忓渾瑙掞紱About Honors 灞曞紑鍐呭鍙充晶浣跨敤 `awardbg.png` 鑳屾櫙 |
+| 2026-05-07 23:12 | main | About Honors 鍏紬鍙疯烦杞?| View Award 鎸夐挳鎸夊椤圭粦瀹?`EN/award.md` 閲岀殑寰俊鍏紬鍙锋枃绔犻摼鎺ワ紱鏃犲叕浼楀彿閾炬帴鐨勬潯鐩笉鏄剧ず鎸夐挳 |
+| 2026-05-07 23:26 | main | 涓枃缃戠珯鏂囨鎺ュ叆 | 鏂板 `src/i18n/LanguageProvider.tsx` 涓?`src/i18n/copy.ts`锛岃瑷€鎸夐挳鍙悓姝ュ垏鎹㈤〉闈富浣撱€侀〉鑴氬拰涓昏浜嬩欢涓枃鎽樿 |
+| 2026-05-08 00:05 | main | 涓枃鍒楄〃鏁版嵁鎺ュ叆 | 棣栭〉鑽ｈ獕鍜屽姩鎬併€丄bout 鑽ｈ獕鍜屽ぇ浜嬭銆佸洟闃熷崱鐗囧鍚嶈亴浣嶆寜 `Chinese/awards.md`銆乣Chinese/event.md`銆乣Chinese/CHRONICLE.md`銆乣Chinese/teamInfo.md` 鍒囨崲涓枃 |
+| 2026-05-08 00:22 | main | 鍥㈤槦璇︽儏涓枃鍖?| `TeamProfilePage` 鎸夊綋鍓嶈瑷€鏄剧ず `Chinese/teamInfo.md` 鐨勫熀鏈俊鎭€佷笓涓氶鍩熴€佹墽涓氱粡楠屻€佽崳瑾夊拰涓汉涓氱哗 |
+| 2026-05-08 00:26 | main | 琛屼笟璇︽儏涓枃鍖?| `/industries/[slug]` 鎸夊綋鍓嶈瑷€鏄剧ず `Chinese/industriesInfo.md` 鐨勮涓氱畝浠嬩笌鏈嶅姟鑼冨洿 |
+| 2026-05-08 00:29 | main | 鏀惰捣鎸夐挳涓枃鏂囨 | 鍏叡 `copy.common.collapse` 涓枃鍊兼敼涓?`鏀惰捣`锛岃嫳鏂囦粛淇濇寔 `COLLAPSE` |
+| 2026-05-08 00:33 | main | 琛屼笟璇︽儏 metadata 淇 | 鏂板 `src/data/industryMetadata.ts` 渚?`/industries/[slug]` 鏈嶅姟绔?metadata 鍜岄潤鎬佸弬鏁扮敓鎴愪娇鐢?|
+| 2026-05-08 00:41 | main | 鏈嶅姟琛屼笟鍗＄墖鏂囨淇 | `/industries` 鍗＄墖鏍囬鏀逛负闅?slug 缁戝畾鐨勪腑鑻辨枃鏂囨锛屽垪琛ㄦ樉绀轰笌璇︽儏璺宠浆淇濇寔涓€鑷?|
+| 2026-05-08 09:29 | main | 鍥剧墖鍔犺浇浼樺寲 | 鍏抽敭棣栧睆鍥句娇鐢?eager/high锛岄潪棣栧睆鍥?lazy锛岄〉闈㈠ぇ鍥惧垏鎹负 WebP锛孋ore Value 婊氬姩鍔ㄧ敾浣跨敤 rAF 涓?IntersectionObserver 闄嶄綆鏃犳晥璁＄畻 |
+| 2026-05-08 21:38 | main | hover 鍥剧墖鍔ㄧ敾淇 | 棣栭〉琛屼笟銆佷簨浠躲€佽涓氬垪琛ㄣ€佸洟闃熴€丆ontact 鍩庡競鍥惧拰 About Culture 鐨?hover 缂╂斁鍥剧墖鏀逛负鍏堝姞杞藉悓姝ヨВ鐮侊紝閬垮厤鐩存帴鏀惧ぇ |
+| 2026-05-08 21:47 | main | Clients Logo 婊氬姩淇 | 绉婚櫎 logo 琛?hover 鏆傚仠瑙勫垯锛屽苟灏嗘粴鍔ㄥ姩鐢绘椂闀垮啓鍏ュ叏灞€ CSS锛屼繚璇佷笁琛?Logo 鎸佺画婊氬姩 |
+| 2026-05-08 21:51 | main | 鍏ㄥ眬鍔ㄦ晥瑙勫垯淇 | `prefers-reduced-motion` 涓嶅啀鍘嬬缉鎵€鏈?transition 鍜?animation 鏃堕暱锛屾仮澶?See More銆丩ogo 澧欏拰鍥剧墖 hover 鐨勬甯歌繃娓?|
+| 2026-05-08 22:19 | main | 棣栭〉涓?About 浜や簰鏇存柊 | Hero 鎺ュ叆娴锋氮瑙嗛鍜屾祦鍏夋枃瀛楋紱棣栭〉 Honors 榛樿 2026 骞惰ˉ 2020/2019锛涜涓氬崱鐗囪烦璇︽儏锛汦vents 鏂板 20210218/20201023锛涗慨澶?Core Value rootMargin銆丆ulture 鍥剧墖鍜?Chronicle 骞翠唤鎸夐挳 hover |
+| 2026-05-08 22:21 | main | 棣栭〉 Hero 璧勬簮绛栫暐璁板綍 | 棣栭〉 Hero 鏄庣‘淇濈暀瑙嗛璧勬簮锛屼笉鍐嶇撼鍏?WebP 鍘嬬缉鍥剧瓥鐣ワ紱闄ゆ寚瀹氬師鍥惧鍏朵綑椤甸潰缁х画浣跨敤 WebP |
+| 2026-05-08 22:30 | main | 棣栭〉 Events 涓?Honors 寰皟 | 棣栭〉 Events 杞挱琛ラ綈 2021/2020 涓ゆ潯铏庣溂瑙傚療鍜屽浘鐗囪祫婧愶紱Honors 骞翠唤鎸夐挳鏀逛负姣忓睆 5 涓苟閫氳繃宸﹀彸鎸夐挳寰幆婊戝姩 |
+| 2026-05-08 22:40 | main | 鏂囨涓?Logo 缁熶竴 | Awards Won 涓枃鏀逛负鈥滄墍鑾峰椤光€濓紝棣栭〉 Vision 涓枃瀛楀彿闄嶈嚦 80%锛屽洟闃熷彛鍙峰拰鑱旂郴鏂囨鏇存柊锛屼釜浜烘暀鑲茶儗鏅寜鍒嗗彿鍒嗘锛孒eader/Footer 浣跨敤 `logo.svg` |
+| 2026-05-08 22:44 | main | Logo 灏哄鏍″噯 | Title/Header logo 鏀逛负 86px 瀹斤紝Footer logo 鏀逛负 152px 瀹斤紝鍧囦繚鎸?SVG 绛夋瘮楂樺害 |
+| 2026-05-08 22:46 | main | Logo 灏哄鏀惧ぇ | Title/Header logo 瀹藉害鏀逛负 `10.75rem`锛孎ooter logo 瀹藉害鏀逛负 `19rem`锛屽潎涓轰笂涓€鐗堜袱鍊?|
+| 2026-05-08 22:55 | main | 鏇挎崲鍥剧墖璧勬簮鍚屾 | 鏂颁簩缁寸爜鍙戝竷鍒?Footer锛涢椤?Real Estate 鍜屽洟闃?team2 閲嶆柊鐢熸垚 WebP锛汚bout Culture 宸﹀浘鍚屾鏂?PNG锛涢椤?Vision 涓枃鈥滆檸璇夋効鏅€濇敼涓?`7rem` |
+| 2026-05-08 22:58 | main | Honors 閫夋嫨浜や簰淇 | 棣栭〉 Honors 宸﹀彸鎸夐挳鏀逛负绉诲姩 active 骞翠唤锛?026 宸︾Щ鍒?2019锛?019 鍙崇Щ鍥?2026锛屽苟淇濇寔 5 涓勾浠界獥鍙ｈ窡闅?|
+| 2026-05-08 23:02 | main | Logo 璧勬簮涓庡昂瀵告洿鏂?| 鏂扮増 `logo.svg` 鍙戝竷鍒?Title/Footer public 璺緞锛汬eader 瀹藉害鏀逛负 `5.375rem`锛孎ooter 瀹藉害鏀逛负 `9.5rem` |
+| 2026-05-08 23:05 | main | Clients logo 灏哄璋冩暣 | 棣栭〉瀹㈡埛 Logo 澧欎腑姣忎釜 logo 鏀逛负 `h-[80%] w-auto max-w-full`锛屽崰鎹崱鐗囩埗瀹瑰櫒楂樺害 80% |
+| 2026-05-08 23:08 | main | Events 杞挱涓庢爣棰樹慨姝?| 鏂板涓ゆ潯浜嬩欢鐨勮嫳鏂囨爣棰樿ˉ榻愬埌棣栭〉鍜?`/events` 鏁版嵁婧愶紱棣栭〉 Events 浣跨敤 `useEffect` 姣?5 绉掕嚜鍔ㄥ垏鎹?|
+| 2026-05-08 23:18 | main | Events 棣栧熬鍒囨崲浼樺寲 | 鑷姩杞挱 effect 渚濊禆 active event锛屾墜鍔ㄧ偣鍑诲悗閲嶅惎 5 绉掕鏃讹紝鍑忓皯鏈€鍚庝竴寮犵偣鍙虫椂鐨勮繛缁烦鍔ㄦ劅 |
+| 2026-05-08 23:22 | main | About 涓?Contact 瑙嗚璋冩暣 | About Vision 鍘婚櫎鍥哄畾楂樺害渚濊禆骞朵负 See More 淇濈暀涓嬭竟璺濓紱Culture 宸﹀浘鍙栨秷婊ら暅/钂欏眰锛汣ontact us 宸︿晶鑳屾櫙鑹叉敼涓?`#A1865F` |
+| 2026-05-09 08:50 | main | Team Profile 淇℃伅鍖鸿皟鏁?| Mengcheng Yun / 浜戞ⅵ鎴愮殑 `socialEngagements` 娓呯┖锛岃鎯呴〉浠呭湪 Social Engagements 鏈夊唴瀹规椂娓叉煋璇ュ尯鍧?|
+| 2026-05-09 08:53 | main | OSS 闈欐€佽祫婧愭帴鍏?| 鏂板 `assetUrl()`銆乣.env.production` 鍜?`public/font/poppins.ttf`锛岀敓浜ф瀯寤洪粯璁ゅ皢 `/assets/*`銆侀椤佃棰戝拰瀛椾綋鍔犺浇鍒?OSS 鍓嶇紑 |
+| 2026-05-09 08:57 | main | Events 婧愮礌鏉愬懡鍚嶆暣鐞?| 灏?`src/assets/event` 鏂板鍥剧墖浠庡井淇″師濮嬫枃浠跺悕鏁寸悊涓鸿繛缁殑 `event2` 鍒?`event39` |
+| 2026-05-09 09:07 | main | Events 婧愮礌鏉愯烦鍙锋暣鐞?| 婧愮礌鏉愬懡鍚嶈烦杩囩己鍥剧紪鍙?7銆?0銆?8锛屽綋鍓嶄簨浠剁礌鏉愯鐩?`event2` 鍒?`event42` 鐨勬湁鏁堢紪鍙?|
+| 2026-05-09 09:16 | main | Events 鐪熷疄鍐呭涓庡浘鐗囨帴鍏?| 灏?Events 鍒楄〃鎵╁睍涓?42 鏉＄湡瀹炰簨浠讹紝閫愭潯缁戝畾鐪熷疄鍥剧墖锛屽苟鍦ㄨ鎯呴〉灞曠ず涓嫳鏂囩湡瀹炴鏂?|
+| 2026-05-09 09:25 | main | Events 鍥剧墖 OSS 鍚屾 | 涓婁紶 `public/assets/event/event1-42` 鍒?OSS锛屼繚璇佺敓浜х幆澧冭祫婧愬墠缂€涓嬪彲璁块棶 |
+| 2026-05-09 09:29 | main | 瀛愰〉闈㈠鑸笌瑙嗚缁熶竴 | 鏂板 `SubpageBreadcrumb` 鍜?`BackToTop`锛岀粺涓€璇︽儏椤佃繑鍥炰笂涓€椤点€佽繑鍥為《閮ㄥ拰闈㈠寘灞戣瑙夛紝骞惰皟鏁?Culture/Team 鑳屾櫙灞傜骇 |
+| 2026-05-09 09:33 | main | Events 璇︽儏鍗犱綅娓呯悊 | 浜嬩欢璇︽儏姝ｆ枃娓叉煋鍓嶇Щ闄ゅ浘鐗囧崰浣嶆枃鏈紝骞剁敤 slug + 搴忓彿鐢熸垚娈佃惤 key |
+| 2026-05-09 09:35 | main | Events 涓枃鍒嗙被瑙勮寖鍖?| `localizeEvent` 灏嗕腑鏂囨爣棰樺唴鐨勫垎绫诲墠缂€鎷嗗嚭锛岄伩鍏嶅垪琛ㄥ拰璇︽儏鏄剧ず `???? | 铏庤瘔鍔ㄦ€乣 |
+| 2026-05-09 09:41 | main | Core Value 涓?Hero 璧勬簮淇 | Core Value 妗岄潰婊氬姩鍥炬敼涓?`16:14` 妯悜灞曠ず锛孉bout/Team/Industries/Events/Contact/Core Value Hero 鍥句娇鐢?PNG |
+| 2026-05-10 00:09 | main | 棣栭〉涓庡瓙椤甸潰璧勬簮浜や簰淇 | 鍚屾 42 寮犲鎴?Logo銆佹柊浜岀淮鐮佸拰鍥㈤槦鍥?WebP锛岄椤靛姩鎬佽疆鎾崱鐗囪烦璇︽儏锛孊ack 鎸夐挳鏀逛负杩斿洖涓婁竴椤碉紝琛屼笟璇︽儏闈㈠寘灞戝洖棣栭〉 |
+| 2026-05-10 00:15 | main | Core Value 涓?About Vision 淇 | Core Value 涓枃鏍囬涓嶅啀鏄剧ず绌虹紪鍙凤紝缁勪欢 key 鏀逛负绋冲畾缁勫悎锛汚bout Vision See More 灞曞紑鐢ㄦ埛鎸囧畾鐨勪笁娈佃嫳鏂囨効鏅枃妗?|
+| 2026-05-10 00:21 | main | About Vision 灞曞紑鏀惰捣 | Vision See More 鎸夐挳鏀逛负灞曞紑/鏀惰捣鍒囨崲锛屽睍寮€鐘舵€佹樉绀?`Collapse` / `鏀惰捣` |
+| 2026-05-10 00:28 | main | Footer 浜岀淮鐮佹浛鎹㈢敓鏁?| 鏂颁簩缁寸爜鍚屾鍒?public 鍜?OSS锛孎ooter 寮曠敤澧炲姞鐗堟湰鍙傛暟纭繚绾夸笂鍒锋柊 |
+| 2026-05-10 11:02 | main | Team Profile 鐢佃瘽灞曠ず | 鍥㈤槦涓汉璇︽儏 Hero 淇℃伅鍧楁柊澧炵數璇濋摼鎺ワ紝骞朵慨澶?Zoe Zhang 涓枃璇︽儏鏁版嵁涓殑鏈棴鍚堝瓧绗︿覆 |
+| 2026-05-10 11:03 | main | Zoe Zhang 鎵т笟缁忛獙鍒嗘 | `TeamProfilePage` 鏀寔鎸夋崲琛屾媶鍒嗘墽涓氱粡楠岋紝Zoe 涓枃鍐呭鎷嗕负涓ゆ |
+| 2026-05-10 11:07 | main | Footer 闅愮寮圭獥 | `SiteFooter` 鏂板 Disclaimer modal锛岀偣鍑婚〉鑴?Disclaimer and Privacy 灞曠ず鐢ㄦ埛鎸囧畾鏉℃鍐呭 |
+| 2026-05-10 11:10 | main | Footer 浜岀淮鐮佷笌澶囨閾炬帴淇 | Footer 浜岀淮鐮佷娇鐢?`QRcode.png?v=202605101115` 閬垮厤鏃х紦瀛橈紝鍏畨澶囨鍜?ICP 澶囨鍙锋敮鎸佺偣鍑昏烦杞?|
+| 2026-05-10 11:14 | main | 铏庤瘔鑽ｈ獕缂哄け鏉＄洰琛ラ綈 | 棣栭〉 Honors 涓?About Honors 琛ュ叆 202211銆?02304銆?0240515銆?0241129銆?02203 浜旀潯涓嫳鏂囪崳瑾夋暟鎹拰鍏紬鍙烽摼鎺?|
+| 2026-05-10 11:16 | main | Min Xu 鑻辨枃绠€浠嬫洿鏂?| `src/data/teamProfiles.ts` 涓?`EN/teamInfo.md` 鍚屾鏇存柊 Min Xu Social Engagements 鏂囨锛岄〉闈㈡暟鎹瀯寤洪€氳繃 |
+| 2026-05-10 11:26 | main | 鍥㈤槦鑻辨枃璇︽儏鎸夋簮鏂囨。鏍″噯 | Li Wan銆乑oe Zhang銆丮engcheng Yun銆乄eifan Qiu 鐨勮嫳鏂囪鎯呭瓧娈垫寜 `EN/teamInfo.md` 琛ュ叏骞堕€氳繃鏋勫缓 |
+| 2026-05-10 11:31 | main | 琛屼笟璇︽儏鑻辨枃鍐呭涓庨潰鍖呭睉淇 | `/industries/[slug]` 闈㈠寘灞戝洖鍒?`/industries`锛岃嫳鏂?Private Equity銆丷eal Estate銆丼ports and E-Sports銆丆yber Tech and Game 鍐呭鎸夋簮鏂囨。琛ラ綈 |
+| 2026-05-10 11:51 | main | 涓枃闅愮涓庢効鏅枃妗堣ˉ榻?| `SiteFooter` 闅愮寮圭獥鎸夎瑷€鏄剧ず涓枃鏉℃锛孉bout Vision See More 涓枃灞曞紑鍐呭鏇挎崲涓虹敤鎴锋寚瀹氫笁娈垫枃妗?|
+| 2026-05-10 11:53 | main | 铏庤瘔鍔ㄦ€佸垪琛ㄥ浘鐗囧畬鏁村睍绀?| `EventsPage` 灏忓崱鐗囧浘妗嗘敼涓?`16:9` + `object-contain`锛屼繚鐣欏乏涓婂亸绉诲苟閬垮厤鐪熷疄浜嬩欢鍥捐鍒?|
+| 2026-05-10 11:55 | main | 椤堕儴瀵艰埅涓嬪垝绾夸紭鍖?| `SiteHeader` 妗岄潰鍜岀Щ鍔?active 涓嬪垝绾跨敱 `1px` 鍔犵矖涓?`0.125rem`锛宧over 灞曞紑绾垮悓姝ュ姞绮?|
+| 2026-05-10 12:02 | main | 棣栭〉 Events 杞挱鏁版嵁鍚屾簮 | `HomePage` 閫氳繃 slug 璇诲彇 `src/data/events.ts`锛屾爣棰樸€佹憳瑕併€佹棩鏈熴€佸浘鐗囧拰璇︽儏璺宠浆涓?Events 椤甸潰淇濇寔涓€鑷?|
+| 2026-05-10 12:26 | main | Footer 浜岀淮鐮佺紦瀛樹笌灞曠ず淇 | `SiteFooter` 浜岀淮鐮?URL 鐗堟湰鏇存柊涓?`202605101205`锛宒ist 鍙戝竷鐩綍鍚屾褰撳墠 QR 鏂囦欢锛屽浘鐗囧睍绀烘敼涓?`object-contain` |
+| 2026-05-10 12:27 | main | Events 鍗＄墖鍥剧墖鑳屾櫙鑷€傚簲 | `EventsPage` 鍗＄墖鍥炬澧炲姞鍚屽浘妯＄硦 cover 鑳屾櫙锛岄《灞備繚鎸?contain 瀹屾暣灞曠ず鍥剧墖 |
+| 2026-05-10 12:28 | main | 瀹樼綉鏋勫缓鑼冨洿淇 | `tsconfig.json` 鎺掗櫎鏈撼鍏ュ綋鍓嶅畼缃戣繍琛岄摼璺殑 `cms` 鐩綍锛屾仮澶嶄富搴旂敤绫诲瀷妫€鏌ヨ寖鍥?|
+| 2026-05-10 12:29 | main | Events 鍥剧墖鑷€傚簲濉厖 | `EventsPage` 鍗＄墖鍥剧墖绉婚櫎棰濆鑳屾櫙灞傚拰閬僵锛屽崟鍥句娇鐢?`object-cover` 濉弧 `16:9` 鍥炬 |
+| 2026-05-10 16:16 | main | About 涓庡洟闃熻鎯?Hero 鍥剧墖鏇挎崲 | `AboutHero` 鎸囧悜 `/assets/about/about.png`锛沗TeamProfilePage` 鎸夋垚鍛?slug 浣跨敤 `/assets/team/1.png` 鑷?`/assets/team/6.png` 浣滀负鍏ㄥ睆棣栧睆鍥?|
+| 2026-05-10 15:23 | main | Team Profile Hero 楂樺害鏍″噯 | `TeamProfilePage` Hero 浠?`100svh` 璋冩暣涓?`45.9375rem`锛屽浘鐗囪窡闅忕埗瀹瑰櫒瀹介珮灞曠ず |
+| 2026-05-10 15:25 | main | Team Hero 涓庝釜浜轰俊鎭畾浣?| `TeamPage` Hero 鍥哄畾涓?`67.5rem`锛屽浘鐗囪窡闅忕埗瀹瑰櫒楂樺害锛沗TeamProfilePage` 淇℃伅鍧楁闈㈠乏璺濇寜 890px 鎹㈢畻涓?`55.625rem` |
+| 2026-05-10 15:27 | main | Team Profile Hero 钂欏眰绉婚櫎 | 鍒犻櫎涓汉璇︽儏 Hero 鐨勫乏鍙虫殫娓愬彉鍜屽簳閮ㄦ笎鍙樺眰锛岃棣栧睆浜虹墿鍥炬棤钂欏眰鏄剧ず |
+| 2026-05-10 15:43 | main | Event Detail 闈㈠寘灞戝洖棣栭〉 | `EventDetailPage` 闈㈠寘灞戠埗绾т娇鐢?`copy.nav.home`锛宖allback 杩斿洖棣栭〉锛屽尮閰嶉椤靛姩鎬佸崱鐗囪繘鍏ヨ鎯呯殑璺緞璇箟 |
+| 2026-05-10 15:44 | main | Industry Detail 闈㈠寘灞戝洖棣栭〉 | `IndustryDetailPage` 闈㈠寘灞戠埗绾т娇鐢?`copy.nav.home`锛宖allback 杩斿洖棣栭〉锛屽尮閰嶉椤佃涓氬崱鐗囪繘鍏ヨ鎯呯殑璺緞璇箟 |
+| 2026-05-10 15:50 | main | Footer 浜岀淮鐮侀€忔槑灞曠ず | `SiteFooter` 鍘绘帀浜岀淮鐮佸鍣ㄧ殑 `bg-white p-1`锛岄伩鍏嶉€忔槑 PNG 琚灞傜櫧搴曡鐩?|
+| 2026-05-10 15:55 | main | About Vision 涓?Culture 鍥炬爣鏍″噯 | `VisionCard` 宸︿笂瑁呴グ鏀逛负鎻忚竟绌哄績涓婂紩鍙峰苟涓庢爣棰橀琛屽榻愶紱`Culture` 鑳屾櫙灏?logo 鏀圭敤 `public/assets/about/bg.png` |
+| 2026-05-10 15:58 | main | About Vision 姝ｆ枃瀵归綈 | `VisionCard` 鏀逛负鏍囬鍖哄拰姝ｆ枃鍖哄叡浜袱鍒楃綉鏍硷紝鐧借壊鎻忚竟寮曞彿涓庨娈垫鏂囧悓鎺掞紱`Culture` 鑳屾櫙鍥惧搴︿粠 `26.25rem` 璋冧负 `15.75rem` |
+| 2026-05-10 16:00 | main | About Vision 寮曞彿寰皟 | `VisionCard` 姝ｆ枃鍒楃户缁笌鏍囬鍒楀叡鐢ㄨ竟璺濓紝寮曞彿鏀逛负姝ｆ枃鍒楀唴缁濆瀹氫綅骞堕潬杩戦琛屾枃瀛?|
+| 2026-05-10 16:04 | main | Vision 涓?Contact 鑳屾櫙璧勬簮瀵归綈 | `VisionCard` 浣跨敤 `/assets/about/Icon.svg` 浣滀负姝ｆ枃宸︿晶寮曞彿骞舵敹鎷负灞呬腑鍐呭瀹瑰櫒锛沗ContactPage` Contact us 宸︿晶鑳屾櫙鏀圭敤 `/assets/about/bg.png` |
+| 2026-05-10 16:08 | main | Vision 鍐呭杈圭晫涓庡浘鏍囧祵鍏?| `VisionCard` 鍘绘帀鏍囬鍜屾鏂囩殑鐙珛宸﹀垪锛屾爣棰樺尯鍜屾鏂囧尯鍏变韩 `max-w-[88rem]` 宸﹀彸杈圭晫锛岄娈垫鏂囧唴浣跨敤娴姩 `Icon.svg` |
+| 2026-05-10 16:11 | main | Vision 寮曞彿宓屽叆鏂瑰紡淇 | `VisionCard` 鏍囬琛屽拰姝ｆ枃鍖哄潎浣跨敤 `lg:pl-[7rem]`锛宍Icon.svg` 鏀逛负棣栨琛屽唴鍏冪礌锛岄伩鍏嶆暣娈垫枃瀛楀洿缁曞浘鐗?|
+| 2026-05-10 23:07 | main | Vision 棣栨鍥炬爣瀹氫綅 | `VisionCard` 灏?`Icon.svg` 浠庢枃鏈祦涓Щ鍑猴紝浣跨敤 `left-[-7.625rem] top-[-3.125rem]` 璐磋繎棣栨绗竴琛屽乏渚э紝姝ｆ枃鏂囨湰涓庢爣棰樹繚鎸佺粺涓€宸﹁竟鐣?|
+| 2026-05-10 23:08 | main | Vision 鍥炬爣鍗犱綅寰皟 | `VisionCard` 棣栨浣跨敤 `w-[2rem]` 琛屽唴鍗犱綅鍖呰９ `Icon.svg`锛屽浘鏍?`left-[-3.625rem]` 鍚戝乏浼稿嚭锛岄伩鍏嶅畬鏁村浘鏍囧搴︽尋鍘嬫鏂?|
+| 2026-05-10 23:10 | main | Vision 鍥炬爣瀹氫綅鐐逛慨姝?| `VisionCard` 棣栨 `Icon.svg` 浠?`left-[-3.625rem]` 鏀逛负 `left-0`锛屽畾浣嶅埌 `2rem` 琛屽唴鍗犱綅璧风偣 |
+| 2026-05-10 23:12 | main | Vision 鍐呭瀹藉害璋冩暣 | `VisionCard` 鍐呴儴鍐呭瀹瑰櫒鏀逛负 `max-w-[95rem]`锛屾斁瀹芥爣棰樹笌姝ｆ枃鎺掔増瀹藉害 |
+| 2026-05-10 23:13 | main | Vision 姝ｆ枃鍜屽浘鏍囧井璋?| `VisionCard` 姝ｆ枃鍖虹Щ闄?`lg:pl-[7rem]`锛沗Icon.svg` 瀹藉害鏀逛负 `16.875rem`锛屽乏鍋忕Щ鏀逛负 `-11.25rem` 浠ヤ繚鎸佸彸渚ч敋鐐?|
+| 2026-05-10 23:16 | main | Vision 棣栨鍥炬爣璐村悎 | `VisionCard` 棣栨 `Icon.svg` 鏀逛负璐磋繎姝ｆ枃绗竴琛屽乏渚э紝瀹藉害浠?`16.875rem` 缂╁皬鍒?`8.4375rem` |
+| 2026-05-11 22:49 | main | Events 涓?About 鏁版嵁浜や簰淇 | Events 瀵煎嚭鑼冨洿鎸?`EN/event.md` 杩囨护涓?28 鏉★紝涓枃鏃ユ湡鏄剧ず涓?`YYYY.MM.DD`锛汚bout Chronicle 琛ュ叆 2026 骞?3-5 鏈堜笁鏉¤褰曪紝Honors 骞翠唤鎸夐檷搴忓睍绀猴紱璇︽儏椤?Back 鍙仮澶嶈繘鍏ュ墠婊氬姩浣嶇疆 |
+| 2026-05-11 23:00 | main | About Chronicle 涓枃鏂囨鏍″噯 | About Chronicle 2026 骞翠笁鏈堛€佸洓鏈堛€佷簲鏈堜腑鏂囨鏂囨寜鐢ㄦ埛鎻愪緵鐗堟湰鏇挎崲锛岃ˉ鍏?CCAS銆佽锤浠蹭徊瑁佸憳鍚嶅唽鍜屼富瑕佽鍒ら鍩熻〃杩?|
+| 2026-05-11 23:21 | main | Events event2 鏂板浜嬩欢鎺ュ叆 | 浠?`EN/event2.md` / `Chinese/event2.md` 鐢熸垚 15 鏉′腑鑻变簨浠舵暟鎹紝澶嶅埗 event2 涓?eventinfo2 鍥剧墖鍒?public锛屽苟璁╀簨浠惰鎯呴〉鎸?`[IMAGE]` 鍗犱綅椤哄簭鎻掑叆璇︽儏鍥剧墖 |
+| 2026-05-11 23:28 | main | Events 鏃т簨浠惰鎯呭浘鎺ュ叆 | 浠?`src/assets/event/eventinfo` 鎸夋枃浠跺悕鏃堕棿椤哄簭涓烘棫 28 鏉′簨浠跺垎閰?22 寮犺鎯呭浘锛岃鎯呴〉鍚屾椂鏀寔鏁磋鍜岃鍐呭浘鐗囧崰浣嶇 |
+| 2026-05-11 23:33 | main | Footer 浜岀淮鐮佽祫婧愬悓姝?| 灏嗘柊鐗?`src/assets/foot/QRcode.png` 瑕嗙洊鍒?`public/assets/foot/QRcode.png`锛屽苟灏?Footer 寮曠敤鐗堟湰鍒锋柊鍒?`202605112333` |
+| 2026-05-11 23:36 | main | Event Detail 鐗堝紡璋冩暣 | `EventDetailPage` 鍒犻櫎鍙充晶浜嬩欢灏侀潰鍥惧鍣紝姝ｆ枃鍖哄煙鍗犳弧鍐呭鐖跺鍣紝璇︽儏鎻掑浘浣跨敤 `md:w-[70%]` 灞呬腑鏄剧ず |
+| 2026-05-11 23:41 | main | About Hero 鍥剧墖鍚屾 | `AboutHero` 鑳屾櫙璺緞鏀逛负 `/assets/about/hero.png`锛屽苟灏?`src/assets/about/hero.png` 瑕嗙洊鍙戝竷鍒?`public/assets/about/hero.png` |
+| 2026-05-11 23:45 | main | Clients Logo 婊氬姩閫熷害璋冩暣 | `.client-logo-track` 鍔ㄧ敾鏃堕暱浠?`135s` 缂╃煭鍒?`103.85s`锛屽疄鐜?1.3 鍊嶆粴鍔ㄩ€熷害 |
+| 2026-05-11 23:49 | main | About Honors 鏈堜唤鎺掑簭 | `Honors` 澧炲姞 `sortAwardsByDateDesc`锛屽湪骞翠唤闄嶅簭鍩虹涓婂姣忎釜骞翠唤鐨勫椤规寜 `date` 闄嶅簭鎺掑簭 |
+| 2026-05-12 00:52 | main | 鏍硅矾寰勬湇鍔″櫒閮ㄧ讲 | 浣跨敤鏍硅矾寰勬瀯寤虹殑 `dist/root-standalone.tgz` 鍙戝竷鍒?`/opt/daxuanweb-root/releases/20260512-0046`锛宍current` 鎸囧悜鏂?release锛屽叕缃?IP 楠岃瘉杩斿洖 200 |
+| 2026-05-12 01:18 | main | 鍩熷悕 HTTPS 鎺ュ叆 | `www.tigerpartners.cn` 鎸囧悜鏍硅矾寰?Next 鏈嶅姟锛孋ertbot 璇佷功绛惧彂骞跺惎鐢ㄨ嚜鍔ㄧ画鏈燂紱瑁稿煙閫氳繃闃块噷浜?URL 杞彂鍒?HTTPS www 鍩熷悕 |
+| 2026-05-12 01:40 | main | 鐙珛閮ㄧ讲鐩綍杩佺Щ | 鏀圭敤 `/opt/tigerpartners-web/releases/20260512-0136` 鍜?`tigerpartners-web.service` 鐙珛鎵胯浇铏庤瘔瀹樼綉锛孨ginx `www.tigerpartners.cn` 鍙嶄唬鍒?`127.0.0.1:3004`锛涚嚎涓?About Hero銆丗ooter 浜岀淮鐮併€侀偙浼熷竼鍥剧墖鍜?Events 鍥剧墖宸蹭笌鏈湴鍝堝笇涓€鑷?|
+| 2026-05-12 01:52 | main | OSS 鍏抽敭鍥剧墖鍚屾 | 瑕嗙洊 `husuweb/assets/about/hero.png`銆乣husuweb/assets/foot/QRcode.png` 鍜?`husuweb/assets/team/team6.webp`锛屼笅杞藉洖婧愭牎楠屽潎涓庢湰鍦?SHA256 涓€鑷?|
+| 2026-05-12 01:57 | main | OSS Events 鍥剧墖鍚屾 | 涓婁紶 `public/assets/event/event2` 鐨?15 寮犲垪琛ㄥ浘鍜?`public/assets/event/eventinfo2` 鐨?25 寮犺鎯呭浘鍒?OSS锛屽叏閮ㄤ笅杞藉洖婧愭牎楠岄€氳繃 |
+| 2026-05-12 02:01 | main | OSS Clients Logo 鍚屾 | 涓婁紶 `public/assets/home/clientLogo` 鐨?42 涓鎴?Logo 鍒?OSS锛沗client-logo-41.png` 鍜屼唬鐮佸疄闄呭紩鐢ㄧ殑 `client-logo-42.jpg` 杩斿洖 200锛屾寚瀹氬垹闄ょ殑 `client-logo-26.png` 杩斿洖 404 |
+| 2026-05-12 21:55 | main | 鍐呭涓庤祫婧愪慨姝?| Home metadata 杈撳嚭 `Home | Tiger Partners`锛汬ero 濯掍綋绉诲姩绔己鍒堕摵婊＄埗瀹瑰櫒锛汚bout Chronicle銆乀eam Profile 涓汉涓氱哗鍜?Core Value 鎸夋簮 md 琛ラ綈锛涙柊鐗?event2 鍥剧墖鍚屾鍒?public 鍜?OSS锛岀敓浜ф瀯寤洪€氳繃锛屽彂甯冨寘宸茬敓鎴愪絾杩滅▼閮ㄧ讲鏈墽琛?|
+| 2026-05-12 22:03 | main | Core Value 鑻辨枃鎺掔増浼樺寲 | 鑻辨枃姝ｆ枃浣跨敤宸﹀榻愩€佹甯歌瘝璺濆拰 1.55 琛岄珮锛屼腑鏂囨鏂囦繚鐣欎袱绔榻愬苟鏀剁揣鍒?1.65 |
+| 2026-05-12 22:07 | main | 鍏ㄧ珯绂佺敤娴忚鍣ㄧ缉鏀?| 鏍瑰竷灞€鎺ュ叆 locked viewport metadata 鍜?`ViewportZoomLock`锛屽叏灞€ CSS 澧炲姞 `touch-action: pan-x pan-y`锛屾嫤鎴父瑙佺Щ鍔ㄧ涓庢闈㈢缉鏀炬搷浣?|
+| 2026-05-12 22:18 | main | About 涓庡洟闃熷浘鐗囧悓姝?| 灏?`src/assets/about/hero.png`銆乣src/assets/team/team5.png`銆乣src/assets/team/5.png` 瑕嗙洊鍒?public锛汳engcheng Yun 鍥㈤槦鍗＄墖鏀圭敤 `/assets/team/team5.png` |
+| 2026-05-12 22:20 | main | Chronicle 鏂板浜嬩欢鏍″噯 | About Chronicle 2026 骞翠竴鏈堛€佷笁鏈堛€佸洓鏈堛€佷簲鏈堜腑鑻辨枃浜嬩欢鎸?`EN/CHRONICLE.md` 鍜?`Chinese/CHRONICLE.md` 鍚屾锛屼腑鏂囦簲鏈堣ˉ鍏呭浗闄呰锤鏄撱€佸叕鍙歌偂鏉冦€佸缓璁惧伐绋嬪拰鍥介檯鍟嗕簨浠茶棰嗗煙 |
+| 2026-05-12 22:30 | main | 鍒樼厹鏆勮崳瑾夎鏄庢牸寮?| 涓嫳鏂囪崳瑾夊拰璁ゅ彲棣栧彞鏀逛负鍐掑彿缁撳熬锛屽苟鍦ㄥ洟闃熶釜浜鸿鎯呴〉瀵瑰啋鍙风粨灏剧殑鑽ｈ獕寮曞鍙ュ彇娑堝渾鐐规爣璇?|
+| 2026-05-12 22:34 | main | Events 杩斿洖浣嶇疆淇 | Events 鍗＄墖杩涘叆璇︽儏鏃朵繚瀛?See More 灞曞紑鐘舵€侊紝杩斿洖鍒楄〃鏃跺厛鎭㈠瀹屾暣鍒楄〃鍐嶆墽琛屾粴鍔ㄤ綅缃仮澶?|
+| 2026-05-12 22:37 | main | 鏃т腑鏂囧叆鍙ｅ吋瀹?| `next.config.ts` 澧炲姞 `/zh` 鍒?`/`銆乣/zh/:path*` 鍒?`/:path*` 鐨勪复鏃?redirect锛屽吋瀹规棫绔欎腑鏂囪矾寰勫叆鍙?|
+| 2026-05-12 22:39 | main | 鏃ц嫳鏂囧叆鍙ｅ吋瀹?| `next.config.ts` 澧炲姞 `/en` 鍒?`/`銆乣/en/:path*` 鍒?`/:path*` 鐨勪复鏃?redirect锛屽吋瀹规棫绔欒嫳鏂囪矾寰勫拰 hash 鍏ュ彛 |
+| 2026-05-12 22:40 | main | Chronicle 涓€鏈堣褰曠‘璁?| 纭 About Chronicle 2026 骞翠竴鏈堚€滆檸璇夎崳鐧汇€婇挶浼柉澶т腑鍗庡尯鎸囧崡2026銆嬩簤璁В鍐筹紙涓祫寰嬪笀浜嬪姟鎵€锛夋鍗曘€傗€濊褰曚繚鐣欏湪涓枃鏃堕棿绾夸腑 |
+| 2026-05-12 23:12 | main | 铏庤瘔鍔ㄦ€佸崱鐗囧浘鐗囨瘮渚?| `EventsPage` 鍗＄墖椤堕儴鍥剧墖瀹瑰櫒鏀逛负 `aspect-[4/3]`锛屼繚鎸?`object-cover` 濉弧鍗＄墖鍥炬 |
+| 2026-05-12 23:24 | main | Events 璇︽儏瑙嗛鎺ュ叆 | `EventDetailPage` 鏀寔 `detailVideos` 娓叉煋鍘熺敓瑙嗛鎾斁鍣紝2025.06.17 鍜?2024.11.13 涓ゆ潯 event2 鍔ㄦ€佺粦瀹氭柊澧?mp4 |
+| 2026-05-12 23:30 | main | 绉诲姩绔?Hero 濯掍綋閾烘弧 | 椤甸潰绾?Hero 鍥剧墖鍜岄椤?Hero 瑙嗛缁熶竴澧炲姞 `block`銆乣min-w-full` 涓?`max-w-none`锛岀Щ鍔ㄧ瀹藉害濮嬬粓鍗犳弧鐖跺鍣?|
+| 2026-05-12 23:38 | main | Events 瑙嗛鍗犱綅绗︽帓搴?| 2025.06.17 鍜?2024.11.13 涓ゆ潯 event2 姝ｆ枃琛ュ洖椋炰功瑙嗛鍗犱綅绗︼紝璇︽儏椤垫寜姝ｆ枃鍗犱綅椤哄簭鎻掑叆瑙嗛 |
+| 2026-05-12 23:41 | main | event2Events 璇硶淇 | 鎵归噺琛ラ綈涓枃浜嬩欢鏁版嵁瀛楃涓查棴鍚堝紩鍙凤紝`tsc --noEmit` 瑙ｆ瀽閫氳繃 |
+| 2026-05-12 23:46 | main | event2 涓枃鏁版嵁淇 | `src/data/event2Events.ts` 鐨?15 鏉℃柊澧炰簨浠?`zh` 瀛楁鎸?`Chinese/event2.md` 閲嶆柊鐢熸垚锛屾爣棰樸€佸垎绫汇€佹憳瑕佸拰姝ｆ枃鎭㈠姝ｅ父涓枃 |
+| 2026-05-12 23:55 | main | 鎵嬫満绔?Hero 鍏ㄥ睆閾烘弧 | 椤甸潰绾?Hero 鍥剧墖鍜岄椤?Hero 瑙嗛鍦ㄦ墜鏈虹浣跨敤瑙嗗彛瀹藉害閾烘弧灞忓箷锛岄伩鍏嶇獎鍥惧彧鍗犵埗瀹瑰櫒灞€閮ㄥ搴?|
+| 2026-05-13 00:02 | main | 鎵嬫満绔?Hero 楂樺害璋冩暣 | 鎵嬫満绔?Hero 濯掍綋鍙栨秷寮哄埗 `height: 100%`锛屽彧淇濈暀瀹藉害 100%锛屾闈㈢浠嶆寜瀹瑰櫒楂樺害閾烘弧 |
+| 2026-05-13 00:09 | main | 鎵嬫満绔?Hero 鑼冨洿鏀舵暃 | 浠?Our Team 淇濈暀鎵嬫満绔搴﹁嚜閫傚簲 Hero 鍥撅紝鍏朵綑椤甸潰鎭㈠涓婁竴鐗堥摵婊℃柟寮忥紝骞朵负棣栧睆鏍囬澧炲姞绉诲姩绔瓧鍙?|
+| 2026-05-13 00:20 | main | 绉诲姩绔唴瀹规孩鍑轰慨澶?| 鏀剁揣 Home Honors銆丠ome Events銆丄bout Vision銆丄bout Honors 鍜?Our Team 棣栧睆绉诲姩绔瓧鍙枫€佹柇琛屻€佹帶鍒跺尯鎺掑垪涓庨棿璺?|
+| 2026-05-13 00:25 | main | About Chronicle 绉诲姩绔慨澶?| Chronicle 骞翠唤鎸夐挳鍙栨秷鎵嬫満绔礋浣嶇Щ锛屼簨浠跺崱鐗囧拰鏍囬璇存槑澧炲姞绉诲姩绔瓧鍙枫€佹柇琛屽拰瀹藉害绾︽潫 |
+| 2026-05-13 00:35 | main | 姝ｅ紡绔欏彂甯?| 褰撳墠宸ヤ綔鍖烘瀯寤哄寘鍙戝竷鍒?`www.tigerpartners.cn` 瀵瑰簲鐨?`20260513-0028` release锛屾湇鍔￠噸鍚拰鍏綉楠岃瘉瀹屾垚 |
+| 2026-05-13 00:39 | main | CIETAC Cup 鑻辨枃涔辩爜淇 | 2024.11.13 event2 浜嬩欢鑻辨枃鍐呭鎸?`EN/event2.md` 淇 `鈥淐IETAC Cup鈥漙 鍜?`year鈥檚` 绛変贡鐮佹枃鏈?|
+| 2026-05-13 00:46 | main | event2 鑻辨枃涔辩爜娓呯悊 | 灏?`event2Events.ts` 涓墿浣?mojibake 鏍囩偣鍏ㄩ儴鎸?`EN/event2.md` 鎭㈠涓?`鈥檂銆乣鈥溾€漙 鍜?`鈥揱 |
+| 2026-05-13 01:02 | main | 姝ｅ紡绔欓噸鏂板彂甯?| About 鍥剧墖鐩綍宸插悓姝ュ埌 OSS锛屽綋鍓嶅伐浣滃尯鍙戝竷鍒?`20260513-0058` release锛屾湇鍔￠噸鍚拰鍏綉楠岃瘉瀹屾垚 |
+| 2026-05-15 01:20 | main | 棣栭〉涓?About 鏂囨鎺掔増淇 | 棣栭〉 Vision/Event 鑻辨枃璇存槑鏀逛负鎸囧畾涓よ锛孉bout Honors/Chronicle 鑻辨枃璇存槑鏀逛负鎸囧畾鍒嗚锛孎ooter 鍜?Team 鏍囪鎸夋寚瀹氭枃妗堝睍绀?|
+| 2026-05-15 01:20 | main | OSS 鍥剧墖鏇挎崲鍚屾 | 鏈湴浜ゆ崲 event2 `1.jpg`/`2.jpg` 鍙婂吋瀹?PNG 鍚庝笂浼?OSS锛屽苟瑕嗙洊涓婁紶 Mengcheng Yun 鍥㈤槦鍗＄墖鍥惧拰涓汉璇︽儏鍥?|
+| 2026-05-15 01:24 | main | 姝ｅ紡绔欓噸鏂板彂甯?| 01:20 鐗堟湰宸插彂甯冨埌 `20260515-0122` release锛宍tigerpartners-web.service` 閲嶅惎鎴愬姛锛涙鍚?Zoe 涓汉椤典笟缁╀慨鏀规湭閮ㄧ讲 |
+| 2026-05-15 01:25 | main | Zoe 涓汉涓氱哗鏇存柊 | 浠?`EN/zoePerformance.md` 鍚屾 24 鏉′腑鑻辨枃 Performance & Achievements 鍒?`teamProfiles.ts`锛屾湰鍦?`tsc --noEmit` 閫氳繃 |
+| 2026-05-15 08:48 | main | Zoe 鏈嶅姟琛屼笟涓?Events 灞曠ず琛ラ綈 | Zoe Zhang 鏈嶅姟琛屼笟鏇存柊涓哄浗闄呰锤鏄撱€佸叕鍙歌偂鏉冦€佸缓璁惧伐绋嬨€侀噾铻嶃€佸浗闄呭晢浜嬩徊瑁侊紱Events 椤甸潰鎭㈠灞曠ず `20210720` 鍜?`20200927` 涓ゆ潯宸叉湁浜嬩欢 |
+| 2026-05-15 08:52 | main | Events 鏃т簨浠惰鎯呭浘琛ラ綈 | `eventInfoImagesByDate` 涓?`20210414` 鍜?`20210315` 澧炲姞鍥剧墖鏄犲皠锛岃鎯呴〉鍙寜 `[鍥剧墖]` 鍗犱綅娓叉煋瀵瑰簲鍥剧墖 |
+| 2026-05-15 08:56 | main | 鍥㈤槦涓汉椤电Щ鍔ㄧ Hero 璋冩暣 | 鎵嬫満绔釜浜鸿鎯呴〉浣跨敤杩涘叆鍓嶅搴旂殑 `team1.png` 鑷?`team6.png` 鍥㈤槦鍗＄墖鍥撅紝淇℃伅鍖哄湪涓娿€佸浘鐗囧湪涓嬶紝閬垮厤 Hero 鍐呭閲嶅彔 |
+| 2026-05-15 09:01 | main | Events 鑻辨枃鍐呭涓庢彃鍥捐ˉ榻?| `20210720` 鍜?`20200927` 鑻辨枃鍐呭鍚屾 `EN/event.md`锛屽苟灏?`20210720` 涓夊紶鏂板璇︽儏鍥惧悓姝ュ埌 `public/assets/event/eventinfo` 鍚庢寜鍗犱綅绗﹂『搴忔覆鏌?|
+| 2026-05-15 09:08 | main | Events 鏃т簨浠惰鎯呭浘鍛藉悕鏍″噯 | `eventInfoImagesByDate` 鏀逛负寮曠敤 `20210414-1.jpg`銆乣20210720-1.jpg`銆乣20210720-2.jpg`銆乣20210720-3.jpg`锛屽苟鍚屾鍒?`public`锛沗20210315` 鏆備互褰撳墠瀛樺湪鐨勪袱寮?20210315 鍥剧墖娓叉煋 |
+| 2026-05-15 09:22 | main | Events 鏂颁簨浠舵帓搴忔牎鍑?| `src/data/events.ts` 瀵?`event2Events` 鎸夊垪琛ㄥ浘鏂囦欢鍚嶄腑鐨勬暟瀛楀仛绋冲畾鎺掑簭锛孍vents 椤垫柊澧?15 鏉′簨浠舵寜 `event2` 鐩綍鍥剧墖鍛藉悕椤哄簭灞曠ず |
+| 2026-05-15 09:29 | main | 琛屼笟鍥剧墖涓?Honors 璇存槑淇 | Cyber Tech and Game 鑳屾櫙鍥剧粺涓€鍒囧埌 `INDUSTRIES6.png` 骞跺悓姝?`public`锛汬ome/About Honors 鑻辨枃鍓爣棰樻寜鎸囧畾涓夎灞曠ず |
+| 2026-05-15 09:41 | main | Events 鏃т簨浠朵笅绾?| `20200902` 宸蹭粠 `eventDatesFromEnglishSource` 绉婚櫎锛屼笉鍐嶈繘鍏?Events 椤甸潰鏁版嵁锛涗繚鐣?`allEvents` 涓師濮嬩簨浠跺璞′互渚垮悗缁仮澶?|
