@@ -2,13 +2,16 @@
 
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { useState } from "react";
+import { usePublicCms } from "@/cms/PublicCmsProvider";
+import { getPreviewPageField } from "@/cms/preview-page-content";
+import type { OfficialCmsChronicleYear } from "@/cms/official-state";
 import { pick, useLanguage } from "@/i18n/LanguageProvider";
 import { copy } from "@/i18n/copy";
 
-type ChronicleEvent = { month: string; side: "left" | "right"; text: string };
-type YearGroup = { year: string; events: ChronicleEvent[] };
+export type ChronicleEvent = { month: string; side: "left" | "right"; text: string };
+export type YearGroup = { year: string; events: ChronicleEvent[] };
 
-const groups: YearGroup[] = [
+export const chronicleGroups: YearGroup[] = [
   {
     "year": "2026",
     "events": [
@@ -256,7 +259,7 @@ const groups: YearGroup[] = [
   }
 ];
 
-const zhGroups: YearGroup[] = [
+export const zhChronicleGroups: YearGroup[] = [
   {
     "year": "2026",
     "events": [
@@ -583,20 +586,63 @@ function ChronicleYear({ group, open, onToggle }: { group: YearGroup; open: bool
   );
 }
 
+function applyManagedYears(items: YearGroup[], years?: string[]) {
+  if (!years?.length) return items;
+
+  const byYear = new Map(items.map((item) => [item.year, item]));
+  const ordered = years.map((year) => byYear.get(year)).filter((item): item is YearGroup => Boolean(item));
+  const orderedYears = new Set(ordered.map((item) => item.year));
+  const missing = items.filter((item) => !orderedYears.has(item.year));
+  return ordered.length ? [...ordered, ...missing] : items;
+}
+
+function localizeCmsChronicle(items: OfficialCmsChronicleYear[] | undefined, language: "en" | "zh"): YearGroup[] | null {
+  if (items === undefined) return null;
+
+  return items.map((item) => ({
+    year: item.year,
+    events: item.events.map((event) => ({
+      month: event.month[language],
+      text: event.text[language],
+      side: event.side,
+    })),
+  }));
+}
+
+function mergeChronicleWithFallback(cmsItems: YearGroup[] | null, fallbackItems: YearGroup[]) {
+  if (cmsItems === null) return fallbackItems;
+
+  return cmsItems;
+}
+
 export function Chronicle() {
   const [openYear, setOpenYear] = useState("2026");
   const [showAll, setShowAll] = useState(false);
   const { language } = useLanguage();
-  const displayGroups = language === "zh" ? zhGroups : groups;
+  const cms = usePublicCms();
+  const cmsGroups = localizeCmsChronicle(cms?.content?.chronicle, language);
+  const fallbackGroups = language === "zh" ? zhChronicleGroups : chronicleGroups;
+  const displayGroups = applyManagedYears(mergeChronicleWithFallback(cmsGroups, fallbackGroups), cms?.lists?.chronicleYears);
   const visibleGroups = showAll ? displayGroups : displayGroups.slice(0, 3);
-  const subtitle = pick(language, copy.about.chronicleSubtitle);
-  const subtitleLines = Array.isArray(subtitle) ? subtitle : [subtitle];
+  const defaultSubtitle = pick(language, copy.about.chronicleSubtitle);
+  const subtitle = getPreviewPageField(
+    cms,
+    language,
+    "about",
+    "chronicle",
+    "subtitle",
+    typeof defaultSubtitle === "string" ? defaultSubtitle : defaultSubtitle.join("\n"),
+  );
+  const subtitleLines = subtitle.split(/\r?\n/).filter(Boolean);
+  const chronicleTitle = getPreviewPageField(cms, language, "about", "chronicle", "title", pick(language, copy.about.chronicleTitle));
+  const seeMoreLabel = getPreviewPageField(cms, language, "about", "chronicle", "seeMoreLabel", pick(language, copy.common.seeMore));
+  const collapseLabel = getPreviewPageField(cms, language, "about", "chronicle", "collapseLabel", pick(language, copy.common.collapse));
 
   return (
     <section className="site-shell mt-32 pb-24">
       <div className="mb-12 flex flex-col justify-between gap-6 border-b-2 border-[#736654] pb-8 lg:flex-row lg:items-end">
         <h2 className="max-w-full break-words text-[3rem] font-medium leading-none tracking-[0.02em] text-[#d9b27a] md:text-[5rem]">
-          {pick(language, copy.about.chronicleTitle)}
+          {chronicleTitle}
         </h2>
         <p className="max-w-full break-words text-[1.1rem] font-light leading-relaxed text-white md:max-w-[30rem] md:text-[1.75rem] lg:text-right">
           {subtitleLines.map((line) => (
@@ -628,7 +674,7 @@ export function Chronicle() {
           className="group relative inline-flex max-w-full items-center gap-3 border border-[#D9B27A] bg-[#D9B27A] px-7 py-4 text-[1rem] font-medium uppercase tracking-[0.06em] text-white transition-all duration-500 hover:bg-transparent md:gap-4 md:px-9 md:text-[1.125rem] md:tracking-[0.08em]"
           aria-expanded={showAll}
         >
-          {showAll ? pick(language, copy.common.collapse) : pick(language, copy.common.seeMore)}
+          {showAll ? collapseLabel : seeMoreLabel}
           <ArrowRight className="size-4 transition-transform duration-500 group-hover:translate-x-2" strokeWidth={1.5} />
         </button>
       </div>

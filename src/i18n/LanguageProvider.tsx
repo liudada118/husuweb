@@ -17,10 +17,29 @@ function applyDocumentLanguage(language: Language) {
   document.documentElement.lang = language === "zh" ? "zh-CN" : "en";
 }
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = useState<Language>("en");
+export function LanguageProvider({
+  children,
+  initialLanguage,
+  persist = true,
+}: {
+  children: React.ReactNode;
+  initialLanguage?: Language;
+  persist?: boolean;
+}) {
+  const [language, setLanguageState] = useState<Language>(initialLanguage ?? "en");
 
   useEffect(() => {
+    if (initialLanguage) {
+      setLanguageState(initialLanguage);
+      applyDocumentLanguage(initialLanguage);
+      return;
+    }
+
+    if (!persist) {
+      applyDocumentLanguage(language);
+      return;
+    }
+
     const savedLanguage = window.localStorage.getItem("tiger-language");
     if (savedLanguage === "en" || savedLanguage === "zh") {
       setLanguageState(savedLanguage);
@@ -29,13 +48,15 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     }
 
     applyDocumentLanguage("en");
-  }, []);
+  }, [initialLanguage, language, persist]);
 
   const value = useMemo<LanguageContextValue>(() => {
     const setLanguage = (nextLanguage: Language) => {
       setLanguageState(nextLanguage);
       applyDocumentLanguage(nextLanguage);
-      window.localStorage.setItem("tiger-language", nextLanguage);
+      if (persist) {
+        window.localStorage.setItem("tiger-language", nextLanguage);
+      }
     };
 
     return {

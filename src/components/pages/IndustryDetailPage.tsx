@@ -3,8 +3,10 @@
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { BackToTop } from "@/components/shared/BackToTop";
+import { getPreviewPageItemField, getPreviewPageSectionItems } from "@/cms/preview-page-content";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
 import { SubpageBreadcrumb } from "@/components/shared/SubpageBreadcrumb";
+import { usePublicCms } from "@/cms/PublicCmsProvider";
 import { pick, useLanguage } from "@/i18n/LanguageProvider";
 import { copy } from "@/i18n/copy";
 import { useSearchParams } from "next/navigation";
@@ -221,7 +223,7 @@ export const industries = {
   },
 } as const;
 
-const zhIndustries = {
+export const zhIndustries = {
   "private-equity": {
     title: "私募股权",
     intro:
@@ -408,6 +410,35 @@ export type IndustrySlug = keyof typeof industries;
 
 const defaultIndustry = industries["private-equity"];
 
+type IndustryDetailSection = {
+  title: string;
+  items?: string[];
+};
+
+const detailSectionInstructionStarts = ["Separate cards with blank lines.", "每个卡片用空行分隔。"];
+
+function parseDetailSections(value: string): IndustryDetailSection[] {
+  const trimmed = value.trim();
+
+  if (!trimmed || detailSectionInstructionStarts.some((text) => trimmed.startsWith(text))) {
+    return [];
+  }
+
+  return trimmed
+    .split(/\n\s*\n/)
+    .map((block) =>
+      block
+        .split(/\r?\n/)
+        .map((line) => line.trim())
+        .filter(Boolean),
+    )
+    .filter((lines) => lines.length > 0)
+    .map(([title, ...items]) => ({
+      title,
+      ...(items.length ? { items: items.map((item) => item.replace(/^[-*]\s*/, "")) } : {}),
+    }));
+}
+
 function Bullet({ children }: { children: React.ReactNode }) {
   return (
     <li className="flex gap-4 text-[clamp(1rem,1.15vw,1.25rem)] font-light leading-[1.6] tracking-[0.02em] text-[#99a1af]">
@@ -427,10 +458,37 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
 
 export function IndustryDetailPage({ slug }: { slug: string }) {
   const { language } = useLanguage();
+  const cms = usePublicCms();
   const searchParams = useSearchParams();
   const industry = industries[slug as IndustrySlug] ?? defaultIndustry;
   const zhIndustry = zhIndustries[slug as IndustrySlug] ?? zhIndustries["private-equity"];
   const displayIndustry = language === "zh" ? { ...industry, ...zhIndustry } : industry;
+  const cmsIndustry = cms?.lists?.industries?.find((item) => item.slug === slug);
+  const fallbackLanguage = language === "zh" ? "en" : "zh";
+  const detailPageItems = getPreviewPageSectionItems(cms, language, "media", "detailPages");
+  const fallbackDetailPageItems = getPreviewPageSectionItems(cms, fallbackLanguage, "media", "detailPages");
+  const detailItem = detailPageItems.find((item) => getPreviewPageItemField(item, "slug", item.id) === slug);
+  const fallbackDetailItem = fallbackDetailPageItems.find((item) => getPreviewPageItemField(item, "slug", item.id) === slug);
+  const detailTitle = getPreviewPageItemField(detailItem, "title", "");
+  const detailImage = getPreviewPageItemField(
+    detailItem,
+    "image",
+    getPreviewPageItemField(fallbackDetailItem, "image", ""),
+  );
+  const detailIntro = getPreviewPageItemField(detailItem, "intro", "");
+  const detailSections = parseDetailSections(getPreviewPageItemField(detailItem, "sections", ""));
+  const fallbackDetailSections = parseDetailSections(getPreviewPageItemField(fallbackDetailItem, "sections", ""));
+  const cmsDisplayIndustry = {
+    ...displayIndustry,
+    title:
+      detailTitle ||
+      (language === "zh" ? cmsIndustry?.zhName || displayIndustry.title : cmsIndustry?.name || displayIndustry.title),
+    image: detailImage || cmsIndustry?.img || displayIndustry.image,
+    intro:
+      detailIntro ||
+      (language === "zh" ? cmsIndustry?.zhIntro || displayIndustry.intro : cmsIndustry?.intro || displayIndustry.intro),
+    sections: detailSections.length ? detailSections : fallbackDetailSections.length ? fallbackDetailSections : displayIndustry.sections,
+  };
   const fromHome = searchParams.get("from") === "home";
   const parentLabel = fromHome ? pick(language, copy.nav.home) : pick(language, copy.nav.industries);
   const fallbackHref = fromHome ? "/" : "/industries";
@@ -442,7 +500,7 @@ export function IndustryDetailPage({ slug }: { slug: string }) {
       <section className="relative w-full overflow-hidden">
         <div className="absolute inset-0">
           <ImageWithFallback
-            src={displayIndustry.image}
+            src={cmsDisplayIndustry.image}
             alt=""
             loading="eager"
             fetchPriority="high"
@@ -465,7 +523,7 @@ export function IndustryDetailPage({ slug }: { slug: string }) {
           <div className="mb-28">
             <SubpageBreadcrumb
               parentLabel={parentLabel}
-              currentLabel={displayIndustry.title}
+              currentLabel={cmsDisplayIndustry.title}
               fallbackHref={fallbackHref}
             />
           </div>
@@ -474,11 +532,11 @@ export function IndustryDetailPage({ slug }: { slug: string }) {
             <div className="shrink-0 lg:w-[26rem]">
               <div className="mb-8 h-[3px] w-20 bg-[#d9b27a]" />
               <h1 className="text-[clamp(2.5rem,3.6vw,3.25rem)] font-semibold leading-[1.1] tracking-[-0.01em] text-[#d9b27a]">
-                {displayIndustry.title}
+                {cmsDisplayIndustry.title}
               </h1>
             </div>
             <p className="max-w-[60rem] flex-1 text-justify text-[clamp(1rem,1.25vw,1.25rem)] leading-[1.8] tracking-[0.02em] text-[#d1d5dc]">
-              {displayIndustry.intro}
+              {cmsDisplayIndustry.intro}
             </p>
           </div>
         </div>
@@ -487,7 +545,7 @@ export function IndustryDetailPage({ slug }: { slug: string }) {
       <section className="relative bg-[#171717]">
         <div className="site-shell">
           <div className="flex max-w-[70rem] flex-col gap-6 pb-32 lg:ml-[26rem] xl:ml-[28rem]">
-            {displayIndustry.sections.map((section) => (
+            {cmsDisplayIndustry.sections.map((section) => (
               <Card key={section.title}>
                 <SectionHeading>{section.title}</SectionHeading>
                 {"items" in section && section.items ? (
