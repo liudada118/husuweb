@@ -41,7 +41,7 @@ const detailLabels = {
   languageSkills: { en: "Language Skills", zh: "工作语言" },
   educationalBackground: { en: "Educational Background", zh: "教育背景" },
   socialEngagements: { en: "Social Engagements", zh: "社会任职" },
-  experienceCapabilities: { en: "Experience& capabilities", zh: "经验与能力" },
+  experienceCapabilities: { en: "Experience & capabilities", zh: "经验与能力" },
   practiceArea: { en: "Practice Area", zh: "专业领域" },
   practiceExperience: { en: "Practice Experience", zh: "执业经验" },
   honors: { en: "Honors", zh: "荣誉和认可" },

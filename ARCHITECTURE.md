@@ -1,6 +1,6 @@
 ﻿# Husuweb Official Site Architecture
 
-最后更新于：2026-05-15 22:33
+最后更新于：2026-05-18 22:11
 
 ## 项目概述
 
@@ -408,13 +408,13 @@ Core Value 页面基于 `core value/` 原型重建，仍归属 About 路由层�
 团队个人详情页基于 `个人介绍详情/` 原型重建：
 
 - 页面入口为 `src/app/team/[slug]/page.tsx`，`src/app/team/yuxuan-liu/page.tsx` 保留 Yuxuan Liu 的兼容静态入口，展示组件为 `src/components/pages/TeamProfilePage.tsx`；
-- 团队列表和个人详情共用 `src/data/teamProfiles.ts`，包含 Yuxuan Liu、Min Xu、Li Wan、Zoe Zhang、Mengcheng Yun、Weifan Qiu 的 slug、姓名、职位、图片、邮箱、服务行业、教育背景、执业资格、语言、社会职务、执业领域、执业经历、荣誉和业绩；Performance & Achievements 按 `EN/teamInfo.md` 的英文个人业绩条目整理，避免使用截断或占位内容；英文状态下 Li Wan 的 Social Engagements / Practice Area、Zoe Zhang 的 Educational Background / Social Engagements / Practice Area / Work Experience / Awards and Recognition、Mengcheng Yun 的 Practice Area / Practice Experience、Weifan Qiu 的 Practice Area / Performance & Achievements 均按 `EN/teamInfo.md` 对齐；中文状态使用 `Chinese/teamInfo.md` 中的 `zh` 详情对象切换姓名、职位、服务行业、教育背景、专业资格、工作语言、社会任职、专业领域、执业经验、荣誉和个人业绩；荣誉条目中以中英文冒号结尾的引导说明按普通段落渲染，不显示列表圆点；教育背景按英文分号 `;` 或中文分号 `；` 拆分为多段展示，执业经验按换行拆分为多段展示，Zoe Zhang / 张莉的教育背景固定拆为四段、中文执业经验固定拆为两段；Social Engagements 仅在存在非空内容时渲染，Mengcheng Yun / 云梦成不展示该区块；
+- 团队列表和个人详情共用 `src/data/teamProfiles.ts`，包含 Yuxuan Liu、Min Xu、Li Wan、Zoe Zhang、Mengcheng Yun、Weifan Qiu 的 slug、姓名、职位、图片、邮箱、服务行业、教育背景、执业资格、语言、社会职务、执业领域、执业经历、荣誉和业绩；Performance & Achievements 按 `EN/teamInfo.md` 的英文个人业绩条目整理，避免使用截断或占位内容；Zoe Zhang / 张莉的服务行业、Social Engagements、Practice Area、Practice Experience、Honors 采用指定中英文文案，个人业绩按 `EN/zoePerformance.md` 的 24 条中英文条目同步；英文状态下 Li Wan 的 Social Engagements / Practice Area、Mengcheng Yun 的 Practice Area / Practice Experience、Weifan Qiu 的 Practice Area / Performance & Achievements 均按 `EN/teamInfo.md` 对齐；中文状态使用 `Chinese/teamInfo.md` 中的 `zh` 详情对象切换姓名、职位、服务行业、教育背景、专业资格、工作语言、社会任职、专业领域、执业经验、荣誉和个人业绩；荣誉条目中以中英文冒号结尾的引导说明按普通段落渲染，不显示列表圆点；教育背景按英文分号 `;` 或中文分号 `；` 拆分为多段展示，执业经验按换行拆分为多段展示，Zoe Zhang / 张莉的教育背景固定拆为四段；Social Engagements 仅在存在非空内容时渲染，Mengcheng Yun / 云梦成不展示该区块；
 - 复用全站 `SiteHeader` 与 `SiteFooter`，顶部导航 active 保持 OUR TEAM；
 - Hero 高度按 735px 换算为 `45.9375rem`，使用左上 `#919191` 到右下 `#5a5a5a` 对角线渐变，左侧人物图片使用当前 slug 对应的 `/assets/team/1.png` 到 `/assets/team/6.png` 并与 title logo 内容线对齐，右侧显示当前成员姓名、职位、下划线、带 Phone icon 的电话入口和带 Mail icon 的邮箱入口；姓名按 100px 换算为 `6.25rem` semibold，职位按 40px 换算为 `2.5rem` light；
 - Hero 下方保留统一 `SubpageBreadcrumb`，显示 Our Team / 当前成员姓名，字号为 `1.5rem`，分隔符为 `/`，父级和当前项点击均返回上一页或回退到 `/team`；
 - 信息介绍及后续内容左右边距统一为 128px，对应 `8rem`；
 - 信息介绍屏背景为 `#333231` 到 `#433e38` 的纵向渐变，包含 Service Industries、Professional Qualification、Educational Background、Language Skills，并在成员存在内容时追加 Social Engagements；Language Skills 与 Professional Qualification 放在同一列，Social Engagements 存在时单独占一整行；Service Industries 标题为 `2rem` semibold，列表为 `1.5rem` light；
-- 第二屏背景为 `#171717`，展示 Experience& capabilities；左侧为 Practice Area 与 Practice Experience，右侧仅在成员存在真实 Honors 数据时展示 Honors 和竖向分隔线；Mengcheng Yun、Weifan Qiu 等无 Honors 条目的成员不渲染该区块；
+- 第二屏背景为 `#171717`，展示 Experience & capabilities；左侧为 Practice Area 与 Practice Experience，右侧仅在成员存在真实 Honors 数据时展示 Honors 和竖向分隔线；Mengcheng Yun、Weifan Qiu 等无 Honors 条目的成员不渲染该区块；
 - 第三屏背景为 `#262626`，展示 Performance & Achievements、六张默认业绩卡片；View More 按钮位于默认卡片下方，样式对齐 About 的 See More，并使用 `useState`、`grid-rows` 和 opacity 过渡实现与 About Honors 卡片一致的展开/收起动画；页面右下角使用 `BackToTop` 提供中英文返回入口。
 
 页面需要的个人简介图片已复制到 `public/assets/prototypes/team-profile/*`。
@@ -559,7 +559,7 @@ Join Us、候选人卡片和简历邮箱区域包裹在同一个相对容器内�
 - 裸域 `tigerpartners.cn` 当前仍由阿里云 URL 转发入口解析到 `203.107.45.167`，并 302 跳转到 `https://www.tigerpartners.cn`；
 - 构建前设置：`NEXT_SNAPSHOT_BASE_PATH=`、`NEXT_PUBLIC_ASSET_BASE_URL=`、`NEXT_TELEMETRY_DISABLED=1`；
 - 本地发布包：`dist/tigerpartners-root-latest.tgz`；
-- 服务器目录：`/opt/tigerpartners-web/current` 指向 `/opt/tigerpartners-web/releases/20260515-0122`；
+- 服务器目录：`/opt/tigerpartners-web/current` 指向 `/opt/tigerpartners-web/releases/20260518-2158`；
 - systemd 服务：`tigerpartners-web.service`；
 - 应用监听：`127.0.0.1:3004`；
 - Nginx 入口：`server_name www.tigerpartners.cn`，80/443 监听，`location /` 反向代理到 `http://127.0.0.1:3004`；
@@ -585,10 +585,14 @@ Join Us、候选人卡片和简历邮箱区域包裹在同一个相对容器内�
 
 2026-05-15 已执行根路径构建与发布，生成 `dist/tigerpartners-root-latest.tgz`，上传到 `39.106.226.65:/opt/tigerpartners-web/tigerpartners-root-20260515-0122.tgz`，解压到 `/opt/tigerpartners-web/releases/20260515-0122`，切换 `current` 后重启 `tigerpartners-web.service`。服务器本机 `http://127.0.0.1:3004/` 返回 `200 OK`。随后新增的 Zoe Zhang 个人页 Performance & Achievements 数据修正仅保留在本地工作区，尚未部署。
 
+2026-05-18 已执行根路径构建与发布，生成 `dist/tigerpartners-root-latest.tgz`，上传到 `39.106.226.65:/opt/tigerpartners-web/tigerpartners-root-20260518-2158.tgz`，解压到 `/opt/tigerpartners-web/releases/20260518-2158`，切换 `current` 后重启 `tigerpartners-web.service`。服务器本机 `http://127.0.0.1:3004/` 与 `/team/zoe-zhang` 返回 `200 OK`；公网验证 `https://www.tigerpartners.cn/`、`/team`、`/team/zoe-zhang`、`/events` 均返回 `200 OK`，Zoe 页面中英文关键文案均已匹配。
+
 ## 更新日志
 
 | 时间 | 分支 | 变更类型 | 描述 |
 | :--- | :--- | :--- | :--- |
+| 2026-05-18 22:11 | main1 | 部署发布 | 将张莉个人简历页文案更新构建发布到正式站根路径；服务器版本目录为 `/opt/tigerpartners-web/releases/20260518-2158`，公网验证通过 |
+| 2026-05-18 21:36 | main1 | 文案更新 | 张莉个人简历页服务行业、社会任职、专业领域、执业经验、荣誉和个人业绩按指定中英文文案更新；生产构建通过，未部署 |
 | 2026-05-15 22:33 | main | 部署发布 | 将 `/client` 首页重定向与首页 SEO 标题优化发布到生产环境；服务器版本目录为 `/opt/tigerpartners-web/releases/20260515-2230`，验证 `/client` 返回 307 到 `/`，首页 title/og:title 为 `虎诉律师事务所 | Tiger Partners`，`WE KNOW HOW TO WIN` 不再作为 `h1` |
 | 2026-05-15 22:25 | main | SEO 与路由调整 | 首页 metadata title 改为 `虎诉律师事务所 | Tiger Partners`，首屏视觉口号 `WE KNOW HOW TO WIN` 从语义 `h1` 改为纯视觉文本，新增隐藏语义标题 `虎诉律师事务所 Tiger Partners`；`/client` 已配置重定向到首页；生产构建通过，未部署 |
 | 2026-05-15 22:15 | main | UI 调整 | 万力个人页最后三条业绩布局保持固定 `gap-6` 间距，改由第 23 条卡片拉伸吸收额外高度，实现左上/右上与左下/右下同时对齐；清理 `.next` 后生产构建通过，未部署 |
@@ -877,6 +881,8 @@ Join Us、候选人卡片和简历邮箱区域包裹在同一个相对容器内�
 
 | 时间 | 分支 | 完成的功能 / 工作 | 说明 |
 | :--- | :--- | :--- | :--- |
+| 2026-05-18 22:11 | main1 | 张莉个人简历正式站发布 | 当前正式站 `current` 已切到 `/opt/tigerpartners-web/releases/20260518-2158`，Zoe 页面中英文文案在线验证通过 |
+| 2026-05-18 21:36 | main1 | 张莉个人简历文案更新 | Zoe Zhang / 张莉个人页详情字段更新为指定中英文内容，Performance & Achievements 从 `EN/zoePerformance.md` 同步为 24 条 |
 | 2026-05-15 22:33 | main | SEO 与 `/client` 生产发布 | 当前线上版本 `/opt/tigerpartners-web/releases/20260515-2230` 已启用中文首页标题、隐藏语义 h1 和 `/client` 到首页的兼容跳转 |
 | 2026-05-15 22:25 | main | 首页搜索标题优化 | 首页显式提供中文 SEO 标题和语义标题，降低搜索结果继续采用 `WE KNOW HOW TO WIN` 作为标题的概率；同时补齐 `/client` 兼容重定向 |
 | 2026-05-15 22:15 | main | 万力尾部业绩上下对齐 | `TeamProfilePage` 中万力尾部左列改为 `1fr/auto` 行布局，固定卡片间距并让第 23 条承担高度补偿 |

@@ -272,14 +272,14 @@ Partner
 邮箱号码
 zoelizhang@tigerpartners.cn
 服务行业
-International Trade,Private Equity,Finance
+Foreign-related and Cross-border Dispute Resolution (Litigation and Arbitration), International Arbitration, Private Equity Investment, International Trade, Construction, Equity Transfer, Intellectual Properties, Finance, Biological Medicine etc
 Educational Background
 
 Bachelor of Laws & Bachelor of English (Double Degree), Beijing Foreign Studies University , 2007
 
 Master of Laws, Beijing Foreign Studies University , 2010 
 
-2018 Bar Council Training Scheme
+2018 UK Bar Council Training Scheme
 
 2025 HKIAC Advanced Arbitrator Training Programme
 Professional Qualification
@@ -288,24 +288,23 @@ Languages Skills
 Mandarin  
 English
 Social Engagements
-Zoe is an arbitrator of the China International Economic and Trade Arbitration Commission, a member of the Organizing Committee of the China Young Arbitration Group, a member of the Commercial Arbitration Law Professional Committee of the Beijing Lawyers Association, a member of the Arbitration and Mediation Research Committee of the Beijing Chaoyang District Lawyers Association, and a panelist on the Arbitrators & Neutrals Panel of the eBRAM International Online Dispute Resolution Centre.
+Zoe is an arbitrator of the China International Economic and Trade Arbitration Commission (CIETAC), a member of the Panel of Arbitrators of the eBRAM International Online Dispute Resolution Centre，a member of the Panel of Neutrals of eBRAM APEC Online Dispute Resolution Platform, a member of the Commercial Arbitration Law Professional Committee of the Beijing Lawyers Association, a member of the Arbitration and Mediation Research Committee of the Beijing Chaoyang District Lawyers Association, and a member of the Organizing Committee of the China Young Arbitration Group.
 
 成员简介
 Practice Area
 
-Zoe Zhang specializes in commercial arbitration and litigation, and especially foreign related arbitration and international arbitration. The major sectors of her practice involve sale of goods, private equity, construction, real estate, joint venture, equity transfer, intellectual properties, energy etc.
+Zoe Zhang specializes in commercial arbitration and litigation, and especially foreign-related and cross-border dispute resolution. The major sectors of her practice involve private equity investment, international sales of goods, construction, real estate, equity transfer, joint venture, intellectual properties, finance, biological medicine, energy etc. Zoe is able to handle cases proficiently in both Chinese and English, and her professional competence has been fully recognized by clients. Her clients mainly include multinational companies, private equity funds, foreign-invested enterprises, large state-owned enterprises, start-up enterprises, etc.
 
 Work Experience
 
-Before joining Tiger Partners, Zoe was working with the Dispute Resolution Team of a top Chinese law firm as an equity partner. Zoe has represented clients in over 100 commercial disputes, most of which are foreign related or international arbitration cases. The applicable rules of those arbitration cases include CIETAC Rules, the BAC Rules, the UNCITRAL Rules, the HKIAC Administered Rules, the ICC Rules, and the SIAC Rules. The arbitration language of many of those cases were English, and hearings were conducted in China Mainland, Hong Kong, Singapore, India and other jurisdictions. 
-
-The clients represented by Zoe are mainly multinational companies, foreign-invested enterprises, large state-owned enterprises and private equity funds. Well-known foreign clients include Total, Honeywell, Heineken, ADM, Hyundai, Paul-Y, Sony, Dalkia, ContiTech, INVISTA, Toyota Tsusho, Marubeni, Carlyle, Vataple, IPG, Canadian Solar, Sandvik, Moody’s, East West Bank, Avenue Capital, CRCI, New Horizon, Standard Chartered Bank, Ting Hsin, Chinachem etc. Famous state-owned and private enterprises include COFCO, Dongfang Electric Corporation (DEC), Luneng Group, Shougang Group, Nanjing Automobile Group, Oriental Petrochemical, China Ordins Corporation, CITIC Group, Junzheng Group, Jingfeng Pharmaceutical, Huaxin Cement etc.
+Before joining Tiger Partners, Zoe was working with the Dispute Resolution Team of a top Chinese law firm as an equity partner. Zoe has represented clients in over 200 commercial disputes, most of which are foreign related or international arbitration/litigation cases. The applicable rules of the arbitration cases include the CIETAC Rules, the BAC Rules, the UNCITRAL Rules, the HKIAC Administered Rules, the ICC Rules, the SIAC Rules, the AAA ICDR Rules, and the LCIA Rules etc. The arbitration language of many of those cases were English, and hearings were conducted in China Mainland, Hong Kong, Singapore, India, USA and other jurisdictions. Litigation cases were conducted in multiple courts at multiple levels in Beijing, Shanghai, Zhejiang, Jiangsu, Sichuan, Fujian and other places of China. Most of the cases represented by Zoe have achieved favorable results with a high success rate and high client satisfaction.
 
 Awards and Recognition
 
-2025 Legal 500, China Elite - Beijing Elite · Commercial Disputes
-2021 The Legal 500 Next Generation Partners (Dispute Resolution: Arbitration)
-2018 Best Defense Award, Beijing Lawyers Association “Beijing Lawyers’ Achievements Display on Excellent Defense – Celebration of Forty Years of Reform and Opening-up”
+2026 The Legal 500, China Elite - Beijing Elite - Commercial Disputes.
+2025 The Excellent Award, Beijing Municipal Bureau of Justice and HKIAC - the Leading International Arbitration Practitioners Training Scheme.
+2021 The Legal 500, Next Generation Partners (Dispute Resolution: Arbitration).
+2018 The Best Defense Award, Beijing Lawyers Association - Beijing Lawyers' Achievements Display on Excellent Defense - Celebration of Forty Years of Reform and Opening-up.
 ②个人业绩
 序号
 业绩详情
