@@ -1,6 +1,6 @@
 ﻿# Husuweb Official Site Architecture
 
-最后更新于：2026-05-18 22:11
+最后更新于：2026-05-25 22:05
 
 ## 项目概述
 
@@ -29,18 +29,39 @@
 | 样式 | Tailwind CSS v4 + CSS variables | `src/app/globals.css` 引入 Tailwind 和响应式 token |
 | 字体 | Poppins 字体文件 | `src/app/layout.tsx` 注入 `@font-face`，本地默认读取 `/font/poppins.ttf`，生产可通过 OSS 资源前缀读取远程字体 |
 | 图标 | `lucide-react` | 当前用于导航、卡片入口和少量控制图标 |
+| CMS 编辑器 | `@puckeditor/core`、SQLite `better-sqlite3`、`motion` | `/cms` 后台、可视化编辑器、版本预览和本地 CMS 数据存储 |
 | 包管理器 | Yarn `1.22.22` | 用户决定改用 Yarn；`packageManager` 已切换 |
 
-当前没有引入 CMS、Radix UI、MUI、motion、轮播库、Three、图表、拖拽等依赖；这些库在当前页面实现中没有实际运行需求。
+当前未引入 Radix UI、MUI、轮播库、Three、图表等依赖；CMS 后台运行依赖 Puck 编辑器、motion 和 better-sqlite3。
 
 ## 目录结构
 
 ```text
 src/
   app/
+    api/
+      cms/
+        assets/
+        auth/
+        collections/
+        contact-submissions/
+        dashboard/
+        official/
+        official-assets/
+        public/
+        site/
+        system/
+        versions/
     about/
       core-value/
         page.tsx
+      page.tsx
+    cms/
+      login/
+        page.tsx
+      version-preview/
+        [id]/
+          page.tsx
       page.tsx
     contact/
       page.tsx
@@ -62,6 +83,10 @@ src/
         page.tsx
       page.tsx
   components/
+    CmsLogin.tsx
+    CmsPuckVisualEditor.tsx
+    CmsStudio.tsx
+    CmsVersionPreview.tsx
     layout/
       AppProviders.tsx
       SiteFooter.tsx
@@ -89,9 +114,16 @@ src/
         CoreValueScrollFlow.tsx
     shared/
       BackToTop.tsx
+      FormattedText.tsx
       ImageWithFallback.tsx
       PageTriangle.tsx
       SubpageBreadcrumb.tsx
+  cms/
+    PublicCmsProvider.tsx
+    events.ts
+    official-state.ts
+    preview-page-content.ts
+    team-profile-overrides.ts
   data/
     eventInfoImages.ts
     events.ts
@@ -102,7 +134,21 @@ src/
     LanguageProvider.tsx
   lib/
     assets.ts
+    cms-analytics.ts
+    cms-api-auth.ts
+    cms-auth.ts
+    cms-dashboard.ts
+    cms-db.ts
+    cms-page-content.ts
+    cms-session.ts
+    cms-store.ts
+    cms-types.ts
+    cms-visual.ts
+    oss-assets.ts
     returnPosition.ts
+    site-content.ts
+    site-settings.ts
+    site-types.ts
   styles/
     tokens.css
   font/
@@ -534,8 +580,16 @@ Join Us、候选人卡片和简历邮箱区域包裹在同一个相对容器内�
 | `NEXT_SNAPSHOT_BASE_PATH` | 子路径部署时设置 Next basePath 和静态资源前缀 | 空字符串 |
 | `NEXT_PUBLIC_BASE_PATH` | 由 `next.config.ts` 从 `NEXT_SNAPSHOT_BASE_PATH` 注入客户端，供 `ImageWithFallback` 为 `/assets/*` 自动补子路径前缀 | 跟随 `NEXT_SNAPSHOT_BASE_PATH` |
 | `NEXT_PUBLIC_ASSET_BASE_URL` | 生产静态资源 CDN/OSS 前缀；配置后 `assetUrl()` 会把 `/assets/*` 和 `/font/*` 指向该前缀 | `.env.production` 中为 `https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb` |
+| `CMS_ADMIN_USERNAME` | 初始化 CMS 数据库时创建管理员账号 | `admin` |
+| `CMS_ADMIN_PASSWORD` | 初始化 CMS 数据库时创建管理员密码；未设置时要求首次重置 | `ChangeMe123!` |
+| `CMS_COOKIE_SECURE` | 控制 CMS 登录 cookie 是否带 `Secure`，HTTP 测试环境需设为 `0` | 生产环境默认启用 |
+| `NEXT_PUBLIC_CMS_ASSET_BASE_URL` | CMS 公开资源默认前缀，供公开资源 API 回退使用 | `https://img-12345.oss-cn-beijing.aliyuncs.com` |
+| `OSS_BUCKET` / `ALIYUN_OSS_BUCKET` | CMS 资源上传使用的 OSS bucket | `img-12345` |
+| `OSS_ENDPOINT` / `ALIYUN_OSS_ENDPOINT` | CMS 资源上传使用的 OSS endpoint | `oss-cn-beijing.aliyuncs.com` |
+| `OSS_ACCESS_KEY_ID` / `ALIYUN_OSS_ACCESS_KEY_ID` / `ALIBABA_CLOUD_ACCESS_KEY_ID` | CMS 资源上传使用的 OSS AccessKey ID | 空 |
+| `OSS_ACCESS_KEY_SECRET` / `ALIYUN_OSS_ACCESS_KEY_SECRET` / `ALIBABA_CLOUD_ACCESS_KEY_SECRET` | CMS 资源上传使用的 OSS AccessKey Secret | 空 |
 
-当前首版公开页没有 CMS、数据库或后台登录环境变量；OSS AccessKey 不写入项目环境文件，上传完成后前端只需要公开资源域名。
+OSS AccessKey 不写入项目环境文件；CMS 上传能力只在服务器环境变量提供密钥时启用。
 
 ## 部署
 
@@ -591,6 +645,7 @@ Join Us、候选人卡片和简历邮箱区域包裹在同一个相对容器内�
 
 | 时间 | 分支 | 变更类型 | 描述 |
 | :--- | :--- | :--- | :--- |
+| 2026-05-25 22:05 | main1 | 修复缺陷 | 从 `cms` 分支恢复本地 `/cms`、`/cms/login`、CMS API、SQLite store、Puck 可视化编辑器及其依赖模块，修复 `localhost:3000/cms` 404 |
 | 2026-05-18 22:11 | main1 | 部署发布 | 将张莉个人简历页文案更新构建发布到正式站根路径；服务器版本目录为 `/opt/tigerpartners-web/releases/20260518-2158`，公网验证通过 |
 | 2026-05-18 21:36 | main1 | 文案更新 | 张莉个人简历页服务行业、社会任职、专业领域、执业经验、荣誉和个人业绩按指定中英文文案更新；生产构建通过，未部署 |
 | 2026-05-15 22:33 | main | 部署发布 | 将 `/client` 首页重定向与首页 SEO 标题优化发布到生产环境；服务器版本目录为 `/opt/tigerpartners-web/releases/20260515-2230`，验证 `/client` 返回 307 到 `/`，首页 title/og:title 为 `虎诉律师事务所 | Tiger Partners`，`WE KNOW HOW TO WIN` 不再作为 `h1` |
@@ -881,6 +936,7 @@ Join Us、候选人卡片和简历邮箱区域包裹在同一个相对容器内�
 
 | 时间 | 分支 | 完成的功能 / 工作 | 说明 |
 | :--- | :--- | :--- | :--- |
+| 2026-05-25 22:05 | main1 | 本地 CMS 路由恢复 | `/cms`、`/cms/login`、`/cms/version-preview/[id]` 与 `/api/cms/*` 重新纳入当前 Next 应用，`npm run build` 已验证通过 |
 | 2026-05-18 22:11 | main1 | 张莉个人简历正式站发布 | 当前正式站 `current` 已切到 `/opt/tigerpartners-web/releases/20260518-2158`，Zoe 页面中英文文案在线验证通过 |
 | 2026-05-18 21:36 | main1 | 张莉个人简历文案更新 | Zoe Zhang / 张莉个人页详情字段更新为指定中英文内容，Performance & Achievements 从 `EN/zoePerformance.md` 同步为 24 条 |
 | 2026-05-15 22:33 | main | SEO 与 `/client` 生产发布 | 当前线上版本 `/opt/tigerpartners-web/releases/20260515-2230` 已启用中文首页标题、隐藏语义 h1 和 `/client` 到首页的兼容跳转 |
