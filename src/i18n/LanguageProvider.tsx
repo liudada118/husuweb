@@ -31,24 +31,20 @@ export function LanguageProvider({
   useEffect(() => {
     if (initialLanguage) {
       setLanguageState(initialLanguage);
-      applyDocumentLanguage(initialLanguage);
       return;
     }
 
-    if (!persist) {
-      applyDocumentLanguage(language);
-      return;
-    }
+    if (!persist) return;
 
     const savedLanguage = window.localStorage.getItem("tiger-language");
     if (savedLanguage === "en" || savedLanguage === "zh") {
       setLanguageState(savedLanguage);
-      applyDocumentLanguage(savedLanguage);
-      return;
     }
+  }, [initialLanguage, persist]);
 
-    applyDocumentLanguage("en");
-  }, [initialLanguage, language, persist]);
+  useEffect(() => {
+    applyDocumentLanguage(language);
+  }, [language]);
 
   const value = useMemo<LanguageContextValue>(() => {
     const setLanguage = (nextLanguage: Language) => {
@@ -64,7 +60,7 @@ export function LanguageProvider({
       setLanguage,
       toggleLanguage: () => setLanguage(language === "en" ? "zh" : "en"),
     };
-  }, [language]);
+  }, [language, persist]);
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 }

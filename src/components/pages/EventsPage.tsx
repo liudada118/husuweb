@@ -24,12 +24,6 @@ type EventListCard = {
   image: string;
 };
 
-function parseSortDate(value: string) {
-  const normalized = value.replace(/\D/g, "");
-  if (normalized.length >= 8) return Number(normalized.slice(0, 8));
-  return 0;
-}
-
 function EventCard({
   slug,
   category,
@@ -131,8 +125,7 @@ export function EventsPage() {
         image: getPreviewPageItemField(item, "image", getPreviewPageItemField(fallbackItem, "image", "")),
       };
     })
-    .filter((item): item is EventListCard => Boolean(item))
-    .sort((a, b) => parseSortDate(b.sortDate) - parseSortDate(a.sortDate));
+    .filter((item): item is EventListCard => Boolean(item));
   const staticEventCards = events.map((event): EventListCard => {
     const localizedEvent = localizeCmsEvent(event, language, cms?.events.overrides[event.slug]);
 

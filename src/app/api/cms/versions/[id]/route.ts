@@ -92,5 +92,10 @@ export async function PUT(
     revalidateOfficialPages();
   }
 
-  return NextResponse.json({ ok: true, versions: listVersions(), appliedToCurrentSite: result.appliedToCurrentSite });
+  return NextResponse.json({
+    ok: true,
+    versions: listVersions(),
+    appliedToCurrentSite: result.appliedToCurrentSite,
+    unpublishedAfterEdit: result.unpublishedAfterEdit,
+  });
 }

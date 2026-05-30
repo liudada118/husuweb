@@ -34,6 +34,7 @@ export type OfficialCmsLocalizedEventOverride = {
 export type OfficialCmsEventOverride = {
   image?: string;
   href?: string;
+  sortDate?: string;
   detailImages?: string[];
   detailVideos?: string[];
   en?: OfficialCmsLocalizedEventOverride;

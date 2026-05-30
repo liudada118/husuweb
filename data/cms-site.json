@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-05-17T17:07:16.499Z",
+  "updatedAt": "2026-05-30T06:43:38.538Z",
   "header": {
     "siteName": "Tiger Partners",
     "siteSubtitle": "Law Firm",
@@ -119,10 +119,10 @@
     },
     "heroVideo": "/assets/event/event2/20250617_视频.mp4",
     "eventSlugs": [
-      "kinsey-kang-hong-kong-legal-counsel",
       "official-account-mini-program-upgrade",
-      "benchmark-litigation-2022-dispute-resolution",
-      "chambers-greater-china-region-2026"
+      "kinsey-kang-hong-kong-legal-counsel",
+      "chambers-greater-china-region-2026",
+      "benchmark-litigation-2022-dispute-resolution"
     ],
     "eventOverrides": {
       "kinsey-kang-hong-kong-legal-counsel": {
@@ -305,6 +305,7 @@
     "overrides": {
       "111": {
         "image": "/assets/about/about.png",
+        "sortDate": "",
         "en": {
           "category": "111",
           "title": "1231231",
@@ -320,6 +321,7 @@
       },
       "1222": {
         "image": "",
+        "sortDate": "",
         "en": {
           "category": "",
           "title": "",
@@ -349,6 +351,7 @@
       },
       "xu-min-ccas-arbitrator-roster": {
         "image": "/assets/event/event2/1.jpg",
+        "sortDate": "20260508",
         "en": {
           "category": "Industry",
           "title": "Mr. Xu Min, Partner at Tiger Partners, Selected to the New",
@@ -363,7 +366,8 @@
             "[IMAGE]",
             "XU Min is a practicing lawyer in Mainland China. He specializes in acting as an advocate in domestic litigation and domestic and overseas arbitration and has extensive experience in providing legal advisory services to enterprises. XU Min has extensive experience in equity transaction, corporate governance, commercial contract review and dispute resolution and product liability for clients. His cases involve in industries of maritime affairs, banking and finance, private equity, shipping, goods trade, high technology, new media, film, television and entertainment, education, real estate and other areas.",
             "Mr. Xu Min graduated from the School of Law, City University of Hong Kong, holding a Bachelor of Laws and a Master of Laws degree. He is currently a Fellow of the Chartered Institute of Arbitrators (F.CIArb), an Arbitrator of the China Commission of Arbitration for Sport, a member of the Culture, Tourism, Media and Sports Professional Committee of the Beijing Lawyers Association, and a member of the Sports Law and Olympic Legal Affairs Research Association of the Beijing Law Society. He has also been selected into the roster of 100 High-end International Legal Talents by the Beijing Municipal Bureau of Justice and the International Lawyers Talent Pool of the Beijing Lawyers Association. Prior to joining Tiger Partners Law Firm, Mr. Xu Min worked as a dispute resolution lawyer at King & Wood Mallesons and Fangda Partners."
-          ]
+          ],
+          "displayDate": "May. 8, 2026"
         },
         "zh": {
           "category": "行业咨询",
@@ -379,7 +383,8 @@
             "[图片]",
             "许旻律师是中国内地执业律师，专长于代理国内诉讼及境内外仲裁案件，并长期为企业提供法律顾问服务。许旻律师在股权交易、公司治理、商事合同审查及纠纷处理、产品责任等业务领域经验丰富，承办的案件涉及海事海商、银行金融、私募基金、航运、货物贸易、高新科技、新媒体、影视娱乐、体育、教育、房地产等多个领域。",
             "许旻律师毕业于香港城市大学法学院，获得法学学士及法学硕士学位。许律师现为英国特许仲裁员协会高级会员（F.CIArb）、中国体育仲裁委员会仲裁员、北京市律师协会文旅传媒与体育专业委员会委员、北京市法学会体育法学与奥林匹克法律事务研究会会员，并入选北京市司法局百名高端涉外法治人才及北京市律师协会涉外律师人才库。在加入虎诉律师事务所之前，许旻律师曾在金杜律师事务所、方达律师事务所担任争议解决律师。"
-          ]
+          ],
+          "displayDate": "2026.05.08"
         },
         "detailImages": [
           "/assets/event/eventinfo2/微信图片_20260511231050_235_2.jpg",
@@ -390,6 +395,7 @@
       },
       "zoe-zhang-cietac-arbitrator-roster": {
         "image": "/assets/event/event2/2.jpg",
+        "sortDate": "20260506",
         "en": {
           "category": "Industry News",
           "title": "Ms. Zoe Zhang, Partner at Tiger Partners, has been selected to the new panel of arbitrators of the China International Economic and Trade Arbitration Commission (CIETAC)",
@@ -406,7 +412,8 @@
             "Before joining Tiger Partners, Zoe was working with the Dispute Resolution Team of a top Chinese law firm as an equity partner. Zoe has represented clients in over 100 commercial disputes, most of which are foreign related or international arbitration cases. The applicable rules of those arbitration cases include CIETAC Rules, the BAC Rules, the UNCITRAL Rules, the HKIAC Administered Rules, the ICC Rules, and the SIAC Rules. The arbitration language of many of those cases were English, and hearings were conducted in China Mainland, Hong Kong, Singapore, India and other jurisdictions. Her litigation cases have been heard at courts of various levels in Beijing, Shanghai, Zhejiang, Jiangsu and other regions.",
             "Ms. Zoe Zhang has provided professional and efficient legal services for clients in numerous major and complex commercial dispute cases, achieving favorable outcomes and earning long-term trust and high praise from clients.",
             "Going forward, taking this as a new starting point, Tiger Partners will continue to uphold the service philosophy of professionalism, efficiency and perfection, further deepen its practice in dispute resolution, steadily enhance its capability in handling complex commercial disputes, and repay clients’ trust with more professional and high-quality legal services."
-          ]
+          ],
+          "displayDate": "May. 6, 2026"
         },
         "zh": {
           "category": "行业资讯",
@@ -424,7 +431,8 @@
             "加入虎诉前，张律师是北京中伦律师事务所争议解决部权益合伙人。张律师参与代理了超过一百多起商事争议诉讼及仲裁案件，绝大部分为涉外争议案件。仲裁案件适用规则包括贸仲委仲裁规则、北京仲裁委员会仲裁规则、联合国国际贸易法委员会仲裁规则、香港国际仲裁中心机构仲裁规则、国际商会仲裁规则、新加坡国际仲裁中心仲裁规则等；其中多起案件仲裁语言为英文，并在中国、香港、新加坡、印度等多地进行开庭。诉讼案件在北京、上海、浙江、江苏等多地、多级法院进行。",
             "张莉律师在多起重大、疑难商事争议案件中为客户提供了专业、高效的法律服务，并取得了良好的案件效果，获得客户的长期信任与高度评价。",
             "未来，虎诉将以此为新的起点，继续秉持专业、高效、极致的服务理念，深耕争议解决业务，不断提升复杂商事争议处理能力，以更加专业、高质量的法律服务回应客户信任。"
-          ]
+          ],
+          "displayDate": "2026.05.06"
         },
         "detailImages": [
           "/assets/event/eventinfo2/微信图片_20260511231050_237_2.png",
@@ -435,6 +443,7 @@
       },
       "alb-china-law-awards-2026-shortlist": {
         "image": "/assets/event/event2/3.png",
+        "sortDate": "20260320",
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners Shortlisted for the 2026 ALB China Law Awards",
@@ -449,7 +458,8 @@
             "We sincerely appreciate the longstanding support and trust from all clients, partners and friends from all walks of life. Moving forward, Tiger Partners will continue to uphold the service philosophy of professionalism and dedication, living up to every trust and entrustment placed in us.",
             "[IMAGE]",
             "Asian Legal Business (ALB) is a leading legal magazine under Thomson Reuters and one of the world’s most influential legal media outlets. It is dedicated to providing clients and readers with cutting-edge legal and business news as well as professional law firm rankings."
-          ]
+          ],
+          "displayDate": "Mar. 20, 2026"
         },
         "zh": {
           "category": "行业资讯",
@@ -467,7 +477,8 @@
             "诚挚感谢所有客户、合作伙伴及各界朋友一直以来的支持与信任。未来，虎诉将继续秉持专业、极致的服务理念，不负每一份信任与托付。",
             "[图片]",
             "ALB是汤森路透旗下的尖端法律杂志，是全球最具影响力的法律媒体之一，旨在为客户和读者提供前沿的法律商业资讯和律所专业评级。"
-          ]
+          ],
+          "displayDate": "2026.03.20"
         },
         "detailImages": [
           "/assets/event/eventinfo2/微信图片_20260511231050_242_2.png"
@@ -476,6 +487,7 @@
       },
       "chambers-greater-china-region-2026": {
         "image": "/assets/event/event2/4.png",
+        "sortDate": "20260115",
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners Listed in The Chambers Greater China Region 2026",
@@ -487,7 +499,8 @@
             "This consecutive ranking is not only profound recognition of Tiger Partners’ philosophy of prioritizing case success as the ultimate goal and aligning services with clients’ commercial objectives, but also further validates the firm’s professional strength and leading edge in commercial dispute resolution practice. Going forward, Tiger Partners will consistently uphold the professional ethos of pursuing perfection, and provide clients with efficient and targeted dispute resolution solutions.",
             "We sincerely thank all clients, partners and friends from all sectors for their long-term support and trust. Tiger Partners will remain committed as always to living up to every trust and entrustment.",
             "Chambers and Partners is a world-leading legal research and analysis institution, which ranks top-tier law firms and legal professionals across various practice areas globally. Regarded as an industry benchmark, Chambers Guides serve as a key reference for international clients seeking high-end legal services."
-          ]
+          ],
+          "displayDate": "Jan. 15, 2026"
         },
         "zh": {
           "category": "行业资讯",
@@ -500,7 +513,8 @@
             "此次蝉联榜单，既是对虎诉以胜诉为最终目的、以客户商业目标为导向理念的深度认可，也进一步印证了虎诉在商事争议解决业务领域的专业实力与领先优势。未来，虎诉将始终秉持追求极致完美的专业精神，为客户提供高效、精准的争议解决方案。",
             "诚挚感谢所有客户、合作伙伴及各界朋友长期以来的支持与信任。虎诉将一如既往，不负每一份信任与托付。",
             "钱伯斯（Chambers and Partners）是全球领先的法律研究和分析机构，在全球范围内评选各领域顶尖律师事务所和法律专业人士。钱伯斯法律指南被视为业界基准，是国际客户寻求高端法律服务的重要参考"
-          ]
+          ],
+          "displayDate": "2026.01.15"
         },
         "detailImages": [
           "/assets/event/eventinfo2/微信图片_20260511231050_244_2.png"
@@ -509,6 +523,7 @@
       },
       "legal-500-china-2026-list": {
         "image": "/assets/event/event2/5.png",
+        "sortDate": "20251119",
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners Ranked on The Legal 500 China 2026 List; Partners Liu Yuxuan, Wan Li and Zoe Zhang Honored as Legal 500 China Elite",
@@ -530,7 +545,8 @@
             "[IMAGE]",
             "The Legal 500 was founded in 1988 and is a world-renowned legal rating institution. Its core mission is to provide professional references for enterprises in selecting legal services through independent research and evaluation.",
             "Launched for the first time in 2025, The Legal 500 China Elite is dedicated to recognizing outstanding lawyers from regional law firms who deliver exceptional performance in China’s core commercial sectors."
-          ]
+          ],
+          "displayDate": "Nov. 19, 2025"
         },
         "zh": {
           "category": "行业资讯",
@@ -553,7 +569,8 @@
             "[图片]",
             "The Legal 500成立于1988年，是全球著名的法律评级机构，其核心使命是通过独立的调研与评估，为企业在选择法律服务时提供专业的参考意见。",
             "Legal 500 中国精英于2025年首次发布，致力于表彰来自区域性律所、在中国核心商业领域表现卓越的杰出律师。"
-          ]
+          ],
+          "displayDate": "2025.11.19"
         },
         "detailImages": [
           "/assets/event/eventinfo2/微信图片_20260511231050_246_2.png",
@@ -566,6 +583,7 @@
       },
       "china-business-law-awards-2025-firm-to-watch": {
         "image": "/assets/event/event2/6.png",
+        "sortDate": "20250723",
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners was listed as \"Firm to Watch\" in China Business Law Awards 2025",
@@ -578,7 +596,8 @@
             "We would like to express our gratitude to all clients, industry peers and partners for their support and trust. Moving forward, Tiger Partners will continue to dedicate itself to delivering efficient and precise dispute resolution solutions for global clients, assisting them in navigating the increasingly complex international legal landscape.",
             "[IMAGE]",
             "China Business Law Journal is an internationally renowned monthly business and legal publication, as well as one of the world’s most influential legal ranking media."
-          ]
+          ],
+          "displayDate": "Jul. 23, 2025"
         },
         "zh": {
           "category": "行业资讯",
@@ -592,7 +611,8 @@
             "感谢所有客户、业界同仁、合作伙伴的支持与信任。未来，虎诉将继续致力于为全球客户提供高效、精准的争议解决方案，帮助客户应对日益复杂的国际法律环境。",
             "[图片]",
             "China Business Law Journal《商法》是国际知名的商业法律月刊，也是全球最具影响力的法律评选媒体之一。"
-          ]
+          ],
+          "displayDate": "2025.07.23"
         },
         "detailImages": [
           "/assets/event/eventinfo2/微信图片_20260511231056_264_2.jpg",
@@ -602,6 +622,7 @@
       },
       "alb-china-dispute-resolution-rankings-2025": {
         "image": "/assets/event/event2/7.png",
+        "sortDate": "20250619",
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners Ranked on the 2025 ALB China Dispute Resolution Rankings",
@@ -614,7 +635,8 @@
             "We sincerely thank all clients, partners and industry peers for their support and trust. Going forward, Tiger Partners will forge ahead and strive for more remarkable accomplishments.",
             "[IMAGE]",
             "Asian Legal Business (ALB) is a premier legal magazine under Thomson Reuters and one of the world’s most influential legal media platforms. It aims to provide clients and readers with cutting-edge legal and business news, as well as professional law firm rankings."
-          ]
+          ],
+          "displayDate": "Jun. 19, 2025"
         },
         "zh": {
           "category": "行业资讯",
@@ -628,7 +650,8 @@
             "衷心感谢每一位客户、合作伙伴和同行对我们的支持与信任。未来，虎诉将继续向前，争创更多佳绩。",
             "[图片]",
             "ALB是汤森路透旗下的尖端法律杂志，是全球最具影响力的法律媒体之一，旨在为客户和读者提供前沿的法律商业资讯和律所专业评级。"
-          ]
+          ],
+          "displayDate": "2025.06.19"
         },
         "detailImages": [
           "/assets/event/eventinfo2/微信图片_20260511231056_266_2.png"
@@ -637,6 +660,7 @@
       },
       "games-law-arbitration-culture-promotion-month": {
         "image": "/assets/event/event2/8.png",
+        "sortDate": "20250617",
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners Successfully Held the Second Arbitration Culture Promotion Month Series: Games x Law: Cross-Border Thinking and Rule Prospects in Dispute Resolution",
@@ -646,7 +670,8 @@
             "暂时无法在飞书文档外展示此内容",
             "The event drew participation from numerous professionals across the legal and gaming industries. Through in-depth case sharing and panel discussions, participants analyzed existing and potential legal risks facing the gaming industry, and explored the unique role of arbitration in resolving such disputes.",
             "As a boutique law firm focusing on high-end commercial dispute resolution, Tiger Partners has always attached great importance to arbitration practice and is committed to providing clients with professional and comprehensive arbitration services. Tiger Partners looks forward to collaborating with fellow legal professionals to jointly promote the dissemination and development of arbitration culture in China."
-          ]
+          ],
+          "displayDate": "Jun. 17, 2025"
         },
         "zh": {
           "category": "行业资讯",
@@ -657,7 +682,8 @@
             "暂时无法在飞书文档外展示此内容",
             "本次活动吸引了众多来自法律和游戏行业的专业人士参与。通过的深入案例分享和讨论，与会者分析了当前以及未来游戏行业可能面临的法律风险，并探讨了仲裁在此类争议中的独特作用。",
             "作为一家专注于高端商事争议解决的精品律所，虎诉始终高度重视仲裁业务，并致力于为客户提供专业且全面的仲裁服务。虎诉期待与广大法律同仁携手，共同推动中国仲裁文化的传播与发展。"
-          ]
+          ],
+          "displayDate": "2025.06.17"
         },
         "detailImages": [],
         "detailVideos": [
@@ -666,6 +692,7 @@
       },
       "alb-china-law-awards-2025-boutique-nomination": {
         "image": "/assets/event/event2/9.png",
+        "sortDate": "20250421",
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners Nominated for The \"Boutique Law Firm of the Year\" Award at The ALB China Law Awards 2025",
@@ -677,7 +704,8 @@
             "Tiger Partners sincerely appreciates the trust and support from all clients, partners and friends from all walks of life. Every recognition inspires us to keep forging ahead. Going forward, adhering to the service philosophy oriented toward case success and clients’ commercial goals, Tiger Partners will further enhance its influence and competitiveness in the international legal market.",
             "[IMAGE]",
             "Asian Legal Business (ALB) is a premier legal magazine owned by Thomson Reuters and ranks among the world’s most influential legal media. It aims to provide clients and readers with cutting-edge legal and business news as well as authoritative law firm rankings."
-          ]
+          ],
+          "displayDate": "Apr. 21, 2025"
         },
         "zh": {
           "category": "行业资讯",
@@ -690,7 +718,8 @@
             "虎诉衷心感谢所有客户、合作伙伴及各界朋友对我们的信任与支持。每一份认可都激励我们不断前行。未来，虎诉将继续秉承以胜诉和客户商业目标为导向的服务理念，持续提升在国际法律市场中的影响力与竞争力。",
             "[图片]",
             "ALB是汤森路透旗下的尖端法律杂志，是全球最具影响力的法律媒体之一，旨在为客户和读者提供前沿的法律商业资讯和律所专业评级。"
-          ]
+          ],
+          "displayDate": "2025.04.21"
         },
         "detailImages": [
           "/assets/event/eventinfo2/微信图片_20260511231056_267_2.png"
@@ -699,6 +728,7 @@
       },
       "chambers-global-guide-2025": {
         "image": "/assets/event/event2/10.png",
+        "sortDate": "20250214",
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners Listed in The Chambers Global Guide 2025",
@@ -712,7 +742,8 @@
             "We sincerely thank all clients, partners and peers for their support and recognition. Tiger Partners will keep striving to deliver high-quality legal support and service assurance to every client. We will continue to forge ahead in both the domestic and international legal markets, endeavoring to achieve more remarkable results and wider industry recognition.",
             "[IMAGE]",
             "Chambers and Partners is one of the world’s most influential legal rating institutions. The Chambers Global Guide compiles the rankings of the world’s leading law firms and top-tier lawyers, standing as one of the most authoritative evaluations within the global legal community."
-          ]
+          ],
+          "displayDate": "Feb. 14, 2025"
         },
         "zh": {
           "category": "行业资讯",
@@ -727,7 +758,8 @@
             "感谢所有客户、合作伙伴及同行的支持和认可，虎诉将继续努力为每一位客户提供高品质的的法律支持与服务保障，继续在国内和国际法律市场中锐意进取，力争取得更加显著的成绩与行业认可。",
             "[图片]",
             "钱伯斯（Chambers and Partners）是全球最具影响力的法律评级机构之一。《钱伯斯全球指南》汇聚了全球领先的律师事务所及顶尖律师的评选结果，是全球法律界最具权威的评估之一。"
-          ]
+          ],
+          "displayDate": "2025.02.14"
         },
         "detailImages": [
           "/assets/event/eventinfo2/微信图片_20260511231056_268_2.png"
@@ -736,6 +768,7 @@
       },
       "chambers-greater-china-region-2025": {
         "image": "/assets/event/event2/11.png",
+        "sortDate": "20250116",
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners Listed in the Chambers Greater China Region 2025",
@@ -749,7 +782,8 @@
             "This inclusion not only highlights Tiger Partners’ leading edge in the field of commercial dispute resolution, but also further validates the firm’s enduring philosophy of pursuing excellence and perfection in case handling, with all work oriented toward securing favorable outcomes and fulfilling clients’ commercial objectives.",
             "Upholding its professional ethos, Tiger Partners Law Firm will continue to deliver efficient, high-quality legal services to clients with a more pragmatic approach, advance the development and innovation of the legal industry, and assist enterprises in addressing increasingly complex legal challenges.",
             "We sincerely appreciate the continued support and trust from all clients, partners and friends from all walks of life. Going forward, we will keep pace with the times, forge ahead with determination, and live up to all expectations."
-          ]
+          ],
+          "displayDate": "Jan. 16, 2025"
         },
         "zh": {
           "category": "行业资讯",
@@ -765,7 +799,8 @@
             "此次入选，不仅彰显了虎诉在商事争议解决领域的领先优势，也再次证明了虎诉始终坚持在办理案件过程中追求极致与完美，一切以胜诉和客户的商业目标为导向的理念。",
             "虎诉律师事务所将继续秉承专业精神，以更加务实的态度为客户提供高效、优质的法律服务，推动法律事业的发展与创新，帮助企业应对日益复杂的法律挑战。",
             "感谢所有客户、合作伙伴、各界朋友一如既往的支持与信任，未来，我们将继续与时俱进，锐意进取，不负众望。"
-          ]
+          ],
+          "displayDate": "2025.01.16"
         },
         "detailImages": [
           "/assets/event/eventinfo2/微信图片_20260511231058_269_2.jpg"
@@ -774,6 +809,7 @@
       },
       "cietac-cup-voice-of-moot-diamond-sponsor": {
         "image": "/assets/event/event2/12.png",
+        "sortDate": "20241113",
         "en": {
           "category": "",
           "title": "Tiger Partners Was Honored as Diamond Sponsor for the 22nd \"CIETAC Cup\" Voice of Moot Series Training Activities",
@@ -790,7 +826,8 @@
             "[IMAGE]",
             "We believe that platforms like the “CIETAC Cup” enable young legal professionals to gain solid knowledge reserves and valuable practical experience. Lastly, Tiger Partners sincerely wishes this year’s “CIETAC Cup” a complete success. May all participants give full play to their strengths and forge ahead triumphantly on the competition stage!",
             "We know how to win! Good luck!"
-          ]
+          ],
+          "displayDate": "Nov. 13, 2024"
         },
         "zh": {
           "category": "",
@@ -808,7 +845,8 @@
             "[图片]",
             "我们相信，通过“贸仲杯”这样的平台，青年法律人将收获深厚的知识积累、实践经验。最后，虎诉衷心预祝本届“贸仲杯”圆满成功，祝愿大家在“贸仲杯”赛场上尽展所长，乘风破浪！",
             "We know how to win! Good luck!"
-          ]
+          ],
+          "displayDate": "2024.11.13"
         },
         "detailImages": [
           "/assets/event/eventinfo2/微信图片_20260511231058_270_2.png",
@@ -821,6 +859,7 @@
       },
       "benchmark-litigation-china-2024": {
         "image": "/assets/event/event2/13.png",
+        "sortDate": "20240606",
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners Listed in the 2024 Benchmark Litigation China Dispute Resolution List",
@@ -832,7 +871,8 @@
             "Tiger Partners sincerely thanks all clients, partners and friends from all walks of life for their recognition and support!",
             "Benchmark Litigation Benchmark Litigation is currently the world’s renowned legal rating institution exclusively dedicated to dispute resolution. Widely acclaimed across the industry, it has established itself as an authoritative evaluation guide in the litigation sector.",
             "[IMAGE]"
-          ]
+          ],
+          "displayDate": "Jun. 6, 2024"
         },
         "zh": {
           "category": "行业资讯",
@@ -846,7 +886,8 @@
             "Benchmark Litigation",
             "Benchmark Litigation系目前市场上唯一专注于争议解决领域的著名法律评级机构，获得业界的广泛赞誉，现已成为诉讼领域的权威评价指南。",
             "[图片]"
-          ]
+          ],
+          "displayDate": "2024.06.06"
         },
         "detailImages": [
           "/assets/event/eventinfo2/微信图片_20260511231058_273_2.png"
@@ -855,6 +896,7 @@
       },
       "world-arbitration-update-2024-china-edition": {
         "image": "/assets/event/event2/14.jpg",
+        "sortDate": "20240509",
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners Sponsored the World Arbitration Update 2024 (WAU 2024) China Edition",
@@ -866,7 +908,8 @@
             "WAU 2024 is being held in mainland China for the first time. Tiger Partners is honored to serve as a Platinum Sponsor of the conference. We look forward to discussing the latest developments in international commercial arbitration and investment arbitration with arbitration experts and legal practitioners, and jointly promoting the innovation and advancement of arbitration practice.",
             "Colleagues from the legal community and all those interested in international arbitration are warmly welcome to attend this grand event.",
             "Lastly, Tiger Partners wishes great success to the China edition of World Arbitration Update 2024. May this event set a new benchmark for exchanges and cooperation in the field of international arbitration!"
-          ]
+          ],
+          "displayDate": "May. 9, 2024"
         },
         "zh": {
           "category": "行业资讯",
@@ -878,7 +921,8 @@
             "WAU 2024系首次在中国境内举办，虎诉律师事务所荣幸成为本次大会的白金赞助商，并期待与各位仲裁专家和法律实践者探讨国际商事仲裁和投资仲裁的最新动态，共同推动仲裁实践的创新和发展。",
             "欢迎法律界同仁及对国际仲裁感兴趣的朋友们参与此次盛会。",
             "最后，虎诉预祝2024年世界仲裁最新动态大会中国站圆满举办。愿此次盛会成为国际仲裁领域交流与合作的新高点！"
-          ]
+          ],
+          "displayDate": "2024.05.09"
         },
         "detailImages": [
           "/assets/event/eventinfo2/微信图片_20260511231058_274_2.png"
@@ -887,6 +931,7 @@
       },
       "alb-china-firms-to-watch-2024": {
         "image": "/assets/event/event2/15.png",
+        "sortDate": "20240204",
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners Listed in 2024 ALB China Firms to Watch List",
@@ -897,7 +942,8 @@
             "ALB is a leading legal magazine under Thomson Reuters and one of the world’s most influential legal media outlets. It is dedicated to providing clients and readers with cutting-edge legal and business news as well as professional law firm rankings.",
             "It is reported that ALB determines the rankings mainly based on criteria including firms’ basic profile, major achievements over the years, significant transactions and litigation matters completed in the past 12 months, newly acquired clients, business growth, and development strategies for the next 12 months.",
             "Since its establishment four years ago, Tiger Partners has always strived to refine every detail in case handling. In delivering legal services, it prioritizes fulfilling clients’ needs as the primary goal, making it the preferred legal team for a growing number of leading domestic enterprises and renowned multinational corporations in the field of dispute resolution services."
-          ]
+          ],
+          "displayDate": "Feb. 4, 2024"
         },
         "zh": {
           "category": "行业资讯",
@@ -909,7 +955,8 @@
             "ALB是汤森路透旗下的尖端法律杂志，是全球最具影响力的法律媒体之一，旨在为客户和读者提供前沿的法律商业资讯和律所专业评级。",
             "据悉，ALB在确定该榜单时主要参考了律所的基本信息，历年重要成就，过去12个月完成的重大交易/诉讼、新增客户、增长情况，未来12个月的发展策略等标准。",
             "成立四年以来，虎诉始终坚持在办理案件过程中对每个细节精雕细琢，在提供法律服务过程中以实现客户的需求作为第一目标，成为越来越多国内领先企业及知名跨国公司在争议解决服务领域首选的律师团队。"
-          ]
+          ],
+          "displayDate": "2024.02.04"
         },
         "detailImages": [
           "/assets/event/eventinfo2/微信图片_20260511231058_275_2.png"
@@ -918,6 +965,7 @@
       },
       "kinsey-kang-hong-kong-legal-counsel": {
         "image": "/assets/event/event1.png",
+        "sortDate": "20231117",
         "en": {
           "category": "Tiger Dynamics",
           "title": "Kinsey Kang Yanan was engaged as Hong Kong Legal Counsel of Tiger Partners",
@@ -941,7 +989,8 @@
             "Practical Guidance for Personal Injury Claims (2015 LexisNexis)",
             "Annotated Ordinance--Mainland Judgments (Reciprocal Enforcement) Ordinance (2021 LexisNexis)",
             "[图片"
-          ]
+          ],
+          "displayDate": "Nov. 17, 2023"
         },
         "zh": {
           "category": "",
@@ -967,7 +1016,8 @@
             "Annotated Ordinance--Mainland Judgments (Reciprocal Enforcement) Ordinance (2021 LexisNexis)",
             "康大律师深耕于跨境争议解决领域多年，并具有极高的社会责任感和学术造诣，其加入必将给虎诉注入新鲜且充沛的能量，极大提升虎诉为客户提供跨境争议解决法律服务的广度和深度！",
             "[图片"
-          ]
+          ],
+          "displayDate": "2023.11.17"
         },
         "detailImages": [
           "/assets/event/eventinfo/微信图片_20260511231524_297_2.png",
@@ -977,6 +1027,7 @@
       },
       "chambers-forum-beijing-2023": {
         "image": "/assets/event/event2.png",
+        "sortDate": "20230406",
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners sponsored and was invited to the Chambers Forum: Beijing 2023",
@@ -984,7 +1035,8 @@
           "content": [
             "From April 12 to 13, the Chambers Forum: Beijing 2023 will be held at the Hilton Hotel of Wangfujing in Beijing. As one of the sponsors, Tiger Partners was invited to participate in the forum.",
             "It is reported that this forum will focus on compliance, centering on the rich connotation of corporate compliance and the latest regulatory policies, legal practices and market trends, and discuss hot compliance issues, PE/VC, revision of arbitration law, ad hoc arbitration and other related sub-topics in global investment and M&A."
-          ]
+          ],
+          "displayDate": "Apr. 6, 2023"
         },
         "zh": {
           "category": "",
@@ -993,13 +1045,15 @@
           "content": [
             "4月12日至13日，2023钱伯斯北京论坛将在北京王府井希尔顿酒店举办。北京虎诉律师事务所作为赞助商之一，受邀参与本次论坛活动。",
             "据悉，本次论坛将以合规为主线，围绕企业合规的丰富内涵和最新的监管政策、法律实操和市场趋势，对全球投资并购中的合规热点问题、私募和风险投资、仲裁法修订和临时仲裁等多个相关子话题进行讨论"
-          ]
+          ],
+          "displayDate": "2023.04.06"
         },
         "detailImages": [],
         "detailVideos": []
       },
       "shifoying-nanli-community-pairing": {
         "image": "/assets/event/event3.png",
+        "sortDate": "20230329",
         "en": {
           "category": "Tiger Dynamics",
           "title": "Tiger Dynamics | Party Branch of Tiger Partners entered into a pairing relationship with Shifoying Nanli Community to build a law-based community",
@@ -1011,7 +1065,8 @@
             "The committee first introduced the thorny problems and related background in recent work, and consulted the legally compliant solutions. Mr. Liu Yuxuan gave the corresponding advice from a professional point of view. Later, the two sides discussed the far-reaching value of this \"pairing relationship\" to build a law-based community, and actively exchanged views on the working modes and plans for the next step.",
             "Remain true to our original aspiration and to keep pressing ahead",
             "The Party Branch of Tiger Partners will adhere to the working method of \" the Party Branches and the Communities in pairing, the Party and the Masses hand in hand\". By organizing party branch’s members and actively mobilizing the law firm’s masses, we plan to set up the Tiger Partners’ legal service team, and better carry out the legal services oriented to the community. We look forward to truly become \"Good Lawyers to the satisfaction of the Party and the people\"."
-          ]
+          ],
+          "displayDate": "Mar. 29, 2023"
         },
         "zh": {
           "category": "",
@@ -1024,13 +1079,15 @@
             "社区首先介绍了近期工作中面临的棘手问题与相关背景，并向虎诉党支部咨询合法合规的解决途径。刘煜暄律师从专业的角度给予了相应的建议。后续，双方探讨了本次“结对子”共建法治社区的深远价值，并就下一步的工作模式与计划积极交换了意见。",
             "不忘初心，砥砺前行",
             "虎诉党支部将坚持运用“组织结对子，党群手拉手”的工作方法，组织支部党员并积极动员单位群众组建虎诉法律服务队，更好地开展面向社区的法律服务，以真正成为“党和人民满意的好律师”。"
-          ]
+          ],
+          "displayDate": "2023.03.29"
         },
         "detailImages": [],
         "detailVideos": []
       },
       "tiger-partners-third-anniversary": {
         "image": "/assets/event/event4.png",
+        "sortDate": "20221218",
         "en": {
           "category": "Tiger Watch",
           "title": "Today, Tiger Partners is three years old!",
@@ -1041,7 +1098,8 @@
             "This year, we still keep pursuing innovation and seeking breakthroughs, such as the launch of new Mini Program TigerPark, the creation of the cartoon character \"Hook\", the initiation of the first TIGERS FELLOWSHIP program, and the upgrading of the official account function......",
             "Over the past three years, Tiger Partners has faced an exceptionally tough growth environment. Thankfully, with the trust and support of every friends, this \"little tiger\" has thrived nonetheless!",
             "On the occasion of our third birthday, we are very pleased to share with you the great news that Tiger Partners will be relocated from China Central Place to Sino-Ocean International Center next year! In the new year, with the support and witness of all friends, we look forward to moving to a broader world!"
-          ]
+          ],
+          "displayDate": "Dec. 18, 2022"
         },
         "zh": {
           "category": "",
@@ -1053,13 +1111,15 @@
             "这一年，我们依旧在不断尝试创新、寻求突破，上线了全新小程序TigerPark，推出了虎诉卡通形象“虎氪”，启动了第一届“虎行风从奖学金”项目，对公众号进行了功能升级……",
             "过去的三年，虎诉所面临的成长环境异常严峻。然而庆幸的是，在各位朋友的信任与支持下，这只“小老虎”还是茁壮成长了起来！",
             "值此三周岁生日，我们非常高兴能与各位分享一个好消息：虎诉明年将从华贸中心迁址远洋国际！新的一岁，期待虎诉在各位朋友的支持与见证下，走向更广阔的天地！"
-          ]
+          ],
+          "displayDate": "2022.12.18"
         },
         "detailImages": [],
         "detailVideos": []
       },
       "cietac-cup-voice-of-moot-sponsor": {
         "image": "/assets/event/event5.png",
+        "sortDate": "20221108",
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners sponsored the \"CIETAC Cup\" Voice of Moot series of training activities",
@@ -1070,7 +1130,8 @@
             "[图片",
             "On the road of realizing its vision, Tiger partners has always paid attention to the growth of young people who are willing to engage in dispute resolution, for which the TIGERS FELLOWSHIP 2022 was established.",
             "Finally, Tiger Partners wishes that this event will be a great success and that all the young participants will have a wonderful performance!"
-          ]
+          ],
+          "displayDate": "Nov. 8, 2022"
         },
         "zh": {
           "category": "",
@@ -1082,7 +1143,8 @@
             "[图片",
             "虎诉在实现自身愿景的道路上，始终关注有志于从事争议解决业务的年轻人的成长，此前的“2022虎行风从奖学金”便是在此初衷之下设立的活动。",
             "最后，虎诉预祝本次活动圆满举办，各位参赛的年轻选手们亦能有精彩表现！"
-          ]
+          ],
+          "displayDate": "2022.11.08"
         },
         "detailImages": [
           "/assets/event/eventinfo/微信图片_20260511231524_299_2.png"
@@ -1091,6 +1153,7 @@
       },
       "tigers-fellowship-winners-announced": {
         "image": "/assets/event/event6.png",
+        "sortDate": "20220725",
         "en": {
           "category": "Tiger Dynamics",
           "title": "TIGERS FELLOWSHIP winners were announced",
@@ -1104,7 +1167,8 @@
             "The publicity period of this award list is from July 25 to July 28. If you have any objection to the results, you can submit a written objection application to the Scholarship Selection Committee during the publicity period. Email address: fellowship@tigerpartners.cn",
             "We have received 34 copies of applications from applicants. During the evaluation phase, the Scholarship Selection Committee carefully read the materials subscribed by the applicants and really appreciated all of your unique shining points. We are shocked by the excellence of contemporary law students and deeply moved by their sincere hearts. Moreover, we are full of confidence in the prospects for development of rule of law in China.",
             "Finally, we would like to thank you again for your attention and support. We cherish it and will always take it as the motivation to move forward."
-          ]
+          ],
+          "displayDate": "Jul. 25, 2022"
         },
         "zh": {
           "category": "",
@@ -1120,13 +1184,15 @@
             "联系邮箱：fellowship@tigerpartners.cn",
             "本次，我们共收到了34位奖学金申请者的申请材料。奖学金评审委员会在本次评奖的过程中，认真阅读了各位申请者准备的材料，看到了各位独特的闪光点，我们为当代法律学子之优秀感到震撼，也为各位的赤诚之心而深受感动，更对中国法治事业的发展前景充满信心。",
             "最后，再次诚挚感谢各位对虎诉的关注与支持，我们十分珍视并将始终以之为前行的动力。"
-          ]
+          ],
+          "displayDate": "2022.07.25"
         },
         "detailImages": [],
         "detailVideos": []
       },
       "hook-cartoon-character-joins": {
         "image": "/assets/event/event7.png",
+        "sortDate": "20220710",
         "en": {
           "category": "Tiger Dynamics",
           "title": "Breaking News! An important guest announced the official joining of Tiger Partners",
@@ -1134,7 +1200,8 @@
           "content": [
             "In order to welcome the official birth of this important guest, we launched the \"Cartoon Character Naming of Tiger Partners\" on TigerPark Mini Program on June 10. In just two days, we received 176 copies of registration information. After the vote of us, it finally obtained its own name - Hook! And let‘s see its detailed introduction. [图片",
             "[图片"
-          ]
+          ],
+          "displayDate": "Jul. 10, 2022"
         },
         "zh": {
           "category": "",
@@ -1144,7 +1211,8 @@
             "为了迎接这位重量级嘉宾的正式诞生，我们于6月10日在TigerPark小程序上发起了“虎诉卡通形象命名活动”。短短两天时间，我们收到了176位朋友的报名信息。经过虎诉全体成员的投票，最终它拥有了自己的名字——虎氪！接下来，请看它的详细介绍~",
             "[图片",
             "[图片"
-          ]
+          ],
+          "displayDate": "2022.07.10"
         },
         "detailImages": [
           "/assets/event/eventinfo/微信图片_20260511231524_300_2.png",
@@ -1154,13 +1222,15 @@
       },
       "tigers-fellowship-launched": {
         "image": "/assets/event/event8.png",
+        "sortDate": "20220616",
         "en": {
           "category": "Tiger Dynamics",
           "title": "TIGERS FELLOWSHIP was officially launched",
           "summary": "[图片",
           "content": [
             "[图片"
-          ]
+          ],
+          "displayDate": "Jun. 16, 2022"
         },
         "zh": {
           "category": "",
@@ -1168,7 +1238,8 @@
           "summary": "[图片",
           "content": [
             "[图片"
-          ]
+          ],
+          "displayDate": "2022.06.16"
         },
         "detailImages": [
           "/assets/event/eventinfo/微信图片_20260511231524_302_2.png"
@@ -1177,6 +1248,7 @@
       },
       "china-business-law-awards-2022": {
         "image": "/assets/event/event9.png",
+        "sortDate": "20220615",
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners won the China Business Law Awards 2022",
@@ -1188,7 +1260,8 @@
             "General Awards",
             "[图片",
             "It is said that during the evaluation phase, firm candidates were scored based on three sources of analysis: the firm’s submissions; endorsement from client referees; and valid nominations from the industry. Apart from peer nominations, selections from government institutions, the judiciary and academia were also received. Based on months of research and evaluation, hundreds of submissions and more than 1,000 comments from corporate executives, in-house counsel and senior practitioners, the editorial team of China Business Journal finally selected the China Business Law Awards 2022."
-          ]
+          ],
+          "displayDate": "Jun. 15, 2022"
         },
         "zh": {
           "category": "",
@@ -1201,7 +1274,8 @@
             "综合奖项",
             "[图片",
             "据悉，本次评选阶段系主要根据三类资料进行评分：律所申报资料、客户证明人的反馈，以及来自业界的有效提名。提名来源亦十分多元，除了业界外，还包括政府机构、司法系统和学术界。基于长达数月的调研和评价、数百份参选资料及千余项来自企业高管、法务和资深律师的评价意见，《商法》编辑团队最终评选出2022年度商法卓越律所大奖。"
-          ]
+          ],
+          "displayDate": "2022.06.15"
         },
         "detailImages": [
           "/assets/event/eventinfo/微信图片_20260511231524_303_2.png",
@@ -1211,6 +1285,7 @@
       },
       "official-account-mini-program-upgrade": {
         "image": "/assets/event/event10.png",
+        "sortDate": "20220609",
         "en": {
           "category": "Tiger Dynamics",
           "title": "Tiger Partners upgraded the functions of the official account and launched a new Mini Program",
@@ -1230,7 +1305,8 @@
             "TigerPark is a communication platform for those who share the same belief and passion. Online or offline communication activities will be held here from time to time， and we hope you can find your partners here and get the courage to move on.",
             "Currently, TigerPark is launching a series of Tiger Partners Co-branded peripheral products, and will launch communication meetings, scholarships and other activities. After registering as a member, users can use the above functions to participate in activities, send resumes, leave messages, purchase peripheral products and so on.",
             "Upgrading of official account function and online of the new Mini Program this time, is a bold attempt made by our team after a long period of preparation. We believe that change and innovation provide inexhaustible power and infinite possibility for upward growth. On the road to realizing our vision, we look forward to each of you who are concerned anout us to witness it together."
-          ]
+          ],
+          "displayDate": "Jun. 9, 2022"
         },
         "zh": {
           "category": "",
@@ -1252,7 +1328,8 @@
             "TigerPark是为有共同信念与热爱的朋友打造的交流平台，这里将不定期举办线上或线下交流活动，期待大家在这里找到携手同行的伙伴并获得继续前行的勇气。",
             "近期，TigerPark正陆续上线虎诉联名款周边，并将推出交流会、奖学金等多种活动，用户注册成为会员后，即可使用上述报名参与活动、投递简历、留言、购买周边等功能。",
             "本次公众号功能的升级与全新小程序的上线，是虎诉团队在筹备良久后做出的一次大胆尝试。虎诉相信，改变与创新为向上生长提供了不竭动力与无限可能。在虎诉实现愿景的前行道路上，期待每一位关注虎诉的朋友共同见证。"
-          ]
+          ],
+          "displayDate": "2022.06.09"
         },
         "detailImages": [
           "/assets/event/eventinfo/微信图片_20260511231524_305_2.png"
@@ -1261,6 +1338,7 @@
       },
       "legalband-2022-top-law-firms-lawyers": {
         "image": "/assets/event/event11.png",
+        "sortDate": "20220517",
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners and Mr. Liu Yuxuan, Mr. Wan Li were selected into the ranking of 2022 China's top law firms and top lawyers",
@@ -1272,7 +1350,8 @@
             "[图片",
             "Mr. Wan Li, the partner, was rated as the \"rising star\" in the field of compliance.",
             "[图片"
-          ]
+          ],
+          "displayDate": "May. 17, 2022"
         },
         "zh": {
           "category": "",
@@ -1285,7 +1364,8 @@
             "[图片",
             "虎诉合伙人万力律师被评为合规领域的“后起之秀”。",
             "[图片"
-          ]
+          ],
+          "displayDate": "2022.05.17"
         },
         "detailImages": [
           "/assets/event/eventinfo/微信图片_20260511231526_306_2.png",
@@ -1295,6 +1375,7 @@
       },
       "benchmark-litigation-2022-dispute-resolution": {
         "image": "/assets/event/event12.png",
+        "sortDate": "20220510",
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners was listed in Asia-Pacific & China on Dispute Resolution of 2022 by Benchmark Litigation",
@@ -1303,7 +1384,8 @@
             "Benchmark Litigation released lists of recommended law firms and lawyers for dispute resolution in Asia Pacific and China of 2022 on May 9, and Tiger Partners won the title of \"Notable Firm\" in the field of commercial disputes resolution in Beijing area by Benchmark Litigation 2022.",
             "[图片",
             "It is said that the list is based on extensive interviews with litigators, arbitrators, dispute resolution specialists and their clients, as well as as well as examining recent casework handled by law firms and lawyers."
-          ]
+          ],
+          "displayDate": "May. 10, 2022"
         },
         "zh": {
           "category": "",
@@ -1313,7 +1395,8 @@
             "5月9日，Benchmark Litigation发布了2022年度亚太地区及中国地区争议解决推荐律所及律师排行榜，虎诉律师事务所被评为中国北京地区商业纠纷领域“值得关注的律所（Notable Firm）”。",
             "[图片",
             "据悉，本次榜单系通过与诉讼律师、仲裁员、争议解决专家及其客户进行广泛访谈，并审查律师事务所及其律师近期办理的案件而得出。"
-          ]
+          ],
+          "displayDate": "2022.05.10"
         },
         "detailImages": [
           "/assets/event/eventinfo/微信图片_20260511231526_308_2.png"
@@ -1322,6 +1405,7 @@
       },
       "legalband-rising-law-firm-2022-nomination": {
         "image": "/assets/event/event13.png",
+        "sortDate": "20220331",
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners was nominated as Rising Law Firm of 2022 by LEGALBAND",
@@ -1331,7 +1415,8 @@
             "It is said that the Law Awards Nominations list has been made by China team of Legalband after several months of independent research, including but not limited to obtaining feedback from clients, peers and other research materials. The final winners will be announced in April.",
             "Established in December 2019, Tiger Partners is one of the extremely vibrant, creative and inclusive law firms. In just over two years after establishment, Tiger Partners has been recognized by many international legal rating agencies and media. Tiger Partners will always pursue the extreme and seek the perfection, and aim at winning lawsuits and fulfilling clients' business goals, as well as marching forward in high spirits down the road of \"becoming the best dispute resolution law firm in China\".",
             "[图片"
-          ]
+          ],
+          "displayDate": "Mar. 31, 2022"
         },
         "zh": {
           "category": "",
@@ -1342,7 +1427,8 @@
             "据悉，本次法律卓越大奖提名名单系由LEGALBAND大中华区调研团队历经数月，通过包括但不限于获取客户反馈、同行反馈及其他调研资料进行独立调研后最终确定，最终获奖结果将于4月揭晓。",
             "虎诉律师事务所成立于2019年12月，是极具生命力、创造力与包容性的律师事务所之一。在成立后短短两年多的时间里，虎诉已获得多家全球知名法律评级机构或媒体的认可。虎诉将始终追求极致与完美，一切以胜诉和客户的商业目标为导向，矢志不渝地在“成为中国最顶尖争议解决律师事务所”的道路上昂扬前行。",
             "[图片"
-          ]
+          ],
+          "displayDate": "2022.03.31"
         },
         "detailImages": [
           "/assets/event/eventinfo/微信图片_20260511231526_309_2.png"
@@ -1351,6 +1437,7 @@
       },
       "wan-li-dalian-international-arbitration-court": {
         "image": "/assets/event/event14.png",
+        "sortDate": "20220322",
         "en": {
           "category": "Industry News",
           "title": "Mr. Wan Li was engaged as the 6th arbitrator of Dalian International Arbitration Court",
@@ -1362,7 +1449,8 @@
             "In addition, Ms. Zoe Zhang, another partner , is engaged by Qingdao Arbitration Commission as the arbitrator.",
             "[图片",
             "Zoe Zhang specializes in commercial arbitration and litigation, and especially foreign related arbitration and international arbitration. The major sectors of her practice involve international sale of goods, construction, real estate, joint venture, equity transfer, intellectual properties, energy etc."
-          ]
+          ],
+          "displayDate": "Mar. 22, 2022"
         },
         "zh": {
           "category": "",
@@ -1375,7 +1463,8 @@
             "此外，虎诉律师事务所的合伙人张莉律师受聘于青岛仲裁委员会担任仲裁员。",
             "[图片",
             "张莉律师的专业领域为仲裁和诉讼，尤其擅长涉外仲裁和国际仲裁；主要领域包括国际货物买卖、建筑工程、房地产、中外合资、股权转让、知识产权和能源等多个领域。"
-          ]
+          ],
+          "displayDate": "2022.03.22"
         },
         "detailImages": [
           "/assets/event/eventinfo/微信图片_20260511231526_310_2.png",
@@ -1385,6 +1474,7 @@
       },
       "liu-yuxuan-china-business-law-journal-a-list": {
         "image": "/assets/event/event15.png",
+        "sortDate": "20220125",
         "en": {
           "category": "Industry News",
           "title": "Mr. Liu Yuxuan was listed in \"The A-List\" by China Business Law Journal",
@@ -1395,7 +1485,8 @@
             "[图片",
             "Liu Yuxuan is the managing partner of Tiger Partners, a member of the commercial arbitration committee of the Beijing Lawyers Association, and Sichuan Arbitration Research Center. Liu had over 12 years of practicing experience in dispute resolution. Before founding Tiger Partners, he worked for several top Chinese law firms, including Fangda Partners, King & Wood Mallesons and Zhong Lun Law Firm. Liu specializes in high-end civil and commercial litigation and arbitration, both domestic and foreign. His practice areas cover commerce and transactions; private equity; corporate equity and control; finance; media and entertainment; and real estate and construction, among others.",
             "Liu was featured by Asian Legal Business as An Up-and-Comer in Dispute Resolution and identified in the list of Top 40 Rising Stars 2021 by China Business Law Journal and 2021 Recommended Lawyers for Dispute Resolution in Beijing by Benchmark Litigation China. Liu was also recommended as a Leading Individual in dispute resolution litigation in the list of 2021 China Top Ranked Lawyers by LEGALBAND, and a Notable Practitioner in dispute resolution in China Legal Market 2020 by Asia Law Profiles."
-          ]
+          ],
+          "displayDate": "Jan. 25, 2022"
         },
         "zh": {
           "category": "",
@@ -1407,7 +1498,8 @@
             "[图片",
             "刘煜暄律师现为虎诉律师事务所管理合伙人，北京市律师协会商事仲裁法律专业委员会委员，四川省仲裁研究中心法律人库成员。刘律师在争议解决领域拥有12年以上的执业经验，专长于代理境内外高端民商事诉讼、仲裁案件，其业务范围涵盖商业与交易、私募股权、公司股权与控制权争夺、金融、传媒及娱乐、房地产及建设工程等各个领域。",
             "刘煜暄律师曾被《亚洲法律杂志》（Asian Legal Business）誉为“争议解决领域的耀眼新星”；并入选《商法》（China Business Law Journal）40位2021中国业务法律新星（Rising Stars 2021 Top 40）榜单、Benchmark Litigation China 2021北京地区争议解决推荐律师榜单；荣获2021年度LEGALBAND中国顶级律师排行榜 “争议解决·诉讼”领域的“后起之秀”、《亚洲法律概况》（Asialaw Profiles）2020年度中国法律市场“争议解决”领域“知名律师”等荣誉称号。"
-          ]
+          ],
+          "displayDate": "2022.01.25"
         },
         "detailImages": [
           "/assets/event/eventinfo/微信图片_20260511231526_312_2.png"
@@ -1416,6 +1508,7 @@
       },
       "zoe-zhang-joined-as-partner": {
         "image": "/assets/event/event16.png",
+        "sortDate": "20220124",
         "en": {
           "category": "Tiger Dynamics",
           "title": "Welcome Zoe Zhang has officially joined the firm as a partner",
@@ -1427,7 +1520,8 @@
             "Zoe is deeply involved in the field of arbitration, and most of the cases represented by her succeeded in the end. Zoe was appraised and elected to be one of the 2021 The Legal 500 Next Generation Partners in the \"Dispute Resolution and Arbitration\" field; she and her team were recommended by one of the clients as “the best arbitration lawyers I have met in China. Their attention to details and hard-working attitudes really makes them one of the most reliable legal representatives in China.”",
             "Zoe is also the Deputy Secretary General of the China International Investment Arbitration Forum (CIAF), a member of the organizing committee of China Young Arbitration Group (CYAG) and a panelist arbitrator of Qingdao Arbitration Commission.",
             "As an expert in foreign related arbitration and international arbitration, Zoe will certainly help strengthen Tiger Partners’ business in cross-border commercial dispute resolution, further enlarging its fields in dispute resolution. [图片"
-          ]
+          ],
+          "displayDate": "Jan. 24, 2022"
         },
         "zh": {
           "category": "",
@@ -1441,7 +1535,8 @@
             "此外，张律师还担任中国国际投资仲裁常设论坛（CIIAF）副秘书长，同时也是中国青年仲裁小组（CYAG）组委会成员以及青岛仲裁委员会仲裁员。",
             "作为在涉外及国际仲裁领域深耕多年的资深律师，张莉律师的加入将大大强化虎诉在跨境商事争议解决这一领域的力量，进一步扩大虎诉在争议解决领域的版图。",
             "[图片"
-          ]
+          ],
+          "displayDate": "2022.01.24"
         },
         "detailImages": [
           "/assets/event/eventinfo/微信图片_20260511231526_313_2.png"
@@ -1450,6 +1545,7 @@
       },
       "alb-china-2022-firms-to-watch": {
         "image": "/assets/event/event17.png",
+        "sortDate": "20220120",
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners was listed as \" ALB China 2022 Firms to Watch\"",
@@ -1464,7 +1560,8 @@
             "• Development strategies of the firm for the next 12 months.",
             "As a boutique law firm focusing on the settlement of major and complex civil and commercial disputes, Tiger Partners has deep legal expertise and extensive practical experience, as well as a distinctive commercial thinking. In the past year, Tiger Partners burst out great energy and achieved remarkable achievements, and has been widely recognized by clients and the industry as a real boutique law firm.",
             "Tiger Partners will continue to cultivate the legal profession in order to provide clients with more professional legal services and more accurate business solutions."
-          ]
+          ],
+          "displayDate": "Jan. 20, 2022"
         },
         "zh": {
           "category": "",
@@ -1480,13 +1577,15 @@
             "- 律所未来12个月的发展战略。",
             "凭借深厚的法律功底与丰富的实战经验，以及与众不同的商业化思维，虎诉自入围“年度最具潜力律师事务所大奖”不到1年的时间，便已飞速成长为获得行业高度认可及客户真切信赖的“精品律所”。",
             "虎诉将始终追求极致与完美，一切以胜诉和客户的商业目标为导向。"
-          ]
+          ],
+          "displayDate": "2022.01.20"
         },
         "detailImages": [],
         "detailVideos": []
       },
       "second-anniversary-dinner": {
         "image": "/assets/event/event18.jpg",
+        "sortDate": "20211231",
         "en": {
           "category": "Tiger Dynamics",
           "title": "Tiger Partners held its 2nd Anniversary Dinner",
@@ -1503,7 +1602,8 @@
             "The final part of the dinner was opened by Mr. Liu Yuxuan, the managing partner of Tiger Partners. He introduced the future development direction and the positioning of the law firm to the guests, and gave a brief report on the major measures expected to be implemented by Tiger Partners in the coming year of 2022.",
             "All the past is a preface. In the days to come, Tiger Partners will continue to run down the road of \"becoming the best dispute resolution law firm in China\", and we look forward to seeing the growth of Tiger Partners with you all.",
             "[图片"
-          ]
+          ],
+          "displayDate": "Dec. 31, 2021"
         },
         "zh": {
           "category": "",
@@ -1524,7 +1624,8 @@
             "晚宴的终章由管理合伙人刘煜暄律师开启，他向各位来宾介绍了虎诉未来的发展方向及律所定位，并就虎诉预计在新的一年推行的重大举措进行了简要汇报。",
             "凡是过往，皆为序章。在未来的日子里，虎诉矢志不渝地在“成为中国最顶尖争议解决律师事务所”的道路上狂奔，也期待每一个关注虎诉成长的你我共同见证。",
             "[图片"
-          ]
+          ],
+          "displayDate": "2021.12.31"
         },
         "detailImages": [
           "/assets/event/eventinfo/微信图片_20260511231526_314_2.jpg"
@@ -1533,6 +1634,7 @@
       },
       "beijing-lawyers-association-professional-committee": {
         "image": "/assets/event/event20.png",
+        "sortDate": "20211015",
         "en": {
           "category": "Industry News",
           "title": "Three partners of Tiger Partners were elected as members of the Professional Committee of the 11th Beijing Lawyer Association",
@@ -1548,7 +1650,8 @@
             "Member of the Professional Committee on Legal Affairs at the Intersection of Criminal and Civil Affairs",
             "Mr. Wan Li （Partner）",
             "[图片"
-          ]
+          ],
+          "displayDate": "Oct. 15, 2021"
         },
         "zh": {
           "category": "",
@@ -1561,7 +1664,8 @@
             "刑民交叉法律事务专业委员会委员：万力律师（合伙人） [图片",
             "这充分体现出虎诉律师具备扎实的执业技能和丰富的工作经验，注重专业化、精细化的业务素养，深耕于业务领域，并取得骄人成绩。同时也反映出虎诉丰富的实战经验和一贯的优异表现受到广泛认可。",
             "虎诉将继续放眼国际、深耕专业，一如既往地为客户提供优质的法律服务。"
-          ]
+          ],
+          "displayDate": "2021.10.15"
         },
         "detailImages": [
           "/assets/event/eventinfo/微信图片_20260511231527_315_2.png",
@@ -1572,6 +1676,7 @@
       },
       "liu-yuxuan-and-sam-liao-were-invited-to-the-29th-cross-strait-youth-perspectives": {
         "image": "/assets/event/event21.png",
+        "sortDate": "20210720",
         "en": {
           "category": "Industry News",
           "title": "Mr. Liu Yuxuan and  Mr. Liao Mengcheng Invited to Attend the 29th Cross-Strait Youth Vision Forum",
@@ -1585,7 +1690,8 @@
             "As the forum was drawing to a close, Mr. Liu Yuxuan remarked on stage that he sincerely hopes young people on both sides of the Strait will strengthen exchanges and interactions in the legal sector, jointly explore new pathways for cross-strait integrated development, and earnestly implement the principle of promoting integration through connectivity, welfare benefits, and emotional affinity, so as to jointly create a promising future for cross-strait youth.",
             "[图片]",
             "Finally, leaders and guests attending the forum took a group photo in front of the rostrum. The 29th Cross-Strait Youth Vision Forum themed Heart Across the Straits · Legal Resonance of Sincere Voices concluded successfully."
-          ]
+          ],
+          "displayDate": "Jul. 20, 2021"
         },
         "zh": {
           "category": "",
@@ -1600,7 +1706,8 @@
             "本次论坛接近尾声时，刘煜暄律师在台上表示，衷心希望广大青年朋友在法律领域多交流多沟通，共同探索海峡两岸融合发展新路，努力做到“以通促融”、“以惠促融”、“以情促融”，共同创造属于两岸青年的美好未来。",
             "[图片",
             "最后，参加本次论坛的领导与嘉宾在主席台前合影留念，“心跨两岸·法悦新声”——第29次两岸青年观点论坛圆满结束。"
-          ]
+          ],
+          "displayDate": "2021.07.20"
         },
         "detailImages": [
           "/assets/event/eventinfo/20210720-1.jpg",
@@ -1611,6 +1718,7 @@
       },
       "benchmark-litigation-china-2021-recommendation": {
         "image": "/assets/event/event22.png",
+        "sortDate": "20210610",
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners and Mr. Liu Yuxuan and Mr. Wan Li recommend by Benchmark Litigation China",
@@ -1618,7 +1726,8 @@
           "content": [
             "On June 10, 2021, the international legal rating agency benchmark ligation officially released the ranking guide for China in 2021, which is also the first time that benchmark ligation has launched the ranking guide for dispute resolution in China.",
             "With its outstanding performance in the field of dispute resolution in the past year, Tiger Partners was awarded as \"Notable Firm\" in the field of commercial disputes resolution in Beijing in 2021. Mr. Liu Yuxuan and Mr. Wan Li, partners of Tiger Partners, were also listed as recommended lawyers for dispute resolution in Beijing in benchmark litigation China 2021."
-          ]
+          ],
+          "displayDate": "Jun. 10, 2021"
         },
         "zh": {
           "category": "",
@@ -1627,13 +1736,15 @@
           "content": [
             "2021年6月10日，国际法律评级机构Benchmark Litigation正式发布2021年中国地区排名指南，这也是Benchmark Litigation首次在中国地区推出争议解决排名指南。",
             "虎诉凭借过去一年在争议解决领域的突出表现，荣膺Benchmark Litigation China 2021北京地区商业纠纷领域“优秀律所”称号。虎诉合伙人刘煜暄律师、万力律师也荣登Benchmark Litigation China 2021北京地区争议解决推荐律师榜单。"
-          ]
+          ],
+          "displayDate": "2021.06.10"
         },
         "detailImages": [],
         "detailVideos": []
       },
       "china-business-law-awards-2021-firm-to-watch": {
         "image": "/assets/event/event23.png",
+        "sortDate": "20210518",
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners was listed as \"Firm to Watch\"",
@@ -1643,7 +1754,8 @@
             "The award was based on the unremitting efforts in covering China’s legal market, CBLJ's team had selected the winners under each category after months of research and evaluation, getting direct feedback from the market, examining thousands of votes and recommendations from domestic and international corporate counsel, decision-makers from management, legal academics and government officials, and taking into account significant transactions, cases or other notable achievements in which each firm has been involved in the past year.",
             "As a boutique law firm focusing on the settlement of major and complex civil and commercial disputes, Tiger Partners has burst out great energy in the past year and achieved remarkable achievements, which has been widely recognized by clients and the industry.",
             "Tiger Partners will continue to cultivate the legal profession in order to provide clients with more professional legal services and more accurate business solutions."
-          ]
+          ],
+          "displayDate": "May. 18, 2021"
         },
         "zh": {
           "category": "",
@@ -1653,13 +1765,15 @@
             "近日，国际领先法律期刊《商法》（China Business Law Journal）公布2021年《商法》卓越律所大奖评选结果，北京虎诉律师事务所（Tiger Partners），凭借精湛的专业能力和优质的客户口碑，被评选为“备受关注律所”。",
             "该奖项是《商法》团队基于对中国法律市场的长期关注，历经数月的调研和评选，通过市场的直接反馈和数千项来自境内外企业法务、管理层决策者、法律学者和政府官员的投票和推荐，同时结合各家律所在过去一年参与过的重要交易、案例或引人注目的其他成就，从数百家参选律所之中甄选而出。",
             "虎诉作为一家专注于重大复杂民商事争议解决的精品所，在过去一年迸发出巨大能量，取得令人瞩目的战绩，受到客户和业界的广泛认可。虎诉将继续深耕法律专业，以期为客户提供更专业的法律服务和更精准的商业解决方案。"
-          ]
+          ],
+          "displayDate": "2021.05.18"
         },
         "detailImages": [],
         "detailVideos": []
       },
       "ssq-alb-china-law-awards-2021-nomination": {
         "image": "/assets/event/event24.png",
+        "sortDate": "20210416",
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners was nominated as \"Rising Law Firm of the Year\" in the 18th Annual SSQ ALB China Law Awards 2021",
@@ -1669,7 +1783,8 @@
             "ALB is a cutting-edge legal magazine under Thomson Reuters and one of the most influential legal media in the world. This year's ALB China law award attracted more than 1400 nominations from more than 200 law firms and corporate legal teams, reaching a new high.",
             "As a boutique law firm focusing on the settlement of major and complex civil and commercial disputes, Tiger Partenrs has profound legal skills and rich practical experience. At the same time, Tiger Partenrs has a distinctive commercial thinking and continues to maintain close cooperation with leaders in emerging fields. It is one of the most viable, creative and inclusive law firms.",
             "Tiger Partners will continue to be committed to providing clients with more professional legal services, and accurate business solutions."
-          ]
+          ],
+          "displayDate": "Apr. 16, 2021"
         },
         "zh": {
           "category": "",
@@ -1680,13 +1795,15 @@
             "ALB是汤森路透旗下的尖端法律杂志，是全球最具影响力的法律媒体之一。今年的ALB中国法律大奖，吸引了超过200家律师事务所以及企业法务团队共计1400余项提名，提名再创新高。",
             "虎诉作为一家专注于重大复杂民商事争议解决的精品所，具备深厚的法律功底与丰富的实战经验。同时，虎诉拥有与众不同的商业化思维，并持续与新兴领域的领军者保持紧密合作，是最具生命力、创造力与包容性的律师事务所之一。",
             "百战常胜——虎诉始终以实现客户的需求为第一目标，以“胜诉”为争议解决法律服务的最终目的，并且一直保持着令人瞩目的案件胜诉率。虎诉将继续致力于为客户提供更为专业的法律服务、精准的商业解决方案及良好的用户体验。"
-          ]
+          ],
+          "displayDate": "2021.04.16"
         },
         "detailImages": [],
         "detailVideos": []
       },
       "liu-yuxuan-legalband-2021-top-lawyers": {
         "image": "/assets/event/event25.png",
+        "sortDate": "20210414",
         "en": {
           "category": "Industry News",
           "title": "Mr. Liu Yuxuan was listed in the top lawyers in China by LEGALBAND in 2021",
@@ -1694,7 +1811,8 @@
           "content": [
             "In April 2021, Mr. Liu Yuxuan was listed in the top lawyers in China by LEGALBAND in 2021 and selected as the \"Rising Star\" in the field of \"dispute resolution litigation\" .",
             "[图片]"
-          ]
+          ],
+          "displayDate": "Apr. 14, 2021"
         },
         "zh": {
           "category": "",
@@ -1705,7 +1823,8 @@
             "该榜单系LEGALBAND重点参考客户反馈信息，结合LEGALBAND中国区驻地调研团队对中国律师群体的长期关注，最终评选出的2021年度各法律服务领域的中国顶级律师，旨在为各类塔尖企业和个人选聘优秀律师提供权威性指南。",
             "刘煜暄律师于2019年12月创办虎诉，作为年轻一代的管理合伙人，刘煜暄律师表示，在刚过去的2021年第一季度，虎诉延续2020年的战绩，最新接受委托的争议解决案件达十余起，其中一半以上案件的标的金额超过人民币1亿元。虎诉必将继续追求卓越，为客户提供更加优质的争议解决法律服务。",
             "[图片"
-          ]
+          ],
+          "displayDate": "2021.04.14"
         },
         "detailImages": [
           "/assets/event/eventinfo/20210414-1.jpg"
@@ -1714,6 +1833,7 @@
       },
       "top-40-rising-stars-2021": {
         "image": "/assets/event/event27.png",
+        "sortDate": "20210315",
         "en": {
           "category": "Industry News",
           "title": "Attorney Liu Yuxuan and Wan Li from Tiger Partners identified in the list of Top 40 Rising Stars 2021 elite up-and-coming lawyers in China",
@@ -1735,7 +1855,8 @@
             "Wan Li is adept at applying his experience as a lawyer and an in-house counsel to understand his clients' needs and ultimate goals and is always able to provide insightful and actionable legal advice to help clients make the most favorable decisions. With excellent legal expertise, a high sense of responsibility, swift turnaround, and a passion for success, Wan Li is committed to helping clients realize their interests.",
             "Wan Li joined Tiger Partners in 2020. Prior to that, Mr. Wan worked as a dispute resolution lawyer in three top Chinese law firms, and as a Litigation Director in the legal department of an A-share listed company.",
             "Wan Li graduated from the University of International Relations with a Bachelor's degree in Law, and completed his Master's degree in Law (Maritime Law) at Dalian Maritime University."
-          ]
+          ],
+          "displayDate": "Mar. 15, 2021"
         },
         "zh": {
           "category": "",
@@ -1756,7 +1877,8 @@
             "万力善于运用其律师和公司法务的经验，理解客户的诉求和最终目的，并提出富有洞察力且可落地执行的法律意见，帮助客户做出最有利的决策。万力具有精湛的专业技能、高度的责任感、极高的响应速度以及寻找一切成功可能的热情，致力于帮助客户最终实现其利益。",
             "万力于2020年加入北京虎诉律师事务所。在加入虎诉律师事务所之前，万力律师曾在国内顶尖的三家律师事务所担任争议解决律师，并在某A股上市公司法务部任诉讼总监。",
             "万力毕业于国际关系学院获法学学士学位，毕业于大连海事大学获法学硕士学位（海商法专业）。"
-          ]
+          ],
+          "displayDate": "2021.03.15"
         },
         "detailImages": [
           "/assets/event/eventinfo/20210315-2.jpg",
@@ -1766,6 +1888,7 @@
       },
       "foreign-related-lawyer-talent-pool": {
         "image": "/assets/event/event31.png",
+        "sortDate": "20201014",
         "en": {
           "category": "Industry News",
           "title": "Mr. Xu Min and Mr. Wan Li were selected into the Foreign-Related Lawyer Talent Pool of the Beijing Bar Association",
@@ -1774,7 +1897,8 @@
             "The Beijing Lawyers Association released the list of Foreign Lawyers Talent pool yesterday. After strict selection and publicity procedures, Mr. Xu Min and Mr. Wan Li were successfully selected into the foreign lawyers talent pool with their rich foreign business experience.",
             "This fully shows the rich practical experience and consistent excellent performance of Tiger Partners lawyers in foreign-related legal services, especially in the field of civil and commercial litigation and arbitration.",
             "Tiger Partners will continue to take a broad view of the international legal affiars, and continue to provide clients with high-quality legal services."
-          ]
+          ],
+          "displayDate": "Oct. 14, 2020"
         },
         "zh": {
           "category": "",
@@ -1785,13 +1909,15 @@
             "许旻律师的业务领域包括：跨境投资、民商事诉讼与仲裁。",
             "万力律师的职业领域包括：国际贸易、民商事诉讼与仲裁。",
             "虎诉将继续放眼国际、深耕专业，一如既往地为客户提供优质的法律服务。"
-          ]
+          ],
+          "displayDate": "2020.10.14"
         },
         "detailImages": [],
         "detailVideos": []
       },
       "china-business-law-journal-featured-tiger-partners": {
         "image": "/assets/event/event32.png",
+        "sortDate": "20200927",
         "en": {
           "category": "Industry News",
           "title": "China Business Law Journal officially included Tiger Partners",
@@ -1799,7 +1925,8 @@
           "content": [
             "Recently, China Business Law Journal, a well-known legal media, officially included Tiger Partners. Tiger Partners’ inclusion in the Journal’s recommended law firm list fully attests to the firm’s consistently outstanding performance in dispute resolution (litigation and arbitration).",
             "Tiger Partners will continue to deepen its professional expertise, devote full professionalism and dedication to every case, and consistently deliver exceptional legal services to clients."
-          ]
+          ],
+          "displayDate": "Sep. 27, 2020"
         },
         "zh": {
           "category": "",
@@ -1808,20 +1935,23 @@
           "content": [
             "近日，知名法律媒体《商法》（China Business Law Journal）正式收录北京虎诉律师事务所。虎诉荣登商法推荐律所榜单，充分显示了虎诉在争议解决（诉讼与仲裁）领域一贯的优异表现。",
             "虎诉将持续深耕专业，对每一起案件都倾注百分之百的技艺和热情，持续为客户提供卓越的法律服务。"
-          ]
+          ],
+          "displayDate": "2020.09.27"
         },
         "detailImages": [],
         "detailVideos": []
       },
       "alb-interview-liu-yuxuan": {
         "image": "/assets/event/event34.png",
+        "sortDate": "20200526",
         "en": {
           "category": "Industry News",
           "title": "ALB report \"An up-and-comer in dispute resolution-Interview Liu Yuxuan, managing partner\"",
           "summary": "Recently, Asian Legal Business (\"ALB\"), one of the world's most influential legal media, interviewed Liu Yuxuan, Managing Partner of Tiger Partners. The article has been published in the May 2020 issue of ALB China. If you would like to read the rest of the article, please visit ALB's website http://www.legalbusinessonline.com/china.",
           "content": [
             "Recently, Asian Legal Business (\"ALB\"), one of the world's most influential legal media, interviewed Liu Yuxuan, Managing Partner of Tiger Partners. The article has been published in the May 2020 issue of ALB China. If you would like to read the rest of the article, please visit ALB's website http://www.legalbusinessonline.com/china."
-          ]
+          ],
+          "displayDate": "May. 26, 2020"
         },
         "zh": {
           "category": "",
@@ -1837,13 +1967,15 @@
             "刘律师：在年轻律师身上，我们最注重的品质首先是要有一个激昂的人生态度和价值观。第二，争议解决往往涉及信用问题，因此我们看重年轻律师对客户的承诺是否可以按时实现。第三，年轻律师应该有韧性。在争议解决的过程中，律师会遇到很多的困难，如果没有韧性的话，是无法在这条职业道路上走得长远的。律师的发展根植于对每一个案子的钻研。在不断突破困难、积累经验，为客户带来价值的过程中，律师自身得到了发展，这样的发展会带动律所的发展，而后者又会为前者回馈相应的价值，并且带来更广阔的空间。",
             "ALB：虎诉的愿景是什么？未来三到五年，虎诉有着怎样的发展规划？",
             "刘律师：我们要成为中国最好的争议解决律师事务所。我们也始终朝着这个方向努力。我们希望通过做好现在手里的每一个案子，营造良好的口碑效应，积累更多的客户，今后为越来越多的客户提供专业化的法律服务和优化的体验。"
-          ]
+          ],
+          "displayDate": "2020.05.26"
         },
         "detailImages": [],
         "detailVideos": []
       },
       "alb-former-red-circle-lawyers-boutique-firm": {
         "image": "/assets/event/event40.png",
+        "sortDate": "20200311",
         "en": {
           "category": "Industry News",
           "title": "ALB report\"Former red circle firm lawyers leave to set up boutique firm Tiger Partners\"",
@@ -1858,7 +1990,8 @@
             "Liu will be the managing partner of the new firm. He specializes on domestic litigation and arbitration, with expertise on private equity, contest of corporate equity and control, media and entertainment, real estate and construction.",
             "Meanwhile Xu and Wan will act as partners. Xu focuses on domestic and international arbitration, with special expertise on finance and investment, equity transaction, corporate governance, commercial contract review and dispute resolution and product liability, having advised industries of banking and finance, technology, new media, entertainment, education and real estate.",
             "Wan specializes on finance and investment, equity transaction, commercial contract, tort liability, IP dispute resolution and criminal accountability, with special knowledge of finance, maritime, aviation, manufacture, medicine, real estate, sports, electronic entertainment and competition industries."
-          ]
+          ],
+          "displayDate": "Mar. 11, 2020"
         },
         "zh": {
           "category": "",
@@ -1873,13 +2006,15 @@
             "刘煜暄律师将担任虎诉的管理合伙人，其专长于代理国内诉讼及仲裁案件，主要服务领域包括私募股权、公司股权与控制权争夺、传媒及娱乐、房地产及建设工程等。",
             "许旻律师和万力律师出任虎诉合伙人。许律师专长于代理境内外仲裁案件，在投融资、股权交易、公司治理、商事合同审查及纠纷处理、产品责任等业务领域经验丰富，承办案件涉及银行金融、私募基金、高新科技、新媒体、影视娱乐、教育、房地产等领域。",
             "万力律师则在投融资、股权交易、商事合同、侵权责任及知识产权纠纷处理、法院执行、刑事追责等业务领域经验丰富，承办案件涉及金融、海事、航空、工业制造、医药、房地产、体育、电子娱乐与竞技等领域。"
-          ]
+          ],
+          "displayDate": "2020.03.11"
         },
         "detailImages": [],
         "detailVideos": []
       },
       "list-1779018285996": {
         "image": "/assets/about/about.png",
+        "sortDate": "",
         "en": {
           "category": "111",
           "title": "1231231",
@@ -1891,6 +2026,40 @@
           "title": "123123123",
           "summary": "",
           "content": []
+        }
+      },
+      "event-20260530-92": {
+        "image": "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb/assets/team/team5.png",
+        "sortDate": "20260530",
+        "en": {
+          "category": "123",
+          "title": "New Event",
+          "summary": "2131",
+          "content": [
+            "1111",
+            "",
+            "1111",
+            "",
+            "",
+            "1111",
+            "",
+            "",
+            "1111"
+          ]
+        },
+        "zh": {
+          "category": "231",
+          "title": "新动态",
+          "summary": "1231",
+          "content": [
+            "123123",
+            "",
+            "123123",
+            "",
+            "123123",
+            "",
+            "1231231"
+          ]
         }
       }
     }
@@ -3268,7 +3437,7 @@
       },
       "mengcheng-yun": {
         "slug": "mengcheng-yun",
-        "name": "Mengcheng Yun",
+        "name": "Mengcheng",
         "zhName": "云梦成",
         "title": "Senior Associate",
         "zhTitle": "资深律师",
@@ -3393,34 +3562,6 @@
           "代理某航空燃机领域的科创企业，针对某真空泵及精密零部件销售龙头企业，提起多起合同纠纷案件。案件涉及货物交付数量争议、质量争议及司法鉴定程序，涉案标的总额约人民币3000万元。目前，部分案件仍在审理中，部分案件已取得全面胜诉结果，并实际收回全额款项。"
         ]
       },
-      "partner-7": {
-        "slug": "partner-7",
-        "name": "达",
-        "zhName": "刘",
-        "title": "Partner",
-        "zhTitle": "合伙人",
-        "image": "",
-        "phone": "",
-        "email": "liud74780@gmail.com",
-        "serviceIndustries": [],
-        "zhServiceIndustries": [],
-        "education": "",
-        "zhEducation": "",
-        "qualification": "",
-        "zhQualification": "",
-        "languages": [],
-        "zhLanguages": [],
-        "socialEngagements": "",
-        "zhSocialEngagements": "",
-        "practiceArea": "",
-        "zhPracticeArea": "",
-        "practiceExperience": "",
-        "zhPracticeExperience": "",
-        "honors": [],
-        "zhHonors": [],
-        "achievements": [],
-        "zhAchievements": []
-      },
       "senior-associate-8": {
         "slug": "senior-associate-8",
         "name": "达",
@@ -3454,61 +3595,96 @@
   "lists": {
     "industries": [
       {
-        "slug": "private-equity?from=home",
+        "intro": "Tiger Partners provides a full range of legal services to many well-known Chinese investment institutions, portfolio or invested companies, founders and shareholders, ranging from potential risk control, pre-litigation dispute resolution, litigation, arbitration and enforcement, to achieve their ultimate business goals.",
+        "zhIntro": "虎诉为国内众多知名投资机构、被投项目公司及创始人或股东提供从潜在风险控制、诉前争端解决，到代理诉讼仲裁和强制执行的全方位法律服务，以期为客户实现最终商业目的。",
+        "slug": "private-equity",
         "name": "Private Eq",
         "zhName": "私募",
         "img": "/assets/about/aboutVision.png",
         "cls": "lg:col-span-2",
-        "intro": "Tiger Partners provides a full range of legal services to many well-known Chinese investment institutions, portfolio or invested companies, founders and shareholders, ranging from potential risk control, pre-litigation dispute resolution, litigation, arbitration and enforcement, to achieve their ultimate business goals.",
-        "zhIntro": "虎诉为国内众多知名投资机构、被投项目公司及创始人或股东提供从潜在风险控制、诉前争端解决，到代理诉讼仲裁和强制执行的全方位法律服务，以期为客户实现最终商业目的。"
+        "sections": "",
+        "zhSections": ""
       },
       {
-        "slug": "finance?from=home",
+        "intro": "Tiger Partners has highly specialized knowledge and extensive experience in dispute resolution relating to finance, and is able to provide early warning and prevent risks arising from various financial products, investment and finance transactions, and provide all-round dispute resolution services in civil & commercial and civil cross criminal area.",
+        "zhIntro": "虎诉在金融相关争议解决领域具有高度专业的知识技能和丰富的实操经验，能够为各类金融产品及投融资交易所衍生的争议提供风险预警和防范，以及全方位民商事、刑民交叉争议解决服务。",
+        "slug": "finance",
         "name": "Finance",
         "zhName": "金融",
-        "img": "/assets/home/INDUSTRIES2.webp",
+        "img": "/assets/industries/in3.webp",
         "cls": "lg:col-span-1",
-        "intro": "Tiger Partners has highly specialized knowledge and extensive experience in dispute resolution relating to finance, and is able to provide early warning and prevent risks arising from various financial products, investment and finance transactions, and provide all-round dispute resolution services in civil & commercial and civil cross criminal area.",
-        "zhIntro": "虎诉在金融相关争议解决领域具有高度专业的知识技能和丰富的实操经验，能够为各类金融产品及投融资交易所衍生的争议提供风险预警和防范，以及全方位民商事、刑民交叉争议解决服务。"
+        "sections": "",
+        "zhSections": ""
       },
       {
-        "slug": "real-estate?from=home",
+        "intro": "Tiger Partners is specialized in dispute resolution in real estate industry. From traditional disputes over construction contracts to large-scale disputes over real estate, land purchase and lease agreements, Tiger Partners has a profound theoretical basis and extensive practical experience.",
+        "zhIntro": "虎诉擅长房地产行业的争议解决法律服务，从传统建设工程合同纠纷案件到大型房地产、土地的买卖、租赁协议纠纷案件，虎诉均拥有深厚的理论基础和丰富的实操经验。",
+        "slug": "real-estate",
         "name": "Real Estate",
         "zhName": "房地产",
-        "img": "/assets/home/INDUSTRIES3.webp",
+        "img": "/assets/industries/in4.webp",
         "cls": "lg:col-span-1 lg:row-span-2",
-        "intro": "Tiger Partners is specialized in dispute resolution in real estate industry. From traditional disputes over construction contracts to large-scale disputes over real estate, land purchase and lease agreements, Tiger Partners has a profound theoretical basis and extensive practical experience.",
-        "zhIntro": "虎诉擅长房地产行业的争议解决法律服务，从传统建设工程合同纠纷案件到大型房地产、土地的买卖、租赁协议纠纷案件，虎诉均拥有深厚的理论基础和丰富的实操经验。"
+        "sections": "",
+        "zhSections": ""
       },
       {
-        "slug": "sports-and-e-sports?from=home",
+        "intro": "Tiger Partners has deeply participated in the increasingly mature commercialization process of China's sports industry. E-Sports, after being selected into the Asian Games, has opened a golden era again. With a wealth of experience and foresight, Tiger Partners is energizing the dream of young talents in the industry to set sail.",
+        "zhIntro": "虎诉深度参与中国体育行业日趋成熟的商业化进程，而电子竞技入选亚运会后再次开启黄金时代，虎诉正以丰富的经验和超前的眼界，助力行业中的青年才俊梦想起航。",
+        "slug": "sports-and-e-sports",
         "name": "Sports and E-Sports",
         "zhName": "体育和电子竞技",
-        "img": "/assets/home/INDUSTRIES4.webp",
+        "img": "/assets/industries/in5.webp",
         "cls": "lg:col-span-1",
-        "intro": "Tiger Partners has deeply participated in the increasingly mature commercialization process of China's sports industry. E-Sports, after being selected into the Asian Games, has opened a golden era again. With a wealth of experience and foresight, Tiger Partners is energizing the dream of young talents in the industry to set sail.",
-        "zhIntro": "虎诉深度参与中国体育行业日趋成熟的商业化进程，而电子竞技入选亚运会后再次开启黄金时代，虎诉正以丰富的经验和超前的眼界，助力行业中的青年才俊梦想起航。"
+        "sections": "",
+        "zhSections": ""
       },
       {
-        "slug": "international-trade?from=home",
+        "intro": "The Belt and Road Initiative offers new opportunities as well as challenges on an ongoing basis for foreign trade participants in all sectors. With extensive experience and academic background in foreign-related cases, the lawyers of Tiger Partners are able to provide high-quality and efficient foreign-related dispute resolution legal services to Chinese and foreign clients.",
+        "zhIntro": "“一带一路”战略为各行业对外贸易参与者提供持续的新机遇和新挑战，虎诉律师有丰富的涉外案件经验和学术背景，能够为中外客户提供优质、高效的涉外争议解决法律服务。",
+        "slug": "international-trade",
         "name": "International Trade",
         "zhName": "国际贸易",
-        "img": "/assets/home/INDUSTRIES5.webp",
+        "img": "/assets/industries/in2.webp",
         "cls": "lg:col-span-1",
-        "intro": "The Belt and Road Initiative offers new opportunities as well as challenges on an ongoing basis for foreign trade participants in all sectors. With extensive experience and academic background in foreign-related cases, the lawyers of Tiger Partners are able to provide high-quality and efficient foreign-related dispute resolution legal services to Chinese and foreign clients.",
-        "zhIntro": "“一带一路”战略为各行业对外贸易参与者提供持续的新机遇和新挑战，虎诉律师有丰富的涉外案件经验和学术背景，能够为中外客户提供优质、高效的涉外争议解决法律服务。"
+        "sections": "",
+        "zhSections": ""
       },
       {
-        "slug": "cyber-tech-and-game?from=home",
+        "intro": "Since Internet plus initiative became a national strategy, numerous entrepreneurs have been pursuing wealth and success in the tide of the internet. With years of legal service experience cultivating in internet technology and game, Tiger Partners has greatly protected and escorted investors and young entrepreneurs in this industry.",
+        "zhIntro": "“互联网+”成为国家战略以来，海量创业者在互联网浪潮中追逐财富与成功，虎诉凭借多年深耕互联网科技及游戏行业法律服务的经验，为行业投资者和青年企业家保驾护航。",
+        "slug": "cyber-tech-and-game",
         "name": "Cyber Tech and Game",
         "zhName": "互联网科技及游戏",
         "img": "/assets/home/INDUSTRIES6.png",
         "cls": "lg:col-span-2",
-        "intro": "Since Internet plus initiative became a national strategy, numerous entrepreneurs have been pursuing wealth and success in the tide of the internet. With years of legal service experience cultivating in internet technology and game, Tiger Partners has greatly protected and escorted investors and young entrepreneurs in this industry.",
-        "zhIntro": "“互联网+”成为国家战略以来，海量创业者在互联网浪潮中追逐财富与成功，虎诉凭借多年深耕互联网科技及游戏行业法律服务的经验，为行业投资者和青年企业家保驾护航。"
+        "sections": "",
+        "zhSections": ""
+      },
+      {
+        "slug": "cards-1780119755266",
+        "name": "111",
+        "zhName": "22",
+        "img": "",
+        "cls": "",
+        "intro": "1231",
+        "zhIntro": "12312",
+        "sections": "123123",
+        "zhSections": "123123"
+      },
+      {
+        "slug": "cards-11",
+        "name": "111",
+        "zhName": "22",
+        "img": "",
+        "cls": "",
+        "intro": "1231",
+        "zhIntro": "12312",
+        "sections": "123123",
+        "zhSections": "123123"
       }
     ],
     "eventSlugs": [
+      "event-20260530-92",
       "xu-min-ccas-arbitrator-roster",
       "zoe-zhang-cietac-arbitrator-roster",
       "alb-china-law-awards-2026-shortlist",
@@ -3650,8 +3826,7 @@
       "yuxuan-liu",
       "min-xu",
       "li-wan",
-      "zoe-zhang",
-      "partner-7"
+      "zoe-zhang"
     ],
     "seniorAssociateSlugs": [
       "mengcheng-yun",
@@ -3795,7 +3970,7 @@
                     "id": "image",
                     "label": "图片",
                     "kind": "image",
-                    "value": "/assets/home/INDUSTRIES2.webp"
+                    "value": "/assets/industries/in3.webp"
                   },
                   {
                     "id": "description",
@@ -3837,7 +4012,7 @@
                     "id": "image",
                     "label": "图片",
                     "kind": "image",
-                    "value": "/assets/home/INDUSTRIES3.webp"
+                    "value": "/assets/industries/in4.webp"
                   },
                   {
                     "id": "description",
@@ -3879,7 +4054,7 @@
                     "id": "image",
                     "label": "图片",
                     "kind": "image",
-                    "value": "/assets/home/INDUSTRIES4.webp"
+                    "value": "/assets/industries/in5.webp"
                   },
                   {
                     "id": "description",
@@ -3921,7 +4096,7 @@
                     "id": "image",
                     "label": "图片",
                     "kind": "image",
-                    "value": "/assets/home/INDUSTRIES5.webp"
+                    "value": "/assets/industries/in2.webp"
                   },
                   {
                     "id": "description",
@@ -3982,6 +4157,90 @@
                     "label": "布局类名",
                     "kind": "text",
                     "value": "lg:col-span-2"
+                  }
+                ]
+              },
+              {
+                "id": "cards-1780119755266",
+                "label": "22",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "标识",
+                    "kind": "text",
+                    "value": "cards-1780119755266"
+                  },
+                  {
+                    "id": "title",
+                    "label": "标题",
+                    "kind": "text",
+                    "value": "22"
+                  },
+                  {
+                    "id": "image",
+                    "label": "图片",
+                    "kind": "image",
+                    "value": ""
+                  },
+                  {
+                    "id": "description",
+                    "label": "描述",
+                    "kind": "textarea",
+                    "value": "12312"
+                  },
+                  {
+                    "id": "href",
+                    "label": "链接",
+                    "kind": "url",
+                    "value": "/industries/cards-1780119755266?from=home"
+                  },
+                  {
+                    "id": "layoutClass",
+                    "label": "布局类名",
+                    "kind": "text",
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "id": "cards-11",
+                "label": "22",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "标识",
+                    "kind": "text",
+                    "value": "cards-11"
+                  },
+                  {
+                    "id": "title",
+                    "label": "标题",
+                    "kind": "text",
+                    "value": "22"
+                  },
+                  {
+                    "id": "image",
+                    "label": "图片",
+                    "kind": "image",
+                    "value": ""
+                  },
+                  {
+                    "id": "description",
+                    "label": "描述",
+                    "kind": "textarea",
+                    "value": "12312"
+                  },
+                  {
+                    "id": "href",
+                    "label": "链接",
+                    "kind": "url",
+                    "value": "/industries/cards-11?from=home"
+                  },
+                  {
+                    "id": "layoutClass",
+                    "label": "布局类名",
+                    "kind": "text",
+                    "value": ""
                   }
                 ]
               }
@@ -4554,54 +4813,6 @@
             ],
             "items": [
               {
-                "id": "kinsey-kang-hong-kong-legal-counsel",
-                "label": "虎诉动态 | 康亚男（Kinsey Kang Yanan）出庭",
-                "fields": [
-                  {
-                    "id": "slug",
-                    "label": "轮播标识",
-                    "kind": "text",
-                    "value": "kinsey-kang-hong-kong-legal-counsel"
-                  },
-                  {
-                    "id": "image",
-                    "label": "轮播图片",
-                    "kind": "image",
-                    "value": "/assets/event/event1.png"
-                  },
-                  {
-                    "id": "displayDate",
-                    "label": "展示日期",
-                    "kind": "text",
-                    "value": "2023.11.17"
-                  },
-                  {
-                    "id": "category",
-                    "label": "分类",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "title",
-                    "label": "标题",
-                    "kind": "textarea",
-                    "value": "虎诉动态 | 康亚男（Kinsey Kang Yanan）出庭"
-                  },
-                  {
-                    "id": "summary",
-                    "label": "轮播摘要",
-                    "kind": "textarea",
-                    "value": "虎诉律师事务所非常荣幸地宣"
-                  },
-                  {
-                    "id": "href",
-                    "label": "点击链接",
-                    "kind": "url",
-                    "value": "/events/kinsey-kang-hong-kong-legal-counsel?from=home"
-                  }
-                ]
-              },
-              {
                 "id": "official-account-mini-program-upgrade",
                 "label": "虎诉动态 | 虎诉升级公众号功能并上线全新小程序",
                 "fields": [
@@ -4650,26 +4861,26 @@
                 ]
               },
               {
-                "id": "benchmark-litigation-2022-dispute-resolution",
-                "label": "行业资讯 | 虎诉荣登Benchmark Litigation2022年度亚太地区及中国地区争议解决榜单",
+                "id": "kinsey-kang-hong-kong-legal-counsel",
+                "label": "虎诉动态 | 康亚男（Kinsey Kang Yanan）出庭",
                 "fields": [
                   {
                     "id": "slug",
                     "label": "轮播标识",
                     "kind": "text",
-                    "value": "benchmark-litigation-2022-dispute-resolution"
+                    "value": "kinsey-kang-hong-kong-legal-counsel"
                   },
                   {
                     "id": "image",
                     "label": "轮播图片",
                     "kind": "image",
-                    "value": "/assets/event/event12.png"
+                    "value": "/assets/event/event1.png"
                   },
                   {
                     "id": "displayDate",
                     "label": "展示日期",
                     "kind": "text",
-                    "value": "2022.05.10"
+                    "value": "2023.11.17"
                   },
                   {
                     "id": "category",
@@ -4681,19 +4892,19 @@
                     "id": "title",
                     "label": "标题",
                     "kind": "textarea",
-                    "value": "行业资讯 | 虎诉荣登Benchmark Litigation2022年度亚太地区及中国地区争议解决榜单"
+                    "value": "虎诉动态 | 康亚男（Kinsey Kang Yanan）出庭"
                   },
                   {
                     "id": "summary",
                     "label": "轮播摘要",
                     "kind": "textarea",
-                    "value": "5月9日，Benchmark Litigation发布了2022年度亚太地区及中国地区争议解决推荐律所及律师排行榜，虎诉律师事务所被评为中国北京地区商业纠纷领域“值得关注的律所（Notable Firm）”。"
+                    "value": "虎诉律师事务所非常荣幸地宣"
                   },
                   {
                     "id": "href",
                     "label": "点击链接",
                     "kind": "url",
-                    "value": "/events/benchmark-litigation-2022-dispute-resolution?from=home"
+                    "value": "/events/kinsey-kang-hong-kong-legal-counsel?from=home"
                   }
                 ]
               },
@@ -4742,6 +4953,54 @@
                     "label": "点击链接",
                     "kind": "url",
                     "value": "/events/chambers-greater-china-region-2026?from=home"
+                  }
+                ]
+              },
+              {
+                "id": "benchmark-litigation-2022-dispute-resolution",
+                "label": "行业资讯 | 虎诉荣登Benchmark Litigation2022年度亚太地区及中国地区争议解决榜单",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "轮播标识",
+                    "kind": "text",
+                    "value": "benchmark-litigation-2022-dispute-resolution"
+                  },
+                  {
+                    "id": "image",
+                    "label": "轮播图片",
+                    "kind": "image",
+                    "value": "/assets/event/event12.png"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "展示日期",
+                    "kind": "text",
+                    "value": "2022.05.10"
+                  },
+                  {
+                    "id": "category",
+                    "label": "分类",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "title",
+                    "label": "标题",
+                    "kind": "textarea",
+                    "value": "行业资讯 | 虎诉荣登Benchmark Litigation2022年度亚太地区及中国地区争议解决榜单"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "轮播摘要",
+                    "kind": "textarea",
+                    "value": "5月9日，Benchmark Litigation发布了2022年度亚太地区及中国地区争议解决推荐律所及律师排行榜，虎诉律师事务所被评为中国北京地区商业纠纷领域“值得关注的律所（Notable Firm）”。"
+                  },
+                  {
+                    "id": "href",
+                    "label": "点击链接",
+                    "kind": "url",
+                    "value": "/events/benchmark-litigation-2022-dispute-resolution?from=home"
                   }
                 ]
               }
@@ -8160,7 +8419,7 @@
                     "id": "number",
                     "label": "编号",
                     "kind": "text",
-                    "value": ""
+                    "value": "No.1"
                   },
                   {
                     "id": "title",
@@ -8190,7 +8449,7 @@
                     "id": "number",
                     "label": "编号",
                     "kind": "text",
-                    "value": ""
+                    "value": "No.2"
                   },
                   {
                     "id": "title",
@@ -8220,7 +8479,7 @@
                     "id": "number",
                     "label": "编号",
                     "kind": "text",
-                    "value": ""
+                    "value": "No.3"
                   },
                   {
                     "id": "title",
@@ -8472,6 +8731,48 @@
               }
             ],
             "items": [
+              {
+                "id": "event-20260530-92",
+                "label": "新动态",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "标识",
+                    "kind": "text",
+                    "value": "event-20260530-92"
+                  },
+                  {
+                    "id": "image",
+                    "label": "缩略图",
+                    "kind": "image",
+                    "value": "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb/assets/team/team5.png"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "排序日期（YYYYMMDD）",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "展示日期",
+                    "kind": "text",
+                    "value": "2026.05.30"
+                  },
+                  {
+                    "id": "category",
+                    "label": "分类",
+                    "kind": "text",
+                    "value": "231"
+                  },
+                  {
+                    "id": "title",
+                    "label": "标题",
+                    "kind": "textarea",
+                    "value": "新动态"
+                  }
+                ]
+              },
               {
                 "id": "xu-min-ccas-arbitrator-roster",
                 "label": "虎诉合伙人1231123 ",
@@ -10327,6 +10628,54 @@
             "label": "动态子页面",
             "fields": [],
             "items": [
+              {
+                "id": "event-20260530-92",
+                "label": "新动态",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "标识",
+                    "kind": "text",
+                    "value": "event-20260530-92"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "排序日期（YYYYMMDD）",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "展示日期",
+                    "kind": "text",
+                    "value": "2026.05.30"
+                  },
+                  {
+                    "id": "category",
+                    "label": "分类",
+                    "kind": "text",
+                    "value": "231"
+                  },
+                  {
+                    "id": "title",
+                    "label": "详情页标题",
+                    "kind": "textarea",
+                    "value": "新动态"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "详情页摘要",
+                    "kind": "textarea",
+                    "value": "1231"
+                  },
+                  {
+                    "id": "content",
+                    "label": "详情正文",
+                    "kind": "textarea",
+                    "value": "123123\n\n\n\n123123\n\n\n\n123123\n\n\n\n1231231"
+                  }
+                ]
+              },
               {
                 "id": "xu-min-ccas-arbitrator-roster",
                 "label": "虎诉合伙人1231123 ",
@@ -12864,7 +13213,7 @@
                     "id": "image",
                     "label": "图片",
                     "kind": "image",
-                    "value": "/assets/home/INDUSTRIES2.webp"
+                    "value": "/assets/industries/in3.webp"
                   },
                   {
                     "id": "description",
@@ -12906,7 +13255,7 @@
                     "id": "image",
                     "label": "图片",
                     "kind": "image",
-                    "value": "/assets/home/INDUSTRIES3.webp"
+                    "value": "/assets/industries/in4.webp"
                   },
                   {
                     "id": "description",
@@ -12948,7 +13297,7 @@
                     "id": "image",
                     "label": "图片",
                     "kind": "image",
-                    "value": "/assets/home/INDUSTRIES4.webp"
+                    "value": "/assets/industries/in5.webp"
                   },
                   {
                     "id": "description",
@@ -12990,7 +13339,7 @@
                     "id": "image",
                     "label": "图片",
                     "kind": "image",
-                    "value": "/assets/home/INDUSTRIES5.webp"
+                    "value": "/assets/industries/in2.webp"
                   },
                   {
                     "id": "description",
@@ -13053,6 +13402,90 @@
                     "value": "lg:col-span-2"
                   }
                 ]
+              },
+              {
+                "id": "cards-1780119755266",
+                "label": "22",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "标识",
+                    "kind": "text",
+                    "value": "cards-1780119755266"
+                  },
+                  {
+                    "id": "title",
+                    "label": "标题",
+                    "kind": "text",
+                    "value": "22"
+                  },
+                  {
+                    "id": "image",
+                    "label": "图片",
+                    "kind": "image",
+                    "value": ""
+                  },
+                  {
+                    "id": "description",
+                    "label": "描述",
+                    "kind": "textarea",
+                    "value": "12312"
+                  },
+                  {
+                    "id": "href",
+                    "label": "链接",
+                    "kind": "url",
+                    "value": "/industries/cards-1780119755266?from=home"
+                  },
+                  {
+                    "id": "layoutClass",
+                    "label": "布局类名",
+                    "kind": "text",
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "id": "cards-11",
+                "label": "22",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "标识",
+                    "kind": "text",
+                    "value": "cards-11"
+                  },
+                  {
+                    "id": "title",
+                    "label": "标题",
+                    "kind": "text",
+                    "value": "22"
+                  },
+                  {
+                    "id": "image",
+                    "label": "图片",
+                    "kind": "image",
+                    "value": ""
+                  },
+                  {
+                    "id": "description",
+                    "label": "描述",
+                    "kind": "textarea",
+                    "value": "12312"
+                  },
+                  {
+                    "id": "href",
+                    "label": "链接",
+                    "kind": "url",
+                    "value": "/industries/cards-11?from=home"
+                  },
+                  {
+                    "id": "layoutClass",
+                    "label": "布局类名",
+                    "kind": "text",
+                    "value": ""
+                  }
+                ]
               }
             ]
           },
@@ -13093,7 +13526,7 @@
                     "id": "sections",
                     "label": "详情卡片",
                     "kind": "textarea",
-                    "value": "在信托制、有限合伙制、公司制等模式下的私募股权或私募基金投资中：\n\n1、合伙协议或投资协议等合同潜在纠纷法律风险研判\n\n2、诉前纠纷法律争端解决服务：\n代表投资者起草、发送回购通知书、差额补足通知书等律师函件；\n代表投资者计算具体的可诉请金额，包括但不限于投资本金、逾期付款利息、回购金额等；\n参与谈判；\n起草并协助签署和解协议等。\n\n3、代表投资者或基金管理人或项目企业：\n提起诉讼或仲裁；\n提起诉前或诉中保全，包括针对相对方银行账户、所持股权或投资收益等财产的司法保全；\n应诉答辩或提起反诉，或提起仲裁反请求；\n提起强制执行申请；\n在诉讼或仲裁程序中，前往上海证券交易所、中国证券登记结算有限责任公司等机构，完成保全或执行程序，协助委托人实现最终商业目标；\n参与和解或调解谈判。"
+                    "value": ""
                   }
                 ]
               },
@@ -13117,7 +13550,7 @@
                     "id": "image",
                     "label": "首屏背景图片",
                     "kind": "image",
-                    "value": "/assets/home/INDUSTRIES2.webp"
+                    "value": "/assets/industries/in3.webp"
                   },
                   {
                     "id": "intro",
@@ -13129,7 +13562,7 @@
                     "id": "sections",
                     "label": "详情卡片",
                     "kind": "textarea",
-                    "value": "1、争议初期法律服务：\n争议预警分析；\n诉前谈判；\n起草并发送律师函等。\n\n2、为信贷融资、项目融资、资产融资、并购融资及衍生的各类投、融资纠纷及担保纠纷提供全方位民商事及刑民交叉争议解决服务：\n提起诉讼或仲裁；\n申请诉前或诉中财产保全；\n应诉答辩或提起反诉，或提起仲裁反请求；\n提起实现担保物权特别程序；\n提起强制执行申请；\n参与和解或调解谈判。"
+                    "value": ""
                   }
                 ]
               },
@@ -13153,7 +13586,7 @@
                     "id": "image",
                     "label": "首屏背景图片",
                     "kind": "image",
-                    "value": "/assets/home/INDUSTRIES3.webp"
+                    "value": "/assets/industries/in4.webp"
                   },
                   {
                     "id": "intro",
@@ -13165,7 +13598,7 @@
                     "id": "sections",
                     "label": "详情卡片",
                     "kind": "textarea",
-                    "value": "1、合同潜在纠纷法律风险研判\n\n2、诉前纠纷法律争端解决服务：\n发送律师函；\n参与谈判；\n起草并协助签署和解协议等。\n\n3、在建设工程合同纠纷中，代表房地产开发商或施工主体；或在大型房地产租赁合同纠纷中，代表出租人或承租人，参与以下争议解决程序，或提供相应法律服务：\n提起诉讼或仲裁；\n提起诉前或诉中保全，包括针对相对方银行账户、所持股权或案涉物业、在建工程等财产的司法保全；\n应诉答辩或提起反诉，或提起仲裁反请求；\n实地考察取证，并协助委托人完成证据搜集工作；\n在诉讼或仲裁程序中，提起相应质量、工期、实际承租面积等司法鉴定申请，并对相对方提供的鉴定或评估报告提出相应质证意见；\n提起强制执行申请，并协助委托人实现最终商业目标；\n参与和解或调解谈判。"
+                    "value": ""
                   }
                 ]
               },
@@ -13189,7 +13622,7 @@
                     "id": "image",
                     "label": "首屏背景图片",
                     "kind": "image",
-                    "value": "/assets/home/INDUSTRIES4.webp"
+                    "value": "/assets/industries/in5.webp"
                   },
                   {
                     "id": "intro",
@@ -13201,7 +13634,7 @@
                     "id": "sections",
                     "label": "详情卡片",
                     "kind": "textarea",
-                    "value": "1、常年法律顾问服务：\n公司日常管理法律风险诊断与完善；\n董事会、股东会召开程序合规性及内容合法性审查及见证；\n劳动关系合规诊断与完善；\n业务合同起草与审查。\n\n2、合同起草、审查与法律风险研判服务：\n俱乐部与运动员劳动/劳务/训练合同；\n运动员转会合同；\n参赛合同；\n赞助合同；\n赛事直播及转播合同；\n俱乐部转让合同。\n\n3、法律纠纷诉前解决服务：\n发送律师函；\n参与谈判；\n起草并协助签署和解协议等。\n\n4、诉讼与仲裁代理服务：\n提起诉讼或仲裁；\n提起诉前或诉中保全，包括针对相对方银行账户、所持股权、知识产权、收益权等有形和无形财产的司法保全；\n应诉答辩或提起反诉，或提起仲裁反请求；\n调查取证，协助委托人完成证据搜集工作；\n提起强制执行申请，并协助委托人实现最终商业目标；\n参与和解或调解谈判。"
+                    "value": ""
                   }
                 ]
               },
@@ -13225,7 +13658,7 @@
                     "id": "image",
                     "label": "首屏背景图片",
                     "kind": "image",
-                    "value": "/assets/home/INDUSTRIES5.webp"
+                    "value": "/assets/industries/in2.webp"
                   },
                   {
                     "id": "intro",
@@ -13237,7 +13670,7 @@
                     "id": "sections",
                     "label": "详情卡片",
                     "kind": "textarea",
-                    "value": "代表国际贸易当事方，进行：\n合同审阅及风险评估；\n诉前风险预警；\n中国国内诉讼与仲裁；\n国际诉讼与仲裁，包括保全、起诉或应诉等；\n国际仲裁裁决和外国法院判决在华承认与执行；\n参与和解或调解谈判。"
+                    "value": ""
                   }
                 ]
               },
@@ -13273,7 +13706,79 @@
                     "id": "sections",
                     "label": "详情卡片",
                     "kind": "textarea",
-                    "value": "1、常年法律顾问服务：\n公司日常管理法律风险诊断与完善；\n董事会、股东会召开程序合规性及内容合法性审查及见证；\n劳动关系合规诊断与完善；\n业务合同起草与审查。\n\n2、合同起草、审查与法律风险研判服务：\n游戏开发创作合同；\n游戏宣传及发行合同；\n游戏直播劳务合同；\n网络用户服务协议。\n\n3、数据合规及隐私保护制度诊断与完善服务\n\n4、法律纠纷诉前解决服务：\n发送律师函；\n参与谈判；\n起草并协助签署和解协议等。\n\n5、诉讼与仲裁代理服务：\n提起诉讼或仲裁；\n提起诉前或诉中保全，包括针对相对方银行账户、所持股权、知识产权、收益权等有形和无形财产的司法保全；\n应诉答辩或提起反诉，或提起仲裁反请求；\n调查取证，协助委托人完成证据搜集工作；\n提起强制执行申请，并协助委托人实现最终商业目标；\n参与和解或调解谈判。"
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "id": "cards-1780119755266",
+                "label": "22",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "标识",
+                    "kind": "text",
+                    "value": "cards-1780119755266"
+                  },
+                  {
+                    "id": "title",
+                    "label": "详情页标题",
+                    "kind": "text",
+                    "value": "22"
+                  },
+                  {
+                    "id": "image",
+                    "label": "首屏背景图片",
+                    "kind": "image",
+                    "value": ""
+                  },
+                  {
+                    "id": "intro",
+                    "label": "详情页简介",
+                    "kind": "textarea",
+                    "value": "12312"
+                  },
+                  {
+                    "id": "sections",
+                    "label": "详情卡片",
+                    "kind": "textarea",
+                    "value": "123123"
+                  }
+                ]
+              },
+              {
+                "id": "cards-11",
+                "label": "22",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "标识",
+                    "kind": "text",
+                    "value": "cards-11"
+                  },
+                  {
+                    "id": "title",
+                    "label": "详情页标题",
+                    "kind": "text",
+                    "value": "22"
+                  },
+                  {
+                    "id": "image",
+                    "label": "首屏背景图片",
+                    "kind": "image",
+                    "value": ""
+                  },
+                  {
+                    "id": "intro",
+                    "label": "详情页简介",
+                    "kind": "textarea",
+                    "value": "12312"
+                  },
+                  {
+                    "id": "sections",
+                    "label": "详情卡片",
+                    "kind": "textarea",
+                    "value": "123123"
                   }
                 ]
               }
@@ -13530,48 +14035,6 @@
                     "label": "链接",
                     "kind": "url",
                     "value": "/team/zoe-zhang"
-                  }
-                ]
-              },
-              {
-                "id": "partner-7",
-                "label": "刘",
-                "fields": [
-                  {
-                    "id": "slug",
-                    "label": "标识",
-                    "kind": "text",
-                    "value": "partner-7"
-                  },
-                  {
-                    "id": "image",
-                    "label": "缩略图",
-                    "kind": "image",
-                    "value": ""
-                  },
-                  {
-                    "id": "name",
-                    "label": "姓名",
-                    "kind": "text",
-                    "value": "刘"
-                  },
-                  {
-                    "id": "title",
-                    "label": "职位",
-                    "kind": "text",
-                    "value": "合伙人"
-                  },
-                  {
-                    "id": "ctaLabel",
-                    "label": "CTA 文案",
-                    "kind": "text",
-                    "value": "了解更多"
-                  },
-                  {
-                    "id": "href",
-                    "label": "链接",
-                    "kind": "url",
-                    "value": "/team/partner-7"
                   }
                 ]
               }
@@ -14311,102 +14774,6 @@
                 ]
               },
               {
-                "id": "partner-7",
-                "label": "刘",
-                "fields": [
-                  {
-                    "id": "slug",
-                    "label": "标识",
-                    "kind": "text",
-                    "value": "partner-7"
-                  },
-                  {
-                    "id": "image",
-                    "label": "缩略图",
-                    "kind": "image",
-                    "value": ""
-                  },
-                  {
-                    "id": "name",
-                    "label": "姓名",
-                    "kind": "text",
-                    "value": "刘"
-                  },
-                  {
-                    "id": "title",
-                    "label": "职位",
-                    "kind": "text",
-                    "value": "合伙人"
-                  },
-                  {
-                    "id": "phone",
-                    "label": "电话",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "email",
-                    "label": "邮箱",
-                    "kind": "text",
-                    "value": "liud74780@gmail.com"
-                  },
-                  {
-                    "id": "serviceIndustries",
-                    "label": "服务行业",
-                    "kind": "textarea",
-                    "value": ""
-                  },
-                  {
-                    "id": "education",
-                    "label": "教育背景",
-                    "kind": "textarea",
-                    "value": ""
-                  },
-                  {
-                    "id": "qualification",
-                    "label": "专业资格",
-                    "kind": "textarea",
-                    "value": ""
-                  },
-                  {
-                    "id": "languages",
-                    "label": "工作语言",
-                    "kind": "textarea",
-                    "value": ""
-                  },
-                  {
-                    "id": "socialEngagements",
-                    "label": "社会任职",
-                    "kind": "textarea",
-                    "value": ""
-                  },
-                  {
-                    "id": "practiceArea",
-                    "label": "专业领域",
-                    "kind": "textarea",
-                    "value": ""
-                  },
-                  {
-                    "id": "practiceExperience",
-                    "label": "执业经验",
-                    "kind": "textarea",
-                    "value": ""
-                  },
-                  {
-                    "id": "honors",
-                    "label": "荣誉",
-                    "kind": "textarea",
-                    "value": ""
-                  },
-                  {
-                    "id": "achievements",
-                    "label": "个人业绩",
-                    "kind": "textarea",
-                    "value": ""
-                  }
-                ]
-              },
-              {
                 "id": "senior-associate-8",
                 "label": "刘",
                 "fields": [
@@ -14790,7 +15157,7 @@
                     "id": "image",
                     "label": "Image",
                     "kind": "image",
-                    "value": "/assets/home/INDUSTRIES2.webp"
+                    "value": "/assets/industries/in3.webp"
                   },
                   {
                     "id": "description",
@@ -14832,7 +15199,7 @@
                     "id": "image",
                     "label": "Image",
                     "kind": "image",
-                    "value": "/assets/home/INDUSTRIES3.webp"
+                    "value": "/assets/industries/in4.webp"
                   },
                   {
                     "id": "description",
@@ -14874,7 +15241,7 @@
                     "id": "image",
                     "label": "Image",
                     "kind": "image",
-                    "value": "/assets/home/INDUSTRIES4.webp"
+                    "value": "/assets/industries/in5.webp"
                   },
                   {
                     "id": "description",
@@ -14916,7 +15283,7 @@
                     "id": "image",
                     "label": "Image",
                     "kind": "image",
-                    "value": "/assets/home/INDUSTRIES5.webp"
+                    "value": "/assets/industries/in2.webp"
                   },
                   {
                     "id": "description",
@@ -14977,6 +15344,90 @@
                     "label": "Layout class",
                     "kind": "text",
                     "value": "lg:col-span-2"
+                  }
+                ]
+              },
+              {
+                "id": "cards-1780119755266",
+                "label": "111",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "Slug",
+                    "kind": "text",
+                    "value": "cards-1780119755266"
+                  },
+                  {
+                    "id": "title",
+                    "label": "Title",
+                    "kind": "text",
+                    "value": "111"
+                  },
+                  {
+                    "id": "image",
+                    "label": "Image",
+                    "kind": "image",
+                    "value": ""
+                  },
+                  {
+                    "id": "description",
+                    "label": "Description",
+                    "kind": "textarea",
+                    "value": "1231"
+                  },
+                  {
+                    "id": "href",
+                    "label": "Link",
+                    "kind": "url",
+                    "value": "/industries/cards-1780119755266?from=home"
+                  },
+                  {
+                    "id": "layoutClass",
+                    "label": "Layout class",
+                    "kind": "text",
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "id": "cards-11",
+                "label": "111",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "Slug",
+                    "kind": "text",
+                    "value": "cards-11"
+                  },
+                  {
+                    "id": "title",
+                    "label": "Title",
+                    "kind": "text",
+                    "value": "111"
+                  },
+                  {
+                    "id": "image",
+                    "label": "Image",
+                    "kind": "image",
+                    "value": ""
+                  },
+                  {
+                    "id": "description",
+                    "label": "Description",
+                    "kind": "textarea",
+                    "value": "1231"
+                  },
+                  {
+                    "id": "href",
+                    "label": "Link",
+                    "kind": "url",
+                    "value": "/industries/cards-11?from=home"
+                  },
+                  {
+                    "id": "layoutClass",
+                    "label": "Layout class",
+                    "kind": "text",
+                    "value": ""
                   }
                 ]
               }
@@ -15549,54 +16000,6 @@
             ],
             "items": [
               {
-                "id": "kinsey-kang-hong-kong-legal-counsel",
-                "label": "Kinsey Kang Yanan was engaged as Hong Kong Legal Counse",
-                "fields": [
-                  {
-                    "id": "slug",
-                    "label": "Slide slug",
-                    "kind": "text",
-                    "value": "kinsey-kang-hong-kong-legal-counsel"
-                  },
-                  {
-                    "id": "image",
-                    "label": "Slide image",
-                    "kind": "image",
-                    "value": "/assets/event/event1.png"
-                  },
-                  {
-                    "id": "displayDate",
-                    "label": "Display date",
-                    "kind": "text",
-                    "value": "Nov. 17, 2023"
-                  },
-                  {
-                    "id": "category",
-                    "label": "Category",
-                    "kind": "text",
-                    "value": "Tiger Dynamics"
-                  },
-                  {
-                    "id": "title",
-                    "label": "Title",
-                    "kind": "textarea",
-                    "value": "Kinsey Kang Yanan was engaged as Hong Kong Legal Counse"
-                  },
-                  {
-                    "id": "summary",
-                    "label": "Slide summary",
-                    "kind": "textarea",
-                    "value": "Tiger Partners is honored to announce that Kinsey Kang Yanan, barrister-at-law, has been engaged as our Hong Kong Legal Counsel. From this day on, Tiger Partners will work with Kinsey wholeheartedly to p"
-                  },
-                  {
-                    "id": "href",
-                    "label": "Click link",
-                    "kind": "url",
-                    "value": "/events/kinsey-kang-hong-kong-legal-counsel?from=home"
-                  }
-                ]
-              },
-              {
                 "id": "official-account-mini-program-upgrade",
                 "label": "Tiger Partners upgraded the functions of the official account and launched a new Mini Program",
                 "fields": [
@@ -15645,50 +16048,50 @@
                 ]
               },
               {
-                "id": "benchmark-litigation-2022-dispute-resolution",
-                "label": "Tiger Partners was listed in Asia-Pacific & China on Dispute Resolution of 2022 by Benchmark Litigation",
+                "id": "kinsey-kang-hong-kong-legal-counsel",
+                "label": "Kinsey Kang Yanan was engaged as Hong Kong Legal Counse",
                 "fields": [
                   {
                     "id": "slug",
                     "label": "Slide slug",
                     "kind": "text",
-                    "value": "benchmark-litigation-2022-dispute-resolution"
+                    "value": "kinsey-kang-hong-kong-legal-counsel"
                   },
                   {
                     "id": "image",
                     "label": "Slide image",
                     "kind": "image",
-                    "value": "/assets/event/event12.png"
+                    "value": "/assets/event/event1.png"
                   },
                   {
                     "id": "displayDate",
                     "label": "Display date",
                     "kind": "text",
-                    "value": "May. 10, 2022"
+                    "value": "Nov. 17, 2023"
                   },
                   {
                     "id": "category",
                     "label": "Category",
                     "kind": "text",
-                    "value": "Industry News"
+                    "value": "Tiger Dynamics"
                   },
                   {
                     "id": "title",
                     "label": "Title",
                     "kind": "textarea",
-                    "value": "Tiger Partners was listed in Asia-Pacific & China on Dispute Resolution of 2022 by Benchmark Litigation"
+                    "value": "Kinsey Kang Yanan was engaged as Hong Kong Legal Counse"
                   },
                   {
                     "id": "summary",
                     "label": "Slide summary",
                     "kind": "textarea",
-                    "value": "Benchmark Litigation released lists of recommended law firms and lawyers for dispute resolution in Asia Pacific and China of 2022 on May 9, and Tiger Partners won the title of \"Notable Firm\" in the field of commercial disputes resolution in Beijing area by Benchmark Litigation 2022."
+                    "value": "Tiger Partners is honored to announce that Kinsey Kang Yanan, barrister-at-law, has been engaged as our Hong Kong Legal Counsel. From this day on, Tiger Partners will work with Kinsey wholeheartedly to p"
                   },
                   {
                     "id": "href",
                     "label": "Click link",
                     "kind": "url",
-                    "value": "/events/benchmark-litigation-2022-dispute-resolution?from=home"
+                    "value": "/events/kinsey-kang-hong-kong-legal-counsel?from=home"
                   }
                 ]
               },
@@ -15737,6 +16140,54 @@
                     "label": "Click link",
                     "kind": "url",
                     "value": "/events/chambers-greater-china-region-2026?from=home"
+                  }
+                ]
+              },
+              {
+                "id": "benchmark-litigation-2022-dispute-resolution",
+                "label": "Tiger Partners was listed in Asia-Pacific & China on Dispute Resolution of 2022 by Benchmark Litigation",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "Slide slug",
+                    "kind": "text",
+                    "value": "benchmark-litigation-2022-dispute-resolution"
+                  },
+                  {
+                    "id": "image",
+                    "label": "Slide image",
+                    "kind": "image",
+                    "value": "/assets/event/event12.png"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "Display date",
+                    "kind": "text",
+                    "value": "May. 10, 2022"
+                  },
+                  {
+                    "id": "category",
+                    "label": "Category",
+                    "kind": "text",
+                    "value": "Industry News"
+                  },
+                  {
+                    "id": "title",
+                    "label": "Title",
+                    "kind": "textarea",
+                    "value": "Tiger Partners was listed in Asia-Pacific & China on Dispute Resolution of 2022 by Benchmark Litigation"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "Slide summary",
+                    "kind": "textarea",
+                    "value": "Benchmark Litigation released lists of recommended law firms and lawyers for dispute resolution in Asia Pacific and China of 2022 on May 9, and Tiger Partners won the title of \"Notable Firm\" in the field of commercial disputes resolution in Beijing area by Benchmark Litigation 2022."
+                  },
+                  {
+                    "id": "href",
+                    "label": "Click link",
+                    "kind": "url",
+                    "value": "/events/benchmark-litigation-2022-dispute-resolution?from=home"
                   }
                 ]
               }
@@ -19468,6 +19919,48 @@
             ],
             "items": [
               {
+                "id": "event-20260530-92",
+                "label": "New Event",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "Slug",
+                    "kind": "text",
+                    "value": "event-20260530-92"
+                  },
+                  {
+                    "id": "image",
+                    "label": "Thumbnail",
+                    "kind": "image",
+                    "value": "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb/assets/team/team5.png"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "Sort date (YYYYMMDD)",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "Display date",
+                    "kind": "text",
+                    "value": "May. 30, 2026"
+                  },
+                  {
+                    "id": "category",
+                    "label": "Category",
+                    "kind": "text",
+                    "value": "123"
+                  },
+                  {
+                    "id": "title",
+                    "label": "Title",
+                    "kind": "textarea",
+                    "value": "New Event"
+                  }
+                ]
+              },
+              {
                 "id": "xu-min-ccas-arbitrator-roster",
                 "label": "Mr. Xu Min, Partner at Tiger Partners, Selected to the New",
                 "fields": [
@@ -21322,6 +21815,54 @@
             "label": "Event detail pages",
             "fields": [],
             "items": [
+              {
+                "id": "event-20260530-92",
+                "label": "New Event",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "Slug",
+                    "kind": "text",
+                    "value": "event-20260530-92"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "Sort date (YYYYMMDD)",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "Display date",
+                    "kind": "text",
+                    "value": "May. 30, 2026"
+                  },
+                  {
+                    "id": "category",
+                    "label": "Category",
+                    "kind": "text",
+                    "value": "123"
+                  },
+                  {
+                    "id": "title",
+                    "label": "Detail title",
+                    "kind": "textarea",
+                    "value": "New Event"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "Detail summary",
+                    "kind": "textarea",
+                    "value": "2131"
+                  },
+                  {
+                    "id": "content",
+                    "label": "Detail content",
+                    "kind": "textarea",
+                    "value": "1111\n\n\n\n1111\n\n\n\n\n\n1111\n\n\n\n\n\n1111"
+                  }
+                ]
+              },
               {
                 "id": "xu-min-ccas-arbitrator-roster",
                 "label": "Mr. Xu Min, Partner at Tiger Partners, Selected to the New",
@@ -23859,7 +24400,7 @@
                     "id": "image",
                     "label": "Image",
                     "kind": "image",
-                    "value": "/assets/home/INDUSTRIES2.webp"
+                    "value": "/assets/industries/in3.webp"
                   },
                   {
                     "id": "description",
@@ -23901,7 +24442,7 @@
                     "id": "image",
                     "label": "Image",
                     "kind": "image",
-                    "value": "/assets/home/INDUSTRIES3.webp"
+                    "value": "/assets/industries/in4.webp"
                   },
                   {
                     "id": "description",
@@ -23943,7 +24484,7 @@
                     "id": "image",
                     "label": "Image",
                     "kind": "image",
-                    "value": "/assets/home/INDUSTRIES4.webp"
+                    "value": "/assets/industries/in5.webp"
                   },
                   {
                     "id": "description",
@@ -23985,7 +24526,7 @@
                     "id": "image",
                     "label": "Image",
                     "kind": "image",
-                    "value": "/assets/home/INDUSTRIES5.webp"
+                    "value": "/assets/industries/in2.webp"
                   },
                   {
                     "id": "description",
@@ -24048,6 +24589,90 @@
                     "value": "lg:col-span-2"
                   }
                 ]
+              },
+              {
+                "id": "cards-1780119755266",
+                "label": "111",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "Slug",
+                    "kind": "text",
+                    "value": "cards-1780119755266"
+                  },
+                  {
+                    "id": "title",
+                    "label": "Title",
+                    "kind": "text",
+                    "value": "111"
+                  },
+                  {
+                    "id": "image",
+                    "label": "Image",
+                    "kind": "image",
+                    "value": ""
+                  },
+                  {
+                    "id": "description",
+                    "label": "Description",
+                    "kind": "textarea",
+                    "value": "1231"
+                  },
+                  {
+                    "id": "href",
+                    "label": "Link",
+                    "kind": "url",
+                    "value": "/industries/cards-1780119755266?from=home"
+                  },
+                  {
+                    "id": "layoutClass",
+                    "label": "Layout class",
+                    "kind": "text",
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "id": "cards-11",
+                "label": "111",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "Slug",
+                    "kind": "text",
+                    "value": "cards-11"
+                  },
+                  {
+                    "id": "title",
+                    "label": "Title",
+                    "kind": "text",
+                    "value": "111"
+                  },
+                  {
+                    "id": "image",
+                    "label": "Image",
+                    "kind": "image",
+                    "value": ""
+                  },
+                  {
+                    "id": "description",
+                    "label": "Description",
+                    "kind": "textarea",
+                    "value": "1231"
+                  },
+                  {
+                    "id": "href",
+                    "label": "Link",
+                    "kind": "url",
+                    "value": "/industries/cards-11?from=home"
+                  },
+                  {
+                    "id": "layoutClass",
+                    "label": "Layout class",
+                    "kind": "text",
+                    "value": ""
+                  }
+                ]
               }
             ]
           },
@@ -24088,7 +24713,7 @@
                     "id": "sections",
                     "label": "Detail cards",
                     "kind": "textarea",
-                    "value": "In the event of investment in private equity or private funds under the mode of trust, limited partnership or company, etc.:\n\n1. Analysis of potential legal exposures in contracts such as partnership agreements or investment agreements\n\n2. Pre-litigation dispute resolution services:\nDrafting and sending repurchase notice, deficiency supplement notice and other legal letters on behalf of investors;\nCalculating the specific claimable amount, including but not limited to investment principal, overdue payment interest, repurchase amount, etc.;\nParticipating in negotiations;\nDrafting and assisting in signing settlement agreements, etc.\n\n3. On behalf of investors, fund managers or invested companies:\nInitiating litigation or arbitration;\nInitiating pre-litigation preservation or preservation in litigation, (including judicial preservation against the bank accounts, equity interests or investment proceeds of the counterparty);\nResponding to claims or filing counterclaims;\nInitiating application for enforcement;\nIn the litigation or arbitration proceedings, assisting in preservation or enforcement proceedings by visiting institutions in person, such as Shanghai Stock Exchange or China Securities Depository and Clearing Corporation Limited;\nParticipating in negotiations for settlement or mediation."
+                    "value": ""
                   }
                 ]
               },
@@ -24112,7 +24737,7 @@
                     "id": "image",
                     "label": "Hero image",
                     "kind": "image",
-                    "value": "/assets/home/INDUSTRIES2.webp"
+                    "value": "/assets/industries/in3.webp"
                   },
                   {
                     "id": "intro",
@@ -24124,7 +24749,7 @@
                     "id": "sections",
                     "label": "Detail cards",
                     "kind": "textarea",
-                    "value": "1. Legal Services at the Initial Stage of Disputes:\nEarly warning analysis of disputes;\nPre-litigation negotiations;\nDrafting and sending attorney's letters, etc.\n\n2. Provide all-round services in respect of civil and commercial matters and matters involving both civil and criminal issues arising out of financing matters, such as credit financing, project financing, asset financing, merger financing, and various investment and financing disputes and security disputes arising therefrom:\nInitiating litigation or arbitration;\nApplying for pre-litigation property preservation or property preservation during litigation;\nResponding to claim or filing counterclaims;\nInitiating special procedures for realization of security rights;\nInitiating application for enforcement;\nParticipating in negotiations for settlement or mediation."
+                    "value": ""
                   }
                 ]
               },
@@ -24148,7 +24773,7 @@
                     "id": "image",
                     "label": "Hero image",
                     "kind": "image",
-                    "value": "/assets/home/INDUSTRIES3.webp"
+                    "value": "/assets/industries/in4.webp"
                   },
                   {
                     "id": "intro",
@@ -24160,7 +24785,7 @@
                     "id": "sections",
                     "label": "Detail cards",
                     "kind": "textarea",
-                    "value": "1. Analysis and assessment of potential legal exposures of contracts\n\n2. Pre-litigation disputes resolution services:\nSending attorney's letters;\nParticipating in negotiations;\nDrafting and assisting in signing settlement agreements, etc.\n\n3. Representing real estate developers or constructors in the disputes over construction contracts, or representing lessors or lessees in the disputes over large real estate leasing contracts to participate in the following dispute resolution procedures or providing corresponding legal services:\nInitiating litigation or arbitration;\nInitiating pre-litigation preservation or preservation during litigation, (including judicial preservation for the counterparty's bank accounts, equity interest or the property or construction-in-progress involved);\nResponding to claims or filing counterclaims;\nConducting on-site investigation to collect evidence, and assisting clients to complete evidence collection;\nIn litigation or arbitration proceedings, initiating applications for judicial authentication of the quality, construction period, actual leased area, etc., and providing cross-examination opinions in relation to authentication or evaluation report submitted by the counterparty;\nInitiating application for enforcement, and assisting clients to achieve their ultimate business goal;\nParticipating in negotiations for settlement or mediation."
+                    "value": ""
                   }
                 ]
               },
@@ -24184,7 +24809,7 @@
                     "id": "image",
                     "label": "Hero image",
                     "kind": "image",
-                    "value": "/assets/home/INDUSTRIES4.webp"
+                    "value": "/assets/industries/in5.webp"
                   },
                   {
                     "id": "intro",
@@ -24196,7 +24821,7 @@
                     "id": "sections",
                     "label": "Detail cards",
                     "kind": "textarea",
-                    "value": "1. Long-term Legal Counsel Services\nDiagnosis and control of legal risks in the daily management of the company;\nExamining and witnessing procedural compliance and content legality of board meetings and shareholders' meetings;\nDiagnosis and perfection of labor relationship compliance;\nDrafting and review of business contracts.\n\n2. Contract drafting, review and legal risks judgment services:\nLabor, service and training contracts between clubs and athletes;\nAthlete transfer contracts;\nCompetition contracts;\nSponsorship contracts;\nBroadcast and rebroadcast contracts;\nClub assignment contracts.\n\n3. Pre-litigation resolution service of legal disputes:\nSending attorney's letters;\nParticipating in negotiation;\nDrafting and assisting in signing settlement agreements, etc.\n\n4. Litigation and arbitration agency services:\nInitiating litigation or arbitration;\nInitiate pre-litigation preservation or preservation during litigation, (including judicial preservation of tangible or intangible property such as bank accounts, equity interests, intellectual property rights, right to income and so on of the counterparty);\nResponding to claims or filing counterclaims;\nInvestigating and collecting evidence and assisting clients to complete evidence collection;\nInitiating application for enforcement, and assisting clients to achieve their ultimate business goals;\nParticipating in negotiation on settlement or mediation."
+                    "value": ""
                   }
                 ]
               },
@@ -24220,7 +24845,7 @@
                     "id": "image",
                     "label": "Hero image",
                     "kind": "image",
-                    "value": "/assets/home/INDUSTRIES5.webp"
+                    "value": "/assets/industries/in2.webp"
                   },
                   {
                     "id": "intro",
@@ -24232,7 +24857,7 @@
                     "id": "sections",
                     "label": "Detail cards",
                     "kind": "textarea",
-                    "value": "Representing parties in international trade:\nContract review and risk assessment;\nPre-litigation risk warning;\nChinese domestic litigation and arbitration;\nInternational litigation and arbitration, including preservation, prosecution or responding;\nRecognition and enforcement of international arbitration awards and foreign court judgments in China;\nParticipating in negotiation on settlement or mediation."
+                    "value": ""
                   }
                 ]
               },
@@ -24268,7 +24893,79 @@
                     "id": "sections",
                     "label": "Detail cards",
                     "kind": "textarea",
-                    "value": "1. Long-term legal counsel services:\nDiagnosis and control of legal risks in the daily management of the company;\nExamining and witnessing procedural compliance and content legality of board meetings and shareholders' meetings;\nDiagnosis and perfection of employment relationship compliance;\nDrafting and review of business contracts.\n\n2. Contract drafting, review and legal risk judgment services:\nGame development and creation contracts;\nGame publicity and distribution contracts;\nGame live broadcasting service contracts;\nInternet user service agreements.\n\n3. Diagnosis and perfection service for data compliance and privacy protection system\n\n4. Pre-litigation resolution service of legal disputes:\nSending attorney's letters;\nParticipating in negotiation;\nDrafting and assisting in signing settlement agreements, etc.\n\n5. Litigation and arbitration agency services:\nInitiating litigation or arbitration;\nInitiating pre-litigation preservation or preservation during litigation, (including judicial preservation of tangible or intangible property such as bank accounts or equity interests, the intellectual property right and right to income held by the counterparty);\nResponding to claims or filing counterclaims;\nInvestigating and collecting evidence, and assisting clients in evidence collection;\nInitiating application for enforcement, and assisting clients in achieving their ultimate business goals;\nParticipating in negotiation on settlement or mediation."
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "id": "cards-1780119755266",
+                "label": "111",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "Slug",
+                    "kind": "text",
+                    "value": "cards-1780119755266"
+                  },
+                  {
+                    "id": "title",
+                    "label": "Detail title",
+                    "kind": "text",
+                    "value": "111"
+                  },
+                  {
+                    "id": "image",
+                    "label": "Hero image",
+                    "kind": "image",
+                    "value": ""
+                  },
+                  {
+                    "id": "intro",
+                    "label": "Detail intro",
+                    "kind": "textarea",
+                    "value": "1231"
+                  },
+                  {
+                    "id": "sections",
+                    "label": "Detail cards",
+                    "kind": "textarea",
+                    "value": "123123"
+                  }
+                ]
+              },
+              {
+                "id": "cards-11",
+                "label": "111",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "Slug",
+                    "kind": "text",
+                    "value": "cards-11"
+                  },
+                  {
+                    "id": "title",
+                    "label": "Detail title",
+                    "kind": "text",
+                    "value": "111"
+                  },
+                  {
+                    "id": "image",
+                    "label": "Hero image",
+                    "kind": "image",
+                    "value": ""
+                  },
+                  {
+                    "id": "intro",
+                    "label": "Detail intro",
+                    "kind": "textarea",
+                    "value": "1231"
+                  },
+                  {
+                    "id": "sections",
+                    "label": "Detail cards",
+                    "kind": "textarea",
+                    "value": "123123"
                   }
                 ]
               }
@@ -24527,48 +25224,6 @@
                     "value": "/team/zoe-zhang"
                   }
                 ]
-              },
-              {
-                "id": "partner-7",
-                "label": "达",
-                "fields": [
-                  {
-                    "id": "slug",
-                    "label": "Slug",
-                    "kind": "text",
-                    "value": "partner-7"
-                  },
-                  {
-                    "id": "image",
-                    "label": "Thumbnail",
-                    "kind": "image",
-                    "value": ""
-                  },
-                  {
-                    "id": "name",
-                    "label": "Name",
-                    "kind": "text",
-                    "value": "达"
-                  },
-                  {
-                    "id": "title",
-                    "label": "Title",
-                    "kind": "text",
-                    "value": "Partner"
-                  },
-                  {
-                    "id": "ctaLabel",
-                    "label": "CTA label",
-                    "kind": "text",
-                    "value": "Find out more"
-                  },
-                  {
-                    "id": "href",
-                    "label": "Link",
-                    "kind": "url",
-                    "value": "/team/partner-7"
-                  }
-                ]
               }
             ]
           },
@@ -24598,7 +25253,7 @@
             "items": [
               {
                 "id": "mengcheng-yun",
-                "label": "Mengcheng Yun",
+                "label": "Mengcheng",
                 "fields": [
                   {
                     "id": "slug",
@@ -24616,7 +25271,7 @@
                     "id": "name",
                     "label": "Name",
                     "kind": "text",
-                    "value": "Mengcheng Yun"
+                    "value": "Mengcheng"
                   },
                   {
                     "id": "title",
@@ -25115,7 +25770,7 @@
               },
               {
                 "id": "mengcheng-yun",
-                "label": "Mengcheng Yun",
+                "label": "Mengcheng",
                 "fields": [
                   {
                     "id": "slug",
@@ -25133,7 +25788,7 @@
                     "id": "name",
                     "label": "Name",
                     "kind": "text",
-                    "value": "Mengcheng Yun"
+                    "value": "Mengcheng"
                   },
                   {
                     "id": "title",
@@ -25302,102 +25957,6 @@
                     "label": "Performance & Achievements",
                     "kind": "textarea",
                     "value": "Represented a large overseas listed company in an insurance claim dispute arbitration against several leading domestic insurance companies before the Shanghai International Economic and Trade Arbitration Commission (SHIAC). By analyzing and arguing key policy provisions such as severability and exclusion clauses, we successfully obtained full payment of the insurance benefits for the client.\nRepresented an enterprise under a leading industrial investment institution in an investment contract dispute arbitration against an investment management company and its legal representative before the Beijing Arbitration Commission (BAC). The subject matter of the case was over RMB 720 million. A favorable award was obtained.\nRepresented a leading entertainment industry enterprise in an investment repurchase lawsuit against a film company. Subsequently, based on the settlement agreement reached in the lawsuit, we initiated an arbitration against the legal representative of the film company. In the ensuing enforcement proceedings, we assisted the enforcement court in taking a series of compulsory measures against the opposing party. All amounts have been recovered and the case has been closed upon full satisfaction of the judgment.\nRepresented a leading film and television entertainment enterprise in a film investment agreement dispute against a large state-owned company and its affiliates, with a subject matter of approximately RMB 150 million. The case involved conflicts in contractual arrangements among different parties. Through professional analysis and argumentation, we successfully persuaded the court to rule that all amounts should be paid to our client. The judgment was upheld by the Beijing Higher People's Court on second instance and by the Supreme People's Court on retrial.\nRepresented an enterprise under a leading capital management company in an equity repurchase dispute arbitration against a technology company and its legal representative, among others, before the China International Economic and Trade Arbitration Commission (CIETAC). By promptly applying for asset preservation measures over the core assets of the opposing party, we prompted the opposing party to settle with the client and pay the full repurchase price.\nRepresented a manufacturing company in an equity repurchase dispute arbitration against a real estate company before the Beijing Arbitration Commission (BAC), with a subject matter exceeding RMB 360 million. The case involved core legal issues such as restrictions on corporate share repurchases under the Minutes of the National Conference on the Trial of Commercial Cases (Jiumin Minutes) and the characterization of “debt disguised as equity.”Through our professional arguments, we successfully persuaded the arbitral tribunal that the matter was in substance a loan and obtained a fully favorable award.\nRepresented an enterprise under a leading industrial investment institution in enforcing a final arbitral award against a technology company and its legal representative. In the enforcement proceedings, we took a series of asset investigation measures and initiated various recovery actions, including but not limited to claims to set aside a debtor’s act, actions to declare contracts void, and actions to establish marital joint debt.\nRepresented an enterprise under a leading investment management group in a compensation agreement dispute arbitration against a leading retail service enterprise before the China International Economic and Trade Arbitration Commission (CIETAC). A favorable award was obtained, and despite the contract not specifying a default interest rate, we successfully persuaded the arbitral tribunal to impose default interest at the maximum rate permitted under current judicial practice.\nRepresented a technology start-up in the aviation and gas turbine field in multiple contract dispute cases against a leading sales enterprise of vacuum pumps and precision components. The cases involved disputes over delivery quantity, quality issues, and judicial appraisal procedures, with a total subject matter of approximately RMB 30 million. Currently, some cases are still pending, while others have resulted in complete victories and full recovery of the amounts."
-                  }
-                ]
-              },
-              {
-                "id": "partner-7",
-                "label": "达",
-                "fields": [
-                  {
-                    "id": "slug",
-                    "label": "Slug",
-                    "kind": "text",
-                    "value": "partner-7"
-                  },
-                  {
-                    "id": "image",
-                    "label": "Thumbnail",
-                    "kind": "image",
-                    "value": ""
-                  },
-                  {
-                    "id": "name",
-                    "label": "Name",
-                    "kind": "text",
-                    "value": "达"
-                  },
-                  {
-                    "id": "title",
-                    "label": "Title",
-                    "kind": "text",
-                    "value": "Partner"
-                  },
-                  {
-                    "id": "phone",
-                    "label": "Phone",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "email",
-                    "label": "Email",
-                    "kind": "text",
-                    "value": "liud74780@gmail.com"
-                  },
-                  {
-                    "id": "serviceIndustries",
-                    "label": "Service industries",
-                    "kind": "textarea",
-                    "value": ""
-                  },
-                  {
-                    "id": "education",
-                    "label": "Education",
-                    "kind": "textarea",
-                    "value": ""
-                  },
-                  {
-                    "id": "qualification",
-                    "label": "Qualification",
-                    "kind": "textarea",
-                    "value": ""
-                  },
-                  {
-                    "id": "languages",
-                    "label": "Languages",
-                    "kind": "textarea",
-                    "value": ""
-                  },
-                  {
-                    "id": "socialEngagements",
-                    "label": "Social engagements",
-                    "kind": "textarea",
-                    "value": ""
-                  },
-                  {
-                    "id": "practiceArea",
-                    "label": "Practice area",
-                    "kind": "textarea",
-                    "value": ""
-                  },
-                  {
-                    "id": "practiceExperience",
-                    "label": "Practice experience",
-                    "kind": "textarea",
-                    "value": ""
-                  },
-                  {
-                    "id": "honors",
-                    "label": "Honors",
-                    "kind": "textarea",
-                    "value": ""
-                  },
-                  {
-                    "id": "achievements",
-                    "label": "Performance & Achievements",
-                    "kind": "textarea",
-                    "value": ""
                   }
                 ]
               },
@@ -25650,6 +26209,6 @@
         ]
       }
     },
-    "updatedAt": "2026-05-17T17:07:10.848Z"
+    "updatedAt": "2026-05-30T06:43:31.474Z"
   }
 }

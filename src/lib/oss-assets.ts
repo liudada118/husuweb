@@ -5,6 +5,7 @@ type OssConfig = {
   endpoint: string;
   accessKeyId: string;
   accessKeySecret: string;
+  publicPrefix: string;
 };
 
 function getOssConfig(): OssConfig {
@@ -32,11 +33,30 @@ function getOssConfig(): OssConfig {
     endpoint,
     accessKeyId,
     accessKeySecret,
+    publicPrefix: getPublicAssetPrefix(),
   };
 }
 
-function objectKeyFromPublicPath(publicPath: string) {
-  return publicPath.replace(/^\/+/, "");
+function getPublicAssetPrefix() {
+  const baseUrl = process.env.NEXT_PUBLIC_ASSET_BASE_URL || "";
+
+  if (!baseUrl) return "";
+
+  try {
+    return new URL(baseUrl).pathname.replace(/^\/+|\/+$/g, "");
+  } catch {
+    return "";
+  }
+}
+
+function objectKeyFromPublicPath(publicPath: string, config: OssConfig) {
+  const normalizedPath = publicPath.replace(/^\/+/, "");
+
+  if (!config.publicPrefix || normalizedPath === config.publicPrefix || normalizedPath.startsWith(`${config.publicPrefix}/`)) {
+    return normalizedPath;
+  }
+
+  return `${config.publicPrefix}/${normalizedPath}`;
 }
 
 function encodeObjectKey(objectKey: string) {
@@ -73,7 +93,7 @@ async function sendOssRequest(input: {
   contentType?: string;
 }) {
   const config = getOssConfig();
-  const objectKey = objectKeyFromPublicPath(input.publicPath);
+  const objectKey = objectKeyFromPublicPath(input.publicPath, config);
   const date = new Date().toUTCString();
   const contentType = input.contentType ?? "";
   const host = `${config.bucket}.${config.endpoint}`;

@@ -4,6 +4,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import type { OfficialCmsPublicState, OfficialCmsSiteState } from "@/cms/official-state";
+import { resolvePublicAssetUrls } from "@/lib/public-assets";
 
 const cmsDataPath = path.join(process.cwd(), "data", "cms-site.json");
 
@@ -126,11 +127,25 @@ const defaultIndustryIntros: Record<string, Pick<OfficialCmsSiteState["lists"]["
   },
 };
 
+function normalizeIndustrySlug(value: string) {
+  const normalized = String(value ?? "").trim().split("#")[0]?.split("?")[0] ?? "";
+  const industryPathMatch = normalized.match(/(?:^|\/)industries\/([^/]+)$/);
+  const slug = industryPathMatch?.[1] ?? normalized;
+
+  return slug.replace(/^\/+|\/+$/g, "");
+}
+
 function enrichIndustryList(items: OfficialCmsSiteState["lists"]["industries"]) {
-  return items.map((item) => ({
-    ...defaultIndustryIntros[item.slug],
-    ...item,
-  }));
+  return items.map((item) => {
+    const slug = normalizeIndustrySlug(item.slug);
+
+    return {
+      ...defaultIndustryIntros[slug],
+      ...item,
+      slug,
+      img: item.img ?? "",
+    };
+  });
 }
 
 export const defaultCmsSiteState: OfficialCmsSiteState = {
@@ -265,7 +280,7 @@ function mergeCmsState(value: Partial<OfficialCmsSiteState>): OfficialCmsSiteSta
       ...defaultCmsSiteState.lists,
       ...lists,
       industries: enrichIndustryList(
-        lists.industries?.filter((item) => item.slug && item.img) ?? defaultCmsSiteState.lists.industries,
+        lists.industries?.filter((item) => normalizeIndustrySlug(item.slug)) ?? defaultCmsSiteState.lists.industries,
       ),
       eventSlugs: lists.eventSlugs?.filter(Boolean) ?? defaultCmsSiteState.lists.eventSlugs,
       clientLogos: lists.clientLogos?.filter(Boolean) ?? defaultCmsSiteState.lists.clientLogos,
@@ -303,7 +318,7 @@ export async function saveCmsSiteState(nextState: OfficialCmsSiteState): Promise
 }
 
 export async function getPublicCmsState(): Promise<OfficialCmsPublicState> {
-  return getCmsSiteState();
+  return resolvePublicAssetUrls(await getCmsSiteState());
 }
 
 export function getCmsSiteStateSync(): OfficialCmsSiteState {

@@ -2,15 +2,47 @@ import { mkdir, readdir, rm, stat, writeFile } from "fs/promises";
 import path from "path";
 import { NextResponse } from "next/server";
 import { requireCmsApiUser } from "@/lib/cms-api-auth";
-import { createAsset, deleteAssetRecord, findAssetById, listAssets } from "@/lib/cms-db";
+import { countAssets, createAsset, deleteAssetRecord, findAssetById, listAssets } from "@/lib/cms-db";
 import { getCmsDashboardMetrics } from "@/lib/cms-dashboard";
 import { deletePublicAssetFromOss, uploadPublicAssetToOss } from "@/lib/oss-assets";
 
 export const runtime = "nodejs";
 
 const uploadDir = path.join(process.cwd(), "public", "uploads");
+const defaultAssetPageSize = 40;
+const maxAssetPageSize = 100;
 
-const uploadPageDirs = new Set(["home", "about", "awards", "event", "media", "podcast", "contact"]);
+const uploadPageDirectories: Record<string, string> = {
+  home: "home",
+  about: "about",
+  team: "team",
+  industries: "industries",
+  event: "event",
+  contact: "contact",
+  coreValue: "coreValue",
+  footer: "footer",
+  title: "title",
+};
+
+const uploadPageAliases: Record<string, keyof typeof uploadPageDirectories> = {
+  about: "about",
+  contact: "contact",
+  core: "coreValue",
+  "core-value": "coreValue",
+  corevalue: "coreValue",
+  event: "event",
+  events: "event",
+  foot: "footer",
+  footer: "footer",
+  header: "title",
+  home: "home",
+  industries: "industries",
+  industry: "industries",
+  media: "industries",
+  podcast: "team",
+  team: "team",
+  title: "title",
+};
 
 const mimeByExtension: Record<string, string> = {
   ".avif": "image/avif",
@@ -29,6 +61,45 @@ const mimeByExtension: Record<string, string> = {
 function toPublicUploadUrl(filePath: string) {
   const relativePath = path.relative(uploadDir, filePath).split(path.sep).join("/");
   return `/uploads/${relativePath}`;
+}
+
+function isMissingOssCredentials(error: unknown) {
+  return error instanceof Error && error.message === "OSS credentials are not configured.";
+}
+
+function normalizeUploadPage(value?: string | null) {
+  const normalized = value?.trim().toLowerCase();
+  return normalized ? uploadPageAliases[normalized] : undefined;
+}
+
+function parsePagination(request: Request) {
+  const url = new URL(request.url);
+  const limit = Number(url.searchParams.get("limit") ?? defaultAssetPageSize);
+  const offset = Number(url.searchParams.get("offset") ?? 0);
+  const page = normalizeUploadPage(url.searchParams.get("page"));
+
+  return {
+    limit: Number.isFinite(limit) ? Math.max(1, Math.min(maxAssetPageSize, Math.floor(limit))) : defaultAssetPageSize,
+    offset: Number.isFinite(offset) ? Math.max(0, Math.floor(offset)) : 0,
+    page,
+  };
+}
+
+function createAssetListPayload(pagination = { limit: defaultAssetPageSize, offset: 0, page: undefined as string | undefined }) {
+  const total = countAssets(pagination.page);
+  const assets = listAssets(pagination);
+
+  return {
+    assets,
+    pagination: {
+      total,
+      limit: pagination.limit,
+      offset: pagination.offset,
+      page: pagination.page,
+      hasMore: pagination.offset + assets.length < total,
+    },
+    dashboard: getCmsDashboardMetrics(),
+  };
 }
 
 async function listUploadFiles(directory: string): Promise<string[]> {
@@ -79,7 +150,7 @@ async function syncUploadDirectoryAssets() {
   }
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   const auth = await requireCmsApiUser();
 
   if (!auth.ok) {
@@ -88,7 +159,7 @@ export async function GET() {
 
   await syncUploadDirectoryAssets();
 
-  return NextResponse.json({ assets: listAssets(), dashboard: getCmsDashboardMetrics() });
+  return NextResponse.json(createAssetListPayload(parsePagination(request)));
 }
 
 export async function POST(request: Request) {
@@ -101,7 +172,7 @@ export async function POST(request: Request) {
   const formData = await request.formData();
   const file = formData.get("file");
   const altText = String(formData.get("altText") ?? "");
-  const uploadPage = String(formData.get("page") ?? "").trim().toLowerCase();
+  const uploadPage = normalizeUploadPage(String(formData.get("page") ?? ""));
 
   if (!(file instanceof File)) {
     return NextResponse.json({ message: "必须上传文件。" }, { status: 400 });
@@ -110,13 +181,16 @@ export async function POST(request: Request) {
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
   const safeName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]+/g, "-")}`;
-  const targetDir = uploadPageDirs.has(uploadPage) ? path.join(uploadDir, uploadPage) : uploadDir;
-  const uploadUrlPrefix = uploadPageDirs.has(uploadPage) ? `/uploads/${uploadPage}` : "/uploads";
+  const uploadPageDirectory = uploadPage ? uploadPageDirectories[uploadPage] : undefined;
+  const targetDir = uploadPageDirectory ? path.join(uploadDir, uploadPageDirectory) : uploadDir;
+  const uploadUrlPrefix = uploadPageDirectory ? `/uploads/${uploadPageDirectory}` : "/uploads";
   const diskPath = path.join(targetDir, safeName);
   const urlPath = `${uploadUrlPrefix}/${safeName}`;
 
   await mkdir(targetDir, { recursive: true });
   await writeFile(diskPath, buffer);
+
+  let ossWarning: string | undefined;
 
   try {
     await uploadPublicAssetToOss({
@@ -125,11 +199,15 @@ export async function POST(request: Request) {
       contentType: file.type || "application/octet-stream",
     });
   } catch (error) {
-    await rm(diskPath, { force: true });
-    return NextResponse.json(
-      { message: error instanceof Error ? error.message : "OSS 上传失败。" },
-      { status: 502 },
-    );
+    if (isMissingOssCredentials(error)) {
+      ossWarning = "OSS 未配置，文件已保存到本地 public/uploads。";
+    } else {
+      await rm(diskPath, { force: true });
+      return NextResponse.json(
+        { message: error instanceof Error ? error.message : "OSS 上传失败。" },
+        { status: 502 },
+      );
+    }
   }
 
   createAsset({
@@ -143,7 +221,11 @@ export async function POST(request: Request) {
     uploadedBy: auth.user.id,
   });
 
-  return NextResponse.json({ ok: true, assets: listAssets(), dashboard: getCmsDashboardMetrics() });
+  return NextResponse.json({
+    ok: true,
+    warning: ossWarning,
+    ...createAssetListPayload({ limit: defaultAssetPageSize, offset: 0, page: uploadPage }),
+  });
 }
 
 export async function DELETE(request: Request) {
@@ -177,6 +259,11 @@ export async function DELETE(request: Request) {
     try {
       await deletePublicAssetFromOss(asset.url);
     } catch (error) {
+      if (isMissingOssCredentials(error)) {
+        deleteAssetRecord(id);
+        return NextResponse.json({ ok: true, ...createAssetListPayload() });
+      }
+
       return NextResponse.json(
         { message: error instanceof Error ? error.message : "OSS 删除失败。" },
         { status: 502 },
@@ -186,5 +273,5 @@ export async function DELETE(request: Request) {
 
   deleteAssetRecord(id);
 
-  return NextResponse.json({ ok: true, assets: listAssets(), dashboard: getCmsDashboardMetrics() });
+  return NextResponse.json({ ok: true, ...createAssetListPayload() });
 }

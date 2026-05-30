@@ -767,7 +767,7 @@ export function HomePage() {
         <div className="grid auto-rows-[18rem] grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:auto-rows-[20rem]">
           {homeIndustries.map((item, index) => (
             <Link
-              key={item.name}
+              key={item.slug || `${item.name}-${index}`}
               href={`/industries/${item.slug}?from=home`}
               onClick={rememberReturnPosition}
               className={`group relative min-w-0 overflow-hidden bg-[#141414] shadow-xl transition-transform duration-500 hover:-translate-y-2 ${item.cls}`}

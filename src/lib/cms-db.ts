@@ -931,8 +931,60 @@ export function listPodcastEpisodes(includeAllStatuses = true) {
   );
 }
 
-export function listAssets() {
-  return listRows("SELECT * FROM assets ORDER BY created_at DESC, id DESC", mapAsset);
+const assetPageUploadPrefixes: Record<string, string[]> = {
+  home: ["/uploads/home/"],
+  about: ["/uploads/about/"],
+  team: ["/uploads/team/", "/uploads/podcast/"],
+  podcast: ["/uploads/team/", "/uploads/podcast/"],
+  industries: ["/uploads/industries/", "/uploads/media/"],
+  media: ["/uploads/industries/", "/uploads/media/"],
+  event: ["/uploads/event/", "/uploads/events/"],
+  contact: ["/uploads/contact/"],
+  coreValue: ["/uploads/coreValue/", "/uploads/core-value/", "/uploads/core/"],
+  footer: ["/uploads/footer/"],
+  title: ["/uploads/title/", "/uploads/header/"],
+};
+
+function assetPageWhereClause(page?: string) {
+  const prefixes = page ? assetPageUploadPrefixes[page] : undefined;
+
+  if (!prefixes?.length) {
+    return { clause: "", params: {} as Record<string, string> };
+  }
+
+  return {
+    clause: `WHERE ${prefixes.map((_, index) => `url_path LIKE @prefix${index}`).join(" OR ")}`,
+    params: Object.fromEntries(prefixes.map((prefix, index) => [`prefix${index}`, `${prefix}%`])),
+  };
+}
+
+export function listAssets(options?: { limit?: number; offset?: number; page?: string }) {
+  const pageFilter = assetPageWhereClause(options?.page);
+
+  if (!options?.limit) {
+    const db = getCmsDb();
+    const rows = db
+      .prepare(`SELECT * FROM assets ${pageFilter.clause} ORDER BY created_at DESC, id DESC`)
+      .all(pageFilter.params) as Record<string, unknown>[];
+
+    return rows.map(mapAsset);
+  }
+
+  const db = getCmsDb();
+  const limit = Math.max(1, Math.min(200, Math.floor(options.limit)));
+  const offset = Math.max(0, Math.floor(options.offset ?? 0));
+  const rows = db
+    .prepare(`SELECT * FROM assets ${pageFilter.clause} ORDER BY created_at DESC, id DESC LIMIT @limit OFFSET @offset`)
+    .all({ ...pageFilter.params, limit, offset }) as Record<string, unknown>[];
+
+  return rows.map(mapAsset);
+}
+
+export function countAssets(page?: string) {
+  const db = getCmsDb();
+  const pageFilter = assetPageWhereClause(page);
+  const row = db.prepare(`SELECT COUNT(*) AS count FROM assets ${pageFilter.clause}`).get(pageFilter.params) as { count: number };
+  return Number(row.count);
 }
 
 export function listContactSubmissions(includeArchived = false) {
@@ -1365,10 +1417,10 @@ export function updateVersionPayload(input: {
   });
 
   if (existing.is_published) {
-    restoreVersion(input.versionId, input.updatedBy);
+    db.prepare("UPDATE versions SET is_published = 0 WHERE id = ?").run(input.versionId);
   }
 
-  return { appliedToCurrentSite: Boolean(existing.is_published) };
+  return { appliedToCurrentSite: false, unpublishedAfterEdit: Boolean(existing.is_published) };
 }
 
 export function getVersionEditorData(versionId: number) {
@@ -1538,7 +1590,7 @@ export function getCmsBootstrapData(userId: number): CmsBootstrapData {
     caseStudies: listCaseStudies(true),
     mediaItems: listMediaItems(true),
     podcastEpisodes: listPodcastEpisodes(true),
-    assets: listAssets(),
+    assets: listAssets({ limit: 40, offset: 0 }),
     versions: listVersions(),
     contactSubmissions: listContactSubmissions(true),
   };

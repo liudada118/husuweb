@@ -49,6 +49,7 @@ import {
   getPastEventPlatformNumbersFromFields,
   getPastEventProgramNumber,
   getPastEventProgramNumbersFromFields,
+  getPageContentItemField,
   isPastEventPlatformFieldId,
   defaultPageContentState,
   mergePageContentDefaults,
@@ -81,6 +82,7 @@ import type {
 } from "@/cms/official-state";
 import { events as officialEventsData, formatEventDate } from "@/data/events";
 import { teamProfiles } from "@/data/teamProfiles";
+import { resolvePublicAssetUrl } from "@/lib/public-assets";
 import { honorData, withZhSponsorHonors, zhHonorData } from "@/components/sections/about/Honors";
 import { chronicleGroups, zhChronicleGroups } from "@/components/sections/about/Chronicle";
 import {
@@ -520,6 +522,31 @@ function formatBytes(value = 0) {
   return `${(value / 1024 / 1024 / 1024).toFixed(2)} GB`;
 }
 
+async function copyTextToClipboard(value: string) {
+  if (navigator.clipboard?.writeText && window.isSecureContext) {
+    await navigator.clipboard.writeText(value);
+    return;
+  }
+
+  const textarea = document.createElement("textarea");
+  textarea.value = value;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "fixed";
+  textarea.style.left = "-9999px";
+  textarea.style.top = "0";
+  document.body.appendChild(textarea);
+  textarea.focus();
+  textarea.select();
+
+  try {
+    if (!document.execCommand("copy")) {
+      throw new Error("copy command failed");
+    }
+  } finally {
+    document.body.removeChild(textarea);
+  }
+}
+
 function formatDateTime(value: string) {
   if (!value) return "-";
   const date = new Date(value);
@@ -527,24 +554,37 @@ function formatDateTime(value: string) {
   return date.toLocaleString("zh-CN", { hour12: false });
 }
 
-function getAssetKind(asset: CmsAsset) {
-  if (asset.mimeType.startsWith("image/")) return "image";
-  if (asset.mimeType.startsWith("video/")) return "video";
-  return "file";
-}
-
 const assetPageCategories = [
-  { id: "all", label: "全部页面", keywords: [] },
   { id: "home", label: "首页", keywords: ["cms-home", "home", "program", "course", "case"] },
-  { id: "about", label: "关于页", keywords: ["about", "work-life", "worklife", "recognition", "leadership"] },
-  { id: "awards", label: "奖项页", keywords: ["award", "awards", "law-firm", "social"] },
-  { id: "event", label: "活动页", keywords: ["event", "schedule", "past"] },
-  { id: "media", label: "媒体页", keywords: ["media", "appearance", "business", "cooperation", "stats"] },
-  { id: "podcast", label: "播客页", keywords: ["podcast", "special", "episode"] },
+  { id: "about", label: "关于我们", keywords: ["about", "work-life", "worklife", "recognition", "leadership"] },
+  { id: "team", label: "虎诉团队", keywords: ["podcast", "team", "partner", "senior-associate"] },
+  { id: "industries", label: "服务行业", keywords: ["media", "industries", "industry", "appearance", "business", "cooperation", "stats"] },
+  { id: "event", label: "虎诉动态", keywords: ["event", "schedule", "past"] },
   { id: "contact", label: "联系我们", keywords: ["contact"] },
+  { id: "coreValue", label: "虎诉文化", keywords: ["core", "core-value", "culture"] },
+  { id: "footer", label: "Footer", keywords: ["footer", "foot"] },
+  { id: "title", label: "Title", keywords: ["title", "header", "logo"] },
 ] as const;
 
 type AssetPageCategoryId = (typeof assetPageCategories)[number]["id"];
+
+const cmsAssetPageSize = 40;
+
+type AssetPagination = {
+  total: number;
+  limit: number;
+  offset: number;
+  page?: string;
+  hasMore: boolean;
+};
+
+type AssetSummary = {
+  count: number;
+  file: number;
+  image: number;
+  totalBytes: number;
+  video: number;
+};
 
 function getStatusLabel(status: string) {
   return (
@@ -721,7 +761,10 @@ export function CmsStudio({ initialData }: { initialData: CmsBootstrapData }) {
     Object.fromEntries(navigationGroups.map((group) => [group.title, group.defaultOpen !== false])),
   );
   const initialOfficialSiteState = initialData.officialSiteState
-    ? normalizeOfficialSiteStateForEditor(cloneValue(initialData.officialSiteState))
+    ? normalizeOfficialSiteStateForEditor(
+        cloneValue(initialData.officialSiteState),
+        mergePageContentDefaults(cloneValue(initialData.pageContent)),
+      )
     : null;
   const [siteContent, setSiteContent] = useState<SiteContent>(cloneValue(initialData.siteContent));
   const [visualEditor, setVisualEditor] = useState<VisualEditorState>(cloneValue(initialData.visualEditor));
@@ -765,7 +808,6 @@ export function CmsStudio({ initialData }: { initialData: CmsBootstrapData }) {
   });
   const [isPasswordSaving, setIsPasswordSaving] = useState(false);
   const assetInputRef = useRef<HTMLInputElement>(null);
-  const defaultPublishedVersionLoadedRef = useRef(false);
 
   const pageSections = useMemo(
     () => Object.keys(siteContent[activeLanguage]) as Array<keyof SiteContent["zh"]>,
@@ -795,7 +837,7 @@ export function CmsStudio({ initialData }: { initialData: CmsBootstrapData }) {
       }
 
       const payload = (await response.json()) as { state: OfficialCmsSiteState };
-      if (!cancelled) setOfficialSiteState(normalizeOfficialSiteStateForEditor(payload.state));
+      if (!cancelled) setOfficialSiteState(normalizeOfficialSiteStateForEditor(payload.state, pageContent));
     }
 
     void loadOfficialState();
@@ -837,7 +879,7 @@ export function CmsStudio({ initialData }: { initialData: CmsBootstrapData }) {
   };
 
   const saveOfficialSiteState = async (nextState: OfficialCmsSiteState) => {
-    const normalizedState = normalizeOfficialSiteStateForEditor(nextState);
+    const normalizedState = normalizeOfficialSiteStateForEditor(nextState, pageContent);
     const syncedPageContent = syncPageContentFromOfficialSiteState(pageContent, normalizedState);
     const stateForSave = { ...normalizedState, previewPageContent: syncedPageContent };
     const response = await fetch("/api/cms/official", {
@@ -852,7 +894,7 @@ export function CmsStudio({ initialData }: { initialData: CmsBootstrapData }) {
     }
 
     const payload = (await response.json()) as { state: OfficialCmsSiteState };
-    setOfficialSiteState(normalizeOfficialSiteStateForEditor(payload.state));
+    setOfficialSiteState(normalizeOfficialSiteStateForEditor(payload.state, syncedPageContent));
     setPageContent(syncedPageContent);
     setMessage("官网内容已保存，并同步到真实前台数据。");
     return true;
@@ -861,15 +903,19 @@ export function CmsStudio({ initialData }: { initialData: CmsBootstrapData }) {
   const applyVersionPayload = (payload: CmsVersionPayload) => {
     setSiteContent(cloneValue(payload.siteContent));
     setVisualEditor(cloneValue(payload.visualEditor));
+    const payloadPageContent = mergePageContentDefaults(cloneValue(payload.pageContent));
     const normalizedOfficialState = payload.officialSiteState
-      ? normalizeOfficialSiteStateForEditor(cloneValue(payload.officialSiteState))
+      ? normalizeOfficialSiteStateForEditor(cloneValue(payload.officialSiteState), payloadPageContent)
       : null;
     const nextPageContent = normalizedOfficialState
-      ? syncPageContentFromOfficialSiteState(mergePageContentDefaults(cloneValue(payload.pageContent)), normalizedOfficialState)
-      : mergePageContentDefaults(cloneValue(payload.pageContent));
+      ? syncPageContentFromOfficialSiteState(payloadPageContent, normalizedOfficialState)
+      : payloadPageContent;
+    const nextOfficialState = normalizedOfficialState
+      ? normalizeOfficialSiteStateForEditor({ ...normalizedOfficialState, previewPageContent: nextPageContent }, nextPageContent)
+      : null;
     setPageContent(nextPageContent);
-    if (payload.officialSiteState) {
-      setOfficialSiteState({ ...normalizedOfficialState!, previewPageContent: nextPageContent });
+    if (nextOfficialState) {
+      setOfficialSiteState({ ...nextOfficialState, previewPageContent: nextPageContent });
     }
     setArticles(cloneValue(payload.articles));
     setCaseStudies(cloneValue(payload.caseStudies));
@@ -889,10 +935,11 @@ export function CmsStudio({ initialData }: { initialData: CmsBootstrapData }) {
     pageContent?: PageContentState;
     officialSiteState?: OfficialCmsSiteState | null;
   }): CmsVersionPayload => {
+    const officialMergePageContent = nextState?.pageContent ?? pageContent;
     const normalizedOfficialState = nextState?.officialSiteState
-      ? normalizeOfficialSiteStateForEditor(nextState.officialSiteState)
+      ? normalizeOfficialSiteStateForEditor(nextState.officialSiteState, officialMergePageContent)
       : officialSiteState
-        ? normalizeOfficialSiteStateForEditor(officialSiteState)
+        ? normalizeOfficialSiteStateForEditor(officialSiteState, officialMergePageContent)
         : undefined;
     const nextPageContent =
       nextState?.pageContent ??
@@ -932,9 +979,10 @@ export function CmsStudio({ initialData }: { initialData: CmsBootstrapData }) {
         pageContent: PageContentState;
       };
       const officialPayload = (await officialResponse.json()) as { state: OfficialCmsSiteState };
-      const normalizedOfficialState = normalizeOfficialSiteStateForEditor(cloneValue(officialPayload.state));
+      const sitePageContent = mergePageContentDefaults(cloneValue(sitePayload.pageContent));
+      const normalizedOfficialState = normalizeOfficialSiteStateForEditor(cloneValue(officialPayload.state), sitePageContent);
       const nextPageContent = syncPageContentFromOfficialSiteState(
-        mergePageContentDefaults(cloneValue(sitePayload.pageContent)),
+        sitePageContent,
         normalizedOfficialState,
       );
 
@@ -965,14 +1013,13 @@ export function CmsStudio({ initialData }: { initialData: CmsBootstrapData }) {
   };
 
   useEffect(() => {
-    if (defaultPublishedVersionLoadedRef.current || editingVersionId || versions.length === 0) return;
+    if (editingVersionId || versions.length === 0) return;
 
-    const publishedVersion = versions.find((version) => version.isPublished);
-    if (!publishedVersion) return;
+    const defaultVersion = versions.find((version) => version.isPublished) ?? versions[0];
+    if (!defaultVersion) return;
 
-    defaultPublishedVersionLoadedRef.current = true;
-    setVersionSourceId(publishedVersion.id);
-    void loadVersionForEditing(publishedVersion.id);
+    setVersionSourceId(defaultVersion.id);
+    void loadVersionForEditing(defaultVersion.id);
   }, [editingVersionId, versions]);
 
   const submitVersionDraft = async (
@@ -992,9 +1039,19 @@ export function CmsStudio({ initialData }: { initialData: CmsBootstrapData }) {
       return false;
     }
 
-    const payload = (await response.json()) as { versions: CmsVersionSnapshot[]; appliedToCurrentSite?: boolean };
+    const payload = (await response.json()) as {
+      versions: CmsVersionSnapshot[];
+      appliedToCurrentSite?: boolean;
+      unpublishedAfterEdit?: boolean;
+    };
     setVersions(payload.versions);
-    setMessage(payload.appliedToCurrentSite ? "已发布版本内容已更新，并同步到当前站点。" : "版本内容已更新，可在版本管理中预览或发布。");
+    setMessage(
+      payload.appliedToCurrentSite
+        ? "已发布版本内容已更新，并同步到当前站点。"
+        : payload.unpublishedAfterEdit
+          ? "版本内容已更新。该版本已转为未发布状态，请在版本管理中预览确认后再发布。"
+          : "版本内容已更新，可在版本管理中预览或发布。",
+    );
     return true;
   };
 
@@ -1515,6 +1572,7 @@ function CmsMainPanel(props: {
         visualEditor={props.visualEditor}
         pageContent={props.pageContent}
         officialSiteState={props.officialSiteState}
+        setOfficialSiteState={props.setOfficialSiteState}
         setVisualEditor={props.setVisualEditor}
         setPageContent={props.setPageContent}
         activeLanguage={props.activeLanguage}
@@ -1921,8 +1979,45 @@ function createLocalizedEventOverride(): OfficialCmsLocalizedEventOverride {
 function createEventOverride(): OfficialCmsEventOverride {
   return {
     image: "",
+    sortDate: "",
     en: createLocalizedEventOverride(),
     zh: createLocalizedEventOverride(),
+  };
+}
+
+function formatEventSortDate(date = new Date()) {
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  return `${date.getFullYear()}${month}${day}`;
+}
+
+function createUniqueEventSlug(existingSlugs: string[]) {
+  const base = `event-${formatEventSortDate()}`;
+  const usedSlugs = new Set([...existingSlugs, ...officialEventsData.map((event) => event.slug)]);
+  let index = existingSlugs.length + 1;
+  let slug = `${base}-${index}`;
+
+  while (usedSlugs.has(slug)) {
+    index += 1;
+    slug = `${base}-${index}`;
+  }
+
+  return slug;
+}
+
+function createBlankEventOverride(): OfficialCmsEventOverride {
+  return {
+    ...createEventOverride(),
+    sortDate: formatEventSortDate(),
+    en: {
+      ...createLocalizedEventOverride(),
+      title: "New Event",
+    },
+    zh: {
+      ...createLocalizedEventOverride(),
+      title: "新动态",
+    },
   };
 }
 
@@ -2027,6 +2122,7 @@ function createDefaultEventOverrides(): Record<string, OfficialCmsEventOverride>
       event.slug,
       {
         image: event.image,
+        sortDate: event.date,
         en: {
           category: event.category,
           title: event.title,
@@ -2072,6 +2168,7 @@ function mergeEventOverrides(
           ...defaultOverride,
           ...override,
           image: override.image ?? defaultOverride.image,
+          sortDate: override.sortDate ?? defaultOverride.sortDate,
           en: mergeLocalizedEventOverride(defaultOverride.en, override.en),
           zh: mergeLocalizedEventOverride(defaultOverride.zh, override.zh),
         },
@@ -2246,6 +2343,99 @@ function getExistingOrDefaultPageItemField(
   );
 }
 
+function normalizeIndustrySlugForStudio(value: string) {
+  const withoutFragment = String(value ?? "").trim().split("#")[0] ?? "";
+  const withoutQuery = withoutFragment.split("?")[0] ?? "";
+  const industryPathMatch = withoutQuery.match(/(?:^|\/)industries\/([^/]+)$/);
+  const slug = industryPathMatch?.[1] ?? withoutQuery;
+
+  return slug.replace(/^\/+|\/+$/g, "");
+}
+
+function getPageItemsBySlug(
+  pageContent: PageContentState | undefined,
+  language: Language,
+  pageId: CmsPageId,
+  sectionId: string,
+) {
+  const items = pageContent?.[language]?.[pageId]?.sections.find((section) => section.id === sectionId)?.items ?? [];
+
+  return new Map(
+    items
+      .map((item) => [normalizeIndustrySlugForStudio(getPageContentItemField(item, "slug", item.id)), item] as const)
+      .filter(([slug]) => Boolean(slug)),
+  );
+}
+
+function mergeIndustriesWithPageContent(
+  industries: OfficialCmsIndustryListItem[],
+  pageContent: PageContentState | undefined,
+) {
+  const bySlug = new Map<string, OfficialCmsIndustryListItem>();
+  const orderedSlugs: string[] = [];
+  const addSlug = (value: string) => {
+    const slug = normalizeIndustrySlugForStudio(value);
+
+    if (!slug) return "";
+    if (!orderedSlugs.includes(slug)) orderedSlugs.push(slug);
+    return slug;
+  };
+
+  industries.forEach((industry) => {
+    const slug = addSlug(industry.slug);
+
+    if (!slug) return;
+    bySlug.set(slug, { ...industry, slug, img: industry.img ?? "" });
+  });
+
+  const enCards = getPageItemsBySlug(pageContent, "en", "media", "cards");
+  const zhCards = getPageItemsBySlug(pageContent, "zh", "media", "cards");
+  const enDetails = getPageItemsBySlug(pageContent, "en", "media", "detailPages");
+  const zhDetails = getPageItemsBySlug(pageContent, "zh", "media", "detailPages");
+
+  [enCards, zhCards, enDetails, zhDetails].forEach((items) => {
+    items.forEach((_item, slug) => addSlug(slug));
+  });
+
+  return orderedSlugs
+    .map((slug) => {
+      const current = bySlug.get(slug);
+      const enCard = enCards.get(slug);
+      const zhCard = zhCards.get(slug);
+      const enDetail = enDetails.get(slug);
+      const zhDetail = zhDetails.get(slug);
+      const name =
+        current?.name ||
+        getPageContentItemField(enCard, "title", getPageContentItemField(enDetail, "title", slug));
+      const zhName =
+        current?.zhName ||
+        getPageContentItemField(zhCard, "title", getPageContentItemField(zhDetail, "title", name));
+
+      return {
+        ...current,
+        slug,
+        name,
+        zhName,
+        img:
+          current?.img ||
+          getPageContentItemField(enDetail, "image", getPageContentItemField(enCard, "image", "")) ||
+          getPageContentItemField(zhDetail, "image", getPageContentItemField(zhCard, "image", "")),
+        cls:
+          current?.cls ||
+          getPageContentItemField(enCard, "layoutClass", getPageContentItemField(zhCard, "layoutClass", "")),
+        intro:
+          current?.intro ||
+          getPageContentItemField(enDetail, "intro", getPageContentItemField(enCard, "description", "")),
+        zhIntro:
+          current?.zhIntro ||
+          getPageContentItemField(zhDetail, "intro", getPageContentItemField(zhCard, "description", "")),
+        sections: current?.sections || getPageContentItemField(enDetail, "sections", ""),
+        zhSections: current?.zhSections || getPageContentItemField(zhDetail, "sections", ""),
+      } satisfies OfficialCmsIndustryListItem;
+    })
+    .filter((industry) => industry.slug && (industry.name || industry.zhName));
+}
+
 function homeHonorItemId(year: string, index: number, date: string) {
   return `${year}-${index + 1}-${date || "award"}`;
 }
@@ -2264,10 +2454,11 @@ function eventLocalizedCopyForLanguage(
   const summary = localizedOverride?.summary ?? (language === "zh" ? event?.zh?.summary : event?.summary) ?? "";
   const category = localizedOverride?.category ?? (language === "zh" ? event?.zh?.category : event?.category) ?? "";
   const content = localizedOverride?.content ?? (language === "zh" ? event?.zh?.content : event?.content) ?? [];
+  const sortDate = override?.sortDate ?? event?.date ?? "";
   const displayDate =
-    localizedOverride?.displayDate ?? (event?.date ? formatEventDate(event.date, language) : "");
+    localizedOverride?.displayDate ?? (sortDate ? formatEventDate(sortDate, language) : "");
 
-  return { title, summary, category, content, displayDate };
+  return { title, summary, category, content, sortDate, displayDate };
 }
 
 function syncPageContentFromOfficialSiteState(pageContent: PageContentState, officialState: OfficialCmsSiteState) {
@@ -2308,7 +2499,8 @@ function syncPageContentFromOfficialSiteState(pageContent: PageContentState, off
     );
     next = replaceSectionItems(next, language, "about", "chronicle", chronicle);
 
-    const industries = officialState.lists.industries.map((industry) =>
+    const mergedIndustries = mergeIndustriesWithPageContent(officialState.lists.industries, next);
+    const industries = mergedIndustries.map((industry) =>
       studioItem(industry.slug, isZh ? industry.zhName || industry.name : industry.name, [
         studioField("slug", isZh ? "标识" : "Slug", "text", industry.slug),
         studioField("title", isZh ? "标题" : "Title", "text", isZh ? industry.zhName || industry.name : industry.name),
@@ -2321,12 +2513,29 @@ function syncPageContentFromOfficialSiteState(pageContent: PageContentState, off
     next = replaceSectionItems(next, language, "home", "industries", industries);
     next = replaceSectionItems(next, language, "media", "cards", industries);
 
-    const industryDetailItems = officialState.lists.industries.map((industry) =>
+    const industryDetailItems = mergedIndustries.map((industry) =>
       studioItem(industry.slug, isZh ? industry.zhName || industry.name : industry.name, [
         studioField("slug", isZh ? "标识" : "Slug", "text", industry.slug),
-        studioField("title", isZh ? "详情页标题" : "Detail title", "text", isZh ? industry.zhName || industry.name : industry.name),
-        studioField("image", isZh ? "首屏背景图片" : "Hero image", "image", industry.img),
-        studioField("intro", isZh ? "详情页简介" : "Detail intro", "textarea", isZh ? industry.zhIntro ?? "" : industry.intro ?? ""),
+        studioField(
+          "title",
+          isZh ? "详情页标题" : "Detail title",
+          "text",
+          getExistingPageItemField(next, language, "media", "detailPages", industry.slug, "title") ||
+            (isZh ? industry.zhName || industry.name : industry.name),
+        ),
+        studioField(
+          "image",
+          isZh ? "首屏背景图片" : "Hero image",
+          "image",
+          getExistingPageItemField(next, language, "media", "detailPages", industry.slug, "image") || industry.img,
+        ),
+        studioField(
+          "intro",
+          isZh ? "详情页简介" : "Detail intro",
+          "textarea",
+          getExistingPageItemField(next, language, "media", "detailPages", industry.slug, "intro") ||
+            (isZh ? industry.zhIntro ?? "" : industry.intro ?? ""),
+        ),
         studioField(
           "sections",
           isZh ? "详情卡片" : "Detail cards",
@@ -2407,7 +2616,7 @@ function syncPageContentFromOfficialSiteState(pageContent: PageContentState, off
       return studioItem(slug, localized.title || slug, [
         studioField("slug", isZh ? "标识" : "Slug", "text", slug),
         studioField("image", isZh ? "缩略图" : "Thumbnail", "image", override.image ?? event?.image ?? ""),
-        studioField("sortDate", isZh ? "排序日期（YYYYMMDD）" : "Sort date (YYYYMMDD)", "text", event?.date ?? ""),
+        studioField("sortDate", isZh ? "排序日期（YYYYMMDD）" : "Sort date (YYYYMMDD)", "text", localized.sortDate),
         studioField("displayDate", isZh ? "展示日期" : "Display date", "text", localized.displayDate),
         studioField("category", isZh ? "分类" : "Category", "text", localized.category),
         studioField("title", isZh ? "标题" : "Title", "textarea", localized.title),
@@ -2425,7 +2634,7 @@ function syncPageContentFromOfficialSiteState(pageContent: PageContentState, off
 
       return studioItem(slug, localized.title || slug, [
         studioField("slug", isZh ? "标识" : "Slug", "text", slug),
-        studioField("sortDate", isZh ? "排序日期（YYYYMMDD）" : "Sort date (YYYYMMDD)", "text", event?.date ?? ""),
+        studioField("sortDate", isZh ? "排序日期（YYYYMMDD）" : "Sort date (YYYYMMDD)", "text", localized.sortDate),
         studioField("displayDate", isZh ? "展示日期" : "Display date", "text", localized.displayDate),
         studioField("category", isZh ? "分类" : "Category", "text", localized.category),
         studioField("title", isZh ? "详情页标题" : "Detail title", "textarea", localized.title),
@@ -2445,7 +2654,10 @@ function syncPageContentFromOfficialSiteState(pageContent: PageContentState, off
   return next;
 }
 
-function normalizeOfficialSiteStateForEditor(current: OfficialCmsSiteState): OfficialCmsSiteState {
+function normalizeOfficialSiteStateForEditor(
+  current: OfficialCmsSiteState,
+  pageContentOverride?: PageContentState,
+): OfficialCmsSiteState {
   const honors = mergeHonorContent(current.content.honors);
   const chronicle = mergeChronicleContent(current.content.chronicle);
   const teamProfileOverrides = mergeTeamProfileContent(current.content.teamProfiles);
@@ -2453,6 +2665,7 @@ function normalizeOfficialSiteStateForEditor(current: OfficialCmsSiteState): Off
   const honorYearDefaults = honors.map((item) => item.year);
   const homeHonorItemDefaults = homeHonorItemIds(honors);
   const chronicleYearDefaults = chronicle.map((item) => item.year);
+  const industries = mergeIndustriesWithPageContent(current.lists.industries, pageContentOverride ?? current.previewPageContent);
 
   return {
     ...current,
@@ -2468,6 +2681,7 @@ function normalizeOfficialSiteStateForEditor(current: OfficialCmsSiteState): Off
     },
     lists: {
       ...current.lists,
+      industries,
       homeHonorYears: mergeOrderedSlugs(current.lists.homeHonorYears, honorYearDefaults),
       homeHonorItems: current.lists.homeHonorItems?.length
         ? current.lists.homeHonorItems.filter((item) => homeHonorItemDefaults.includes(item))
@@ -2493,6 +2707,12 @@ function moveArrayItem<T>(items: T[], fromIndex: number, toIndex: number) {
   const [item] = next.splice(fromIndex, 1);
   next.splice(toIndex, 0, item);
   return next;
+}
+
+function parseEventSortDate(value?: string) {
+  const normalized = (value ?? "").replace(/\D/g, "");
+  if (normalized.length >= 8) return Number(normalized.slice(0, 8));
+  return 0;
 }
 
 function MultilingualField(props: {
@@ -2619,15 +2839,18 @@ function OfficialSiteSectionPanel(props: {
     officialEvents: "管理 Events 页动态内容与排序。",
   };
   const saveCurrentPanel = () => {
-    const normalizedState = normalizeOfficialSiteStateForEditor(state);
+    if (!props.editingVersionId) {
+      props.setMessage("请先在“版本发布”中创建或选择一个版本，再保存内容；保存后需要发布版本才会同步到前台。");
+      return;
+    }
+
+    const normalizedState = normalizeOfficialSiteStateForEditor(state, props.pageContent);
     const syncedPageContent = syncPageContentFromOfficialSiteState(props.pageContent, normalizedState);
     const stateForSave = { ...normalizedState, previewPageContent: syncedPageContent };
     props.setOfficialSiteState(stateForSave);
     props.setPageContent(syncedPageContent);
 
-    void (props.editingVersionId
-      ? props.submitVersionDraft(props.editingVersionId, { officialSiteState: stateForSave, pageContent: syncedPageContent })
-      : props.saveOfficialSiteState(stateForSave));
+    void props.submitVersionDraft(props.editingVersionId, { officialSiteState: stateForSave, pageContent: syncedPageContent });
   };
 
   const officialSplitEditorClassName = "grid gap-4 xl:col-span-2 xl:grid-cols-[22rem_minmax(0,1fr)] xl:items-start";
@@ -2650,6 +2873,7 @@ function OfficialSiteSectionPanel(props: {
     layout?: "inline" | "split";
     defaultOpen?: boolean;
     children: React.ReactNode;
+    onPinTop?: () => void;
     onMoveUp?: () => void;
     onMoveDown?: () => void;
     onDelete?: () => void;
@@ -2673,6 +2897,16 @@ function OfficialSiteSectionPanel(props: {
               {params.summary ? <p className="mt-1 line-clamp-2 text-xs leading-5 text-slate-500">{params.summary}</p> : null}
             </button>
             <div className="flex flex-wrap items-center gap-2">
+              {params.onPinTop ? (
+                <button
+                  type="button"
+                  onClick={params.onPinTop}
+                  className="inline-flex items-center gap-1 rounded-xl border border-slate-200 px-3 py-2 text-xs font-bold text-slate-600 transition hover:border-[#2563eb] hover:text-[#2563eb]"
+                >
+                  <ArrowUp className="h-3.5 w-3.5" />
+                  置顶
+                </button>
+              ) : null}
               {params.onMoveUp ? (
                 <button
                   type="button"
@@ -2740,6 +2974,16 @@ function OfficialSiteSectionPanel(props: {
             {params.summary ? <p className="mt-1 line-clamp-2 text-xs leading-5 text-slate-500">{params.summary}</p> : null}
           </button>
           <div className="flex flex-wrap items-center gap-2">
+            {params.onPinTop ? (
+              <button
+                type="button"
+                onClick={params.onPinTop}
+                className="inline-flex items-center gap-1 rounded-xl border border-slate-200 px-3 py-2 text-xs font-bold text-slate-600 transition hover:border-[#2563eb] hover:text-[#2563eb]"
+              >
+                <ArrowUp className="h-3.5 w-3.5" />
+                置顶
+              </button>
+            ) : null}
             {params.onMoveUp ? (
               <button
                 type="button"
@@ -2841,7 +3085,17 @@ function OfficialSiteSectionPanel(props: {
                 ...current.lists,
                 industries: [
                   ...current.lists.industries,
-                  { slug: `industry-${Date.now()}`, name: "", zhName: "", img: "", cls: "" },
+                  {
+                    slug: `industry-${Date.now()}`,
+                    name: "New Industry",
+                    zhName: "新服务行业",
+                    img: "",
+                    cls: "lg:col-span-1",
+                    intro: "",
+                    zhIntro: "",
+                    sections: "",
+                    zhSections: "",
+                  },
                 ],
               },
             }))
@@ -4277,6 +4531,20 @@ function OfficialSiteSectionPanel(props: {
       }));
     };
 
+    const sortEventSlugsByDate = (direction: "asc" | "desc") => {
+      const sortedSlugs = [...slugs].sort((leftSlug, rightSlug) => {
+        const leftEvent = officialEventsData.find((event) => event.slug === leftSlug);
+        const rightEvent = officialEventsData.find((event) => event.slug === rightSlug);
+        const leftSortDate = state.events.overrides[leftSlug]?.sortDate || leftEvent?.date || "";
+        const rightSortDate = state.events.overrides[rightSlug]?.sortDate || rightEvent?.date || "";
+        const result = parseEventSortDate(leftSortDate) - parseEventSortDate(rightSortDate);
+
+        return direction === "asc" ? result : -result;
+      });
+
+      updateList("eventSlugs", sortedSlugs);
+    };
+
     return (
       <div className="space-y-4 xl:col-span-2">
         <div className="flex flex-wrap justify-end gap-3">
@@ -4295,13 +4563,53 @@ function OfficialSiteSectionPanel(props: {
           <button
             type="button"
             onClick={() => {
-              if (!selectedOfficialEventSlug) return;
-              updateList("eventSlugs", [...slugs, selectedOfficialEventSlug]);
+              const nextSlug =
+                selectedOfficialEventSlug ||
+                createUniqueEventSlug([...slugs, ...Object.keys(state.events.overrides)]);
+
+              updateState((current) => {
+                const currentSlugs = current.lists.eventSlugs.length
+                  ? current.lists.eventSlugs
+                  : officialEventsData.map((event) => event.slug);
+                const nextOverrides = selectedOfficialEventSlug
+                  ? current.events.overrides
+                  : {
+                      ...current.events.overrides,
+                      [nextSlug]: current.events.overrides[nextSlug] ?? createBlankEventOverride(),
+                    };
+
+                return {
+                  ...current,
+                  lists: {
+                    ...current.lists,
+                    eventSlugs: [nextSlug, ...currentSlugs.filter((slug) => slug !== nextSlug)],
+                  },
+                  events: {
+                    ...current.events,
+                    overrides: nextOverrides,
+                  },
+                };
+              });
               setSelectedOfficialEventSlug("");
+              setExpandedOfficialItemIds({ [`event-${nextSlug}`]: true });
             }}
             className="rounded-2xl bg-[#2563eb] px-4 py-3 text-sm font-semibold text-white"
           >
             新增动态
+          </button>
+          <button
+            type="button"
+            onClick={() => sortEventSlugsByDate("desc")}
+            className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 transition hover:border-[#2563eb] hover:text-[#2563eb]"
+          >
+            时间排序：最新
+          </button>
+          <button
+            type="button"
+            onClick={() => sortEventSlugsByDate("asc")}
+            className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 transition hover:border-[#2563eb] hover:text-[#2563eb]"
+          >
+            时间排序：最早
           </button>
         </div>
         {slugs.map((slug, index) => {
@@ -4314,6 +4622,7 @@ function OfficialSiteSectionPanel(props: {
             summary: slug,
             thumbnail: override.image || sourceEvent?.image,
             layout: "inline",
+            onPinTop: index > 0 ? () => updateList("eventSlugs", moveArrayItem(slugs, index, 0)) : undefined,
             onMoveUp:
               index > 0 ? () => updateList("eventSlugs", moveArrayItem(slugs, index, index - 1)) : undefined,
             onMoveDown:
@@ -4327,6 +4636,17 @@ function OfficialSiteSectionPanel(props: {
                     value={override.image ?? ""}
                     placeholder={sourceEvent?.image}
                     onChange={(event) => updateOverride(slug, (currentOverride) => ({ ...currentOverride, image: event.target.value }))}
+                    className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
+                  />
+                </label>
+                <label className="block space-y-2">
+                  <span className="text-sm font-medium text-slate-700">排序日期（YYYYMMDD）</span>
+                  <input
+                    value={override.sortDate ?? sourceEvent?.date ?? ""}
+                    placeholder={sourceEvent?.date}
+                    onChange={(event) =>
+                      updateOverride(slug, (currentOverride) => ({ ...currentOverride, sortDate: event.target.value }))
+                    }
                     className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
                   />
                 </label>
@@ -4383,16 +4703,20 @@ function OfficialSiteSectionPanel(props: {
           <div>
             <h2 className="text-2xl font-semibold text-slate-950">{panelTitles[props.panel]}</h2>
             <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-500">
-              {panelDescriptions[props.panel]} 保存到真实前台数据 data/cms-site.json。
+              {panelDescriptions[props.panel]}{" "}
+              {props.editingVersionId
+                ? "当前保存到所选版本，只有在版本发布里点击“发布”后才会同步到前台。"
+                : "当前未选择版本，请先在“版本发布”中创建或选择版本。"}
             </p>
           </div>
           <button
             type="button"
             onClick={saveCurrentPanel}
-            className="inline-flex items-center justify-center gap-2 rounded-2xl bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
+            disabled={!props.editingVersionId}
+            className="inline-flex items-center justify-center gap-2 rounded-2xl bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-45"
           >
             <Save className="h-4 w-4" />
-            保存{panelTitles[props.panel]}
+            {props.editingVersionId ? `保存${panelTitles[props.panel]}到版本` : "先选择版本"}
           </button>
         </div>
       </div>
@@ -4668,7 +4992,10 @@ function CmsVersionSelect(props: {
   editingVersionId: number | null;
   loadVersionForEditing: (versionId: number | null) => Promise<void>;
 }) {
-  const selectedVersionId = props.editingVersionId ? String(props.editingVersionId) : "";
+  const publishedVersion = props.versions.find((version) => version.isPublished);
+  const selectedVersionId = props.editingVersionId
+    ? String(props.editingVersionId)
+    : String(publishedVersion?.id ?? props.versions[0]?.id ?? "");
 
   return (
     <label className="flex items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-semibold text-slate-600">
@@ -4682,7 +5009,7 @@ function CmsVersionSelect(props: {
         disabled={props.versions.length === 0}
         className="min-w-[180px] rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-4 focus:ring-[#2563eb]/10"
       >
-        <option value="">{props.versions.length ? "未选择版本" : "暂无版本"}</option>
+        {props.versions.length === 0 ? <option value="">暂无版本</option> : null}
         {props.versions.map((version) => (
           <option key={version.id} value={version.id}>
             {version.name}{version.isPublished ? "（已发布）" : ""}
@@ -4722,7 +5049,14 @@ function SiteContentPanel(props: {
   };
 
   return (
-    <section className="space-y-5">
+    <section className="cms-assets-panel space-y-5">
+      <style>{`
+        .cms-assets-panel .text-xs { font-size: 0.975rem; }
+        .cms-assets-panel .text-sm { font-size: 1.1375rem; }
+        .cms-assets-panel .text-base { font-size: 1.3rem; }
+        .cms-assets-panel .text-2xl { font-size: 1.95rem; }
+        .cms-assets-panel .text-\\[11px\\] { font-size: 0.89375rem; }
+      `}</style>
       <div className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
         <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
           <div>
@@ -5822,7 +6156,7 @@ function AssetsPanel(props: {
   assetInputRef: RefObject<HTMLInputElement>;
   setMessage: (message: string) => void;
 }) {
-  const [assetUploadPage, setAssetUploadPage] = useState<Exclude<AssetPageCategoryId, "all">>("home");
+  const [assetUploadPage, setAssetUploadPage] = useState<AssetPageCategoryId>("home");
   const [officialAssetSummary, setOfficialAssetSummary] = useState({
     count: 0,
     file: 0,
@@ -5830,52 +6164,57 @@ function AssetsPanel(props: {
     totalBytes: 0,
     video: 0,
   });
-  const assetStats = useMemo(() => {
-    return props.assets.reduce(
-      (stats, asset) => {
-        const kind = getAssetKind(asset);
-        stats.totalBytes += asset.sizeBytes;
-        stats[kind] += 1;
-        return stats;
-      },
-      { file: 0, image: 0, totalBytes: 0, video: 0 },
-    );
-  }, [props.assets]);
-  const totalAssetStats = {
-    file: assetStats.file + officialAssetSummary.file,
-    image: assetStats.image + officialAssetSummary.image,
-    totalBytes: assetStats.totalBytes + officialAssetSummary.totalBytes,
-    video: assetStats.video + officialAssetSummary.video,
-  };
-  const applyAssetPayload = (payload: { assets: CmsAsset[]; dashboard?: CmsDashboardMetrics }) => {
-    props.setAssets(payload.assets);
+  const [officialAssetRefreshKey, setOfficialAssetRefreshKey] = useState(0);
+  const [assetPagination, setAssetPagination] = useState<AssetPagination>({
+    total: props.assets.length,
+    limit: cmsAssetPageSize,
+    offset: 0,
+    hasMore: false,
+  });
+  const totalAssetStats = officialAssetSummary;
+  const applyAssetPayload = (
+    payload: { assets: CmsAsset[]; dashboard?: CmsDashboardMetrics; pagination?: AssetPagination },
+    mode: "replace" | "append" = "replace",
+  ) => {
+    props.setAssets((current) => (mode === "append" ? [...current, ...payload.assets] : payload.assets));
+    if (payload.pagination) {
+      setAssetPagination(payload.pagination);
+    }
     if (payload.dashboard) {
       props.setDashboard(payload.dashboard);
     }
   };
 
-  const refreshAssets = async () => {
-    const response = await fetch("/api/cms/assets");
+  const refreshAssets = async (offset = 0, mode: "replace" | "append" = "replace") => {
+    const response = await fetch(
+      `/api/cms/assets?limit=${cmsAssetPageSize}&offset=${offset}&page=${encodeURIComponent(assetUploadPage)}`,
+    );
 
     if (!response.ok) {
       props.setMessage("刷新文件列表失败。");
       return;
     }
 
-    const payload = (await response.json()) as { assets: CmsAsset[]; dashboard?: CmsDashboardMetrics };
-    applyAssetPayload(payload);
+    const payload = (await response.json()) as {
+      assets: CmsAsset[];
+      dashboard?: CmsDashboardMetrics;
+      pagination?: AssetPagination;
+    };
+    applyAssetPayload(payload, mode);
     props.setMessage("文件列表已刷新。");
   };
 
   useEffect(() => {
     void refreshAssets();
-  }, []);
+  }, [assetUploadPage]);
 
   const uploadAsset = async (event: ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(event.target.files ?? []);
     if (files.length === 0) return;
 
-    let latestPayload: { assets: CmsAsset[]; dashboard?: CmsDashboardMetrics } | null = null;
+    let latestPayload: { assets: CmsAsset[]; dashboard?: CmsDashboardMetrics; pagination?: AssetPagination; warning?: string } | null =
+      null;
+    const uploadedUrls: string[] = [];
 
     for (const file of files) {
       const formData = new FormData();
@@ -5893,18 +6232,39 @@ function AssetsPanel(props: {
         return;
       }
 
-      latestPayload = (await response.json()) as { assets: CmsAsset[]; dashboard?: CmsDashboardMetrics };
+      latestPayload = (await response.json()) as {
+        assets: CmsAsset[];
+        dashboard?: CmsDashboardMetrics;
+        pagination?: AssetPagination;
+        warning?: string;
+      };
+
+      const uploaded = latestPayload.assets.find((asset) => asset.originalName === file.name) ?? latestPayload.assets[0];
+      if (uploaded?.url) {
+        uploadedUrls.push(resolvePublicAssetUrl(uploaded.url));
+      }
     }
 
     if (latestPayload) {
       applyAssetPayload(latestPayload);
+      setOfficialAssetRefreshKey((current) => current + 1);
     }
-    props.setMessage(`${files.length} 个文件已上传。`);
+    props.setMessage(
+      uploadedUrls.length
+        ? `${files.length} 个文件已上传。最新地址：${uploadedUrls.join("；")}`
+        : `${files.length} 个文件已上传，请在 OSS 静态资源分类中查看。`,
+    );
     event.target.value = "";
   };
-
   return (
-    <section className="space-y-5">
+    <section className="cms-assets-panel space-y-5">
+      <style>{`
+        .cms-assets-panel .text-xs { font-size: 0.975rem; }
+        .cms-assets-panel .text-sm { font-size: 1.1375rem; }
+        .cms-assets-panel .text-base { font-size: 1.3rem; }
+        .cms-assets-panel .text-2xl { font-size: 1.95rem; }
+        .cms-assets-panel .text-\\[11px\\] { font-size: 0.89375rem; }
+      `}</style>
       <div className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
         <div className="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
           <div>
@@ -5912,34 +6272,18 @@ function AssetsPanel(props: {
             <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-500">
               查看和管理 OSS 静态资源、文章、新闻、页面编辑时上传过的图片、视频和其他附件。刷新时会同步扫描
               <span className="font-mono text-slate-700"> public/uploads </span>
-              中的历史文件，并在下方扫描 <span className="font-mono text-slate-700"> public/assets </span>。
+              中的历史文件，并在下方合并扫描 <span className="font-mono text-slate-700"> public/assets </span>。
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
             <button
               type="button"
-              onClick={refreshAssets}
+              onClick={() => void refreshAssets()}
               className="inline-flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 transition hover:border-[#2563eb] hover:text-[#2563eb]"
             >
               <RefreshCcw className="h-4 w-4" />
               刷新列表
             </button>
-            <label className="flex items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-semibold text-slate-600">
-              <span>上传到</span>
-              <select
-                value={assetUploadPage}
-                onChange={(event) => setAssetUploadPage(event.target.value as Exclude<AssetPageCategoryId, "all">)}
-                className="min-w-[120px] rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-4 focus:ring-[#2563eb]/10"
-              >
-                {assetPageCategories
-                  .filter((category) => category.id !== "all")
-                  .map((category) => (
-                    <option key={category.id} value={category.id}>
-                      {category.label}
-                    </option>
-                  ))}
-              </select>
-            </label>
             <button
               type="button"
               onClick={() => props.assetInputRef.current?.click()}
@@ -5958,27 +6302,55 @@ function AssetsPanel(props: {
           </div>
         </div>
 
+        <div className="mt-6">
+          <div className="mb-3 flex items-center justify-between gap-3">
+            <p className="text-sm font-semibold text-slate-700">按页面查看 / 上传到当前页面</p>
+            <p className="text-xs text-slate-400">当前页面：{assetPageCategories.find((category) => category.id === assetUploadPage)?.label}</p>
+          </div>
+          <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+            {assetPageCategories.map((category) => (
+              <button
+                key={category.id}
+                type="button"
+                onClick={() => setAssetUploadPage(category.id)}
+                className={`rounded-2xl border px-4 py-3 text-left text-sm font-semibold transition ${
+                  assetUploadPage === category.id
+                    ? "border-[#2563eb] bg-[#2563eb] text-white shadow-[0_10px_20px_rgba(37,99,235,0.18)]"
+                    : "border-slate-200 bg-white text-slate-700 hover:border-[#2563eb] hover:text-[#2563eb]"
+                }`}
+              >
+                {category.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
         <div className="mt-6 grid gap-4 md:grid-cols-4">
           <div className="rounded-2xl bg-slate-50 p-4">
-            <p className="text-xs text-slate-500">全部文件</p>
-            <p className="mt-2 text-2xl font-semibold text-slate-950">{props.assets.length + officialAssetSummary.count}</p>
+            <p className="text-xs text-slate-500">当前页上传记录</p>
+            <p className="mt-2 text-2xl font-semibold text-slate-950">{assetPagination.total}</p>
           </div>
           <div className="rounded-2xl bg-slate-50 p-4">
-            <p className="text-xs text-slate-500">图片</p>
+            <p className="text-xs text-slate-500">真实图片数</p>
             <p className="mt-2 text-2xl font-semibold text-slate-950">{totalAssetStats.image}</p>
           </div>
           <div className="rounded-2xl bg-slate-50 p-4">
-            <p className="text-xs text-slate-500">视频</p>
+            <p className="text-xs text-slate-500">真实视频数</p>
             <p className="mt-2 text-2xl font-semibold text-slate-950">{totalAssetStats.video}</p>
           </div>
           <div className="rounded-2xl bg-slate-50 p-4">
-            <p className="text-xs text-slate-500">附件空间</p>
+            <p className="text-xs text-slate-500">真实文件空间</p>
             <p className="mt-2 text-2xl font-semibold text-slate-950">{formatBytes(totalAssetStats.totalBytes)}</p>
           </div>
         </div>
+
       </div>
 
-      <OfficialAssetBrowser setMessage={props.setMessage} onSummary={setOfficialAssetSummary} />
+      <OfficialAssetBrowser
+        refreshKey={officialAssetRefreshKey}
+        setMessage={props.setMessage}
+        onSummary={setOfficialAssetSummary}
+      />
     </section>
   );
 }
@@ -5987,24 +6359,63 @@ type OfficialAssetBrowserItem = {
   path: string;
   url: string;
   category: string;
+  categoryLabel: string;
   name: string;
   type: "file" | "image" | "video";
   sizeBytes: number;
 };
 
+type OfficialAssetCategory = {
+  id: string;
+  label: string;
+};
+
+type OfficialAssetPayload = {
+  assets: OfficialAssetBrowserItem[];
+  categories: OfficialAssetCategory[];
+  pagination: AssetPagination;
+  summary: AssetSummary;
+};
+
 function OfficialAssetBrowser(props: {
+  refreshKey: number;
   setMessage: (message: string) => void;
-  onSummary: (summary: { count: number; file: number; image: number; totalBytes: number; video: number }) => void;
+  onSummary: (summary: AssetSummary) => void;
 }) {
   const [assets, setAssets] = useState<OfficialAssetBrowserItem[]>([]);
-  const [categories, setCategories] = useState<string[]>([]);
+  const [categories, setCategories] = useState<OfficialAssetCategory[]>([]);
   const [activeCategory, setActiveCategory] = useState("all");
   const [search, setSearch] = useState("");
+  const [pagination, setPagination] = useState<AssetPagination>({
+    total: 0,
+    limit: cmsAssetPageSize,
+    offset: 0,
+    hasMore: false,
+  });
   const [isLoading, setIsLoading] = useState(false);
 
-  const refresh = async () => {
+  const requestAssets = async (options?: {
+    category?: string;
+    search?: string;
+    offset?: number;
+    mode?: "replace" | "append";
+  }) => {
+    const nextCategory = options?.category ?? activeCategory;
+    const nextSearch = options?.search ?? search;
+    const offset = options?.offset ?? 0;
+    const mode = options?.mode ?? "replace";
+    const params = new URLSearchParams({
+      category: nextCategory,
+      limit: String(cmsAssetPageSize),
+      offset: String(offset),
+    });
+
+    if (nextSearch.trim()) {
+      params.set("search", nextSearch.trim());
+    }
+
     setIsLoading(true);
-    const response = await fetch("/api/cms/official-assets");
+    const response = await fetch(`/api/cms/official-assets?${params.toString()}`);
     setIsLoading(false);
 
     if (!response.ok) {
@@ -6012,45 +6423,40 @@ function OfficialAssetBrowser(props: {
       return;
     }
 
-    const payload = (await response.json()) as {
-      assets: OfficialAssetBrowserItem[];
-      categories: string[];
-    };
-    setAssets(payload.assets);
+    const payload = (await response.json()) as OfficialAssetPayload;
+    setAssets((current) => (mode === "append" ? [...current, ...payload.assets] : payload.assets));
     setCategories(payload.categories);
-    props.onSummary(
-      payload.assets.reduce(
-        (summary, asset) => {
-          summary.count += 1;
-          summary.totalBytes += asset.sizeBytes;
-          summary[asset.type] += 1;
-          return summary;
-        },
-        { count: 0, file: 0, image: 0, totalBytes: 0, video: 0 },
-      ),
-    );
+    setPagination(payload.pagination);
+    props.onSummary(payload.summary);
     props.setMessage("OSS 文件列表已刷新。");
   };
 
   useEffect(() => {
-    void refresh();
-  }, []);
+    const timer = window.setTimeout(() => {
+      void requestAssets({ offset: 0, mode: "replace" });
+    }, 200);
 
-  const visibleAssets = useMemo(() => {
-    const keyword = search.trim().toLowerCase();
+    return () => window.clearTimeout(timer);
+  }, [activeCategory, search, props.refreshKey]);
 
-    return assets.filter((asset) => {
-      const matchesCategory = activeCategory === "all" || asset.category === activeCategory;
-      const matchesKeyword =
-        !keyword || asset.path.toLowerCase().includes(keyword) || asset.url.toLowerCase().includes(keyword);
+  const loadMoreOfficialAssets = async () => {
+    if (!pagination.hasMore || isLoading) return;
+    await requestAssets({ offset: assets.length, mode: "append" });
+  };
 
-      return matchesCategory && matchesKeyword;
-    });
-  }, [activeCategory, assets, search]);
+  const refresh = async () => {
+    await requestAssets({ offset: 0, mode: "replace" });
+  };
+
+  const visibleAssets = assets;
 
   const copyUrl = async (url: string) => {
-    await navigator.clipboard?.writeText(url);
-    props.setMessage("OSS 地址已复制。");
+    try {
+      await copyTextToClipboard(url);
+      props.setMessage("OSS 地址已复制。");
+    } catch {
+      props.setMessage("OSS 地址复制失败，请手动选中地址复制。");
+    }
   };
 
   return (
@@ -6059,7 +6465,7 @@ function OfficialAssetBrowser(props: {
         <div>
           <h3 className="text-xl font-semibold text-slate-950">OSS 静态资源</h3>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-500">
-            扫描 public/assets 并生成对应 OSS 地址，按一级目录分类，方便检查线上资源路径。
+            扫描 public/assets 和 public/uploads 并生成对应 OSS 地址，按页面分类，方便检查线上资源路径。
           </p>
         </div>
         <button
@@ -6074,18 +6480,18 @@ function OfficialAssetBrowser(props: {
 
       <div className="mt-5 flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
         <div className="flex flex-wrap gap-2">
-          {["all", ...categories].map((category) => (
+          {[{ id: "all", label: "全部" }, ...categories].map((category) => (
             <button
-              key={category}
+              key={category.id}
               type="button"
-              onClick={() => setActiveCategory(category)}
+              onClick={() => setActiveCategory(category.id)}
               className={`rounded-2xl px-4 py-2 text-sm font-semibold transition ${
-                activeCategory === category
+                activeCategory === category.id
                   ? "bg-slate-900 text-white"
                   : "border border-slate-200 bg-white text-slate-600 hover:border-[#2563eb] hover:text-[#2563eb]"
               }`}
             >
-              {category === "all" ? "全部" : category}
+              {category.label}
             </button>
           ))}
         </div>
@@ -6098,7 +6504,7 @@ function OfficialAssetBrowser(props: {
       </div>
 
       <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        {visibleAssets.slice(0, 80).map((asset) => (
+        {visibleAssets.map((asset) => (
           <article key={asset.path} className="rounded-2xl border border-slate-200 bg-slate-50 p-3">
             {asset.type === "image" ? (
               <div className="mb-3 flex h-32 items-center justify-center overflow-hidden rounded-xl bg-white">
@@ -6114,7 +6520,9 @@ function OfficialAssetBrowser(props: {
               </div>
             )}
             <p className="line-clamp-1 text-sm font-semibold text-slate-900">{asset.name}</p>
-            <p className="mt-1 text-xs text-slate-500">{asset.category} / {formatBytes(asset.sizeBytes)}</p>
+            <p className="mt-1 text-xs text-slate-500">
+              {asset.categoryLabel} / {asset.category} / {formatBytes(asset.sizeBytes)}
+            </p>
             <p className="mt-2 break-all font-mono text-[11px] leading-5 text-blue-600">{asset.url}</p>
             <div className="mt-3 flex justify-end">
               <button
@@ -6129,9 +6537,22 @@ function OfficialAssetBrowser(props: {
         ))}
       </div>
 
-      {visibleAssets.length > 80 ? (
-        <p className="mt-4 text-xs text-slate-400">当前筛选共有 {visibleAssets.length} 个文件，已先显示前 80 个。</p>
-      ) : null}
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500">
+        <span>
+          已加载 OSS 文件 {visibleAssets.length} / {pagination.total}
+        </span>
+        {pagination.hasMore ? (
+          <button
+            type="button"
+            onClick={() => void loadMoreOfficialAssets()}
+            disabled={isLoading}
+            className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-600 transition hover:border-[#2563eb] hover:text-[#2563eb] disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            <RefreshCcw className={`h-3.5 w-3.5 ${isLoading ? "animate-spin" : ""}`} />
+            加载更多 OSS 文件
+          </button>
+        ) : null}
+      </div>
     </div>
   );
 }

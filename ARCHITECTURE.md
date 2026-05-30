@@ -1,6 +1,6 @@
 ﻿# Husuweb Official Site Architecture
 
-最后更新于：2026-05-18 01:03
+最后更新于：2026-05-30 15:21
 
 ## 椤圭洰姒傝堪
 
@@ -537,6 +537,38 @@ Join Us銆佸€欓€変汉鍗＄墖鍜岀畝鍘嗛偖绠卞尯鍩熷寘瑁瑰�
 
 褰撳墠棣栫増鍏紑椤垫病鏈?CMS銆佹暟鎹簱鎴栧悗鍙扮櫥褰曠幆澧冨彉閲忥紱OSS AccessKey 涓嶅啓鍏ラ」鐩幆澧冩枃浠讹紝涓婁紶瀹屾垚鍚庡墠绔彧闇€瑕佸叕寮€璧勬簮鍩熷悕銆?
 
+## CMS 上传策略
+
+`src/app/api/cms/assets/route.ts` 的素材上传流程会先写入 `public/uploads`，再尝试同步到 OSS。为了支持本地开发和未配置 OSS AccessKey 的测试环境，上传接口在检测到 `OSS credentials are not configured.` 时不再回滚本地文件，而是返回成功并附带 warning；只有 OSS 已配置但远程 PUT/DELETE 失败时才返回 `502`。
+
+删除素材时同样兼容未配置 OSS 的本地环境：本地文件与数据库记录会正常删除，不再因为缺少 OSS 凭证阻断 CMS 文件管理。
+
+CMS 文件管理采用分页懒加载：`/api/cms/assets` 支持 `limit` 与 `offset` 返回上传素材页、分页信息和 dashboard 指标，`getCmsBootstrapData` 只注入首屏上传素材；`/api/cms/official-assets` 支持 `limit`、`offset`、`category`、`search`，按页返回 `public/assets` 与 `public/uploads` 生成的 OSS 资源列表。`CmsStudio` 文件管理面板默认加载 40 条，分类/搜索会重新请求第一页，点击“加载更多”继续追加，避免一次性把大量文件放入 CMS 页面状态和渲染树。
+
+CMS 可视化编辑中的虎诉动态列表支持条目置顶、按 `YYYYMMDD` 排序日期升降序重排，并在保存时把动态列表的 `sortDate`、`displayDate` 同步到真实官网 CMS 状态。可视化预览和抽屉图片缩略图通过 `resolvePublicAssetUrl(s)` 解析 `/uploads`、`/assets` 等相对路径，预览请求会指向 `NEXT_PUBLIC_CMS_ASSET_BASE_URL` 对应的 OSS 公网地址。
+
+CMS 文件管理和可视化抽屉上传成功后会在后台消息中直接显示最新 OSS 公网地址；字段内部仍保存 `/uploads/...` 相对路径，由预览和公开接口统一转换，避免数据与具体资源域名强绑定。
+
+OSS 图片地址统一以 `NEXT_PUBLIC_ASSET_BASE_URL` 为准，例如 `https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb`。`resolvePublicAssetUrl(s)` 优先读取该变量，CMS 上传到 OSS 时会从同一变量解析公开路径前缀，把 `/uploads/...` 写入 OSS 的 `husuweb/uploads/...` 对象 key，保证后台提示、可视化预览和公开页面使用同一资源前缀。
+
+本地开发的 `.env.local` 同样需要配置 `NEXT_PUBLIC_ASSET_BASE_URL=https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb`，Next dev server 重启后客户端图片、视频和 CMS 预览才会加载同一 OSS 前缀。
+
+CMS 文件管理面板不再单独渲染“最近上传文件”卡片区；上传后的 `/uploads` 素材会并入下方 `OfficialAssetBrowser`，统一按页面分类展示并生成完整 `/husuweb` OSS 地址。
+
+CMS 文件管理上传素材按页面分组分页：`/api/cms/assets` 支持 `page` 参数，数据库按 `url_path` 前缀过滤后继续使用 `created_at DESC, id DESC` 排序；前端页面顺序固定为首页、关于我们、虎诉团队、服务行业、虎诉动态、联系我们、虎诉文化、Footer、Title，上传会写入当前选中的页面语义目录（如 `uploads/team`、`uploads/industries`），旧的 `uploads/podcast`、`uploads/media` 会继续归入对应页面。文件管理面板使用局部 CSS 将文字尺寸放大约 1.3 倍。
+
+OSS 静态资源浏览同样使用页面语义分类：`/api/cms/official-assets` 将 `public/assets` 与 `public/uploads` 一级目录映射为首页、关于我们、虎诉团队、服务行业、虎诉动态、联系我们、虎诉文化、Footer、Title 和其他，并按固定顺序返回 `{ id, label }` 分类列表；前端分类按钮展示中文标签，资源卡片同时显示中文分类和原始目录名，上传成功后会触发 OSS 分类列表刷新。
+
+CMS 文件管理复制 OSS 地址使用 Clipboard API 与隐藏 textarea fallback 两条路径，兼容非 HTTPS 测试地址；可视化预览在 iframe 内通过 `PreviewLanguageSync` 强制同步当前语言，语言切换会立即刷新预览快照。`LanguageProvider` 的 `initialLanguage` 只在外部初始语言变化时同步，不再阻止预览内部 CN/EN 按钮切换；版本预览页使用页面 Header 自带语言按钮切换。Header/Footer 的 logo、官网图片和图标字段支持直接上传到 `title` 或 `footer` 上传目录并写回字段。
+
+CMS 左侧全局版本选择器不再提供“未选择版本”空项；默认显示并加载当前已发布版本。只有在“版本发布”面板里选择编辑其他版本、创建版本或发布/恢复版本时，当前编辑版本才会切换到对应版本；若系统没有已发布版本，则退回第一条版本作为明确编辑上下文。
+
+官网内容管理（首页轮播、HONORS、服务行业、虎诉荣誉、大事记、团队和虎诉动态）保存时必须处于版本编辑状态：内容先写入版本 payload，不再直接写入当前 `data/cms-site.json`。如果编辑的是已发布版本，提交后该版本会自动转为未发布草稿，前台保持原内容，必须在“版本发布”中再次点击发布才会同步到当前站点。
+
+文件管理统计卡片中“真实图片数 / 真实视频数 / 真实文件空间”来自 `/api/cms/official-assets` 对 `public/assets` 与 `public/uploads` 的扫描汇总；“当前页上传记录”仍来自 `assets` 数据库按页面前缀过滤后的记录数，用于区分数据库上传记录和真实文件系统素材数。
+
+可视化编辑预览刷新采用 500ms 防抖：Puck 数据和右侧字段状态会正常记录，但 `OfficialPublicCmsProvider` 的 remount key 只在内容停止变化 500ms 后更新，避免每次输入都触发整页预览刷新。预览数据本身也使用 `debouncedPreviewData` 快照，右侧字段输入期间会跳过对 Puck 的即时 `setData` 派发。右侧和抽屉内文本输入统一通过 `BufferedTextControl` 本地缓冲，停止输入约 250ms 或失焦后才写回 CMS 大状态，避免删除文字时频繁重建 Puck 配置和 iframe。可视化同步 About 大事记时会从年份字段、条目 id、标题、月份或正文中自动识别年份，并按年份降序、同一年内月份降序输出到真实官网 CMS 状态；大事记抽屉编辑列表也按同一规则分组展示。
+
 ## 閮ㄧ讲
 
 褰撳墠 offweb 鐜浣跨敤 Next.js standalone 杩愯鍖呴儴缃诧細
@@ -589,6 +621,38 @@ Join Us銆佸€欓€変汉鍗＄墖鍜岀畝鍘嗛偖绠卞尯鍩熷寘瑁瑰�
 
 | 鏃堕棿 | 鍒嗘敮 | 鍙樻洿绫诲瀷 | 鎻忚堪 |
 | :--- | :--- | :--- | :--- |
+| 2026-05-30 15:21 | cms | 修复缺陷 | 可视化编辑的 pageContent 更新函数内立即排队同步官网 CMS 草稿，避免新增动态后快速返回内容管理仍看到旧列表 |
+| 2026-05-30 15:15 | cms | 修复缺陷 | 可视化编辑变更实时同步父级官网 CMS 内存状态，切回内容管理虎诉动态时无需刷新页面即可看到新增动态 |
+| 2026-05-30 15:04 | cms | 修复缺陷 | 可视化编辑虎诉动态新增项改为插入动态列表首位并停留在列表编辑，避免默认跳转动态子页面和新增项落在首屏列表外 |
+| 2026-05-30 14:24 | cms | 修复缺陷 | 虎诉动态内容管理新增按钮支持直接创建空白动态，新增或重新加入的动态统一插入列表最上方并自动展开编辑 |
+| 2026-05-26 09:12 | cms | 修复缺陷 | 虎诉动态前台改为尊重 CMS 列表顺序，内容管理补齐排序日期字段和时间排序按钮，避免置顶被前台日期排序覆盖 |
+| 2026-05-26 10:03 | cms | 修复缺陷 | 可视化动态列表新增置顶/取消置顶，时间排序支持 `YYYYMMDD` 并保留置顶优先级，可视化图片预览统一解析到 OSS 公网地址 |
+| 2026-05-26 10:29 | cms | UI 调整 | CMS 文件管理和可视化上传成功提示显示最新 OSS 公网地址，方便定位刚上传的文件 |
+| 2026-05-26 22:35 | cms | 配置修正 | OSS 图片地址统一使用 `NEXT_PUBLIC_ASSET_BASE_URL` 的 `/husuweb` 前缀，上传对象 key 同步写入同一前缀 |
+| 2026-05-26 22:47 | cms | 配置修正 | `.env.local` 补齐 `NEXT_PUBLIC_ASSET_BASE_URL`，本地 dev server 重启后也加载 `/husuweb` OSS 图片前缀 |
+| 2026-05-26 23:02 | cms | UI 调整 | 文件管理新增“最近上传文件”列表，上传素材最新项置顶并显示可复制的 `/husuweb` OSS 地址 |
+| 2026-05-26 23:14 | cms | UI 调整 | 文件管理改为按页面分页查看和上传，并将文件管理面板文字整体放大约 1.3 倍 |
+| 2026-05-26 23:20 | cms | UI 调整 | OSS 静态资源浏览按页面语义分类展示，分类按钮使用固定中文页面顺序 |
+| 2026-05-26 23:30 | cms | UI 调整 | 文件管理移除“最近上传文件”卡片区，上传素材并入 OSS 静态资源分类并按页面语义目录归档 |
+| 2026-05-27 09:02 | cms | 修复缺陷 | 官网内容管理保存改为只写入版本草稿，编辑已发布版本不再绕过发布流程；文件管理统计改用真实资源扫描汇总 |
+| 2026-05-28 08:38 | cms | 优化重构 | 可视化编辑预览刷新增加 500ms 防抖；大事记同步按年份自动分组并按月份降序排序 |
+| 2026-05-28 08:45 | cms | 修复缺陷 | 文件管理 OSS 地址复制兼容 HTTP 测试环境；可视化预览中文切换强制同步；Header/Footer Logo 字段支持直接上传 |
+| 2026-05-28 08:50 | cms | UI 调整 | 左侧全局版本选择器移除“未选择版本”空项，并在有版本时自动加载默认版本 |
+| 2026-05-28 08:53 | cms | 性能优化 | 可视化编辑右侧输入改用防抖预览快照，输入和删除时不再即时重建 Puck 配置或派发 setData |
+| 2026-05-28 08:56 | cms | 修复缺陷 | 左侧版本选择器默认值改为当前已发布版本，未主动编辑其他版本时始终回到发布版本 |
+| 2026-05-28 09:02 | cms | 修复缺陷 | 修复预览 CN/EN 被 `initialLanguage` 重置的问题，并为版本预览页增加固定语言切换 |
+| 2026-05-28 09:10 | cms | UI 调整 | 移除版本预览页右上角额外中英文按钮，保留页面 Header 自带切换 |
+| 2026-05-28 09:17 | cms | 性能优化 | 可视化编辑所有右侧文本框改为本地缓冲提交；大事记抽屉按自动识别年份和月份降序分组展示 |
+| 2026-05-28 09:37 | cms | UI 调整 | 可视化 About 大事记抽屉对齐内容管理，提供“新增年份”和年份内“新增事件”，新增事件标签改为年份事件命名 |
+| 2026-05-28 09:58 | cms | 修复缺陷 | 服务行业发布读取不再因图片为空丢弃新增行业，并归一化 `/industries/...?...` slug，避免内容管理和可视化子页面找不到新增行业 |
+| 2026-05-28 09:59 | cms | 修复缺陷 | 修复 `BufferedTextControl` 聚焦输入期间被旧 value 覆盖的问题，可视化编辑输入框可连续输入和删除 |
+| 2026-05-28 10:09 | cms | 修复缺陷 | 可视化页面字段提交时同步更新 Puck 当前数据，并短暂忽略程序化 `setData` 引发的旧 `onChange`，避免输入被预览旧值反写 |
+| 2026-05-30 13:48 | cms | 修复缺陷 | 服务行业加载改为合并 officialState 与 pageContent cards/detailPages，避免新增行业第二次进入可视化后右侧子页面编辑项丢失 |
+| 2026-05-30 13:56 | cms | 修复缺陷 | 将可视化字段同步 Puck 的 dispatch 移出 `setPuckData` updater，避免 React 报告跨组件渲染期更新 `Preview2` |
+| 2026-05-30 14:15 | cms | 修复缺陷 | 首页服务行业卡片 key 改为 slug，并在可视化同步服务行业时按 slug 去重，避免同名行业触发 React 重复 key 警告 |
+| 2026-05-26 09:00 | cms | UI 调整 | 虎诉动态 CMS 条目新增“一键置顶”，直接把当前动态移动到 Events 页排序首位 |
+| 2026-05-26 08:50 | cms | 性能优化 | CMS 文件管理上传素材和 OSS 公共素材列表改为分页懒加载，默认首屏 40 条并通过“加载更多”追加 |
+| 2026-05-25 22:13 | cms | 修复缺陷 | CMS 文件上传在本地未配置 OSS AccessKey 时改为保留 `public/uploads` 本地文件并返回成功，避免 GIF 等素材上传被 502 阻断 |
 | 2026-05-18 01:03 | cms | UI 调整 | 内容管理所有左侧导航分栏统一包入 sticky 可滚动容器，服务行业、虎诉荣誉、大事记、合伙人和资深律师均固定在视窗内滚动 |
 | 2026-05-18 00:57 | cms | 修复缺陷 | 首页 HONORS 内容管理改为 sticky 年份导航，点击年份直接显示右侧编辑；可视化同步改为首页 Honors 维护 `homeHonorItems`、About Honors 维护虎诉荣誉内容 |
 | 2026-05-18 00:48 | cms | UI 调整 | 首页 HONORS 轮播内容管理恢复为左侧年份导航，右侧按当前年份添加、排序和删除具体荣誉条目 |
@@ -957,6 +1021,38 @@ Join Us銆佸€欓€変汉鍗＄墖鍜岀畝鍘嗛偖绠卞尯鍩熷寘瑁瑰�
 
 | 鏃堕棿 | 鍒嗘敮 | 瀹屾垚鐨勫姛鑳?/ 宸ヤ綔 | 璇存槑 |
 | :--- | :--- | :--- | :--- |
+| 2026-05-30 15:21 | cms | 可视化即时同步加固 | `CmsPuckVisualEditor` 用 `updatePageContentState` 包装所有本地 `pageContent` 修改，在同一次更新中拿到 nextPageContent 并异步写回父级 `officialSiteState` |
+| 2026-05-30 15:15 | cms | 可视化到内容管理实时同步 | `CmsPuckVisualEditor` 接收 `setOfficialSiteState`，在 `pageContent`/可视化草稿变化后用 `officialPreviewState` 更新父级草稿状态，保持虎诉动态内容管理列表即时一致 |
+| 2026-05-30 15:04 | cms | 可视化虎诉动态新增链路修复 | `CmsPuckVisualEditor` 新建 `event.list` 条目时生成“新动态 / New Event”并插入首位，同时自动创建详情页数据但不切换到详情子页面 |
+| 2026-05-30 14:24 | cms | 虎诉动态新增置顶 | `renderEventOverridesEditor` 未选择已有动态时生成当天排序日期的新动态 slug 和空白中英文内容，写入 `eventSlugs` 首位并展开对应编辑面板 |
+| 2026-05-26 09:12 | cms | 虎诉动态排序生效修复 | `EventsPage` 使用 CMS pageContent 列表顺序渲染；`OfficialCmsEventOverride` 增加 `sortDate`，内容管理可按排序日期重排 `eventSlugs` |
+| 2026-05-26 10:03 | cms | 可视化动态排序与 OSS 预览 | `CmsPuckVisualEditor` 动态列表支持置顶和 `YYYYMMDD` 日期排序，预览态和图片缩略图统一通过 OSS 公网地址加载 |
+| 2026-05-26 10:29 | cms | 上传结果地址提示 | 文件管理和可视化字段上传完成后显示 `resolvePublicAssetUrl()` 解析出的 OSS 地址，便于直接复制或确认位置 |
+| 2026-05-26 22:35 | cms | OSS `/husuweb` 前缀统一 | `public-assets` 优先使用 `NEXT_PUBLIC_ASSET_BASE_URL`，`oss-assets` 根据该变量路径前缀上传和删除 CMS 素材 |
+| 2026-05-26 22:47 | cms | 本地 OSS 前缀配置 | `.env.local` 与 `.env.production` 使用同一个 `NEXT_PUBLIC_ASSET_BASE_URL`，保证本地启动和测试服务器图片地址一致 |
+| 2026-05-26 23:02 | cms | 上传素材列表恢复 | `AssetsPanel` 渲染 `props.assets` 最近上传网格，区分图片、视频、文件并提供复制 OSS 地址和打开链接操作 |
+| 2026-05-26 23:14 | cms | 文件管理页面分页 | `/api/cms/assets` 增加 `page` 过滤；`AssetsPanel` 固定页面顺序、按当前页面加载/追加上传素材并放大面板字号 |
+| 2026-05-26 23:20 | cms | OSS 静态资源分类 | `/api/cms/official-assets` 把 `public/assets` 目录映射到页面分类，`OfficialAssetBrowser` 用中文分类按钮筛选 OSS 静态资源 |
+| 2026-05-26 23:30 | cms | 上传素材分类归档 | `AssetsPanel` 删除“最近上传文件”展示块；`/api/cms/assets` 将团队和服务行业上传分别写入 `uploads/team`、`uploads/industries`，`/api/cms/official-assets` 合并扫描 `public/uploads` |
+| 2026-05-27 09:02 | cms | 版本发布保护与真实文件统计 | `OfficialSiteSectionPanel` 要求选择版本后才能保存；`updateVersionPayload` 编辑已发布版本时取消发布标记且不 restore 当前站点；文件管理统计卡片使用 OSS 扫描 summary |
+| 2026-05-28 08:38 | cms | 可视化预览防抖与大事记排序 | `CmsPuckVisualEditor` 使用 500ms 防抖刷新预览 Provider；`syncChronicleFromPageContent` 自动识别年份并对每年事件按月份从大到小排序 |
+| 2026-05-28 08:45 | cms | CMS 复制、预览语言和 Logo 上传 | `OfficialAssetBrowser` 复制 OSS 地址增加 fallback；`CmsPuckVisualEditor` 预览语言强制同步，并允许 Header/Footer Logo 字段上传写回 |
+| 2026-05-28 08:50 | cms | 版本选择器去空项 | `CmsVersionSelect` 只在无版本时显示“暂无版本”，有版本时自动选中已发布版本或第一条版本 |
+| 2026-05-28 08:53 | cms | 可视化输入性能优化 | `CmsPuckVisualEditor` 使用 `debouncedPreviewData`/`debouncedSiteContent` 驱动 Puck 预览，本地输入时跳过同步 Puck setData |
+| 2026-05-28 08:56 | cms | 默认发布版本上下文 | `CmsStudio` 在没有 `editingVersionId` 时自动加载 `isPublished` 版本，`CmsVersionSelect` 的 fallback 也优先显示已发布版本 |
+| 2026-05-28 09:02 | cms | 预览中文切换修复 | `LanguageProvider` 不再因 `initialLanguage` 重置内部切换；`CmsVersionPreview` 新增固定中文/English 控制 |
+| 2026-05-28 09:10 | cms | 版本预览语言按钮清理 | `CmsVersionPreview` 移除固定语言切换条，继续通过官网 Header 内置语言按钮切换 |
+| 2026-05-28 09:17 | cms | 可视化编辑输入缓冲与大事记分组 | `BufferedTextControl` 延迟写回字段编辑；`drawerItemRows` 对 About 大事记按年份降序、月份降序排序并渲染年份分组 |
+| 2026-05-28 09:37 | cms | 可视化大事记新增逻辑 | `CmsPuckVisualEditor` 的 About 大事记抽屉按内容管理逻辑提供“新增年份”和年份内“新增事件”，新增事件使用年份事件命名并隐藏手动上移/下移 |
+| 2026-05-28 09:58 | cms | 服务行业新增链路修复 | `mergeCmsState` 保留空图片新增行业并清理查询参数 slug；可视化服务行业子页面下拉可从 cards 补齐缺失 detailPages |
+| 2026-05-28 09:59 | cms | 可视化输入框恢复 | `BufferedTextControl` 聚焦时保留本地 draft，不再被中途提交的旧 pageContent value 覆盖 |
+| 2026-05-28 10:09 | cms | 可视化字段反写保护 | 右侧页面字段提交同步 patch `puckData`，`updateDraftContent` 在程序化同步窗口内不再把旧 Puck props 写回 `pageContent` |
+| 2026-05-30 13:48 | cms | 服务行业子页面持久化 | `CmsStudio` 加载和同步时从 `previewPageContent` 保留新增服务行业，并把缺失的 `media.detailPages` 合并回内容管理和可视化编辑区 |
+| 2026-05-30 13:56 | cms | Puck 同步副作用修复 | `CmsPuckVisualEditor` 使用 `puckDataRef` 计算最新数据，并在异步任务中调用 Puck dispatch，避免 setState updater 内副作用 |
+| 2026-05-30 14:15 | cms | 服务行业重复 key 修复 | `HomePage` 使用行业 slug 作为列表 key；`syncIndustriesFromPageContent` 归一化并去重 slug，空 slug 使用 `industry-N` 兜底 |
+| 2026-05-26 09:00 | cms | 虎诉动态一键置顶 | `renderEventOverridesEditor` 为非首位动态提供置顶按钮，点击后通过 `moveArrayItem(slugs, index, 0)` 更新 `eventSlugs` 排序 |
+| 2026-05-26 08:50 | cms | CMS 文件管理懒加载 | `/api/cms/assets` 与 `/api/cms/official-assets` 支持分页参数，`CmsStudio` 文件管理面板首屏加载 40 条并按需追加，减少大量文件导致的初始加载压力 |
+| 2026-05-25 22:13 | cms | CMS 本地素材上传兼容 | `/api/cms/assets` 支持 OSS 未配置时本地落盘保存和删除，配置错误或远程上传失败仍返回 502 便于排查 |
 | 2026-05-18 01:03 | cms | 通用左侧导航固定滚动 | `OfficialSiteSectionPanel` 新增 sticky split 渲染层，所有左侧导航型内容管理模块共享固定视窗、独立滚动的左栏交互 |
 | 2026-05-18 00:57 | cms | 首页 HONORS 与可视化同步 | 内容管理左侧年份列表固定在视窗内并可独立滚动；`CmsPuckVisualEditor` 分离首页 Honors 列表同步和 About Honors 内容同步，避免首页轮播与可视化区域不对应 |
 | 2026-05-18 00:48 | cms | 首页 HONORS 年份导航 | 首页 HONORS 轮播左侧导航改为年份；每个年份右侧从虎诉荣誉的同年具体条目中选择加入轮播，并继续写入 `homeHonorItems` |
