@@ -2662,7 +2662,7 @@ export function CmsPuckVisualEditor({
   };
 
   const updatePageContentState = (updater: (current: PageContentState) => PageContentState) => {
-    updatePageContentState((current) => {
+    setPageContent((current) => {
       const nextPageContent = updater(current);
       scheduleOfficialStateSync(nextPageContent);
       return nextPageContent;
@@ -2861,6 +2861,34 @@ export function CmsPuckVisualEditor({
       };
     });
   };
+
+  const uploadPageFieldAsset = async (language: Language, sectionId: string, fieldId: string, file: File) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("page", previewPage);
+
+    const response = await fetch("/api/cms/assets", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!response.ok) {
+      setMessage(`上传失败：${file.name}`);
+      return;
+    }
+
+    const payload = (await response.json()) as { assets: CmsAsset[] };
+    const uploaded = payload.assets.find((asset) => asset.originalName === file.name) ?? payload.assets[0];
+
+    if (!uploaded?.url) {
+      setMessage(`上传完成，但未获取到文件地址：${file.name}`);
+      return;
+    }
+
+    updatePageField(language, sectionId, fieldId, uploaded.url);
+    setMessage(`已上传并写入字段：${resolvePublicAssetUrl(uploaded.url)}`);
+  };
+
   const updateCarouselItems = (
     language: Language,
     sectionId: string,
@@ -4025,18 +4053,21 @@ export function CmsPuckVisualEditor({
                           const field = section?.fields.find((fieldItem) => fieldItem.id === labelField.id);
                           const fieldKey = puckFieldKey(labelSection.id, labelField.id);
                           const focused = focusedFieldKey === fieldKey && activeLanguage === language;
+                          const effectiveKind = field?.kind ?? labelField.kind;
+                          const uploadable = isUploadableDrawerField(labelField.id, effectiveKind);
+                          const fieldValue = field?.value ?? "";
 
                           return (
                             <label key={language} className="block space-y-1.5">
                               <span className={`text-xs font-bold ${focused ? "text-[#2563eb]" : "text-slate-600"}`}>
                                 {language === "en" ? "English" : "中文"}
                               </span>
-                              {(field?.kind ?? labelField.kind) === "textarea" ? (
+                              {effectiveKind === "textarea" ? (
                                 <BufferedTextControl
                                   name={`${language}-${fieldKey}`}
                                   fieldKey={fieldKey}
                                   language={language}
-                                  value={field?.value ?? ""}
+                                  value={fieldValue}
                                   onCommit={(value) => updatePageField(language, labelSection.id, labelField.id, value)}
                                   multiline
                                   rows={4}
@@ -4049,14 +4080,36 @@ export function CmsPuckVisualEditor({
                                   name={`${language}-${fieldKey}`}
                                   fieldKey={fieldKey}
                                   language={language}
-                                  value={field?.value ?? ""}
-                                  type={(field?.kind ?? labelField.kind) === "url" ? "url" : "text"}
+                                  value={fieldValue}
+                                  type={effectiveKind === "url" ? "url" : "text"}
                                   onCommit={(value) => updatePageField(language, labelSection.id, labelField.id, value)}
                                   className={`w-full rounded-2xl border bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-4 focus:ring-[#2563eb]/10 ${
                                     focused ? "border-[#2563eb] ring-4 ring-[#2563eb]/10" : "border-slate-200"
                                   }`}
                                 />
                               )}
+                              {uploadable ? (
+                                <div className="flex flex-wrap items-center gap-2">
+                                  <span className="inline-flex items-center gap-2 rounded-xl bg-slate-100 px-3 py-2 text-xs font-semibold text-slate-500">
+                                    <Upload className="h-3.5 w-3.5" />
+                                    {uploadLabelForField(labelField.id)}
+                                  </span>
+                                  <input
+                                    type="file"
+                                    accept={uploadAcceptForField(labelField.id)}
+                                    className="text-xs text-slate-500 file:mr-3 file:rounded-xl file:border-0 file:bg-[#2563eb] file:px-3 file:py-2 file:text-xs file:font-bold file:text-white"
+                                    onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                                      const file = event.target.files?.[0];
+                                      event.target.value = "";
+                                      if (!file) return;
+                                      void uploadPageFieldAsset(language, labelSection.id, labelField.id, file);
+                                    }}
+                                  />
+                                  {effectiveKind === "image" && fieldValue ? (
+                                    <img src={resolvePublicAssetUrl(fieldValue)} alt="" className="h-14 w-20 rounded-xl border border-slate-200 object-cover" />
+                                  ) : null}
+                                </div>
+                              ) : null}
                             </label>
                           );
                         })}

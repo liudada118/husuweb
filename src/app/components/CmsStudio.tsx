@@ -2818,6 +2818,41 @@ function OfficialSiteSectionPanel(props: {
     }));
   };
 
+  const uploadIndustryImage = async (index: number, file: File) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("page", "industries");
+
+    const response = await fetch("/api/cms/assets", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!response.ok) {
+      props.setMessage(`上传失败：${file.name}`);
+      return;
+    }
+
+    const payload = (await response.json()) as { assets: CmsAsset[] };
+    const uploaded = payload.assets.find((asset) => asset.originalName === file.name) ?? payload.assets[0];
+
+    if (!uploaded?.url) {
+      props.setMessage(`上传完成，但未获取到文件地址：${file.name}`);
+      return;
+    }
+
+    updateState((current) => ({
+      ...current,
+      lists: {
+        ...current.lists,
+        industries: current.lists.industries.map((item, itemIndex) =>
+          itemIndex === index ? { ...item, img: uploaded.url } : item,
+        ),
+      },
+    }));
+    props.setMessage(`已上传并写入服务行业背景图片：${resolvePublicAssetUrl(uploaded.url)}`);
+  };
+
   const panelTitles: Record<typeof props.panel, string> = {
     homeEventCarousel: "首页 event 事件轮播",
     homeHonorsCarousel: "首页 HONORS 轮播",
@@ -3159,6 +3194,28 @@ function OfficialSiteSectionPanel(props: {
                     }
                     className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
                   />
+                  {key === "img" ? (
+                    <div className="flex flex-wrap items-center gap-3">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="text-xs text-slate-500 file:mr-3 file:rounded-xl file:border-0 file:bg-[#2563eb] file:px-3 file:py-2 file:text-xs file:font-bold file:text-white"
+                        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                          const file = event.target.files?.[0];
+                          event.target.value = "";
+                          if (!file) return;
+                          void uploadIndustryImage(index, file);
+                        }}
+                      />
+                      {industry.img ? (
+                        <img
+                          src={resolvePublicAssetUrl(industry.img)}
+                          alt=""
+                          className="h-14 w-20 rounded-xl border border-slate-200 object-cover"
+                        />
+                      ) : null}
+                    </div>
+                  ) : null}
                 </label>
               ))}
               {[
@@ -4531,6 +4588,33 @@ function OfficialSiteSectionPanel(props: {
       }));
     };
 
+    const uploadEventCoverImage = async (slug: string, file: File) => {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("page", "event");
+
+      const response = await fetch("/api/cms/assets", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        props.setMessage(`上传失败：${file.name}`);
+        return;
+      }
+
+      const payload = (await response.json()) as { assets: CmsAsset[] };
+      const uploaded = payload.assets.find((asset) => asset.originalName === file.name) ?? payload.assets[0];
+
+      if (!uploaded?.url) {
+        props.setMessage(`上传完成，但未获取到文件地址：${file.name}`);
+        return;
+      }
+
+      updateOverride(slug, (currentOverride) => ({ ...currentOverride, image: uploaded.url }));
+      props.setMessage(`已上传并写入虎诉动态封面图片：${resolvePublicAssetUrl(uploaded.url)}`);
+    };
+
     const sortEventSlugsByDate = (direction: "asc" | "desc") => {
       const sortedSlugs = [...slugs].sort((leftSlug, rightSlug) => {
         const leftEvent = officialEventsData.find((event) => event.slug === leftSlug);
@@ -4615,12 +4699,13 @@ function OfficialSiteSectionPanel(props: {
         {slugs.map((slug, index) => {
           const sourceEvent = officialEventsData.find((event) => event.slug === slug);
           const override = state.events.overrides[slug] ?? createEventOverride();
+          const coverImage = override.image || sourceEvent?.image || "";
 
           return renderItemShell({
             id: `event-${slug}`,
             title: override.zh?.title || override.en?.title || sourceEvent?.zh?.title || sourceEvent?.title || slug,
             summary: slug,
-            thumbnail: override.image || sourceEvent?.image,
+            thumbnail: coverImage,
             layout: "inline",
             onPinTop: index > 0 ? () => updateList("eventSlugs", moveArrayItem(slugs, index, 0)) : undefined,
             onMoveUp:
@@ -4638,6 +4723,26 @@ function OfficialSiteSectionPanel(props: {
                     onChange={(event) => updateOverride(slug, (currentOverride) => ({ ...currentOverride, image: event.target.value }))}
                     className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
                   />
+                  <div className="flex flex-wrap items-center gap-3">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="text-xs text-slate-500 file:mr-3 file:rounded-xl file:border-0 file:bg-[#2563eb] file:px-3 file:py-2 file:text-xs file:font-bold file:text-white"
+                      onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                        const file = event.target.files?.[0];
+                        event.target.value = "";
+                        if (!file) return;
+                        void uploadEventCoverImage(slug, file);
+                      }}
+                    />
+                    {coverImage ? (
+                      <img
+                        src={resolvePublicAssetUrl(coverImage)}
+                        alt=""
+                        className="h-14 w-20 rounded-xl border border-slate-200 object-cover"
+                      />
+                    ) : null}
+                  </div>
                 </label>
                 <label className="block space-y-2">
                   <span className="text-sm font-medium text-slate-700">排序日期（YYYYMMDD）</span>

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-05-30T06:43:38.538Z",
+  "updatedAt": "2026-05-30T08:17:31.296Z",
   "header": {
     "siteName": "Tiger Partners",
     "siteSubtitle": "Law Firm",
@@ -830,7 +830,7 @@
           "displayDate": "Nov. 13, 2024"
         },
         "zh": {
-          "category": "",
+          "category": "行业资讯",
           "title": "虎诉荣任第二十二届“贸仲杯”VOICE OF MOOT系列培训活动钻石赞助商",
           "summary": "第二十二届“贸仲杯”将于2024年11月29日开启，吸引了来自全国及境外，包括英国、荷兰、俄罗斯、埃及、越南、哈萨克斯坦、中国香港、中国澳门在内的100余所法学院校1000余名选手同场竞技。",
           "content": [
@@ -2037,15 +2037,11 @@
           "summary": "2131",
           "content": [
             "1111",
-            "",
             "1111",
-            "",
-            "",
             "1111",
-            "",
-            "",
             "1111"
-          ]
+          ],
+          "displayDate": "May. 30, 2026"
         },
         "zh": {
           "category": "231",
@@ -2053,13 +2049,177 @@
           "summary": "1231",
           "content": [
             "123123",
-            "",
             "123123",
-            "",
             "123123",
-            "",
             "1231231"
-          ]
+          ],
+          "displayDate": "2026.05.30"
+        }
+      },
+      "list-1780123488840": {
+        "image": "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb/assets/team/team5.png",
+        "sortDate": "20260530",
+        "en": {
+          "category": "",
+          "title": "123222",
+          "summary": "",
+          "content": [],
+          "displayDate": "20260530"
+        },
+        "zh": {
+          "category": "231",
+          "title": "123111",
+          "summary": "",
+          "content": [],
+          "displayDate": "20260530"
+        }
+      },
+      "list-1780123501347": {
+        "image": "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb/assets/team/team5.png",
+        "sortDate": "20260530",
+        "en": {
+          "category": "",
+          "title": "",
+          "summary": "",
+          "content": [],
+          "displayDate": "20260530"
+        },
+        "zh": {
+          "category": "",
+          "title": "",
+          "summary": "",
+          "content": [],
+          "displayDate": "20260530"
+        }
+      },
+      "list-1780123940212": {
+        "image": "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb/assets/team/6.png",
+        "sortDate": "20260530",
+        "en": {
+          "category": "",
+          "title": "我是新",
+          "summary": "",
+          "content": [],
+          "displayDate": "20260530"
+        },
+        "zh": {
+          "category": "11",
+          "title": "我是新",
+          "summary": "",
+          "content": [],
+          "displayDate": "20260530"
+        }
+      },
+      "event-20260530-100": {
+        "image": "11",
+        "sortDate": "20260530",
+        "en": {
+          "category": "11",
+          "title": "New Event1",
+          "summary": "11",
+          "content": [
+            "11"
+          ],
+          "displayDate": "May. 30, 2026"
+        },
+        "zh": {
+          "category": "11",
+          "title": "新动态",
+          "summary": "",
+          "content": [],
+          "displayDate": "2026.05.30"
+        }
+      },
+      "list-1780124402090": {
+        "image": "",
+        "sortDate": "20260530",
+        "en": {
+          "category": "",
+          "title": "",
+          "summary": "",
+          "content": [],
+          "displayDate": "20260530"
+        },
+        "zh": {
+          "category": "",
+          "title": "我是新",
+          "summary": "",
+          "content": [],
+          "displayDate": "20260530"
+        }
+      },
+      "list-1780125100895": {
+        "image": "/uploads/event/1780125132073-videoframe_15020.png",
+        "sortDate": "20260530",
+        "en": {
+          "category": "",
+          "title": "New Event",
+          "summary": "",
+          "content": [],
+          "displayDate": "20260530"
+        },
+        "zh": {
+          "category": "",
+          "title": "新动态",
+          "summary": "",
+          "content": [],
+          "displayDate": "20260530"
+        }
+      },
+      "list-1780125497918": {
+        "image": "/uploads/event/1780125504372-event18.jpg",
+        "sortDate": "20260530",
+        "en": {
+          "category": "",
+          "title": "New Event",
+          "summary": "",
+          "content": [],
+          "displayDate": "20260530"
+        },
+        "zh": {
+          "category": "",
+          "title": "新动态",
+          "summary": "",
+          "content": [],
+          "displayDate": "20260530"
+        }
+      },
+      "event-20260530-108": {
+        "image": "/uploads/event/1780128842174-hu.svg",
+        "sortDate": "20260530",
+        "en": {
+          "category": "111",
+          "title": "New Event",
+          "summary": "222",
+          "content": [
+            "333"
+          ],
+          "displayDate": "May. 30, 2026"
+        },
+        "zh": {
+          "category": "",
+          "title": "新动态",
+          "summary": "",
+          "content": [],
+          "displayDate": "2026.05.30"
+        }
+      },
+      "list-1780128877683": {
+        "image": "/uploads/event/1780128884440-event10.png",
+        "sortDate": "20260530",
+        "en": {
+          "category": "",
+          "title": "New Event",
+          "summary": "",
+          "content": [],
+          "displayDate": "20260530"
+        },
+        "zh": {
+          "category": "",
+          "title": "新动态",
+          "summary": "",
+          "content": [],
+          "displayDate": "20260530"
         }
       }
     }
@@ -3664,7 +3824,7 @@
         "slug": "cards-1780119755266",
         "name": "111",
         "zhName": "22",
-        "img": "",
+        "img": "/uploads/industries/1780127935072-event7.png",
         "cls": "",
         "intro": "1231",
         "zhIntro": "12312",
@@ -3675,7 +3835,7 @@
         "slug": "cards-11",
         "name": "111",
         "zhName": "22",
-        "img": "",
+        "img": "/uploads/industries/1780127945064-event10.png",
         "cls": "",
         "intro": "1231",
         "zhIntro": "12312",
@@ -3684,6 +3844,15 @@
       }
     ],
     "eventSlugs": [
+      "list-1780128877683",
+      "event-20260530-108",
+      "list-1780125497918",
+      "list-1780125100895",
+      "list-1780123501347",
+      "list-1780124402090",
+      "list-1780123940212",
+      "event-20260530-100",
+      "list-1780123488840",
       "event-20260530-92",
       "xu-min-ccas-arbitrator-roster",
       "zoe-zhang-cietac-arbitrator-roster",
@@ -4180,7 +4349,7 @@
                     "id": "image",
                     "label": "图片",
                     "kind": "image",
-                    "value": ""
+                    "value": "/uploads/industries/1780127935072-event7.png"
                   },
                   {
                     "id": "description",
@@ -4222,7 +4391,7 @@
                     "id": "image",
                     "label": "图片",
                     "kind": "image",
-                    "value": ""
+                    "value": "/uploads/industries/1780127945064-event10.png"
                   },
                   {
                     "id": "description",
@@ -8396,7 +8565,7 @@
                 "id": "image",
                 "label": "背景图片",
                 "kind": "image",
-                "value": "/assets/about/awardbg.webp"
+                "value": "/uploads/coreValue/1780128620763-event7.png"
               },
               {
                 "id": "breadcrumb",
@@ -8731,6 +8900,390 @@
               }
             ],
             "items": [
+              {
+                "id": "list-1780128877683",
+                "label": "新动态",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "标识",
+                    "kind": "text",
+                    "value": "list-1780128877683"
+                  },
+                  {
+                    "id": "image",
+                    "label": "缩略图",
+                    "kind": "image",
+                    "value": "/uploads/event/1780128891141-event10.png"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "排序日期（YYYYMMDD）",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "展示日期",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "category",
+                    "label": "分类",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "title",
+                    "label": "标题",
+                    "kind": "textarea",
+                    "value": "新动态"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "Summary",
+                    "kind": "textarea",
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "id": "event-20260530-108",
+                "label": "新动态",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "标识",
+                    "kind": "text",
+                    "value": "event-20260530-108"
+                  },
+                  {
+                    "id": "image",
+                    "label": "缩略图",
+                    "kind": "image",
+                    "value": "/uploads/event/1780128842174-hu.svg"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "排序日期（YYYYMMDD）",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "展示日期",
+                    "kind": "text",
+                    "value": "2026.05.30"
+                  },
+                  {
+                    "id": "category",
+                    "label": "分类",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "title",
+                    "label": "标题",
+                    "kind": "textarea",
+                    "value": "新动态"
+                  }
+                ]
+              },
+              {
+                "id": "list-1780125497918",
+                "label": "新动态",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "标识",
+                    "kind": "text",
+                    "value": "list-1780125497918"
+                  },
+                  {
+                    "id": "image",
+                    "label": "缩略图",
+                    "kind": "image",
+                    "value": "/uploads/event/1780125504372-event18.jpg"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "排序日期（YYYYMMDD）",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "展示日期",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "category",
+                    "label": "分类",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "title",
+                    "label": "标题",
+                    "kind": "textarea",
+                    "value": "新动态"
+                  }
+                ]
+              },
+              {
+                "id": "list-1780125100895",
+                "label": "新动态",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "标识",
+                    "kind": "text",
+                    "value": "list-1780125100895"
+                  },
+                  {
+                    "id": "image",
+                    "label": "缩略图",
+                    "kind": "image",
+                    "value": "/uploads/event/1780125132073-videoframe_15020.png"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "排序日期（YYYYMMDD）",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "展示日期",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "category",
+                    "label": "分类",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "title",
+                    "label": "标题",
+                    "kind": "textarea",
+                    "value": "新动态"
+                  }
+                ]
+              },
+              {
+                "id": "list-1780123501347",
+                "label": "list-1780123501347",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "标识",
+                    "kind": "text",
+                    "value": "list-1780123501347"
+                  },
+                  {
+                    "id": "image",
+                    "label": "缩略图",
+                    "kind": "image",
+                    "value": "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb/assets/team/team5.png"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "排序日期（YYYYMMDD）",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "展示日期",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "category",
+                    "label": "分类",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "title",
+                    "label": "标题",
+                    "kind": "textarea",
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "id": "list-1780124402090",
+                "label": "list-1780124402090",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "标识",
+                    "kind": "text",
+                    "value": "list-1780124402090"
+                  },
+                  {
+                    "id": "image",
+                    "label": "缩略图",
+                    "kind": "image",
+                    "value": ""
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "排序日期（YYYYMMDD）",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "展示日期",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "category",
+                    "label": "分类",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "title",
+                    "label": "标题",
+                    "kind": "textarea",
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "id": "list-1780123940212",
+                "label": "我是新",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "标识",
+                    "kind": "text",
+                    "value": "list-1780123940212"
+                  },
+                  {
+                    "id": "image",
+                    "label": "缩略图",
+                    "kind": "image",
+                    "value": "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb/assets/team/6.png"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "排序日期（YYYYMMDD）",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "展示日期",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "category",
+                    "label": "分类",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "title",
+                    "label": "标题",
+                    "kind": "textarea",
+                    "value": "我是新"
+                  }
+                ]
+              },
+              {
+                "id": "event-20260530-100",
+                "label": "新动态",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "标识",
+                    "kind": "text",
+                    "value": "event-20260530-100"
+                  },
+                  {
+                    "id": "image",
+                    "label": "缩略图",
+                    "kind": "image",
+                    "value": "11"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "排序日期（YYYYMMDD）",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "展示日期",
+                    "kind": "text",
+                    "value": "2026.05.30"
+                  },
+                  {
+                    "id": "category",
+                    "label": "分类",
+                    "kind": "text",
+                    "value": "11"
+                  },
+                  {
+                    "id": "title",
+                    "label": "标题",
+                    "kind": "textarea",
+                    "value": "新动态"
+                  }
+                ]
+              },
+              {
+                "id": "list-1780123488840",
+                "label": "123111",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "标识",
+                    "kind": "text",
+                    "value": "list-1780123488840"
+                  },
+                  {
+                    "id": "image",
+                    "label": "缩略图",
+                    "kind": "image",
+                    "value": "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb/assets/team/team5.png"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "排序日期（YYYYMMDD）",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "展示日期",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "category",
+                    "label": "分类",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "title",
+                    "label": "标题",
+                    "kind": "textarea",
+                    "value": "123111"
+                  }
+                ]
+              },
               {
                 "id": "event-20260530-92",
                 "label": "新动态",
@@ -10629,6 +11182,390 @@
             "fields": [],
             "items": [
               {
+                "id": "event-20260530-108",
+                "label": "新动态",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "标识",
+                    "kind": "text",
+                    "value": "event-20260530-108"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "排序日期（YYYYMMDD）",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "展示日期",
+                    "kind": "text",
+                    "value": "2026.05.30"
+                  },
+                  {
+                    "id": "category",
+                    "label": "分类",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "title",
+                    "label": "详情页标题",
+                    "kind": "textarea",
+                    "value": "新动态"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "详情页摘要",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "content",
+                    "label": "详情正文",
+                    "kind": "textarea",
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "id": "list-1780125497918",
+                "label": "新动态",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "标识",
+                    "kind": "text",
+                    "value": "list-1780125497918"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "排序日期（YYYYMMDD）",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "展示日期",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "category",
+                    "label": "分类",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "title",
+                    "label": "详情页标题",
+                    "kind": "textarea",
+                    "value": "新动态"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "详情页摘要",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "content",
+                    "label": "详情正文",
+                    "kind": "textarea",
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "id": "list-1780125100895",
+                "label": "新动态",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "标识",
+                    "kind": "text",
+                    "value": "list-1780125100895"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "排序日期（YYYYMMDD）",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "展示日期",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "category",
+                    "label": "分类",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "title",
+                    "label": "详情页标题",
+                    "kind": "textarea",
+                    "value": "新动态"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "详情页摘要",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "content",
+                    "label": "详情正文",
+                    "kind": "textarea",
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "id": "list-1780123501347",
+                "label": "list-1780123501347",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "标识",
+                    "kind": "text",
+                    "value": "list-1780123501347"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "排序日期（YYYYMMDD）",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "展示日期",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "category",
+                    "label": "分类",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "title",
+                    "label": "详情页标题",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "summary",
+                    "label": "详情页摘要",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "content",
+                    "label": "详情正文",
+                    "kind": "textarea",
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "id": "list-1780124402090",
+                "label": "list-1780124402090",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "标识",
+                    "kind": "text",
+                    "value": "list-1780124402090"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "排序日期（YYYYMMDD）",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "展示日期",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "category",
+                    "label": "分类",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "title",
+                    "label": "详情页标题",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "summary",
+                    "label": "详情页摘要",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "content",
+                    "label": "详情正文",
+                    "kind": "textarea",
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "id": "list-1780123940212",
+                "label": "我是新",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "标识",
+                    "kind": "text",
+                    "value": "list-1780123940212"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "排序日期（YYYYMMDD）",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "展示日期",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "category",
+                    "label": "分类",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "title",
+                    "label": "详情页标题",
+                    "kind": "textarea",
+                    "value": "我是新"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "详情页摘要",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "content",
+                    "label": "详情正文",
+                    "kind": "textarea",
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "id": "event-20260530-100",
+                "label": "新动态",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "标识",
+                    "kind": "text",
+                    "value": "event-20260530-100"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "排序日期（YYYYMMDD）",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "展示日期",
+                    "kind": "text",
+                    "value": "2026.05.30"
+                  },
+                  {
+                    "id": "category",
+                    "label": "分类",
+                    "kind": "text",
+                    "value": "11"
+                  },
+                  {
+                    "id": "title",
+                    "label": "详情页标题",
+                    "kind": "textarea",
+                    "value": "新动态"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "详情页摘要",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "content",
+                    "label": "详情正文",
+                    "kind": "textarea",
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "id": "list-1780123488840",
+                "label": "123111",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "标识",
+                    "kind": "text",
+                    "value": "list-1780123488840"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "排序日期（YYYYMMDD）",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "展示日期",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "category",
+                    "label": "分类",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "title",
+                    "label": "详情页标题",
+                    "kind": "textarea",
+                    "value": "123111"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "详情页摘要",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "content",
+                    "label": "详情正文",
+                    "kind": "textarea",
+                    "value": ""
+                  }
+                ]
+              },
+              {
                 "id": "event-20260530-92",
                 "label": "新动态",
                 "fields": [
@@ -10672,7 +11609,7 @@
                     "id": "content",
                     "label": "详情正文",
                     "kind": "textarea",
-                    "value": "123123\n\n\n\n123123\n\n\n\n123123\n\n\n\n1231231"
+                    "value": "123123\n\n123123\n\n123123\n\n1231231"
                   }
                 ]
               },
@@ -13111,6 +14048,66 @@
                     "value": "近日，全球最具影响力的法律媒体之一——亚洲法律杂志（Asian Legal Business，“ALB”）关注到虎诉的成立。虎诉作为一家专注于高端商事争议解决业务的精品所，始终以实现客户需求为第一目标。虎诉拥有深厚的法律功底、丰富的实战经验及与众不同的商业化思维，致力于为客户提供专业的法律服务、精准的商业解决方案及良好的用户体验。 以下为ALB关于虎诉的报道原文。\n\n前红圈所律师组建精品律所虎诉，专注争议解决业务\n\n三位争议解决律师刘煜暄、许旻、万力在北京组建了精品律所虎诉律师事务所，未来将专注于高端商事争议解决业务。\n\n刘煜暄律师此前先后就职于中伦、金杜、方达和竞天公诚律师事务所，许旻律师此前先后任职于金杜和方达律师事务所，万力律师此前先后就职于环球、国浩和方达律师事务所，并在某A股上市企业法务部任诉讼总监。\n\n虎诉未来的业务领域主要为投资纠纷、公司治理纠纷、商业合同纠纷、知识产权纠纷，重点服务行业为金融、互联网、高新科技、影视娱乐、游戏、教育、房地产等。目前律所服务客户包括度小满金融、中植资本、老虎证券、硅谷天堂、远镜创投、迷你考拉仓等。\n\n刘煜暄律师将担任虎诉的管理合伙人，其专长于代理国内诉讼及仲裁案件，主要服务领域包括私募股权、公司股权与控制权争夺、传媒及娱乐、房地产及建设工程等。\n\n许旻律师和万力律师出任虎诉合伙人。许律师专长于代理境内外仲裁案件，在投融资、股权交易、公司治理、商事合同审查及纠纷处理、产品责任等业务领域经验丰富，承办案件涉及银行金融、私募基金、高新科技、新媒体、影视娱乐、教育、房地产等领域。\n\n万力律师则在投融资、股权交易、商事合同、侵权责任及知识产权纠纷处理、法院执行、刑事追责等业务领域经验丰富，承办案件涉及金融、海事、航空、工业制造、医药、房地产、体育、电子娱乐与竞技等领域。"
                   }
                 ]
+              },
+              {
+                "id": "list-1780128877683",
+                "label": "新动态",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "Slug",
+                    "kind": "text",
+                    "value": "list-1780128877683"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "Sort date",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "Display date",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "category",
+                    "label": "Category",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "title",
+                    "label": "Detail title",
+                    "kind": "textarea",
+                    "value": "新动态"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "Detail summary",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "content",
+                    "label": "Detail content",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "detailImage1",
+                    "label": "Detail image 1",
+                    "kind": "image",
+                    "value": ""
+                  },
+                  {
+                    "id": "detailVideo1",
+                    "label": "Detail video 1",
+                    "kind": "url",
+                    "value": ""
+                  }
+                ]
               }
             ]
           }
@@ -13423,7 +14420,7 @@
                     "id": "image",
                     "label": "图片",
                     "kind": "image",
-                    "value": ""
+                    "value": "/uploads/industries/1780127935072-event7.png"
                   },
                   {
                     "id": "description",
@@ -13465,7 +14462,7 @@
                     "id": "image",
                     "label": "图片",
                     "kind": "image",
-                    "value": ""
+                    "value": "/uploads/industries/1780127945064-event10.png"
                   },
                   {
                     "id": "description",
@@ -13730,7 +14727,7 @@
                     "id": "image",
                     "label": "首屏背景图片",
                     "kind": "image",
-                    "value": ""
+                    "value": "/uploads/industries/1780127935072-event7.png"
                   },
                   {
                     "id": "intro",
@@ -13766,7 +14763,7 @@
                     "id": "image",
                     "label": "首屏背景图片",
                     "kind": "image",
-                    "value": ""
+                    "value": "/uploads/industries/1780127945064-event10.png"
                   },
                   {
                     "id": "intro",
@@ -15367,7 +16364,7 @@
                     "id": "image",
                     "label": "Image",
                     "kind": "image",
-                    "value": ""
+                    "value": "/uploads/industries/1780127935072-event7.png"
                   },
                   {
                     "id": "description",
@@ -15409,7 +16406,7 @@
                     "id": "image",
                     "label": "Image",
                     "kind": "image",
-                    "value": ""
+                    "value": "/uploads/industries/1780127945064-event10.png"
                   },
                   {
                     "id": "description",
@@ -19583,7 +20580,7 @@
                 "id": "image",
                 "label": "Background image",
                 "kind": "image",
-                "value": "/assets/about/awardbg.webp"
+                "value": "/uploads/coreValue/1780128620763-event7.png"
               },
               {
                 "id": "breadcrumb",
@@ -19918,6 +20915,390 @@
               }
             ],
             "items": [
+              {
+                "id": "list-1780128877683",
+                "label": "New Event",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "Slug",
+                    "kind": "text",
+                    "value": "list-1780128877683"
+                  },
+                  {
+                    "id": "image",
+                    "label": "Thumbnail",
+                    "kind": "image",
+                    "value": "/uploads/event/1780128884440-event10.png"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "Sort date (YYYYMMDD)",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "Display date",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "category",
+                    "label": "Category",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "title",
+                    "label": "Title",
+                    "kind": "textarea",
+                    "value": "New Event"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "Summary",
+                    "kind": "textarea",
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "id": "event-20260530-108",
+                "label": "New Event",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "Slug",
+                    "kind": "text",
+                    "value": "event-20260530-108"
+                  },
+                  {
+                    "id": "image",
+                    "label": "Thumbnail",
+                    "kind": "image",
+                    "value": "/uploads/event/1780128842174-hu.svg"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "Sort date (YYYYMMDD)",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "Display date",
+                    "kind": "text",
+                    "value": "May. 30, 2026"
+                  },
+                  {
+                    "id": "category",
+                    "label": "Category",
+                    "kind": "text",
+                    "value": "111"
+                  },
+                  {
+                    "id": "title",
+                    "label": "Title",
+                    "kind": "textarea",
+                    "value": "New Event"
+                  }
+                ]
+              },
+              {
+                "id": "list-1780125497918",
+                "label": "New Event",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "Slug",
+                    "kind": "text",
+                    "value": "list-1780125497918"
+                  },
+                  {
+                    "id": "image",
+                    "label": "Thumbnail",
+                    "kind": "image",
+                    "value": "/uploads/event/1780125504372-event18.jpg"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "Sort date (YYYYMMDD)",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "Display date",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "category",
+                    "label": "Category",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "title",
+                    "label": "Title",
+                    "kind": "textarea",
+                    "value": "New Event"
+                  }
+                ]
+              },
+              {
+                "id": "list-1780125100895",
+                "label": "New Event",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "Slug",
+                    "kind": "text",
+                    "value": "list-1780125100895"
+                  },
+                  {
+                    "id": "image",
+                    "label": "Thumbnail",
+                    "kind": "image",
+                    "value": "/uploads/event/1780125132073-videoframe_15020.png"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "Sort date (YYYYMMDD)",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "Display date",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "category",
+                    "label": "Category",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "title",
+                    "label": "Title",
+                    "kind": "textarea",
+                    "value": "New Event"
+                  }
+                ]
+              },
+              {
+                "id": "list-1780123501347",
+                "label": "list-1780123501347",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "Slug",
+                    "kind": "text",
+                    "value": "list-1780123501347"
+                  },
+                  {
+                    "id": "image",
+                    "label": "Thumbnail",
+                    "kind": "image",
+                    "value": "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb/assets/team/team5.png"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "Sort date (YYYYMMDD)",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "Display date",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "category",
+                    "label": "Category",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "title",
+                    "label": "Title",
+                    "kind": "textarea",
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "id": "list-1780124402090",
+                "label": "list-1780124402090",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "Slug",
+                    "kind": "text",
+                    "value": "list-1780124402090"
+                  },
+                  {
+                    "id": "image",
+                    "label": "Thumbnail",
+                    "kind": "image",
+                    "value": ""
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "Sort date (YYYYMMDD)",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "Display date",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "category",
+                    "label": "Category",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "title",
+                    "label": "Title",
+                    "kind": "textarea",
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "id": "list-1780123940212",
+                "label": "我是新",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "Slug",
+                    "kind": "text",
+                    "value": "list-1780123940212"
+                  },
+                  {
+                    "id": "image",
+                    "label": "Thumbnail",
+                    "kind": "image",
+                    "value": "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb/assets/team/6.png"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "Sort date (YYYYMMDD)",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "Display date",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "category",
+                    "label": "Category",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "title",
+                    "label": "Title",
+                    "kind": "textarea",
+                    "value": "我是新"
+                  }
+                ]
+              },
+              {
+                "id": "event-20260530-100",
+                "label": "New Event1",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "Slug",
+                    "kind": "text",
+                    "value": "event-20260530-100"
+                  },
+                  {
+                    "id": "image",
+                    "label": "Thumbnail",
+                    "kind": "image",
+                    "value": "11"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "Sort date (YYYYMMDD)",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "Display date",
+                    "kind": "text",
+                    "value": "May. 30, 2026"
+                  },
+                  {
+                    "id": "category",
+                    "label": "Category",
+                    "kind": "text",
+                    "value": "11"
+                  },
+                  {
+                    "id": "title",
+                    "label": "Title",
+                    "kind": "textarea",
+                    "value": "New Event1"
+                  }
+                ]
+              },
+              {
+                "id": "list-1780123488840",
+                "label": "123222",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "Slug",
+                    "kind": "text",
+                    "value": "list-1780123488840"
+                  },
+                  {
+                    "id": "image",
+                    "label": "Thumbnail",
+                    "kind": "image",
+                    "value": "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb/assets/team/team5.png"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "Sort date (YYYYMMDD)",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "Display date",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "category",
+                    "label": "Category",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "title",
+                    "label": "Title",
+                    "kind": "textarea",
+                    "value": "123222"
+                  }
+                ]
+              },
               {
                 "id": "event-20260530-92",
                 "label": "New Event",
@@ -21816,6 +23197,390 @@
             "fields": [],
             "items": [
               {
+                "id": "event-20260530-108",
+                "label": "New Event",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "Slug",
+                    "kind": "text",
+                    "value": "event-20260530-108"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "Sort date (YYYYMMDD)",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "Display date",
+                    "kind": "text",
+                    "value": "May. 30, 2026"
+                  },
+                  {
+                    "id": "category",
+                    "label": "Category",
+                    "kind": "text",
+                    "value": "111"
+                  },
+                  {
+                    "id": "title",
+                    "label": "Detail title",
+                    "kind": "textarea",
+                    "value": "New Event"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "Detail summary",
+                    "kind": "textarea",
+                    "value": "222"
+                  },
+                  {
+                    "id": "content",
+                    "label": "Detail content",
+                    "kind": "textarea",
+                    "value": "333"
+                  }
+                ]
+              },
+              {
+                "id": "list-1780125497918",
+                "label": "New Event",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "Slug",
+                    "kind": "text",
+                    "value": "list-1780125497918"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "Sort date (YYYYMMDD)",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "Display date",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "category",
+                    "label": "Category",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "title",
+                    "label": "Detail title",
+                    "kind": "textarea",
+                    "value": "New Event"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "Detail summary",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "content",
+                    "label": "Detail content",
+                    "kind": "textarea",
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "id": "list-1780125100895",
+                "label": "New Event",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "Slug",
+                    "kind": "text",
+                    "value": "list-1780125100895"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "Sort date (YYYYMMDD)",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "Display date",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "category",
+                    "label": "Category",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "title",
+                    "label": "Detail title",
+                    "kind": "textarea",
+                    "value": "New Event"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "Detail summary",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "content",
+                    "label": "Detail content",
+                    "kind": "textarea",
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "id": "list-1780123501347",
+                "label": "list-1780123501347",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "Slug",
+                    "kind": "text",
+                    "value": "list-1780123501347"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "Sort date (YYYYMMDD)",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "Display date",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "category",
+                    "label": "Category",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "title",
+                    "label": "Detail title",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "summary",
+                    "label": "Detail summary",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "content",
+                    "label": "Detail content",
+                    "kind": "textarea",
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "id": "list-1780124402090",
+                "label": "list-1780124402090",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "Slug",
+                    "kind": "text",
+                    "value": "list-1780124402090"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "Sort date (YYYYMMDD)",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "Display date",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "category",
+                    "label": "Category",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "title",
+                    "label": "Detail title",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "summary",
+                    "label": "Detail summary",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "content",
+                    "label": "Detail content",
+                    "kind": "textarea",
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "id": "list-1780123940212",
+                "label": "我是新",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "Slug",
+                    "kind": "text",
+                    "value": "list-1780123940212"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "Sort date (YYYYMMDD)",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "Display date",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "category",
+                    "label": "Category",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "title",
+                    "label": "Detail title",
+                    "kind": "textarea",
+                    "value": "我是新"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "Detail summary",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "content",
+                    "label": "Detail content",
+                    "kind": "textarea",
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "id": "event-20260530-100",
+                "label": "New Event1",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "Slug",
+                    "kind": "text",
+                    "value": "event-20260530-100"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "Sort date (YYYYMMDD)",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "Display date",
+                    "kind": "text",
+                    "value": "May. 30, 2026"
+                  },
+                  {
+                    "id": "category",
+                    "label": "Category",
+                    "kind": "text",
+                    "value": "11"
+                  },
+                  {
+                    "id": "title",
+                    "label": "Detail title",
+                    "kind": "textarea",
+                    "value": "New Event1"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "Detail summary",
+                    "kind": "textarea",
+                    "value": "11"
+                  },
+                  {
+                    "id": "content",
+                    "label": "Detail content",
+                    "kind": "textarea",
+                    "value": "11"
+                  }
+                ]
+              },
+              {
+                "id": "list-1780123488840",
+                "label": "123222",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "Slug",
+                    "kind": "text",
+                    "value": "list-1780123488840"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "Sort date (YYYYMMDD)",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "Display date",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "category",
+                    "label": "Category",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "title",
+                    "label": "Detail title",
+                    "kind": "textarea",
+                    "value": "123222"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "Detail summary",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "content",
+                    "label": "Detail content",
+                    "kind": "textarea",
+                    "value": ""
+                  }
+                ]
+              },
+              {
                 "id": "event-20260530-92",
                 "label": "New Event",
                 "fields": [
@@ -21859,7 +23624,7 @@
                     "id": "content",
                     "label": "Detail content",
                     "kind": "textarea",
-                    "value": "1111\n\n\n\n1111\n\n\n\n\n\n1111\n\n\n\n\n\n1111"
+                    "value": "1111\n\n1111\n\n1111\n\n1111"
                   }
                 ]
               },
@@ -24298,6 +26063,66 @@
                     "value": "Asian Legal Business (\"ALB\"), one of the world's most influential legal media, has recently noted the establishment of Tiger Partners. As a boutique firm specializing in complex commercial dispute resolution, Tiger Partners' primary objective is to realize the interests of its clients. Tiger Partners has a deep legal expertise, rich practical experience and a distinctive commercial mindset. It is committed to providing professional legal services, precise business solutions and good user experience to its clients.\n\nThe following is the original ALB article on Tiger Partners:\n\nFormer red circle firm lawyers leave to set up boutique firm Tiger Partners\n\nDispute resolution lawyers Liu Yuxuan, Xu Min and Wan Li have co-founded a boutique firm called Tiger Partners in Beijing, which is dedicated to handling complex commercial dispute resolution cases in the future.\n\nLiu has previously worked for red circle firms Zhonglun, KWM, Fangda and Jingtian & Gongcheng, and Xu has worked for KWM and Fangda, while Wan has left his position as dispute director from a Chinese listed company, with previous working experiences in Global, Grandall and Fangda.\n\nThe new firm will focus on investment dispute, corporate governance dispute, commercial contract dispute and IP dispute, with special focuses on industries of finance, internet, technology, entertainment, game, education and real estate. The firm already boasts a number of key clients, including Du Xiaoman Financial, Zhongzhi Capital, Tiger Brokers, Heaven-sent Capital, Telescope investment and Mini-Kaola.\n\nLiu will be the managing partner of the new firm. He specializes on domestic litigation and arbitration, with expertise on private equity, contest of corporate equity and control, media and entertainment, real estate and construction.\n\nMeanwhile Xu and Wan will act as partners. Xu focuses on domestic and international arbitration, with special expertise on finance and investment, equity transaction, corporate governance, commercial contract review and dispute resolution and product liability, having advised industries of banking and finance, technology, new media, entertainment, education and real estate.\n\nWan specializes on finance and investment, equity transaction, commercial contract, tort liability, IP dispute resolution and criminal accountability, with special knowledge of finance, maritime, aviation, manufacture, medicine, real estate, sports, electronic entertainment and competition industries."
                   }
                 ]
+              },
+              {
+                "id": "list-1780128877683",
+                "label": "New Event",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "Slug",
+                    "kind": "text",
+                    "value": "list-1780128877683"
+                  },
+                  {
+                    "id": "sortDate",
+                    "label": "Sort date",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "displayDate",
+                    "label": "Display date",
+                    "kind": "text",
+                    "value": "20260530"
+                  },
+                  {
+                    "id": "category",
+                    "label": "Category",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "title",
+                    "label": "Detail title",
+                    "kind": "textarea",
+                    "value": "New Event"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "Detail summary",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "content",
+                    "label": "Detail content",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "detailImage1",
+                    "label": "Detail image 1",
+                    "kind": "image",
+                    "value": ""
+                  },
+                  {
+                    "id": "detailVideo1",
+                    "label": "Detail video 1",
+                    "kind": "url",
+                    "value": ""
+                  }
+                ]
               }
             ]
           }
@@ -24610,7 +26435,7 @@
                     "id": "image",
                     "label": "Image",
                     "kind": "image",
-                    "value": ""
+                    "value": "/uploads/industries/1780127935072-event7.png"
                   },
                   {
                     "id": "description",
@@ -24652,7 +26477,7 @@
                     "id": "image",
                     "label": "Image",
                     "kind": "image",
-                    "value": ""
+                    "value": "/uploads/industries/1780127945064-event10.png"
                   },
                   {
                     "id": "description",
@@ -24917,7 +26742,7 @@
                     "id": "image",
                     "label": "Hero image",
                     "kind": "image",
-                    "value": ""
+                    "value": "/uploads/industries/1780127935072-event7.png"
                   },
                   {
                     "id": "intro",
@@ -24953,7 +26778,7 @@
                     "id": "image",
                     "label": "Hero image",
                     "kind": "image",
-                    "value": ""
+                    "value": "/uploads/industries/1780127945064-event10.png"
                   },
                   {
                     "id": "intro",
@@ -26209,6 +28034,6 @@
         ]
       }
     },
-    "updatedAt": "2026-05-30T06:43:31.474Z"
+    "updatedAt": "2026-05-30T08:15:15.129Z"
   }
 }

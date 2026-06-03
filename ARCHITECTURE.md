@@ -1,6 +1,6 @@
 ﻿# Husuweb Official Site Architecture
 
-最后更新于：2026-05-30 15:21
+最后更新于：2026-05-30 16:12
 
 ## 椤圭洰姒傝堪
 
@@ -621,6 +621,8 @@ CMS 左侧全局版本选择器不再提供“未选择版本”空项；默认�
 
 | 鏃堕棿 | 鍒嗘敮 | 鍙樻洿绫诲瀷 | 鎻忚堪 |
 | :--- | :--- | :--- | :--- |
+| 2026-05-30 16:12 | cms | UI 调整 | 内容管理虎诉动态封面图片字段新增上传按钮，上传到 event 分类后自动写回封面地址并显示缩略图 |
+| 2026-05-30 15:55 | cms | 修复缺陷 | 修复可视化 pageContent 包装函数自调用导致的栈溢出，并为可视化页面图片字段和内容管理服务行业背景图补充上传入口 |
 | 2026-05-30 15:21 | cms | 修复缺陷 | 可视化编辑的 pageContent 更新函数内立即排队同步官网 CMS 草稿，避免新增动态后快速返回内容管理仍看到旧列表 |
 | 2026-05-30 15:15 | cms | 修复缺陷 | 可视化编辑变更实时同步父级官网 CMS 内存状态，切回内容管理虎诉动态时无需刷新页面即可看到新增动态 |
 | 2026-05-30 15:04 | cms | 修复缺陷 | 可视化编辑虎诉动态新增项改为插入动态列表首位并停留在列表编辑，避免默认跳转动态子页面和新增项落在首屏列表外 |
@@ -1021,6 +1023,8 @@ CMS 左侧全局版本选择器不再提供“未选择版本”空项；默认�
 
 | 鏃堕棿 | 鍒嗘敮 | 瀹屾垚鐨勫姛鑳?/ 宸ヤ綔 | 璇存槑 |
 | :--- | :--- | :--- | :--- |
+| 2026-05-30 16:12 | cms | 虎诉动态封面上传 | `renderEventOverridesEditor` 为动态封面图片增加文件上传控件，复用 `/api/cms/assets` 并将返回的 `/uploads/...` 写入 `events.overrides[slug].image` |
+| 2026-05-30 15:55 | cms | 图片字段上传入口补齐 | `CmsPuckVisualEditor` 页面字段支持 image/video/logo 上传写回；`OfficialSiteSectionPanel` 服务行业背景图字段支持上传到 industries 分类并预览缩略图 |
 | 2026-05-30 15:21 | cms | 可视化即时同步加固 | `CmsPuckVisualEditor` 用 `updatePageContentState` 包装所有本地 `pageContent` 修改，在同一次更新中拿到 nextPageContent 并异步写回父级 `officialSiteState` |
 | 2026-05-30 15:15 | cms | 可视化到内容管理实时同步 | `CmsPuckVisualEditor` 接收 `setOfficialSiteState`，在 `pageContent`/可视化草稿变化后用 `officialPreviewState` 更新父级草稿状态，保持虎诉动态内容管理列表即时一致 |
 | 2026-05-30 15:04 | cms | 可视化虎诉动态新增链路修复 | `CmsPuckVisualEditor` 新建 `event.list` 条目时生成“新动态 / New Event”并插入首位，同时自动创建详情页数据但不切换到详情子页面 |
