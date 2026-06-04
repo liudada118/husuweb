@@ -2,6 +2,7 @@ import Database from "better-sqlite3";
 import { existsSync, mkdirSync, readFileSync } from "fs";
 import path from "path";
 import { translations, type SiteContent } from "@/app/translations/translations";
+import type { OfficialCmsSiteState } from "@/cms/official-state";
 import { hashPassword } from "./cms-auth";
 import {
   defaultPageContentState,
@@ -355,6 +356,151 @@ function mergePageContentState(base: PageContentState, override: unknown): PageC
     zh: mergePageContentLocale(base.zh, overrideObject.zh),
     en: mergePageContentLocale(base.en, overrideObject.en),
     updatedAt: typeof overrideObject.updatedAt === "string" ? overrideObject.updatedAt : base.updatedAt,
+  };
+}
+
+function normalizeIndustrySlug(value: string) {
+  const normalized = String(value ?? "").trim().split("#")[0]?.split("?")[0] ?? "";
+  const industryPathMatch = normalized.match(/(?:^|\/)industries\/([^/]+)$/);
+  const slug = industryPathMatch?.[1] ?? normalized;
+
+  return slug
+    .replace(/^\/+|\/+$/g, "")
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function pageContentSectionItems(
+  pageContent: PageContentState | undefined,
+  language: Language,
+  pageId: keyof PageContentLocale,
+  sectionId: string,
+) {
+  return pageContent?.[language]?.[pageId]?.sections.find((section) => section.id === sectionId)?.items;
+}
+
+function pageContentItemField(item: PageContentRepeaterItem | undefined, fieldId: string, fallback = "") {
+  const value = item?.fields.find((fieldItem) => fieldItem.id === fieldId)?.value;
+  return value === undefined || value === "" ? fallback : value;
+}
+
+function pageContentIndustrySlug(item: PageContentRepeaterItem, index: number) {
+  return (
+    normalizeIndustrySlug(pageContentItemField(item, "slug", "")) ||
+    normalizeIndustrySlug(pageContentItemField(item, "href", "")) ||
+    normalizeIndustrySlug(item.id) ||
+    normalizeIndustrySlug(pageContentItemField(item, "title", "")) ||
+    `industry-${index + 1}`
+  );
+}
+
+function industryItemsDifferFromOfficial(
+  items: PageContentRepeaterItem[] | undefined,
+  officialIndustries: OfficialCmsSiteState["lists"]["industries"],
+) {
+  if (!items) return false;
+
+  const officialSlugs = officialIndustries.map((industry) => normalizeIndustrySlug(industry.slug));
+  const itemSlugs = items.map(pageContentIndustrySlug);
+
+  return itemSlugs.length !== officialSlugs.length || itemSlugs.some((slug, index) => slug !== officialSlugs[index]);
+}
+
+function getPageItemsBySlug(
+  pageContent: PageContentState | undefined,
+  language: Language,
+  pageId: keyof PageContentLocale,
+  sectionId: string,
+) {
+  return new Map(
+    (pageContentSectionItems(pageContent, language, pageId, sectionId) ?? [])
+      .map((item, index) => [pageContentIndustrySlug(item, index), item] as const)
+      .filter(([slug]) => Boolean(slug)),
+  );
+}
+
+function industriesFromPageContent(
+  officialIndustries: OfficialCmsSiteState["lists"]["industries"],
+  pageContent: PageContentState | undefined,
+) {
+  const enHomeItems = pageContentSectionItems(pageContent, "en", "home", "industries");
+  const zhHomeItems = pageContentSectionItems(pageContent, "zh", "home", "industries");
+  const enMediaItems = pageContentSectionItems(pageContent, "en", "media", "cards");
+  const zhMediaItems = pageContentSectionItems(pageContent, "zh", "media", "cards");
+  const sourceItems =
+    enMediaItems !== undefined
+      ? enMediaItems
+      : industryItemsDifferFromOfficial(enHomeItems, officialIndustries)
+        ? enHomeItems
+        : undefined;
+
+  if (!sourceItems) return officialIndustries;
+
+  const zhItems = sourceItems === enMediaItems ? zhMediaItems ?? [] : zhHomeItems ?? [];
+  const enDetails = getPageItemsBySlug(pageContent, "en", "media", "detailPages");
+  const zhDetails = getPageItemsBySlug(pageContent, "zh", "media", "detailPages");
+  const officialBySlug = new Map(officialIndustries.map((industry) => [normalizeIndustrySlug(industry.slug), industry] as const));
+  const seenSlugs = new Set<string>();
+
+  return sourceItems
+    .map((item, index) => {
+      const slug = pageContentIndustrySlug(item, index);
+      const zhItem = zhItems[index];
+      const current = officialBySlug.get(slug) ?? officialIndustries[index];
+      const enDetail = enDetails.get(slug);
+      const zhDetail = zhDetails.get(slug);
+
+      return {
+        ...current,
+        slug,
+        name: pageContentItemField(item, "title", current?.name ?? item.label),
+        zhName: pageContentItemField(zhItem, "title", current?.zhName ?? current?.name ?? item.label),
+        img:
+          pageContentItemField(enDetail, "image", pageContentItemField(item, "image", "")) ||
+          pageContentItemField(zhDetail, "image", "") ||
+          current?.img ||
+          "",
+        cls: pageContentItemField(item, "layoutClass", current?.cls ?? ""),
+        intro: pageContentItemField(enDetail, "intro", pageContentItemField(item, "description", current?.intro ?? "")),
+        zhIntro: pageContentItemField(zhDetail, "intro", pageContentItemField(zhItem, "description", current?.zhIntro ?? "")),
+        sections: pageContentItemField(enDetail, "sections", current?.sections ?? ""),
+        zhSections: pageContentItemField(zhDetail, "sections", current?.zhSections ?? ""),
+      } satisfies OfficialCmsSiteState["lists"]["industries"][number];
+    })
+    .filter((industry) => {
+      if (!industry.slug || seenSlugs.has(industry.slug)) return false;
+      seenSlugs.add(industry.slug);
+      return Boolean(industry.name || industry.zhName);
+    });
+}
+
+function normalizeOfficialStateWithPageContent(
+  officialSiteState: OfficialCmsSiteState | undefined,
+  pageContent: PageContentState,
+) {
+  if (!officialSiteState) return undefined;
+
+  const normalizedPageContent = mergePageContentState(cloneValue(defaultPageContentState), pageContent);
+
+  return {
+    ...officialSiteState,
+    lists: {
+      ...officialSiteState.lists,
+      industries: industriesFromPageContent(officialSiteState.lists.industries, normalizedPageContent),
+    },
+    previewPageContent: normalizedPageContent,
+  };
+}
+
+function normalizeVersionPayloadForStorage(payload: CmsVersionPayload): CmsVersionPayload {
+  const pageContent = mergePageContentState(cloneValue(defaultPageContentState), payload.pageContent);
+
+  return {
+    ...payload,
+    pageContent,
+    officialSiteState: normalizeOfficialStateWithPageContent(payload.officialSiteState, pageContent),
   };
 }
 
@@ -1352,7 +1498,7 @@ export function listVersions() {
 function createVersionPayload(): CmsVersionPayload {
   const state = getSiteState();
 
-  return {
+  return normalizeVersionPayloadForStorage({
     siteContent: state.siteContent,
     visualEditor: state.visualEditor,
     pageContent: state.pageContent,
@@ -1361,14 +1507,14 @@ function createVersionPayload(): CmsVersionPayload {
     caseStudies: listCaseStudies(true),
     mediaItems: listMediaItems(true),
     podcastEpisodes: listPodcastEpisodes(true),
-  };
+  });
 }
 
 export function createVersion(input: { name: string; description: string; createdBy?: number; sourceVersionId?: number | null }) {
   const db = getCmsDb();
   const now = getNow();
   const sourceVersion = input.sourceVersionId ? getVersionEditorData(input.sourceVersionId) : null;
-  const sourcePayload = sourceVersion?.payload ?? createVersionPayload();
+  const sourcePayload = normalizeVersionPayloadForStorage(sourceVersion?.payload ?? createVersionPayload());
   const payload = sourcePayload;
 
   db.prepare(`
@@ -1399,7 +1545,7 @@ export function updateVersionPayload(input: {
   if (!existing) {
     throw new Error("Version not found.");
   }
-  const payload = input.payload;
+  const payload = normalizeVersionPayloadForStorage(input.payload);
 
   db.prepare(`
     UPDATE versions
@@ -1455,7 +1601,8 @@ export function restoreVersion(versionId: number, updatedBy?: number) {
     throw new Error("Version not found.");
   }
 
-  const payload = parseJsonField(row.payload_json, null as CmsVersionPayload | null);
+  const rawPayload = parseJsonField(row.payload_json, null as CmsVersionPayload | null);
+  const payload = rawPayload ? normalizeVersionPayloadForStorage(rawPayload) : null;
 
   if (!payload) {
     throw new Error("Version payload is invalid.");
@@ -1528,7 +1675,8 @@ export function getVersionPreviewData(versionId: number) {
     return null;
   }
 
-  const payload = parseJsonField(row.payload_json, null as CmsVersionPayload | null);
+  const rawPayload = parseJsonField(row.payload_json, null as CmsVersionPayload | null);
+  const payload = rawPayload ? normalizeVersionPayloadForStorage(rawPayload) : null;
 
   if (!payload) {
     return null;

@@ -927,7 +927,18 @@ function mergeDefaultFields(fields: PageContentField[] = [], defaultFields: Page
   ];
 }
 
-function mergeDefaultItems(items: PageContentRepeaterItem[] = [], defaultItems: PageContentRepeaterItem[] = []) {
+function shouldAppendDefaultItems(pageId: CmsPageId, sectionId: string) {
+  if (pageId === "home" && sectionId === "industries") return false;
+  if (pageId === "media" && (sectionId === "cards" || sectionId === "detailPages")) return false;
+
+  return true;
+}
+
+function mergeDefaultItems(
+  items: PageContentRepeaterItem[] = [],
+  defaultItems: PageContentRepeaterItem[] = [],
+  appendMissingItems = true,
+) {
   const defaultItemMap = new Map(defaultItems.map((item) => [item.id, item]));
   const existingIds = new Set(items.map((item) => item.id));
 
@@ -939,11 +950,15 @@ function mergeDefaultItems(items: PageContentRepeaterItem[] = [], defaultItems: 
         ? { ...item, fields: mergeDefaultFields(item.fields, defaultItem.fields) }
         : item;
     }),
-    ...defaultItems.filter((item) => !existingIds.has(item.id)),
+    ...(appendMissingItems ? defaultItems.filter((item) => !existingIds.has(item.id)) : []),
   ];
 }
 
-function mergeDefaultSections(sections: PageContentSection[] = [], defaultSections: PageContentSection[]) {
+function mergeDefaultSections(
+  pageId: CmsPageId,
+  sections: PageContentSection[] = [],
+  defaultSections: PageContentSection[],
+) {
   const defaultSectionMap = new Map(defaultSections.map((sectionItem) => [sectionItem.id, sectionItem]));
   const existingIds = new Set(sections.map((sectionItem) => sectionItem.id));
 
@@ -955,7 +970,14 @@ function mergeDefaultSections(sections: PageContentSection[] = [], defaultSectio
         ? {
             ...sectionItem,
             fields: mergeDefaultFields(sectionItem.fields, defaultSection.fields),
-            items: sectionItem.items || defaultSection.items ? mergeDefaultItems(sectionItem.items, defaultSection.items) : undefined,
+            items:
+              sectionItem.items || defaultSection.items
+                ? mergeDefaultItems(
+                    sectionItem.items,
+                    defaultSection.items,
+                    shouldAppendDefaultItems(pageId, sectionItem.id),
+                  )
+                : undefined,
           }
         : sectionItem;
     }),
@@ -969,7 +991,7 @@ function mergeDefaultLocale(locale: PageContentLocale, defaultLocale: PageConten
     const defaultPage = defaultLocale[pageId];
 
     next[pageId] = currentPage
-      ? { ...currentPage, sections: mergeDefaultSections(currentPage.sections, defaultPage.sections) }
+      ? { ...currentPage, sections: mergeDefaultSections(pageId, currentPage.sections, defaultPage.sections) }
       : defaultPage;
 
     return next;

@@ -764,6 +764,7 @@ export function CmsStudio({ initialData }: { initialData: CmsBootstrapData }) {
     ? normalizeOfficialSiteStateForEditor(
         cloneValue(initialData.officialSiteState),
         mergePageContentDefaults(cloneValue(initialData.pageContent)),
+        { industriesFromPageContent: true },
       )
     : null;
   const [siteContent, setSiteContent] = useState<SiteContent>(cloneValue(initialData.siteContent));
@@ -837,7 +838,7 @@ export function CmsStudio({ initialData }: { initialData: CmsBootstrapData }) {
       }
 
       const payload = (await response.json()) as { state: OfficialCmsSiteState };
-      if (!cancelled) setOfficialSiteState(normalizeOfficialSiteStateForEditor(payload.state, pageContent));
+      if (!cancelled) setOfficialSiteState(normalizeOfficialSiteStateForEditor(payload.state, pageContent, { industriesFromPageContent: true }));
     }
 
     void loadOfficialState();
@@ -905,13 +906,17 @@ export function CmsStudio({ initialData }: { initialData: CmsBootstrapData }) {
     setVisualEditor(cloneValue(payload.visualEditor));
     const payloadPageContent = mergePageContentDefaults(cloneValue(payload.pageContent));
     const normalizedOfficialState = payload.officialSiteState
-      ? normalizeOfficialSiteStateForEditor(cloneValue(payload.officialSiteState), payloadPageContent)
+      ? normalizeOfficialSiteStateForEditor(cloneValue(payload.officialSiteState), payloadPageContent, { industriesFromPageContent: true })
       : null;
     const nextPageContent = normalizedOfficialState
       ? syncPageContentFromOfficialSiteState(payloadPageContent, normalizedOfficialState)
       : payloadPageContent;
     const nextOfficialState = normalizedOfficialState
-      ? normalizeOfficialSiteStateForEditor({ ...normalizedOfficialState, previewPageContent: nextPageContent }, nextPageContent)
+      ? normalizeOfficialSiteStateForEditor(
+          { ...normalizedOfficialState, previewPageContent: nextPageContent },
+          nextPageContent,
+          { industriesFromPageContent: true },
+        )
       : null;
     setPageContent(nextPageContent);
     if (nextOfficialState) {
@@ -936,10 +941,15 @@ export function CmsStudio({ initialData }: { initialData: CmsBootstrapData }) {
     officialSiteState?: OfficialCmsSiteState | null;
   }): CmsVersionPayload => {
     const officialMergePageContent = nextState?.pageContent ?? pageContent;
+    const shouldSyncIndustriesFromPageContent = Boolean(nextState?.pageContent);
     const normalizedOfficialState = nextState?.officialSiteState
-      ? normalizeOfficialSiteStateForEditor(nextState.officialSiteState, officialMergePageContent)
+      ? normalizeOfficialSiteStateForEditor(nextState.officialSiteState, officialMergePageContent, {
+          industriesFromPageContent: shouldSyncIndustriesFromPageContent,
+        })
       : officialSiteState
-        ? normalizeOfficialSiteStateForEditor(officialSiteState, officialMergePageContent)
+        ? normalizeOfficialSiteStateForEditor(officialSiteState, officialMergePageContent, {
+            industriesFromPageContent: shouldSyncIndustriesFromPageContent,
+          })
         : undefined;
     const nextPageContent =
       nextState?.pageContent ??
@@ -980,7 +990,9 @@ export function CmsStudio({ initialData }: { initialData: CmsBootstrapData }) {
       };
       const officialPayload = (await officialResponse.json()) as { state: OfficialCmsSiteState };
       const sitePageContent = mergePageContentDefaults(cloneValue(sitePayload.pageContent));
-      const normalizedOfficialState = normalizeOfficialSiteStateForEditor(cloneValue(officialPayload.state), sitePageContent);
+      const normalizedOfficialState = normalizeOfficialSiteStateForEditor(cloneValue(officialPayload.state), sitePageContent, {
+        industriesFromPageContent: true,
+      });
       const nextPageContent = syncPageContentFromOfficialSiteState(
         sitePageContent,
         normalizedOfficialState,
@@ -2367,13 +2379,99 @@ function getPageItemsBySlug(
   );
 }
 
+function getPageSectionItems(
+  pageContent: PageContentState | undefined,
+  language: Language,
+  pageId: CmsPageId,
+  sectionId: string,
+) {
+  return pageContent?.[language]?.[pageId]?.sections.find((section) => section.id === sectionId)?.items;
+}
+
+function pageContentIndustrySlug(item: PageContentRepeaterItem) {
+  return (
+    normalizeIndustrySlugForStudio(getPageContentItemField(item, "slug", "")) ||
+    normalizeIndustrySlugForStudio(getPageContentItemField(item, "href", "")) ||
+    normalizeIndustrySlugForStudio(item.id)
+  );
+}
+
+function industryItemsDifferFromOfficial(
+  items: PageContentRepeaterItem[] | undefined,
+  officialIndustries: OfficialCmsIndustryListItem[],
+) {
+  if (!items) return false;
+
+  const officialSlugs = officialIndustries.map((industry) => normalizeIndustrySlugForStudio(industry.slug));
+  const itemSlugs = items.map(pageContentIndustrySlug);
+
+  return itemSlugs.length !== officialSlugs.length || itemSlugs.some((slug, index) => slug !== officialSlugs[index]);
+}
+
+function industriesFromPageContent(
+  officialIndustries: OfficialCmsIndustryListItem[],
+  pageContent: PageContentState | undefined,
+) {
+  const enHomeItems = getPageSectionItems(pageContent, "en", "home", "industries");
+  const zhHomeItems = getPageSectionItems(pageContent, "zh", "home", "industries");
+  const enMediaItems = getPageSectionItems(pageContent, "en", "media", "cards");
+  const zhMediaItems = getPageSectionItems(pageContent, "zh", "media", "cards");
+  const sourceItems =
+    enMediaItems !== undefined
+      ? enMediaItems
+      : industryItemsDifferFromOfficial(enHomeItems, officialIndustries)
+        ? enHomeItems
+        : undefined;
+
+  if (!sourceItems) return null;
+
+  const zhItems = sourceItems === enMediaItems ? zhMediaItems ?? [] : zhHomeItems ?? [];
+  const enDetails = getPageItemsBySlug(pageContent, "en", "media", "detailPages");
+  const zhDetails = getPageItemsBySlug(pageContent, "zh", "media", "detailPages");
+  const officialBySlug = new Map(
+    officialIndustries.map((industry) => [normalizeIndustrySlugForStudio(industry.slug), industry] as const),
+  );
+  const seenSlugs = new Set<string>();
+
+  return sourceItems
+    .map((item, index) => {
+      const slug = pageContentIndustrySlug(item) || `industry-${index + 1}`;
+      const zhItem = zhItems[index];
+      const current = officialBySlug.get(slug) ?? officialIndustries[index];
+      const enDetail = enDetails.get(slug);
+      const zhDetail = zhDetails.get(slug);
+
+      return {
+        ...current,
+        slug,
+        name: getPageContentItemField(item, "title", current?.name ?? item.label),
+        zhName: getPageContentItemField(zhItem, "title", current?.zhName ?? current?.name ?? item.label),
+        img:
+          getPageContentItemField(enDetail, "image", getPageContentItemField(item, "image", "")) ||
+          getPageContentItemField(zhDetail, "image", "") ||
+          current?.img ||
+          "",
+        cls: getPageContentItemField(item, "layoutClass", current?.cls ?? ""),
+        intro: getPageContentItemField(enDetail, "intro", getPageContentItemField(item, "description", current?.intro ?? "")),
+        zhIntro: getPageContentItemField(zhDetail, "intro", getPageContentItemField(zhItem, "description", current?.zhIntro ?? "")),
+        sections: getPageContentItemField(enDetail, "sections", current?.sections ?? ""),
+        zhSections: getPageContentItemField(zhDetail, "sections", current?.zhSections ?? ""),
+      } satisfies OfficialCmsIndustryListItem;
+    })
+    .filter((industry) => {
+      if (!industry.slug || seenSlugs.has(industry.slug)) return false;
+      seenSlugs.add(industry.slug);
+      return Boolean(industry.name || industry.zhName);
+    });
+}
+
 function mergeIndustriesWithPageContent(
   industries: OfficialCmsIndustryListItem[],
   pageContent: PageContentState | undefined,
 ) {
   const bySlug = new Map<string, OfficialCmsIndustryListItem>();
   const orderedSlugs: string[] = [];
-  const addSlug = (value: string) => {
+  const addManagedSlug = (value: string) => {
     const slug = normalizeIndustrySlugForStudio(value);
 
     if (!slug) return "";
@@ -2382,7 +2480,7 @@ function mergeIndustriesWithPageContent(
   };
 
   industries.forEach((industry) => {
-    const slug = addSlug(industry.slug);
+    const slug = addManagedSlug(industry.slug);
 
     if (!slug) return;
     bySlug.set(slug, { ...industry, slug, img: industry.img ?? "" });
@@ -2392,10 +2490,6 @@ function mergeIndustriesWithPageContent(
   const zhCards = getPageItemsBySlug(pageContent, "zh", "media", "cards");
   const enDetails = getPageItemsBySlug(pageContent, "en", "media", "detailPages");
   const zhDetails = getPageItemsBySlug(pageContent, "zh", "media", "detailPages");
-
-  [enCards, zhCards, enDetails, zhDetails].forEach((items) => {
-    items.forEach((_item, slug) => addSlug(slug));
-  });
 
   return orderedSlugs
     .map((slug) => {
@@ -2657,6 +2751,7 @@ function syncPageContentFromOfficialSiteState(pageContent: PageContentState, off
 function normalizeOfficialSiteStateForEditor(
   current: OfficialCmsSiteState,
   pageContentOverride?: PageContentState,
+  options: { industriesFromPageContent?: boolean } = {},
 ): OfficialCmsSiteState {
   const honors = mergeHonorContent(current.content.honors);
   const chronicle = mergeChronicleContent(current.content.chronicle);
@@ -2665,7 +2760,11 @@ function normalizeOfficialSiteStateForEditor(
   const honorYearDefaults = honors.map((item) => item.year);
   const homeHonorItemDefaults = homeHonorItemIds(honors);
   const chronicleYearDefaults = chronicle.map((item) => item.year);
-  const industries = mergeIndustriesWithPageContent(current.lists.industries, pageContentOverride ?? current.previewPageContent);
+  const industryPageContent = pageContentOverride ?? current.previewPageContent;
+  const industries =
+    (options.industriesFromPageContent
+      ? industriesFromPageContent(current.lists.industries, industryPageContent)
+      : null) ?? mergeIndustriesWithPageContent(current.lists.industries, industryPageContent);
 
   return {
     ...current,

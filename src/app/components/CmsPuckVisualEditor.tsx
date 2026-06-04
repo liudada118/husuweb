@@ -1454,6 +1454,15 @@ function pageItems(previewData: PublicCmsData, language: Language, pageId: Visua
   return getPageContentSectionItems(previewData.pageContent, language, pageId, sectionId);
 }
 
+function pageSectionItems(
+  previewData: PublicCmsData,
+  language: Language,
+  pageId: VisualPage,
+  sectionId: string,
+) {
+  return previewData.pageContent[language]?.[pageId]?.sections.find((section) => section.id === sectionId)?.items;
+}
+
 function homeHonorItemId(year: string, index: number, date: string) {
   return `${year}-${index + 1}-${date || "award"}`;
 }
@@ -1472,13 +1481,16 @@ function normalizeIndustrySlugFromValue(value: string) {
 }
 
 function syncIndustriesFromPageContent(previewData: PublicCmsData, officialSiteState: OfficialCmsPublicState) {
-  const enItems = pageItems(previewData, "en", "home", "industries");
-  const zhItems = pageItems(previewData, "zh", "home", "industries");
-  const sourceItems = enItems.length ? enItems : pageItems(previewData, "en", "media", "cards");
+  const enHomeItems = pageSectionItems(previewData, "en", "home", "industries");
+  const zhHomeItems = pageSectionItems(previewData, "zh", "home", "industries");
+  const enMediaItems = pageSectionItems(previewData, "en", "media", "cards");
+  const zhMediaItems = pageSectionItems(previewData, "zh", "media", "cards");
+  const sourceItems = enMediaItems ?? enHomeItems ?? [];
+  const zhItems = sourceItems === enMediaItems ? zhMediaItems ?? [] : zhHomeItems ?? [];
   const enDetailItems = pageItems(previewData, "en", "media", "detailPages");
   const zhDetailItems = pageItems(previewData, "zh", "media", "detailPages");
 
-  if (!sourceItems.length) {
+  if (!sourceItems.length && !enHomeItems && !enMediaItems) {
     return officialSiteState.lists.industries;
   }
 
@@ -1486,7 +1498,7 @@ function syncIndustriesFromPageContent(previewData: PublicCmsData, officialSiteS
 
   return sourceItems
     .map((item, index) => {
-      const zhItem = zhItems[index] ?? pageItems(previewData, "zh", "media", "cards")[index];
+      const zhItem = zhItems[index] ?? zhMediaItems?.[index] ?? zhHomeItems?.[index];
       const fallback = officialSiteState.lists.industries[index];
       const slug = normalizeIndustrySlugFromValue(getPageContentItemField(item, "slug", fallback?.slug ?? item.id));
       const href = getPageContentItemField(item, "href", slug ? `/industries/${slug}` : fallback?.slug ?? "");

@@ -1,6 +1,6 @@
 ﻿# Husuweb Official Site Architecture
 
-最后更新于：2026-05-30 16:12
+最后更新于：2026-06-04 22:22
 
 ## 椤圭洰姒傝堪
 
@@ -268,7 +268,7 @@ flowchart TD
 `src/app/**/page.tsx` 鍙繚鐣欒矾鐢卞叆鍙ｅ拰 metadata锛涢〉闈㈠睍绀虹粍浠剁粺涓€鏀惧湪 `src/components/pages/*` 涓嬶紝涓氬姟鍖哄潡鍜屽叡浜粍浠剁户缁斁鍦?`src/components/sections/*`銆乣src/components/layout/*`銆乣src/components/shared/*`銆?
 CMS 鐪熷疄瀹樼綉鏁版嵁鐢?`src/lib/cms-store.ts` 鍚堝苟 `data/cms-site.json` 涓庨潤鎬侀粯璁ゅ€煎悗閫氳繃 `PublicCmsProvider` 娉ㄥ叆鍓嶅彴锛涢椤佃疆鎾€佹湇鍔¤涓氥€丠onors銆丆hronicle銆佸洟闃熷拰 Events 椤甸潰鍧囦互 CMS 瑕嗙洊鏁版嵁浼樺厛銆侀潤鎬佹暟鎹厹搴曘€傛牴甯冨眬鏈嶅姟绔細璇诲彇褰撳墠鍏紑 CMS 鐘舵€佷綔涓洪灞忔暟鎹紝瀹㈡埛绔啀浠?no-store 璇锋眰 `/api/cms/public` 鍒锋柊锛岀増鏈彂甯?鎭㈠浼氬埛鏂扮湡瀹炲畼缃戣矾鐢卞拰鍏紑 CMS 鎺ュ彛锛岄伩鍏嶉瑙堢増鏈凡鏇存柊浣嗘寮忕珯浠嶈鏃х紦瀛樸€傛寮?CMS 鐘舵€佷細淇濆瓨 `previewPageContent`锛岄椤?Vision銆両ndustries銆丠onors銆丒vents銆丆lients 浠ュ強 About Hero/Vision/Honors/Culture/Chronicle 鍜?Core Value 瀛愰〉闈㈠瓧娈靛湪姝ｅ紡绔欎笌棰勮绔欎娇鐢ㄥ悓涓€浠介〉闈㈠瓧娈碉紱鏃х増鏈噸鏂板彂甯冩椂浼氱敤鐗堟湰 `pageContent` 鍥炲～ `previewPageContent`銆侰MS 鍚庡彴鐨?`CmsStudio` 浼氭寜 slug 閫愰」琛ラ綈 Team 鍜?Events 榛樿鍐呭锛岄伩鍏嶆棫鐘舵€佸彧淇濆瓨閮ㄥ垎鏉＄洰鏃跺嚭鐜扮┖鍗＄墖鎴栫己澶辨垚鍛橈紱鐗堟湰閫夋嫨鍏ュ彛鍙垪鍑虹増鏈鐞嗕腑鍒涘缓鐨勭増鏈紝杩涘叆鍚庡彴鏃朵細榛樿鍔犺浇宸插彂甯冪増鏈紝鏈€夋嫨鐗堟湰鏃舵樉绀哄崰浣嶇姸鎬侊紝閬垮厤鎶婂綋鍓嶇珯鐐瑰唴瀹硅璁や负涓€涓彲绠＄悊鐗堟湰銆傞椤佃檸璇夊姩鎬佽疆鎾娇鐢?`home.eventOverrides` 鐙珛淇濆瓨鏍囬銆佹憳瑕併€佸皝闈㈠拰 CTA锛屼笉鐩存帴瑕嗙洊 Events 鍒楄〃绠＄悊涓殑鍔ㄦ€佽鎯咃紱铏庤瘔鍔ㄦ€佽鎯呭浘浼氭牴鎹鏂囧浘鐗?瑙嗛鍗犱綅绗︾敓鎴?`detailImageN`銆乣detailVideoN` 鐙珛瀛楁锛屼慨鏀硅繖浜涚敓鎴愬瓧娈垫椂浼氬悓姝ュ啓鍥炲簳灞?`detailImages`/`detailVideos` 鍒楄〃骞朵繚鐣欏崰浣嶉『搴忥紝淇濆瓨鏃跺啀鍚堝苟涓哄墠鍙拌鎯呴〉娑堣垂鐨勫獟浣撴暟缁勶紱鏂板 Events 鐖跺垪琛ㄩ」浼氬悓姝ュ垱寤哄悓 slug 鐨勫姩鎬佸瓙椤甸潰楠ㄦ灦锛屾柊澧炲姩鎬佸瓙椤甸潰涔熶細鏄惧紡鍐欏叆 `Detail content`銆佽鎯呭浘鐗囧拰璇︽儏瑙嗛瀛楁銆傞〉闈㈠唴瀹瑰姞杞芥椂浼氬悎骞?`defaultPageContentState` 涓柊澧炲瓧娈碉紝淇濊瘉鏃х増鏈篃鑳界湅鍒版柊鍔犵殑 CMS 瀛楁銆傚彲瑙嗗寲缂栬緫椤堕儴鏍忎繚鐣?Header 涓?Footer 涓や釜绔欑偣绾ф爮鐩紝鍜屽叚涓埗椤甸潰/铏庤瘔鏂囧寲瀛愰〉闈㈠叡鍚岃繘鍏ュ彸渚у瓧娈垫娊灞夈€?
 `src/components/shared/PageTriangle.tsx` 鎻愪緵璺ㄩ〉闈㈠鐢ㄧ殑浣庡眰绾х洿瑙掍笁瑙掑舰鑳屾櫙瑁呴グ锛屽綋鍓嶇敤浜庨椤点€丄bout銆乀eam銆両ndustries 鍜?Events 椤甸潰锛岄粯璁ゅ眰绾т负 `z-0`锛屽簳閮ㄥ乏渚ч《鐐逛綅浜?Footer 椤堕儴宸︿晶 40% 浣嶇疆銆傞椤靛拰 About 浣跨敤 `isolate` 寤虹珛鐙珛灞傜骇锛屼笁瑙掑舰淇濇寔 `z-0`锛屽湪椤甸潰瀹為檯鍐呭 `z-10` 涔嬩笅锛屽苟灏嗛€忔槑搴﹂檷鍒?10%锛屼互鑳屾櫙绾圭悊鏂瑰紡瀛樺湪鑰屼笉鍘嬩綇鏂囧瓧銆佹寜閽拰鍗＄墖锛汿eam 椤靛唴瀹瑰尯缁熶竴鎻愬崌涓?`z-10`锛屼笁瑙掑舰閫忔槑搴﹂檷涓?20%锛岄伩鍏嶉伄鎸″洟闃熷垪琛紱棣栭〉 `SiteHeader` 浣滀负 `main` 椤跺眰鍥哄畾鍏冪礌娓叉煋锛岄伩鍏嶈 Hero section 鐨?stacking context 闄愬埗銆?
-CMS 内容管理的 `OfficialSiteSectionPanel` 复用左右分栏编辑 shell：首页 HONORS、虎诉荣誉、虎诉大事记按年份导航，服务行业按行业导航，合伙人和资深律师按成员姓名导航；首页 HONORS 轮播通过 `homeHonorItems` 记录来自虎诉荣誉的具体荣誉条目，未选择具体条目时继续回退到 `homeHonorYears` 年份列表。
+CMS 内容管理的 `OfficialSiteSectionPanel` 复用左右分栏编辑 shell：首页 HONORS、虎诉荣誉、虎诉大事记按年份导航，服务行业按行业导航，合伙人和资深律师按成员姓名导航；首页 HONORS 轮播通过 `homeHonorItems` 记录来自虎诉荣誉的具体荣誉条目，未选择具体条目时继续回退到 `homeHonorYears` 年份列表。服务行业属于可删除列表，`CmsStudio` 同步时只以 `officialState.lists.industries` 的 slug 为准合并同名 pageContent 字段，加载版本或当前站点内容时若 `pageContent.media.cards`/`home.industries` 与官方列表 slug 不一致，会先用 pageContent 反推官方行业列表，且服务行业页 `media.cards` 优先于首页 `home.industries`，避免首页较短列表反向裁剪服务行业页；服务端 `cms-db` 在创建版本、更新版本、版本预览读取和发布恢复时也会用版本 `pageContent` 归一化 `officialState.lists.industries`，同样以 `media.cards` 为权威来源，避免旧浏览器包或旧版本 payload 再次裁掉新增行业；`CmsPuckVisualEditor` 会把 `media.cards` 的数量变化同步回官方行业列表，`mergePageContentDefaults` 对 `home.industries`、`media.cards` 和 `media.detailPages` 只补字段不补已删除的默认条目。
 `src/components/shared/SubpageBreadcrumb.tsx` 鎻愪緵瀛愰〉闈㈢粺涓€闈㈠寘灞戯紝瀛楀彿鎸?24px 鎹㈢畻涓?`1.5rem`锛屽垎闅旂涓?`/`锛岀埗绾у拰褰撳墠椤圭偣鍑绘椂浼樺厛鎵ц `router.back()` 杩斿洖涓婁竴椤碉紝鏃犲巻鍙茶褰曟椂鍥為€€鍒版寚瀹氱埗绾ц矾鐢便€俙src/components/shared/BackToTop.tsx` 鎻愪緵瀛愰〉闈㈠彸涓嬭鍥哄畾杩斿洖鎸夐挳锛屼腑鏂囦负鈥滆繑鍥炩€濓紝鑻辨枃涓?`Back`锛岀偣鍑讳紭鍏堣繑鍥炰笂涓€椤点€佹棤鍘嗗彶璁板綍鏃跺洖鍒伴椤碉紝浣跨敤閲戣壊鏂囧瓧銆侀噾鑹蹭笅鍒掔嚎鍜?hover 鏀剁缉鍔ㄦ晥銆?
 
 ## 鍥剧墖鍔犺浇涓庡獟浣撲紭鍖?
@@ -621,6 +621,10 @@ CMS 左侧全局版本选择器不再提供“未选择版本”空项；默认�
 
 | 鏃堕棿 | 鍒嗘敮 | 鍙樻洿绫诲瀷 | 鎻忚堪 |
 | :--- | :--- | :--- | :--- |
+| 2026-06-04 22:22 | cms | 修复缺陷 | 修复版本中 `home.industries` 少于 `media.cards` 时，加载可视化或内容管理会用首页列表反向裁掉服务行业页新增项的问题 |
+| 2026-06-04 10:05 | cms | 修复缺陷 | 在服务端版本创建、更新、预览读取和发布恢复时用 pageContent 归一化服务行业 officialState，防止线上旧 payload 继续丢失可视化新增行业 |
+| 2026-06-04 09:50 | cms | 修复缺陷 | 修复版本发布后再次进入可视化编辑时新增服务行业被旧 officialState 列表裁掉的问题 |
+| 2026-06-04 00:01 | cms | 修复缺陷 | 修复服务行业删除后被 pageContent 默认项、旧 slug 合并或可视化 `media.cards` 未同步官方列表而重新补回的问题 |
 | 2026-05-30 16:12 | cms | UI 调整 | 内容管理虎诉动态封面图片字段新增上传按钮，上传到 event 分类后自动写回封面地址并显示缩略图 |
 | 2026-05-30 15:55 | cms | 修复缺陷 | 修复可视化 pageContent 包装函数自调用导致的栈溢出，并为可视化页面图片字段和内容管理服务行业背景图补充上传入口 |
 | 2026-05-30 15:21 | cms | 修复缺陷 | 可视化编辑的 pageContent 更新函数内立即排队同步官网 CMS 草稿，避免新增动态后快速返回内容管理仍看到旧列表 |
@@ -1023,6 +1027,10 @@ CMS 左侧全局版本选择器不再提供“未选择版本”空项；默认�
 
 | 鏃堕棿 | 鍒嗘敮 | 瀹屾垚鐨勫姛鑳?/ 宸ヤ綔 | 璇存槑 |
 | :--- | :--- | :--- | :--- |
+| 2026-06-04 22:22 | cms | 服务行业来源优先级修复 | `CmsStudio`、`CmsPuckVisualEditor` 和 `cms-db` 统一以 `pageContent.media.cards` 作为服务行业权威列表，`home.industries` 只在缺少服务行业页列表时兜底 |
+| 2026-06-04 10:05 | cms | 服务端版本行业归一化 | `cms-db` 持久化和读取版本 payload 时按 `pageContent.media.cards`/`home.industries` 重建 `officialSiteState.lists.industries`，兼容旧前端提交和历史版本发布 |
+| 2026-06-04 09:50 | cms | 可视化服务行业版本加载修复 | `CmsStudio` 加载版本、当前站点内容和构建版本 payload 时可按 pageContent 反推 `officialState.lists.industries`，避免发布后继续编辑丢失新增行业 |
+| 2026-06-04 00:01 | cms | 服务行业删除持久化 | `mergeIndustriesWithPageContent` 不再从旧页面内容扩展官方行业 slug；`CmsPuckVisualEditor` 将 `media.cards` 数量变化写回官方行业；`mergePageContentDefaults` 对服务行业相关 repeater 停止追加已删除默认项 |
 | 2026-05-30 16:12 | cms | 虎诉动态封面上传 | `renderEventOverridesEditor` 为动态封面图片增加文件上传控件，复用 `/api/cms/assets` 并将返回的 `/uploads/...` 写入 `events.overrides[slug].image` |
 | 2026-05-30 15:55 | cms | 图片字段上传入口补齐 | `CmsPuckVisualEditor` 页面字段支持 image/video/logo 上传写回；`OfficialSiteSectionPanel` 服务行业背景图字段支持上传到 industries 分类并预览缩略图 |
 | 2026-05-30 15:21 | cms | 可视化即时同步加固 | `CmsPuckVisualEditor` 用 `updatePageContentState` 包装所有本地 `pageContent` 修改，在同一次更新中拿到 nextPageContent 并异步写回父级 `officialSiteState` |
