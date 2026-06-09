@@ -2,6 +2,38 @@
 
 export const event2Events: EventItem[] = [
   {
+    "slug": "benchmark-litigation-china-2026-dispute-resolution",
+    "date": "20260604",
+    "image": "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb/assets/event/event2/4.png",
+    "category": "Industry News",
+    "title": "Tiger Partners Recognized in Benchmark Litigation China 2026 Rankings for Dispute Resolution",
+    "summary": "",
+    "content": [
+      "On June 3, 2026, Benchmark Litigation, a leading international legal ranking institution specializing in dispute resolution, officially released its 2026 China rankings.",
+      "Leveraging its outstanding performance in dispute resolution, continuously enhanced professional capabilities, and strong market reputation, Tiger Partners has been highly recommended in the Commercial Disputes category in Beijing.",
+      "This recognition is a full affirmation of Tiger Partners’ professional strength, business development, and market reputation. It also further demonstrates the firm’s growing overall competitiveness in the field of dispute resolution. Tiger Partners remains committed to achieving successful outcomes for clients and providing efficient, precise dispute resolution solutions guided by clients’ commercial objectives.",
+      "We sincerely thank all our clients, partners, and friends from all sectors for their continued support and trust. Looking ahead, Tiger Partners will continue to uphold its professional and uncompromising service philosophy, honoring every trust and mandate entrusted to us.",
+      "[IMAGE]",
+      "Benchmark Litigation is a renowned legal ranking institution dedicated to dispute resolution. Widely recognized by the legal industry, it has become an authoritative guide in the field of litigation."
+    ],
+    "detailImages": [
+      "/assets/event/eventinfo2/微信图片_20260608225037_393_2.png"
+    ],
+    "zh": {
+      "category": "行业资讯",
+      "title": "虎诉荣登Benchmark Litigation2026年度中国争议解决榜单",
+      "summary": "2026年6月3日，国际权威争议解决领域法律评级机构Benchmark Litigation正式公布2026年度中国争议解决榜单。",
+      "content": [
+        "2026年6月3日，国际权威争议解决领域法律评级机构Benchmark Litigation正式公布2026年度中国争议解决榜单。",
+        "凭借在争议解决领域的卓越表现、持续提升的专业实力及良好的市场口碑，虎诉律师事务所在北京地区的商业纠纷（Commercial disputes）领域获得重点推荐。",
+        "此次获奖是对虎诉专业能力、业务发展及行业口碑的充分认可，也进一步彰显了虎诉在争议解决领域持续增长的综合竞争力。虎诉始终坚持以胜诉为最终目的、以客户商业目标为导向，致力于为客户提供高效、精准的争议解决方案。",
+        "诚挚感谢所有客户、合作伙伴及各界朋友一直以来的支持与信任。未来，虎诉将继续秉持专业、极致的服务理念，不负每一份信任与托付。",
+        "[图片]",
+        "Benchmark Litigation系专注于争议解决领域的著名法律评级机构，获得业界的广泛赞誉，现已成为诉讼领域的权威评价指南。"
+      ]
+    }
+  },
+  {
     "slug": "xu-min-ccas-arbitrator-roster",
     "date": "20260508",
     "image": "/assets/event/event2/1.jpg",

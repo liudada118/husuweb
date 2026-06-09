@@ -13,6 +13,11 @@ const groups: YearGroup[] = [
     "year": "2026",
     "events": [
       {
+        "month": "JUNE",
+        "text": "Tiger Partners has been recognized in the Benchmark Litigation China 2026 Dispute Resolution Rankings and has been highly recommended in the Commercial Disputes in Beijing.",
+        "side": "right"
+      },
+      {
         "month": "MAY",
         "text": "Zoe Zhang, Partner at Tiger Partners, has been successfully selected into the new CIETAC Arbitrator Roster by virtue of her profound professional legal accomplishment and extensive experience in foreign-related dispute resolution.",
         "side": "left"
@@ -260,6 +265,11 @@ const zhGroups: YearGroup[] = [
   {
     "year": "2026",
     "events": [
+      {
+        "month": "六月",
+        "text": "虎诉荣登Benchmark Litigation2026年度中国争议解决榜单，在北京地区的“商业纠纷（Commercial disputes）”领域获得重点推荐。",
+        "side": "right"
+      },
       {
         "month": "五月",
         "text": "虎诉律师事务所合伙人张莉律师凭借深厚的法律专业素养、丰富的涉外争议解决经验，成功入选新一届贸仲仲裁员名册，主要裁判领域为国际贸易、公司股权、建设工程和国际商事仲裁。",

@@ -78,6 +78,7 @@ export function EventDetailPage({ slug }: { slug: string }) {
         | { type: "video"; src: string; index: number }
         | { type: "text"; text: string; index: number } => Boolean(block),
     );
+  const leadTextBlockIndex = detailBlocks.findIndex((block) => block.type === "text");
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-[#171717] text-white">
@@ -106,9 +107,11 @@ export function EventDetailPage({ slug }: { slug: string }) {
       <section className="site-shell pb-28">
         <div className="max-w-[108rem]">
           <div>
-            <p className="text-justify text-[1.5rem] font-light italic leading-[1.7] tracking-[0.02em] text-[#d1d5dc]">
-              {summary}
-            </p>
+            {summary ? (
+              <p className="text-justify text-[1.5rem] font-light italic leading-[1.7] tracking-[0.02em] text-[#d1d5dc]">
+                {summary}
+              </p>
+            ) : null}
             {detailBlocks.map((block, blockIndex) =>
               block.type === "image" ? (
                 <div key={`${event.slug}-image-${block.index}-${blockIndex}`} className="mx-auto mt-10 w-full overflow-hidden bg-[#272727] md:w-[70%]">
@@ -127,7 +130,7 @@ export function EventDetailPage({ slug }: { slug: string }) {
               ) : (
                 <p
                   key={`${event.slug}-paragraph-${block.index}-${blockIndex}`}
-                  className="mt-10 text-justify text-[1.5rem] font-light leading-[1.7] tracking-[0.02em] text-[#d1d5dc]"
+                  className={`${!summary && blockIndex === leadTextBlockIndex ? "" : "mt-10"} text-justify text-[1.5rem] font-light leading-[1.7] tracking-[0.02em] text-[#d1d5dc] ${!summary && blockIndex === leadTextBlockIndex ? "italic" : ""}`}
                 >
                   {block.text}
                 </p>

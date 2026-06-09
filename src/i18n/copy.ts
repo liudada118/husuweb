@@ -19,7 +19,7 @@ export const copy = {
   },
   footer: {
     tagline: {
-      en: ["Always pursuing the extreme and seeking the perfection,", "Always aiming at winning lawsuits and", "Fulling clients' business goals"],
+      en: ["Always pursuing the extreme and seeking the perfection,", "Always aiming at winning lawsuits and", "Fulfilling clients' business goals"],
       zh: ["始终追求极致与完美，一切以胜诉和客户的商业目标为导向"],
     },
     address: {

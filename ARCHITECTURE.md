@@ -1,6 +1,6 @@
 ﻿# Husuweb Official Site Architecture
 
-最后更新于：2026-05-18 22:11
+最后更新于：2026-06-08 23:24
 
 ## 项目概述
 
@@ -465,7 +465,7 @@ Core Value 页面基于 `core value/` 原型重建，仍归属 About 路由层�
 - `generateStaticParams` 从 `src/data/events.ts` 为全部事件生成静态参数；
 - 复用全站 `SiteHeader` 与 `SiteFooter`，顶部导航 active 保持 EVENTS；
 - 顶部包含统一 `SubpageBreadcrumb`，显示 Events / 当前事件，字号为 `1.5rem`，分隔符为 `/`，点击返回上一页或回退到 `/events`；事件标题按 64px 换算为 `4rem` semibold，日期按 28px 换算为 `1.75rem` regular；
-- 正文区先展示当前事件 summary，再继续渲染真实正文段落；英文状态显示 `EN/event.md` 中已有正文或补充英文摘要，中文状态显示 `Chinese/event.md` 对应正文；渲染时会识别 `[图片]` / `[Image]` 占位并按 `detailImages` 插入正文图片，识别“暂时无法在飞书文档外展示此内容”占位并按 `detailVideos` 在对应位置插入原生 `video` 播放器，无对应媒体时清理占位文本；正文内容占满 `max-w-[108rem]` 父容器，不再保留右侧封面图列；正文插图和视频桌面宽度为父容器 70%，移动端不超出容器；主说明按 24px 换算为 `1.5rem` light italic；页面右下角使用 `BackToTop` 提供中英文返回入口。
+- 正文区在当前事件 summary 有内容时先展示 summary，再继续渲染真实正文段落；若 summary 为空，则第一段正文接管首段样式并以斜体展示；英文状态显示 `EN/event.md` 中已有正文或补充英文摘要，中文状态显示 `Chinese/event.md` 对应正文；渲染时会识别 `[图片]` / `[Image]` 占位并按 `detailImages` 插入正文图片，识别“暂时无法在飞书文档外展示此内容”占位并按 `detailVideos` 在对应位置插入原生 `video` 播放器，无对应媒体时清理占位文本；正文内容占满 `max-w-[108rem]` 父容器，不再保留右侧封面图列；正文插图和视频桌面宽度为父容器 70%，移动端不超出容器；主说明按 24px 换算为 `1.5rem` light italic；页面右下角使用 `BackToTop` 提供中英文返回入口。
 
 页面需要的事件详情图片已复制到 `public/assets/prototypes/event-detail/*`。
 
@@ -587,10 +587,16 @@ Join Us、候选人卡片和简历邮箱区域包裹在同一个相对容器内�
 
 2026-05-18 已执行根路径构建与发布，生成 `dist/tigerpartners-root-latest.tgz`，上传到 `39.106.226.65:/opt/tigerpartners-web/tigerpartners-root-20260518-2158.tgz`，解压到 `/opt/tigerpartners-web/releases/20260518-2158`，切换 `current` 后重启 `tigerpartners-web.service`。服务器本机 `http://127.0.0.1:3004/` 与 `/team/zoe-zhang` 返回 `200 OK`；公网验证 `https://www.tigerpartners.cn/`、`/team`、`/team/zoe-zhang`、`/events` 均返回 `200 OK`，Zoe 页面中英文关键文案均已匹配。
 
+2026-06-08 已执行根路径构建与发布，生成 `dist/tigerpartners-root-latest.tgz`，上传到 `39.106.226.65:/opt/tigerpartners-web/tigerpartners-root-20260608-2320.tgz`，解压到 `/opt/tigerpartners-web/releases/20260608-2320`，切换 `current` 后重启 `tigerpartners-web.service`。服务器本机 `http://127.0.0.1:3004/`、`/events`、`/about` 和 `/events/benchmark-litigation-china-2026-dispute-resolution` 均返回 `200 OK`；公网验证 `https://www.tigerpartners.cn/` 和新增动态详情页返回 `200 OK`，新增详情图 OSS URL 返回 `200 OK`。
+
 ## 更新日志
 
 | 时间 | 分支 | 变更类型 | 描述 |
 | :--- | :--- | :--- | :--- |
+| 2026-06-08 23:24 | webEnd | 部署发布 | 将 Benchmark Litigation 2026 动态、荣誉、大事记和详情页样式修正发布到正式站；服务器版本目录为 `/opt/tigerpartners-web/releases/20260608-2320`，公网验证通过 |
+| 2026-06-08 23:14 | webEnd | UI 调整 | 事件详情页在 summary 为空时让第一段正文使用首段斜体样式，保持新增动态详情页与其他子页面格式一致 |
+| 2026-06-08 23:08 | webEnd | 修复缺陷 | 移除新增 Benchmark Litigation 2026 动态详情页英文摘要段落，详情页改为仅在 summary 非空时渲染摘要，并将新增详情图上传到 OSS |
+| 2026-06-08 22:59 | webEnd | 数据更新 | 新增 2026-06-04 Benchmark Litigation 中国争议解决榜单动态，补充对应虎诉荣誉和大事记中英文记录，并同步详情页图片到 public 资源目录 |
 | 2026-05-18 22:11 | main1 | 部署发布 | 将张莉个人简历页文案更新构建发布到正式站根路径；服务器版本目录为 `/opt/tigerpartners-web/releases/20260518-2158`，公网验证通过 |
 | 2026-05-18 21:36 | main1 | 文案更新 | 张莉个人简历页服务行业、社会任职、专业领域、执业经验、荣誉和个人业绩按指定中英文文案更新；生产构建通过，未部署 |
 | 2026-05-15 22:33 | main | 部署发布 | 将 `/client` 首页重定向与首页 SEO 标题优化发布到生产环境；服务器版本目录为 `/opt/tigerpartners-web/releases/20260515-2230`，验证 `/client` 返回 307 到 `/`，首页 title/og:title 为 `虎诉律师事务所 | Tiger Partners`，`WE KNOW HOW TO WIN` 不再作为 `h1` |
@@ -881,6 +887,10 @@ Join Us、候选人卡片和简历邮箱区域包裹在同一个相对容器内�
 
 | 时间 | 分支 | 完成的功能 / 工作 | 说明 |
 | :--- | :--- | :--- | :--- |
+| 2026-06-08 23:24 | webEnd | Benchmark Litigation 2026 正式站发布 | `www.tigerpartners.cn` 已切换到 `/opt/tigerpartners-web/releases/20260608-2320`，首页、Events、About、新增详情页和详情图资源验证通过 |
+| 2026-06-08 23:14 | webEnd | 新增动态详情页首段样式修正 | 无摘要事件的第一段正文恢复首段斜体样式，并去除额外顶部间距 |
+| 2026-06-08 23:08 | webEnd | Benchmark Litigation 2026 详情页修正 | 新增事件英文详情页不再显示指定摘要段落；详情图已同步到 OSS，公开资源 URL 返回 200 |
+| 2026-06-08 22:59 | webEnd | Benchmark Litigation 2026 内容上线准备 | Events 数据、About Honors 和 About Chronicle 已加入用户指定中英文内容，详情图可通过 `/assets/event/eventinfo2/微信图片_20260608225037_393_2.png` 访问 |
 | 2026-05-18 22:11 | main1 | 张莉个人简历正式站发布 | 当前正式站 `current` 已切到 `/opt/tigerpartners-web/releases/20260518-2158`，Zoe 页面中英文文案在线验证通过 |
 | 2026-05-18 21:36 | main1 | 张莉个人简历文案更新 | Zoe Zhang / 张莉个人页详情字段更新为指定中英文内容，Performance & Achievements 从 `EN/zoePerformance.md` 同步为 24 条 |
 | 2026-05-15 22:33 | main | SEO 与 `/client` 生产发布 | 当前线上版本 `/opt/tigerpartners-web/releases/20260515-2230` 已启用中文首页标题、隐藏语义 h1 和 `/client` 到首页的兼容跳转 |

@@ -12,8 +12,14 @@ type YearItem = { year: string; count: string; awards: Award[] };
 const data: YearItem[] = [
   {
     year: "2026",
-    count: "2 Distinctions",
+    count: "3 Distinctions",
     awards: [
+      {
+        title: "Tiger Partners Recognized in Benchmark Litigation China 2026 Dispute Resolution Rankings | June 2026",
+        date: "2026-06",
+        body: "Tiger Partners has been highly recommended in the Commercial Disputes in Beijing.",
+        href: "https://mp.weixin.qq.com/s/h8QMDrv1lWsS2p8lFmrlWg",
+      },
       {
         title: "Chambers Greater China Region 2026",
         date: "2026-01",
@@ -265,8 +271,14 @@ const data: YearItem[] = [
 const zhData: YearItem[] = [
   {
     year: "2026",
-    count: "2项荣誉",
+    count: "3项荣誉",
     awards: [
+      {
+        title: "虎诉荣登Benchmark Litigation2026年度中国争议解决榜单 | 2026年6月",
+        date: "2026-06",
+        body: "虎诉在北京地区的“商业纠纷（Commercial disputes）”领域获得重点推荐。",
+        href: "https://mp.weixin.qq.com/s/h8QMDrv1lWsS2p8lFmrlWg",
+      },
       {
         title: "虎诉荣登《钱伯斯大中华区指南2026》争议解决榜单",
         date: "2026-01",

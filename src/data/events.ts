@@ -1542,6 +1542,10 @@ export const events: EventItem[] = [
 ];
 
 function getEvent2ImageOrder(event: EventItem) {
+  if (event.slug === "benchmark-litigation-china-2026-dispute-resolution") {
+    return 0;
+  }
+
   const match = event.image.match(/\/event2\/(\d+)\.(?:jpe?g|png|webp)$/i);
   return match ? Number(match[1]) : Number.MAX_SAFE_INTEGER;
 }
