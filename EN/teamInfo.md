@@ -288,7 +288,7 @@ Languages Skills
 Mandarin  
 English
 Social Engagements
-Zoe is an arbitrator of the China International Economic and Trade Arbitration Commission (CIETAC), a member of the Panel of Arbitrators of the eBRAM International Online Dispute Resolution Centre，a member of the Panel of Neutrals of eBRAM APEC Online Dispute Resolution Platform, a member of the Commercial Arbitration Law Professional Committee of the Beijing Lawyers Association, a member of the Arbitration and Mediation Research Committee of the Beijing Chaoyang District Lawyers Association, and a member of the Organizing Committee of the China Young Arbitration Group.
+Zoe is an arbitrator of the China International Economic and Trade Arbitration Commission (CIETAC), a member of the Panel of Arbitrators of the eBRAM International Online Dispute Resolution Centre, a member of the Panel of Neutrals of eBRAM APEC Online Dispute Resolution Platform, a research fellow of the China Arbitration Institute of China University of Political Science and Law, a member of the Commercial Arbitration Law Professional Committee of the Beijing Lawyers Association, a member of the Arbitration and Mediation Research Committee of the Beijing Chaoyang District Lawyers Association, and a member of the Organizing Committee of the China Young Arbitration Group.
 
 成员简介
 Practice Area

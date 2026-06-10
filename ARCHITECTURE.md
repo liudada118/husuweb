@@ -1,6 +1,6 @@
 ﻿# Husuweb Official Site Architecture
 
-最后更新于：2026-06-08 23:24
+最后更新于：2026-06-10 23:46
 
 ## 项目概述
 
@@ -589,10 +589,13 @@ Join Us、候选人卡片和简历邮箱区域包裹在同一个相对容器内�
 
 2026-06-08 已执行根路径构建与发布，生成 `dist/tigerpartners-root-latest.tgz`，上传到 `39.106.226.65:/opt/tigerpartners-web/tigerpartners-root-20260608-2320.tgz`，解压到 `/opt/tigerpartners-web/releases/20260608-2320`，切换 `current` 后重启 `tigerpartners-web.service`。服务器本机 `http://127.0.0.1:3004/`、`/events`、`/about` 和 `/events/benchmark-litigation-china-2026-dispute-resolution` 均返回 `200 OK`；公网验证 `https://www.tigerpartners.cn/` 和新增动态详情页返回 `200 OK`，新增详情图 OSS URL 返回 `200 OK`。
 
+2026-06-10 已执行根路径构建与发布，生成 `dist/tigerpartners-root-latest.tgz`，上传到 `39.106.226.65:/opt/tigerpartners-web/tigerpartners-root-20260610-2341.tgz`，解压到 `/opt/tigerpartners-web/releases/20260610-2341`，切换 `current` 后重启 `tigerpartners-web.service`。服务器本机 `http://127.0.0.1:3004/`、`/team`、`/team/zoe-zhang` 和新增动态详情页均返回 `200 OK`；公网验证 `https://www.tigerpartners.cn/`、`/team`、`/team/zoe-zhang` 和新增动态详情页均返回 `200 OK`。
+
 ## 更新日志
 
 | 时间 | 分支 | 变更类型 | 描述 |
 | :--- | :--- | :--- | :--- |
+| 2026-06-10 23:46 | webEnd | 部署发布 | 将当前团队资料数据变更发布到正式站；服务器版本目录为 `/opt/tigerpartners-web/releases/20260610-2341`，首页、团队页、Zoe 详情页和新增动态详情页公网验证通过 |
 | 2026-06-08 23:24 | webEnd | 部署发布 | 将 Benchmark Litigation 2026 动态、荣誉、大事记和详情页样式修正发布到正式站；服务器版本目录为 `/opt/tigerpartners-web/releases/20260608-2320`，公网验证通过 |
 | 2026-06-08 23:14 | webEnd | UI 调整 | 事件详情页在 summary 为空时让第一段正文使用首段斜体样式，保持新增动态详情页与其他子页面格式一致 |
 | 2026-06-08 23:08 | webEnd | 修复缺陷 | 移除新增 Benchmark Litigation 2026 动态详情页英文摘要段落，详情页改为仅在 summary 非空时渲染摘要，并将新增详情图上传到 OSS |
@@ -887,6 +890,7 @@ Join Us、候选人卡片和简历邮箱区域包裹在同一个相对容器内�
 
 | 时间 | 分支 | 完成的功能 / 工作 | 说明 |
 | :--- | :--- | :--- | :--- |
+| 2026-06-10 23:46 | webEnd | 团队资料变更正式站发布 | `www.tigerpartners.cn` 已切换到 `/opt/tigerpartners-web/releases/20260610-2341`，首页、团队页、Zoe 详情页和新增动态详情页验证通过 |
 | 2026-06-08 23:24 | webEnd | Benchmark Litigation 2026 正式站发布 | `www.tigerpartners.cn` 已切换到 `/opt/tigerpartners-web/releases/20260608-2320`，首页、Events、About、新增详情页和详情图资源验证通过 |
 | 2026-06-08 23:14 | webEnd | 新增动态详情页首段样式修正 | 无摘要事件的第一段正文恢复首段斜体样式，并去除额外顶部间距 |
 | 2026-06-08 23:08 | webEnd | Benchmark Litigation 2026 详情页修正 | 新增事件英文详情页不再显示指定摘要段落；详情图已同步到 OSS，公开资源 URL 返回 200 |

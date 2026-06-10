@@ -282,12 +282,13 @@ const zhTeamDetails: Record<string, TeamProfile["zh"]> = {
     qualification: "中国内地律师执业资格",
     languages: ["中文", "英文"],
     socialEngagements:
-      "张莉律师是中国国际经济贸易仲裁委员会（贸仲委/CIETAC）仲裁员、香港一邦国际网上仲调中心（eBRAM ）仲裁员、香港一邦亚太经济合作组织（APEC）网上争议解决中立成员专家组成员、北京市律师协会商事仲裁法律专业委员会委员、北京市朝阳区律师协会仲裁与调解研究会委员、中国青年仲裁小组组委会成员。",
+      "张莉律师是中国国际经济贸易仲裁委员会（贸仲委/CIETAC）仲裁员、香港一邦国际网上仲调中心（eBRAM ）仲裁员、香港一邦亚太经济合作组织（APEC）网上争议解决中立成员专家组成员、中国政法大学仲裁研究院研究员、北京市律师协会商事仲裁法律专业委员会委员、北京市朝阳区律师协会仲裁与调解研究会委员、中国青年仲裁小组组委会成员。",
     practiceArea:
       "张莉律师的专业领域为争议解决，尤其擅长涉外及跨境争议解决；主要领域包括私募股权投资、国际货物买卖、建筑工程、房地产、股权转让、中外合资、知识产权、金融 、生物医药等多个领域。张律师能够熟练运用中英文双语办案，工作能力受到客户的充分认可。张律师代理客户多为跨国公司、私募投资基金、外商投资企业、大型国有企业、创业型企业等。",
     practiceExperience:
       "加入虎诉前，张律师在中国某知名律师事务所争议解决部担任权益合伙人。张律师参与代理了超过两百起商事争议案件，绝大部分为涉外或国际仲裁/诉讼案件。仲裁案件适用规则包括贸仲委仲裁规则、北京仲裁委员会仲裁规则、联合国国际贸易法委员会仲裁规则、香港国际仲裁中心机构仲裁规则、国际商会仲裁规则、新加坡国际仲裁中心仲裁规则等；多起案件仲裁语言为英文，并在中国、中国香港、新加坡、印度、美国等多地进行开庭。诉讼案件在北京、上海、浙江、江苏、四川、福建等多地、多级法院进行。张律师代理的绝大多数案件，结果均比较良好，维持着较高的胜率，客户满意度高。",
     honors: [
+      "2026年6月，张莉律师获评2026 Benchmark Litigation国际仲裁领域“争议解决之星”（Litigation Star）。",
       "2025年11月，张莉律师荣获《法律500强》2026首届中国精英榜单“北京精英·商业争议”奖项。",
       "2025年11月，张莉律师荣获北京市司法局与香港国际仲裁领军人才培训项目“杰出学员”奖项。",
       "2021年1月，张莉律师获评《法律500强》亚太榜单“明日之星（Next Generation Partners）”（争议解决：仲裁）。",
@@ -480,12 +481,13 @@ export const teamProfiles: TeamProfile[] = [
     qualification: "Bar Admission in the People's Republic of China",
     languages: ["Mandarin", "English"],
     socialEngagements:
-      "Zoe is an arbitrator of the China International Economic and Trade Arbitration Commission (CIETAC), a member of the Panel of Arbitrators of the eBRAM International Online Dispute Resolution Centre，a member of the Panel of Neutrals of eBRAM APEC Online Dispute Resolution Platform, a member of the Commercial Arbitration Law Professional Committee of the Beijing Lawyers Association, a member of the Arbitration and Mediation Research Committee of the Beijing Chaoyang District Lawyers Association, and a member of the Organizing Committee of the China Young Arbitration Group.",
+      "Zoe is an arbitrator of the China International Economic and Trade Arbitration Commission (CIETAC), a member of the Panel of Arbitrators of the eBRAM International Online Dispute Resolution Centre, a member of the Panel of Neutrals of eBRAM APEC Online Dispute Resolution Platform, a research fellow of the China Arbitration Institute of China University of Political Science and Law, a member of the Commercial Arbitration Law Professional Committee of the Beijing Lawyers Association, a member of the Arbitration and Mediation Research Committee of the Beijing Chaoyang District Lawyers Association, and a member of the Organizing Committee of the China Young Arbitration Group.",
     practiceArea:
       "Zoe Zhang specializes in commercial arbitration and litigation, and especially foreign-related and cross-border dispute resolution. The major sectors of her practice involve private equity investment, international sales of goods, construction, real estate, equity transfer, joint venture, intellectual properties, finance, biological medicine, energy etc. Zoe is able to handle cases proficiently in both Chinese and English, and her professional competence has been fully recognized by clients. Her clients mainly include multinational companies, private equity funds, foreign-invested enterprises, large state-owned enterprises, start-up enterprises, etc.",
     practiceExperience:
       "Before joining Tiger Partners, Zoe was working with the Dispute Resolution Team of a top Chinese law firm as an equity partner. Zoe has represented clients in over 200 commercial disputes, most of which are foreign related or international arbitration/litigation cases. The applicable rules of the arbitration cases include the CIETAC Rules, the BAC Rules, the UNCITRAL Rules, the HKIAC Administered Rules, the ICC Rules, the SIAC Rules, the AAA ICDR Rules, and the LCIA Rules etc. The arbitration language of many of those cases were English, and hearings were conducted in China Mainland, Hong Kong, Singapore, India, USA and other jurisdictions. Litigation cases were conducted in multiple courts at multiple levels in Beijing, Shanghai, Zhejiang, Jiangsu, Sichuan, Fujian and other places of China. Most of the cases represented by Zoe have achieved favorable results with a high success rate and high client satisfaction.",
     honors: [
+      "2026 Benchmark Litigation, Litigation Star (International Arbitration)",
       "2026 The Legal 500, China Elite - Beijing Elite - Commercial Disputes.",
       "2025 The Excellent Award, Beijing Municipal Bureau of Justice and HKIAC - the Leading International Arbitration Practitioners Training Scheme.",
       "2021 The Legal 500, Next Generation Partners (Dispute Resolution: Arbitration).",
@@ -527,7 +529,7 @@ export const teamProfiles: TeamProfile[] = [
     email: "qiu.weifan@tigerpartners.cn",
     serviceIndustries: ["Commerce and Transaction", "Finance", "Private Equity"],
     education:
-      "Bachelor of Laws and Bachelor of Engineering, South China University of Technology, 2019  ; Master of Laws, China University of Political Science and Law, 2022 ",
+      "Bachelor of Laws and Bachelor of Engineering, South China University of Technology, 2019  ; Master of Laws, China University of Political Science and Law,  2022 ",
     qualification: "Bar Admission in the People's Republic of China",
     languages: ["Mandarin", "English"],
     socialEngagements: "Mr. Qiu is a member of the Fiscal and Tax Law Research Association of the China Law Society.",
