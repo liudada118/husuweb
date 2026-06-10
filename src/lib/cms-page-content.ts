@@ -929,6 +929,7 @@ function mergeDefaultFields(fields: PageContentField[] = [], defaultFields: Page
 
 function shouldAppendDefaultItems(pageId: CmsPageId, sectionId: string) {
   if (pageId === "home" && sectionId === "industries") return false;
+  if (pageId === "event" && (sectionId === "list" || sectionId === "detailPages")) return false;
   if (pageId === "media" && (sectionId === "cards" || sectionId === "detailPages")) return false;
 
   return true;
@@ -1033,6 +1034,10 @@ export function getPageContentSectionItems(
 export function getPageContentItemField(item: PageContentRepeaterItem | undefined, fieldId: string, fallback = "") {
   const value = item?.fields.find((fieldItem) => fieldItem.id === fieldId)?.value;
   return value === undefined || value === "" ? fallback : value;
+}
+
+export function getPageContentItemFieldValue(item: PageContentRepeaterItem | undefined, fieldId: string) {
+  return item?.fields.find((fieldItem) => fieldItem.id === fieldId)?.value;
 }
 
 export function getPageContentLines(

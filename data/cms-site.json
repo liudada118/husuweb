@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-04T13:46:21.295Z",
+  "updatedAt": "2026-06-10T01:40:18.933Z",
   "header": {
     "siteName": "Tiger Partners",
     "siteSubtitle": "Law Firm",
@@ -2184,43 +2184,52 @@
           "displayDate": "20260530"
         }
       },
-      "event-20260530-108": {
-        "image": "/uploads/event/1780128842174-hu.svg",
-        "sortDate": "20260530",
+      "detailPages-1781020243056": {
+        "image": "",
+        "sortDate": "20260609",
         "en": {
-          "category": "111",
-          "title": "New Event",
-          "summary": "222",
-          "content": [
-            "333"
-          ],
-          "displayDate": "May. 30, 2026"
+          "category": "",
+          "title": "",
+          "summary": "",
+          "content": [],
+          "displayDate": "20260609"
         },
         "zh": {
           "category": "",
-          "title": "新动态",
+          "title": "",
           "summary": "",
           "content": [],
-          "displayDate": "2026.05.30"
+          "displayDate": "20260609"
         }
       },
-      "list-1780128877683": {
-        "image": "/uploads/event/1780128884440-event10.png",
-        "sortDate": "20260530",
+      "list-1781020346379": {
+        "image": "",
+        "sortDate": "20260609",
         "en": {
           "category": "",
           "title": "New Event",
           "summary": "",
-          "content": [],
-          "displayDate": "20260530"
+          "content": [
+            "hello",
+            "[IMAGE]",
+            "123"
+          ],
+          "displayDate": "20260609"
         },
         "zh": {
           "category": "",
           "title": "新动态",
           "summary": "",
-          "content": [],
-          "displayDate": "20260530"
-        }
+          "content": [
+            "11你好，",
+            "[IMAGE]",
+            "真的好"
+          ],
+          "displayDate": "20260609"
+        },
+        "detailImages": [
+          "/uploads/event/1781020522531-447bdcb7-92c7-4548-a3a9-befd6ace314d.gif"
+        ]
       }
     }
   },
@@ -3821,20 +3830,30 @@
         "zhSections": ""
       },
       {
-        "slug": "cards-1780537527298",
-        "name": "Industry cards 7",
-        "zhName": "Industry cards 7",
+        "slug": "cards-1780119755266",
+        "name": "111",
+        "zhName": "22",
         "img": "",
         "cls": "",
-        "intro": "",
-        "zhIntro": "",
-        "sections": "",
-        "zhSections": ""
+        "intro": "1231",
+        "zhIntro": "12312",
+        "sections": "123123",
+        "zhSections": "123123"
+      },
+      {
+        "slug": "cards-11",
+        "name": "111",
+        "zhName": "22",
+        "img": "",
+        "cls": "",
+        "intro": "1231",
+        "zhIntro": "12312",
+        "sections": "123123",
+        "zhSections": "123123"
       }
     ],
     "eventSlugs": [
-      "list-1780128877683",
-      "event-20260530-108",
+      "list-1781020346379",
       "list-1780125497918",
       "list-1780125100895",
       "list-1780123501347",
@@ -4319,20 +4338,20 @@
                 ]
               },
               {
-                "id": "cards-1780537527298",
-                "label": "Industry cards 7",
+                "id": "cards-1780119755266",
+                "label": "22",
                 "fields": [
                   {
                     "id": "slug",
                     "label": "标识",
                     "kind": "text",
-                    "value": "cards-1780537527298"
+                    "value": "cards-1780119755266"
                   },
                   {
                     "id": "title",
                     "label": "标题",
                     "kind": "text",
-                    "value": "Industry cards 7"
+                    "value": "22"
                   },
                   {
                     "id": "image",
@@ -4344,13 +4363,55 @@
                     "id": "description",
                     "label": "描述",
                     "kind": "textarea",
-                    "value": ""
+                    "value": "12312"
                   },
                   {
                     "id": "href",
                     "label": "链接",
                     "kind": "url",
-                    "value": "/industries/cards-1780537527298?from=home"
+                    "value": "/industries/cards-1780119755266?from=home"
+                  },
+                  {
+                    "id": "layoutClass",
+                    "label": "布局类名",
+                    "kind": "text",
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "id": "cards-11",
+                "label": "22",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "标识",
+                    "kind": "text",
+                    "value": "cards-11"
+                  },
+                  {
+                    "id": "title",
+                    "label": "标题",
+                    "kind": "text",
+                    "value": "22"
+                  },
+                  {
+                    "id": "image",
+                    "label": "图片",
+                    "kind": "image",
+                    "value": ""
+                  },
+                  {
+                    "id": "description",
+                    "label": "描述",
+                    "kind": "textarea",
+                    "value": "12312"
+                  },
+                  {
+                    "id": "href",
+                    "label": "链接",
+                    "kind": "url",
+                    "value": "/industries/cards-11?from=home"
                   },
                   {
                     "id": "layoutClass",
@@ -8584,7 +8645,7 @@
                 "id": "image",
                 "label": "背景图片",
                 "kind": "image",
-                "value": "/uploads/coreValue/1780128620763-event7.png"
+                "value": "/assets/about/awardbg.webp"
               },
               {
                 "id": "breadcrumb",
@@ -8920,38 +8981,38 @@
             ],
             "items": [
               {
-                "id": "list-1780128877683",
+                "id": "list-1781020346379",
                 "label": "新动态",
                 "fields": [
                   {
                     "id": "slug",
                     "label": "标识",
                     "kind": "text",
-                    "value": "list-1780128877683"
+                    "value": "list-1781020346379"
                   },
                   {
                     "id": "image",
                     "label": "缩略图",
                     "kind": "image",
-                    "value": "/uploads/event/1780128884440-event10.png"
+                    "value": ""
                   },
                   {
                     "id": "sortDate",
                     "label": "排序日期（YYYYMMDD）",
                     "kind": "text",
-                    "value": "20260530"
+                    "value": "20260609"
                   },
                   {
                     "id": "displayDate",
                     "label": "展示日期",
                     "kind": "text",
-                    "value": "20260530"
+                    "value": "20260609"
                   },
                   {
                     "id": "category",
                     "label": "分类",
                     "kind": "text",
-                    "value": "行业资讯"
+                    "value": ""
                   },
                   {
                     "id": "title",
@@ -8963,55 +9024,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "2026年4月30日，中国体育仲裁委员会（China Commission of Arbitration for Sport, CCAS）正式启用新仲裁员名册。"
-                  }
-                ]
-              },
-              {
-                "id": "event-20260530-108",
-                "label": "新动态",
-                "fields": [
-                  {
-                    "id": "slug",
-                    "label": "标识",
-                    "kind": "text",
-                    "value": "event-20260530-108"
-                  },
-                  {
-                    "id": "image",
-                    "label": "缩略图",
-                    "kind": "image",
-                    "value": "/uploads/event/1780128842174-hu.svg"
-                  },
-                  {
-                    "id": "sortDate",
-                    "label": "排序日期（YYYYMMDD）",
-                    "kind": "text",
-                    "value": "20260530"
-                  },
-                  {
-                    "id": "displayDate",
-                    "label": "展示日期",
-                    "kind": "text",
-                    "value": "2026.05.30"
-                  },
-                  {
-                    "id": "category",
-                    "label": "分类",
-                    "kind": "text",
-                    "value": "行业资讯"
-                  },
-                  {
-                    "id": "title",
-                    "label": "标题",
-                    "kind": "textarea",
-                    "value": "新动态"
-                  },
-                  {
-                    "id": "summary",
-                    "label": "摘要",
-                    "kind": "textarea",
-                    "value": "2026年5月1日，中国国际经济贸易仲裁委员会（简称“贸仲”）正式公布新一届仲裁员名册，该名册于当日起施行，任期五年。"
+                    "value": ""
                   }
                 ]
               },
@@ -9047,7 +9060,7 @@
                     "id": "category",
                     "label": "分类",
                     "kind": "text",
-                    "value": "行业资讯"
+                    "value": ""
                   },
                   {
                     "id": "title",
@@ -9059,7 +9072,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "2026年3月16日，知名法律媒体《亚洲法律杂志》（Asian Legal Business，ALB）公布了2026年度中国法律大奖入围名单（ALB China Law Awards 2026）。 "
+                    "value": ""
                   }
                 ]
               },
@@ -9095,7 +9108,7 @@
                     "id": "category",
                     "label": "分类",
                     "kind": "text",
-                    "value": "行业资讯"
+                    "value": ""
                   },
                   {
                     "id": "title",
@@ -9107,7 +9120,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "2026年1月15日，国际权威法律评级机构钱伯斯（Chambers and Partners）正式发布《钱伯斯大中华区指南2026》（Chambers Greater China Region 2026）。"
+                    "value": ""
                   }
                 ]
               },
@@ -9143,19 +9156,19 @@
                     "id": "category",
                     "label": "分类",
                     "kind": "text",
-                    "value": "行业资讯"
+                    "value": ""
                   },
                   {
                     "id": "title",
                     "label": "标题",
                     "kind": "textarea",
-                    "value": "虎诉荣登Legal 500 2026中国区榜单，合伙人刘煜暄、万力、张莉律师荣获Legal 500中国精英"
+                    "value": ""
                   },
                   {
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "2025 年 11 月19日，国际权威法律评级机构《法律500强》（The Legal 500）公布 2026 中国区榜单（China rankings）。"
+                    "value": ""
                   }
                 ]
               },
@@ -9173,7 +9186,7 @@
                     "id": "image",
                     "label": "缩略图",
                     "kind": "image",
-                    "value": "/assets/event/event2/6.png"
+                    "value": ""
                   },
                   {
                     "id": "sortDate",
@@ -9191,7 +9204,7 @@
                     "id": "category",
                     "label": "分类",
                     "kind": "text",
-                    "value": "行业资讯"
+                    "value": ""
                   },
                   {
                     "id": "title",
@@ -9203,7 +9216,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "2025年7月23日，国际知名法律媒体《商法》（China Business Law Journal）公布了卓越律所大奖2025评选结果。"
+                    "value": ""
                   }
                 ]
               },
@@ -9251,7 +9264,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "2025年6月20日，汤森路透旗下国际知名法律媒体《亚洲法律杂志》（Asian Legal Business，简称ALB）公布了2025 ALB China争议解决业务排名榜单。 "
+                    "value": ""
                   }
                 ]
               },
@@ -9299,7 +9312,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "2025年6月6日，由北京仲裁委员会/北京国际仲裁院主办、由虎诉律师事务所承办的第二届北京仲裁文化推广月系列活动——《游戏×法律：争议解决的跨界思辨与规则前瞻》在虎诉圆满落幕。"
+                    "value": ""
                   }
                 ]
               },
@@ -9347,7 +9360,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "2025年4月16日，汤森路透旗下国际知名法律媒体《亚洲法律杂志》（Asian Legal Business，“ALB”）公布了“年度中国法律大奖（China Law Awards 2025）”的入围名单。 "
+                    "value": ""
                   }
                 ]
               },
@@ -9395,7 +9408,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "2025年2月13日，国际权威法律评级机构钱伯斯（Chambers and Partners）发布了《钱伯斯全球指南2025》（Chambers Global Guide 2025）。"
+                    "value": "1231"
                   }
                 ]
               },
@@ -9443,7 +9456,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "2025年1月16日，国际权威法律评级机构钱伯斯（Chambers and Partners）发布了《钱伯斯大中华区指南2025》（Chambers Greater China Region 2025）。"
+                    "value": "2026年4月30日，中国体育仲裁委员"
                   }
                 ]
               },
@@ -9491,7 +9504,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "第二十二届“贸仲杯”将于2024年11月29日开启，吸引了来自全国及境外，包括英国、荷兰、俄罗斯、埃及、越南、哈萨克斯坦、中国香港、中国澳门在内的100余所法学院校1000余名选手同场竞技。"
+                    "value": "2026年5月1日，中国国际经济贸易仲裁委员会（简称“贸仲”）正式公布新一届仲裁员名册，该名册于当日起施行，任期五年。"
                   }
                 ]
               },
@@ -9539,7 +9552,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "2024年6月4日，2024 Benchmark Litigation中国争议解决榜单正式公布，虎诉律师事务所荣幸入选为受关注律所。 "
+                    "value": "2026年3月16日，知名法律媒体《亚洲法律杂志》（Asian Legal Business，ALB）公布了2026年度中国法律大奖入围名单（ALB China Law Awards 2026）。 "
                   }
                 ]
               },
@@ -9587,7 +9600,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "2024年5月15日至16日，北京仲裁委员会/北京国际仲裁中心（以下称“北仲”）将与世界仲裁最新动态有限责任公司（World Arbitration U pdate LLC）共同主办世界仲裁最新动态大会2024（World Arbitration Update 2024，“WAU 2024”）中国站，会议地点为北仲国际会议厅，并会同步进行线上直播。WAU大会自2021年起举办，持续向国际社会介绍国际商事仲裁和投资仲裁的核心及最新话题。"
+                    "value": "2026年1月15日，国际权威法律评级机构钱伯斯（Chambers and Partners）正式发布《钱伯斯大中华区指南2026》（Chambers Greater China Region 2026）。"
                   }
                 ]
               },
@@ -9635,7 +9648,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "2024年1月22日，《亚洲法律杂志》（Asian Legal Business，“ALB”）公布 2024 ALB China 精品律所榜单，虎诉律师事务所荣幸入选 。"
+                    "value": "2025 年 11 月19日，国际权威法律评级机构《法律500强》（The Legal 500）公布 2026 中国区榜单（China rankings）。"
                   }
                 ]
               },
@@ -9683,7 +9696,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "虎诉律师事务所非常荣幸地宣布，康亚男（Kinsey Kang Yanan）出庭大律师已受聘为本所香港法律顾问。自即日起，虎诉将与康大律师竭诚携手，以为我们的客户提供更优质专业、高效便捷的法律服务。"
+                    "value": "2025年7月23日，国际知名法律媒体《商法》（China Business Law Journal）公布了卓越律所大奖2025评选结果。"
                   }
                 ]
               },
@@ -9731,7 +9744,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "4月12日至13日，2023钱伯斯北京论坛将在北京王府井希尔顿酒店举办。北京虎诉律师事务所作为赞助商之一，受邀参与本次论坛活动。"
+                    "value": "2025年6月20日，汤森路透旗下国际知名法律媒体《亚洲法律杂志》（Asian Legal Business，简称ALB）公布了2025 ALB China争议解决业务排名榜单。 "
                   }
                 ]
               },
@@ -9779,7 +9792,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "为进一步深入贯彻习近平法治思想，践行“做党和人民满意的好律师”，中共北京虎诉律师事务所支部委员会积极响应北京市朝阳区律师行业党委提出的共建法治社区的号召，与石佛营南里社区委员会达成结对关系，以期利用法律专业优势，为推进社区法治进程贡献智慧。"
+                    "value": "2025年6月6日，由北京仲裁委员会/北京国际仲裁院主办、由虎诉律师事务所承办的第二届北京仲裁文化推广月系列活动——《游戏×法律：争议解决的跨界思辨与规则前瞻》在虎诉圆满落幕。"
                   }
                 ]
               },
@@ -9827,7 +9840,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "这一年，我们继续秉持“虎诉精神”为各位客户服务，并最终实现了相较去年30%的业务收入增长；"
+                    "value": "2025年4月16日，汤森路透旗下国际知名法律媒体《亚洲法律杂志》（Asian Legal Business，“ALB”）公布了“年度中国法律大奖（China Law Awards 2025）”的入围名单。 "
                   }
                 ]
               },
@@ -9875,7 +9888,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "第二十届“贸仲杯”将于2022年11月28日至12月2日举行，本届“贸仲杯”汇集来自全国以及境外，包括英国、越南、荷兰、乌兹别克斯坦、中国香港、中国澳门在内的90余所法学院校1000余名参赛队员参与比赛。"
+                    "value": "2025年2月13日，国际权威法律评级机构钱伯斯（Chambers and Partners）发布了《钱伯斯全球指南2025》（Chambers Global Guide 2025）。"
                   }
                 ]
               },
@@ -9923,7 +9936,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "6月16日，我们正式启动了“2022虎行风从奖学金”项目。经过第一轮的材料审查以及第二轮的面谈，综合考虑各位奖学金申请者对本次奖学金申请的投入程度、对争议解决业务的理解与从事意愿、学习能力、理解能力及表达能力等多个维度，奖学金评选委员会最终确定了王苓瑜、曹家豪、马延茹三位获奖者。"
+                    "value": "2025年1月16日，国际权威法律评级机构钱伯斯（Chambers and Partners）发布了《钱伯斯大中华区指南2025》（Chambers Greater China Region 2025）。"
                   }
                 ]
               },
@@ -9971,7 +9984,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "为了迎接这位重量级嘉宾的正式诞生，我们于6月10日在TigerPark小程序上发起了“虎诉卡通形象命名活动”。短短两天时间，我们收到了176位朋友的报名信息。经过虎诉全体成员的投票，最终它拥有了自己的名字——虎氪！接下来，请看它的详细介绍~"
+                    "value": "第二十二届“贸仲杯”将于2024年11月29日开启，吸引了来自全国及境外，包括英国、荷兰、俄罗斯、埃及、越南、哈萨克斯坦、中国香港、中国澳门在内的100余所法学院校1000余名选手同场竞技。"
                   }
                 ]
               },
@@ -10019,7 +10032,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "[图片"
+                    "value": "2024年6月4日，2024 Benchmark Litigation中国争议解决榜单正式公布，虎诉律师事务所荣幸入选为受关注律所。 "
                   }
                 ]
               },
@@ -10067,7 +10080,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "6月15日，知名法律媒体《商法》（China Business Law Journal）公布了商法卓越律所大奖2022评选结果，虎诉律师事务所荣幸入选其中两类奖项榜单。"
+                    "value": "2024年5月15日至16日，北京仲裁委员会/北京国际仲裁中心（以下称“北仲”）将与世界仲裁最新动态有限责任公司（World Arbitration U pdate LLC）共同主办世界仲裁最新动态大会2024（World Arbitration Update 2024，“WAU 2024”）中国站，会议地点为北仲国际会议厅，并会同步进行线上直播。WAU大会自2021年起举办，持续向国际社会介绍国际商事仲裁和投资仲裁的核心及最新话题。"
                   }
                 ]
               },
@@ -10115,7 +10128,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "自成立以来，虎诉始终坚持以深厚的法律功底、丰富的实战经验及与众不同的商业化思维，为客户提供专业的法律服务与精准的商业解决方案。同时，作为一家极具生命力、创造力与包容性的律师事务所，虎诉一直在寻求服务的升级换代，以期为客户及其他所有关注虎诉成长的朋友带来更好的用户体验。"
+                    "value": "2024年1月22日，《亚洲法律杂志》（Asian Legal Business，“ALB”）公布 2024 ALB China 精品律所榜单，虎诉律师事务所荣幸入选 。"
                   }
                 ]
               },
@@ -10163,7 +10176,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "5月17日，LEGALBAND发布了2022年度中国顶级律所及顶级律师排行榜，虎诉律师事务所及其合伙人刘煜暄律师、万力律师分别入选前述两个榜单。"
+                    "value": "虎诉律师事务所非常荣幸地宣布，康亚男（Kinsey Kang Yanan）出庭大律师已受聘为本所香港法律顾问。自即日起，虎诉将与康大律师竭诚携手，以为我们的客户提供更优质专业、高效便捷的法律服务。"
                   }
                 ]
               },
@@ -10211,7 +10224,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "5月9日，Benchmark Litigation发布了2022年度亚太地区及中国地区争议解决推荐律所及律师排行榜，虎诉律师事务所被评为中国北京地区商业纠纷领域“值得关注的律所（Notable Firm）”。"
+                    "value": "4月12日至13日，2023钱伯斯北京论坛将在北京王府井希尔顿酒店举办。北京虎诉律师事务所作为赞助商之一，受邀参与本次论坛活动。"
                   }
                 ]
               },
@@ -10259,7 +10272,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "3月31日，LEGALBAND发布了2022年度中国法律卓越大奖提名名单，虎诉律师事务所荣获年度最佳新锐律师事务所提名。"
+                    "value": "为进一步深入贯彻习近平法治思想，践行“做党和人民满意的好律师”，中共北京虎诉律师事务所支部委员会积极响应北京市朝阳区律师行业党委提出的共建法治社区的号召，与石佛营南里社区委员会达成结对关系，以期利用法律专业优势，为推进社区法治进程贡献智慧。"
                   }
                 ]
               },
@@ -10307,7 +10320,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "今日，大连国际仲裁院（大连仲裁委员会）发布了第六届仲裁员增聘名单，虎诉律师事务所的合伙人万力律师荣幸入选。"
+                    "value": "这一年，我们继续秉持“虎诉精神”为各位客户服务，并最终实现了相较去年30%的业务收入增长；"
                   }
                 ]
               },
@@ -10355,7 +10368,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "1月24日，知名法律媒体《商法》（China Business Law Journal）公布了2021年度中国相关业务“The A-List 法律精英”名册，虎诉律师事务所的管理合伙人刘煜暄律师荣列其中。"
+                    "value": "第二十届“贸仲杯”将于2022年11月28日至12月2日举行，本届“贸仲杯”汇集来自全国以及境外，包括英国、越南、荷兰、乌兹别克斯坦、中国香港、中国澳门在内的90余所法学院校1000余名参赛队员参与比赛。"
                   }
                 ]
               },
@@ -10403,7 +10416,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "虎诉律师事务所荣幸宣布，张莉律师自即日起以合伙人的身份正式加盟本所。在加入虎诉之前，张律师就职于中伦律师事务所争议解决部，担任权益合伙人职位。目前，张律师的相关转所手续正在办理中。"
+                    "value": "6月16日，我们正式启动了“2022虎行风从奖学金”项目。经过第一轮的材料审查以及第二轮的面谈，综合考虑各位奖学金申请者对本次奖学金申请的投入程度、对争议解决业务的理解与从事意愿、学习能力、理解能力及表达能力等多个维度，奖学金评选委员会最终确定了王苓瑜、曹家豪、马延茹三位获奖者。"
                   }
                 ]
               },
@@ -10451,7 +10464,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "今日，《亚洲法律杂志》（Asian Legal Business，“ALB”）公布2022年度ALB China精品律所榜单，北京虎诉律师事务所（Tiger Partners）凭借过去一年在民商事争议解决领域的优秀业绩，成功入选该榜单。"
+                    "value": "为了迎接这位重量级嘉宾的正式诞生，我们于6月10日在TigerPark小程序上发起了“虎诉卡通形象命名活动”。短短两天时间，我们收到了176位朋友的报名信息。经过虎诉全体成员的投票，最终它拥有了自己的名字——虎氪！接下来，请看它的详细介绍~"
                   }
                 ]
               },
@@ -10499,7 +10512,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "2021年12月18日，虎诉2周年晚宴于北京市三里屯通盈中心洲际酒店4楼玫瑰厅隆重举行。虎诉众多亲朋好友欢聚一堂，共同庆祝虎诉的2周岁生日。"
+                    "value": "[图片"
                   }
                 ]
               },
@@ -10547,7 +10560,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "北京市律师协会于10月13日发布了《北京市律师协会关于发布专业委员会（研究会）委员增补名单》，经过严格的选拔和公示程序，虎诉律师事务所的合伙人刘煜暄律师、许旻律师和万力律师，凭借其在专业领域丰富的业务经验，成功当选北京市律师协会第十一届专业委员会委员。具体如下："
+                    "value": "6月15日，知名法律媒体《商法》（China Business Law Journal）公布了商法卓越律所大奖2022评选结果，虎诉律师事务所荣幸入选其中两类奖项榜单。"
                   }
                 ]
               },
@@ -10595,7 +10608,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "2021年7月19日，由民革中央主办的第29次两岸青年观点论坛在京举行。本次论坛以“心跨两岸·法悦心声”为主题，两岸青年法律从业者围绕行业发展和两岸交流中的法律问题展开了热烈的座谈研讨。北京虎诉律师事务所管理合伙人刘煜暄律师、高级顾问廖孟誠律师非常荣幸地受邀参加了本次观点论坛。"
+                    "value": "自成立以来，虎诉始终坚持以深厚的法律功底、丰富的实战经验及与众不同的商业化思维，为客户提供专业的法律服务与精准的商业解决方案。同时，作为一家极具生命力、创造力与包容性的律师事务所，虎诉一直在寻求服务的升级换代，以期为客户及其他所有关注虎诉成长的朋友带来更好的用户体验。"
                   }
                 ]
               },
@@ -10643,7 +10656,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "2021年6月10日，国际法律评级机构Benchmark Litigation正式发布2021年中国地区排名指南，这也是Benchmark Litigation首次在中国地区推出争议解决排名指南。"
+                    "value": "5月17日，LEGALBAND发布了2022年度中国顶级律所及顶级律师排行榜，虎诉律师事务所及其合伙人刘煜暄律师、万力律师分别入选前述两个榜单。"
                   }
                 ]
               },
@@ -10691,7 +10704,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "近日，国际领先法律期刊《商法》（China Business Law Journal）公布2021年《商法》卓越律所大奖评选结果，北京虎诉律师事务所（Tiger Partners），凭借精湛的专业能力和优质的客户口碑，被评选为“备受关注律所”。"
+                    "value": "5月9日，Benchmark Litigation发布了2022年度亚太地区及中国地区争议解决推荐律所及律师排行榜，虎诉律师事务所被评为中国北京地区商业纠纷领域“值得关注的律所（Notable Firm）”。"
                   }
                 ]
               },
@@ -10739,7 +10752,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "近日，《亚洲法律杂志》（Asian Legal Business,“ALB”）公布SSQ二零二一年ALB中国法律大奖入围名单，北京虎诉律师事务所（Tiger Partners），凭借精湛的专业能力和突出的成绩，入围“年度最具潜力律师事务所大奖”（Rising Law Firm of the Year）"
+                    "value": "3月31日，LEGALBAND发布了2022年度中国法律卓越大奖提名名单，虎诉律师事务所荣获年度最佳新锐律师事务所提名。"
                   }
                 ]
               },
@@ -10787,7 +10800,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "近日，Accurate Media旗下的专业法律评级机构LEGALBAND发布了2021年度中国顶级律师排行榜（Top Ranked Lawyers）。虎诉刘煜暄律师，凭借其在争议解决领域精湛的专业能力、丰富的实战经验，以及优质的客户口碑，在本次排行中被评选为“争议解决·诉讼”领域的“后起之秀”。"
+                    "value": "今日，大连国际仲裁院（大连仲裁委员会）发布了第六届仲裁员增聘名单，虎诉律师事务所的合伙人万力律师荣幸入选。"
                   }
                 ]
               },
@@ -10835,7 +10848,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "近日，知名法律媒体《商法》（China Business Law Journal）发布了2021中国业务法律新星（Rising Stars 2021）榜单, 该榜单收录了40位中国精英律师, 以表彰他们上年度在各自擅长业务领域中的杰出表现。北京虎诉律师事务所的刘煜暄律师和万力律师，凭借其在商事争议解决领域精湛的专业能力和优质的客户口碑，荣列榜单。"
+                    "value": "1月24日，知名法律媒体《商法》（China Business Law Journal）公布了2021年度中国相关业务“The A-List 法律精英”名册，虎诉律师事务所的管理合伙人刘煜暄律师荣列其中。"
                   }
                 ]
               },
@@ -10883,7 +10896,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "北京市律师协会于昨日发布了《北京市律师协会涉外律师人才库名单》，经过严格的选拔和公示程序，虎诉律师事务所的许旻律师和万力律师，凭借其丰富的涉外业务经验，成功入选北京市律师协会涉外律师人才库。这充分显示了虎诉律师在涉外法律服务方面，尤其是民商事诉讼与仲裁领域，丰富的实战经验和一贯的优异表现。"
+                    "value": "虎诉律师事务所荣幸宣布，张莉律师自即日起以合伙人的身份正式加盟本所。在加入虎诉之前，张律师就职于中伦律师事务所争议解决部，担任权益合伙人职位。目前，张律师的相关转所手续正在办理中。"
                   }
                 ]
               },
@@ -10931,7 +10944,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "近日，知名法律媒体《商法》（China Business Law Journal）正式收录北京虎诉律师事务所。虎诉荣登商法推荐律所榜单，充分显示了虎诉在争议解决（诉讼与仲裁）领域一贯的优异表现。"
+                    "value": "今日，《亚洲法律杂志》（Asian Legal Business，“ALB”）公布2022年度ALB China精品律所榜单，北京虎诉律师事务所（Tiger Partners）凭借过去一年在民商事争议解决领域的优秀业绩，成功入选该榜单。"
                   }
                 ]
               },
@@ -10979,7 +10992,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "近日，全球最具影响力的法律媒体之一——亚洲法律杂志（Asian Legal Business，“ALB”）采访了虎诉管理合伙人刘煜暄律师。"
+                    "value": "2021年12月18日，虎诉2周年晚宴于北京市三里屯通盈中心洲际酒店4楼玫瑰厅隆重举行。虎诉众多亲朋好友欢聚一堂，共同庆祝虎诉的2周岁生日。"
                   }
                 ]
               },
@@ -11027,7 +11040,7 @@
                     "id": "summary",
                     "label": "摘要",
                     "kind": "textarea",
-                    "value": "近日，全球最具影响力的法律媒体之一——亚洲法律杂志（Asian Legal Business，“ALB”）关注到虎诉的成立。虎诉作为一家专注于高端商事争议解决业务的精品所，始终以实现客户需求为第一目标。虎诉拥有深厚的法律功底、丰富的实战经验及与众不同的商业化思维，致力于为客户提供专业的法律服务、精准的商业解决方案及良好的用户体验。 以下为ALB关于虎诉的报道原文。"
+                    "value": "北京市律师协会于10月13日发布了《北京市律师协会关于发布专业委员会（研究会）委员增补名单》，经过严格的选拔和公示程序，虎诉律师事务所的合伙人刘煜暄律师、许旻律师和万力律师，凭借其在专业领域丰富的业务经验，成功当选北京市律师协会第十一届专业委员会委员。具体如下："
                   }
                 ]
               },
@@ -11070,6 +11083,12 @@
                     "label": "标题",
                     "kind": "textarea",
                     "value": "虎诉动态 | 刘煜暄律师、廖孟誠律师受邀参加第29次两岸青年观点论坛"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "摘要",
+                    "kind": "textarea",
+                    "value": "2021年7月19日，由民革中央主办的第29次两岸青年观点论坛在京举行。本次论坛以“心跨两岸·法悦心声”为主题，两岸青年法律从业者围绕行业发展和两岸交流中的法律问题展开了热烈的座谈研讨。北京虎诉律师事务所管理合伙人刘煜暄律师、高级顾问廖孟誠律师非常荣幸地受邀参加了本次观点论坛。"
                   }
                 ]
               },
@@ -11112,6 +11131,12 @@
                     "label": "标题",
                     "kind": "textarea",
                     "value": "行业资讯 | 虎诉及合伙人荣获2021 Benchmark Litigation推荐"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "摘要",
+                    "kind": "textarea",
+                    "value": "2021年6月10日，国际法律评级机构Benchmark Litigation正式发布2021年中国地区排名指南，这也是Benchmark Litigation首次在中国地区推出争议解决排名指南。"
                   }
                 ]
               },
@@ -11154,6 +11179,12 @@
                     "label": "标题",
                     "kind": "textarea",
                     "value": "行业资讯 | 虎诉荣膺2021《商法》卓越律所大奖"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "摘要",
+                    "kind": "textarea",
+                    "value": "近日，国际领先法律期刊《商法》（China Business Law Journal）公布2021年《商法》卓越律所大奖评选结果，北京虎诉律师事务所（Tiger Partners），凭借精湛的专业能力和优质的客户口碑，被评选为“备受关注律所”。"
                   }
                 ]
               },
@@ -11196,6 +11227,12 @@
                     "label": "标题",
                     "kind": "textarea",
                     "value": "行业资讯 | 虎诉入围SSQ二零二一年ALB中国法律大奖"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "摘要",
+                    "kind": "textarea",
+                    "value": "近日，《亚洲法律杂志》（Asian Legal Business,“ALB”）公布SSQ二零二一年ALB中国法律大奖入围名单，北京虎诉律师事务所（Tiger Partners），凭借精湛的专业能力和突出的成绩，入围“年度最具潜力律师事务所大奖”（Rising Law Firm of the Year）"
                   }
                 ]
               },
@@ -11238,6 +11275,12 @@
                     "label": "标题",
                     "kind": "textarea",
                     "value": "行业资讯 | 虎诉刘煜暄律师入选LEGALBAND2021年度中国顶级律师排行榜"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "摘要",
+                    "kind": "textarea",
+                    "value": "近日，Accurate Media旗下的专业法律评级机构LEGALBAND发布了2021年度中国顶级律师排行榜（Top Ranked Lawyers）。虎诉刘煜暄律师，凭借其在争议解决领域精湛的专业能力、丰富的实战经验，以及优质的客户口碑，在本次排行中被评选为“争议解决·诉讼”领域的“后起之秀”。"
                   }
                 ]
               },
@@ -11280,6 +11323,12 @@
                     "label": "标题",
                     "kind": "textarea",
                     "value": "行业资讯｜虎诉两位律师入选《商法》Rising Stars 2021 TOP 40榜单"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "摘要",
+                    "kind": "textarea",
+                    "value": "近日，知名法律媒体《商法》（China Business Law Journal）发布了2021中国业务法律新星（Rising Stars 2021）榜单, 该榜单收录了40位中国精英律师, 以表彰他们上年度在各自擅长业务领域中的杰出表现。北京虎诉律师事务所的刘煜暄律师和万力律师，凭借其在商事争议解决领域精湛的专业能力和优质的客户口碑，荣列榜单。"
                   }
                 ]
               },
@@ -11322,6 +11371,12 @@
                     "label": "标题",
                     "kind": "textarea",
                     "value": "行业资讯 | 虎诉两位合伙人入选北京市律师协会涉外律师人才库"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "摘要",
+                    "kind": "textarea",
+                    "value": "北京市律师协会于昨日发布了《北京市律师协会涉外律师人才库名单》，经过严格的选拔和公示程序，虎诉律师事务所的许旻律师和万力律师，凭借其丰富的涉外业务经验，成功入选北京市律师协会涉外律师人才库。这充分显示了虎诉律师在涉外法律服务方面，尤其是民商事诉讼与仲裁领域，丰富的实战经验和一贯的优异表现。"
                   }
                 ]
               },
@@ -11364,6 +11419,12 @@
                     "label": "标题",
                     "kind": "textarea",
                     "value": "行业资讯 | \"商法“收录虎诉"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "摘要",
+                    "kind": "textarea",
+                    "value": "近日，知名法律媒体《商法》（China Business Law Journal）正式收录北京虎诉律师事务所。虎诉荣登商法推荐律所榜单，充分显示了虎诉在争议解决（诉讼与仲裁）领域一贯的优异表现。"
                   }
                 ]
               },
@@ -11406,6 +11467,12 @@
                     "label": "标题",
                     "kind": "textarea",
                     "value": "行业资讯 | ALB专访虎诉管理合伙人刘煜暄律师：“争议解决领域的耀眼新星”"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "摘要",
+                    "kind": "textarea",
+                    "value": "近日，全球最具影响力的法律媒体之一——亚洲法律杂志（Asian Legal Business，“ALB”）采访了虎诉管理合伙人刘煜暄律师。"
                   }
                 ]
               },
@@ -11448,6 +11515,12 @@
                     "label": "标题",
                     "kind": "textarea",
                     "value": "行业资讯 | ALB报道虎诉：“前红圈所律师组建精品律所虎诉，专注争议解决业务”"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "摘要",
+                    "kind": "textarea",
+                    "value": "近日，全球最具影响力的法律媒体之一——亚洲法律杂志（Asian Legal Business，“ALB”）关注到虎诉的成立。虎诉作为一家专注于高端商事争议解决业务的精品所，始终以实现客户需求为第一目标。虎诉拥有深厚的法律功底、丰富的实战经验及与众不同的商业化思维，致力于为客户提供专业的法律服务、精准的商业解决方案及良好的用户体验。 以下为ALB关于虎诉的报道原文。"
                   }
                 ]
               }
@@ -11459,32 +11532,32 @@
             "fields": [],
             "items": [
               {
-                "id": "list-1780128877683",
+                "id": "list-1781020346379",
                 "label": "新动态",
                 "fields": [
                   {
                     "id": "slug",
                     "label": "标识",
                     "kind": "text",
-                    "value": "list-1780128877683"
+                    "value": "list-1781020346379"
                   },
                   {
                     "id": "sortDate",
                     "label": "排序日期（YYYYMMDD）",
                     "kind": "text",
-                    "value": "20260530"
+                    "value": "20260609"
                   },
                   {
                     "id": "displayDate",
                     "label": "展示日期",
                     "kind": "text",
-                    "value": "20260530"
+                    "value": "20260609"
                   },
                   {
                     "id": "category",
                     "label": "分类",
                     "kind": "text",
-                    "value": "行业资讯"
+                    "value": ""
                   },
                   {
                     "id": "title",
@@ -11496,97 +11569,19 @@
                     "id": "summary",
                     "label": "详情页摘要",
                     "kind": "textarea",
-                    "value": "2026年4月30日，中国体育仲裁委员会（China Commission of Arbitration for Sport, CCAS）正式启用新仲裁员名册。"
+                    "value": ""
                   },
                   {
                     "id": "content",
                     "label": "详情正文",
                     "kind": "textarea",
-                    "value": "2026年4月30日，中国体育仲裁委员会（China Commission of Arbitration for Sport, CCAS）正式启用新仲裁员名册。\n\n虎诉律师事务所合伙人许旻律师凭借扎实的法律专业功底、丰富的争议解决经验及对体育法治领域的持续耕耘，成功入选CCAS新仲裁员名册。\n\n[图片]\n\n[图片]\n\n中国体育仲裁委员会是由国家体育总局依法设立的、专门处理体育领域纠纷的仲裁机构。此次增补是中国体育仲裁委员会在“十五五”开局之年强化专业力量、推动体育仲裁事业高质量发展的重要举措，重点吸纳了兼具体育管理经验、专业运动员背景或法学实务能力的优秀人才。\n\n许旻律师的入选，既是对其个人专业能力与跨领域素养的充分认可，也体现了虎诉律师事务所在体育、文娱、商事等多元争议解决领域的持续深耕。未来，虎诉将继续依托高水平专业平台，为客户提供更加精准、高效的法律服务。\n\n[图片]\n\n许旻律师是中国内地执业律师，专长于代理国内诉讼及境内外仲裁案件，并长期为企业提供法律顾问服务。许旻律师在股权交易、公司治理、商事合同审查及纠纷处理、产品责任等业务领域经验丰富，承办的案件涉及海事海商、银行金融、私募基金、航运、货物贸易、高新科技、新媒体、影视娱乐、体育、教育、房地产等多个领域。\n\n许旻律师毕业于香港城市大学法学院，获得法学学士及法学硕士学位。许律师现为英国特许仲裁员协会高级会员（F.CIArb）、中国体育仲裁委员会仲裁员、北京市律师协会文旅传媒与体育专业委员会委员、北京市法学会体育法学与奥林匹克法律事务研究会会员，并入选北京市司法局百名高端涉外法治人才及北京市律师协会涉外律师人才库。在加入虎诉律师事务所之前，许旻律师曾在金杜律师事务所、方达律师事务所担任争议解决律师。"
+                    "value": "11你好，\n\n[IMAGE]\n\n真的好"
                   },
                   {
                     "id": "detailImage1",
                     "label": "详情图片 1",
                     "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231050_232_2.png"
-                  },
-                  {
-                    "id": "detailImage2",
-                    "label": "详情图片 2",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231050_233_2.png"
-                  },
-                  {
-                    "id": "detailImage3",
-                    "label": "详情图片 3",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231050_235_2.jpg"
-                  }
-                ]
-              },
-              {
-                "id": "event-20260530-108",
-                "label": "新动态",
-                "fields": [
-                  {
-                    "id": "slug",
-                    "label": "标识",
-                    "kind": "text",
-                    "value": "event-20260530-108"
-                  },
-                  {
-                    "id": "sortDate",
-                    "label": "排序日期（YYYYMMDD）",
-                    "kind": "text",
-                    "value": "20260530"
-                  },
-                  {
-                    "id": "displayDate",
-                    "label": "展示日期",
-                    "kind": "text",
-                    "value": "2026.05.30"
-                  },
-                  {
-                    "id": "category",
-                    "label": "分类",
-                    "kind": "text",
-                    "value": "行业资讯"
-                  },
-                  {
-                    "id": "title",
-                    "label": "详情页标题",
-                    "kind": "textarea",
-                    "value": "新动态"
-                  },
-                  {
-                    "id": "summary",
-                    "label": "详情页摘要",
-                    "kind": "textarea",
-                    "value": "2026年5月1日，中国国际经济贸易仲裁委员会（简称“贸仲”）正式公布新一届仲裁员名册，该名册于当日起施行，任期五年。"
-                  },
-                  {
-                    "id": "content",
-                    "label": "详情正文",
-                    "kind": "textarea",
-                    "value": "2026年5月1日，中国国际经济贸易仲裁委员会（简称“贸仲”）正式公布新一届仲裁员名册，该名册于当日起施行，任期五年。\n\n虎诉律师事务所合伙人张莉律师凭借深厚的法律专业素养、丰富的涉外争议解决经验，成功入选新一届贸仲仲裁员名册，主要裁判领域为国际贸易、公司股权、建设工程、国际商事仲裁。\n\n[图片]\n\n[图片]\n\n贸仲作为中国最具代表性和国际影响力的常设仲裁机构之一，其仲裁员名册遴选标准严格、程序规范，对候选人的专业资历、实务经验、行业声誉、及争议解决能力均有较高要求。\n\n张莉律师此次入选贸仲仲裁员名册，不仅体现了业界对其长期深耕商事争议解决领域的充分认可，也为虎诉持续拓展高端商事争议解决业务提供了新的动力。\n\n[图片]\n\n张莉律师的专业领域为争议解决，尤其擅长涉外争议解决；主要领域包括私募股权投资、建筑工程、房地产、中外合资、股权转让、国际货物买卖、知识产权和能源等多个领域。张律师能够熟练运用中英文双语办案，工作能力受到客户的充分认可。张律师代理客户多为私募投资基金、跨国公司、外商投资企业、大型国有企业、创业型企业等。\n\n加入虎诉前，张律师是北京中伦律师事务所争议解决部权益合伙人。张律师参与代理了超过一百多起商事争议诉讼及仲裁案件，绝大部分为涉外争议案件。仲裁案件适用规则包括贸仲委仲裁规则、北京仲裁委员会仲裁规则、联合国国际贸易法委员会仲裁规则、香港国际仲裁中心机构仲裁规则、国际商会仲裁规则、新加坡国际仲裁中心仲裁规则等；其中多起案件仲裁语言为英文，并在中国、香港、新加坡、印度等多地进行开庭。诉讼案件在北京、上海、浙江、江苏等多地、多级法院进行。\n\n张莉律师在多起重大、疑难商事争议案件中为客户提供了专业、高效的法律服务，并取得了良好的案件效果，获得客户的长期信任与高度评价。\n\n未来，虎诉将以此为新的起点，继续秉持专业、高效、极致的服务理念，深耕争议解决业务，不断提升复杂商事争议处理能力，以更加专业、高质量的法律服务回应客户信任。"
-                  },
-                  {
-                    "id": "detailImage1",
-                    "label": "详情图片 1",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231050_237_2.png"
-                  },
-                  {
-                    "id": "detailImage2",
-                    "label": "详情图片 2",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231050_238_2.png"
-                  },
-                  {
-                    "id": "detailImage3",
-                    "label": "详情图片 3",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231050_240_2.jpg"
+                    "value": "/uploads/event/1781020522531-447bdcb7-92c7-4548-a3a9-befd6ace314d.gif"
                   }
                 ]
               },
@@ -11616,7 +11611,7 @@
                     "id": "category",
                     "label": "分类",
                     "kind": "text",
-                    "value": "行业资讯"
+                    "value": ""
                   },
                   {
                     "id": "title",
@@ -11628,19 +11623,13 @@
                     "id": "summary",
                     "label": "详情页摘要",
                     "kind": "textarea",
-                    "value": "2026年3月16日，知名法律媒体《亚洲法律杂志》（Asian Legal Business，ALB）公布了2026年度中国法律大奖入围名单（ALB China Law Awards 2026）。 "
+                    "value": ""
                   },
                   {
                     "id": "content",
                     "label": "详情正文",
                     "kind": "textarea",
-                    "value": "2026年3月16日，知名法律媒体《亚洲法律杂志》（Asian Legal Business，ALB）公布了2026年度中国法律大奖入围名单（ALB China Law Awards 2026）。 \n\n荣获提名\n\n虎诉律师事务所凭借在争议解决领域的卓越表现、持续提升的专业实力及良好的市场口碑，荣获两项提名：\n\n“年度争议解决精品律师事务所大奖”\n\n（Dispute Resolution Boutique Law Firm of the Year）\n\n“年度最具潜力律师事务所大奖”\n\n（Rising Law Firm of the Year）\n\n此次入围两项大奖，是对虎诉专业能力、业务发展及行业口碑的充分认可，也进一步彰显了虎诉在争议解决领域持续增长的综合竞争力。虎诉始终坚持以胜诉为最终目的、以客户商业目标为导向，致力于为客户提供高效、精准的争议解决方案。\n\n诚挚感谢所有客户、合作伙伴及各界朋友一直以来的支持与信任。未来，虎诉将继续秉持专业、极致的服务理念，不负每一份信任与托付。\n\n[图片]\n\nALB是汤森路透旗下的尖端法律杂志，是全球最具影响力的法律媒体之一，旨在为客户和读者提供前沿的法律商业资讯和律所专业评级。"
-                  },
-                  {
-                    "id": "detailImage1",
-                    "label": "详情图片 1",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231050_242_2.png"
+                    "value": ""
                   }
                 ]
               },
@@ -11670,7 +11659,7 @@
                     "id": "category",
                     "label": "分类",
                     "kind": "text",
-                    "value": "行业资讯"
+                    "value": ""
                   },
                   {
                     "id": "title",
@@ -11682,19 +11671,13 @@
                     "id": "summary",
                     "label": "详情页摘要",
                     "kind": "textarea",
-                    "value": "2026年1月15日，国际权威法律评级机构钱伯斯（Chambers and Partners）正式发布《钱伯斯大中华区指南2026》（Chambers Greater China Region 2026）。"
+                    "value": ""
                   },
                   {
                     "id": "content",
                     "label": "详情正文",
                     "kind": "textarea",
-                    "value": "2026年1月15日，国际权威法律评级机构钱伯斯（Chambers and Partners）正式发布《钱伯斯大中华区指南2026》（Chambers Greater China Region 2026）。\n\n虎诉律师事务所凭借卓越的业务能力、广泛的客户认可及良好的行业声誉，再次荣登：争议解决（中资律师事务所）/ Dispute Resolution（PRC Firms）榜单。\n\n[图片]\n\n此次蝉联榜单，既是对虎诉以胜诉为最终目的、以客户商业目标为导向理念的深度认可，也进一步印证了虎诉在商事争议解决业务领域的专业实力与领先优势。未来，虎诉将始终秉持追求极致完美的专业精神，为客户提供高效、精准的争议解决方案。\n\n诚挚感谢所有客户、合作伙伴及各界朋友长期以来的支持与信任。虎诉将一如既往，不负每一份信任与托付。\n\n钱伯斯（Chambers and Partners）是全球领先的法律研究和分析机构，在全球范围内评选各领域顶尖律师事务所和法律专业人士。钱伯斯法律指南被视为业界基准，是国际客户寻求高端法律服务的重要参考"
-                  },
-                  {
-                    "id": "detailImage1",
-                    "label": "详情图片 1",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231050_244_2.png"
+                    "value": ""
                   }
                 ]
               },
@@ -11724,55 +11707,25 @@
                     "id": "category",
                     "label": "分类",
                     "kind": "text",
-                    "value": "行业资讯"
+                    "value": ""
                   },
                   {
                     "id": "title",
                     "label": "详情页标题",
                     "kind": "textarea",
-                    "value": "虎诉荣登Legal 500 2026中国区榜单，合伙人刘煜暄、万力、张莉律师荣获Legal 500中国精英"
+                    "value": ""
                   },
                   {
                     "id": "summary",
                     "label": "详情页摘要",
                     "kind": "textarea",
-                    "value": "2025 年 11 月19日，国际权威法律评级机构《法律500强》（The Legal 500）公布 2026 中国区榜单（China rankings）。"
+                    "value": ""
                   },
                   {
                     "id": "content",
                     "label": "详情正文",
                     "kind": "textarea",
-                    "value": "2025 年 11 月19日，国际权威法律评级机构《法律500强》（The Legal 500）公布 2026 中国区榜单（China rankings）。\n\n荣获奖项\n\n凭借在高端商事争议解决领域的深厚积淀与卓越表现，虎诉律师事务所成功入选 Legal 500 2026 中国区榜单：\n\n争议解决-仲裁-中国律所\n\n争议解决-诉讼-中国律所\n\n与此同时，虎诉合伙人刘煜暄律师、万力律师、张莉律师凭借在商事争议解决案件中的出色表现以及客户的高度评价，荣获：\n\n首届Legal 500中国精英-“北京精英·商业争议”\n\n[图片]\n\n[图片]\n\n[图片]\n\n本次入选，是对虎诉及其合伙人长期专注于争议解决领域、持续提供高质量法律服务的充分认可。\n\n衷心感谢所有客户、合作伙伴及行业同仁的长期信任与支持。虎诉将以此次登榜为新起点，砥砺前行，持续提升专业服务能力，在亚太地区争议解决领域再创佳绩。\n\n[图片]\n\n[图片]\n\nThe Legal 500成立于1988年，是全球著名的法律评级机构，其核心使命是通过独立的调研与评估，为企业在选择法律服务时提供专业的参考意见。\n\nLegal 500 中国精英于2025年首次发布，致力于表彰来自区域性律所、在中国核心商业领域表现卓越的杰出律师。"
-                  },
-                  {
-                    "id": "detailImage1",
-                    "label": "详情图片 1",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231050_246_2.png"
-                  },
-                  {
-                    "id": "detailImage2",
-                    "label": "详情图片 2",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231056_260_2.png"
-                  },
-                  {
-                    "id": "detailImage3",
-                    "label": "详情图片 3",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231056_261_2.png"
-                  },
-                  {
-                    "id": "detailImage4",
-                    "label": "详情图片 4",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231056_262_2.png"
-                  },
-                  {
-                    "id": "detailImage5",
-                    "label": "详情图片 5",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231056_263_2.png"
+                    "value": ""
                   }
                 ]
               },
@@ -11802,7 +11755,7 @@
                     "id": "category",
                     "label": "分类",
                     "kind": "text",
-                    "value": "行业资讯"
+                    "value": ""
                   },
                   {
                     "id": "title",
@@ -11814,25 +11767,13 @@
                     "id": "summary",
                     "label": "详情页摘要",
                     "kind": "textarea",
-                    "value": "2025年7月23日，国际知名法律媒体《商法》（China Business Law Journal）公布了卓越律所大奖2025评选结果。"
+                    "value": ""
                   },
                   {
                     "id": "content",
                     "label": "详情正文",
                     "kind": "textarea",
-                    "value": "2025年7月23日，国际知名法律媒体《商法》（China Business Law Journal）公布了卓越律所大奖2025评选结果。\n\n荣获奖项\n\n凭借在跨境争议解决业务中的突出业绩和卓越表现，虎诉律师事务所荣获执业领域奖项：跨境诉讼/Cross-border litigation。\n\n[图片]\n\n感谢所有客户、业界同仁、合作伙伴的支持与信任。未来，虎诉将继续致力于为全球客户提供高效、精准的争议解决方案，帮助客户应对日益复杂的国际法律环境。\n\n[图片]\n\nChina Business Law Journal《商法》是国际知名的商业法律月刊，也是全球最具影响力的法律评选媒体之一。"
-                  },
-                  {
-                    "id": "detailImage1",
-                    "label": "详情图片 1",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231056_264_2.jpg"
-                  },
-                  {
-                    "id": "detailImage2",
-                    "label": "详情图片 2",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231056_265_2.png"
+                    "value": ""
                   }
                 ]
               },
@@ -11874,19 +11815,13 @@
                     "id": "summary",
                     "label": "详情页摘要",
                     "kind": "textarea",
-                    "value": "2025年6月20日，汤森路透旗下国际知名法律媒体《亚洲法律杂志》（Asian Legal Business，简称ALB）公布了2025 ALB China争议解决业务排名榜单。 "
+                    "value": ""
                   },
                   {
                     "id": "content",
                     "label": "详情正文",
                     "kind": "textarea",
-                    "value": "2025年6月20日，汤森路透旗下国际知名法律媒体《亚洲法律杂志》（Asian Legal Business，简称ALB）公布了2025 ALB China争议解决业务排名榜单。 \n\n荣获奖项\n\n凭借在争议解决领域的卓越表现，虎诉律师事务所荣登“2025 ALB China争议解决业务排名”，并在诉讼领域荣获“值得关注律所/Notable Firms”。\n\n本次获奖，不仅是对虎诉过去成绩的认可，更是对未来发展的鼓舞。我们将持续深耕于争议解决领域，为客户提供高效、专业的争议解决方案。\n\n衷心感谢每一位客户、合作伙伴和同行对我们的支持与信任。未来，虎诉将继续向前，争创更多佳绩。\n\n[图片]\n\nALB是汤森路透旗下的尖端法律杂志，是全球最具影响力的法律媒体之一，旨在为客户和读者提供前沿的法律商业资讯和律所专业评级。"
-                  },
-                  {
-                    "id": "detailImage1",
-                    "label": "详情图片 1",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231056_266_2.png"
+                    "value": ""
                   }
                 ]
               },
@@ -11928,19 +11863,13 @@
                     "id": "summary",
                     "label": "详情页摘要",
                     "kind": "textarea",
-                    "value": "2025年6月6日，由北京仲裁委员会/北京国际仲裁院主办、由虎诉律师事务所承办的第二届北京仲裁文化推广月系列活动——《游戏×法律：争议解决的跨界思辨与规则前瞻》在虎诉圆满落幕。"
+                    "value": ""
                   },
                   {
                     "id": "content",
                     "label": "详情正文",
                     "kind": "textarea",
-                    "value": "2025年6月6日，由北京仲裁委员会/北京国际仲裁院主办、由虎诉律师事务所承办的第二届北京仲裁文化推广月系列活动——《游戏×法律：争议解决的跨界思辨与规则前瞻》在虎诉圆满落幕。\n\n暂时无法在飞书文档外展示此内容\n\n本次活动吸引了众多来自法律和游戏行业的专业人士参与。通过的深入案例分享和讨论，与会者分析了当前以及未来游戏行业可能面临的法律风险，并探讨了仲裁在此类争议中的独特作用。\n\n作为一家专注于高端商事争议解决的精品律所，虎诉始终高度重视仲裁业务，并致力于为客户提供专业且全面的仲裁服务。虎诉期待与广大法律同仁携手，共同推动中国仲裁文化的传播与发展。"
-                  },
-                  {
-                    "id": "detailVideo1",
-                    "label": "详情视频 1",
-                    "kind": "url",
-                    "value": "/assets/event/event2/20250617_%E8%A7%86%E9%A2%91.mp4"
+                    "value": ""
                   }
                 ]
               },
@@ -11982,19 +11911,13 @@
                     "id": "summary",
                     "label": "详情页摘要",
                     "kind": "textarea",
-                    "value": "2025年4月16日，汤森路透旗下国际知名法律媒体《亚洲法律杂志》（Asian Legal Business，“ALB”）公布了“年度中国法律大奖（China Law Awards 2025）”的入围名单。 "
+                    "value": ""
                   },
                   {
                     "id": "content",
                     "label": "详情正文",
                     "kind": "textarea",
-                    "value": "2025年4月16日，汤森路透旗下国际知名法律媒体《亚洲法律杂志》（Asian Legal Business，“ALB”）公布了“年度中国法律大奖（China Law Awards 2025）”的入围名单。 \n\n荣获提名\n\n凭借过去一年的卓越表现与行业实力，虎诉律师事务所荣获“年度精品律师事务所大奖”（Boutique Law Firm of the Year ）提名。\n\n虎诉衷心感谢所有客户、合作伙伴及各界朋友对我们的信任与支持。每一份认可都激励我们不断前行。未来，虎诉将继续秉承以胜诉和客户商业目标为导向的服务理念，持续提升在国际法律市场中的影响力与竞争力。\n\n[图片]\n\nALB是汤森路透旗下的尖端法律杂志，是全球最具影响力的法律媒体之一，旨在为客户和读者提供前沿的法律商业资讯和律所专业评级。"
-                  },
-                  {
-                    "id": "detailImage1",
-                    "label": "详情图片 1",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231056_267_2.png"
+                    "value": ""
                   }
                 ]
               },
@@ -12043,12 +11966,6 @@
                     "label": "详情正文",
                     "kind": "textarea",
                     "value": "123123\n\n123123\n\n123123\n\n1231231"
-                  },
-                  {
-                    "id": "detailImage1",
-                    "label": "详情图片 1",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231056_268_2.png"
                   }
                 ]
               },
@@ -12181,12 +12098,6 @@
                     "label": "详情图片 3",
                     "kind": "image",
                     "value": "/assets/event/eventinfo2/微信图片_20260511231050_240_2.jpg"
-                  },
-                  {
-                    "id": "detailVideo1",
-                    "label": "详情视频 1",
-                    "kind": "url",
-                    "value": "/assets/event/event2/20241113_%E8%A7%86%E9%A2%91.mp4"
                   }
                 ]
               },
@@ -12883,12 +12794,6 @@
                     "label": "详情图片 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo2/微信图片_20260511231058_274_2.png"
-                  },
-                  {
-                    "id": "detailImage2",
-                    "label": "详情图片 2",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo/微信图片_20260511231524_304_2.png"
                   }
                 ]
               },
@@ -13051,12 +12956,6 @@
                     "label": "详情正文",
                     "kind": "textarea",
                     "value": "4月12日至13日，2023钱伯斯北京论坛将在北京王府井希尔顿酒店举办。北京虎诉律师事务所作为赞助商之一，受邀参与本次论坛活动。\n\n据悉，本次论坛将以合规为主线，围绕企业合规的丰富内涵和最新的监管政策、法律实操和市场趋势，对全球投资并购中的合规热点问题、私募和风险投资、仲裁法修订和临时仲裁等多个相关子话题进行讨论"
-                  },
-                  {
-                    "id": "detailImage1",
-                    "label": "详情图片 1",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo/微信图片_20260511231526_308_2.png"
                   }
                 ]
               },
@@ -13105,12 +13004,6 @@
                     "label": "详情正文",
                     "kind": "textarea",
                     "value": "为进一步深入贯彻习近平法治思想，践行“做党和人民满意的好律师”，中共北京虎诉律师事务所支部委员会积极响应北京市朝阳区律师行业党委提出的共建法治社区的号召，与石佛营南里社区委员会达成结对关系，以期利用法律专业优势，为推进社区法治进程贡献智慧。\n\n结对共建法治社区\n\n3月29日，北京虎诉律师事务所管理合伙人刘煜暄律师与虎诉党支部宣传委员陈明静实习律师前往石佛营南里社区，社区党委的张铉书记、刘贇超副书记与陆冬梅站长进行了接待。\n\n社区首先介绍了近期工作中面临的棘手问题与相关背景，并向虎诉党支部咨询合法合规的解决途径。刘煜暄律师从专业的角度给予了相应的建议。后续，双方探讨了本次“结对子”共建法治社区的深远价值，并就下一步的工作模式与计划积极交换了意见。\n\n不忘初心，砥砺前行\n\n虎诉党支部将坚持运用“组织结对子，党群手拉手”的工作方法，组织支部党员并积极动员单位群众组建虎诉法律服务队，更好地开展面向社区的法律服务，以真正成为“党和人民满意的好律师”。"
-                  },
-                  {
-                    "id": "detailImage1",
-                    "label": "详情图片 1",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo/微信图片_20260511231526_309_2.png"
                   }
                 ]
               },
@@ -13159,18 +13052,6 @@
                     "label": "详情正文",
                     "kind": "textarea",
                     "value": "这一年，我们继续秉持“虎诉精神”为各位客户服务，并最终实现了相较去年30%的业务收入增长；\n\n这一年，我们追求卓越的精神依旧为众多知名法律媒体及评级机构所欣赏，先后获得了《亚洲法律杂志》(Asian Legal Business)、《商法》(China Business Law Journal)、LEGALBAND、Benchmark Litigation等机构对虎诉及其各位合伙人的认可；\n\n这一年，我们依旧在不断尝试创新、寻求突破，上线了全新小程序TigerPark，推出了虎诉卡通形象“虎氪”，启动了第一届“虎行风从奖学金”项目，对公众号进行了功能升级……\n\n过去的三年，虎诉所面临的成长环境异常严峻。然而庆幸的是，在各位朋友的信任与支持下，这只“小老虎”还是茁壮成长了起来！\n\n值此三周岁生日，我们非常高兴能与各位分享一个好消息：虎诉明年将从华贸中心迁址远洋国际！新的一岁，期待虎诉在各位朋友的支持与见证下，走向更广阔的天地！"
-                  },
-                  {
-                    "id": "detailImage1",
-                    "label": "详情图片 1",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo/微信图片_20260511231526_310_2.png"
-                  },
-                  {
-                    "id": "detailImage2",
-                    "label": "详情图片 2",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo/微信图片_20260511231526_311_2.png"
                   }
                 ]
               },
@@ -13273,12 +13154,6 @@
                     "label": "详情正文",
                     "kind": "textarea",
                     "value": "6月16日，我们正式启动了“2022虎行风从奖学金”项目。经过第一轮的材料审查以及第二轮的面谈，综合考虑各位奖学金申请者对本次奖学金申请的投入程度、对争议解决业务的理解与从事意愿、学习能力、理解能力及表达能力等多个维度，奖学金评选委员会最终确定了王苓瑜、曹家豪、马延茹三位获奖者。\n\n一等奖：王苓瑜\n\n二等奖：曹家豪\n\n三等奖：马延茹\n\n了解上述获奖者的更多信息，请进入公众号。（链接：https://mp.weixin.qq.com/s/N-0VcbH9LqHZjmYADe5teg）\n\n本获奖名单公示期为7月25日-7月28日，如对公示结果有异议，可在公示期内向奖学金评选委员会提出书面异议申请。\n\n联系邮箱：fellowship@tigerpartners.cn\n\n本次，我们共收到了34位奖学金申请者的申请材料。奖学金评审委员会在本次评奖的过程中，认真阅读了各位申请者准备的材料，看到了各位独特的闪光点，我们为当代法律学子之优秀感到震撼，也为各位的赤诚之心而深受感动，更对中国法治事业的发展前景充满信心。\n\n最后，再次诚挚感谢各位对虎诉的关注与支持，我们十分珍视并将始终以之为前行的动力。"
-                  },
-                  {
-                    "id": "detailImage1",
-                    "label": "详情图片 1",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo/微信图片_20260511231526_313_2.png"
                   }
                 ]
               },
@@ -13453,12 +13328,6 @@
                     "label": "详情图片 2",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231524_304_2.png"
-                  },
-                  {
-                    "id": "detailImage3",
-                    "label": "详情图片 3",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo/微信图片_20260511231527_317_2.png"
                   }
                 ]
               },
@@ -13513,18 +13382,6 @@
                     "label": "详情图片 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231524_305_2.png"
-                  },
-                  {
-                    "id": "detailImage2",
-                    "label": "详情图片 2",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo/20210720-2.jpg"
-                  },
-                  {
-                    "id": "detailImage3",
-                    "label": "详情图片 3",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo/20210720-3.jpg"
                   }
                 ]
               },
@@ -13807,12 +13664,6 @@
                     "label": "详情图片 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231526_312_2.png"
-                  },
-                  {
-                    "id": "detailImage2",
-                    "label": "详情图片 2",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo/20210315-2.png"
                   }
                 ]
               },
@@ -14846,20 +14697,20 @@
                 ]
               },
               {
-                "id": "cards-1780537527298",
-                "label": "Industry cards 7",
+                "id": "cards-1780119755266",
+                "label": "22",
                 "fields": [
                   {
                     "id": "slug",
                     "label": "标识",
                     "kind": "text",
-                    "value": "cards-1780537527298"
+                    "value": "cards-1780119755266"
                   },
                   {
                     "id": "title",
                     "label": "标题",
                     "kind": "text",
-                    "value": "Industry cards 7"
+                    "value": "22"
                   },
                   {
                     "id": "image",
@@ -14871,13 +14722,13 @@
                     "id": "description",
                     "label": "描述",
                     "kind": "textarea",
-                    "value": ""
+                    "value": "12312"
                   },
                   {
                     "id": "href",
                     "label": "链接",
                     "kind": "url",
-                    "value": "/industries/cards-1780537527298?from=home"
+                    "value": "/industries/cards-1780119755266?from=home"
                   },
                   {
                     "id": "layoutClass",
@@ -14888,20 +14739,20 @@
                 ]
               },
               {
-                "id": "cards-1780580759330",
-                "label": "行业卡片 8",
+                "id": "cards-11",
+                "label": "22",
                 "fields": [
                   {
                     "id": "slug",
                     "label": "标识",
                     "kind": "text",
-                    "value": "cards-1780580759330"
+                    "value": "cards-11"
                   },
                   {
                     "id": "title",
                     "label": "标题",
                     "kind": "text",
-                    "value": ""
+                    "value": "22"
                   },
                   {
                     "id": "image",
@@ -14913,13 +14764,13 @@
                     "id": "description",
                     "label": "描述",
                     "kind": "textarea",
-                    "value": ""
+                    "value": "12312"
                   },
                   {
                     "id": "href",
                     "label": "链接",
                     "kind": "url",
-                    "value": ""
+                    "value": "/industries/cards-11?from=home"
                   },
                   {
                     "id": "layoutClass",
@@ -15153,20 +15004,20 @@
                 ]
               },
               {
-                "id": "cards-1780537527298",
-                "label": "Industry cards 7",
+                "id": "cards-1780119755266",
+                "label": "22",
                 "fields": [
                   {
                     "id": "slug",
                     "label": "标识",
                     "kind": "text",
-                    "value": "cards-1780537527298"
+                    "value": "cards-1780119755266"
                   },
                   {
                     "id": "title",
                     "label": "详情页标题",
                     "kind": "text",
-                    "value": "Industry cards 7"
+                    "value": "22"
                   },
                   {
                     "id": "image",
@@ -15178,13 +15029,49 @@
                     "id": "intro",
                     "label": "详情页简介",
                     "kind": "textarea",
-                    "value": ""
+                    "value": "12312"
                   },
                   {
                     "id": "sections",
                     "label": "详情卡片",
                     "kind": "textarea",
+                    "value": "123123"
+                  }
+                ]
+              },
+              {
+                "id": "cards-11",
+                "label": "22",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "标识",
+                    "kind": "text",
+                    "value": "cards-11"
+                  },
+                  {
+                    "id": "title",
+                    "label": "详情页标题",
+                    "kind": "text",
+                    "value": "22"
+                  },
+                  {
+                    "id": "image",
+                    "label": "首屏背景图片",
+                    "kind": "image",
                     "value": ""
+                  },
+                  {
+                    "id": "intro",
+                    "label": "详情页简介",
+                    "kind": "textarea",
+                    "value": "12312"
+                  },
+                  {
+                    "id": "sections",
+                    "label": "详情卡片",
+                    "kind": "textarea",
+                    "value": "123123"
                   }
                 ]
               }
@@ -16754,20 +16641,20 @@
                 ]
               },
               {
-                "id": "cards-1780537527298",
-                "label": "Industry cards 7",
+                "id": "cards-1780119755266",
+                "label": "111",
                 "fields": [
                   {
                     "id": "slug",
                     "label": "Slug",
                     "kind": "text",
-                    "value": "cards-1780537527298"
+                    "value": "cards-1780119755266"
                   },
                   {
                     "id": "title",
                     "label": "Title",
                     "kind": "text",
-                    "value": "Industry cards 7"
+                    "value": "111"
                   },
                   {
                     "id": "image",
@@ -16779,13 +16666,55 @@
                     "id": "description",
                     "label": "Description",
                     "kind": "textarea",
-                    "value": ""
+                    "value": "1231"
                   },
                   {
                     "id": "href",
                     "label": "Link",
                     "kind": "url",
-                    "value": "/industries/cards-1780537527298?from=home"
+                    "value": "/industries/cards-1780119755266?from=home"
+                  },
+                  {
+                    "id": "layoutClass",
+                    "label": "Layout class",
+                    "kind": "text",
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "id": "cards-11",
+                "label": "111",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "Slug",
+                    "kind": "text",
+                    "value": "cards-11"
+                  },
+                  {
+                    "id": "title",
+                    "label": "Title",
+                    "kind": "text",
+                    "value": "111"
+                  },
+                  {
+                    "id": "image",
+                    "label": "Image",
+                    "kind": "image",
+                    "value": ""
+                  },
+                  {
+                    "id": "description",
+                    "label": "Description",
+                    "kind": "textarea",
+                    "value": "1231"
+                  },
+                  {
+                    "id": "href",
+                    "label": "Link",
+                    "kind": "url",
+                    "value": "/industries/cards-11?from=home"
                   },
                   {
                     "id": "layoutClass",
@@ -21019,7 +20948,7 @@
                 "id": "image",
                 "label": "Background image",
                 "kind": "image",
-                "value": "/uploads/coreValue/1780128620763-event7.png"
+                "value": "/assets/about/awardbg.webp"
               },
               {
                 "id": "breadcrumb",
@@ -21355,38 +21284,38 @@
             ],
             "items": [
               {
-                "id": "list-1780128877683",
+                "id": "list-1781020346379",
                 "label": "New Event",
                 "fields": [
                   {
                     "id": "slug",
                     "label": "Slug",
                     "kind": "text",
-                    "value": "list-1780128877683"
+                    "value": "list-1781020346379"
                   },
                   {
                     "id": "image",
                     "label": "Thumbnail",
                     "kind": "image",
-                    "value": "/uploads/event/1780128884440-event10.png"
+                    "value": ""
                   },
                   {
                     "id": "sortDate",
                     "label": "Sort date (YYYYMMDD)",
                     "kind": "text",
-                    "value": "20260530"
+                    "value": "20260609"
                   },
                   {
                     "id": "displayDate",
                     "label": "Display date",
                     "kind": "text",
-                    "value": "20260530"
+                    "value": "20260609"
                   },
                   {
                     "id": "category",
                     "label": "Category",
                     "kind": "text",
-                    "value": "Industry News"
+                    "value": ""
                   },
                   {
                     "id": "title",
@@ -21398,55 +21327,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "On April 30, 2026, the China Commission of Arbitration for Sport (CCAS) officially launched its new arbitrator roster."
-                  }
-                ]
-              },
-              {
-                "id": "event-20260530-108",
-                "label": "New Event",
-                "fields": [
-                  {
-                    "id": "slug",
-                    "label": "Slug",
-                    "kind": "text",
-                    "value": "event-20260530-108"
-                  },
-                  {
-                    "id": "image",
-                    "label": "Thumbnail",
-                    "kind": "image",
-                    "value": "/uploads/event/1780128842174-hu.svg"
-                  },
-                  {
-                    "id": "sortDate",
-                    "label": "Sort date (YYYYMMDD)",
-                    "kind": "text",
-                    "value": "20260530"
-                  },
-                  {
-                    "id": "displayDate",
-                    "label": "Display date",
-                    "kind": "text",
-                    "value": "May. 30, 2026"
-                  },
-                  {
-                    "id": "category",
-                    "label": "Category",
-                    "kind": "text",
-                    "value": "111"
-                  },
-                  {
-                    "id": "title",
-                    "label": "Title",
-                    "kind": "textarea",
-                    "value": "New Event"
-                  },
-                  {
-                    "id": "summary",
-                    "label": "Summary",
-                    "kind": "textarea",
-                    "value": "On May 1, 2026, the China International Economic and Trade Arbitration Commission (hereinafter referred to as CIETAC) officially released its new roster of arbitrators, which took effect on the same day for a term of five years."
+                    "value": ""
                   }
                 ]
               },
@@ -21482,7 +21363,7 @@
                     "id": "category",
                     "label": "Category",
                     "kind": "text",
-                    "value": "Industry News"
+                    "value": ""
                   },
                   {
                     "id": "title",
@@ -21494,7 +21375,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "On March 16, 2026, renowned legal media Asian Legal Business (ALB) unveiled the shortlist for the ALB China Law Awards 2026. "
+                    "value": ""
                   }
                 ]
               },
@@ -21530,7 +21411,7 @@
                     "id": "category",
                     "label": "Category",
                     "kind": "text",
-                    "value": "Industry News"
+                    "value": ""
                   },
                   {
                     "id": "title",
@@ -21542,7 +21423,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "On January 15, 2026, Chambers and Partners, the world’s authoritative legal rating institution, officially released Chambers Greater China Region 2026."
+                    "value": ""
                   }
                 ]
               },
@@ -21578,19 +21459,19 @@
                     "id": "category",
                     "label": "Category",
                     "kind": "text",
-                    "value": "Industry News"
+                    "value": ""
                   },
                   {
                     "id": "title",
                     "label": "Title",
                     "kind": "textarea",
-                    "value": "Tiger Partners Ranked on The Legal 500 China 2026 List; Partners Liu Yuxuan, Wan Li and Zoe Zhang Honored as Legal 500 China Elite"
+                    "value": ""
                   },
                   {
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "On November 19, 2025, The Legal 500, an internationally authoritative legal rating institution, released its 2026 China Rankings."
+                    "value": ""
                   }
                 ]
               },
@@ -21608,7 +21489,7 @@
                     "id": "image",
                     "label": "Thumbnail",
                     "kind": "image",
-                    "value": "/assets/event/event2/6.png"
+                    "value": ""
                   },
                   {
                     "id": "sortDate",
@@ -21626,19 +21507,19 @@
                     "id": "category",
                     "label": "Category",
                     "kind": "text",
-                    "value": "Industry News"
+                    "value": ""
                   },
                   {
                     "id": "title",
                     "label": "Title",
                     "kind": "textarea",
-                    "value": "Tiger Partners was listed as \"Firm to Watch\" in China Business Law Awards 2025"
+                    "value": ""
                   },
                   {
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "On July 23, 2025, China Business Law Journal, an internationally renowned legal media outlet, announced the results of its China Business Law Journal Awards 2025."
+                    "value": ""
                   }
                 ]
               },
@@ -21674,7 +21555,7 @@
                     "id": "category",
                     "label": "Category",
                     "kind": "text",
-                    "value": "Industry News"
+                    "value": ""
                   },
                   {
                     "id": "title",
@@ -21686,7 +21567,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "On June 20, 2025, Asian Legal Business (ALB), the internationally renowned legal media under Thomson Reuters, released the 2025 ALB China Dispute Resolution Rankings.  "
+                    "value": ""
                   }
                 ]
               },
@@ -21734,7 +21615,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "On June 6, 2025, the second Beijing Arbitration Culture Promotion Month Series themed Games 脳 Law: Cross-Border Thinking and Rule Prospects in Dispute Resolution, hosted by the Beijing Arbitration Commission / Beijing International Arbitration Court and undertaken by Tiger Partners, concluded successfully at Tiger Partners."
+                    "value": "11"
                   }
                 ]
               },
@@ -21770,7 +21651,7 @@
                     "id": "category",
                     "label": "Category",
                     "kind": "text",
-                    "value": "Industry News"
+                    "value": ""
                   },
                   {
                     "id": "title",
@@ -21782,7 +21663,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "On April 16, 2025, Asian Legal Business (\"ALB\"), the internationally renowned legal media outlet under Thomson Reuters, announced the shortlist for the China Law Awards 2025.  "
+                    "value": ""
                   }
                 ]
               },
@@ -21830,7 +21711,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "On February 13, 2025, Chambers and Partners, the internationally authoritative legal rating institution, released the Chambers Global Guide 2025."
+                    "value": "2131"
                   }
                 ]
               },
@@ -21878,7 +21759,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "On January 16, 2025, Chambers and Partners, the world's authoritative legal rating institution, released Chambers Greater China Region 2025."
+                    "value": "On April 30, 2026, the China Commission of Arbitration for Sport (CCAS) officially launched its new arbitrator roster."
                   }
                 ]
               },
@@ -21926,7 +21807,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "The 22nd \"CIETAC Cup\" will kick off on November 29, 2024. It has attracted more than 1,000 participants from over 100 law schools across China and overseas regions, including the United Kingdom, the Netherlands, Russia, Egypt, Vietnam, Kazakhstan, as well as China’s Hong Kong and Macao."
+                    "value": "On May 1, 2026, the China International Economic and Trade Arbitration Commission (hereinafter referred to as CIETAC) officially released its new roster of arbitrators, which took effect on the same day for a term of five years."
                   }
                 ]
               },
@@ -21974,7 +21855,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "On June 4, the 2024 Benchmark Litigation China Dispute Resolution List were officially released. Tiger Partners was honored to be selected as a Firm to Watch. "
+                    "value": "On March 16, 2026, renowned legal media Asian Legal Business (ALB) unveiled the shortlist for the ALB China Law Awards 2026. "
                   }
                 ]
               },
@@ -22022,7 +21903,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "the World Arbitration Update 2024 (WAU 2024) China Edition"
+                    "value": "On January 15, 2026, Chambers and Partners, the world’s authoritative legal rating institution, officially released Chambers Greater China Region 2026."
                   }
                 ]
               },
@@ -22070,7 +21951,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "On January 22, Asian Legal Business (ALB) released the 2024 ALB China Boutique Law Firm Rankings. Tiger Partners is honored to be selected for the list. "
+                    "value": "On November 19, 2025, The Legal 500, an internationally authoritative legal rating institution, released its 2026 China Rankings."
                   }
                 ]
               },
@@ -22118,7 +21999,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "Tiger Partners is honored to announce that Kinsey Kang Yanan, barrister-at-law, has been engaged as our Hong Kong Legal Counsel. From this day on, Tiger Partners will work with Kinsey wholeheartedly to provide our clients with more professional, efficient and convenient legal services."
+                    "value": "On July 23, 2025, China Business Law Journal, an internationally renowned legal media outlet, announced the results of its China Business Law Journal Awards 2025."
                   }
                 ]
               },
@@ -22166,7 +22047,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "From April 12 to 13, the Chambers Forum: Beijing 2023 will be held at the Hilton Hotel of Wangfujing in Beijing. As one of the sponsors, Tiger Partners was invited to participate in the forum."
+                    "value": "On June 20, 2025, Asian Legal Business (ALB), the internationally renowned legal media under Thomson Reuters, released the 2025 ALB China Dispute Resolution Rankings.  "
                   }
                 ]
               },
@@ -22214,7 +22095,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "In order to deepen the implementation of Xi Jinping Thought on the Rule of Law and fulfill practice \"Good Lawyers to the satisfaction of the Party and the people\", the Party branch committee of Tiger Partners responded positively to the call of the Party Committee of the Lawyers' Profession of Chaoyang District of Beijing for building a law-based community and entered into a pairing relationship with the community committee of Shifoying Nanli in order to make use of the advantages of the legal profession to contribute to promoting the construction of the rule of law in the community."
+                    "value": "On June 6, 2025, the second Beijing Arbitration Culture Promotion Month Series themed Games 脳 Law: Cross-Border Thinking and Rule Prospects in Dispute Resolution, hosted by the Beijing Arbitration Commission / Beijing International Arbitration Court and undertaken by Tiger Partners, concluded successfully at Tiger Partners."
                   }
                 ]
               },
@@ -22262,7 +22143,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "This year, we always uphold the spirit of Tiger Partners to serve our clients, culminating in a 30 percent increase in revenue compared to the previous year."
+                    "value": "On April 16, 2025, Asian Legal Business (\"ALB\"), the internationally renowned legal media outlet under Thomson Reuters, announced the shortlist for the China Law Awards 2025.  "
                   }
                 ]
               },
@@ -22310,7 +22191,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "The 20th \"CIETAC Cup\" will be held from November 28 to December 2, 2022. More than 1000 players from more than 90 law schools, including the United Kingdom, Vietnam, the Netherlands, Uzbekistan, Hong Kong, China and Macao, China, participated in the \"CIETAC Cup\" this year."
+                    "value": "On February 13, 2025, Chambers and Partners, the internationally authoritative legal rating institution, released the Chambers Global Guide 2025."
                   }
                 ]
               },
@@ -22358,7 +22239,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "On June 16, we officially launched the 2022 TIGERS FELLOWSHIP program. After the first round of review material and a second round of interviews, considering devotion of scholarship applicants for application, understanding and willingness of dispute resolution, ability to learn, understandi and express, and other dimensions, the Scholarship Selection Committee ultimately decided on three winners, who were Wang Lingyu, Cao Jiahao and Ma Yanru."
+                    "value": "On January 16, 2025, Chambers and Partners, the world's authoritative legal rating institution, released Chambers Greater China Region 2025."
                   }
                 ]
               },
@@ -22394,7 +22275,7 @@
                     "id": "category",
                     "label": "Category",
                     "kind": "text",
-                    "value": "Tiger Dynamics"
+                    "value": ""
                   },
                   {
                     "id": "title",
@@ -22406,7 +22287,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "In order to welcome the official birth of this important guest, we launched the \"Cartoon Character Naming of Tiger Partners\" on TigerPark Mini Program on June 10. In just two days, we received 176 copies of registration information. After the vote of us, it finally obtained its own name - Hook! And let‘s see its detailed introduction. [图片"
+                    "value": "The 22nd \"CIETAC Cup\" will kick off on November 29, 2024. It has attracted more than 1,000 participants from over 100 law schools across China and overseas regions, including the United Kingdom, the Netherlands, Russia, Egypt, Vietnam, Kazakhstan, as well as China’s Hong Kong and Macao."
                   }
                 ]
               },
@@ -22454,7 +22335,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "[图片"
+                    "value": "On June 4, the 2024 Benchmark Litigation China Dispute Resolution List were officially released. Tiger Partners was honored to be selected as a Firm to Watch. "
                   }
                 ]
               },
@@ -22502,7 +22383,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "On June 15, China Business Law Journal, a well-known legal media, announced the results of the China Business Law Awards 2022, and Tiger Partners was honored to be included in two of the awards."
+                    "value": "the World Arbitration Update 2024 (WAU 2024) China Edition"
                   }
                 ]
               },
@@ -22550,7 +22431,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "Since its establishment, Tiger Partners has always adhered to the deep legal expertise and extensive practical experience, as well as a distinctive commercial thinking, to provide customers with professional legal services and precise business solutions. At the same time, as one of the extremely vibrant, creative and inclusive law firms, Tiger Partners has been seeking to upgrade its services, in order to bring better user experience for clients and all other friends who pay great attention to the growth of us."
+                    "value": "On January 22, Asian Legal Business (ALB) released the 2024 ALB China Boutique Law Firm Rankings. Tiger Partners is honored to be selected for the list. "
                   }
                 ]
               },
@@ -22598,7 +22479,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "On May 17, LEGALBAND released the ranking of China's top law firms and lawyers in 2022. Tiger Partners and Mr. Liu Yuxuan, Mr. Wan Li were selected into the abovementioned ranking lists."
+                    "value": "Tiger Partners is honored to announce that Kinsey Kang Yanan, barrister-at-law, has been engaged as our Hong Kong Legal Counsel. From this day on, Tiger Partners will work with Kinsey wholeheartedly to provide our clients with more professional, efficient and convenient legal services."
                   }
                 ]
               },
@@ -22646,7 +22527,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "Benchmark Litigation released lists of recommended law firms and lawyers for dispute resolution in Asia Pacific and China of 2022 on May 9, and Tiger Partners won the title of \"Notable Firm\" in the field of commercial disputes resolution in Beijing area by Benchmark Litigation 2022."
+                    "value": "From April 12 to 13, the Chambers Forum: Beijing 2023 will be held at the Hilton Hotel of Wangfujing in Beijing. As one of the sponsors, Tiger Partners was invited to participate in the forum."
                   }
                 ]
               },
@@ -22694,7 +22575,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "LEGALBAND released 2022 China Law Awards Nominations list on March 31, and Tiger Partners was nominated as \"Rising Law Firm of the Year\"."
+                    "value": "In order to deepen the implementation of Xi Jinping Thought on the Rule of Law and fulfill practice \"Good Lawyers to the satisfaction of the Party and the people\", the Party branch committee of Tiger Partners responded positively to the call of the Party Committee of the Lawyers' Profession of Chaoyang District of Beijing for building a law-based community and entered into a pairing relationship with the community committee of Shifoying Nanli in order to make use of the advantages of the legal profession to contribute to promoting the construction of the rule of law in the community."
                   }
                 ]
               },
@@ -22742,7 +22623,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "Today, Dalian International Arbitration Court released the namelist of arbitrators for the 6th session, and Mr. Wan Li, partner of Tiger Partners, is honored to be the selected one."
+                    "value": "This year, we always uphold the spirit of Tiger Partners to serve our clients, culminating in a 30 percent increase in revenue compared to the previous year."
                   }
                 ]
               },
@@ -22790,7 +22671,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "On January 24, 2021, China Business Law Journal released “The A-List” for related businesses in 2021 in P.R.C. Liu Yuxuan, Managing Partner of Tiger Partners was selected as “The A-List”."
+                    "value": "The 20th \"CIETAC Cup\" will be held from November 28 to December 2, 2022. More than 1000 players from more than 90 law schools, including the United Kingdom, Vietnam, the Netherlands, Uzbekistan, Hong Kong, China and Macao, China, participated in the \"CIETAC Cup\" this year."
                   }
                 ]
               },
@@ -22838,7 +22719,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "Tiger Partners is pleased to announce that Zoe Zhang has officially joined the firm as a partner. Before joining Tiger Partners, Zoe was working with the Dispute Resolution Team of Zhong Lun Law Firm as an equity partner. We are in the process of fulfilling registration formalities for Zoe’s transfer."
+                    "value": "On June 16, we officially launched the 2022 TIGERS FELLOWSHIP program. After the first round of review material and a second round of interviews, considering devotion of scholarship applicants for application, understanding and willingness of dispute resolution, ability to learn, understandi and express, and other dimensions, the Scholarship Selection Committee ultimately decided on three winners, who were Wang Lingyu, Cao Jiahao and Ma Yanru."
                   }
                 ]
               },
@@ -22886,7 +22767,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "Recently, Asian Legal Business (“ALB”), a leading international legal magazine, announced the list of ALB China 2022 Firms to Watch. Tiger Partners, with its exquisite professional ability and high-quality reputation in area of disputes resolution, was selected as \"Firm to Watch\"."
+                    "value": "In order to welcome the official birth of this important guest, we launched the \"Cartoon Character Naming of Tiger Partners\" on TigerPark Mini Program on June 10. In just two days, we received 176 copies of registration information. After the vote of us, it finally obtained its own name - Hook! And let‘s see its detailed introduction. [图片"
                   }
                 ]
               },
@@ -22934,7 +22815,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "On December 18, 2021, the 2nd anniversary dinner of Tiger Partners was held in Rose Hall, 4th floor, InterContinental Hotel, TongYing Center, Sanlitun Village, Beijing. Many Friends of Tiger Partners gathered together to celebrate its 2nd birthday."
+                    "value": "[图片"
                   }
                 ]
               },
@@ -22982,7 +22863,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "On October 13, the Beijing Lawyers Association released the \"Supplementary List of Members of the Beijing Lawyers Association on Publishing Professional Committees (Board)\". Through strict procedures of selection and publication, Mr. Liu Yuxuan, Mr. Xu Min and Mr. Wan Li, partners of Tiger Partners, were elected as members of the 11th Professional Committee of the Beijing Lawyers Association with their extensive experience in specialized fields. Specifically,"
+                    "value": "On June 15, China Business Law Journal, a well-known legal media, announced the results of the China Business Law Awards 2022, and Tiger Partners was honored to be included in two of the awards."
                   }
                 ]
               },
@@ -23030,7 +22911,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "On July 19, 2021, the 29th Cross-Strait Youth Vision Forum, hosted by the Central Committee of the Revolutionary Committee of the Chinese Kuomintang, was held in Beijing. With the theme of \"Heart Across the Straits · Legal Resonance of Sincere Voices\", the forum gathered young legal professionals from both sides of the Taiwan Strait to engage in in-depth discussions on industrial development and legal issues concerning cross-strait exchanges. Liu Yuxuan, Managing Partner of Tiger Partners, and Liao Mengcheng, Senior Consultant of Tiger Partners, were honored to be invited to attend the forum."
+                    "value": "Since its establishment, Tiger Partners has always adhered to the deep legal expertise and extensive practical experience, as well as a distinctive commercial thinking, to provide customers with professional legal services and precise business solutions. At the same time, as one of the extremely vibrant, creative and inclusive law firms, Tiger Partners has been seeking to upgrade its services, in order to bring better user experience for clients and all other friends who pay great attention to the growth of us."
                   }
                 ]
               },
@@ -23078,7 +22959,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "On June 10, 2021, the international legal rating agency benchmark ligation officially released the ranking guide for China in 2021, which is also the first time that benchmark ligation has launched the ranking guide for dispute resolution in China."
+                    "value": "On May 17, LEGALBAND released the ranking of China's top law firms and lawyers in 2022. Tiger Partners and Mr. Liu Yuxuan, Mr. Wan Li were selected into the abovementioned ranking lists."
                   }
                 ]
               },
@@ -23126,7 +23007,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "Recently, China Business Law Journal, a leading international legal magazine, announced the results of the China Business Law Awards 2021. Tiger partners, with its exquisite professional ability and high-quality reputation, was selected as a \"Firm to Watch\"."
+                    "value": "Benchmark Litigation released lists of recommended law firms and lawyers for dispute resolution in Asia Pacific and China of 2022 on May 9, and Tiger Partners won the title of \"Notable Firm\" in the field of commercial disputes resolution in Beijing area by Benchmark Litigation 2022."
                   }
                 ]
               },
@@ -23174,7 +23055,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "Recently, Asian legal business (\"ALB\") published the shortlist of SSQ 2021 ALB China law award. Tiger Partners, with its superb professional ability and outstanding achievements, was shortlisted for the \"Rising Law Firm of the Year\""
+                    "value": "LEGALBAND released 2022 China Law Awards Nominations list on March 31, and Tiger Partners was nominated as \"Rising Law Firm of the Year\"."
                   }
                 ]
               },
@@ -23222,7 +23103,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "In April 2021, Mr. Liu Yuxuan was listed in the top lawyers in China by LEGALBAND in 2021 and selected as the \"Rising Star\" in the field of \"dispute resolution litigation\" ."
+                    "value": "Today, Dalian International Arbitration Court released the namelist of arbitrators for the 6th session, and Mr. Wan Li, partner of Tiger Partners, is honored to be the selected one."
                   }
                 ]
               },
@@ -23270,7 +23151,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "The leading legal press China Business Law Journal recently released its list of Top 40 Rising Stars 2021 - 40 elite up-and-coming lawyers in China, recognizing their outstanding performance in their respective practice areas in the past year of 2020. Liu Yuxuan and Wan Li from Tiger Partners are identified in the list for their expertise in the field of commercial dispute resolution and for their excellent client reputation."
+                    "value": "On January 24, 2021, China Business Law Journal released “The A-List” for related businesses in 2021 in P.R.C. Liu Yuxuan, Managing Partner of Tiger Partners was selected as “The A-List”."
                   }
                 ]
               },
@@ -23318,7 +23199,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "The Beijing Lawyers Association released the list of Foreign Lawyers Talent pool yesterday. After strict selection and publicity procedures, Mr. Xu Min and Mr. Wan Li were successfully selected into the foreign lawyers talent pool with their rich foreign business experience."
+                    "value": "Tiger Partners is pleased to announce that Zoe Zhang has officially joined the firm as a partner. Before joining Tiger Partners, Zoe was working with the Dispute Resolution Team of Zhong Lun Law Firm as an equity partner. We are in the process of fulfilling registration formalities for Zoe’s transfer."
                   }
                 ]
               },
@@ -23366,7 +23247,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "Recently, China Business Law Journal, a well-known legal media, officially included Tiger Partners. Tiger Partners’ inclusion in the Journal’s recommended law firm list fully attests to the firm’s consistently outstanding performance in dispute resolution (litigation and arbitration)."
+                    "value": "Recently, Asian Legal Business (“ALB”), a leading international legal magazine, announced the list of ALB China 2022 Firms to Watch. Tiger Partners, with its exquisite professional ability and high-quality reputation in area of disputes resolution, was selected as \"Firm to Watch\"."
                   }
                 ]
               },
@@ -23414,7 +23295,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "Recently, Asian Legal Business (\"ALB\"), one of the world's most influential legal media, interviewed Liu Yuxuan, Managing Partner of Tiger Partners. The article has been published in the May 2020 issue of ALB China. If you would like to read the rest of the article, please visit ALB's website http://www.legalbusinessonline.com/china."
+                    "value": "On December 18, 2021, the 2nd anniversary dinner of Tiger Partners was held in Rose Hall, 4th floor, InterContinental Hotel, TongYing Center, Sanlitun Village, Beijing. Many Friends of Tiger Partners gathered together to celebrate its 2nd birthday."
                   }
                 ]
               },
@@ -23462,7 +23343,7 @@
                     "id": "summary",
                     "label": "Summary",
                     "kind": "textarea",
-                    "value": "Asian Legal Business (\"ALB\"), one of the world's most influential legal media, has recently noted the establishment of Tiger Partners. As a boutique firm specializing in complex commercial dispute resolution, Tiger Partners' primary objective is to realize the interests of its clients. Tiger Partners has a deep legal expertise, rich practical experience and a distinctive commercial mindset. It is committed to providing professional legal services, precise business solutions and good user experience to its clients."
+                    "value": "On October 13, the Beijing Lawyers Association released the \"Supplementary List of Members of the Beijing Lawyers Association on Publishing Professional Committees (Board)\". Through strict procedures of selection and publication, Mr. Liu Yuxuan, Mr. Xu Min and Mr. Wan Li, partners of Tiger Partners, were elected as members of the 11th Professional Committee of the Beijing Lawyers Association with their extensive experience in specialized fields. Specifically,"
                   }
                 ]
               },
@@ -23505,6 +23386,12 @@
                     "label": "Title",
                     "kind": "textarea",
                     "value": "Mr. Liu Yuxuan and  Mr. Liao Mengcheng Invited to Attend the 29th Cross-Strait Youth Vision Forum"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "Summary",
+                    "kind": "textarea",
+                    "value": "On July 19, 2021, the 29th Cross-Strait Youth Vision Forum, hosted by the Central Committee of the Revolutionary Committee of the Chinese Kuomintang, was held in Beijing. With the theme of \"Heart Across the Straits · Legal Resonance of Sincere Voices\", the forum gathered young legal professionals from both sides of the Taiwan Strait to engage in in-depth discussions on industrial development and legal issues concerning cross-strait exchanges. Liu Yuxuan, Managing Partner of Tiger Partners, and Liao Mengcheng, Senior Consultant of Tiger Partners, were honored to be invited to attend the forum."
                   }
                 ]
               },
@@ -23547,6 +23434,12 @@
                     "label": "Title",
                     "kind": "textarea",
                     "value": "Tiger Partners and Mr. Liu Yuxuan and Mr. Wan Li recommend by Benchmark Litigation China"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "Summary",
+                    "kind": "textarea",
+                    "value": "On June 10, 2021, the international legal rating agency benchmark ligation officially released the ranking guide for China in 2021, which is also the first time that benchmark ligation has launched the ranking guide for dispute resolution in China."
                   }
                 ]
               },
@@ -23589,6 +23482,12 @@
                     "label": "Title",
                     "kind": "textarea",
                     "value": "Tiger Partners was listed as \"Firm to Watch\""
+                  },
+                  {
+                    "id": "summary",
+                    "label": "Summary",
+                    "kind": "textarea",
+                    "value": "Recently, China Business Law Journal, a leading international legal magazine, announced the results of the China Business Law Awards 2021. Tiger partners, with its exquisite professional ability and high-quality reputation, was selected as a \"Firm to Watch\"."
                   }
                 ]
               },
@@ -23631,6 +23530,12 @@
                     "label": "Title",
                     "kind": "textarea",
                     "value": "Tiger Partners was nominated as \"Rising Law Firm of the Year\" in the 18th Annual SSQ ALB China Law Awards 2021"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "Summary",
+                    "kind": "textarea",
+                    "value": "Recently, Asian legal business (\"ALB\") published the shortlist of SSQ 2021 ALB China law award. Tiger Partners, with its superb professional ability and outstanding achievements, was shortlisted for the \"Rising Law Firm of the Year\""
                   }
                 ]
               },
@@ -23673,6 +23578,12 @@
                     "label": "Title",
                     "kind": "textarea",
                     "value": "Mr. Liu Yuxuan was listed in the top lawyers in China by LEGALBAND in 2021"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "Summary",
+                    "kind": "textarea",
+                    "value": "In April 2021, Mr. Liu Yuxuan was listed in the top lawyers in China by LEGALBAND in 2021 and selected as the \"Rising Star\" in the field of \"dispute resolution litigation\" ."
                   }
                 ]
               },
@@ -23715,6 +23626,12 @@
                     "label": "Title",
                     "kind": "textarea",
                     "value": "Attorney Liu Yuxuan and Wan Li from Tiger Partners identified in the list of Top 40 Rising Stars 2021 elite up-and-coming lawyers in China"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "Summary",
+                    "kind": "textarea",
+                    "value": "The leading legal press China Business Law Journal recently released its list of Top 40 Rising Stars 2021 - 40 elite up-and-coming lawyers in China, recognizing their outstanding performance in their respective practice areas in the past year of 2020. Liu Yuxuan and Wan Li from Tiger Partners are identified in the list for their expertise in the field of commercial dispute resolution and for their excellent client reputation."
                   }
                 ]
               },
@@ -23757,6 +23674,12 @@
                     "label": "Title",
                     "kind": "textarea",
                     "value": "Mr. Xu Min and Mr. Wan Li were selected into the Foreign-Related Lawyer Talent Pool of the Beijing Bar Association"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "Summary",
+                    "kind": "textarea",
+                    "value": "The Beijing Lawyers Association released the list of Foreign Lawyers Talent pool yesterday. After strict selection and publicity procedures, Mr. Xu Min and Mr. Wan Li were successfully selected into the foreign lawyers talent pool with their rich foreign business experience."
                   }
                 ]
               },
@@ -23799,6 +23722,12 @@
                     "label": "Title",
                     "kind": "textarea",
                     "value": "China Business Law Journal officially included Tiger Partners"
+                  },
+                  {
+                    "id": "summary",
+                    "label": "Summary",
+                    "kind": "textarea",
+                    "value": "Recently, China Business Law Journal, a well-known legal media, officially included Tiger Partners. Tiger Partners’ inclusion in the Journal’s recommended law firm list fully attests to the firm’s consistently outstanding performance in dispute resolution (litigation and arbitration)."
                   }
                 ]
               },
@@ -23841,6 +23770,12 @@
                     "label": "Title",
                     "kind": "textarea",
                     "value": "ALB report \"An up-and-comer in dispute resolution-Interview Liu Yuxuan, managing partner\""
+                  },
+                  {
+                    "id": "summary",
+                    "label": "Summary",
+                    "kind": "textarea",
+                    "value": "Recently, Asian Legal Business (\"ALB\"), one of the world's most influential legal media, interviewed Liu Yuxuan, Managing Partner of Tiger Partners. The article has been published in the May 2020 issue of ALB China. If you would like to read the rest of the article, please visit ALB's website http://www.legalbusinessonline.com/china."
                   }
                 ]
               },
@@ -23883,6 +23818,12 @@
                     "label": "Title",
                     "kind": "textarea",
                     "value": "ALB report\"Former red circle firm lawyers leave to set up boutique firm Tiger Partners\""
+                  },
+                  {
+                    "id": "summary",
+                    "label": "Summary",
+                    "kind": "textarea",
+                    "value": "Asian Legal Business (\"ALB\"), one of the world's most influential legal media, has recently noted the establishment of Tiger Partners. As a boutique firm specializing in complex commercial dispute resolution, Tiger Partners' primary objective is to realize the interests of its clients. Tiger Partners has a deep legal expertise, rich practical experience and a distinctive commercial mindset. It is committed to providing professional legal services, precise business solutions and good user experience to its clients."
                   }
                 ]
               }
@@ -23894,32 +23835,32 @@
             "fields": [],
             "items": [
               {
-                "id": "list-1780128877683",
+                "id": "list-1781020346379",
                 "label": "New Event",
                 "fields": [
                   {
                     "id": "slug",
                     "label": "Slug",
                     "kind": "text",
-                    "value": "list-1780128877683"
+                    "value": "list-1781020346379"
                   },
                   {
                     "id": "sortDate",
                     "label": "Sort date (YYYYMMDD)",
                     "kind": "text",
-                    "value": "20260530"
+                    "value": "20260609"
                   },
                   {
                     "id": "displayDate",
                     "label": "Display date",
                     "kind": "text",
-                    "value": "20260530"
+                    "value": "20260609"
                   },
                   {
                     "id": "category",
                     "label": "Category",
                     "kind": "text",
-                    "value": "Industry News"
+                    "value": ""
                   },
                   {
                     "id": "title",
@@ -23931,97 +23872,19 @@
                     "id": "summary",
                     "label": "Detail summary",
                     "kind": "textarea",
-                    "value": "On April 30, 2026, the China Commission of Arbitration for Sport (CCAS) officially launched its new arbitrator roster."
+                    "value": ""
                   },
                   {
                     "id": "content",
                     "label": "Detail content",
                     "kind": "textarea",
-                    "value": "On April 30, 2026, the China Commission of Arbitration for Sport (CCAS) officially launched its new arbitrator roster.\n\nMr. Xu Min, Partner at Tiger Partners, has been successfully selected into the new arbitrator roster of CCAS, owing to his solid legal expertise, extensive experience in dispute resolution, and in-depth dedication to the field of sports rule of law.\n\n[IMAGE]\n\n[IMAGE]\n\nChina Commission of Arbitration for Sport (CCAS) is an arbitration institution established in accordance with the law by the General Administration of Sport of China, specializing in settling disputes in the sports sector. The supplementary recruitment marks an important measure taken by CCAS to strengthen its professional workforce and advance the high-quality development of sports arbitration in the inaugural year of the 15th Five-Year Plan. It focuses on recruiting outstanding talents with sports management experience, professional athlete backgrounds or practical legal capabilities.\n\nMr. Xu Min’s selection fully recognizes his professional competence and interdisciplinary expertise, and also reflects Tiger Partners’ continued in-depth cultivation in diversified dispute resolution areas including sports, entertainment and commercial affairs. Going forward, Tiger Partners will continue to leverage its high-level professional platform to deliver more targeted and efficient legal services to clients.\n\n[IMAGE]\n\nXU Min is a practicing lawyer in Mainland China. He specializes in acting as an advocate in domestic litigation and domestic and overseas arbitration and has extensive experience in providing legal advisory services to enterprises. XU Min has extensive experience in equity transaction, corporate governance, commercial contract review and dispute resolution and product liability for clients. His cases involve in industries of maritime affairs, banking and finance, private equity, shipping, goods trade, high technology, new media, film, television and entertainment, education, real estate and other areas.\n\nMr. Xu Min graduated from the School of Law, City University of Hong Kong, holding a Bachelor of Laws and a Master of Laws degree. He is currently a Fellow of the Chartered Institute of Arbitrators (F.CIArb), an Arbitrator of the China Commission of Arbitration for Sport, a member of the Culture, Tourism, Media and Sports Professional Committee of the Beijing Lawyers Association, and a member of the Sports Law and Olympic Legal Affairs Research Association of the Beijing Law Society. He has also been selected into the roster of 100 High-end International Legal Talents by the Beijing Municipal Bureau of Justice and the International Lawyers Talent Pool of the Beijing Lawyers Association. Prior to joining Tiger Partners Law Firm, Mr. Xu Min worked as a dispute resolution lawyer at King & Wood Mallesons and Fangda Partners."
+                    "value": "hello\n[IMAGE]\n123"
                   },
                   {
                     "id": "detailImage1",
                     "label": "Detail image 1",
                     "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231050_232_2.png"
-                  },
-                  {
-                    "id": "detailImage2",
-                    "label": "Detail image 2",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231050_233_2.png"
-                  },
-                  {
-                    "id": "detailImage3",
-                    "label": "Detail image 3",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231050_235_2.jpg"
-                  }
-                ]
-              },
-              {
-                "id": "event-20260530-108",
-                "label": "New Event",
-                "fields": [
-                  {
-                    "id": "slug",
-                    "label": "Slug",
-                    "kind": "text",
-                    "value": "event-20260530-108"
-                  },
-                  {
-                    "id": "sortDate",
-                    "label": "Sort date (YYYYMMDD)",
-                    "kind": "text",
-                    "value": "20260530"
-                  },
-                  {
-                    "id": "displayDate",
-                    "label": "Display date",
-                    "kind": "text",
-                    "value": "May. 30, 2026"
-                  },
-                  {
-                    "id": "category",
-                    "label": "Category",
-                    "kind": "text",
-                    "value": "111"
-                  },
-                  {
-                    "id": "title",
-                    "label": "Detail title",
-                    "kind": "textarea",
-                    "value": "New Event"
-                  },
-                  {
-                    "id": "summary",
-                    "label": "Detail summary",
-                    "kind": "textarea",
-                    "value": "222"
-                  },
-                  {
-                    "id": "content",
-                    "label": "Detail content",
-                    "kind": "textarea",
-                    "value": "333"
-                  },
-                  {
-                    "id": "detailImage1",
-                    "label": "Detail image 1",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231050_237_2.png"
-                  },
-                  {
-                    "id": "detailImage2",
-                    "label": "Detail image 2",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231050_238_2.png"
-                  },
-                  {
-                    "id": "detailImage3",
-                    "label": "Detail image 3",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231050_240_2.jpg"
+                    "value": "/uploads/event/1781020522531-447bdcb7-92c7-4548-a3a9-befd6ace314d.gif"
                   }
                 ]
               },
@@ -24051,7 +23914,7 @@
                     "id": "category",
                     "label": "Category",
                     "kind": "text",
-                    "value": "Industry News"
+                    "value": ""
                   },
                   {
                     "id": "title",
@@ -24063,19 +23926,13 @@
                     "id": "summary",
                     "label": "Detail summary",
                     "kind": "textarea",
-                    "value": "On March 16, 2026, renowned legal media Asian Legal Business (ALB) unveiled the shortlist for the ALB China Law Awards 2026. "
+                    "value": ""
                   },
                   {
                     "id": "content",
                     "label": "Detail content",
                     "kind": "textarea",
-                    "value": "On March 16, 2026, renowned legal media Asian Legal Business (ALB) unveiled the shortlist for the ALB China Law Awards 2026. \n\nNominated for Awards\n\nThanks to its outstanding performance in the field of dispute resolution, continuously strengthened professional capabilities and sound market reputation, Tiger Partners has received two award nominations:\n\nDispute Resolution Boutique Law Firm of the Year\n\nRising Law Firm of the Year\n\nThis dual shortlisting fully recognizes Tiger Partners’ professional competence, business development and industry reputation, and further highlights the firm’s steadily growing comprehensive competitiveness in the dispute resolution sector. Always prioritizing case success as the ultimate goal and aligning services with clients’ commercial objectives, Tiger Partners is committed to delivering efficient and tailored dispute resolution solutions.\n\nWe sincerely appreciate the longstanding support and trust from all clients, partners and friends from all walks of life. Moving forward, Tiger Partners will continue to uphold the service philosophy of professionalism and dedication, living up to every trust and entrustment placed in us.\n\n[IMAGE]\n\nAsian Legal Business (ALB) is a leading legal magazine under Thomson Reuters and one of the world’s most influential legal media outlets. It is dedicated to providing clients and readers with cutting-edge legal and business news as well as professional law firm rankings."
-                  },
-                  {
-                    "id": "detailImage1",
-                    "label": "Detail image 1",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231050_242_2.png"
+                    "value": ""
                   }
                 ]
               },
@@ -24105,7 +23962,7 @@
                     "id": "category",
                     "label": "Category",
                     "kind": "text",
-                    "value": "Industry News"
+                    "value": ""
                   },
                   {
                     "id": "title",
@@ -24117,19 +23974,13 @@
                     "id": "summary",
                     "label": "Detail summary",
                     "kind": "textarea",
-                    "value": "On January 15, 2026, Chambers and Partners, the world’s authoritative legal rating institution, officially released Chambers Greater China Region 2026."
+                    "value": ""
                   },
                   {
                     "id": "content",
                     "label": "Detail content",
                     "kind": "textarea",
-                    "value": "On January 15, 2026, Chambers and Partners, the world’s authoritative legal rating institution, officially released Chambers Greater China Region 2026.\n\nWith its outstanding professional capabilities, extensive client recognition and sound industry reputation, Tiger Partners has once again been listed on the ranking of Dispute Resolution (PRC Firms).\n\n[IMAGE]\n\nThis consecutive ranking is not only profound recognition of Tiger Partners’ philosophy of prioritizing case success as the ultimate goal and aligning services with clients’ commercial objectives, but also further validates the firm’s professional strength and leading edge in commercial dispute resolution practice. Going forward, Tiger Partners will consistently uphold the professional ethos of pursuing perfection, and provide clients with efficient and targeted dispute resolution solutions.\n\nWe sincerely thank all clients, partners and friends from all sectors for their long-term support and trust. Tiger Partners will remain committed as always to living up to every trust and entrustment.\n\nChambers and Partners is a world-leading legal research and analysis institution, which ranks top-tier law firms and legal professionals across various practice areas globally. Regarded as an industry benchmark, Chambers Guides serve as a key reference for international clients seeking high-end legal services."
-                  },
-                  {
-                    "id": "detailImage1",
-                    "label": "Detail image 1",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231050_244_2.png"
+                    "value": ""
                   }
                 ]
               },
@@ -24159,55 +24010,25 @@
                     "id": "category",
                     "label": "Category",
                     "kind": "text",
-                    "value": "Industry News"
+                    "value": ""
                   },
                   {
                     "id": "title",
                     "label": "Detail title",
                     "kind": "textarea",
-                    "value": "Tiger Partners Ranked on The Legal 500 China 2026 List; Partners Liu Yuxuan, Wan Li and Zoe Zhang Honored as Legal 500 China Elite"
+                    "value": ""
                   },
                   {
                     "id": "summary",
                     "label": "Detail summary",
                     "kind": "textarea",
-                    "value": "On November 19, 2025, The Legal 500, an internationally authoritative legal rating institution, released its 2026 China Rankings."
+                    "value": ""
                   },
                   {
                     "id": "content",
                     "label": "Detail content",
                     "kind": "textarea",
-                    "value": "Nominated for Awards\n\nBy virtue of its profound accumulation and outstanding performance in the field of high-end commercial dispute resolution, Tiger Partners has been successfully listed in The Legal 500 China Rankings 2026:\n\nDispute resolution: Arbitration: PRC firms \n\nDispute resolution: Litigation: PRC firms\n\nMeanwhile, Mr. Liu Yuxuan, Mr. Wan Li and Ms. Zoe Zhang, partners of Tiger Partners, have been honored for their outstanding performance in handling commercial dispute resolution cases and high praise from clients:\n\nthe inaugural Legal 500 China Elite: \n\nBeijing Elite – Commercial Disputes\n\n[IMAGE]\n\n[IMAGE]\n\n[IMAGE]\n\nThis inclusion fully recognizes Tiger Partners and its partners for their long-term dedication to the dispute resolution practice and consistent delivery of high-quality legal services.\n\nWe sincerely appreciate the long-standing trust and support from all clients, partners and industry peers. Taking this ranking as a new starting point, Tiger Partners will forge ahead with determination, continuously upgrade its professional service capabilities, and strive for greater achievements in the field of dispute resolution across the Asia-Pacific region.\n\n[IMAGE]\n\n[IMAGE]\n\nThe Legal 500 was founded in 1988 and is a world-renowned legal rating institution. Its core mission is to provide professional references for enterprises in selecting legal services through independent research and evaluation.\n\nLaunched for the first time in 2025, The Legal 500 China Elite is dedicated to recognizing outstanding lawyers from regional law firms who deliver exceptional performance in China’s core commercial sectors."
-                  },
-                  {
-                    "id": "detailImage1",
-                    "label": "Detail image 1",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231050_246_2.png"
-                  },
-                  {
-                    "id": "detailImage2",
-                    "label": "Detail image 2",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231056_260_2.png"
-                  },
-                  {
-                    "id": "detailImage3",
-                    "label": "Detail image 3",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231056_261_2.png"
-                  },
-                  {
-                    "id": "detailImage4",
-                    "label": "Detail image 4",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231056_262_2.png"
-                  },
-                  {
-                    "id": "detailImage5",
-                    "label": "Detail image 5",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231056_263_2.png"
+                    "value": ""
                   }
                 ]
               },
@@ -24237,37 +24058,25 @@
                     "id": "category",
                     "label": "Category",
                     "kind": "text",
-                    "value": "Industry News"
+                    "value": ""
                   },
                   {
                     "id": "title",
                     "label": "Detail title",
                     "kind": "textarea",
-                    "value": "Tiger Partners was listed as \"Firm to Watch\" in China Business Law Awards 2025"
+                    "value": ""
                   },
                   {
                     "id": "summary",
                     "label": "Detail summary",
                     "kind": "textarea",
-                    "value": "On July 23, 2025, China Business Law Journal, an internationally renowned legal media outlet, announced the results of its China Business Law Journal Awards 2025."
+                    "value": ""
                   },
                   {
                     "id": "content",
                     "label": "Detail content",
                     "kind": "textarea",
-                    "value": "On July 23, 2025, China Business Law Journal, an internationally renowned legal media outlet, announced the results of its China Business Law Journal Awards 2025.\n\nNominated for Awards\n\nBy virtue of its outstanding track record and exceptional performance in cross-border dispute resolution practices, Tiger Partners has won the practice area award: Cross-border Litigation.\n\n[IMAGE]\n\nWe would like to express our gratitude to all clients, industry peers and partners for their support and trust. Moving forward, Tiger Partners will continue to dedicate itself to delivering efficient and precise dispute resolution solutions for global clients, assisting them in navigating the increasingly complex international legal landscape.\n\n[IMAGE]\n\nChina Business Law Journal is an internationally renowned monthly business and legal publication, as well as one of the world’s most influential legal ranking media."
-                  },
-                  {
-                    "id": "detailImage1",
-                    "label": "Detail image 1",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231056_264_2.jpg"
-                  },
-                  {
-                    "id": "detailImage2",
-                    "label": "Detail image 2",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231056_265_2.png"
+                    "value": ""
                   }
                 ]
               },
@@ -24297,7 +24106,7 @@
                     "id": "category",
                     "label": "Category",
                     "kind": "text",
-                    "value": "Industry News"
+                    "value": ""
                   },
                   {
                     "id": "title",
@@ -24309,19 +24118,13 @@
                     "id": "summary",
                     "label": "Detail summary",
                     "kind": "textarea",
-                    "value": "On June 20, 2025, Asian Legal Business (ALB), the internationally renowned legal media under Thomson Reuters, released the 2025 ALB China Dispute Resolution Rankings.  "
+                    "value": ""
                   },
                   {
                     "id": "content",
                     "label": "Detail content",
                     "kind": "textarea",
-                    "value": "On June 20, 2025, Asian Legal Business (ALB), the internationally renowned legal media under Thomson Reuters, released the 2025 ALB China Dispute Resolution Rankings.  \n\nNominated for Awards\n\nBoasting outstanding performance in the dispute resolution sector, Tiger Partners has been featured on the 2025 ALB China Dispute Resolution Rankings and honored as a Notable Firms in the litigation category.\n\nThis accolade not only recognizes Tiger Partners’ past achievements but also serves as an inspiration for its future development. The firm will continue to deepen its practice in dispute resolution and deliver efficient, professional dispute resolution solutions to clients.\n\nWe sincerely thank all clients, partners and industry peers for their support and trust. Going forward, Tiger Partners will forge ahead and strive for more remarkable accomplishments.\n\n[IMAGE]\n\nAsian Legal Business (ALB) is a premier legal magazine under Thomson Reuters and one of the world’s most influential legal media platforms. It aims to provide clients and readers with cutting-edge legal and business news, as well as professional law firm rankings."
-                  },
-                  {
-                    "id": "detailImage1",
-                    "label": "Detail image 1",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231056_266_2.png"
+                    "value": ""
                   }
                 ]
               },
@@ -24370,12 +24173,6 @@
                     "label": "Detail content",
                     "kind": "textarea",
                     "value": "11"
-                  },
-                  {
-                    "id": "detailVideo1",
-                    "label": "Detail video 1",
-                    "kind": "url",
-                    "value": "/assets/event/event2/20250617_%E8%A7%86%E9%A2%91.mp4"
                   }
                 ]
               },
@@ -24405,7 +24202,7 @@
                     "id": "category",
                     "label": "Category",
                     "kind": "text",
-                    "value": "Industry News"
+                    "value": ""
                   },
                   {
                     "id": "title",
@@ -24417,19 +24214,13 @@
                     "id": "summary",
                     "label": "Detail summary",
                     "kind": "textarea",
-                    "value": "On April 16, 2025, Asian Legal Business (\"ALB\"), the internationally renowned legal media outlet under Thomson Reuters, announced the shortlist for the China Law Awards 2025.  "
+                    "value": ""
                   },
                   {
                     "id": "content",
                     "label": "Detail content",
                     "kind": "textarea",
-                    "value": "On April 16, 2025, Asian Legal Business (\"ALB\"), the internationally renowned legal media outlet under Thomson Reuters, announced the shortlist for the China Law Awards 2025.  \n\nNominated for Awards\n\nBoasting exceptional performance and professional strength over the past year, Tiger Partners has been nominated for Boutique Law Firm of the Year.\n\nTiger Partners sincerely appreciates the trust and support from all clients, partners and friends from all walks of life. Every recognition inspires us to keep forging ahead. Going forward, adhering to the service philosophy oriented toward case success and clients’ commercial goals, Tiger Partners will further enhance its influence and competitiveness in the international legal market.\n\n[IMAGE]\n\nAsian Legal Business (ALB) is a premier legal magazine owned by Thomson Reuters and ranks among the world’s most influential legal media. It aims to provide clients and readers with cutting-edge legal and business news as well as authoritative law firm rankings."
-                  },
-                  {
-                    "id": "detailImage1",
-                    "label": "Detail image 1",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231056_267_2.png"
+                    "value": ""
                   }
                 ]
               },
@@ -24478,12 +24269,6 @@
                     "label": "Detail content",
                     "kind": "textarea",
                     "value": "1111\n\n1111\n\n1111\n\n1111"
-                  },
-                  {
-                    "id": "detailImage1",
-                    "label": "Detail image 1",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo2/微信图片_20260511231056_268_2.png"
                   }
                 ]
               },
@@ -24616,12 +24401,6 @@
                     "label": "Detail image 3",
                     "kind": "image",
                     "value": "/assets/event/eventinfo2/微信图片_20260511231050_240_2.jpg"
-                  },
-                  {
-                    "id": "detailVideo1",
-                    "label": "Detail video 1",
-                    "kind": "url",
-                    "value": "/assets/event/event2/20241113_%E8%A7%86%E9%A2%91.mp4"
                   }
                 ]
               },
@@ -25167,7 +24946,7 @@
                     "id": "category",
                     "label": "Category",
                     "kind": "text",
-                    "value": "Tiger Dynamics"
+                    "value": ""
                   },
                   {
                     "id": "title",
@@ -25318,12 +25097,6 @@
                     "label": "Detail image 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo2/微信图片_20260511231058_274_2.png"
-                  },
-                  {
-                    "id": "detailImage2",
-                    "label": "Detail image 2",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo/微信图片_20260511231524_304_2.png"
                   }
                 ]
               },
@@ -25486,12 +25259,6 @@
                     "label": "Detail content",
                     "kind": "textarea",
                     "value": "From April 12 to 13, the Chambers Forum: Beijing 2023 will be held at the Hilton Hotel of Wangfujing in Beijing. As one of the sponsors, Tiger Partners was invited to participate in the forum.\n\nIt is reported that this forum will focus on compliance, centering on the rich connotation of corporate compliance and the latest regulatory policies, legal practices and market trends, and discuss hot compliance issues, PE/VC, revision of arbitration law, ad hoc arbitration and other related sub-topics in global investment and M&A."
-                  },
-                  {
-                    "id": "detailImage1",
-                    "label": "Detail image 1",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo/微信图片_20260511231526_308_2.png"
                   }
                 ]
               },
@@ -25540,12 +25307,6 @@
                     "label": "Detail content",
                     "kind": "textarea",
                     "value": "In order to deepen the implementation of Xi Jinping Thought on the Rule of Law and fulfill practice \"Good Lawyers to the satisfaction of the Party and the people\", the Party branch committee of Tiger Partners responded positively to the call of the Party Committee of the Lawyers' Profession of Chaoyang District of Beijing for building a law-based community and entered into a pairing relationship with the community committee of Shifoying Nanli in order to make use of the advantages of the legal profession to contribute to promoting the construction of the rule of law in the community.\n\nPairing to build a law-based community\n\nOn 29th March, 2023, Liu Yuxuan, Managing Partner of Tiger Partners, and Chen Mingjing, a trainee solicitor who is a commissary in charge of publicity of the Party Branch of Tiger Partners, went to Shifoying Nanli Community, where they were greeted by Zhang Xuan, the secretary of the Party Committee of the community, Liu Yunchao, the deputy secretary of the Party Committee of the community, and Lu Dongmei, the head of the Station.\n\nThe committee first introduced the thorny problems and related background in recent work, and consulted the legally compliant solutions. Mr. Liu Yuxuan gave the corresponding advice from a professional point of view. Later, the two sides discussed the far-reaching value of this \"pairing relationship\" to build a law-based community, and actively exchanged views on the working modes and plans for the next step.\n\nRemain true to our original aspiration and to keep pressing ahead\n\nThe Party Branch of Tiger Partners will adhere to the working method of \" the Party Branches and the Communities in pairing, the Party and the Masses hand in hand\". By organizing party branch’s members and actively mobilizing the law firm’s masses, we plan to set up the Tiger Partners’ legal service team, and better carry out the legal services oriented to the community. We look forward to truly become \"Good Lawyers to the satisfaction of the Party and the people\"."
-                  },
-                  {
-                    "id": "detailImage1",
-                    "label": "Detail image 1",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo/微信图片_20260511231526_309_2.png"
                   }
                 ]
               },
@@ -25594,18 +25355,6 @@
                     "label": "Detail content",
                     "kind": "textarea",
                     "value": "This year, we always uphold the spirit of Tiger Partners to serve our clients, culminating in a 30 percent increase in revenue compared to the previous year.\n\nThis year, we have been highly praised in our pursuit of excellence by many well-known legal media and rating agencies. We and our partners were honored to be recognised by Asian Legal Business, China Business Law Journal, LEGALBAND, Benchmark Litigation and others.\n\nThis year, we still keep pursuing innovation and seeking breakthroughs, such as the launch of new Mini Program TigerPark, the creation of the cartoon character \"Hook\", the initiation of the first TIGERS FELLOWSHIP program, and the upgrading of the official account function......\n\nOver the past three years, Tiger Partners has faced an exceptionally tough growth environment. Thankfully, with the trust and support of every friends, this \"little tiger\" has thrived nonetheless!\n\nOn the occasion of our third birthday, we are very pleased to share with you the great news that Tiger Partners will be relocated from China Central Place to Sino-Ocean International Center next year! In the new year, with the support and witness of all friends, we look forward to moving to a broader world!"
-                  },
-                  {
-                    "id": "detailImage1",
-                    "label": "Detail image 1",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo/微信图片_20260511231526_310_2.png"
-                  },
-                  {
-                    "id": "detailImage2",
-                    "label": "Detail image 2",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo/微信图片_20260511231526_311_2.png"
                   }
                 ]
               },
@@ -25708,12 +25457,6 @@
                     "label": "Detail content",
                     "kind": "textarea",
                     "value": "On June 16, we officially launched the 2022 TIGERS FELLOWSHIP program. After the first round of review material and a second round of interviews, considering devotion of scholarship applicants for application, understanding and willingness of dispute resolution, ability to learn, understandi and express, and other dimensions, the Scholarship Selection Committee ultimately decided on three winners, who were Wang Lingyu, Cao Jiahao and Ma Yanru.\n\nthe Top Award of Scholarship: Wang Lingyu\n\nthe Second Award of Scholarship: Cao Jiahao\n\nthe Third Award of Scholarship: Ma Yanru\n\nPlease enter the official account for more information of the above winners (link: https://mp.weixin.qq.com/s/N-0VcbH9LqHZjmYADe5teg).\n\nThe publicity period of this award list is from July 25 to July 28. If you have any objection to the results, you can submit a written objection application to the Scholarship Selection Committee during the publicity period. Email address: fellowship@tigerpartners.cn\n\nWe have received 34 copies of applications from applicants. During the evaluation phase, the Scholarship Selection Committee carefully read the materials subscribed by the applicants and really appreciated all of your unique shining points. We are shocked by the excellence of contemporary law students and deeply moved by their sincere hearts. Moreover, we are full of confidence in the prospects for development of rule of law in China.\n\nFinally, we would like to thank you again for your attention and support. We cherish it and will always take it as the motivation to move forward."
-                  },
-                  {
-                    "id": "detailImage1",
-                    "label": "Detail image 1",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo/微信图片_20260511231526_313_2.png"
                   }
                 ]
               },
@@ -25888,12 +25631,6 @@
                     "label": "Detail image 2",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231524_304_2.png"
-                  },
-                  {
-                    "id": "detailImage3",
-                    "label": "Detail image 3",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo/微信图片_20260511231527_317_2.png"
                   }
                 ]
               },
@@ -25948,18 +25685,6 @@
                     "label": "Detail image 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231524_305_2.png"
-                  },
-                  {
-                    "id": "detailImage2",
-                    "label": "Detail image 2",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo/20210720-2.jpg"
-                  },
-                  {
-                    "id": "detailImage3",
-                    "label": "Detail image 3",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo/20210720-3.jpg"
                   }
                 ]
               },
@@ -26242,12 +25967,6 @@
                     "label": "Detail image 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231526_312_2.png"
-                  },
-                  {
-                    "id": "detailImage2",
-                    "label": "Detail image 2",
-                    "kind": "image",
-                    "value": "/assets/event/eventinfo/20210315-2.png"
                   }
                 ]
               },
@@ -27281,20 +27000,20 @@
                 ]
               },
               {
-                "id": "cards-1780537527298",
-                "label": "Industry cards 7",
+                "id": "cards-1780119755266",
+                "label": "111",
                 "fields": [
                   {
                     "id": "slug",
                     "label": "Slug",
                     "kind": "text",
-                    "value": "cards-1780537527298"
+                    "value": "cards-1780119755266"
                   },
                   {
                     "id": "title",
                     "label": "Title",
                     "kind": "text",
-                    "value": "Industry cards 7"
+                    "value": "111"
                   },
                   {
                     "id": "image",
@@ -27306,13 +27025,13 @@
                     "id": "description",
                     "label": "Description",
                     "kind": "textarea",
-                    "value": ""
+                    "value": "1231"
                   },
                   {
                     "id": "href",
                     "label": "Link",
                     "kind": "url",
-                    "value": "/industries/cards-1780537527298?from=home"
+                    "value": "/industries/cards-1780119755266?from=home"
                   },
                   {
                     "id": "layoutClass",
@@ -27323,20 +27042,20 @@
                 ]
               },
               {
-                "id": "cards-1780580759330",
-                "label": "Industry cards 8",
+                "id": "cards-11",
+                "label": "111",
                 "fields": [
                   {
                     "id": "slug",
                     "label": "Slug",
                     "kind": "text",
-                    "value": "cards-1780580759330"
+                    "value": "cards-11"
                   },
                   {
                     "id": "title",
                     "label": "Title",
                     "kind": "text",
-                    "value": ""
+                    "value": "111"
                   },
                   {
                     "id": "image",
@@ -27348,13 +27067,13 @@
                     "id": "description",
                     "label": "Description",
                     "kind": "textarea",
-                    "value": ""
+                    "value": "1231"
                   },
                   {
                     "id": "href",
                     "label": "Link",
                     "kind": "url",
-                    "value": ""
+                    "value": "/industries/cards-11?from=home"
                   },
                   {
                     "id": "layoutClass",
@@ -27588,20 +27307,20 @@
                 ]
               },
               {
-                "id": "cards-1780537527298",
-                "label": "Industry cards 7",
+                "id": "cards-1780119755266",
+                "label": "111",
                 "fields": [
                   {
                     "id": "slug",
                     "label": "Slug",
                     "kind": "text",
-                    "value": "cards-1780537527298"
+                    "value": "cards-1780119755266"
                   },
                   {
                     "id": "title",
                     "label": "Detail title",
                     "kind": "text",
-                    "value": "Industry cards 7"
+                    "value": "111"
                   },
                   {
                     "id": "image",
@@ -27613,13 +27332,49 @@
                     "id": "intro",
                     "label": "Detail intro",
                     "kind": "textarea",
-                    "value": ""
+                    "value": "1231"
                   },
                   {
                     "id": "sections",
                     "label": "Detail cards",
                     "kind": "textarea",
+                    "value": "123123"
+                  }
+                ]
+              },
+              {
+                "id": "cards-11",
+                "label": "111",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "Slug",
+                    "kind": "text",
+                    "value": "cards-11"
+                  },
+                  {
+                    "id": "title",
+                    "label": "Detail title",
+                    "kind": "text",
+                    "value": "111"
+                  },
+                  {
+                    "id": "image",
+                    "label": "Hero image",
+                    "kind": "image",
                     "value": ""
+                  },
+                  {
+                    "id": "intro",
+                    "label": "Detail intro",
+                    "kind": "textarea",
+                    "value": "1231"
+                  },
+                  {
+                    "id": "sections",
+                    "label": "Detail cards",
+                    "kind": "textarea",
+                    "value": "123123"
                   }
                 ]
               }
@@ -28863,6 +28618,6 @@
         ]
       }
     },
-    "updatedAt": "2026-06-04T13:46:02.622Z"
+    "updatedAt": "2026-06-10T01:39:54.075Z"
   }
 }

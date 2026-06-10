@@ -1846,6 +1846,7 @@ function CmsMainPanel(props: {
         versions={props.versions}
         setVersions={props.setVersions}
         editingVersionId={props.editingVersionId}
+        activeLanguage={props.activeLanguage}
         loadVersionForEditing={props.loadVersionForEditing}
         versionName={props.versionName}
       setVersionName={props.setVersionName}
@@ -2714,6 +2715,7 @@ function syncPageContentFromOfficialSiteState(pageContent: PageContentState, off
         studioField("displayDate", isZh ? "展示日期" : "Display date", "text", localized.displayDate),
         studioField("category", isZh ? "分类" : "Category", "text", localized.category),
         studioField("title", isZh ? "标题" : "Title", "textarea", localized.title),
+        studioField("summary", isZh ? "摘要" : "Summary", "textarea", localized.summary),
       ]);
     });
     next = replaceSectionItems(next, language, "event", "list", eventListItems);
@@ -3241,7 +3243,7 @@ function OfficialSiteSectionPanel(props: {
       </div>,
       ...state.lists.industries.map((industry, index) =>
         renderItemShell({
-          id: `industry-${industry.slug}-${index}`,
+          id: `industry-${index}`,
           defaultOpen: index === 0,
           title: `${industry.zhName || "未填写中文"} / ${industry.name || "Untitled"}`,
           summary: industry.img,
@@ -6765,6 +6767,7 @@ function VersionsPanel(props: {
   versions: CmsVersionSnapshot[];
   setVersions: Dispatch<SetStateAction<CmsVersionSnapshot[]>>;
   editingVersionId: number | null;
+  activeLanguage: Language;
   loadVersionForEditing: (versionId: number | null) => Promise<void>;
   versionName: string;
   setVersionName: Dispatch<SetStateAction<string>>;
@@ -6908,7 +6911,7 @@ function VersionsPanel(props: {
                 <button
                   type="button"
                   onClick={() => {
-                    window.location.href = `/cms/version-preview/${version.id}`;
+                    window.location.href = `/cms/version-preview/${version.id}?lang=${props.activeLanguage}`;
                   }}
                   className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700"
                 >

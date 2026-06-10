@@ -235,13 +235,15 @@ export function CmsVersionPreview({
   publicData,
   siteContent,
   version,
+  initialLanguage,
 }: {
   publicData: PublicCmsData;
   siteContent: SiteContent;
   version: CmsVersionSnapshot;
+  initialLanguage: Language;
 }) {
   const [route, setRoute] = useState<PreviewRoute>({ page: "home" });
-  const [language] = useState<Language>("en");
+  const [language] = useState<Language>(initialLanguage);
 
   const handlePreviewClick = (event: MouseEvent<HTMLDivElement>) => {
     if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {

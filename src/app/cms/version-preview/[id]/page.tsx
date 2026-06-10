@@ -5,13 +5,17 @@ import { requireCmsUser } from "@/lib/cms-session";
 
 export default async function CmsVersionPreviewPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams?: Promise<{ lang?: string }>;
 }) {
   await requireCmsUser();
 
   const { id } = await params;
+  const { lang } = (await searchParams) ?? {};
   const versionId = Number(id);
+  const initialLanguage = lang === "en" ? "en" : "zh";
 
   if (!Number.isFinite(versionId)) {
     notFound();
@@ -28,6 +32,7 @@ export default async function CmsVersionPreviewPage({
       publicData={preview.publicData}
       siteContent={preview.siteContent}
       version={preview.version}
+      initialLanguage={initialLanguage}
     />
   );
 }

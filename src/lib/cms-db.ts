@@ -168,10 +168,7 @@ function normalizeRepeaterField(fieldItem: unknown, fallback?: PageContentSectio
       fieldItem.kind === "textarea" || fieldItem.kind === "image" || fieldItem.kind === "url" || fieldItem.kind === "text"
         ? fieldItem.kind
         : fallback?.kind ?? "text",
-    value:
-      typeof fieldItem.value === "string" && (fieldItem.value !== "" || fallback?.value === "")
-        ? normalizeStoredAssetUrl(fieldItem.value)
-        : fallback?.value ?? "",
+    value: typeof fieldItem.value === "string" ? normalizeStoredAssetUrl(fieldItem.value) : fallback?.value ?? "",
   };
 }
 
@@ -211,6 +208,51 @@ function normalizeRepeaterItem(
     label: typeof item.label === "string" && item.label ? item.label : fallback?.label ?? "Item",
     fields,
   };
+}
+
+function getRepeaterItemFieldValue(item: PageContentRepeaterItem | undefined, fieldId: string) {
+  return item?.fields.find((fieldItem) => fieldItem.id === fieldId)?.value.trim();
+}
+
+function getOverrideRepeaterItemStableKey(item: unknown) {
+  if (!isPlainObject(item)) {
+    return "";
+  }
+
+  if (typeof item.id === "string" && item.id.trim()) {
+    return item.id.trim();
+  }
+
+  if (!Array.isArray(item.fields)) {
+    return "";
+  }
+
+  const slugField = item.fields.find(
+    (fieldItem) => isPlainObject(fieldItem) && fieldItem.id === "slug" && typeof fieldItem.value === "string",
+  );
+
+  return isPlainObject(slugField) && typeof slugField.value === "string" ? slugField.value.trim() : "";
+}
+
+const stableKeyedRepeaterSectionIds = new Set(["list", "detailPages"]);
+
+function getRepeaterFallbackItem(
+  sectionId: string,
+  baseItems: PageContentRepeaterItem[],
+  item: unknown,
+  index: number,
+) {
+  if (!stableKeyedRepeaterSectionIds.has(sectionId)) {
+    return baseItems[index];
+  }
+
+  const key = getOverrideRepeaterItemStableKey(item);
+
+  if (!key) {
+    return undefined;
+  }
+
+  return baseItems.find((baseItem) => baseItem.id === key || getRepeaterItemFieldValue(baseItem, "slug") === key);
 }
 
 const preserveBaseTailSectionIds = new Set([
@@ -293,7 +335,7 @@ function mergePageContentRepeaterItems(
     }
 
     return overrideItems
-      .map((item, index) => normalizeRepeaterItem(item, baseItems[index], sectionId))
+      .map((item, index) => normalizeRepeaterItem(item, getRepeaterFallbackItem(sectionId, baseItems, item, index), sectionId))
       .filter((item): item is PageContentRepeaterItem => Boolean(item));
   }
 
@@ -502,6 +544,18 @@ function normalizeVersionPayloadForStorage(payload: CmsVersionPayload): CmsVersi
     pageContent,
     officialSiteState: normalizeOfficialStateWithPageContent(payload.officialSiteState, pageContent),
   };
+}
+
+function officialStateForPublishedPageContent(
+  officialSiteState: OfficialCmsSiteState | undefined,
+  pageContent: PageContentState,
+) {
+  return (
+    normalizeOfficialStateWithPageContent(officialSiteState ?? getCmsSiteStateSync(), pageContent) ?? {
+      ...getCmsSiteStateSync(),
+      previewPageContent: pageContent,
+    }
+  );
 }
 
 function getSeedSiteContent(): SiteContent {
@@ -1618,17 +1672,7 @@ export function restoreVersion(versionId: number, updatedBy?: number) {
       updatedBy,
     });
 
-    saveCmsSiteStateSync(
-      payload.officialSiteState
-        ? {
-            ...payload.officialSiteState,
-            previewPageContent: payload.officialSiteState.previewPageContent ?? restoredPageContent,
-          }
-        : {
-            ...getCmsSiteStateSync(),
-            previewPageContent: restoredPageContent,
-          },
-    );
+    saveCmsSiteStateSync(officialStateForPublishedPageContent(payload.officialSiteState, restoredPageContent));
 
     db.prepare("DELETE FROM articles").run();
     db.prepare("DELETE FROM case_studies").run();
@@ -1686,14 +1730,8 @@ export function getVersionPreviewData(versionId: number) {
   const visualEditor = mergeContent(cloneValue(defaultVisualEditorState), payload.visualEditor);
   const pageContent = mergePageContentState(cloneValue(defaultPageContentState), payload.pageContent);
   const officialSiteState = payload.officialSiteState
-    ? {
-        ...payload.officialSiteState,
-        previewPageContent: payload.officialSiteState.previewPageContent ?? pageContent,
-      }
-    : {
-        ...getCmsSiteStateSync(),
-        previewPageContent: pageContent,
-      };
+    ? officialStateForPublishedPageContent(payload.officialSiteState, pageContent)
+    : officialStateForPublishedPageContent(undefined, pageContent);
 
   return {
     version: {

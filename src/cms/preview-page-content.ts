@@ -44,3 +44,10 @@ export function getPreviewPageItemField(
   const value = item?.fields.find((field) => field.id === fieldId)?.value;
   return value?.trim() ? value : fallback;
 }
+
+export function getPreviewPageItemFieldValue(
+  item: ReturnType<typeof getPreviewPageSectionItems>[number] | undefined,
+  fieldId: string,
+) {
+  return item?.fields.find((field) => field.id === fieldId)?.value;
+}

@@ -33,6 +33,7 @@ import {
   getPastEventProgramNumbersFromFields,
   getPageContentField,
   getPageContentItemField,
+  getPageContentItemFieldValue,
   getPageContentSectionItems,
   isPastEventPlatformFieldId,
   pageContentItemFieldKey,
@@ -477,12 +478,12 @@ function getGeneratedEventMediaValue(item: PageContentRepeaterItem | undefined, 
 
   const imageMatch = fieldId.match(detailImageFieldPattern);
   if (imageMatch) {
-    return splitDrawerList(getItemFieldValue(item, "detailImages"))[Number(imageMatch[1]) - 1] ?? "";
+    return resolvePublicAssetUrl(splitDrawerList(getItemFieldValue(item, "detailImages"))[Number(imageMatch[1]) - 1] ?? "");
   }
 
   const videoMatch = fieldId.match(detailVideoFieldPattern);
   if (videoMatch) {
-    return splitDrawerList(getItemFieldValue(item, "detailVideos"))[Number(videoMatch[1]) - 1] ?? "";
+    return resolvePublicAssetUrl(splitDrawerList(getItemFieldValue(item, "detailVideos"))[Number(videoMatch[1]) - 1] ?? "");
   }
 
   return "";
@@ -1547,6 +1548,11 @@ function syncHomeEventsFromPageContent(
   const zhDetailItems = pageItems(previewData, "zh", "event", "detailPages");
   const slugs = enItems.map((item) => getPageContentItemField(item, "slug", item.id)).filter(Boolean);
   const listSlugs = enListItems.map((item) => getPageContentItemField(item, "slug", item.id)).filter(Boolean);
+  const zhItemsBySlug = new Map(zhItems.map((item) => [getPageContentItemField(item, "slug", item.id), item] as const));
+  const zhListItemsBySlug = new Map(zhListItems.map((item) => [getPageContentItemField(item, "slug", item.id), item] as const));
+  const zhDetailItemsBySlug = new Map(
+    zhDetailItems.map((item) => [getPageContentItemField(item, "slug", item.id), item] as const),
+  );
   const overrides = { ...officialSiteState.events.overrides };
   const homeOverrides = { ...(officialSiteState.home.eventOverrides ?? {}) };
 
@@ -1554,12 +1560,13 @@ function syncHomeEventsFromPageContent(
     const isListItem = index >= enItems.length;
     const localIndex = isListItem ? index - enItems.length : index;
     const slug = isListItem ? listSlugs[localIndex] : slugs[localIndex];
-    const zhItem = isListItem ? zhListItems[localIndex] : zhItems[localIndex];
+    const zhItem = isListItem ? zhListItemsBySlug.get(slug) : zhItemsBySlug.get(slug);
 
     if (!slug) return;
 
     const targetOverrides = isListItem ? overrides : homeOverrides;
     const existingOverride = targetOverrides[slug];
+    const imageValue = getPageContentItemFieldValue(item, "image");
     const sortDate = getPageContentItemField(
       item,
       "sortDate",
@@ -1569,7 +1576,7 @@ function syncHomeEventsFromPageContent(
     targetOverrides[slug] = {
       ...existingOverride,
       ...(sortDate ? { sortDate } : {}),
-      image: getPageContentItemField(item, "image", existingOverride?.image ?? ""),
+      image: imageValue === undefined ? existingOverride?.image ?? "" : imageValue.trim(),
       ...(isListItem ? {} : { href: getPageContentItemField(item, "href", existingOverride?.href ?? "") }),
       en: {
         ...existingOverride?.en,
@@ -1590,7 +1597,7 @@ function syncHomeEventsFromPageContent(
 
   enDetailItems.forEach((item, index) => {
     const slug = getPageContentItemField(item, "slug", item.id);
-    const zhItem = zhDetailItems[index];
+    const zhItem = zhDetailItemsBySlug.get(slug);
 
     if (!slug) return;
 
@@ -3382,16 +3389,24 @@ export function CmsPuckVisualEditor({
       [`${section.id}-${nextId}`]: true,
     }));
   };
-  const removeCarouselItem = (sectionId: string, itemIndex: number) => {
+  const removeCarouselItem = (sectionId: string, itemIndex: number, slug?: string) => {
     editorLanguages.forEach((language) => {
-      updateCarouselItems(language, sectionId, (items) => items.filter((_, index) => index !== itemIndex));
+      updateCarouselItems(language, sectionId, (items) =>
+        slug ? items.filter((item) => getPageContentItemField(item, "slug", item.id) !== slug) : items.filter((_, index) => index !== itemIndex),
+      );
     });
   };
-  const moveCarouselItem = (sectionId: string, itemIndex: number, direction: -1 | 1) => {
-    const targetIndex = itemIndex + direction;
-
+  const moveCarouselItem = (sectionId: string, itemIndex: number, direction: -1 | 1, slug?: string) => {
     editorLanguages.forEach((language) => {
-      updateCarouselItems(language, sectionId, (items) => moveRepeaterItem(items, itemIndex, targetIndex));
+      updateCarouselItems(language, sectionId, (items) => {
+        const sourceIndex = slug
+          ? items.findIndex((item) => getPageContentItemField(item, "slug", item.id) === slug)
+          : itemIndex;
+
+        if (sourceIndex < 0) return items;
+
+        return moveRepeaterItem(items, sourceIndex, sourceIndex + direction);
+      });
     });
   };
   const togglePinCarouselItem = (sectionId: string, itemIndex: number, slug?: string) => {
@@ -3901,7 +3916,7 @@ export function CmsPuckVisualEditor({
           type="button"
           onClick={() => {
             if (editingVersionId) {
-              window.open(`/cms/version-preview/${editingVersionId}`, "_blank", "noopener,noreferrer");
+              window.open(`/cms/version-preview/${editingVersionId}?lang=${activeLanguage}`, "_blank", "noopener,noreferrer");
               return;
             }
 
@@ -4352,8 +4367,8 @@ export function CmsPuckVisualEditor({
                       <>
                         <button
                           type="button"
-                          onClick={() => moveCarouselItem(activeCarouselSection.id, itemIndex, -1)}
-                          disabled={itemIndex === 0}
+                          onClick={() => moveCarouselItem(activeCarouselSection.id, itemIndex, -1, rowSlug)}
+                          disabled={rowPosition === 0}
                           className="inline-flex items-center gap-1 rounded-xl border border-slate-200 px-2.5 py-2 text-xs font-bold text-slate-600 transition hover:border-[#2563eb] hover:text-[#2563eb] disabled:cursor-not-allowed disabled:opacity-40"
                         >
                           <ArrowUp className="h-3.5 w-3.5" />
@@ -4361,9 +4376,9 @@ export function CmsPuckVisualEditor({
                         </button>
                         <button
                           type="button"
-                          onClick={() => moveCarouselItem(activeCarouselSection.id, itemIndex, 1)}
+                          onClick={() => moveCarouselItem(activeCarouselSection.id, itemIndex, 1, rowSlug)}
                           disabled={
-                            itemIndex >=
+                            rowPosition >=
                             Math.max(
                               activeCarouselSectionsByLanguage.zh?.items?.length ?? 0,
                               activeCarouselSectionsByLanguage.en?.items?.length ?? 0,
@@ -4407,7 +4422,7 @@ export function CmsPuckVisualEditor({
                     ) : null}
                     <button
                       type="button"
-                      onClick={() => removeCarouselItem(activeCarouselSection.id, itemIndex)}
+                      onClick={() => removeCarouselItem(activeCarouselSection.id, itemIndex, rowSlug)}
                       className="inline-flex items-center gap-1 rounded-xl px-3 py-2 text-xs font-bold text-rose-500 transition hover:bg-rose-50"
                     >
                       <Trash2 className="h-3.5 w-3.5" />
@@ -4450,7 +4465,7 @@ export function CmsPuckVisualEditor({
                           const field = localizedItem?.fields.find(
                             (fieldItem) => fieldItem.id === fieldId,
                           );
-                          const fieldValue = field?.value ?? getGeneratedEventMediaValue(localizedItem, fieldId);
+                          const fieldValue = field?.value ? resolvePublicAssetUrl(field.value) : getGeneratedEventMediaValue(localizedItem, fieldId);
                           const fieldKey = localizedItem
                             ? pageContentItemFieldKey(activeCarouselSection.id, localizedItem.id, fieldId)
                             : `${activeCarouselSection.id}__${itemIndex}__${fieldId}`;

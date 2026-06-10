@@ -8,7 +8,12 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
 import { PageTriangle } from "@/components/shared/PageTriangle";
 import { localizeCmsEvent } from "@/cms/events";
-import { getPreviewPageField, getPreviewPageItemField, getPreviewPageSectionItems } from "@/cms/preview-page-content";
+import {
+  getPreviewPageField,
+  getPreviewPageItemField,
+  getPreviewPageItemFieldValue,
+  getPreviewPageSectionItems,
+} from "@/cms/preview-page-content";
 import { usePublicCms } from "@/cms/PublicCmsProvider";
 import { events, formatEventDate } from "@/data/events";
 import { pick, useLanguage } from "@/i18n/LanguageProvider";
@@ -113,6 +118,7 @@ export function EventsPage() {
         sortDate ? formatEventDate(sortDate, language) : getPreviewPageItemField(item, "date", ""),
       );
       const title = getPreviewPageItemField(item, "title", getPreviewPageItemField(fallbackItem, "title", ""));
+      const imageValue = getPreviewPageItemFieldValue(item, "image");
 
       if (!slug || !title) return null;
 
@@ -122,7 +128,7 @@ export function EventsPage() {
         displayDate,
         title,
         category: getPreviewPageItemField(item, "category", getPreviewPageItemField(fallbackItem, "category", "")),
-        image: getPreviewPageItemField(item, "image", getPreviewPageItemField(fallbackItem, "image", "")),
+        image: imageValue === undefined ? getPreviewPageItemField(fallbackItem, "image", "") : imageValue.trim(),
       };
     })
     .filter((item): item is EventListCard => Boolean(item));

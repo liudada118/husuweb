@@ -1,6 +1,6 @@
 ﻿# Husuweb Official Site Architecture
 
-最后更新于：2026-06-04 22:22
+最后更新于：2026-06-10 23:15
 
 ## 椤圭洰姒傝堪
 
@@ -547,6 +547,12 @@ CMS 文件管理采用分页懒加载：`/api/cms/assets` 支持 `limit` 与 `of
 
 CMS 可视化编辑中的虎诉动态列表支持条目置顶、按 `YYYYMMDD` 排序日期升降序重排，并在保存时把动态列表的 `sortDate`、`displayDate` 同步到真实官网 CMS 状态。可视化预览和抽屉图片缩略图通过 `resolvePublicAssetUrl(s)` 解析 `/uploads`、`/assets` 等相对路径，预览请求会指向 `NEXT_PUBLIC_CMS_ASSET_BASE_URL` 对应的 OSS 公网地址。
 
+虎诉动态的 `event.list` 和 `event.detailPages` 合并逻辑以 `id/slug` 作为稳定键，不再按数组下标给新增动态补默认事件字段；可视化编辑同步中英文动态、移动和删除列表项时同样按 slug 对齐，避免新增 event 子页面、CMS 可视化内容、版本预览和线上页面互相串字段。
+
+虎诉动态详情页右侧抽屉生成的 `detailImageN`/`detailVideoN` 字段会在读取旧 `detailImages`/`detailVideos` 列表和当前字段值时统一调用 `resolvePublicAssetUrl`，测试站即使本地 `/uploads` 静态路径缺失，也会在预览和缩略图中加载 OSS 公网地址。
+
+版本发布/恢复写入正式站公开 CMS 状态时，会强制用该版本的 `pageContent` 覆盖 `officialSiteState.previewPageContent`，与版本预览的读取规则保持一致，避免发布后正式站继续读取 payload 中旧的可视化子页面副本。
+
 CMS 文件管理和可视化抽屉上传成功后会在后台消息中直接显示最新 OSS 公网地址；字段内部仍保存 `/uploads/...` 相对路径，由预览和公开接口统一转换，避免数据与具体资源域名强绑定。
 
 OSS 图片地址统一以 `NEXT_PUBLIC_ASSET_BASE_URL` 为准，例如 `https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb`。`resolvePublicAssetUrl(s)` 优先读取该变量，CMS 上传到 OSS 时会从同一变量解析公开路径前缀，把 `/uploads/...` 写入 OSS 的 `husuweb/uploads/...` 对象 key，保证后台提示、可视化预览和公开页面使用同一资源前缀。
@@ -621,6 +627,12 @@ CMS 左侧全局版本选择器不再提供“未选择版本”空项；默认�
 
 | 鏃堕棿 | 鍒嗘敮 | 鍙樻洿绫诲瀷 | 鎻忚堪 |
 | :--- | :--- | :--- | :--- |
+| 2026-06-10 23:15 | cms | 修复缺陷 | 修复虎诉动态详情抽屉生成图片字段仍可能使用本地 `/uploads` 路径，导致测试站预览加载不到新上传图片的问题 |
+| 2026-06-10 09:33 | cms | 修复缺陷 | 修复版本发布/恢复后正式站 event 子页面可能读取旧 `officialSiteState.previewPageContent`，导致与版本预览不一致的问题 |
+| 2026-06-10 09:15 | cms | 修复缺陷 | 修复虎诉动态新增 event 被按位置套用默认摘要/详情图片，以及可视化中英文子页面按下标同步导致字段串项的问题 |
+| 2026-06-10 08:41 | cms | 修复缺陷 | 补齐虎诉动态前台事件合并路径，空封面不再通过 `localizeCmsEvent` 回退为静态默认图片 |
+| 2026-06-10 00:32 | cms | 修复缺陷 | 修复虎诉动态新增事件图片留空后，版本预览和 CMS 同步层把空图片回退为默认图片的问题 |
+| 2026-06-10 00:10 | cms | 修复缺陷 | 修复服务行业内容管理中编辑 Slug 会导致右侧编辑面板被卸载的问题，并让版本预览按当前 CMS 可视化语言打开 |
 | 2026-06-04 22:22 | cms | 修复缺陷 | 修复版本中 `home.industries` 少于 `media.cards` 时，加载可视化或内容管理会用首页列表反向裁掉服务行业页新增项的问题 |
 | 2026-06-04 10:05 | cms | 修复缺陷 | 在服务端版本创建、更新、预览读取和发布恢复时用 pageContent 归一化服务行业 officialState，防止线上旧 payload 继续丢失可视化新增行业 |
 | 2026-06-04 09:50 | cms | 修复缺陷 | 修复版本发布后再次进入可视化编辑时新增服务行业被旧 officialState 列表裁掉的问题 |
@@ -1027,6 +1039,12 @@ CMS 左侧全局版本选择器不再提供“未选择版本”空项；默认�
 
 | 鏃堕棿 | 鍒嗘敮 | 瀹屾垚鐨勫姛鑳?/ 宸ヤ綔 | 璇存槑 |
 | :--- | :--- | :--- | :--- |
+| 2026-06-10 23:15 | cms | 虎诉动态预览上传图 OSS 化 | 可视化抽屉读取 event 详情图片字段时统一把 `/uploads` 和 `/assets` 相对路径解析为 OSS 公网地址，避免测试站预览依赖本地静态文件 |
+| 2026-06-10 09:33 | cms | 版本发布正式站 pageContent 对齐 | 发布和恢复版本时正式站公开 CMS 状态强制写入该版本 `pageContent`，保证 event 子页面正式版、版本预览和可视化编辑使用同一份子页面内容 |
+| 2026-06-10 09:15 | cms | 虎诉动态新增 event 子页面对齐 | pageContent 读取按 slug 合并 event 列表和详情页；可视化编辑的中英文同步、移动和删除同样按 slug 定位，新增 event 不再继承默认摘要或详情图片 |
+| 2026-06-10 08:41 | cms | 虎诉动态线上空封面修复 | `localizeCmsEvent` 只有在 `image` 字段不存在时才使用静态默认图；字段存在但为空时，首页、动态页和发布后的前台保持无图状态 |
+| 2026-06-10 00:32 | cms | 虎诉动态空图片预览修复 | pageContent 保存归一化、可视化 officialState 同步和 Events 列表渲染均区分“字段缺失”和“字段为空”，新增动态无封面时预览保持空占位 |
+| 2026-06-10 00:10 | cms | CMS 服务行业编辑与预览语言修复 | 服务行业编辑项展开 ID 改为不依赖 Slug；可视化和版本管理打开 `/cms/version-preview/[id]` 时携带当前语言，版本预览按 `lang` 参数初始化 |
 | 2026-06-04 22:22 | cms | 服务行业来源优先级修复 | `CmsStudio`、`CmsPuckVisualEditor` 和 `cms-db` 统一以 `pageContent.media.cards` 作为服务行业权威列表，`home.industries` 只在缺少服务行业页列表时兜底 |
 | 2026-06-04 10:05 | cms | 服务端版本行业归一化 | `cms-db` 持久化和读取版本 payload 时按 `pageContent.media.cards`/`home.industries` 重建 `officialSiteState.lists.industries`，兼容旧前端提交和历史版本发布 |
 | 2026-06-04 09:50 | cms | 可视化服务行业版本加载修复 | `CmsStudio` 加载版本、当前站点内容和构建版本 payload 时可按 pageContent 反推 `officialState.lists.industries`，避免发布后继续编辑丢失新增行业 |

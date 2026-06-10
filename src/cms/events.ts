@@ -24,7 +24,7 @@ export function applyCmsEventOverride(event: EventItem, override?: OfficialCmsEv
 
   return {
     ...event,
-    image: override.image?.trim() || event.image,
+    image: typeof override.image === "string" ? override.image.trim() : event.image,
     detailImages: hasCmsMediaOverride(override.detailImages)
       ? override.detailImages?.map((value) => value.trim())
       : event.detailImages,

@@ -101,8 +101,19 @@ export function EventDetailPage({ slug }: { slug: string }) {
   const summaryForCompare = normalizeDetailText(localizedSummary);
   const detailImageFieldPattern = /^detailImage(\d+)$/;
   const detailVideoFieldPattern = /^detailVideo(\d+)$/;
-  const detailImages = pickCmsDetailMedia(currentDetailItem, fallbackDetailItem, "detailImages", detailImageFieldPattern, staticEvent ? event.detailImages ?? [] : []);
-  const detailVideos = pickCmsDetailMedia(currentDetailItem, fallbackDetailItem, "detailVideos", detailVideoFieldPattern, staticEvent ? event.detailVideos ?? [] : []);
+  const customEventOverride = staticEvent ? undefined : cms?.events.overrides[slug];
+  const customDetailImages = Array.isArray(customEventOverride?.detailImages)
+    ? customEventOverride.detailImages.map((item) => item.trim()).filter(Boolean)
+    : undefined;
+  const customDetailVideos = Array.isArray(customEventOverride?.detailVideos)
+    ? customEventOverride.detailVideos.map((item) => item.trim()).filter(Boolean)
+    : undefined;
+  const detailImages =
+    customDetailImages ??
+    pickCmsDetailMedia(currentDetailItem, fallbackDetailItem, "detailImages", detailImageFieldPattern, staticEvent ? event.detailImages ?? [] : []);
+  const detailVideos =
+    customDetailVideos ??
+    pickCmsDetailMedia(currentDetailItem, fallbackDetailItem, "detailVideos", detailVideoFieldPattern, staticEvent ? event.detailVideos ?? [] : []);
   let detailImageIndex = 0;
   let detailVideoIndex = 0;
   const detailBlocks = localizedContent
