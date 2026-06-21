@@ -2448,8 +2448,10 @@ function industriesFromPageContent(
         name: getPageContentItemField(item, "title", current?.name ?? item.label),
         zhName: getPageContentItemField(zhItem, "title", current?.zhName ?? current?.name ?? item.label),
         img:
+          getPageContentItemField(item, "image", "") ||
+          getPageContentItemField(zhItem, "image", "") ||
           current?.img ||
-          getPageContentItemField(enDetail, "image", getPageContentItemField(item, "image", "")) ||
+          getPageContentItemField(enDetail, "image", "") ||
           getPageContentItemField(zhDetail, "image", "") ||
           "",
         cls: getPageContentItemField(item, "layoutClass", current?.cls ?? ""),
@@ -2512,9 +2514,11 @@ function mergeIndustriesWithPageContent(
         name,
         zhName,
         img:
+          getPageContentItemField(enCard, "image", "") ||
+          getPageContentItemField(zhCard, "image", "") ||
           current?.img ||
-          getPageContentItemField(enDetail, "image", getPageContentItemField(enCard, "image", "")) ||
-          getPageContentItemField(zhDetail, "image", getPageContentItemField(zhCard, "image", "")),
+          getPageContentItemField(enDetail, "image", "") ||
+          getPageContentItemField(zhDetail, "image", ""),
         cls:
           current?.cls ||
           getPageContentItemField(enCard, "layoutClass", getPageContentItemField(zhCard, "layoutClass", "")),

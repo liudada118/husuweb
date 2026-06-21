@@ -503,9 +503,11 @@ function industriesFromPageContent(
             industry.zhName ||
             pageContentItemField(zhCard, "title", pageContentItemField(zhDetail, "title", industry.name || slug)),
           img:
+            pageContentItemField(enCard, "image", "") ||
+            pageContentItemField(zhCard, "image", "") ||
             industry.img ||
-            pageContentItemField(enDetail, "image", pageContentItemField(enCard, "image", "")) ||
-            pageContentItemField(zhDetail, "image", pageContentItemField(zhCard, "image", "")),
+            pageContentItemField(enDetail, "image", "") ||
+            pageContentItemField(zhDetail, "image", ""),
           cls: industry.cls || pageContentItemField(enCard, "layoutClass", pageContentItemField(zhCard, "layoutClass", "")),
           intro: industry.intro || pageContentItemField(enDetail, "intro", pageContentItemField(enCard, "description", "")),
           zhIntro: industry.zhIntro || pageContentItemField(zhDetail, "intro", pageContentItemField(zhCard, "description", "")),
@@ -534,9 +536,11 @@ function industriesFromPageContent(
         name: pageContentItemField(item, "title", current?.name ?? item.label),
         zhName: pageContentItemField(zhItem, "title", current?.zhName ?? current?.name ?? item.label),
         img:
-          pageContentItemField(enDetail, "image", pageContentItemField(item, "image", "")) ||
-          pageContentItemField(zhDetail, "image", "") ||
+          pageContentItemField(item, "image", "") ||
+          pageContentItemField(zhItem, "image", "") ||
           current?.img ||
+          pageContentItemField(enDetail, "image", "") ||
+          pageContentItemField(zhDetail, "image", "") ||
           "",
         cls: pageContentItemField(item, "layoutClass", current?.cls ?? ""),
         intro: pageContentItemField(enDetail, "intro", pageContentItemField(item, "description", current?.intro ?? "")),
