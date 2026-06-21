@@ -23,6 +23,7 @@ import {
   LanguageProvider as OfficialLanguageProvider,
   useLanguage as useOfficialLanguage,
 } from "@/i18n/LanguageProvider";
+import { formatEventDate } from "@/data/events";
 import { createEmptyTeamProfile, getTeamProfile, teamProfiles } from "@/data/teamProfiles";
 import {
   createPastEventPlatformFields,
@@ -225,14 +226,16 @@ function getRepeaterDisplayTitle(
   itemIndex: number,
   fallback: string,
   slug?: string,
+  displayIndex = itemIndex,
 ) {
   const preferredFieldIds = ["title", "name", "award", "platform", "brand", "label", "tag"];
 
   for (const language of ["zh", "en"] as Language[]) {
     const item = getSectionItemBySlugOrIndex(sectionsByLanguage[language], itemIndex, slug);
+    const preferredValue = getPreferredRepeaterFieldValue(item, preferredFieldIds);
     const value =
-      getPreferredRepeaterFieldValue(item, preferredFieldIds) ||
-      item?.label ||
+      formatAutoNumberedRepeaterTitle(preferredValue, item, displayIndex) ||
+      formatAutoNumberedRepeaterTitle(item?.label, item, displayIndex) ||
       item?.fields.find((fieldItem) => fieldItem.kind !== "image" && fieldItem.kind !== "url")?.value;
 
     if (value?.trim()) {
@@ -241,6 +244,23 @@ function getRepeaterDisplayTitle(
   }
 
   return fallback;
+}
+
+function formatAutoNumberedRepeaterTitle(
+  value: string | undefined,
+  item: PageContentRepeaterItem | undefined,
+  displayIndex: number,
+) {
+  const trimmed = value?.trim();
+  if (!trimmed) return "";
+
+  const label = item?.label?.trim();
+  const isGeneratedTitle = trimmed === label;
+  const match = trimmed.match(/^(.*?)(\s+)(\d+)$/);
+
+  if (!isGeneratedTitle || !match) return trimmed;
+
+  return `${match[1]}${match[2]}${displayIndex + 1}`;
 }
 
 function getRepeaterDisplaySummary(
@@ -1840,9 +1860,7 @@ function sortChronicleEvents<T extends { month: { en: string; zh: string } }>(ev
 }
 
 function sortChronicleYears<T extends { year: string; events: Array<{ month: { en: string; zh: string } }> }>(years: T[]) {
-  return years
-    .map((year) => ({ ...year, events: sortChronicleEvents(year.events) }))
-    .sort((left, right) => Number(right.year) - Number(left.year));
+  return [...years].sort((left, right) => Number(right.year) - Number(left.year));
 }
 
 function syncChronicleFromPageContent(previewData: PublicCmsData, officialSiteState: OfficialCmsPublicState) {
@@ -1884,17 +1902,7 @@ function syncChronicleFromPageContent(previewData: PublicCmsData, officialSiteSt
     const group = groups.get(existingYear.year);
 
     if (!group) {
-      groups.set(existingYear.year, { ...existingYear, events: sortChronicleEvents(existingYear.events) });
-      return;
-    }
-
-    const seen = new Set(group.events.map((event) => `${event.month.en}::${event.month.zh}::${event.text.en}::${event.text.zh}`.toLowerCase()));
-    const missingEvents = existingYear.events.filter(
-      (event) => !seen.has(`${event.month.en}::${event.month.zh}::${event.text.en}::${event.text.zh}`.toLowerCase()),
-    );
-
-    if (missingEvents.length) {
-      group.events = [...group.events, ...missingEvents];
+      groups.set(existingYear.year, { ...existingYear });
     }
   });
 
@@ -2742,30 +2750,7 @@ export function CmsPuckVisualEditor({
       return { itemIndex, rowSlug };
     });
 
-    if (previewPage !== "about" || activeCarouselSection?.id !== "chronicle") {
-      return rows;
-    }
-
-    return [...rows].sort((left, right) => {
-      const leftEn = activeCarouselSectionsByLanguage.en?.items?.[left.itemIndex];
-      const leftZh = activeCarouselSectionsByLanguage.zh?.items?.[left.itemIndex];
-      const rightEn = activeCarouselSectionsByLanguage.en?.items?.[right.itemIndex];
-      const rightZh = activeCarouselSectionsByLanguage.zh?.items?.[right.itemIndex];
-      const leftItem = leftEn ?? leftZh;
-      const rightItem = rightEn ?? rightZh;
-      const leftYear = leftItem ? Number(inferChronicleYear(leftItem, leftZh)) : 0;
-      const rightYear = rightItem ? Number(inferChronicleYear(rightItem, rightZh)) : 0;
-      const leftMonth = Math.max(
-        getChronicleMonthNumber(leftEn ? getPageContentItemField(leftEn, "month", "") : ""),
-        getChronicleMonthNumber(leftZh ? getPageContentItemField(leftZh, "month", "") : ""),
-      );
-      const rightMonth = Math.max(
-        getChronicleMonthNumber(rightEn ? getPageContentItemField(rightEn, "month", "") : ""),
-        getChronicleMonthNumber(rightZh ? getPageContentItemField(rightZh, "month", "") : ""),
-      );
-
-      return rightYear - leftYear || rightMonth - leftMonth || left.itemIndex - right.itemIndex;
-    });
+    return rows;
   }, [
     activeCarouselSection?.id,
     activeCarouselSectionsByLanguage.en,
@@ -3203,6 +3188,7 @@ export function CmsPuckVisualEditor({
       language: Language,
     ) => {
       const eventListTitle = language === "zh" ? "新动态" : "New Event";
+      const displayDate = formatEventDate(today, language);
       let fields =
         template?.fields.map((field) => ({
           ...field,
@@ -3211,9 +3197,9 @@ export function CmsPuckVisualEditor({
             field.id === "slug"
               ? nextId
               : field.id === "sortDate" || field.id === "date"
-                ? today
-                : field.id === "displayDate"
-                  ? today
+              ? today
+              : field.id === "displayDate"
+                  ? displayDate
                   : previewPage === "event" && section.id === "list" && field.id === "title"
                     ? eventListTitle
                   : "",
@@ -3223,7 +3209,7 @@ export function CmsPuckVisualEditor({
         fields = createFallbackField(fields, "slug", "Slug", "text", nextId);
         fields = createFallbackField(fields, "image", "Thumbnail image", "image");
         fields = createFallbackField(fields, "sortDate", "Sort date", "text", today);
-        fields = createFallbackField(fields, "displayDate", "Display date", "text", today);
+        fields = createFallbackField(fields, "displayDate", "Display date", "text", displayDate);
         fields = createFallbackField(fields, "category", "Category", "text");
         fields = createFallbackField(fields, "title", "Title", "textarea", eventListTitle);
         fields = createFallbackField(fields, "summary", "Summary", "textarea");
@@ -3233,7 +3219,7 @@ export function CmsPuckVisualEditor({
         fields = fields.filter((field) => homeEventSlideFields.some((item) => item.fieldId === field.id));
         fields = createFallbackField(fields, "slug", "Slide slug", "text", nextId);
         fields = createFallbackField(fields, "image", "Slide image", "image");
-        fields = createFallbackField(fields, "displayDate", "Display date", "text", today);
+        fields = createFallbackField(fields, "displayDate", "Display date", "text", displayDate);
         fields = createFallbackField(fields, "category", "Category", "text");
         fields = createFallbackField(fields, "title", "Title", "textarea", `${localizedSection.label} ${nextIndex}`);
         fields = createFallbackField(fields, "summary", "Slide summary", "textarea");
@@ -3243,7 +3229,7 @@ export function CmsPuckVisualEditor({
       if (previewPage === "event" && section.id === "detailPages") {
         fields = createFallbackField(fields, "slug", "Slug", "text", nextId);
         fields = createFallbackField(fields, "sortDate", "Sort date", "text", today);
-        fields = createFallbackField(fields, "displayDate", "Display date", "text", today);
+        fields = createFallbackField(fields, "displayDate", "Display date", "text", displayDate);
         fields = createFallbackField(fields, "category", "Category", "text");
         fields = createFallbackField(fields, "title", "Detail title", "textarea", `${localizedSection.label} ${nextIndex}`);
         fields = createFallbackField(fields, "summary", "Detail summary", "textarea");
@@ -3295,6 +3281,7 @@ export function CmsPuckVisualEditor({
 
           const nextIndex = items.length + 1;
           const detailTitle = language === "zh" ? "新动态" : "New Event";
+          const displayDate = formatEventDate(today, language);
 
           return [
             ...items,
@@ -3304,7 +3291,7 @@ export function CmsPuckVisualEditor({
               fields: [
                 { id: "slug", label: "Slug", kind: "text", value: nextId },
                 { id: "sortDate", label: "Sort date", kind: "text", value: today },
-                { id: "displayDate", label: "Display date", kind: "text", value: today },
+                { id: "displayDate", label: "Display date", kind: "text", value: displayDate },
                 { id: "category", label: "Category", kind: "text", value: "" },
                 { id: "title", label: "Detail title", kind: "textarea", value: detailTitle },
                 { id: "summary", label: "Detail summary", kind: "textarea", value: "" },
@@ -3394,7 +3381,18 @@ export function CmsPuckVisualEditor({
       updateCarouselItems(language, sectionId, (items) =>
         slug ? items.filter((item) => getPageContentItemField(item, "slug", item.id) !== slug) : items.filter((_, index) => index !== itemIndex),
       );
+
+      if (previewPage === "event" && sectionId === "list" && slug) {
+        updateCarouselItems(language, "detailPages", (items) =>
+          items.filter((item) => getPageContentItemField(item, "slug", item.id) !== slug),
+        );
+      }
     });
+
+    if (previewPage === "event" && sectionId === "list" && slug) {
+      setCarouselDrawer((current) => (current?.slug === slug ? null : current));
+      setSubpageSelection((current) => (current?.page === "event" && current.slug === slug ? null : current));
+    }
   };
   const moveCarouselItem = (sectionId: string, itemIndex: number, direction: -1 | 1, slug?: string) => {
     editorLanguages.forEach((language) => {
@@ -3406,6 +3404,19 @@ export function CmsPuckVisualEditor({
         if (sourceIndex < 0) return items;
 
         return moveRepeaterItem(items, sourceIndex, sourceIndex + direction);
+      });
+    });
+  };
+  const moveCarouselItemToIndex = (sectionId: string, itemIndex: number, targetIndex: number, slug?: string) => {
+    editorLanguages.forEach((language) => {
+      updateCarouselItems(language, sectionId, (items) => {
+        const sourceIndex = slug
+          ? items.findIndex((item) => getPageContentItemField(item, "slug", item.id) === slug)
+          : itemIndex;
+
+        if (sourceIndex < 0 || targetIndex < 0 || targetIndex >= items.length) return items;
+
+        return moveRepeaterItem(items, sourceIndex, targetIndex);
       });
     });
   };
@@ -4258,7 +4269,7 @@ export function CmsPuckVisualEditor({
                 const isExpanded =
                   expandedCarouselItems[itemKey] ?? (selectedBySlug || carouselDrawer?.itemIndex === itemIndex);
                 const thumbnail = getRepeaterThumbnail(activeCarouselSectionsByLanguage, itemIndex, rowSlug);
-                const title = getRepeaterDisplayTitle(activeCarouselSectionsByLanguage, itemIndex, `Item ${itemIndex + 1}`, rowSlug);
+                const title = getRepeaterDisplayTitle(activeCarouselSectionsByLanguage, itemIndex, `Item ${rowPosition + 1}`, rowSlug, rowPosition);
                 const summary =
                   previewPage === "event" && activeCarouselSection.id === "list"
                     ? ""
@@ -4302,6 +4313,30 @@ export function CmsPuckVisualEditor({
                         activeCarouselSectionsByLanguage.zh?.items?.[drawerItemRows[rowPosition - 1]?.itemIndex ?? -1],
                       )
                     : "";
+                const nextChronicleItem =
+                  previewPage === "about" && activeCarouselSection.id === "chronicle"
+                    ? activeCarouselSectionsByLanguage.en?.items?.[drawerItemRows[rowPosition + 1]?.itemIndex ?? -1] ??
+                      activeCarouselSectionsByLanguage.zh?.items?.[drawerItemRows[rowPosition + 1]?.itemIndex ?? -1]
+                    : undefined;
+                const nextChronicleYear =
+                  nextChronicleItem && previewPage === "about" && activeCarouselSection.id === "chronicle"
+                    ? inferChronicleYear(
+                        nextChronicleItem,
+                        activeCarouselSectionsByLanguage.zh?.items?.[drawerItemRows[rowPosition + 1]?.itemIndex ?? -1],
+                      )
+                    : "";
+                const firstChronicleRowPosition =
+                  chronicleYear && isChronicleDrawer
+                    ? drawerItemRows.findIndex((row) => {
+                        const rowZhItem = activeCarouselSectionsByLanguage.zh?.items?.[row.itemIndex];
+                        const rowEnItem = activeCarouselSectionsByLanguage.en?.items?.[row.itemIndex];
+                        const rowItem = rowEnItem ?? rowZhItem;
+
+                        return rowItem ? inferChronicleYear(rowItem, rowZhItem) === chronicleYear : false;
+                      })
+                    : -1;
+                const firstChronicleRow =
+                  firstChronicleRowPosition >= 0 ? drawerItemRows[firstChronicleRowPosition] : undefined;
 
                 return (
                 <section
@@ -4363,7 +4398,41 @@ export function CmsPuckVisualEditor({
                         {isPinned ? "取消置顶" : "置顶"}
                       </button>
                     ) : null}
-                    {!isChronicleDrawer ? (
+                    {isChronicleDrawer ? (
+                      <>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            firstChronicleRow
+                              ? moveCarouselItemToIndex(activeCarouselSection.id, itemIndex, firstChronicleRow.itemIndex, rowSlug)
+                              : undefined
+                          }
+                          disabled={!firstChronicleRow || rowPosition === firstChronicleRowPosition}
+                          className="inline-flex items-center gap-1 rounded-xl border border-slate-200 px-2.5 py-2 text-xs font-bold text-slate-600 transition hover:border-[#2563eb] hover:text-[#2563eb] disabled:cursor-not-allowed disabled:opacity-40"
+                        >
+                          <ArrowUp className="h-3.5 w-3.5" />
+                          置顶
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => moveCarouselItem(activeCarouselSection.id, itemIndex, -1, rowSlug)}
+                          disabled={rowPosition === 0 || previousChronicleYear !== chronicleYear}
+                          className="inline-flex items-center gap-1 rounded-xl border border-slate-200 px-2.5 py-2 text-xs font-bold text-slate-600 transition hover:border-[#2563eb] hover:text-[#2563eb] disabled:cursor-not-allowed disabled:opacity-40"
+                        >
+                          <ArrowUp className="h-3.5 w-3.5" />
+                          上移
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => moveCarouselItem(activeCarouselSection.id, itemIndex, 1, rowSlug)}
+                          disabled={rowPosition >= drawerItemRows.length - 1 || nextChronicleYear !== chronicleYear}
+                          className="inline-flex items-center gap-1 rounded-xl border border-slate-200 px-2.5 py-2 text-xs font-bold text-slate-600 transition hover:border-[#2563eb] hover:text-[#2563eb] disabled:cursor-not-allowed disabled:opacity-40"
+                        >
+                          <ArrowDown className="h-3.5 w-3.5" />
+                          下移
+                        </button>
+                      </>
+                    ) : (
                       <>
                         <button
                           type="button"
@@ -4391,7 +4460,7 @@ export function CmsPuckVisualEditor({
                           下移
                         </button>
                       </>
-                    ) : null}
+                    )}
                     <button
                       type="button"
                       onClick={() => setExpandedCarouselItems((current) => ({ ...current, [itemKey]: !isExpanded }))}

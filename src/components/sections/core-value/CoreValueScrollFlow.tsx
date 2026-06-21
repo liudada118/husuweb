@@ -176,15 +176,50 @@ function CoreImageStack({ items, progress }: { items: CoreValueItem[]; progress:
 function renderCoreValueBody(body: ReactNode | string) {
   if (typeof body !== "string") return body;
 
-  return body
-    .split(/\r?\n+/)
-    .map((paragraph) => paragraph.trim())
-    .filter(Boolean)
-    .map((paragraph) => (
-      <p key={paragraph} className="mb-5 last:mb-0">
-        {paragraph}
-      </p>
-    ));
+  const nodes: ReactNode[] = [];
+  let listItems: string[] = [];
+
+  const flushList = () => {
+    if (!listItems.length) return;
+
+    nodes.push(
+      <ul key={`list-${nodes.length}`} className="mb-5 space-y-3 text-[#99a1af] last:mb-0">
+        {listItems.map((item, index) => (
+          <li key={`${item}-${index}`} className="flex items-start gap-3">
+            <span className="mt-[0.65em] block size-2 shrink-0 rounded-full bg-[#d9d9d9]" />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>,
+    );
+    listItems = [];
+  };
+
+  body.split(/\r?\n/).forEach((line) => {
+    const trimmed = line.trim();
+
+    if (!trimmed) {
+      flushList();
+      return;
+    }
+
+    const unorderedMatch = trimmed.match(/^[-*•]\s+(.+)$/);
+
+    if (unorderedMatch) {
+      listItems.push(unorderedMatch[1].trim());
+      return;
+    }
+
+    flushList();
+    nodes.push(
+      <p key={`paragraph-${nodes.length}`} className="mb-5 last:mb-0">
+        {trimmed}
+      </p>,
+    );
+  });
+
+  flushList();
+  return nodes;
 }
 
 function CoreValueBlock({ item, active, isZh }: { item: CoreValueItem; active: boolean; isZh: boolean }) {

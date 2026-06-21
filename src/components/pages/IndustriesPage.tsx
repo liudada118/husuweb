@@ -24,13 +24,11 @@ function IndustryCard({
   label,
   href,
   image,
-  description,
   className,
 }: {
   label: string;
   href: string;
   image: string;
-  description?: string;
   className?: string;
 }) {
   return (
@@ -50,11 +48,6 @@ function IndustryCard({
         <h2 className="whitespace-pre-line text-left text-[clamp(2rem,3vw,3rem)] font-semibold leading-[1.1] tracking-[0.02em] text-white">
           {label}
         </h2>
-        {description ? (
-          <p className="mt-4 max-w-[42rem] text-[1.125rem] font-light leading-[1.5] text-white/85">
-            {description}
-          </p>
-        ) : null}
         <span className="mt-4 block h-0.5 w-full bg-[#d9b27a]" />
       </div>
     </Link>
@@ -71,7 +64,6 @@ export function IndustriesPage() {
     label: pick(language, card.label),
     slug: card.slug,
     image: card.image,
-    description: "",
     href: `/industries/${card.slug}?from=industries`,
   }));
   const fallbackById = new Map(fallbackCards.map((card) => [card.id, card]));
@@ -85,7 +77,6 @@ export function IndustriesPage() {
           label: getPreviewPageItemField(item, "title", fallback?.label ?? item.label),
           slug,
           image: getPreviewPageItemField(item, "image", fallback?.image ?? ""),
-          description: getPreviewPageItemField(item, "description", fallback?.description ?? ""),
           href: getPreviewPageItemField(item, "href", fallback?.href ?? `/industries/${slug}?from=industries`),
         };
       })

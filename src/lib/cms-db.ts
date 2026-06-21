@@ -486,6 +486,40 @@ function industriesFromPageContent(
   const officialBySlug = new Map(officialIndustries.map((industry) => [normalizeIndustrySlug(industry.slug), industry] as const));
   const seenSlugs = new Set<string>();
 
+  if (officialIndustries.length) {
+    return officialIndustries
+      .map((industry, index) => {
+        const slug = normalizeIndustrySlug(industry.slug) || `industry-${index + 1}`;
+        const enCard = enMediaItems?.find((item, itemIndex) => pageContentIndustrySlug(item, itemIndex) === slug);
+        const zhCard = zhMediaItems?.find((item, itemIndex) => pageContentIndustrySlug(item, itemIndex) === slug);
+        const enDetail = enDetails.get(slug);
+        const zhDetail = zhDetails.get(slug);
+
+        return {
+          ...industry,
+          slug,
+          name: industry.name || pageContentItemField(enCard, "title", pageContentItemField(enDetail, "title", slug)),
+          zhName:
+            industry.zhName ||
+            pageContentItemField(zhCard, "title", pageContentItemField(zhDetail, "title", industry.name || slug)),
+          img:
+            industry.img ||
+            pageContentItemField(enDetail, "image", pageContentItemField(enCard, "image", "")) ||
+            pageContentItemField(zhDetail, "image", pageContentItemField(zhCard, "image", "")),
+          cls: industry.cls || pageContentItemField(enCard, "layoutClass", pageContentItemField(zhCard, "layoutClass", "")),
+          intro: industry.intro || pageContentItemField(enDetail, "intro", pageContentItemField(enCard, "description", "")),
+          zhIntro: industry.zhIntro || pageContentItemField(zhDetail, "intro", pageContentItemField(zhCard, "description", "")),
+          sections: industry.sections || pageContentItemField(enDetail, "sections", ""),
+          zhSections: industry.zhSections || pageContentItemField(zhDetail, "sections", ""),
+        } satisfies OfficialCmsSiteState["lists"]["industries"][number];
+      })
+      .filter((industry) => {
+        if (!industry.slug || seenSlugs.has(industry.slug)) return false;
+        seenSlugs.add(industry.slug);
+        return Boolean(industry.name || industry.zhName);
+      });
+  }
+
   return sourceItems
     .map((item, index) => {
       const slug = pageContentIndustrySlug(item, index);

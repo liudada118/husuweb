@@ -15,7 +15,7 @@ import {
   getPreviewPageSectionItems,
 } from "@/cms/preview-page-content";
 import { usePublicCms } from "@/cms/PublicCmsProvider";
-import { events, formatEventDate } from "@/data/events";
+import { events, formatEventDate, normalizeEventDisplayDate } from "@/data/events";
 import { pick, useLanguage } from "@/i18n/LanguageProvider";
 import { copy } from "@/i18n/copy";
 import { rememberReturnPosition, useRestoreReturnPosition } from "@/lib/returnPosition";
@@ -112,10 +112,13 @@ export function EventsPage() {
       const fallbackItem = fallbackPageEventItems[index];
       const slug = getPreviewPageItemField(item, "slug", getPreviewPageItemField(fallbackItem, "slug", item.id));
       const sortDate = getPreviewPageItemField(item, "sortDate", getPreviewPageItemField(item, "date", ""));
-      const displayDate = getPreviewPageItemField(
-        item,
-        "displayDate",
-        sortDate ? formatEventDate(sortDate, language) : getPreviewPageItemField(item, "date", ""),
+      const displayDate = normalizeEventDisplayDate(
+        getPreviewPageItemField(
+          item,
+          "displayDate",
+          sortDate ? formatEventDate(sortDate, language) : getPreviewPageItemField(item, "date", ""),
+        ),
+        language,
       );
       const title = getPreviewPageItemField(item, "title", getPreviewPageItemField(fallbackItem, "title", ""));
       const imageValue = getPreviewPageItemFieldValue(item, "image");

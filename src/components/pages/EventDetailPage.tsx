@@ -8,7 +8,7 @@ import { SubpageBreadcrumb } from "@/components/shared/SubpageBreadcrumb";
 import { localizeCmsEvent } from "@/cms/events";
 import { getPreviewPageItemField, getPreviewPageSectionItems } from "@/cms/preview-page-content";
 import { usePublicCms } from "@/cms/PublicCmsProvider";
-import { events, formatEventDate } from "@/data/events";
+import { events, formatEventDate, normalizeEventDisplayDate } from "@/data/events";
 import { pick, useLanguage } from "@/i18n/LanguageProvider";
 import { copy } from "@/i18n/copy";
 import { useSearchParams } from "next/navigation";
@@ -58,6 +58,10 @@ function pickCmsDetailMedia(
   return fallback;
 }
 
+function firstFilledValue(...values: Array<string | undefined>) {
+  return values.find((value) => typeof value === "string" && value.trim())?.trim() ?? "";
+}
+
 export function EventDetailPage({ slug }: { slug: string }) {
   const { language } = useLanguage();
   const cms = usePublicCms();
@@ -83,6 +87,24 @@ export function EventDetailPage({ slug }: { slug: string }) {
   const fallbackListItem = fallbackListItems.find(findItemBySlug);
   const currentPageItem = currentDetailItem ?? currentListItem;
   const fallbackPageItem = fallbackDetailItem ?? fallbackListItem;
+  const localizedOverride = language === "zh" ? cms?.events.overrides[slug]?.zh : cms?.events.overrides[slug]?.en;
+  const cmsSortDate = firstFilledValue(
+    getPreviewPageItemField(currentDetailItem, "sortDate", ""),
+    getPreviewPageItemField(currentListItem, "sortDate", ""),
+    getPreviewPageItemField(fallbackDetailItem, "sortDate", ""),
+    getPreviewPageItemField(fallbackListItem, "sortDate", ""),
+    getPreviewPageItemField(currentPageItem, "date", ""),
+    cms?.events.overrides[slug]?.sortDate,
+    event.date,
+  );
+  const detailDisplayDate = normalizeEventDisplayDate(firstFilledValue(
+    getPreviewPageItemField(currentDetailItem, "displayDate", ""),
+    getPreviewPageItemField(currentListItem, "displayDate", ""),
+    getPreviewPageItemField(fallbackDetailItem, "displayDate", ""),
+    getPreviewPageItemField(fallbackListItem, "displayDate", ""),
+    localizedOverride?.displayDate,
+    cmsSortDate ? formatEventDate(cmsSortDate, language) : formatEventDate(event.date, language),
+  ), language);
   const localizedCategory = getPreviewPageItemField(currentPageItem, "category", staticEvent ? event.localizedCategory : "");
   const localizedTitle = getPreviewPageItemField(currentPageItem, "title", staticEvent ? event.localizedTitle : slug);
   const localizedSummary = getPreviewPageItemField(currentPageItem, "summary", staticEvent ? event.localizedSummary : "");
@@ -200,7 +222,7 @@ export function EventDetailPage({ slug }: { slug: string }) {
           </h1>
 
           <p className="mt-12 text-[1.75rem] font-normal leading-none tracking-[0.02em] text-[#d9b27a]">
-            {formatEventDate(event.date, language)}
+            {detailDisplayDate}
           </p>
 
           <div className="mt-12 h-px bg-[#d9b27a]" />

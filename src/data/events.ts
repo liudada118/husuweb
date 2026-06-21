@@ -1590,3 +1590,13 @@ export function formatEventDate(date: string, language: "en" | "zh" = "en") {
 
   return `${monthNames[month - 1]} ${day}, ${year}`;
 }
+
+export function normalizeEventDisplayDate(date: string | undefined, language: "en" | "zh" = "en") {
+  const trimmed = date?.trim() ?? "";
+
+  if (/^\d{8}$/.test(trimmed)) {
+    return formatEventDate(trimmed, language);
+  }
+
+  return trimmed;
+}

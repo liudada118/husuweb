@@ -8,7 +8,7 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
 import { PageTriangle } from "@/components/shared/PageTriangle";
 import { localizeCmsEvent } from "@/cms/events";
-import { getPreviewPageField } from "@/cms/preview-page-content";
+import { getPreviewPageField, getPreviewPageItemField, getPreviewPageSectionItems } from "@/cms/preview-page-content";
 import { usePublicCms } from "@/cms/PublicCmsProvider";
 import type { OfficialCmsEventOverride, OfficialCmsHonorYear } from "@/cms/official-state";
 import { events as eventItems, formatEventDate } from "@/data/events";
@@ -581,7 +581,24 @@ export function HomePage() {
     applyHomeHonorItemList(mergedHomeHonors, cms?.lists?.homeHonorItems) ??
     applyYearList(mergedHomeHonors, cms?.lists?.homeHonorYears ?? cms?.lists?.honorYears);
   const homeEvents = getHomeEvents(language, cms?.home.eventSlugs, cms?.home.eventOverrides, cms?.events.overrides);
-  const homeIndustries = cms?.lists?.industries?.length ? cms.lists.industries : industries;
+  const baseHomeIndustries = cms?.lists?.industries?.length ? cms.lists.industries : industries;
+  const homeIndustryItems = getPreviewPageSectionItems(cms, language, "home", "industries");
+  const baseIndustriesBySlug = new Map(baseHomeIndustries.map((item) => [item.slug, item]));
+  const homeIndustries = homeIndustryItems.length
+    ? homeIndustryItems.map((item, index) => {
+        const slug = getPreviewPageItemField(item, "slug", item.id);
+        const fallback = baseIndustriesBySlug.get(slug) ?? baseHomeIndustries[index];
+        const title = getPreviewPageItemField(item, "title", language === "zh" ? fallback?.zhName ?? fallback?.name ?? item.label : fallback?.name ?? item.label);
+
+        return {
+          name: language === "zh" ? fallback?.name ?? title : title,
+          zhName: language === "zh" ? title : fallback?.zhName ?? title,
+          slug,
+          img: getPreviewPageItemField(item, "image", fallback?.img ?? ""),
+          cls: getPreviewPageItemField(item, "layoutClass", fallback?.cls ?? ""),
+        };
+      })
+    : baseHomeIndustries;
   const managedLogoRows = splitLogoRows(cms?.lists?.clientLogos ?? clientLogos);
   const heroTitle = getPreviewPageField(cms, language, "home", "hero", "title", cms?.home.heroTitle?.[language] || "WE KNOW HOW TO WIN");
   const heroVideo = getPreviewPageField(cms, language, "home", "hero", "video", cms?.home.heroVideo || "/assets/home/海浪0508.mp4");

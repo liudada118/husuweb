@@ -80,7 +80,7 @@ import type {
   OfficialCmsSiteState,
   OfficialCmsTeamProfileContent,
 } from "@/cms/official-state";
-import { events as officialEventsData, formatEventDate } from "@/data/events";
+import { events as officialEventsData, formatEventDate, normalizeEventDisplayDate } from "@/data/events";
 import { teamProfiles } from "@/data/teamProfiles";
 import { resolvePublicAssetUrl } from "@/lib/public-assets";
 import { honorData, withZhSponsorHonors, zhHonorData } from "@/components/sections/about/Honors";
@@ -2448,9 +2448,9 @@ function industriesFromPageContent(
         name: getPageContentItemField(item, "title", current?.name ?? item.label),
         zhName: getPageContentItemField(zhItem, "title", current?.zhName ?? current?.name ?? item.label),
         img:
+          current?.img ||
           getPageContentItemField(enDetail, "image", getPageContentItemField(item, "image", "")) ||
           getPageContentItemField(zhDetail, "image", "") ||
-          current?.img ||
           "",
         cls: getPageContentItemField(item, "layoutClass", current?.cls ?? ""),
         intro: getPageContentItemField(enDetail, "intro", getPageContentItemField(item, "description", current?.intro ?? "")),
@@ -2551,7 +2551,7 @@ function eventLocalizedCopyForLanguage(
   const content = localizedOverride?.content ?? (language === "zh" ? event?.zh?.content : event?.content) ?? [];
   const sortDate = override?.sortDate ?? event?.date ?? "";
   const displayDate =
-    localizedOverride?.displayDate ?? (sortDate ? formatEventDate(sortDate, language) : "");
+    normalizeEventDisplayDate(localizedOverride?.displayDate, language) || (sortDate ? formatEventDate(sortDate, language) : "");
 
   return { title, summary, category, content, sortDate, displayDate };
 }
@@ -2622,7 +2622,7 @@ function syncPageContentFromOfficialSiteState(pageContent: PageContentState, off
           "image",
           isZh ? "首屏背景图片" : "Hero image",
           "image",
-          getExistingPageItemField(next, language, "media", "detailPages", industry.slug, "image") || industry.img,
+          industry.img || getExistingPageItemField(next, language, "media", "detailPages", industry.slug, "image"),
         ),
         studioField(
           "intro",
@@ -2875,6 +2875,9 @@ function OfficialSiteSectionPanel(props: {
 }) {
   const rawState = props.officialSiteState;
   const state = useMemo(() => (rawState ? normalizeOfficialSiteStateForEditor(rawState) : null), [rawState]);
+  const latestOfficialStateRef = useRef<OfficialCmsSiteState | null>(state);
+  const latestPageContentRef = useRef<PageContentState>(props.pageContent);
+  const autoSaveVersionDraftTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [expandedOfficialItemIds, setExpandedOfficialItemIds] = useState<Record<string, boolean>>({});
   const [selectedHomeEventSlug, setSelectedHomeEventSlug] = useState("");
   const [selectedHomeHonorYear, setSelectedHomeHonorYear] = useState("");
@@ -2887,8 +2890,63 @@ function OfficialSiteSectionPanel(props: {
     setSelectedOfficialEventSlug("");
   }, [props.panel]);
 
+  useEffect(() => {
+    latestOfficialStateRef.current = state;
+    latestPageContentRef.current = props.pageContent;
+  }, [state, props.pageContent]);
+
+  useEffect(
+    () => () => {
+      if (autoSaveVersionDraftTimerRef.current) {
+        clearTimeout(autoSaveVersionDraftTimerRef.current);
+      }
+    },
+    [],
+  );
+
+  const queueVersionDraftAutoSave = (nextState: OfficialCmsSiteState, nextPageContent: PageContentState) => {
+    if (!props.editingVersionId) return;
+
+    if (autoSaveVersionDraftTimerRef.current) {
+      clearTimeout(autoSaveVersionDraftTimerRef.current);
+    }
+
+    autoSaveVersionDraftTimerRef.current = setTimeout(() => {
+      autoSaveVersionDraftTimerRef.current = null;
+      void props.submitVersionDraft(props.editingVersionId!, {
+        officialSiteState: nextState,
+        pageContent: nextPageContent,
+      });
+    }, 700);
+  };
+
   const updateState = (updater: (current: OfficialCmsSiteState) => OfficialCmsSiteState) => {
-    props.setOfficialSiteState((current) => (current ? updater(current) : current));
+    const currentState = latestOfficialStateRef.current ?? state;
+    if (!currentState) return;
+
+    const nextState = updater(currentState);
+    latestOfficialStateRef.current = nextState;
+    props.setOfficialSiteState(nextState);
+  };
+
+  const updateStateAndPageContent = (
+    updater: (current: OfficialCmsSiteState) => OfficialCmsSiteState,
+    options: { autoSaveVersionDraft?: boolean } = {},
+  ) => {
+    const currentState = latestOfficialStateRef.current ?? state;
+    if (!currentState) return;
+
+    const normalizedState = normalizeOfficialSiteStateForEditor(updater(currentState));
+    const syncedPageContent = syncPageContentFromOfficialSiteState(latestPageContentRef.current, normalizedState);
+    const stateForSave = { ...normalizedState, previewPageContent: syncedPageContent };
+
+    latestOfficialStateRef.current = stateForSave;
+    latestPageContentRef.current = syncedPageContent;
+    props.setOfficialSiteState(stateForSave);
+    props.setPageContent(syncedPageContent);
+    if (options.autoSaveVersionDraft) {
+      queueVersionDraftAutoSave(stateForSave, syncedPageContent);
+    }
   };
 
   useEffect(() => {
@@ -2942,15 +3000,18 @@ function OfficialSiteSectionPanel(props: {
       return;
     }
 
-    updateState((current) => ({
-      ...current,
-      lists: {
-        ...current.lists,
-        industries: current.lists.industries.map((item, itemIndex) =>
-          itemIndex === index ? { ...item, img: uploaded.url } : item,
-        ),
-      },
-    }));
+    updateStateAndPageContent(
+      (current) => ({
+        ...current,
+        lists: {
+          ...current.lists,
+          industries: current.lists.industries.map((item, itemIndex) =>
+            itemIndex === index ? { ...item, img: uploaded.url } : item,
+          ),
+        },
+      }),
+      { autoSaveVersionDraft: true },
+    );
     props.setMessage(`已上传并写入服务行业背景图片：${resolvePublicAssetUrl(uploaded.url)}`);
   };
 
@@ -2980,9 +3041,15 @@ function OfficialSiteSectionPanel(props: {
       return;
     }
 
-    const normalizedState = normalizeOfficialSiteStateForEditor(state, props.pageContent);
-    const syncedPageContent = syncPageContentFromOfficialSiteState(props.pageContent, normalizedState);
+    const latestState = latestOfficialStateRef.current ?? state;
+    const latestPageContent = latestPageContentRef.current;
+    if (!latestState) return;
+
+    const normalizedState = normalizeOfficialSiteStateForEditor(latestState, latestPageContent);
+    const syncedPageContent = syncPageContentFromOfficialSiteState(latestPageContent, normalizedState);
     const stateForSave = { ...normalizedState, previewPageContent: syncedPageContent };
+    latestOfficialStateRef.current = stateForSave;
+    latestPageContentRef.current = syncedPageContent;
     props.setOfficialSiteState(stateForSave);
     props.setPageContent(syncedPageContent);
 
@@ -3215,26 +3282,29 @@ function OfficialSiteSectionPanel(props: {
         <button
           type="button"
           onClick={() =>
-            updateState((current) => ({
-              ...current,
-              lists: {
-                ...current.lists,
-                industries: [
-                  ...current.lists.industries,
-                  {
-                    slug: `industry-${Date.now()}`,
-                    name: "New Industry",
-                    zhName: "新服务行业",
-                    img: "",
-                    cls: "lg:col-span-1",
-                    intro: "",
-                    zhIntro: "",
-                    sections: "",
-                    zhSections: "",
-                  },
-                ],
-              },
-            }))
+            updateStateAndPageContent(
+              (current) => ({
+                ...current,
+                lists: {
+                  ...current.lists,
+                  industries: [
+                    ...current.lists.industries,
+                    {
+                      slug: `industry-${Date.now()}`,
+                      name: "New Industry",
+                      zhName: "新服务行业",
+                      img: "",
+                      cls: "lg:col-span-1",
+                      intro: "",
+                      zhIntro: "",
+                      sections: "",
+                      zhSections: "",
+                    },
+                  ],
+                },
+              }),
+              { autoSaveVersionDraft: true },
+            )
           }
           className="rounded-2xl bg-[#2563eb] px-4 py-3 text-sm font-semibold text-white"
         >
@@ -3251,24 +3321,33 @@ function OfficialSiteSectionPanel(props: {
           onMoveUp:
             index > 0
               ? () =>
-                  updateState((current) => ({
-                    ...current,
-                    lists: { ...current.lists, industries: moveArrayItem(current.lists.industries, index, index - 1) },
-                  }))
+                  updateStateAndPageContent(
+                    (current) => ({
+                      ...current,
+                      lists: { ...current.lists, industries: moveArrayItem(current.lists.industries, index, index - 1) },
+                    }),
+                    { autoSaveVersionDraft: true },
+                  )
               : undefined,
           onMoveDown:
             index < state.lists.industries.length - 1
               ? () =>
-                  updateState((current) => ({
-                    ...current,
-                    lists: { ...current.lists, industries: moveArrayItem(current.lists.industries, index, index + 1) },
-                  }))
+                  updateStateAndPageContent(
+                    (current) => ({
+                      ...current,
+                      lists: { ...current.lists, industries: moveArrayItem(current.lists.industries, index, index + 1) },
+                    }),
+                    { autoSaveVersionDraft: true },
+                  )
               : undefined,
           onDelete: () =>
-            updateState((current) => ({
-              ...current,
-              lists: { ...current.lists, industries: current.lists.industries.filter((_, itemIndex) => itemIndex !== index) },
-            })),
+            updateStateAndPageContent(
+              (current) => ({
+                ...current,
+                lists: { ...current.lists, industries: current.lists.industries.filter((_, itemIndex) => itemIndex !== index) },
+              }),
+              { autoSaveVersionDraft: true },
+            ),
           children: (
             <div className="grid gap-4 xl:grid-cols-2">
               {[
@@ -3283,15 +3362,18 @@ function OfficialSiteSectionPanel(props: {
                   <input
                     value={String(industry[key as keyof OfficialCmsIndustryListItem] ?? "")}
                     onChange={(event) =>
-                      updateState((current) => ({
-                        ...current,
-                        lists: {
-                          ...current.lists,
-                          industries: current.lists.industries.map((item, itemIndex) =>
-                            itemIndex === index ? { ...item, [key]: event.target.value } : item,
-                          ),
-                        },
-                      }))
+                      updateStateAndPageContent(
+                        (current) => ({
+                          ...current,
+                          lists: {
+                            ...current.lists,
+                            industries: current.lists.industries.map((item, itemIndex) =>
+                              itemIndex === index ? { ...item, [key]: event.target.value } : item,
+                            ),
+                          },
+                        }),
+                        { autoSaveVersionDraft: true },
+                      )
                     }
                     className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
                   />
@@ -3370,15 +3452,18 @@ function OfficialSiteSectionPanel(props: {
                     )}
                     rows={5}
                     onChange={(event) =>
-                      updateState((current) => ({
-                        ...current,
-                        lists: {
-                          ...current.lists,
-                          industries: current.lists.industries.map((item, itemIndex) =>
-                            itemIndex === index ? { ...item, [key]: event.target.value } : item,
-                          ),
-                        },
-                      }))
+                      updateStateAndPageContent(
+                        (current) => ({
+                          ...current,
+                          lists: {
+                            ...current.lists,
+                            industries: current.lists.industries.map((item, itemIndex) =>
+                              itemIndex === index ? { ...item, [key]: event.target.value } : item,
+                            ),
+                          },
+                        }),
+                        { autoSaveVersionDraft: true },
+                      )
                     }
                     className="min-h-32 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
                   />
@@ -4194,7 +4279,7 @@ function OfficialSiteSectionPanel(props: {
                 <div className="flex justify-end">
                   <button
                     type="button"
-                    onClick={() => updateYear(yearIndex, (item) => ({ ...item, awards: [...item.awards, createEmptyHonorAward()] }))}
+                    onClick={() => updateYear(yearIndex, (item) => ({ ...item, awards: [createEmptyHonorAward(), ...item.awards] }))}
                     className="rounded-xl border border-slate-200 px-3 py-2 text-xs font-bold text-slate-600"
                   >
                     新增荣誉
@@ -4417,18 +4502,66 @@ function OfficialSiteSectionPanel(props: {
                   <div key={`${yearIndex}-${eventIndex}`} className="space-y-4 rounded-[22px] border border-slate-200 bg-slate-50 p-4">
                     <div className="flex justify-between gap-3">
                       <p className="text-sm font-semibold text-slate-900">事件 {eventIndex + 1}</p>
-                      <button
-                        type="button"
-                        onClick={() =>
-                          updateYear(yearIndex, (item) => ({
-                            ...item,
-                            events: item.events.filter((_, index) => index !== eventIndex),
-                          }))
-                        }
-                        className="text-xs font-bold text-rose-500"
-                      >
-                        删除事件
-                      </button>
+                      <div className="flex flex-wrap items-center justify-end gap-2">
+                        {eventIndex > 0 ? (
+                          <button
+                            type="button"
+                            onClick={() =>
+                              updateYear(yearIndex, (item) => ({
+                                ...item,
+                                events: moveArrayItem(item.events, eventIndex, 0),
+                              }))
+                            }
+                            className="inline-flex items-center gap-1 rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-bold text-slate-600 transition hover:border-[#2563eb] hover:text-[#2563eb]"
+                          >
+                            <ArrowUp className="h-3.5 w-3.5" />
+                            置顶
+                          </button>
+                        ) : null}
+                        {eventIndex > 0 ? (
+                          <button
+                            type="button"
+                            onClick={() =>
+                              updateYear(yearIndex, (item) => ({
+                                ...item,
+                                events: moveArrayItem(item.events, eventIndex, eventIndex - 1),
+                              }))
+                            }
+                            className="inline-flex items-center gap-1 rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-bold text-slate-600 transition hover:border-[#2563eb] hover:text-[#2563eb]"
+                          >
+                            <ArrowUp className="h-3.5 w-3.5" />
+                            上移
+                          </button>
+                        ) : null}
+                        {eventIndex < year.events.length - 1 ? (
+                          <button
+                            type="button"
+                            onClick={() =>
+                              updateYear(yearIndex, (item) => ({
+                                ...item,
+                                events: moveArrayItem(item.events, eventIndex, eventIndex + 1),
+                              }))
+                            }
+                            className="inline-flex items-center gap-1 rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-bold text-slate-600 transition hover:border-[#2563eb] hover:text-[#2563eb]"
+                          >
+                            <ArrowDown className="h-3.5 w-3.5" />
+                            下移
+                          </button>
+                        ) : null}
+                        <button
+                          type="button"
+                          onClick={() =>
+                            updateYear(yearIndex, (item) => ({
+                              ...item,
+                              events: item.events.filter((_, index) => index !== eventIndex),
+                            }))
+                          }
+                          className="inline-flex items-center gap-1 rounded-xl px-3 py-2 text-xs font-bold text-rose-500 transition hover:bg-rose-50"
+                        >
+                          <Trash2 className="h-3.5 w-3.5" />
+                          删除事件
+                        </button>
+                      </div>
                     </div>
                     <div className="grid gap-4 xl:grid-cols-2">
                       <MultilingualField
@@ -4689,6 +4822,37 @@ function OfficialSiteSectionPanel(props: {
       }));
     };
 
+    const deleteEventSlug = (slug: string) => {
+      updateStateAndPageContent(
+        (current) => {
+          const { [slug]: _removedEventOverride, ...nextEventOverrides } = current.events.overrides;
+          const { [slug]: _removedHomeOverride, ...nextHomeEventOverrides } = current.home.eventOverrides ?? {};
+
+          return {
+            ...current,
+            home: {
+              ...current.home,
+              eventSlugs: current.home.eventSlugs.filter((item) => item !== slug),
+              eventOverrides: nextHomeEventOverrides,
+            },
+            lists: {
+              ...current.lists,
+              eventSlugs: current.lists.eventSlugs.filter((item) => item !== slug),
+            },
+            events: {
+              ...current.events,
+              overrides: nextEventOverrides,
+            },
+          };
+        },
+        { autoSaveVersionDraft: true },
+      );
+
+      if (selectedOfficialEventSlug === slug) {
+        setSelectedOfficialEventSlug("");
+      }
+    };
+
     const uploadEventCoverImage = async (slug: string, file: File) => {
       const formData = new FormData();
       formData.append("file", file);
@@ -4813,7 +4977,7 @@ function OfficialSiteSectionPanel(props: {
               index > 0 ? () => updateList("eventSlugs", moveArrayItem(slugs, index, index - 1)) : undefined,
             onMoveDown:
               index < slugs.length - 1 ? () => updateList("eventSlugs", moveArrayItem(slugs, index, index + 1)) : undefined,
-            onDelete: () => updateList("eventSlugs", slugs.filter((item) => item !== slug)),
+            onDelete: () => deleteEventSlug(slug),
             children: (
               <div className="grid gap-4 xl:grid-cols-2">
                 <label className="block space-y-2 xl:col-span-2">
@@ -6010,14 +6174,16 @@ function getRepeaterDisplayTitle(
   itemsByLanguage: Record<Language, PageContentRepeaterItem[]>,
   itemIndex: number,
   fallback: string,
+  displayIndex = itemIndex,
 ) {
   const preferredFieldIds = ["title", "name", "award", "platform", "brand", "label", "tag"];
 
   for (const language of ["zh", "en"] as Language[]) {
     const item = itemsByLanguage[language]?.[itemIndex];
+    const preferredValue = getPreferredRepeaterFieldValue(item, preferredFieldIds);
     const value =
-      getPreferredRepeaterFieldValue(item, preferredFieldIds) ||
-      item?.label ||
+      formatAutoNumberedRepeaterTitle(preferredValue, item, displayIndex) ||
+      formatAutoNumberedRepeaterTitle(item?.label, item, displayIndex) ||
       item?.fields.find((fieldItem) => fieldItem.kind !== "image" && fieldItem.kind !== "url")?.value;
 
     if (value?.trim()) {
@@ -6026,6 +6192,23 @@ function getRepeaterDisplayTitle(
   }
 
   return fallback;
+}
+
+function formatAutoNumberedRepeaterTitle(
+  value: string | undefined,
+  item: PageContentRepeaterItem | undefined,
+  displayIndex: number,
+) {
+  const trimmed = value?.trim();
+  if (!trimmed) return "";
+
+  const label = item?.label?.trim();
+  const isGeneratedTitle = trimmed === label;
+  const match = trimmed.match(/^(.*?)(\s+)(\d+)$/);
+
+  if (!isGeneratedTitle || !match) return trimmed;
+
+  return `${match[1]}${match[2]}${displayIndex + 1}`;
 }
 
 function getRepeaterDisplaySummary(
