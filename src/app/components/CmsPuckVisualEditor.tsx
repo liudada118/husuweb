@@ -420,8 +420,10 @@ function getPairedDrawerFields(
 }
 
 const eventDetailImagePlaceholderPattern = /\[(?:IMAGE|Image|\u56fe\u7247|\u9365\u5267\u5896)\]?/g;
-const eventDetailVideoPlaceholderText = "\u6682\u65f6\u65e0\u6cd5\u5728\u98de\u4e66\u6587\u6863\u5916\u5c55\u793a\u6b64\u5185\u5bb9";
+const legacyEventDetailVideoPlaceholderText = "\u6682\u65f6\u65e0\u6cd5\u5728\u98de\u4e66\u6587\u6863\u5916\u5c55\u793a\u6b64\u5185\u5bb9";
+const eventDetailVideoPlaceholderPattern = new RegExp(String.raw`\[(?:VIDEO|Video|video)\]|${legacyEventDetailVideoPlaceholderText}`, "g");
 const detailImageFieldPattern = /^detailImage(\d+)$/;
+const detailImageWidthFieldPattern = /^detailImageWidth(\d+)$/;
 const detailVideoFieldPattern = /^detailVideo(\d+)$/;
 
 function countEventDetailImagePlaceholders(value: string) {
@@ -429,11 +431,24 @@ function countEventDetailImagePlaceholders(value: string) {
 }
 
 function countEventDetailVideoPlaceholders(value: string) {
-  return value.split(eventDetailVideoPlaceholderText).length - 1;
+  return [...value.matchAll(eventDetailVideoPlaceholderPattern)].length;
 }
 
 function isGeneratedEventMediaField(fieldId: string) {
   return detailImageFieldPattern.test(fieldId) || detailVideoFieldPattern.test(fieldId);
+}
+
+function isGeneratedEventImageWidthField(fieldId: string) {
+  return detailImageWidthFieldPattern.test(fieldId);
+}
+
+function isEventImageWidthStorageField(fieldId: string) {
+  return fieldId === "detailImageWidths";
+}
+
+function getGeneratedEventImageWidthFieldId(fieldId: string) {
+  const imageMatch = fieldId.match(detailImageFieldPattern);
+  return imageMatch ? `detailImageWidth${imageMatch[1]}` : null;
 }
 
 function splitDrawerList(value: string) {
@@ -484,6 +499,11 @@ function addGeneratedEventMediaFields(
     if (!fieldMap.has(fieldId)) {
       fieldMap.set(fieldId, { fieldId, label: `详情图片 ${index + 1}`, kind: "image" });
     }
+
+    const widthFieldId = `detailImageWidth${index + 1}`;
+    if (!fieldMap.has(widthFieldId)) {
+      fieldMap.set(widthFieldId, { fieldId: widthFieldId, label: `详情图片宽度 % ${index + 1}`, kind: "text" });
+    }
   });
   Array.from({ length: videoCount }, (_, index) => {
     const fieldId = `detailVideo${index + 1}`;
@@ -507,6 +527,15 @@ function getGeneratedEventMediaValue(item: PageContentRepeaterItem | undefined, 
   }
 
   return "";
+}
+
+function getGeneratedEventImageWidthValue(item: PageContentRepeaterItem | undefined, fieldId: string) {
+  if (!item) return "";
+
+  const widthMatch = fieldId.match(detailImageWidthFieldPattern);
+  if (!widthMatch) return "";
+
+  return splitDrawerList(getItemFieldValue(item, "detailImageWidths"))[Number(widthMatch[1]) - 1] ?? "";
 }
 
 function getPastEventPlatformNumbersForDrawer(
@@ -1017,6 +1046,28 @@ function upsertGeneratedEventMediaField(
   return upsertRepeaterField(nextFields, legacyFieldId, trimTrailingEmptyItems(mediaItems).join("\n"), {
     id: legacyFieldId,
     label: legacyField?.label ?? legacyFieldId,
+    kind: legacyField?.kind ?? "textarea",
+    value: legacyField?.value ?? "",
+  });
+}
+
+function upsertGeneratedEventImageWidthField(
+  fields: PageContentField[],
+  fieldId: string,
+  value: string,
+  fallback: PageContentField | null,
+) {
+  const match = fieldId.match(detailImageWidthFieldPattern);
+  if (!match) return upsertRepeaterField(fields, fieldId, value, fallback);
+
+  const legacyField = fields.find((field) => field.id === "detailImageWidths");
+  const widthItems = splitDrawerList(legacyField?.value ?? "");
+  widthItems[Number(match[1]) - 1] = value.trim();
+
+  const nextFields = upsertRepeaterField(fields, fieldId, value, fallback);
+  return upsertRepeaterField(nextFields, "detailImageWidths", trimTrailingEmptyItems(widthItems).join("\n"), {
+    id: "detailImageWidths",
+    label: legacyField?.label ?? "Detail image widths",
     kind: legacyField?.kind ?? "textarea",
     value: legacyField?.value ?? "",
   });
@@ -1624,7 +1675,25 @@ function syncHomeEventsFromPageContent(
     const primaryMediaItem = language === "zh" ? zhItem : item;
     const secondaryMediaItem = language === "zh" ? item : zhItem;
     const detailImages = collectMergedNumberedDetailMedia(primaryMediaItem, secondaryMediaItem, "detailImages", detailImageFieldPattern);
+    const detailImageWidths = collectMergedNumberedDetailMedia(
+      primaryMediaItem,
+      secondaryMediaItem,
+      "detailImageWidths",
+      detailImageWidthFieldPattern,
+    );
     const detailVideos = collectMergedNumberedDetailMedia(primaryMediaItem, secondaryMediaItem, "detailVideos", detailVideoFieldPattern);
+    const hasDetailImages = hasMergedNumberedDetailMediaField(
+      primaryMediaItem,
+      secondaryMediaItem,
+      "detailImages",
+      detailImageFieldPattern,
+    );
+    const hasDetailVideos = hasMergedNumberedDetailMediaField(
+      primaryMediaItem,
+      secondaryMediaItem,
+      "detailVideos",
+      detailVideoFieldPattern,
+    );
     const existingOverride = overrides[slug];
     const sortDate = getPageContentItemField(
       item,
@@ -1635,8 +1704,9 @@ function syncHomeEventsFromPageContent(
     overrides[slug] = {
       ...existingOverride,
       ...(sortDate ? { sortDate } : {}),
-      detailImages: detailImages.length ? detailImages : existingOverride?.detailImages,
-      detailVideos: detailVideos.length ? detailVideos : existingOverride?.detailVideos,
+      detailImages: hasDetailImages ? detailImages : existingOverride?.detailImages,
+      detailImageWidths: detailImageWidths.length ? detailImageWidths : existingOverride?.detailImageWidths,
+      detailVideos: hasDetailVideos ? detailVideos : existingOverride?.detailVideos,
       en: {
         ...existingOverride?.en,
         displayDate: getPageContentItemField(item, "displayDate", existingOverride?.en?.displayDate ?? ""),
@@ -1675,6 +1745,10 @@ function collectNumberedDetailMedia(item: PageContentRepeaterItem | undefined, l
   return trimTrailingEmptyItems(list);
 }
 
+function hasNumberedDetailMediaField(item: PageContentRepeaterItem | undefined, legacyFieldId: string, pattern: RegExp) {
+  return Boolean(item?.fields.some((field) => field.id === legacyFieldId || pattern.test(field.id)));
+}
+
 function collectMergedNumberedDetailMedia(
   primaryItem: PageContentRepeaterItem | undefined,
   secondaryItem: PageContentRepeaterItem | undefined,
@@ -1686,6 +1760,15 @@ function collectMergedNumberedDetailMedia(
   const size = Math.max(primary.length, secondary.length);
 
   return trimTrailingEmptyItems(Array.from({ length: size }, (_, index) => primary[index] || secondary[index] || ""));
+}
+
+function hasMergedNumberedDetailMediaField(
+  primaryItem: PageContentRepeaterItem | undefined,
+  secondaryItem: PageContentRepeaterItem | undefined,
+  legacyFieldId: string,
+  pattern: RegExp,
+) {
+  return hasNumberedDetailMediaField(primaryItem, legacyFieldId, pattern) || hasNumberedDetailMediaField(secondaryItem, legacyFieldId, pattern);
 }
 
 function syncHonorsFromPageContent(previewData: PublicCmsData, officialSiteState: OfficialCmsPublicState) {
@@ -3031,7 +3114,10 @@ export function CmsPuckVisualEditor({
   const syncEventSlug =
     previewPage === "event" && (sectionId === "list" || sectionId === "detailPages") && fieldId === "slug";
   const targetLanguages =
-    syncEventSlug || (sectionId === "detailPages" && isGeneratedEventMediaField(fieldId)) ? editorLanguages : [language];
+    syncEventSlug ||
+    (sectionId === "detailPages" && (isGeneratedEventMediaField(fieldId) || isGeneratedEventImageWidthField(fieldId)))
+      ? editorLanguages
+      : [language];
 
   targetLanguages.forEach((targetLanguage) => {
     updateCarouselItems(targetLanguage, sectionId, (items) =>
@@ -3047,6 +3133,8 @@ export function CmsPuckVisualEditor({
                 fields:
                   sectionId === "detailPages" && isGeneratedEventMediaField(fieldId)
                     ? upsertGeneratedEventMediaField(item.fields, fieldId, value, fallback)
+                    : sectionId === "detailPages" && isGeneratedEventImageWidthField(fieldId)
+                    ? upsertGeneratedEventImageWidthField(item.fields, fieldId, value, fallback)
                     : upsertRepeaterField(item.fields, fieldId, value, fallback),
               }
             : item;
@@ -3235,6 +3323,7 @@ export function CmsPuckVisualEditor({
         fields = createFallbackField(fields, "summary", "Detail summary", "textarea");
         fields = createFallbackField(fields, "content", "Detail content", "textarea");
         fields = createFallbackField(fields, "detailImage1", "Detail image 1", "image");
+        fields = createFallbackField(fields, "detailImageWidth1", "Detail image width % 1", "text", "");
         fields = createFallbackField(fields, "detailVideo1", "Detail video 1", "url");
       }
 
@@ -3297,6 +3386,7 @@ export function CmsPuckVisualEditor({
                 { id: "summary", label: "Detail summary", kind: "textarea", value: "" },
                 { id: "content", label: "Detail content", kind: "textarea", value: "" },
                 { id: "detailImage1", label: "Detail image 1", kind: "image", value: "" },
+                { id: "detailImageWidth1", label: "Detail image width % 1", kind: "text", value: "" },
                 { id: "detailVideo1", label: "Detail video 1", kind: "url", value: "" },
               ],
             },
@@ -3620,6 +3710,7 @@ export function CmsPuckVisualEditor({
                     { id: "summary", label: language === "zh" ? "详情页摘要" : "Detail summary", kind: "textarea", value: detailSummary },
                     { id: "content", label: language === "zh" ? "详情正文" : "Detail content", kind: "textarea", value: "" },
                     { id: "detailImage1", label: language === "zh" ? "详情图片 1" : "Detail image 1", kind: "image", value: "" },
+                    { id: "detailImageWidth1", label: language === "zh" ? "详情图片宽度 % 1" : "Detail image width % 1", kind: "text", value: "" },
                     { id: "detailVideo1", label: language === "zh" ? "详情视频 1" : "Detail video 1", kind: "url", value: "" },
                   ],
                 };
@@ -4506,8 +4597,10 @@ export function CmsPuckVisualEditor({
                         <p className="font-bold text-slate-900">正文编辑格式说明</p>
                         <p className="mt-2">普通正文直接写在 Detail content 里，段落之间空一行。</p>
                         <p>插入图片：在正文对应位置写一行 [IMAGE]，然后在下方对应的 Detail image 1、Detail image 2 上传或填写图片地址。</p>
-                        <p>插入视频：在正文对应位置写一行 暂时无法在飞书文档外展示此内容，然后在下方对应的 Detail video 1、Detail video 2 上传或填写视频地址。</p>
-                        <p>如果只填写图片/视频地址但正文里没有占位符，系统会把剩余图片或视频追加到正文末尾。</p>
+                        <p>新增视频：在 Detail content 里单独写一行 [VIDEO]，下方会生成对应的 Detail video 1 输入框。</p>
+                        <p>多个视频：每多写一行 [VIDEO]，就会依次生成 Detail video 2、Detail video 3；在对应字段上传视频或填写视频地址。</p>
+                        <p>视频位置：[VIDEO] 写在哪一段下面，视频就显示在哪一段下面；如果对应的 Detail video 输入框为空，页面不会显示 video 标签。</p>
+                        <p>如果只填写图片/视频地址但正文里没有占位符，系统会把剩余图片或视频追加到正文末尾；空视频地址会被忽略。</p>
                       </div>
                     ) : null}
                     {previewPage === "media" && activeCarouselSection.id === "detailPages" ? (
@@ -4520,6 +4613,14 @@ export function CmsPuckVisualEditor({
                     ) : null}
                     {getPairedDrawerFields(activeCarouselSectionsByLanguage, itemIndex, previewPage, activeCarouselSection.id, rowSlug)
                       .filter(({ fieldId }) => activeCarouselSection.id !== "pastEvents" || !isPastEventPlatformFieldId(fieldId))
+                      .filter(
+                        ({ fieldId }) =>
+                          !(
+                            previewPage === "event" &&
+                            activeCarouselSection.id === "detailPages" &&
+                            (isGeneratedEventImageWidthField(fieldId) || isEventImageWidthStorageField(fieldId))
+                          ),
+                      )
                       .map(({ fieldId, label, kind }) => (
                       <section key={fieldId} className="space-y-3 rounded-[20px] border border-slate-200 bg-white p-4">
                         <h3 className="text-xs font-bold text-slate-700">{label}</h3>
@@ -4534,19 +4635,51 @@ export function CmsPuckVisualEditor({
                           const field = localizedItem?.fields.find(
                             (fieldItem) => fieldItem.id === fieldId,
                           );
-                          const fieldValue = field?.value ? resolvePublicAssetUrl(field.value) : getGeneratedEventMediaValue(localizedItem, fieldId);
+                          const generatedFieldValue = isGeneratedEventImageWidthField(fieldId)
+                            ? getGeneratedEventImageWidthValue(localizedItem, fieldId)
+                            : getGeneratedEventMediaValue(localizedItem, fieldId);
+                          const fieldValue =
+                            field?.value && !isGeneratedEventImageWidthField(fieldId)
+                              ? resolvePublicAssetUrl(field.value)
+                              : field?.value ?? generatedFieldValue;
                           const fieldKey = localizedItem
                             ? pageContentItemFieldKey(activeCarouselSection.id, localizedItem.id, fieldId)
                             : `${activeCarouselSection.id}__${itemIndex}__${fieldId}`;
                           const focused = focusedFieldKey === fieldKey && activeLanguage === language;
                           const effectiveKind = field?.kind ?? kind;
                           const uploadable = isUploadableDrawerField(fieldId, effectiveKind);
+                          const imageWidthFieldId =
+                            previewPage === "event" && activeCarouselSection.id === "detailPages"
+                              ? getGeneratedEventImageWidthFieldId(fieldId)
+                              : null;
+                          const widthField = imageWidthFieldId
+                            ? localizedItem?.fields.find((fieldItem) => fieldItem.id === imageWidthFieldId)
+                            : undefined;
+                          const widthFieldValue = imageWidthFieldId
+                            ? widthField?.value ?? getGeneratedEventImageWidthValue(localizedItem, imageWidthFieldId)
+                            : "";
+                          const widthFieldKey =
+                            imageWidthFieldId && localizedItem
+                              ? pageContentItemFieldKey(activeCarouselSection.id, localizedItem.id, imageWidthFieldId)
+                              : imageWidthFieldId
+                                ? `${activeCarouselSection.id}__${itemIndex}__${imageWidthFieldId}`
+                                : "";
+                          const widthFocused =
+                            Boolean(imageWidthFieldId) && focusedFieldKey === widthFieldKey && activeLanguage === language;
                           const fallbackField = {
                             id: fieldId,
                             label,
                             kind,
                             value: fieldValue,
                           } satisfies PageContentField;
+                          const widthFallbackField = imageWidthFieldId
+                            ? ({
+                                id: imageWidthFieldId,
+                                label: widthField?.label ?? "详情图片宽度 %",
+                                kind: "text",
+                                value: widthFieldValue,
+                              } satisfies PageContentField)
+                            : null;
 
                           return (
                             <label key={language} className="block space-y-1.5">
@@ -4602,6 +4735,35 @@ export function CmsPuckVisualEditor({
                                   {effectiveKind === "image" && fieldValue ? (
                                     <img src={resolvePublicAssetUrl(fieldValue)} alt="" className="h-14 w-20 rounded-xl border border-slate-200 object-cover" />
                                   ) : null}
+                                </div>
+                              ) : null}
+                              {imageWidthFieldId && widthFallbackField ? (
+                                <div className="mt-3 space-y-1.5 rounded-2xl bg-slate-50 p-3">
+                                  <span className={`text-xs font-bold ${widthFocused ? "text-[#2563eb]" : "text-slate-500"}`}>
+                                    宽度比例 %
+                                  </span>
+                                  <BufferedTextControl
+                                    name={`${language}-${widthFieldKey}`}
+                                    fieldKey={widthFieldKey}
+                                    language={language}
+                                    value={widthFieldValue}
+                                    onCommit={(value) =>
+                                      updateCarouselItemField(
+                                        language,
+                                        activeCarouselSection.id,
+                                        localizedItemIndex,
+                                        imageWidthFieldId,
+                                        value,
+                                        widthFallbackField,
+                                      )
+                                    }
+                                    className={`w-full rounded-2xl border bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-[#2563eb] focus:ring-4 focus:ring-[#2563eb]/10 ${
+                                      widthFocused ? "border-[#2563eb] ring-4 ring-[#2563eb]/10" : "border-slate-200"
+                                    }`}
+                                  />
+                                  <span className="block text-[11px] leading-5 text-slate-500">
+                                    注：控制这张照片在动态子页面中占屏幕宽度的比例，留空默认 70%，可填 10-100。
+                                  </span>
                                 </div>
                               ) : null}
                             </label>

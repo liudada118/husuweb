@@ -1,6 +1,6 @@
 ﻿# Husuweb Official Site Architecture
 
-最后更新于：2026-06-22 00:09
+最后更新于：2026-07-03 00:24
 
 ## 椤圭洰姒傝堪
 
@@ -533,7 +533,7 @@ Join Us銆佸€欓€変汉鍗＄墖鍜岀畝鍘嗛偖绠卞尯鍩熷寘瑁瑰�
 | :--- | :--- | :--- |
 | `NEXT_SNAPSHOT_BASE_PATH` | 瀛愯矾寰勯儴缃叉椂璁剧疆 Next basePath 鍜岄潤鎬佽祫婧愬墠缂€ | 绌哄瓧绗︿覆 |
 | `NEXT_PUBLIC_BASE_PATH` | 鐢?`next.config.ts` 浠?`NEXT_SNAPSHOT_BASE_PATH` 娉ㄥ叆瀹㈡埛绔紝渚?`ImageWithFallback` 涓?`/assets/*` 鑷姩琛ュ瓙璺緞鍓嶇紑 | 璺熼殢 `NEXT_SNAPSHOT_BASE_PATH` |
-| `NEXT_PUBLIC_ASSET_BASE_URL` | 鐢熶骇闈欐€佽祫婧?CDN/OSS 鍓嶇紑锛涢厤缃悗 `assetUrl()` 浼氭妸 `/assets/*` 鍜?`/font/*` 鎸囧悜璇ュ墠缂€ | `.env.production` 涓负 `https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb` |
+| `NEXT_PUBLIC_ASSET_BASE_URL` | 鐢熶骇闈欐€佽祫婧?CDN/OSS 鍓嶇紑锛涢厤缃悗 `assetUrl()` 浼氭妸 `/assets/*` 鍜?`/font/*` 鎸囧悜璇ュ墠缂€ | `.env.production` 涓负 `https://husu2.oss-cn-beijing.aliyuncs.com/husuweb` |
 
 褰撳墠棣栫増鍏紑椤垫病鏈?CMS銆佹暟鎹簱鎴栧悗鍙扮櫥褰曠幆澧冨彉閲忥紱OSS AccessKey 涓嶅啓鍏ラ」鐩幆澧冩枃浠讹紝涓婁紶瀹屾垚鍚庡墠绔彧闇€瑕佸叕寮€璧勬簮鍩熷悕銆?
 
@@ -551,15 +551,17 @@ CMS 可视化编辑中的虎诉动态列表支持条目置顶、按 `YYYYMMDD` �
 
 虎诉动态详情页右侧抽屉生成的 `detailImageN`/`detailVideoN` 字段会在读取旧 `detailImages`/`detailVideos` 列表和当前字段值时统一调用 `resolvePublicAssetUrl`，测试站即使本地 `/uploads` 静态路径缺失，也会在预览和缩略图中加载 OSS 公网地址。
 
+虎诉动态详情页的 metadata 会从当前公开 CMS 状态读取同 slug 的详情页、列表项和 override 标题/摘要，新增动态发布后浏览器标题随推文名称变化；`/events/[slug]` 改为动态渲染，避免构建期预生成旧 event metadata。动态详情图支持 `detailImageWidthN` 和 `detailImageWidths` 字段，留空默认按 70% 宽度显示，可在内容管理或可视化抽屉中填写 10-100 的屏幕宽度比例；内容管理和可视化抽屉里的每个详情照片地址输入框下方会直接显示宽度比例输入框和注释说明，可视化抽屉不再单独显示底层 `Detail image widths` 存储字段。动态详情视频新增规则使用 `[VIDEO]` 占位符生成 `Detail video N` 字段，旧飞书占位文字仅保留兼容识别；CMS 中存在详情图片/视频字段时即使为空也会覆盖静态默认媒体，预览合成和前台本地化均尊重空数组覆盖，空图片/视频不会渲染占位媒体元素。
+
 新增虎诉动态详情页日期以 CMS `displayDate` 为显示优先级，缺失时使用同 slug 的列表/详情 `sortDate` 格式化；`OfficialCmsEventOverride.sortDate` 会覆盖静态事件底稿的 `date`，避免自定义 event 继续继承静态最新动态日期。前台会把 `YYYYMMDD` 展示日期归一化为当前语言的可读日期，新建动态时也会默认写入格式化后的展示日期。
 
 版本发布/恢复写入正式站公开 CMS 状态时，会强制用该版本的 `pageContent` 覆盖 `officialSiteState.previewPageContent`，与版本预览的读取规则保持一致，避免发布后正式站继续读取 payload 中旧的可视化子页面副本。
 
 CMS 文件管理和可视化抽屉上传成功后会在后台消息中直接显示最新 OSS 公网地址；字段内部仍保存 `/uploads/...` 相对路径，由预览和公开接口统一转换，避免数据与具体资源域名强绑定。
 
-OSS 图片地址统一以 `NEXT_PUBLIC_ASSET_BASE_URL` 为准，例如 `https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb`。`resolvePublicAssetUrl(s)` 优先读取该变量，CMS 上传到 OSS 时会从同一变量解析公开路径前缀，把 `/uploads/...` 写入 OSS 的 `husuweb/uploads/...` 对象 key，保证后台提示、可视化预览和公开页面使用同一资源前缀。
+OSS 图片地址统一以 `NEXT_PUBLIC_ASSET_BASE_URL` 为准，例如 `https://husu2.oss-cn-beijing.aliyuncs.com/husuweb`。`resolvePublicAssetUrl(s)` 优先读取该变量，CMS 上传到 OSS 时会从同一变量解析公开路径前缀，把 `/uploads/...` 写入 OSS 的 `husuweb/uploads/...` 对象 key，保证后台提示、可视化预览和公开页面使用同一资源前缀。
 
-本地开发的 `.env.local` 同样需要配置 `NEXT_PUBLIC_ASSET_BASE_URL=https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb`，Next dev server 重启后客户端图片、视频和 CMS 预览才会加载同一 OSS 前缀。
+本地开发的 `.env.local` 同样需要配置 `NEXT_PUBLIC_ASSET_BASE_URL=https://husu2.oss-cn-beijing.aliyuncs.com/husuweb`，Next dev server 重启后客户端图片、视频和 CMS 预览才会加载同一 OSS 前缀。
 
 CMS 文件管理面板不再单独渲染“最近上传文件”卡片区；上传后的 `/uploads` 素材会并入下方 `OfficialAssetBrowser`，统一按页面分类展示并生成完整 `/husuweb` OSS 地址。
 
@@ -580,6 +582,8 @@ CMS 可视化抽屉和页面内容重复项列表只在显示层重编号系统�
 文件管理统计卡片中“真实图片数 / 真实视频数 / 真实文件空间”来自 `/api/cms/official-assets` 对 `public/assets` 与 `public/uploads` 的扫描汇总；“当前页上传记录”仍来自 `assets` 数据库按页面前缀过滤后的记录数，用于区分数据库上传记录和真实文件系统素材数。
 
 可视化编辑预览刷新采用 500ms 防抖：Puck 数据和右侧字段状态会正常记录，但 `OfficialPublicCmsProvider` 的 remount key 只在内容停止变化 500ms 后更新，避免每次输入都触发整页预览刷新。预览数据本身也使用 `debouncedPreviewData` 快照，右侧字段输入期间会跳过对 Puck 的即时 `setData` 派发。右侧和抽屉内文本输入统一通过 `BufferedTextControl` 本地缓冲，停止输入约 250ms 或失焦后才写回 CMS 大状态，避免删除文字时频繁重建 Puck 配置和 iframe。可视化同步 About 大事记时会从年份字段、条目 id、标题、月份或正文中自动识别年份，年份整体仍按年份降序输出到真实官网 CMS 状态，同一年内事件保留抽屉手动顺序；当 pageContent 已提供某年份事件时，以 pageContent 为该年份权威来源，不再按月份/正文内容把上一帧 officialState 旧事件追加回来，避免输入月份时每个字母都生成重复事件；大事记抽屉编辑列表也按当前保存顺序分组展示。
+
+About 大事记前台事件正文使用 `whitespace-pre-line` 渲染，CMS 文本域中输入的换行会在页面上保留。
 
 ## 閮ㄧ讲
 
@@ -629,10 +633,30 @@ CMS 可视化抽屉和页面内容重复项列表只在显示层重编号系统�
 
 2026-05-15 宸叉墽琛屾牴璺緞鏋勫缓涓庡彂甯冿紝鐢熸垚 `dist/tigerpartners-root-latest.tgz`锛屼笂浼犲埌 `39.106.226.65:/opt/tigerpartners-web/tigerpartners-root-20260515-0122.tgz`锛岃В鍘嬪埌 `/opt/tigerpartners-web/releases/20260515-0122`锛屽垏鎹?`current` 鍚庨噸鍚?`tigerpartners-web.service`銆傛湇鍔″櫒鏈満 `http://127.0.0.1:3004/` 杩斿洖 `200 OK`銆傞殢鍚庢柊澧炵殑 Zoe Zhang 涓汉椤?Performance & Achievements 鏁版嵁淇浠呬繚鐣欏湪鏈湴宸ヤ綔鍖猴紝灏氭湭閮ㄧ讲銆?
 
+2026-06-22 已将当前 `cms` 分支构建发布到正式站 `https://www.tigerpartners.cn/`，新 release 为 `/opt/tigerpartners-web/releases/20260622-012540`，并用本地 `data/cms.db` 与 `data/cms-site.json` 替换正式站 release 数据目录。正式服安装 Linux 生产依赖后重启 `tigerpartners-web.service`，公网验证首页、CMS 登录页和 `/api/cms/public` 均返回 `200 OK`，公开数据与 `/team` 页面均不再包含 `senior-associate-8`。
+
+2026-06-23 已将正式站切换到新 OSS 配置，release 为 `/opt/tigerpartners-web/releases/20260623-222902`。正式站 `.env.production` 和 `.env.local` 均配置 `OSS_BUCKET=husu2`、`OSS_ENDPOINT=oss-cn-beijing.aliyuncs.com`、`NEXT_PUBLIC_ASSET_BASE_URL=https://husu2.oss-cn-beijing.aliyuncs.com/husuweb` 与 `NEXT_PUBLIC_CMS_ASSET_BASE_URL=https://husu2.oss-cn-beijing.aliyuncs.com/husuweb`；公网验证首页、CMS 登录页和 `/api/cms/public` 均返回 `200 OK`，公开 CMS 数据只包含新 OSS 前缀，不再包含旧 `img-12345` 前缀，正式服务器侧 OSS 临时对象 PUT 返回 `200`、DELETE 返回 `204`。
+
+2026-07-03 已将当前 `cms` 分支代码部署到正式站 `https://www.tigerpartners.cn/`，新 release 为 `/opt/tigerpartners-web/releases/20260703-0032`。本次只部署代码，不覆盖正式 CMS 数据；新 release 的 `data` 和 `public` 软链到 `/opt/tigerpartners-web/releases/20260623-222902/data` 与 `/opt/tigerpartners-web/releases/20260623-222902/public`。远端 source 构建时补装 `lightningcss-linux-x64-gnu` 和 `@tailwindcss/oxide-linux-x64-gnu` 后构建通过，已切换 `current` 并重启 `tigerpartners-web.service`；公网验证首页、CMS 登录页、`/api/cms/public` 和 `/events` 均返回 `200 OK`。
+
 ## 鏇存柊鏃ュ織
 
 | 鏃堕棿 | 鍒嗘敮 | 鍙樻洿绫诲瀷 | 鎻忚堪 |
 | :--- | :--- | :--- | :--- |
+| 2026-07-03 00:24 | cms | 部署发布 | 正式站切换到 release `20260703-0032`，仅部署代码，`data/public` 复用 `20260623-222902`，公网首页、CMS 登录页、公开 CMS API 和 Events 验证通过 |
+| 2026-07-02 23:56 | cms | 修复缺陷 | 可视化预览合成虎诉动态详情媒体时尊重空数组覆盖，清空 Detail image/video 后不再保留旧默认占位元素 |
+| 2026-07-02 23:43 | cms | 修复缺陷 | 虎诉动态详情页读取 CMS 详情媒体时尊重空值覆盖，清空 `Detail video N` 后不再回退静态默认视频 |
+| 2026-07-02 23:37 | cms | 功能调整 | 虎诉动态详情视频占位规则改为 `[VIDEO]`，空视频地址不会在前台输出 video 标签，并保留旧飞书占位文字兼容 |
+| 2026-07-02 23:32 | cms | 文案更新 | 可视化编辑虎诉动态详情页的正文编辑格式说明补充新增视频、多个视频和视频显示位置的操作说明 |
+| 2026-07-02 23:25 | cms | UI 调整 | 可视化编辑虎诉动态详情页隐藏底层 `Detail image widths` 字段，只保留每张详情图片下方的宽度比例输入框 |
+| 2026-07-02 23:18 | cms | UI 调整 | 可视化编辑虎诉动态详情图片的宽度比例输入框改为跟随对应照片地址显示，不再作为单独字段散落在抽屉列表中 |
+| 2026-07-02 23:11 | cms | UI 调整 | 内容管理虎诉动态详情图片改为每个照片地址输入框下方直接显示宽度比例输入框，并补充默认 70%、范围 10-100 的说明 |
+| 2026-07-02 22:25 | cms | 修复缺陷 | 动态详情 metadata 改为读取公开 CMS 标题/摘要，详情图新增宽度比例字段，大事记正文换行在前台保留 |
+| 2026-06-23 22:41 | cms | 部署发布 | 正式站切换到 release `20260623-222902`，运行新 `husu2` OSS 配置，公网首页、CMS 登录页、公开 CMS API 和 OSS PUT/DELETE 验证通过 |
+| 2026-06-23 22:06 | cms | 资源更新 | 已将本地 `public/assets` 与 `public/uploads` 共 293 个文件上传到 `husu2/husuweb`，并抽样验证图片、视频、中文文件名和 uploads URL 均返回 200 |
+| 2026-06-23 21:58 | cms | 配置变更 | 本地 OSS 配置切换到 `husu2` bucket，公开资源前缀统一为 `https://husu2.oss-cn-beijing.aliyuncs.com/husuweb`，并替换本地 CMS 数据中的旧 OSS URL |
+| 2026-06-22 01:29 | cms | 部署发布 | 将当前团队删除联动修复和本地 CMS 数据库发布到正式站 `/opt/tigerpartners-web/releases/20260622-012540`，正式域名验证通过 |
+| 2026-06-22 01:07 | cms | 修复缺陷 | 虎诉团队删除成员时同步刷新团队页 pageContent 投影，并清理 `senior-associate-8` 在当前数据、稳定版和测试版中的残留 |
 | 2026-06-22 00:09 | cms | 修复缺陷 | CMS 进入服务行业内容管理时图片优先读取 `pageContent.home/media.cards` 的前台投影图，再回退 official 图，避免前台已替换但后台仍显示默认图 |
 | 2026-06-21 23:57 | cms | 新增功能 | 虎诉文化正文 Body 支持以 `- `、`* `、`• ` 开头的无序列表行，并保留普通段落渲染 |
 | 2026-06-21 23:37 | cms | 修复缺陷 | 首页服务行业卡片图片改为优先读取 `pageContent.home.industries[].image`，解决首页图片地址栏替换后前台仍使用 official 列表图片的问题 |
@@ -778,6 +802,9 @@ CMS 可视化抽屉和页面内容重复项列表只在显示层重编号系统�
 | 2026-05-15 22:01 | main | UI 璋冩暣 | 涓汉绠€鍘嗚鎯呴〉绉诲姩绔?hero 鍖哄潡璋冩暣涓哄浘鐗囧湪涓汉淇℃伅涓婃柟锛涚‘璁や竾鍔涗腑鑻辨枃涓汉涓氱哗鍧囦负 25 鏉′笖鏈€鍚庝笁鏉″熬閮ㄩ『搴忎竴鑷达紱鐢熶骇鏋勫缓閫氳繃锛屾湭閮ㄧ讲 |
 | 2026-05-15 21:59 | main | 璧勬簮鏇存柊 | 鍚屾鏇挎崲 event 椤甸潰灏侀潰鍥?`event2.png`銆乣event8.png`銆乣event10.png`銆乣event16.png`锛屽苟灏?`event16` 鏁版嵁寮曠敤浠?`.jpg` 鏀逛负 `.png`锛? 寮犲浘宸蹭笂浼?OSS锛屾牴璺緞鐢熶骇鏋勫缓閫氳繃骞跺彂甯冨埌 `/opt/tigerpartners-web/releases/20260515-2155` |
 | 2026-05-15 10:07 | main | 閮ㄧ讲鍙戝竷 | 鏍硅矾寰勭敓浜ф瀯寤洪€氳繃锛屽苟鍙戝竷鍒?`https://www.tigerpartners.cn/`锛涙湇鍔″櫒鐗堟湰鐩綍涓?`/opt/tigerpartners-web/releases/20260515-0957`锛宍tigerpartners-web.service` 宸查噸鍚笖鍏綉鏍￠獙閫氳繃 |
+| 2026-06-22 00:53 | cms | 修复缺陷 | 修复首页虎诉动态轮播 CMS 同步时中文被 PowerShell 编码转换为问号的问题，重新写入 UTF-8 中文 |
+| 2026-06-22 00:47 | cms | 内容更新 | 将首页虎诉动态轮播的代码默认值、CMS 当前状态和稳定/测试版本 payload 同步为 Markdown 指定的 5 条 |
+| 2026-06-22 00:33 | cms | 内容更新 | 首页虎诉动态轮播按 `当前分支首页虎诉动态与新闻轮播内容.md` 固定为 5 条默认内容，并同步 CMS 默认事件顺序 |
 | 2026-05-15 09:54 | main | 璧勬簮鏇存柊 | 灏?`src/assets/event/event2` 涓?1-9 鍙峰皝闈㈠悓姝ヨ鐩栧埌 `public/assets/event/event2`锛岀‘淇?event2 椤甸潰鍓?9 寮犲皝闈㈡寜 `1.jpg`銆乣2.jpg`銆乣3.png` 鑷?`9.png` 鐨勫懡鍚嶉『搴忚鍙栵紱鏈瀯寤恒€佹湭閮ㄧ讲 |
 | 2026-05-15 09:46 | main | 鏁版嵁鏇存柊 | 鎸?`EN/liwanPerformance.md` 鍚屾涓囧姏涓汉璇︽儏椤典腑鑻辨枃 Performance & Achievements锛屽叡 25 鏉★紝涓枃涓庤嫳鏂囧潎鎸夋簮鏂囨。椤哄簭灞曠ず锛涙湭鏋勫缓銆佹湭閮ㄧ讲 |
 | 2026-05-15 09:41 | main | 鏁版嵁鏇存柊 | 浠?Events 瀵煎嚭鐧藉悕鍗曠Щ闄?`20200902`锛屼簨浠堕〉涓嶅啀灞曠ず鈥滄灙鐐竴鍝?榛勯噾涓囦袱 | 鍏充簬姘戦棿鍊熻捶鍒╃巼鍙告硶淇濇姢瑙勫垯璋冩暣鐨勮В璇烩€濓紱婧愭暟鎹笌闂茬疆璇︽儏鍥炬槧灏勪繚鐣欙紝鏈儴缃?|
@@ -1059,6 +1086,20 @@ CMS 可视化抽屉和页面内容重复项列表只在显示层重编号系统�
 
 | 鏃堕棿 | 鍒嗘敮 | 瀹屾垚鐨勫姛鑳?/ 宸ヤ綔 | 璇存槑 |
 | :--- | :--- | :--- | :--- |
+| 2026-07-03 00:24 | cms | 正式站代码部署 | `www.tigerpartners.cn` 已切换到 `/opt/tigerpartners-web/releases/20260703-0032`；保留正式 CMS 数据和上传素材，发布空媒体占位与 `[VIDEO]` 规则修复 |
+| 2026-07-02 23:56 | cms | 预览空媒体占位清理 | `CmsPuckVisualEditor` 和 `localizeCmsEvent` 区分未配置与已清空的详情图片/视频，空字段会覆盖默认媒体 |
+| 2026-07-02 23:43 | cms | 动态详情空视频覆盖默认媒体 | 前台详情页识别 CMS 中存在的详情媒体字段，空视频/图片字段会阻止静态默认媒体回退，避免空输入仍显示播放器 |
+| 2026-07-02 23:37 | cms | 动态详情视频占位符改为 `[VIDEO]` | 可视化抽屉、默认 pageContent 字段生成和前台详情页渲染统一识别 `[VIDEO]`；空视频输入不生成前台视频标签 |
+| 2026-07-02 23:32 | cms | 动态详情视频说明补充 | 可视化动态详情抽屉说明文字明确通过视频占位符生成 `Detail video N` 字段，并说明多个视频和显示位置规则 |
+| 2026-07-02 23:25 | cms | 可视化详情图片宽度字段收口 | `Detail image widths` 作为底层列表字段保留同步能力，但不再在抽屉中单独展示，避免和图片下方比例框重复 |
+| 2026-07-02 23:18 | cms | 可视化动态详情图片比例位置调整 | 可视化抽屉渲染详情图片字段时同步渲染对应宽度比例输入框，填写后仍写回 `detailImageWidths` |
+| 2026-07-02 23:11 | cms | 动态详情图片比例编辑位置调整 | 内容管理虎诉动态的详情图片编辑行现在把宽度比例输入框放在对应照片地址输入框下方，并显示默认值和可填范围说明 |
+| 2026-07-02 22:25 | cms | 动态详情标题和图片尺寸编辑 | 新增动态发布后的网页标题跟随 CMS 推文标题；动态详情图片可设置屏幕宽度比例；大事记正文支持 CMS 换行显示 |
+| 2026-06-23 22:41 | cms | 正式站新 OSS 部署 | `www.tigerpartners.cn` 已切换到 `20260623-222902` release，正式 CMS 上传环境变量和公开资源前缀均指向 `husu2/husuweb`，公开 API 不再输出旧 OSS 域名，正式服务器 OSS PUT/DELETE 验证通过 |
+| 2026-06-23 22:06 | cms | 新 OSS 静态资源上传 | `public/assets` 和 `public/uploads` 已同步到新 OSS，`assets/title/logo.svg`、团队图、服务行业图、首页视频、中文事件详情图和 uploads 样本均可公网访问 |
+| 2026-06-23 21:58 | cms | 本地 OSS 地址切换 | `.env.local`、`.env.production`、代码默认前缀、`data/cms-site.json` 和 `data/cms.db` 已切换到 `husu2` OSS，上传凭证 PUT/DELETE 测试通过 |
+| 2026-06-22 01:29 | cms | 正式站发布 | `www.tigerpartners.cn` 已切换到 release `20260622-012540`，正式站使用本地 CMS 数据库，`senior-associate-8` 不再出现在公开 CMS 数据和团队页 |
+| 2026-06-22 01:07 | cms | 虎诉团队删除联动修复 | 团队成员删除改为同步 official 列表、成员 profile 和团队页 pageContent，避免可视化页面残留 slug 在后续保存时重新生成成员 |
 | 2026-06-22 00:09 | cms | 服务行业后台图片显示对齐 | 稳定版私募 official 图片已同步为当前前台投影图；前后端版本归一化都以卡片/首页投影图优先显示 |
 | 2026-06-21 23:57 | cms | 虎诉文化正文列表渲染 | `CoreValueScrollFlow` 会把虎诉文化 Body 中连续的无序列表行渲染为项目符号列表，方便 CMS 维护正文结构 |
 | 2026-06-21 23:37 | cms | 首页服务行业图片来源修复 | 首页服务行业渲染合并 `home.industries` 页面内容和 official 服务行业列表，同 slug 的页面内容图片优先显示 |
@@ -1168,6 +1209,9 @@ CMS 可视化抽屉和页面内容重复项列表只在显示层重编号系统�
 | 2026-05-16 15:57 | cms | 浜嬩欢濯掍綋鍏滃簳棰勮鍚屾 | `officialPreviewState` 鍦ㄦ病鏈夌湡瀹炲畼缃戠姸鎬佹椂浠嶄互榛樿鐘舵€佺户缁墽琛?Events銆丠onors銆乀eam 鍚屾锛岄伩鍏嶈鎯呭浘鐗囧湴鍧€宸叉敼浣嗛瑙堜粛鏄剧ず闈欐€佹棫鍥?|
 | 2026-05-16 15:50 | cms | 璇︽儏濯掍綋棰勮鍗虫椂鍚屾 | Event 璇︽儏鍥剧墖/瑙嗛瀛楁浠绘剰璇█杈撳叆閮戒細鍚屾鍒板叡鍚屽獟浣撴Ы浣嶏紝棰勮鐘舵€佹寜褰撳墠璇█浼樺厛鍚堝苟濯掍綋鏁扮粍锛屾墜鍔ㄦ浛鎹?URL 鍚庡彲绔嬪嵆鍒锋柊鍙鍖栧尯鍩?|
 | 2026-05-16 15:44 | cms | 铏庤瘔鍔ㄦ€佽鎯呭獟浣撴Ы浣?| Event 瀛愰〉闈㈢紪杈戞牴鎹?`[IMAGE]`銆乣[鍥剧墖]` 鍜岃棰戝崰浣嶇鍔ㄦ€佹樉绀鸿鎯呭浘鐗?瑙嗛 1銆?銆? 绛夊瓧娈碉紝鏀寔閫愬紶鏇挎崲骞跺吋瀹规棫鐨勫琛屽獟浣撴暟鎹?|
+| 2026-06-22 00:53 | cms | 首页轮播中文编码修复 | 从 `HomePage.tsx` 的正确 UTF-8 覆盖对象重写 CMS JSON/SQLite 首页 events 中文字段，并用 Unicode 码点校验 |
+| 2026-06-22 00:47 | cms | 首页虎诉动态轮播 CMS 同步 | `data/cms-site.json`、`site_state.page_content_json` 和版本 1/2 payload 的首页 events 区块均同步为 5 条 |
+| 2026-06-22 00:33 | cms | 首页虎诉动态轮播内容同步 | 首页轮播默认显示 Markdown 指定的 5 条中英文动态，并使用 `YYYY.MM.DD` 中文日期格式 |
 | 2026-05-16 15:34 | cms | CMS 鐗堟湰閫夋嫨鏀舵暃 | 鍙鍖栫紪杈戝拰鍐呭缂栬緫闈㈡澘鐨勭増鏈笅鎷夊彧灞曠ず宸插垱寤虹増鏈紝涓嶅啀鎻愪緵鈥滃綋鍓嶇嚎涓婄増鏈€濅綔涓洪€夐」锛岄檷浣庢祴璇曠増鏈拰褰撳墠绔欑偣鍐呭鐨勬贩娣?|
 | 2026-05-16 15:04 | cms | 鐗堟湰鍙戝竷鏁版嵁涓€鑷存€?| 鍙鍖栫紪杈戦粯璁ゆ樉绀哄綋鍓嶇嚎涓婄増鏈紝鎵嬪姩閫夋嫨娴嬭瘯鐗堟湰鎵嶈繘鍏ョ増鏈紪杈戯紱娴嬭瘯鐗堟湰淇濆瓨鍜屽彂甯冧細鎼哄甫鏈嶅姟琛屼笟銆佽檸璇夊姩鎬併€佸洟闃熴€佽崳瑾夌瓑鐪熷疄瀹樼綉 CMS 鏁版嵁 |
 | 2026-05-16 14:47 | cms | 宸插彂甯冪増鏈彁浜ゅ嵆鍚屾 | `/api/cms/versions/[id]` 鏇存柊宸插彂甯冪増鏈椂浼氳皟鐢ㄧ増鏈仮澶嶉€昏緫鍐欏叆褰撳墠绔欑偣鏁版嵁锛屽悗鍙版彁绀哄悓姝ョ粨鏋?|

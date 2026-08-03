@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-02T14:53:56.052Z",
+  "updatedAt": "2026-06-21T17:00:57.864Z",
   "header": {
     "siteName": "Tiger Partners",
     "siteSubtitle": "Law Firm",
@@ -335,9 +335,6 @@
       "111": {
         "image": "/assets/about/about.png",
         "sortDate": "",
-        "detailImages": [],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "111",
           "title": "1231231",
@@ -354,13 +351,6 @@
       "1222": {
         "image": "",
         "sortDate": "",
-        "detailImages": [
-          "/assets/about/aboutVision.png",
-          "/assets/about/awardbg.png",
-          "/assets/about/bg.png"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "",
           "title": "",
@@ -381,18 +371,16 @@
             "1234",
             "[图片]"
           ]
-        }
+        },
+        "detailImages": [
+          "/assets/about/aboutVision.png",
+          "/assets/about/awardbg.png",
+          "/assets/about/bg.png"
+        ]
       },
       "xu-min-ccas-arbitrator-roster": {
         "image": "/assets/event/event2/1.jpg",
         "sortDate": "20260508",
-        "detailImages": [
-          "https://husu2.oss-cn-beijing.aliyuncs.com/husuweb/assets/event/eventinfo2/微信图片_20260511231050_232_2.png",
-          "https://husu2.oss-cn-beijing.aliyuncs.com/husuweb/assets/event/eventinfo2/微信图片_20260511231050_233_2.png",
-          "/assets/event/eventinfo2/微信图片_20260511231050_235_2.jpg"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry",
           "title": "Mr. Xu Min, Partner at Tiger Partners, Selected to the New Panel of Arbitrators of China Commission of Arbitration for Sport",
@@ -426,18 +414,17 @@
             "许旻律师毕业于香港城市大学法学院，获得法学学士及法学硕士学位。许律师现为英国特许仲裁员协会高级会员（F.CIArb）、中国体育仲裁委员会仲裁员、北京市律师协会文旅传媒与体育专业委员会委员、北京市法学会体育法学与奥林匹克法律事务研究会会员，并入选北京市司法局百名高端涉外法治人才及北京市律师协会涉外律师人才库。在加入虎诉律师事务所之前，许旻律师曾在金杜律师事务所、方达律师事务所担任争议解决律师。"
           ],
           "displayDate": "2026.05.08"
-        }
+        },
+        "detailImages": [
+          "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb/assets/event/eventinfo2/微信图片_20260511231050_232_2.png",
+          "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb/assets/event/eventinfo2/微信图片_20260511231050_233_2.png",
+          "/assets/event/eventinfo2/微信图片_20260511231050_235_2.jpg"
+        ],
+        "detailVideos": []
       },
       "zoe-zhang-cietac-arbitrator-roster": {
         "image": "/assets/event/event2/2.jpg",
         "sortDate": "20260506",
-        "detailImages": [
-          "/assets/event/eventinfo2/微信图片_20260511231050_237_2.png",
-          "/assets/event/eventinfo2/微信图片_20260511231050_238_2.png",
-          "/assets/event/eventinfo2/微信图片_20260511231050_240_2.jpg"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry News",
           "title": "Ms. Zoe Zhang, Partner at Tiger Partners, has been selected to the new panel of arbitrators of the China International Economic and Trade Arbitration Commission (CIETAC)",
@@ -475,16 +462,17 @@
             "未来，虎诉将以此为新的起点，继续秉持专业、高效、极致的服务理念，深耕争议解决业务，不断提升复杂商事争议处理能力，以更加专业、高质量的法律服务回应客户信任。"
           ],
           "displayDate": "2026.05.06"
-        }
+        },
+        "detailImages": [
+          "/assets/event/eventinfo2/微信图片_20260511231050_237_2.png",
+          "/assets/event/eventinfo2/微信图片_20260511231050_238_2.png",
+          "/assets/event/eventinfo2/微信图片_20260511231050_240_2.jpg"
+        ],
+        "detailVideos": []
       },
       "alb-china-law-awards-2026-shortlist": {
         "image": "/assets/event/event2/3.png",
         "sortDate": "20260320",
-        "detailImages": [
-          "/assets/event/eventinfo2/微信图片_20260511231050_242_2.png"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners Shortlisted for the 2026 ALB China Law Awards",
@@ -520,16 +508,15 @@
             "ALB是汤森路透旗下的尖端法律杂志，是全球最具影响力的法律媒体之一，旨在为客户和读者提供前沿的法律商业资讯和律所专业评级。"
           ],
           "displayDate": "2026.03.20"
-        }
+        },
+        "detailImages": [
+          "/assets/event/eventinfo2/微信图片_20260511231050_242_2.png"
+        ],
+        "detailVideos": []
       },
       "chambers-greater-china-region-2026": {
         "image": "/assets/event/event2/4.png",
         "sortDate": "20260115",
-        "detailImages": [
-          "/assets/event/eventinfo2/微信图片_20260511231050_244_2.png"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners Listed in The Chambers Greater China Region 2026",
@@ -557,20 +544,15 @@
             "钱伯斯（Chambers and Partners）是全球领先的法律研究和分析机构，在全球范围内评选各领域顶尖律师事务所和法律专业人士。钱伯斯法律指南被视为业界基准，是国际客户寻求高端法律服务的重要参考"
           ],
           "displayDate": "2026.01.15"
-        }
+        },
+        "detailImages": [
+          "/assets/event/eventinfo2/微信图片_20260511231050_244_2.png"
+        ],
+        "detailVideos": []
       },
       "legal-500-china-2026-list": {
         "image": "/assets/event/event2/5.png",
         "sortDate": "20251119",
-        "detailImages": [
-          "/assets/event/eventinfo2/微信图片_20260511231050_246_2.png",
-          "/assets/event/eventinfo2/微信图片_20260511231056_260_2.png",
-          "/assets/event/eventinfo2/微信图片_20260511231056_261_2.png",
-          "/assets/event/eventinfo2/微信图片_20260511231056_262_2.png",
-          "/assets/event/eventinfo2/微信图片_20260511231056_263_2.png"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners Ranked on The Legal 500 China 2026 List; Partners Liu Yuxuan, Wan Li and Zoe Zhang Honored as Legal 500 China Elite",
@@ -618,17 +600,19 @@
             "Legal 500 中国精英于2025年首次发布，致力于表彰来自区域性律所、在中国核心商业领域表现卓越的杰出律师。"
           ],
           "displayDate": "2025.11.19"
-        }
+        },
+        "detailImages": [
+          "/assets/event/eventinfo2/微信图片_20260511231050_246_2.png",
+          "/assets/event/eventinfo2/微信图片_20260511231056_260_2.png",
+          "/assets/event/eventinfo2/微信图片_20260511231056_261_2.png",
+          "/assets/event/eventinfo2/微信图片_20260511231056_262_2.png",
+          "/assets/event/eventinfo2/微信图片_20260511231056_263_2.png"
+        ],
+        "detailVideos": []
       },
       "china-business-law-awards-2025-firm-to-watch": {
         "image": "/assets/event/event2/6.png",
         "sortDate": "20250723",
-        "detailImages": [
-          "/assets/event/eventinfo2/微信图片_20260511231056_264_2.jpg",
-          "/assets/event/eventinfo2/微信图片_20260511231056_265_2.png"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners was listed as \"Firm to Watch\" in China Business Law Awards 2025",
@@ -658,16 +642,16 @@
             "China Business Law Journal《商法》是国际知名的商业法律月刊，也是全球最具影响力的法律评选媒体之一。"
           ],
           "displayDate": "2025.07.23"
-        }
+        },
+        "detailImages": [
+          "/assets/event/eventinfo2/微信图片_20260511231056_264_2.jpg",
+          "/assets/event/eventinfo2/微信图片_20260511231056_265_2.png"
+        ],
+        "detailVideos": []
       },
       "alb-china-dispute-resolution-rankings-2025": {
         "image": "/assets/event/event2/7.png",
         "sortDate": "20250619",
-        "detailImages": [
-          "/assets/event/eventinfo2/微信图片_20260511231056_266_2.png"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners Ranked on the 2025 ALB China Dispute Resolution Rankings",
@@ -697,16 +681,15 @@
             "ALB是汤森路透旗下的尖端法律杂志，是全球最具影响力的法律媒体之一，旨在为客户和读者提供前沿的法律商业资讯和律所专业评级。"
           ],
           "displayDate": "2025.06.19"
-        }
+        },
+        "detailImages": [
+          "/assets/event/eventinfo2/微信图片_20260511231056_266_2.png"
+        ],
+        "detailVideos": []
       },
       "games-law-arbitration-culture-promotion-month": {
         "image": "/assets/event/event2/8.png",
         "sortDate": "20250617",
-        "detailImages": [],
-        "detailImageWidths": [],
-        "detailVideos": [
-          "/assets/event/event2/20250617_%E8%A7%86%E9%A2%91.mp4"
-        ],
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners Successfully Held the Second Arbitration Culture Promotion Month Series: Games x Law: Cross-Border Thinking and Rule Prospects in Dispute Resolution",
@@ -730,16 +713,15 @@
             "作为一家专注于高端商事争议解决的精品律所，虎诉始终高度重视仲裁业务，并致力于为客户提供专业且全面的仲裁服务。虎诉期待与广大法律同仁携手，共同推动中国仲裁文化的传播与发展。"
           ],
           "displayDate": "2025.06.17"
-        }
+        },
+        "detailImages": [],
+        "detailVideos": [
+          "/assets/event/event2/20250617_%E8%A7%86%E9%A2%91.mp4"
+        ]
       },
       "alb-china-law-awards-2025-boutique-nomination": {
         "image": "/assets/event/event2/9.png",
         "sortDate": "20250421",
-        "detailImages": [
-          "/assets/event/eventinfo2/微信图片_20260511231056_267_2.png"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners Nominated for The \"Boutique Law Firm of the Year\" Award at The ALB China Law Awards 2025",
@@ -767,16 +749,15 @@
             "ALB是汤森路透旗下的尖端法律杂志，是全球最具影响力的法律媒体之一，旨在为客户和读者提供前沿的法律商业资讯和律所专业评级。"
           ],
           "displayDate": "2025.04.21"
-        }
+        },
+        "detailImages": [
+          "/assets/event/eventinfo2/微信图片_20260511231056_267_2.png"
+        ],
+        "detailVideos": []
       },
       "chambers-global-guide-2025": {
         "image": "/assets/event/event2/10.png",
         "sortDate": "20250214",
-        "detailImages": [
-          "/assets/event/eventinfo2/微信图片_20260511231056_268_2.png"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners Listed in The Chambers Global Guide 2025",
@@ -808,16 +789,15 @@
             "钱伯斯（Chambers and Partners）是全球最具影响力的法律评级机构之一。《钱伯斯全球指南》汇聚了全球领先的律师事务所及顶尖律师的评选结果，是全球法律界最具权威的评估之一。"
           ],
           "displayDate": "2025.02.14"
-        }
+        },
+        "detailImages": [
+          "/assets/event/eventinfo2/微信图片_20260511231056_268_2.png"
+        ],
+        "detailVideos": []
       },
       "chambers-greater-china-region-2025": {
         "image": "/assets/event/event2/11.png",
         "sortDate": "20250116",
-        "detailImages": [
-          "/assets/event/eventinfo2/微信图片_20260511231058_269_2.jpg"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners Listed in the Chambers Greater China Region 2025",
@@ -850,20 +830,15 @@
             "感谢所有客户、合作伙伴、各界朋友一如既往的支持与信任，未来，我们将继续与时俱进，锐意进取，不负众望。"
           ],
           "displayDate": "2025.01.16"
-        }
+        },
+        "detailImages": [
+          "/assets/event/eventinfo2/微信图片_20260511231058_269_2.jpg"
+        ],
+        "detailVideos": []
       },
       "cietac-cup-voice-of-moot-diamond-sponsor": {
         "image": "/assets/event/event2/12.png",
         "sortDate": "20241113",
-        "detailImages": [
-          "/assets/event/eventinfo2/微信图片_20260511231058_270_2.png",
-          "/assets/event/eventinfo2/微信图片_20260511231058_271_2.jpg",
-          "/assets/event/eventinfo2/微信图片_20260511231058_272_2.jpg"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [
-          "/assets/event/event2/20241113_%E8%A7%86%E9%A2%91.mp4"
-        ],
         "en": {
           "category": "",
           "title": "Tiger Partners Was Honored as Diamond Sponsor for the 22nd \"CIETAC Cup\" Voice of Moot Series Training Activities",
@@ -901,16 +876,19 @@
             "We know how to win! Good luck!"
           ],
           "displayDate": "2024.11.13"
-        }
+        },
+        "detailImages": [
+          "/assets/event/eventinfo2/微信图片_20260511231058_270_2.png",
+          "/assets/event/eventinfo2/微信图片_20260511231058_271_2.jpg",
+          "/assets/event/eventinfo2/微信图片_20260511231058_272_2.jpg"
+        ],
+        "detailVideos": [
+          "/assets/event/event2/20241113_%E8%A7%86%E9%A2%91.mp4"
+        ]
       },
       "benchmark-litigation-china-2024": {
         "image": "/assets/event/event2/13.png",
         "sortDate": "20240606",
-        "detailImages": [
-          "/assets/event/eventinfo2/微信图片_20260511231058_273_2.png"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners Listed in the 2024 Benchmark Litigation China Dispute Resolution List",
@@ -939,16 +917,15 @@
             "[图片]"
           ],
           "displayDate": "2024.06.06"
-        }
+        },
+        "detailImages": [
+          "/assets/event/eventinfo2/微信图片_20260511231058_273_2.png"
+        ],
+        "detailVideos": []
       },
       "world-arbitration-update-2024-china-edition": {
         "image": "/assets/event/event2/14.jpg",
         "sortDate": "20240509",
-        "detailImages": [
-          "/assets/event/eventinfo2/微信图片_20260511231058_274_2.png"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners Sponsored the World Arbitration Update 2024 (WAU 2024) China Edition",
@@ -975,16 +952,15 @@
             "最后，虎诉预祝2024年世界仲裁最新动态大会中国站圆满举办。愿此次盛会成为国际仲裁领域交流与合作的新高点！"
           ],
           "displayDate": "2024.05.09"
-        }
+        },
+        "detailImages": [
+          "/assets/event/eventinfo2/微信图片_20260511231058_274_2.png"
+        ],
+        "detailVideos": []
       },
       "alb-china-firms-to-watch-2024": {
         "image": "/assets/event/event2/15.png",
         "sortDate": "20240204",
-        "detailImages": [
-          "/assets/event/eventinfo2/微信图片_20260511231058_275_2.png"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners Listed in 2024 ALB China Firms to Watch List",
@@ -1010,17 +986,15 @@
             "成立四年以来，虎诉始终坚持在办理案件过程中对每个细节精雕细琢，在提供法律服务过程中以实现客户的需求作为第一目标，成为越来越多国内领先企业及知名跨国公司在争议解决服务领域首选的律师团队。"
           ],
           "displayDate": "2024.02.04"
-        }
+        },
+        "detailImages": [
+          "/assets/event/eventinfo2/微信图片_20260511231058_275_2.png"
+        ],
+        "detailVideos": []
       },
       "kinsey-kang-hong-kong-legal-counsel": {
         "image": "/assets/event/event1.png",
         "sortDate": "20231117",
-        "detailImages": [
-          "/assets/event/eventinfo/微信图片_20260511231524_297_2.png",
-          "/assets/event/eventinfo/微信图片_20260511231524_298_2.png"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Tiger Dynamics",
           "title": "Kinsey Kang Yanan was engaged as Hong Kong Legal Counsel of Tiger Partners",
@@ -1073,14 +1047,16 @@
             "[图片"
           ],
           "displayDate": "2023.11.17"
-        }
+        },
+        "detailImages": [
+          "/assets/event/eventinfo/微信图片_20260511231524_297_2.png",
+          "/assets/event/eventinfo/微信图片_20260511231524_298_2.png"
+        ],
+        "detailVideos": []
       },
       "chambers-forum-beijing-2023": {
         "image": "/assets/event/event2.png",
         "sortDate": "20230406",
-        "detailImages": [],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners sponsored and was invited to the Chambers Forum: Beijing 2023",
@@ -1100,14 +1076,13 @@
             "据悉，本次论坛将以合规为主线，围绕企业合规的丰富内涵和最新的监管政策、法律实操和市场趋势，对全球投资并购中的合规热点问题、私募和风险投资、仲裁法修订和临时仲裁等多个相关子话题进行讨论"
           ],
           "displayDate": "2023.04.06"
-        }
+        },
+        "detailImages": [],
+        "detailVideos": []
       },
       "shifoying-nanli-community-pairing": {
         "image": "/assets/event/event3.png",
         "sortDate": "20230329",
-        "detailImages": [],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Tiger Dynamics",
           "title": "Tiger Dynamics | Party Branch of Tiger Partners entered into a pairing relationship with Shifoying Nanli Community to build a law-based community",
@@ -1135,14 +1110,13 @@
             "虎诉党支部将坚持运用“组织结对子，党群手拉手”的工作方法，组织支部党员并积极动员单位群众组建虎诉法律服务队，更好地开展面向社区的法律服务，以真正成为“党和人民满意的好律师”。"
           ],
           "displayDate": "2023.03.29"
-        }
+        },
+        "detailImages": [],
+        "detailVideos": []
       },
       "tiger-partners-third-anniversary": {
         "image": "/assets/event/event4.png",
         "sortDate": "20221218",
-        "detailImages": [],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Tiger Watch",
           "title": "Today, Tiger Partners is three years old!",
@@ -1168,16 +1142,13 @@
             "值此三周岁生日，我们非常高兴能与各位分享一个好消息：虎诉明年将从华贸中心迁址远洋国际！新的一岁，期待虎诉在各位朋友的支持与见证下，走向更广阔的天地！"
           ],
           "displayDate": "2022.12.18"
-        }
+        },
+        "detailImages": [],
+        "detailVideos": []
       },
       "cietac-cup-voice-of-moot-sponsor": {
         "image": "/assets/event/event5.png",
         "sortDate": "20221108",
-        "detailImages": [
-          "/assets/event/eventinfo/微信图片_20260511231524_299_2.png"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners sponsored the \"CIETAC Cup\" Voice of Moot series of training activities",
@@ -1203,14 +1174,15 @@
             "最后，虎诉预祝本次活动圆满举办，各位参赛的年轻选手们亦能有精彩表现！"
           ],
           "displayDate": "2022.11.08"
-        }
+        },
+        "detailImages": [
+          "/assets/event/eventinfo/微信图片_20260511231524_299_2.png"
+        ],
+        "detailVideos": []
       },
       "tigers-fellowship-winners-announced": {
         "image": "/assets/event/event6.png",
         "sortDate": "20220725",
-        "detailImages": [],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Tiger Dynamics",
           "title": "TIGERS FELLOWSHIP winners were announced",
@@ -1243,17 +1215,13 @@
             "最后，再次诚挚感谢各位对虎诉的关注与支持，我们十分珍视并将始终以之为前行的动力。"
           ],
           "displayDate": "2022.07.25"
-        }
+        },
+        "detailImages": [],
+        "detailVideos": []
       },
       "hook-cartoon-character-joins": {
         "image": "/assets/event/event7.png",
         "sortDate": "20220710",
-        "detailImages": [
-          "/assets/event/eventinfo/微信图片_20260511231524_300_2.png",
-          "/assets/event/eventinfo/微信图片_20260511231524_301_2.png"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Tiger Dynamics",
           "title": "Breaking News! An important guest announced the official joining of Tiger Partners",
@@ -1274,16 +1242,16 @@
             "[图片"
           ],
           "displayDate": "2022.07.10"
-        }
+        },
+        "detailImages": [
+          "/assets/event/eventinfo/微信图片_20260511231524_300_2.png",
+          "/assets/event/eventinfo/微信图片_20260511231524_301_2.png"
+        ],
+        "detailVideos": []
       },
       "tigers-fellowship-launched": {
         "image": "/assets/event/event8.png",
         "sortDate": "20220616",
-        "detailImages": [
-          "/assets/event/eventinfo/微信图片_20260511231524_302_2.png"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Tiger Dynamics",
           "title": "TIGERS FELLOWSHIP was officially launched",
@@ -1301,17 +1269,15 @@
             "[图片"
           ],
           "displayDate": "2022.06.16"
-        }
+        },
+        "detailImages": [
+          "/assets/event/eventinfo/微信图片_20260511231524_302_2.png"
+        ],
+        "detailVideos": []
       },
       "china-business-law-awards-2022": {
         "image": "/assets/event/event9.png",
         "sortDate": "20220615",
-        "detailImages": [
-          "/assets/event/eventinfo/微信图片_20260511231524_303_2.png",
-          "/assets/event/eventinfo/微信图片_20260511231524_304_2.png"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners won the China Business Law Awards 2022",
@@ -1339,16 +1305,16 @@
             "据悉，本次评选阶段系主要根据三类资料进行评分：律所申报资料、客户证明人的反馈，以及来自业界的有效提名。提名来源亦十分多元，除了业界外，还包括政府机构、司法系统和学术界。基于长达数月的调研和评价、数百份参选资料及千余项来自企业高管、法务和资深律师的评价意见，《商法》编辑团队最终评选出2022年度商法卓越律所大奖。"
           ],
           "displayDate": "2022.06.15"
-        }
+        },
+        "detailImages": [
+          "/assets/event/eventinfo/微信图片_20260511231524_303_2.png",
+          "/assets/event/eventinfo/微信图片_20260511231524_304_2.png"
+        ],
+        "detailVideos": []
       },
       "official-account-mini-program-upgrade": {
         "image": "/assets/event/event10.png",
         "sortDate": "20220609",
-        "detailImages": [
-          "/assets/event/eventinfo/微信图片_20260511231524_305_2.png"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Tiger Dynamics",
           "title": "Tiger Partners upgraded the functions of the official account and launched a new Mini Program",
@@ -1393,17 +1359,15 @@
             "本次公众号功能的升级与全新小程序的上线，是虎诉团队在筹备良久后做出的一次大胆尝试。虎诉相信，改变与创新为向上生长提供了不竭动力与无限可能。在虎诉实现愿景的前行道路上，期待每一位关注虎诉的朋友共同见证。"
           ],
           "displayDate": "2022.06.09"
-        }
+        },
+        "detailImages": [
+          "/assets/event/eventinfo/微信图片_20260511231524_305_2.png"
+        ],
+        "detailVideos": []
       },
       "legalband-2022-top-law-firms-lawyers": {
         "image": "/assets/event/event11.png",
         "sortDate": "20220517",
-        "detailImages": [
-          "/assets/event/eventinfo/微信图片_20260511231526_306_2.png",
-          "/assets/event/eventinfo/微信图片_20260511231526_307_2.png"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners and Mr. Liu Yuxuan, Mr. Wan Li were selected into the ranking of 2022 China's top law firms and top lawyers",
@@ -1431,16 +1395,16 @@
             "[图片"
           ],
           "displayDate": "2022.05.17"
-        }
+        },
+        "detailImages": [
+          "/assets/event/eventinfo/微信图片_20260511231526_306_2.png",
+          "/assets/event/eventinfo/微信图片_20260511231526_307_2.png"
+        ],
+        "detailVideos": []
       },
       "benchmark-litigation-2022-dispute-resolution": {
         "image": "/assets/event/event12.png",
         "sortDate": "20220510",
-        "detailImages": [
-          "/assets/event/eventinfo/微信图片_20260511231526_308_2.png"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners was listed in Asia-Pacific & China on Dispute Resolution of 2022 by Benchmark Litigation",
@@ -1462,16 +1426,15 @@
             "据悉，本次榜单系通过与诉讼律师、仲裁员、争议解决专家及其客户进行广泛访谈，并审查律师事务所及其律师近期办理的案件而得出。"
           ],
           "displayDate": "2022.05.10"
-        }
+        },
+        "detailImages": [
+          "/assets/event/eventinfo/微信图片_20260511231526_308_2.png"
+        ],
+        "detailVideos": []
       },
       "legalband-rising-law-firm-2022-nomination": {
         "image": "/assets/event/event13.png",
         "sortDate": "20220331",
-        "detailImages": [
-          "/assets/event/eventinfo/微信图片_20260511231526_309_2.png"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners was nominated as Rising Law Firm of 2022 by LEGALBAND",
@@ -1495,17 +1458,15 @@
             "[图片"
           ],
           "displayDate": "2022.03.31"
-        }
+        },
+        "detailImages": [
+          "/assets/event/eventinfo/微信图片_20260511231526_309_2.png"
+        ],
+        "detailVideos": []
       },
       "wan-li-dalian-international-arbitration-court": {
         "image": "/assets/event/event14.png",
         "sortDate": "20220322",
-        "detailImages": [
-          "/assets/event/eventinfo/微信图片_20260511231526_310_2.png",
-          "/assets/event/eventinfo/微信图片_20260511231526_311_2.png"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry News",
           "title": "Mr. Wan Li was engaged as the 6th arbitrator of Dalian International Arbitration Court",
@@ -1533,16 +1494,16 @@
             "张莉律师的专业领域为仲裁和诉讼，尤其擅长涉外仲裁和国际仲裁；主要领域包括国际货物买卖、建筑工程、房地产、中外合资、股权转让、知识产权和能源等多个领域。"
           ],
           "displayDate": "2022.03.22"
-        }
+        },
+        "detailImages": [
+          "/assets/event/eventinfo/微信图片_20260511231526_310_2.png",
+          "/assets/event/eventinfo/微信图片_20260511231526_311_2.png"
+        ],
+        "detailVideos": []
       },
       "liu-yuxuan-china-business-law-journal-a-list": {
         "image": "/assets/event/event15.png",
         "sortDate": "20220125",
-        "detailImages": [
-          "/assets/event/eventinfo/微信图片_20260511231526_312_2.png"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry News",
           "title": "Mr. Liu Yuxuan was listed in \"The A-List\" by China Business Law Journal",
@@ -1568,16 +1529,15 @@
             "刘煜暄律师曾被《亚洲法律杂志》（Asian Legal Business）誉为“争议解决领域的耀眼新星”；并入选《商法》（China Business Law Journal）40位2021中国业务法律新星（Rising Stars 2021 Top 40）榜单、Benchmark Litigation China 2021北京地区争议解决推荐律师榜单；荣获2021年度LEGALBAND中国顶级律师排行榜 “争议解决·诉讼”领域的“后起之秀”、《亚洲法律概况》（Asialaw Profiles）2020年度中国法律市场“争议解决”领域“知名律师”等荣誉称号。"
           ],
           "displayDate": "2022.01.25"
-        }
+        },
+        "detailImages": [
+          "/assets/event/eventinfo/微信图片_20260511231526_312_2.png"
+        ],
+        "detailVideos": []
       },
       "zoe-zhang-joined-as-partner": {
         "image": "/assets/event/event16.png",
         "sortDate": "20220124",
-        "detailImages": [
-          "/assets/event/eventinfo/微信图片_20260511231526_313_2.png"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Tiger Dynamics",
           "title": "Welcome Zoe Zhang has officially joined the firm as a partner",
@@ -1606,14 +1566,15 @@
             "[图片"
           ],
           "displayDate": "2022.01.24"
-        }
+        },
+        "detailImages": [
+          "/assets/event/eventinfo/微信图片_20260511231526_313_2.png"
+        ],
+        "detailVideos": []
       },
       "alb-china-2022-firms-to-watch": {
         "image": "/assets/event/event17.png",
         "sortDate": "20220120",
-        "detailImages": [],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners was listed as \" ALB China 2022 Firms to Watch\"",
@@ -1647,16 +1608,13 @@
             "虎诉将始终追求极致与完美，一切以胜诉和客户的商业目标为导向。"
           ],
           "displayDate": "2022.01.20"
-        }
+        },
+        "detailImages": [],
+        "detailVideos": []
       },
       "second-anniversary-dinner": {
         "image": "/assets/event/event18.jpg",
         "sortDate": "20211231",
-        "detailImages": [
-          "/assets/event/eventinfo/微信图片_20260511231526_314_2.jpg"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Tiger Dynamics",
           "title": "Tiger Partners held its 2nd Anniversary Dinner",
@@ -1697,18 +1655,15 @@
             "[图片"
           ],
           "displayDate": "2021.12.31"
-        }
+        },
+        "detailImages": [
+          "/assets/event/eventinfo/微信图片_20260511231526_314_2.jpg"
+        ],
+        "detailVideos": []
       },
       "beijing-lawyers-association-professional-committee": {
         "image": "/assets/event/event20.png",
         "sortDate": "20211015",
-        "detailImages": [
-          "/assets/event/eventinfo/微信图片_20260511231527_315_2.png",
-          "/assets/event/eventinfo/微信图片_20260511231527_316_2.png",
-          "/assets/event/eventinfo/微信图片_20260511231527_317_2.png"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry News",
           "title": "Three partners of Tiger Partners were elected as members of the Professional Committee of the 11th Beijing Lawyer Association",
@@ -1740,18 +1695,17 @@
             "虎诉将继续放眼国际、深耕专业，一如既往地为客户提供优质的法律服务。"
           ],
           "displayDate": "2021.10.15"
-        }
+        },
+        "detailImages": [
+          "/assets/event/eventinfo/微信图片_20260511231527_315_2.png",
+          "/assets/event/eventinfo/微信图片_20260511231527_316_2.png",
+          "/assets/event/eventinfo/微信图片_20260511231527_317_2.png"
+        ],
+        "detailVideos": []
       },
       "liu-yuxuan-and-sam-liao-were-invited-to-the-29th-cross-strait-youth-perspectives": {
         "image": "/assets/event/event21.png",
         "sortDate": "20210720",
-        "detailImages": [
-          "/assets/event/eventinfo/20210720-1.jpg",
-          "/assets/event/eventinfo/20210720-2.jpg",
-          "/assets/event/eventinfo/20210720-3.jpg"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry News",
           "title": "Mr. Liu Yuxuan and  Mr. Liao Mengcheng Invited to Attend the 29th Cross-Strait Youth Vision Forum",
@@ -1783,14 +1737,17 @@
             "最后，参加本次论坛的领导与嘉宾在主席台前合影留念，“心跨两岸·法悦新声”——第29次两岸青年观点论坛圆满结束。"
           ],
           "displayDate": "2021.07.20"
-        }
+        },
+        "detailImages": [
+          "/assets/event/eventinfo/20210720-1.jpg",
+          "/assets/event/eventinfo/20210720-2.jpg",
+          "/assets/event/eventinfo/20210720-3.jpg"
+        ],
+        "detailVideos": []
       },
       "benchmark-litigation-china-2021-recommendation": {
         "image": "/assets/event/event22.png",
         "sortDate": "20210610",
-        "detailImages": [],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners and Mr. Liu Yuxuan and Mr. Wan Li recommend by Benchmark Litigation China",
@@ -1810,14 +1767,13 @@
             "虎诉凭借过去一年在争议解决领域的突出表现，荣膺Benchmark Litigation China 2021北京地区商业纠纷领域“优秀律所”称号。虎诉合伙人刘煜暄律师、万力律师也荣登Benchmark Litigation China 2021北京地区争议解决推荐律师榜单。"
           ],
           "displayDate": "2021.06.10"
-        }
+        },
+        "detailImages": [],
+        "detailVideos": []
       },
       "china-business-law-awards-2021-firm-to-watch": {
         "image": "/assets/event/event23.png",
         "sortDate": "20210518",
-        "detailImages": [],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners was listed as \"Firm to Watch\"",
@@ -1840,14 +1796,13 @@
             "虎诉作为一家专注于重大复杂民商事争议解决的精品所，在过去一年迸发出巨大能量，取得令人瞩目的战绩，受到客户和业界的广泛认可。虎诉将继续深耕法律专业，以期为客户提供更专业的法律服务和更精准的商业解决方案。"
           ],
           "displayDate": "2021.05.18"
-        }
+        },
+        "detailImages": [],
+        "detailVideos": []
       },
       "ssq-alb-china-law-awards-2021-nomination": {
         "image": "/assets/event/event24.png",
         "sortDate": "20210416",
-        "detailImages": [],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry News",
           "title": "Tiger Partners was nominated as \"Rising Law Firm of the Year\" in the 18th Annual SSQ ALB China Law Awards 2021",
@@ -1871,16 +1826,13 @@
             "百战常胜——虎诉始终以实现客户的需求为第一目标，以“胜诉”为争议解决法律服务的最终目的，并且一直保持着令人瞩目的案件胜诉率。虎诉将继续致力于为客户提供更为专业的法律服务、精准的商业解决方案及良好的用户体验。"
           ],
           "displayDate": "2021.04.16"
-        }
+        },
+        "detailImages": [],
+        "detailVideos": []
       },
       "liu-yuxuan-legalband-2021-top-lawyers": {
         "image": "/assets/event/event25.png",
         "sortDate": "20210414",
-        "detailImages": [
-          "/assets/event/eventinfo/20210414-1.jpg"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry News",
           "title": "Mr. Liu Yuxuan was listed in the top lawyers in China by LEGALBAND in 2021",
@@ -1902,17 +1854,15 @@
             "[图片"
           ],
           "displayDate": "2021.04.14"
-        }
+        },
+        "detailImages": [
+          "/assets/event/eventinfo/20210414-1.jpg"
+        ],
+        "detailVideos": []
       },
       "top-40-rising-stars-2021": {
         "image": "/assets/event/event27.png",
         "sortDate": "20210315",
-        "detailImages": [
-          "/assets/event/eventinfo/20210315-2.jpg",
-          "/assets/event/eventinfo/20210315-2.png"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry News",
           "title": "Attorney Liu Yuxuan and Wan Li from Tiger Partners identified in the list of Top 40 Rising Stars 2021 elite up-and-coming lawyers in China",
@@ -1958,14 +1908,16 @@
             "万力毕业于国际关系学院获法学学士学位，毕业于大连海事大学获法学硕士学位（海商法专业）。"
           ],
           "displayDate": "2021.03.15"
-        }
+        },
+        "detailImages": [
+          "/assets/event/eventinfo/20210315-2.jpg",
+          "/assets/event/eventinfo/20210315-2.png"
+        ],
+        "detailVideos": []
       },
       "foreign-related-lawyer-talent-pool": {
         "image": "/assets/event/event31.png",
         "sortDate": "20201014",
-        "detailImages": [],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry News",
           "title": "Mr. Xu Min and Mr. Wan Li were selected into the Foreign-Related Lawyer Talent Pool of the Beijing Bar Association",
@@ -1988,14 +1940,13 @@
             "虎诉将继续放眼国际、深耕专业，一如既往地为客户提供优质的法律服务。"
           ],
           "displayDate": "2020.10.14"
-        }
+        },
+        "detailImages": [],
+        "detailVideos": []
       },
       "china-business-law-journal-featured-tiger-partners": {
         "image": "/assets/event/event32.png",
         "sortDate": "20200927",
-        "detailImages": [],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry News",
           "title": "China Business Law Journal officially included Tiger Partners",
@@ -2015,14 +1966,13 @@
             "虎诉将持续深耕专业，对每一起案件都倾注百分之百的技艺和热情，持续为客户提供卓越的法律服务。"
           ],
           "displayDate": "2020.09.27"
-        }
+        },
+        "detailImages": [],
+        "detailVideos": []
       },
       "alb-interview-liu-yuxuan": {
         "image": "/assets/event/event34.png",
         "sortDate": "20200526",
-        "detailImages": [],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry News",
           "title": "ALB report \"An up-and-comer in dispute resolution-Interview Liu Yuxuan, managing partner\"",
@@ -2048,14 +1998,13 @@
             "刘律师：我们要成为中国最好的争议解决律师事务所。我们也始终朝着这个方向努力。我们希望通过做好现在手里的每一个案子，营造良好的口碑效应，积累更多的客户，今后为越来越多的客户提供专业化的法律服务和优化的体验。"
           ],
           "displayDate": "2020.05.26"
-        }
+        },
+        "detailImages": [],
+        "detailVideos": []
       },
       "alb-former-red-circle-lawyers-boutique-firm": {
         "image": "/assets/event/event40.png",
         "sortDate": "20200311",
-        "detailImages": [],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "Industry News",
           "title": "ALB report\"Former red circle firm lawyers leave to set up boutique firm Tiger Partners\"",
@@ -2088,14 +2037,13 @@
             "万力律师则在投融资、股权交易、商事合同、侵权责任及知识产权纠纷处理、法院执行、刑事追责等业务领域经验丰富，承办案件涉及金融、海事、航空、工业制造、医药、房地产、体育、电子娱乐与竞技等领域。"
           ],
           "displayDate": "2020.03.11"
-        }
+        },
+        "detailImages": [],
+        "detailVideos": []
       },
       "list-1779018285996": {
         "image": "/assets/about/about.png",
         "sortDate": "",
-        "detailImages": [],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "111",
           "title": "1231231",
@@ -2110,11 +2058,8 @@
         }
       },
       "event-20260530-92": {
-        "image": "https://husu2.oss-cn-beijing.aliyuncs.com/husuweb/assets/team/team5.png",
+        "image": "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb/assets/team/team5.png",
         "sortDate": "20260530",
-        "detailImages": [],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "123",
           "title": "New Event",
@@ -2141,11 +2086,8 @@
         }
       },
       "list-1780123488840": {
-        "image": "https://husu2.oss-cn-beijing.aliyuncs.com/husuweb/assets/team/team5.png",
+        "image": "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb/assets/team/team5.png",
         "sortDate": "20260530",
-        "detailImages": [],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "",
           "title": "123222",
@@ -2162,11 +2104,8 @@
         }
       },
       "list-1780123501347": {
-        "image": "https://husu2.oss-cn-beijing.aliyuncs.com/husuweb/assets/team/team5.png",
+        "image": "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb/assets/team/team5.png",
         "sortDate": "20260530",
-        "detailImages": [],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "",
           "title": "",
@@ -2183,11 +2122,8 @@
         }
       },
       "list-1780123940212": {
-        "image": "https://husu2.oss-cn-beijing.aliyuncs.com/husuweb/assets/team/6.png",
+        "image": "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb/assets/team/6.png",
         "sortDate": "20260530",
-        "detailImages": [],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "",
           "title": "我是新",
@@ -2206,9 +2142,6 @@
       "event-20260530-100": {
         "image": "11",
         "sortDate": "20260530",
-        "detailImages": [],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "11",
           "title": "New Event1",
@@ -2229,9 +2162,6 @@
       "list-1780124402090": {
         "image": "",
         "sortDate": "20260530",
-        "detailImages": [],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "",
           "title": "",
@@ -2250,9 +2180,6 @@
       "list-1780125100895": {
         "image": "/uploads/event/1780125132073-videoframe_15020.png",
         "sortDate": "20260530",
-        "detailImages": [],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "",
           "title": "New Event",
@@ -2271,9 +2198,6 @@
       "list-1780125497918": {
         "image": "/uploads/event/1780125504372-event18.jpg",
         "sortDate": "20260530",
-        "detailImages": [],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "",
           "title": "New Event",
@@ -2292,9 +2216,6 @@
       "detailPages-1781020243056": {
         "image": "",
         "sortDate": "20260609",
-        "detailImages": [],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "",
           "title": "",
@@ -2313,11 +2234,6 @@
       "list-1781020346379": {
         "image": "",
         "sortDate": "20260609",
-        "detailImages": [
-          "/uploads/event/1781020522531-447bdcb7-92c7-4548-a3a9-befd6ace314d.gif"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [],
         "en": {
           "category": "",
           "title": "New Event",
@@ -2339,32 +2255,10 @@
             "真的好"
           ],
           "displayDate": "2026.06.09"
-        }
-      },
-      "list-1783002769593": {
-        "image": "",
-        "sortDate": "20260702",
-        "detailImages": [
-          "11"
-        ],
-        "detailImageWidths": [],
-        "detailVideos": [
-          "11"
-        ],
-        "en": {
-          "category": "",
-          "title": "New Event",
-          "summary": "",
-          "content": [],
-          "displayDate": "Jul. 2, 2026"
         },
-        "zh": {
-          "category": "",
-          "title": "新动态",
-          "summary": "",
-          "content": [],
-          "displayDate": "2026.07.02"
-        }
+        "detailImages": [
+          "/uploads/event/1781020522531-447bdcb7-92c7-4548-a3a9-befd6ace314d.gif"
+        ]
       }
     }
   },
@@ -3867,6 +3761,34 @@
           "代理某头部投资管理集团旗下的企业，针对某零售服务行业头部企业，在中国国际经济贸易仲裁委员会提起补偿协议争议仲裁案。该案已取得胜诉裁决，且在合同未明确约定逾期利息标准的情况下，成功说服仲裁庭按照现行司法实践中可支持的最高利率标准判决对方承担逾期利息。",
           "代理某航空燃机领域的科创企业，针对某真空泵及精密零部件销售龙头企业，提起多起合同纠纷案件。案件涉及货物交付数量争议、质量争议及司法鉴定程序，涉案标的总额约人民币3000万元。目前，部分案件仍在审理中，部分案件已取得全面胜诉结果，并实际收回全额款项。"
         ]
+      },
+      "senior-associate-8": {
+        "slug": "senior-associate-8",
+        "name": "达",
+        "zhName": "刘",
+        "title": "Senior Associate",
+        "zhTitle": "资深律师",
+        "image": "",
+        "phone": "",
+        "email": "liud74780@gmail.com",
+        "serviceIndustries": [],
+        "zhServiceIndustries": [],
+        "education": "",
+        "zhEducation": "",
+        "qualification": "",
+        "zhQualification": "",
+        "languages": [],
+        "zhLanguages": [],
+        "socialEngagements": "",
+        "zhSocialEngagements": "",
+        "practiceArea": "",
+        "zhPracticeArea": "",
+        "practiceExperience": "",
+        "zhPracticeExperience": "",
+        "honors": [],
+        "zhHonors": [],
+        "achievements": [],
+        "zhAchievements": []
       }
     }
   },
@@ -3878,7 +3800,7 @@
         "slug": "private-equity",
         "name": "Private Equity",
         "zhName": "私募股权",
-        "img": "https://husu2.oss-cn-beijing.aliyuncs.com/husuweb/assets/home/INDUSTRIES1.webp",
+        "img": "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb/assets/home/INDUSTRIES1.webp",
         "cls": "lg:col-span-2",
         "sections": "",
         "zhSections": ""
@@ -3940,7 +3862,6 @@
       }
     ],
     "eventSlugs": [
-      "list-1783002769593",
       "xu-min-ccas-arbitrator-roster",
       "zoe-zhang-cietac-arbitrator-roster",
       "alb-china-law-awards-2026-shortlist",
@@ -4086,7 +4007,8 @@
     ],
     "seniorAssociateSlugs": [
       "mengcheng-yun",
-      "weifan-qiu"
+      "weifan-qiu",
+      "senior-associate-8"
     ]
   },
   "previewPageContent": {
@@ -4183,7 +4105,7 @@
                     "id": "image",
                     "label": "图片",
                     "kind": "image",
-                    "value": "https://husu2.oss-cn-beijing.aliyuncs.com/husuweb/assets/home/INDUSTRIES1.webp"
+                    "value": "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb/assets/home/INDUSTRIES1.webp"
                   },
                   {
                     "id": "description",
@@ -9005,54 +8927,6 @@
             ],
             "items": [
               {
-                "id": "list-1783002769593",
-                "label": "新动态",
-                "fields": [
-                  {
-                    "id": "slug",
-                    "label": "标识",
-                    "kind": "text",
-                    "value": "list-1783002769593"
-                  },
-                  {
-                    "id": "image",
-                    "label": "缩略图",
-                    "kind": "image",
-                    "value": ""
-                  },
-                  {
-                    "id": "sortDate",
-                    "label": "排序日期（YYYYMMDD）",
-                    "kind": "text",
-                    "value": "20260702"
-                  },
-                  {
-                    "id": "displayDate",
-                    "label": "展示日期",
-                    "kind": "text",
-                    "value": "2026.07.02"
-                  },
-                  {
-                    "id": "category",
-                    "label": "分类",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "title",
-                    "label": "标题",
-                    "kind": "textarea",
-                    "value": "新动态"
-                  },
-                  {
-                    "id": "summary",
-                    "label": "摘要",
-                    "kind": "textarea",
-                    "value": ""
-                  }
-                ]
-              },
-              {
                 "id": "xu-min-ccas-arbitrator-roster",
                 "label": "虎诉合伙人许旻律师入选中国体育仲裁委员会新仲裁员名册",
                 "fields": [
@@ -11221,37 +11095,19 @@
                     "id": "detailImage1",
                     "label": "详情图片 1",
                     "kind": "image",
-                    "value": "https://husu2.oss-cn-beijing.aliyuncs.com/husuweb/assets/event/eventinfo2/微信图片_20260511231050_232_2.png"
+                    "value": "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb/assets/event/eventinfo2/微信图片_20260511231050_232_2.png"
                   },
                   {
                     "id": "detailImage2",
                     "label": "详情图片 2",
                     "kind": "image",
-                    "value": "https://husu2.oss-cn-beijing.aliyuncs.com/husuweb/assets/event/eventinfo2/微信图片_20260511231050_233_2.png"
+                    "value": "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb/assets/event/eventinfo2/微信图片_20260511231050_233_2.png"
                   },
                   {
                     "id": "detailImage3",
                     "label": "详情图片 3",
                     "kind": "image",
                     "value": "/assets/event/eventinfo2/微信图片_20260511231050_235_2.jpg"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 1",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth2",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 2",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth3",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 3",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -11318,24 +11174,6 @@
                     "label": "详情图片 3",
                     "kind": "image",
                     "value": "/assets/event/eventinfo2/微信图片_20260511231050_240_2.jpg"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 1",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth2",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 2",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth3",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 3",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -11390,12 +11228,6 @@
                     "label": "详情图片 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo2/微信图片_20260511231050_242_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -11450,12 +11282,6 @@
                     "label": "详情图片 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo2/微信图片_20260511231050_244_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -11534,36 +11360,6 @@
                     "label": "详情图片 5",
                     "kind": "image",
                     "value": "/assets/event/eventinfo2/微信图片_20260511231056_263_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 1",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth2",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 2",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth3",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 3",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth4",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 4",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth5",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 5",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -11624,18 +11420,6 @@
                     "label": "详情图片 2",
                     "kind": "image",
                     "value": "/assets/event/eventinfo2/微信图片_20260511231056_265_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 1",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth2",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 2",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -11690,12 +11474,6 @@
                     "label": "详情图片 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo2/微信图片_20260511231056_266_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -11804,12 +11582,6 @@
                     "label": "详情图片 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo2/微信图片_20260511231056_267_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -11864,12 +11636,6 @@
                     "label": "详情图片 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo2/微信图片_20260511231056_268_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -11924,12 +11690,6 @@
                     "label": "详情图片 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo2/微信图片_20260511231058_269_2.jpg"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -11998,24 +11758,6 @@
                     "value": "/assets/event/eventinfo2/微信图片_20260511231058_272_2.jpg"
                   },
                   {
-                    "id": "detailImageWidth1",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 1",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth2",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 2",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth3",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 3",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
                     "id": "detailVideo1",
                     "label": "详情视频 1",
                     "kind": "url",
@@ -12074,12 +11816,6 @@
                     "label": "详情图片 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo2/微信图片_20260511231058_273_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -12134,12 +11870,6 @@
                     "label": "详情图片 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo2/微信图片_20260511231058_274_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -12194,12 +11924,6 @@
                     "label": "详情图片 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo2/微信图片_20260511231058_275_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -12260,18 +11984,6 @@
                     "label": "详情图片 2",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231524_298_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 1",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth2",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 2",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -12470,12 +12182,6 @@
                     "label": "详情图片 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231524_299_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -12584,18 +12290,6 @@
                     "label": "详情图片 2",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231524_301_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 1",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth2",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 2",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -12650,12 +12344,6 @@
                     "label": "详情图片 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231524_302_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -12716,18 +12404,6 @@
                     "label": "详情图片 2",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231524_304_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 1",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth2",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 2",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -12782,12 +12458,6 @@
                     "label": "详情图片 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231524_305_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -12848,18 +12518,6 @@
                     "label": "详情图片 2",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231526_307_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 1",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth2",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 2",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -12914,12 +12572,6 @@
                     "label": "详情图片 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231526_308_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -12974,12 +12626,6 @@
                     "label": "详情图片 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231526_309_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -13040,18 +12686,6 @@
                     "label": "详情图片 2",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231526_311_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 1",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth2",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 2",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -13106,12 +12740,6 @@
                     "label": "详情图片 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231526_312_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -13166,12 +12794,6 @@
                     "label": "详情图片 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231526_313_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -13274,12 +12896,6 @@
                     "label": "详情图片 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231526_314_2.jpg"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -13346,24 +12962,6 @@
                     "label": "详情图片 3",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231527_317_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 1",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth2",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 2",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth3",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 3",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -13430,24 +13028,6 @@
                     "label": "详情图片 3",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/20210720-3.jpg"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 1",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth2",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 2",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth3",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 3",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -13646,12 +13226,6 @@
                     "label": "详情图片 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/20210414-1.jpg"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -13712,18 +13286,6 @@
                     "label": "详情图片 2",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/20210315-2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 1",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth2",
-                    "label": "璇︽儏鍥剧墖瀹藉害 % 2",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -13918,84 +13480,6 @@
                     "value": "近日，全球最具影响力的法律媒体之一——亚洲法律杂志（Asian Legal Business，“ALB”）关注到虎诉的成立。虎诉作为一家专注于高端商事争议解决业务的精品所，始终以实现客户需求为第一目标。虎诉拥有深厚的法律功底、丰富的实战经验及与众不同的商业化思维，致力于为客户提供专业的法律服务、精准的商业解决方案及良好的用户体验。 以下为ALB关于虎诉的报道原文。\n\n前红圈所律师组建精品律所虎诉，专注争议解决业务\n\n三位争议解决律师刘煜暄、许旻、万力在北京组建了精品律所虎诉律师事务所，未来将专注于高端商事争议解决业务。\n\n刘煜暄律师此前先后就职于中伦、金杜、方达和竞天公诚律师事务所，许旻律师此前先后任职于金杜和方达律师事务所，万力律师此前先后就职于环球、国浩和方达律师事务所，并在某A股上市企业法务部任诉讼总监。\n\n虎诉未来的业务领域主要为投资纠纷、公司治理纠纷、商业合同纠纷、知识产权纠纷，重点服务行业为金融、互联网、高新科技、影视娱乐、游戏、教育、房地产等。目前律所服务客户包括度小满金融、中植资本、老虎证券、硅谷天堂、远镜创投、迷你考拉仓等。\n\n刘煜暄律师将担任虎诉的管理合伙人，其专长于代理国内诉讼及仲裁案件，主要服务领域包括私募股权、公司股权与控制权争夺、传媒及娱乐、房地产及建设工程等。\n\n许旻律师和万力律师出任虎诉合伙人。许律师专长于代理境内外仲裁案件，在投融资、股权交易、公司治理、商事合同审查及纠纷处理、产品责任等业务领域经验丰富，承办案件涉及银行金融、私募基金、高新科技、新媒体、影视娱乐、教育、房地产等领域。\n\n万力律师则在投融资、股权交易、商事合同、侵权责任及知识产权纠纷处理、法院执行、刑事追责等业务领域经验丰富，承办案件涉及金融、海事、航空、工业制造、医药、房地产、体育、电子娱乐与竞技等领域。"
                   }
                 ]
-              },
-              {
-                "id": "list-1783002769593",
-                "label": "新动态",
-                "fields": [
-                  {
-                    "id": "slug",
-                    "label": "Slug",
-                    "kind": "text",
-                    "value": "list-1783002769593"
-                  },
-                  {
-                    "id": "sortDate",
-                    "label": "Sort date",
-                    "kind": "text",
-                    "value": "20260702"
-                  },
-                  {
-                    "id": "displayDate",
-                    "label": "Display date",
-                    "kind": "text",
-                    "value": "2026.07.02"
-                  },
-                  {
-                    "id": "category",
-                    "label": "Category",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "title",
-                    "label": "Detail title",
-                    "kind": "textarea",
-                    "value": "新动态"
-                  },
-                  {
-                    "id": "summary",
-                    "label": "Detail summary",
-                    "kind": "textarea",
-                    "value": "1231123123"
-                  },
-                  {
-                    "id": "content",
-                    "label": "Detail content",
-                    "kind": "textarea",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImage1",
-                    "label": "Detail image 1",
-                    "kind": "image",
-                    "value": "11"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailVideo1",
-                    "label": "Detail video 1",
-                    "kind": "url",
-                    "value": "11"
-                  },
-                  {
-                    "id": "detailImages",
-                    "label": "detailImages",
-                    "kind": "textarea",
-                    "value": "11"
-                  },
-                  {
-                    "id": "detailVideos",
-                    "label": "detailVideos",
-                    "kind": "textarea",
-                    "value": "11"
-                  }
-                ]
               }
             ]
           }
@@ -14021,7 +13505,7 @@
                 "id": "image",
                 "label": "背景图片",
                 "kind": "image",
-                "value": "https://husu2.oss-cn-beijing.aliyuncs.com/husuweb/assets/industries/hero.webp"
+                "value": "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb/assets/industries/hero.webp"
               },
               {
                 "id": "body",
@@ -14056,7 +13540,7 @@
                     "id": "image",
                     "label": "图片",
                     "kind": "image",
-                    "value": "https://husu2.oss-cn-beijing.aliyuncs.com/husuweb/assets/home/INDUSTRIES1.webp"
+                    "value": "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb/assets/home/INDUSTRIES1.webp"
                   },
                   {
                     "id": "description",
@@ -14315,7 +13799,7 @@
                     "id": "image",
                     "label": "首屏背景图片",
                     "kind": "image",
-                    "value": "https://husu2.oss-cn-beijing.aliyuncs.com/husuweb/assets/home/INDUSTRIES1.webp"
+                    "value": "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb/assets/home/INDUSTRIES1.webp"
                   },
                   {
                     "id": "intro",
@@ -14874,6 +14358,48 @@
                     "label": "链接",
                     "kind": "url",
                     "value": "/team/weifan-qiu"
+                  }
+                ]
+              },
+              {
+                "id": "senior-associate-8",
+                "label": "刘",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "标识",
+                    "kind": "text",
+                    "value": "senior-associate-8"
+                  },
+                  {
+                    "id": "image",
+                    "label": "缩略图",
+                    "kind": "image",
+                    "value": ""
+                  },
+                  {
+                    "id": "name",
+                    "label": "姓名",
+                    "kind": "text",
+                    "value": "刘"
+                  },
+                  {
+                    "id": "title",
+                    "label": "职位",
+                    "kind": "text",
+                    "value": "资深律师"
+                  },
+                  {
+                    "id": "ctaLabel",
+                    "label": "CTA 文案",
+                    "kind": "text",
+                    "value": "了解更多"
+                  },
+                  {
+                    "id": "href",
+                    "label": "链接",
+                    "kind": "url",
+                    "value": "/team/senior-associate-8"
                   }
                 ]
               }
@@ -15459,6 +14985,102 @@
                     "value": "代理某大型境外上市公司，针对多家国内头部保险公司，在上海国际经济贸易仲裁委员会提起保险索赔争议仲裁案。通过对保单可分性、免责条款等关键条款的分析论证，成功为当事人赢得保险金全额赔付。\n代理某产业投资龙头机构旗下的企业，针对某投资管理公司及其法定代表人，在北京仲裁委员会提起投资合同争议仲裁案，涉案标的额高达人民币7.2亿余元。该案已取得胜诉裁决。\n代理某文娱行业头部企业，针对某影业公司提起投资回购诉讼；后依据诉讼中达成的《和解协议》，针对该影业公司的法定代表人提起争议仲裁案。在后续执行程序中，协助执行法院对相对方采取一系列强制执行措施。该案已取得全部回款，执行完毕结案。\n代表某影视娱乐行业头部企业，针对某大型国有公司及其关联公司提起影视投资协议纠纷案，涉案标的额约人民币1.5亿元，且涉及不同主体间的合同安排冲突问题。经过专业论证及分析，成功说服法院判决全部款项应支付至我方当事人名下。该案经北京市高级人民法院二审、最高人民法院再审，均维持原判。\n代理某头部资本管理公司旗下的企业，针对某科技公司及其法定代表人等，在中国国际经济贸易仲裁委员会提起股权回购争议仲裁案。通过立即申请对相对方核心资产采取财产保全措施，促使相对方主动与当事人和解，并支付全部回购款项。\n代理某实业公司，针对某置业公司，在北京仲裁委员会提起股权回购争议仲裁案，涉案标的额高达人民币3.6亿余元。该案涉及《九民纪要》关于公司回购的限制、“名股实债” 等核心法律争议。最终，经过我方专业论述，成功说服仲裁庭认可本案实质属于借款，并已取得全面胜诉裁决。\n代理某产业投资龙头机构旗下的企业，依据生效仲裁裁决，针对某科技公司及其法定代表人提起强制执行程序。在执行程序中，采取了一系列财产调查措施，并提起了系列财产追索诉讼，包括但不限于债权人撤销之诉、确认合同无效之诉、确认夫妻共同债务之诉。\n代理某头部投资管理集团旗下的企业，针对某零售服务行业头部企业，在中国国际经济贸易仲裁委员会提起补偿协议争议仲裁案。该案已取得胜诉裁决，且在合同未明确约定逾期利息标准的情况下，成功说服仲裁庭按照现行司法实践中可支持的最高利率标准判决对方承担逾期利息。\n代理某航空燃机领域的科创企业，针对某真空泵及精密零部件销售龙头企业，提起多起合同纠纷案件。案件涉及货物交付数量争议、质量争议及司法鉴定程序，涉案标的总额约人民币3000万元。目前，部分案件仍在审理中，部分案件已取得全面胜诉结果，并实际收回全额款项。"
                   }
                 ]
+              },
+              {
+                "id": "senior-associate-8",
+                "label": "刘",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "标识",
+                    "kind": "text",
+                    "value": "senior-associate-8"
+                  },
+                  {
+                    "id": "image",
+                    "label": "缩略图",
+                    "kind": "image",
+                    "value": ""
+                  },
+                  {
+                    "id": "name",
+                    "label": "姓名",
+                    "kind": "text",
+                    "value": "刘"
+                  },
+                  {
+                    "id": "title",
+                    "label": "职位",
+                    "kind": "text",
+                    "value": "资深律师"
+                  },
+                  {
+                    "id": "phone",
+                    "label": "电话",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "email",
+                    "label": "邮箱",
+                    "kind": "text",
+                    "value": "liud74780@gmail.com"
+                  },
+                  {
+                    "id": "serviceIndustries",
+                    "label": "服务行业",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "education",
+                    "label": "教育背景",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "qualification",
+                    "label": "专业资格",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "languages",
+                    "label": "工作语言",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "socialEngagements",
+                    "label": "社会任职",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "practiceArea",
+                    "label": "专业领域",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "practiceExperience",
+                    "label": "执业经验",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "honors",
+                    "label": "荣誉",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "achievements",
+                    "label": "个人业绩",
+                    "kind": "textarea",
+                    "value": ""
+                  }
+                ]
               }
             ]
           }
@@ -15706,7 +15328,7 @@
                     "id": "image",
                     "label": "Image",
                     "kind": "image",
-                    "value": "https://husu2.oss-cn-beijing.aliyuncs.com/husuweb/assets/home/INDUSTRIES1.webp"
+                    "value": "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb/assets/home/INDUSTRIES1.webp"
                   },
                   {
                     "id": "description",
@@ -20528,54 +20150,6 @@
             ],
             "items": [
               {
-                "id": "list-1783002769593",
-                "label": "New Event",
-                "fields": [
-                  {
-                    "id": "slug",
-                    "label": "Slug",
-                    "kind": "text",
-                    "value": "list-1783002769593"
-                  },
-                  {
-                    "id": "image",
-                    "label": "Thumbnail",
-                    "kind": "image",
-                    "value": ""
-                  },
-                  {
-                    "id": "sortDate",
-                    "label": "Sort date (YYYYMMDD)",
-                    "kind": "text",
-                    "value": "20260702"
-                  },
-                  {
-                    "id": "displayDate",
-                    "label": "Display date",
-                    "kind": "text",
-                    "value": "Jul. 2, 2026"
-                  },
-                  {
-                    "id": "category",
-                    "label": "Category",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "title",
-                    "label": "Title",
-                    "kind": "textarea",
-                    "value": "New Event"
-                  },
-                  {
-                    "id": "summary",
-                    "label": "Summary",
-                    "kind": "textarea",
-                    "value": ""
-                  }
-                ]
-              },
-              {
                 "id": "xu-min-ccas-arbitrator-roster",
                 "label": "Mr. Xu Min, Partner at Tiger Partners, Selected to the New Panel of Arbitrators of China Commission of Arbitration for Sport",
                 "fields": [
@@ -22744,37 +22318,19 @@
                     "id": "detailImage1",
                     "label": "Detail image 1",
                     "kind": "image",
-                    "value": "https://husu2.oss-cn-beijing.aliyuncs.com/husuweb/assets/event/eventinfo2/微信图片_20260511231050_232_2.png"
+                    "value": "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb/assets/event/eventinfo2/微信图片_20260511231050_232_2.png"
                   },
                   {
                     "id": "detailImage2",
                     "label": "Detail image 2",
                     "kind": "image",
-                    "value": "https://husu2.oss-cn-beijing.aliyuncs.com/husuweb/assets/event/eventinfo2/微信图片_20260511231050_233_2.png"
+                    "value": "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb/assets/event/eventinfo2/微信图片_20260511231050_233_2.png"
                   },
                   {
                     "id": "detailImage3",
                     "label": "Detail image 3",
                     "kind": "image",
                     "value": "/assets/event/eventinfo2/微信图片_20260511231050_235_2.jpg"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth2",
-                    "label": "Detail image width % 2",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth3",
-                    "label": "Detail image width % 3",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -22841,24 +22397,6 @@
                     "label": "Detail image 3",
                     "kind": "image",
                     "value": "/assets/event/eventinfo2/微信图片_20260511231050_240_2.jpg"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth2",
-                    "label": "Detail image width % 2",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth3",
-                    "label": "Detail image width % 3",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -22913,12 +22451,6 @@
                     "label": "Detail image 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo2/微信图片_20260511231050_242_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -22973,12 +22505,6 @@
                     "label": "Detail image 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo2/微信图片_20260511231050_244_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -23057,36 +22583,6 @@
                     "label": "Detail image 5",
                     "kind": "image",
                     "value": "/assets/event/eventinfo2/微信图片_20260511231056_263_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth2",
-                    "label": "Detail image width % 2",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth3",
-                    "label": "Detail image width % 3",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth4",
-                    "label": "Detail image width % 4",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth5",
-                    "label": "Detail image width % 5",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -23147,18 +22643,6 @@
                     "label": "Detail image 2",
                     "kind": "image",
                     "value": "/assets/event/eventinfo2/微信图片_20260511231056_265_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth2",
-                    "label": "Detail image width % 2",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -23213,12 +22697,6 @@
                     "label": "Detail image 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo2/微信图片_20260511231056_266_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -23327,12 +22805,6 @@
                     "label": "Detail image 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo2/微信图片_20260511231056_267_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -23387,12 +22859,6 @@
                     "label": "Detail image 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo2/微信图片_20260511231056_268_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -23447,12 +22913,6 @@
                     "label": "Detail image 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo2/微信图片_20260511231058_269_2.jpg"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -23521,24 +22981,6 @@
                     "value": "/assets/event/eventinfo2/微信图片_20260511231058_272_2.jpg"
                   },
                   {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth2",
-                    "label": "Detail image width % 2",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth3",
-                    "label": "Detail image width % 3",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
                     "id": "detailVideo1",
                     "label": "Detail video 1",
                     "kind": "url",
@@ -23597,12 +23039,6 @@
                     "label": "Detail image 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo2/微信图片_20260511231058_273_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -23657,12 +23093,6 @@
                     "label": "Detail image 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo2/微信图片_20260511231058_274_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -23717,12 +23147,6 @@
                     "label": "Detail image 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo2/微信图片_20260511231058_275_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -23783,18 +23207,6 @@
                     "label": "Detail image 2",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231524_298_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth2",
-                    "label": "Detail image width % 2",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -23993,12 +23405,6 @@
                     "label": "Detail image 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231524_299_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -24107,18 +23513,6 @@
                     "label": "Detail image 2",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231524_301_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth2",
-                    "label": "Detail image width % 2",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -24173,12 +23567,6 @@
                     "label": "Detail image 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231524_302_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -24239,18 +23627,6 @@
                     "label": "Detail image 2",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231524_304_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth2",
-                    "label": "Detail image width % 2",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -24305,12 +23681,6 @@
                     "label": "Detail image 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231524_305_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -24371,18 +23741,6 @@
                     "label": "Detail image 2",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231526_307_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth2",
-                    "label": "Detail image width % 2",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -24437,12 +23795,6 @@
                     "label": "Detail image 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231526_308_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -24497,12 +23849,6 @@
                     "label": "Detail image 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231526_309_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -24563,18 +23909,6 @@
                     "label": "Detail image 2",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231526_311_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth2",
-                    "label": "Detail image width % 2",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -24629,12 +23963,6 @@
                     "label": "Detail image 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231526_312_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -24689,12 +24017,6 @@
                     "label": "Detail image 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231526_313_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -24797,12 +24119,6 @@
                     "label": "Detail image 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231526_314_2.jpg"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -24869,24 +24185,6 @@
                     "label": "Detail image 3",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/微信图片_20260511231527_317_2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth2",
-                    "label": "Detail image width % 2",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth3",
-                    "label": "Detail image width % 3",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -24953,24 +24251,6 @@
                     "label": "Detail image 3",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/20210720-3.jpg"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth2",
-                    "label": "Detail image width % 2",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth3",
-                    "label": "Detail image width % 3",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -25169,12 +24449,6 @@
                     "label": "Detail image 1",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/20210414-1.jpg"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -25235,18 +24509,6 @@
                     "label": "Detail image 2",
                     "kind": "image",
                     "value": "/assets/event/eventinfo/20210315-2.png"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImageWidth2",
-                    "label": "Detail image width % 2",
-                    "kind": "text",
-                    "value": ""
                   }
                 ]
               },
@@ -25441,84 +24703,6 @@
                     "value": "Asian Legal Business (\"ALB\"), one of the world's most influential legal media, has recently noted the establishment of Tiger Partners. As a boutique firm specializing in complex commercial dispute resolution, Tiger Partners' primary objective is to realize the interests of its clients. Tiger Partners has a deep legal expertise, rich practical experience and a distinctive commercial mindset. It is committed to providing professional legal services, precise business solutions and good user experience to its clients.\n\nThe following is the original ALB article on Tiger Partners:\n\nFormer red circle firm lawyers leave to set up boutique firm Tiger Partners\n\nDispute resolution lawyers Liu Yuxuan, Xu Min and Wan Li have co-founded a boutique firm called Tiger Partners in Beijing, which is dedicated to handling complex commercial dispute resolution cases in the future.\n\nLiu has previously worked for red circle firms Zhonglun, KWM, Fangda and Jingtian & Gongcheng, and Xu has worked for KWM and Fangda, while Wan has left his position as dispute director from a Chinese listed company, with previous working experiences in Global, Grandall and Fangda.\n\nThe new firm will focus on investment dispute, corporate governance dispute, commercial contract dispute and IP dispute, with special focuses on industries of finance, internet, technology, entertainment, game, education and real estate. The firm already boasts a number of key clients, including Du Xiaoman Financial, Zhongzhi Capital, Tiger Brokers, Heaven-sent Capital, Telescope investment and Mini-Kaola.\n\nLiu will be the managing partner of the new firm. He specializes on domestic litigation and arbitration, with expertise on private equity, contest of corporate equity and control, media and entertainment, real estate and construction.\n\nMeanwhile Xu and Wan will act as partners. Xu focuses on domestic and international arbitration, with special expertise on finance and investment, equity transaction, corporate governance, commercial contract review and dispute resolution and product liability, having advised industries of banking and finance, technology, new media, entertainment, education and real estate.\n\nWan specializes on finance and investment, equity transaction, commercial contract, tort liability, IP dispute resolution and criminal accountability, with special knowledge of finance, maritime, aviation, manufacture, medicine, real estate, sports, electronic entertainment and competition industries."
                   }
                 ]
-              },
-              {
-                "id": "list-1783002769593",
-                "label": "New Event",
-                "fields": [
-                  {
-                    "id": "slug",
-                    "label": "Slug",
-                    "kind": "text",
-                    "value": "list-1783002769593"
-                  },
-                  {
-                    "id": "sortDate",
-                    "label": "Sort date",
-                    "kind": "text",
-                    "value": "20260702"
-                  },
-                  {
-                    "id": "displayDate",
-                    "label": "Display date",
-                    "kind": "text",
-                    "value": "Jul. 2, 2026"
-                  },
-                  {
-                    "id": "category",
-                    "label": "Category",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "title",
-                    "label": "Detail title",
-                    "kind": "textarea",
-                    "value": "New Event"
-                  },
-                  {
-                    "id": "summary",
-                    "label": "Detail summary",
-                    "kind": "textarea",
-                    "value": "123123"
-                  },
-                  {
-                    "id": "content",
-                    "label": "Detail content",
-                    "kind": "textarea",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailImage1",
-                    "label": "Detail image 1",
-                    "kind": "image",
-                    "value": "11"
-                  },
-                  {
-                    "id": "detailImageWidth1",
-                    "label": "Detail image width % 1",
-                    "kind": "text",
-                    "value": ""
-                  },
-                  {
-                    "id": "detailVideo1",
-                    "label": "Detail video 1",
-                    "kind": "url",
-                    "value": "11"
-                  },
-                  {
-                    "id": "detailImages",
-                    "label": "detailImages",
-                    "kind": "textarea",
-                    "value": "11"
-                  },
-                  {
-                    "id": "detailVideos",
-                    "label": "detailVideos",
-                    "kind": "textarea",
-                    "value": "11"
-                  }
-                ]
               }
             ]
           }
@@ -25544,7 +24728,7 @@
                 "id": "image",
                 "label": "Background image",
                 "kind": "image",
-                "value": "https://husu2.oss-cn-beijing.aliyuncs.com/husuweb/assets/industries/hero.webp"
+                "value": "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb/assets/industries/hero.webp"
               },
               {
                 "id": "body",
@@ -25579,7 +24763,7 @@
                     "id": "image",
                     "label": "Image",
                     "kind": "image",
-                    "value": "https://husu2.oss-cn-beijing.aliyuncs.com/husuweb/assets/home/INDUSTRIES1.webp"
+                    "value": "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb/assets/home/INDUSTRIES1.webp"
                   },
                   {
                     "id": "description",
@@ -25838,7 +25022,7 @@
                     "id": "image",
                     "label": "Hero image",
                     "kind": "image",
-                    "value": "https://husu2.oss-cn-beijing.aliyuncs.com/husuweb/assets/home/INDUSTRIES1.webp"
+                    "value": "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb/assets/home/INDUSTRIES1.webp"
                   },
                   {
                     "id": "intro",
@@ -26397,6 +25581,48 @@
                     "label": "Link",
                     "kind": "url",
                     "value": "/team/weifan-qiu"
+                  }
+                ]
+              },
+              {
+                "id": "senior-associate-8",
+                "label": "达",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "Slug",
+                    "kind": "text",
+                    "value": "senior-associate-8"
+                  },
+                  {
+                    "id": "image",
+                    "label": "Thumbnail",
+                    "kind": "image",
+                    "value": ""
+                  },
+                  {
+                    "id": "name",
+                    "label": "Name",
+                    "kind": "text",
+                    "value": "达"
+                  },
+                  {
+                    "id": "title",
+                    "label": "Title",
+                    "kind": "text",
+                    "value": "Senior Associate"
+                  },
+                  {
+                    "id": "ctaLabel",
+                    "label": "CTA label",
+                    "kind": "text",
+                    "value": "Find out more"
+                  },
+                  {
+                    "id": "href",
+                    "label": "Link",
+                    "kind": "url",
+                    "value": "/team/senior-associate-8"
                   }
                 ]
               }
@@ -26982,6 +26208,102 @@
                     "value": "Represented a large overseas listed company in an insurance claim dispute arbitration against several leading domestic insurance companies before the Shanghai International Economic and Trade Arbitration Commission (SHIAC). By analyzing and arguing key policy provisions such as severability and exclusion clauses, we successfully obtained full payment of the insurance benefits for the client.\nRepresented an enterprise under a leading industrial investment institution in an investment contract dispute arbitration against an investment management company and its legal representative before the Beijing Arbitration Commission (BAC). The subject matter of the case was over RMB 720 million. A favorable award was obtained.\nRepresented a leading entertainment industry enterprise in an investment repurchase lawsuit against a film company. Subsequently, based on the settlement agreement reached in the lawsuit, we initiated an arbitration against the legal representative of the film company. In the ensuing enforcement proceedings, we assisted the enforcement court in taking a series of compulsory measures against the opposing party. All amounts have been recovered and the case has been closed upon full satisfaction of the judgment.\nRepresented a leading film and television entertainment enterprise in a film investment agreement dispute against a large state-owned company and its affiliates, with a subject matter of approximately RMB 150 million. The case involved conflicts in contractual arrangements among different parties. Through professional analysis and argumentation, we successfully persuaded the court to rule that all amounts should be paid to our client. The judgment was upheld by the Beijing Higher People's Court on second instance and by the Supreme People's Court on retrial.\nRepresented an enterprise under a leading capital management company in an equity repurchase dispute arbitration against a technology company and its legal representative, among others, before the China International Economic and Trade Arbitration Commission (CIETAC). By promptly applying for asset preservation measures over the core assets of the opposing party, we prompted the opposing party to settle with the client and pay the full repurchase price.\nRepresented a manufacturing company in an equity repurchase dispute arbitration against a real estate company before the Beijing Arbitration Commission (BAC), with a subject matter exceeding RMB 360 million. The case involved core legal issues such as restrictions on corporate share repurchases under the Minutes of the National Conference on the Trial of Commercial Cases (Jiumin Minutes) and the characterization of “debt disguised as equity.”Through our professional arguments, we successfully persuaded the arbitral tribunal that the matter was in substance a loan and obtained a fully favorable award.\nRepresented an enterprise under a leading industrial investment institution in enforcing a final arbitral award against a technology company and its legal representative. In the enforcement proceedings, we took a series of asset investigation measures and initiated various recovery actions, including but not limited to claims to set aside a debtor’s act, actions to declare contracts void, and actions to establish marital joint debt.\nRepresented an enterprise under a leading investment management group in a compensation agreement dispute arbitration against a leading retail service enterprise before the China International Economic and Trade Arbitration Commission (CIETAC). A favorable award was obtained, and despite the contract not specifying a default interest rate, we successfully persuaded the arbitral tribunal to impose default interest at the maximum rate permitted under current judicial practice.\nRepresented a technology start-up in the aviation and gas turbine field in multiple contract dispute cases against a leading sales enterprise of vacuum pumps and precision components. The cases involved disputes over delivery quantity, quality issues, and judicial appraisal procedures, with a total subject matter of approximately RMB 30 million. Currently, some cases are still pending, while others have resulted in complete victories and full recovery of the amounts."
                   }
                 ]
+              },
+              {
+                "id": "senior-associate-8",
+                "label": "达",
+                "fields": [
+                  {
+                    "id": "slug",
+                    "label": "Slug",
+                    "kind": "text",
+                    "value": "senior-associate-8"
+                  },
+                  {
+                    "id": "image",
+                    "label": "Thumbnail",
+                    "kind": "image",
+                    "value": ""
+                  },
+                  {
+                    "id": "name",
+                    "label": "Name",
+                    "kind": "text",
+                    "value": "达"
+                  },
+                  {
+                    "id": "title",
+                    "label": "Title",
+                    "kind": "text",
+                    "value": "Senior Associate"
+                  },
+                  {
+                    "id": "phone",
+                    "label": "Phone",
+                    "kind": "text",
+                    "value": ""
+                  },
+                  {
+                    "id": "email",
+                    "label": "Email",
+                    "kind": "text",
+                    "value": "liud74780@gmail.com"
+                  },
+                  {
+                    "id": "serviceIndustries",
+                    "label": "Service industries",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "education",
+                    "label": "Education",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "qualification",
+                    "label": "Qualification",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "languages",
+                    "label": "Languages",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "socialEngagements",
+                    "label": "Social engagements",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "practiceArea",
+                    "label": "Practice area",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "practiceExperience",
+                    "label": "Practice experience",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "honors",
+                    "label": "Honors",
+                    "kind": "textarea",
+                    "value": ""
+                  },
+                  {
+                    "id": "achievements",
+                    "label": "Performance & Achievements",
+                    "kind": "textarea",
+                    "value": ""
+                  }
+                ]
               }
             ]
           }
@@ -27136,6 +26458,6 @@
         ]
       }
     },
-    "updatedAt": "2026-07-02T14:53:06.430Z"
+    "updatedAt": "2026-06-21T17:00:40.370Z"
   }
 }

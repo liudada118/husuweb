@@ -194,10 +194,10 @@ export const defaultCmsSiteState: OfficialCmsSiteState = {
     heroVideo: "/assets/home/海浪0508.mp4",
     eventSlugs: [
       "kinsey-kang-hong-kong-legal-counsel",
-      "official-account-mini-program-upgrade",
-      "benchmark-litigation-2022-dispute-resolution",
-      "civil-code-contract-termination-rules-part-one",
-      "wuhan-kingold-fake-gold-jurisdiction-objection",
+      "chambers-forum-beijing-2023",
+      "shifoying-nanli-community-pairing",
+      "tiger-partners-third-anniversary",
+      "cietac-cup-voice-of-moot-sponsor",
     ],
   },
   events: {

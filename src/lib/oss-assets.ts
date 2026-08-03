@@ -9,7 +9,7 @@ type OssConfig = {
 };
 
 function getOssConfig(): OssConfig {
-  const bucket = process.env.OSS_BUCKET || process.env.ALIYUN_OSS_BUCKET || "img-12345";
+  const bucket = process.env.OSS_BUCKET || process.env.ALIYUN_OSS_BUCKET || "husu2";
   const endpoint = (process.env.OSS_ENDPOINT || process.env.ALIYUN_OSS_ENDPOINT || "oss-cn-beijing.aliyuncs.com")
     .replace(/^https?:\/\//, "")
     .replace(/\/+$/, "");

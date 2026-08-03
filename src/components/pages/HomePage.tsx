@@ -413,9 +413,99 @@ const homeEventSlugs = [
   "cietac-cup-voice-of-moot-sponsor",
 ] as const;
 
+const homeEventDefaultOverrides: Record<string, OfficialCmsEventOverride> = {
+  "kinsey-kang-hong-kong-legal-counsel": {
+    image: "/assets/event/event1.png",
+    href: "/events/kinsey-kang-hong-kong-legal-counsel?from=home",
+    en: {
+      category: "Tiger Dynamics",
+      title: "Kinsey Kang Yanan was engaged as Hong Kong Legal Counsel of Tiger Partners",
+      summary:
+        "Tiger Partners is honored to announce that Kinsey Kang Yanan, barrister-at-law, has been engaged as our Hong Kong Legal Counsel. From this day on, Tiger Partners will work with Kinsey wholeheartedly to provide our clients with more professional, efficient and convenient legal services.",
+      displayDate: "Nov. 17, 2023",
+    },
+    zh: {
+      category: "虎诉动态",
+      title: "康亚男（Kinsey Kang Yanan）出庭大律师受聘为虎诉的香港法律顾问",
+      summary:
+        "虎诉律师事务所非常荣幸地宣布，康亚男（Kinsey Kang Yanan）出庭大律师已受聘为本所香港法律顾问。自即日起，虎诉将与康大律师竭诚携手，以为我们的客户提供更优质专业、高效便捷的法律服务。",
+      displayDate: "2023.11.17",
+    },
+  },
+  "chambers-forum-beijing-2023": {
+    image: "/assets/event/event2.png",
+    href: "/events/chambers-forum-beijing-2023?from=home",
+    en: {
+      category: "Industry News",
+      title: "Tiger Partners sponsored and was invited to the Chambers Forum: Beijing 2023",
+      summary:
+        "From April 12 to 13, the Chambers Forum: Beijing 2023 will be held at the Hilton Hotel of Wangfujing in Beijing. As one of the sponsors, Tiger Partners was invited to participate in the forum.",
+      displayDate: "Apr. 6, 2023",
+    },
+    zh: {
+      category: "行业资讯",
+      title: "虎诉赞助2023钱伯斯北京论坛并受邀参会",
+      summary: "4月12日至13日，2023钱伯斯北京论坛将在北京王府井希尔顿酒店举办。北京虎诉律师事务所作为赞助商之一，受邀参与本次论坛活动。",
+      displayDate: "2023.04.06",
+    },
+  },
+  "shifoying-nanli-community-pairing": {
+    image: "/assets/event/event3.png",
+    href: "/events/shifoying-nanli-community-pairing?from=home",
+    en: {
+      category: "Tiger Dynamics",
+      title: "Party Branch of Tiger Partners entered into a pairing relationship with Shifoying Nanli Community to build a law-based community",
+      summary:
+        "In order to deepen the implementation of Xi Jinping Thought on the Rule of Law and fulfill practice \"Good Lawyers to the satisfaction of the Party and the people\", the Party branch committee of Tiger Partners responded positively to the call of the Party Committee of the Lawyers' Profession of Chaoyang District of Beijing for building a law-based community and entered into a pairing relationship with the community committee of Shifoying Nanli in order to make use of the advantages of the legal profession to contribute to promoting the construction of the rule of law in the community.",
+      displayDate: "Mar. 29, 2023",
+    },
+    zh: {
+      category: "虎诉动态",
+      title: "虎诉律所党支部与石佛营南里社区结对共建法治社区",
+      summary:
+        "为进一步深入贯彻习近平法治思想，践行“做党和人民满意的好律师”，中共北京虎诉律师事务所支部委员会积极响应北京市朝阳区律师行业党委提出的共建法治社区的号召，与石佛营南里社区委员会达成结对关系，以期利用法律专业优势，为推进社区法治进程贡献智慧。",
+      displayDate: "2023.03.29",
+    },
+  },
+  "tiger-partners-third-anniversary": {
+    image: "/assets/event/event4.png",
+    href: "/events/tiger-partners-third-anniversary?from=home",
+    en: {
+      category: "Tiger Watch",
+      title: "Today, Tiger Partners is three years old!",
+      summary: "This year, we always uphold the spirit of Tiger Partners to serve our clients, culminating in a 30 percent increase in revenue compared to the previous year.",
+      displayDate: "Dec. 18, 2022",
+    },
+    zh: {
+      category: "虎诉动态",
+      title: "今天，虎诉三周岁啦！",
+      summary: "这一年，我们继续秉持“虎诉精神”为各位客户服务，并最终实现了相较去年30%的业务收入增长；",
+      displayDate: "2022.12.18",
+    },
+  },
+  "cietac-cup-voice-of-moot-sponsor": {
+    image: "/assets/event/event5.png",
+    href: "/events/cietac-cup-voice-of-moot-sponsor?from=home",
+    en: {
+      category: "Industry News",
+      title: 'Tiger Partners sponsored the "CIETAC Cup" Voice of Moot series of training activities',
+      summary:
+        'The 20th "CIETAC Cup" will be held from November 28 to December 2, 2022. More than 1000 players from more than 90 law schools, including the United Kingdom, Vietnam, the Netherlands, Uzbekistan, Hong Kong, China and Macao, China, participated in the "CIETAC Cup" this year.',
+      displayDate: "Nov. 8, 2022",
+    },
+    zh: {
+      category: "行业资讯",
+      title: "虎诉赞助“贸仲杯”Voice of Moot系列培训活动",
+      summary:
+        "第二十届“贸仲杯”将于2022年11月28日至12月2日举行，本届“贸仲杯”汇集来自全国以及境外，包括英国、越南、荷兰、乌兹别克斯坦、中国香港、中国澳门在内的90余所法学院校1000余名参赛队员参与比赛。",
+      displayDate: "2022.11.08",
+    },
+  },
+};
+
 function formatHomeEventDate(date: string, language: "en" | "zh") {
   if (language === "zh") {
-    return `${date.slice(0, 4)}年${Number(date.slice(4, 6))}月${Number(date.slice(6, 8))}日`;
+    return `${date.slice(0, 4)}.${date.slice(4, 6)}.${date.slice(6, 8)}`;
   }
 
   return formatEventDate(date, language);
@@ -432,7 +522,7 @@ function getHomeEvents(
   return slugs
     .map((slug) => {
       const event = eventItems.find((eventItem) => eventItem.slug === slug);
-      const override = homeOverrides?.[slug] ?? eventOverrides?.[slug];
+      const override = homeOverrides?.[slug] ?? homeEventDefaultOverrides[slug] ?? eventOverrides?.[slug];
       const localizedOverride = override?.[language];
 
       if (!event) {

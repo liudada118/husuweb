@@ -224,10 +224,10 @@ const clientLogoDefaults = Array.from({ length: 42 }, (_, index) => {
 
 const homeEventSlugs = [
   "kinsey-kang-hong-kong-legal-counsel",
-  "official-account-mini-program-upgrade",
-  "benchmark-litigation-2022-dispute-resolution",
-  "civil-code-contract-termination-rules-part-one",
-  "wuhan-kingold-fake-gold-jurisdiction-objection",
+  "chambers-forum-beijing-2023",
+  "shifoying-nanli-community-pairing",
+  "tiger-partners-third-anniversary",
+  "cietac-cup-voice-of-moot-sponsor",
 ];
 
 function eventDefaults(limit?: number) {
@@ -252,7 +252,8 @@ function eventDefaults(limit?: number) {
 }
 
 const detailImagePlaceholderPattern = /\[(?:IMAGE|Image|图片|鍥剧墖|鍥剧墖)\]?/g;
-const detailVideoPlaceholderText = "暂时无法在飞书文档外展示此内容";
+const legacyDetailVideoPlaceholderText = "暂时无法在飞书文档外展示此内容";
+const detailVideoPlaceholderPattern = new RegExp(String.raw`\[(?:VIDEO|Video|video)\]|${legacyDetailVideoPlaceholderText}`, "g");
 
 function countMatches(value: string, pattern: RegExp) {
   return [...value.matchAll(pattern)].length;
@@ -273,6 +274,12 @@ function numberedDetailMediaFields(
 
   return Array.from({ length: size }, (_, index) =>
     field(`${fieldPrefix}${index + 1}`, `${labelPrefix} ${index + 1}`, kind, list[index] ?? ""),
+  );
+}
+
+function numberedDetailImageWidthFields(labelPrefix: string, count: number) {
+  return Array.from({ length: count }, (_, index) =>
+    field(`detailImageWidth${index + 1}`, `${labelPrefix} ${index + 1}`, "text", ""),
   );
 }
 
@@ -474,11 +481,15 @@ function localizedEventItems(language: Language, limit?: number) {
         countMatches(isZh ? item.zhContent : item.enContent, detailImagePlaceholderPattern),
         item.detailImages,
       ),
+      ...numberedDetailImageWidthFields(
+        isZh ? "详情图片宽度 %" : "Detail image width %",
+        Math.max(countMatches(isZh ? item.zhContent : item.enContent, detailImagePlaceholderPattern), item.detailImages.split(/\r?\n/).filter(Boolean).length),
+      ),
       ...numberedDetailMediaFields(
         "detailVideo",
         isZh ? "详情视频" : "Detail video",
         "url",
-        (isZh ? item.zhContent : item.enContent).split(detailVideoPlaceholderText).length - 1,
+        countMatches(isZh ? item.zhContent : item.enContent, detailVideoPlaceholderPattern),
         item.detailVideos,
       ),
     ]),
@@ -598,11 +609,15 @@ function localizedEventDetailItems(language: Language, limit?: number) {
         countMatches(isZh ? item.zhContent : item.enContent, detailImagePlaceholderPattern),
         item.detailImages,
       ),
+      ...numberedDetailImageWidthFields(
+        isZh ? "详情图片宽度 %" : "Detail image width %",
+        Math.max(countMatches(isZh ? item.zhContent : item.enContent, detailImagePlaceholderPattern), item.detailImages.split(/\r?\n/).filter(Boolean).length),
+      ),
       ...numberedDetailMediaFields(
         "detailVideo",
         isZh ? "详情视频" : "Detail video",
         "url",
-        (isZh ? item.zhContent : item.enContent).split(detailVideoPlaceholderText).length - 1,
+        countMatches(isZh ? item.zhContent : item.enContent, detailVideoPlaceholderPattern),
         item.detailVideos,
       ),
     ]),

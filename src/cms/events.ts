@@ -16,7 +16,7 @@ function applyCopyOverride(copy: EventCopy, override?: OfficialCmsEventOverride[
 }
 
 function hasCmsMediaOverride(values?: string[]) {
-  return values?.some((value) => value.trim()) ?? false;
+  return Array.isArray(values);
 }
 
 export function applyCmsEventOverride(event: EventItem, override?: OfficialCmsEventOverride): EventItem {

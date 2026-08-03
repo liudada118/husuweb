@@ -42,17 +42,24 @@ function collectDetailMedia(item: EventPageItem | undefined, legacyFieldId: stri
   return trimTrailingEmptyItems(list);
 }
 
+function hasDetailMediaField(item: EventPageItem | undefined, legacyFieldId: string, pattern: RegExp) {
+  return Boolean(item?.fields.some((field) => field.id === legacyFieldId || pattern.test(field.id)));
+}
+
 function pickCmsDetailMedia(
   primaryItem: EventPageItem | undefined,
   secondaryItem: EventPageItem | undefined,
   legacyFieldId: string,
   pattern: RegExp,
   fallback: string[],
+  useExplicitEmptyCmsValue = false,
 ) {
   const primary = collectDetailMedia(primaryItem, legacyFieldId, pattern);
+  if (useExplicitEmptyCmsValue && hasDetailMediaField(primaryItem, legacyFieldId, pattern)) return primary;
   if (primary.some(Boolean)) return primary;
 
   const secondary = collectDetailMedia(secondaryItem, legacyFieldId, pattern);
+  if (useExplicitEmptyCmsValue && hasDetailMediaField(secondaryItem, legacyFieldId, pattern)) return secondary;
   if (secondary.some(Boolean)) return secondary;
 
   return fallback;
@@ -60,6 +67,15 @@ function pickCmsDetailMedia(
 
 function firstFilledValue(...values: Array<string | undefined>) {
   return values.find((value) => typeof value === "string" && value.trim())?.trim() ?? "";
+}
+
+function normalizeMediaWidthPercent(value: string | undefined, fallback = 70) {
+  if (!value?.trim()) return fallback;
+
+  const percent = Number(value.replace("%", "").trim());
+  if (!Number.isFinite(percent)) return fallback;
+
+  return Math.min(100, Math.max(10, percent));
 }
 
 export function EventDetailPage({ slug }: { slug: string }) {
@@ -73,8 +89,10 @@ export function EventDetailPage({ slug }: { slug: string }) {
   const parentLabel = fromHome ? pick(language, copy.nav.home) : pick(language, copy.nav.events);
   const fallbackHref = fromHome ? "/" : "/events";
   const imagePlaceholderSource = String.raw`\[(?:IMAGE|Image|\u56fe\u7247|\u9365\u5267\u5896)\]?`;
-  const videoPlaceholderText = "\u6682\u65f6\u65e0\u6cd5\u5728\u98de\u4e66\u6587\u6863\u5916\u5c55\u793a\u6b64\u5185\u5bb9";
-  const mediaPlaceholderPattern = new RegExp(`${imagePlaceholderSource}|${videoPlaceholderText}`, "g");
+  const videoPlaceholderSource = String.raw`\[(?:VIDEO|Video|video)\]`;
+  const legacyVideoPlaceholderText = "\u6682\u65f6\u65e0\u6cd5\u5728\u98de\u4e66\u6587\u6863\u5916\u5c55\u793a\u6b64\u5185\u5bb9";
+  const videoPlaceholderPattern = new RegExp(`^(?:${videoPlaceholderSource}|${legacyVideoPlaceholderText})$`);
+  const mediaPlaceholderPattern = new RegExp(`${imagePlaceholderSource}|${videoPlaceholderSource}|${legacyVideoPlaceholderText}`, "g");
   const cleanText = (text: string) => text.replace(mediaPlaceholderPattern, "").trim();
   const currentLanguageItems = getPreviewPageSectionItems(cms, language, "event", "detailPages");
   const fallbackLanguageItems = getPreviewPageSectionItems(cms, language === "zh" ? "en" : "zh", "event", "detailPages");
@@ -122,26 +140,33 @@ export function EventDetailPage({ slug }: { slug: string }) {
   const normalizeDetailText = (text: string) => cleanText(text).replace(/\s+/g, " ");
   const summaryForCompare = normalizeDetailText(localizedSummary);
   const detailImageFieldPattern = /^detailImage(\d+)$/;
+  const detailImageWidthFieldPattern = /^detailImageWidth(\d+)$/;
   const detailVideoFieldPattern = /^detailVideo(\d+)$/;
   const customEventOverride = staticEvent ? undefined : cms?.events.overrides[slug];
   const customDetailImages = Array.isArray(customEventOverride?.detailImages)
     ? customEventOverride.detailImages.map((item) => item.trim()).filter(Boolean)
+    : undefined;
+  const customDetailImageWidths = Array.isArray(customEventOverride?.detailImageWidths)
+    ? customEventOverride.detailImageWidths.map((item) => item.trim())
     : undefined;
   const customDetailVideos = Array.isArray(customEventOverride?.detailVideos)
     ? customEventOverride.detailVideos.map((item) => item.trim()).filter(Boolean)
     : undefined;
   const detailImages =
     customDetailImages ??
-    pickCmsDetailMedia(currentDetailItem, fallbackDetailItem, "detailImages", detailImageFieldPattern, staticEvent ? event.detailImages ?? [] : []);
+    pickCmsDetailMedia(currentDetailItem, fallbackDetailItem, "detailImages", detailImageFieldPattern, staticEvent ? event.detailImages ?? [] : [], true);
+  const detailImageWidths =
+    customDetailImageWidths ??
+    pickCmsDetailMedia(currentDetailItem, fallbackDetailItem, "detailImageWidths", detailImageWidthFieldPattern, []);
   const detailVideos =
     customDetailVideos ??
-    pickCmsDetailMedia(currentDetailItem, fallbackDetailItem, "detailVideos", detailVideoFieldPattern, staticEvent ? event.detailVideos ?? [] : []);
+    pickCmsDetailMedia(currentDetailItem, fallbackDetailItem, "detailVideos", detailVideoFieldPattern, staticEvent ? event.detailVideos ?? [] : [], true);
   let detailImageIndex = 0;
   let detailVideoIndex = 0;
   const detailBlocks = localizedContent
     .flatMap((paragraph, index) => {
       const blocks: Array<
-        | { type: "image"; src: string; index: number }
+        | { type: "image"; src: string; index: number; widthPercent: number }
         | { type: "video"; src: string; index: number }
         | { type: "text"; text: string; index: number }
       > = [];
@@ -164,14 +189,15 @@ export function EventDetailPage({ slug }: { slug: string }) {
         }
 
         const placeholder = match[0];
-        if (placeholder === videoPlaceholderText) {
+        if (videoPlaceholderPattern.test(placeholder)) {
           const src = detailVideos[detailVideoIndex];
           detailVideoIndex += 1;
           if (src) blocks.push({ type: "video", src, index: index * 100 + matchIndex });
         } else {
           const src = detailImages[detailImageIndex];
+          const widthPercent = normalizeMediaWidthPercent(detailImageWidths[detailImageIndex]);
           detailImageIndex += 1;
-          if (src) blocks.push({ type: "image", src, index: index * 100 + matchIndex });
+          if (src) blocks.push({ type: "image", src, widthPercent, index: index * 100 + matchIndex });
         }
 
         cursor = (match.index ?? 0) + match[0].length;
@@ -187,7 +213,7 @@ export function EventDetailPage({ slug }: { slug: string }) {
     })
     .filter(
       (block): block is
-        | { type: "image"; src: string; index: number }
+        | { type: "image"; src: string; index: number; widthPercent: number }
         | { type: "video"; src: string; index: number }
         | { type: "text"; text: string; index: number } => Boolean(block),
     );
@@ -196,6 +222,7 @@ export function EventDetailPage({ slug }: { slug: string }) {
     ...detailImages.slice(detailImageIndex).filter(Boolean).map((src, index) => ({
       type: "image" as const,
       src,
+      widthPercent: normalizeMediaWidthPercent(detailImageWidths[detailImageIndex + index]),
       index: 100000 + index,
     })),
     ...detailVideos.slice(detailVideoIndex).filter(Boolean).map((src, index) => ({
@@ -237,7 +264,11 @@ export function EventDetailPage({ slug }: { slug: string }) {
             </p>
             {renderedBlocks.map((block, blockIndex) =>
               block.type === "image" ? (
-                <div key={`${event.slug}-image-${block.index}-${blockIndex}-${block.src}`} className="mx-auto mt-10 w-full overflow-hidden bg-[#272727] md:w-[70%]">
+                <div
+                  key={`${event.slug}-image-${block.index}-${blockIndex}-${block.src}`}
+                  className="mx-auto mt-10 max-w-full overflow-hidden bg-[#272727]"
+                  style={{ width: `${block.widthPercent}%` }}
+                >
                   <ImageWithFallback key={block.src} src={block.src} alt={fullTitle} loading="lazy" className="h-auto w-full object-contain" />
                 </div>
               ) : block.type === "video" ? (

@@ -10,7 +10,7 @@ const publicUploadsDir = path.join(process.cwd(), "public", "uploads");
 const assetBaseUrl =
   process.env.NEXT_PUBLIC_ASSET_BASE_URL ??
   process.env.NEXT_PUBLIC_CMS_ASSET_BASE_URL ??
-  "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb";
+  "https://husu2.oss-cn-beijing.aliyuncs.com/husuweb";
 
 const imageExtensions = new Set([".avif", ".gif", ".jpeg", ".jpg", ".png", ".svg", ".webp"]);
 const videoExtensions = new Set([".mov", ".mp4", ".webm"]);

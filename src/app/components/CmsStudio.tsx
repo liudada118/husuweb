@@ -1866,6 +1866,16 @@ function splitLines(value: string) {
     .filter(Boolean);
 }
 
+function trimTrailingEmptyItems(items: string[]) {
+  const nextItems = [...items];
+
+  while (nextItems.length && !nextItems[nextItems.length - 1]?.trim()) {
+    nextItems.pop();
+  }
+
+  return nextItems;
+}
+
 function serializeIndustries(items: OfficialCmsIndustryListItem[]) {
   return items.map((item) => [item.slug, item.name, item.zhName ?? "", item.img, item.cls ?? ""].join(" | ")).join("\n");
 }
@@ -1993,6 +2003,9 @@ function createEventOverride(): OfficialCmsEventOverride {
   return {
     image: "",
     sortDate: "",
+    detailImages: [],
+    detailImageWidths: [],
+    detailVideos: [],
     en: createLocalizedEventOverride(),
     zh: createLocalizedEventOverride(),
   };
@@ -2136,6 +2149,9 @@ function createDefaultEventOverrides(): Record<string, OfficialCmsEventOverride>
       {
         image: event.image,
         sortDate: event.date,
+        detailImages: event.detailImages ?? [],
+        detailImageWidths: [],
+        detailVideos: event.detailVideos ?? [],
         en: {
           category: event.category,
           title: event.title,
@@ -2182,6 +2198,9 @@ function mergeEventOverrides(
           ...override,
           image: override.image ?? defaultOverride.image,
           sortDate: override.sortDate ?? defaultOverride.sortDate,
+          detailImages: override.detailImages ?? defaultOverride.detailImages ?? [],
+          detailImageWidths: override.detailImageWidths ?? defaultOverride.detailImageWidths ?? [],
+          detailVideos: override.detailVideos ?? defaultOverride.detailVideos ?? [],
           en: mergeLocalizedEventOverride(defaultOverride.en, override.en),
           zh: mergeLocalizedEventOverride(defaultOverride.zh, override.zh),
         },
@@ -2730,6 +2749,7 @@ function syncPageContentFromOfficialSiteState(pageContent: PageContentState, off
       const localized = eventLocalizedCopyForLanguage(event, override, language);
       const content = localized.content.join("\n\n");
       const detailImages = override.detailImages ?? event?.detailImages ?? [];
+      const detailImageWidths = override.detailImageWidths ?? [];
       const detailVideos = override.detailVideos ?? event?.detailVideos ?? [];
 
       return studioItem(slug, localized.title || slug, [
@@ -2742,6 +2762,14 @@ function syncPageContentFromOfficialSiteState(pageContent: PageContentState, off
         studioField("content", isZh ? "详情正文" : "Detail content", "textarea", content),
         ...detailImages.map((image, index) =>
           studioField(`detailImage${index + 1}`, `${isZh ? "详情图片" : "Detail image"} ${index + 1}`, "image", image),
+        ),
+        ...Array.from({ length: detailImages.length }, (_, index) =>
+          studioField(
+            `detailImageWidth${index + 1}`,
+            `${isZh ? "璇︽儏鍥剧墖瀹藉害 %" : "Detail image width %"} ${index + 1}`,
+            "text",
+            detailImageWidths[index] ?? "",
+          ),
         ),
         ...detailVideos.map((video, index) =>
           studioField(`detailVideo${index + 1}`, `${isZh ? "详情视频" : "Detail video"} ${index + 1}`, "url", video),
@@ -4706,21 +4734,24 @@ function OfficialSiteSectionPanel(props: {
                 : undefined,
             onDelete: slugs.includes(slug)
               ? () =>
-                  updateState((current) => {
-                    const { [slug]: _removedProfile, ...teamProfiles } = current.content.teamProfiles;
+                  updateStateAndPageContent(
+                    (current) => {
+                      const { [slug]: _removedProfile, ...teamProfiles } = current.content.teamProfiles;
 
-                    return {
-                      ...current,
-                      content: {
-                        ...current.content,
-                        teamProfiles,
-                      },
-                      lists: {
-                        ...current.lists,
-                        [listKey]: current.lists[listKey].filter((item) => item !== slug),
-                      },
-                    };
-                  })
+                      return {
+                        ...current,
+                        content: {
+                          ...current.content,
+                          teamProfiles,
+                        },
+                        lists: {
+                          ...current.lists,
+                          [listKey]: current.lists[listKey].filter((item) => item !== slug),
+                        },
+                      };
+                    },
+                    { autoSaveVersionDraft: true },
+                  )
               : undefined,
             children: (
               <div className="grid gap-4 xl:grid-cols-2">
@@ -4969,6 +5000,9 @@ function OfficialSiteSectionPanel(props: {
           const sourceEvent = officialEventsData.find((event) => event.slug === slug);
           const override = state.events.overrides[slug] ?? createEventOverride();
           const coverImage = override.image || sourceEvent?.image || "";
+          const detailImages = override.detailImages ?? sourceEvent?.detailImages ?? [];
+          const detailImageWidths = override.detailImageWidths ?? [];
+          const detailImageRowCount = Math.max(1, detailImages.length, detailImageWidths.length);
 
           return renderItemShell({
             id: `event-${slug}`,
@@ -5024,6 +5058,104 @@ function OfficialSiteSectionPanel(props: {
                     className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#2563eb]"
                   />
                 </label>
+                <section className="space-y-3 rounded-[22px] border border-[#2563eb]/25 bg-[#eef4ff] p-4 xl:col-span-2">
+                  <div className="flex flex-wrap items-start justify-between gap-3">
+                    <div>
+                      <h4 className="text-sm font-semibold text-slate-950">详情图片</h4>
+                      <p className="mt-1 text-xs leading-5 text-slate-600">
+                        正文里用 [IMAGE] 占位，详情图片按顺序填入；每张照片下面可以设置显示宽度。
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        updateOverride(slug, (currentOverride) => ({
+                          ...currentOverride,
+                          detailImages: [...(currentOverride.detailImages ?? detailImages), ""],
+                          detailImageWidths: [...(currentOverride.detailImageWidths ?? detailImageWidths), ""],
+                        }))
+                      }
+                      className="rounded-xl bg-[#2563eb] px-3 py-2 text-xs font-bold text-white transition hover:bg-[#1d4ed8]"
+                    >
+                      新增详情图片
+                    </button>
+                  </div>
+                  <div className="grid gap-3 md:grid-cols-2">
+                    {Array.from({ length: detailImageRowCount }, (_, imageIndex) => {
+                      const imageValue = detailImages[imageIndex] ?? "";
+                      const widthValue = detailImageWidths[imageIndex] ?? "";
+
+                      return (
+                        <div key={`${slug}-visible-detail-image-width-${imageIndex}`} className="rounded-2xl border border-slate-200 bg-white p-3">
+                          <div className="mb-3 flex items-center justify-between gap-3">
+                            <span className="text-xs font-bold text-slate-600">详情图 {imageIndex + 1}</span>
+                            {imageValue ? (
+                              <img
+                                src={resolvePublicAssetUrl(imageValue)}
+                                alt=""
+                                className="h-10 w-14 rounded-lg border border-slate-200 object-cover"
+                              />
+                            ) : null}
+                          </div>
+                          <label className="block space-y-1.5">
+                            <span className="text-xs font-semibold text-slate-500">照片地址</span>
+                            <input
+                              value={imageValue}
+                              onChange={(event) =>
+                                updateOverride(slug, (currentOverride) => {
+                                  const nextImages = [...(currentOverride.detailImages ?? detailImages)];
+                                  nextImages[imageIndex] = event.target.value;
+
+                                  return {
+                                    ...currentOverride,
+                                    detailImages: trimTrailingEmptyItems(nextImages),
+                                  };
+                                })
+                              }
+                              className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:border-[#2563eb]"
+                            />
+                          </label>
+                          <label className="mt-3 block space-y-1.5">
+                            <span className="text-xs font-semibold text-slate-500">宽度比例 %</span>
+                            <input
+                              value={widthValue}
+                              placeholder="70"
+                              inputMode="numeric"
+                              onChange={(event) =>
+                                updateOverride(slug, (currentOverride) => {
+                                  const nextWidths = [...(currentOverride.detailImageWidths ?? detailImageWidths)];
+                                  nextWidths[imageIndex] = event.target.value;
+
+                                  return {
+                                    ...currentOverride,
+                                    detailImageWidths: trimTrailingEmptyItems(nextWidths),
+                                  };
+                                })
+                              }
+                              className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:border-[#2563eb]"
+                            />
+                            <span className="block text-[11px] leading-5 text-slate-500">
+                              注：控制这张照片在动态子页面中占屏幕宽度的比例，留空默认 70%，可填 10-100。
+                            </span>
+                          </label>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              updateOverride(slug, (currentOverride) => ({
+                                ...currentOverride,
+                                detailImages: (currentOverride.detailImages ?? detailImages).filter((_, itemIndex) => itemIndex !== imageIndex),
+                                detailImageWidths: (currentOverride.detailImageWidths ?? detailImageWidths).filter((_, itemIndex) => itemIndex !== imageIndex),
+                              }))
+                            }
+                            className="mt-3 rounded-xl px-3 py-2 text-xs font-bold text-rose-500 transition hover:bg-rose-50"
+                          >
+                            删除
+                          </button>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </section>
                 {(["en", "zh"] as const).map((language) => {
                   const localized = override[language] ?? createLocalizedEventOverride();
 

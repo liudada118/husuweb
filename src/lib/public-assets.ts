@@ -1,7 +1,7 @@
 const publicAssetBaseUrl = (
   process.env.NEXT_PUBLIC_ASSET_BASE_URL ||
   process.env.NEXT_PUBLIC_CMS_ASSET_BASE_URL ||
-  "https://img-12345.oss-cn-beijing.aliyuncs.com/husuweb"
+  "https://husu2.oss-cn-beijing.aliyuncs.com/husuweb"
 ).replace(/\/+$/, "");
 
 const nextStaticMediaAssetPaths: Record<string, string> = {

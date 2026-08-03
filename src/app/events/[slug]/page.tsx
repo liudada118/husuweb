@@ -2,23 +2,51 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { EventDetailPage } from "@/components/pages/EventDetailPage";
 import { events } from "@/data/events";
+import { getPreviewPageItemField, getPreviewPageSectionItems } from "@/cms/preview-page-content";
+import { getPublicCmsState } from "@/lib/cms-store";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const event = events.find((item) => item.slug === slug) ?? events[0];
+  const cms = await getPublicCmsState();
+  const event = events.find((item) => item.slug === slug);
+  const findBySlug = (item: ReturnType<typeof getPreviewPageSectionItems>[number]) =>
+    getPreviewPageItemField(item, "slug", item.id) === slug;
+  const zhDetailItem = getPreviewPageSectionItems(cms, "zh", "event", "detailPages").find(findBySlug);
+  const enDetailItem = getPreviewPageSectionItems(cms, "en", "event", "detailPages").find(findBySlug);
+  const zhListItem = getPreviewPageSectionItems(cms, "zh", "event", "list").find(findBySlug);
+  const enListItem = getPreviewPageSectionItems(cms, "en", "event", "list").find(findBySlug);
+  const override = cms.events.overrides[slug];
+  const title =
+    getPreviewPageItemField(zhDetailItem, "title") ||
+    getPreviewPageItemField(enDetailItem, "title") ||
+    getPreviewPageItemField(zhListItem, "title") ||
+    getPreviewPageItemField(enListItem, "title") ||
+    override?.zh?.title?.trim() ||
+    override?.en?.title?.trim() ||
+    event?.zh?.title ||
+    event?.title ||
+    slug;
+  const description =
+    getPreviewPageItemField(zhDetailItem, "summary") ||
+    getPreviewPageItemField(enDetailItem, "summary") ||
+    getPreviewPageItemField(zhListItem, "summary") ||
+    getPreviewPageItemField(enListItem, "summary") ||
+    override?.zh?.summary?.trim() ||
+    override?.en?.summary?.trim() ||
+    event?.zh?.summary ||
+    event?.summary ||
+    title;
 
   return {
-    title: event.title,
-    description: event.summary,
+    title,
+    description,
   };
-}
-
-export function generateStaticParams() {
-  return events.map((event) => ({ slug: event.slug }));
 }
 
 export default async function Page({ params }: PageProps) {

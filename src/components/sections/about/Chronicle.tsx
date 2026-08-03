@@ -527,7 +527,7 @@ function EventRow({ event }: { event: ChronicleEvent }) {
           </span>
           {isLeft ? <span className="hidden h-px w-8 bg-[#d9b27a]/60 md:block" /> : null}
         </div>
-        <p className={`${isLeft ? "md:ml-auto" : ""} w-full break-words text-left text-[1rem] font-light leading-relaxed text-[#c8c8c8] md:w-[85%] md:text-[1.5rem] ${isLeft ? "md:text-right" : "md:text-left"}`}>
+        <p className={`${isLeft ? "md:ml-auto" : ""} w-full whitespace-pre-line break-words text-left text-[1rem] font-light leading-relaxed text-[#c8c8c8] md:w-[85%] md:text-[1.5rem] ${isLeft ? "md:text-right" : "md:text-left"}`}>
           {event.text}
         </p>
       </div>
