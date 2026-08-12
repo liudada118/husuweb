@@ -2821,7 +2821,7 @@ function normalizeOfficialSiteStateForEditor(
         : [],
       honorYears: mergeOrderedSlugs(current.lists.honorYears, honorYearDefaults),
       chronicleYears: mergeOrderedSlugs(current.lists.chronicleYears, chronicleYearDefaults),
-      eventSlugs: current.lists.eventSlugs.length ? current.lists.eventSlugs : officialEventsData.map((event) => event.slug),
+      eventSlugs: current.lists.eventSlugs,
       partnerSlugs: mergeOrderedSlugs(
         current.lists.partnerSlugs,
         [...defaultPartnerSlugs, ...slugsFromTeamProfiles(teamProfileOverrides, "partner")],
@@ -2840,6 +2840,29 @@ function moveArrayItem<T>(items: T[], fromIndex: number, toIndex: number) {
   const [item] = next.splice(fromIndex, 1);
   next.splice(toIndex, 0, item);
   return next;
+}
+
+function pairedStringRows(left: string[] = [], right: string[] = []) {
+  const rowCount = Math.max(left.length, right.length, 1);
+
+  return Array.from({ length: rowCount }, (_, index) => ({
+    en: left[index] ?? "",
+    zh: right[index] ?? "",
+  }));
+}
+
+function splitPairedStringRows(rows: Array<{ en: string; zh: string }>) {
+  const trimmedRows = rows
+    .map((row) => ({
+      en: row.en.trim(),
+      zh: row.zh.trim(),
+    }))
+    .filter((row) => row.en || row.zh);
+
+  return {
+    en: trimmedRows.map((row) => row.en),
+    zh: trimmedRows.map((row) => row.zh),
+  };
 }
 
 function parseEventSortDate(value?: string) {
@@ -4684,6 +4707,15 @@ function OfficialSiteSectionPanel(props: {
       updateProfile(slug, (profile) => ({ ...profile, [key]: splitLines(value) }));
     };
 
+    const setProfileAchievementRows = (slug: string, rows: Array<{ en: string; zh: string }>) => {
+      const next = splitPairedStringRows(rows);
+      updateProfile(slug, (profile) => ({
+        ...profile,
+        achievements: next.en,
+        zhAchievements: next.zh,
+      }));
+    };
+
     return (
       <div className={officialSplitEditorClassName}>
         {renderStickySplitNodes([
@@ -4783,8 +4815,6 @@ function OfficialSiteSectionPanel(props: {
                   ["zhLanguages", "中文工作语言"],
                   ["honors", "英文荣誉"],
                   ["zhHonors", "中文荣誉"],
-                  ["achievements", "英文个人业绩"],
-                  ["zhAchievements", "中文个人业绩"],
                 ].map(([key, label]) => (
                   <label key={key} className="block space-y-2">
                     <span className="text-sm font-medium text-slate-700">{label}（每行一条）</span>
@@ -4796,6 +4826,112 @@ function OfficialSiteSectionPanel(props: {
                     />
                   </label>
                 ))}
+                <section className="space-y-3 rounded-[22px] border border-slate-200 bg-slate-50 p-4 xl:col-span-2">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <div>
+                      <h4 className="text-sm font-semibold text-slate-900">个人业绩 / Performance & Achievements</h4>
+                      <p className="mt-1 text-xs leading-5 text-slate-500">
+                        每条业绩由英文和中文组成，前台会按这里的顺序展示。
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setProfileAchievementRows(slug, [
+                          ...pairedStringRows(profile.achievements, profile.zhAchievements),
+                          { en: "", zh: "" },
+                        ])
+                      }
+                      className="rounded-xl bg-[#2563eb] px-3 py-2 text-xs font-semibold text-white"
+                    >
+                      新增业绩
+                    </button>
+                  </div>
+                  <div className="space-y-3">
+                    {pairedStringRows(profile.achievements, profile.zhAchievements).map((row, rowIndex, rows) => (
+                      <div key={rowIndex} className="rounded-2xl border border-slate-200 bg-white p-3">
+                        <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+                          <span className="text-xs font-semibold text-slate-500">第 {rowIndex + 1} 条</span>
+                          <div className="flex flex-wrap gap-2">
+                            {rowIndex > 0 ? (
+                              <>
+                                <button
+                                  type="button"
+                                  onClick={() => setProfileAchievementRows(slug, moveArrayItem(rows, rowIndex, 0))}
+                                  className="rounded-lg border border-slate-200 px-2 py-1 text-xs font-semibold text-slate-600 hover:border-[#2563eb] hover:text-[#2563eb]"
+                                >
+                                  置顶
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() => setProfileAchievementRows(slug, moveArrayItem(rows, rowIndex, rowIndex - 1))}
+                                  className="rounded-lg border border-slate-200 px-2 py-1 text-xs font-semibold text-slate-600 hover:border-[#2563eb] hover:text-[#2563eb]"
+                                >
+                                  上移
+                                </button>
+                              </>
+                            ) : null}
+                            {rowIndex < rows.length - 1 ? (
+                              <button
+                                type="button"
+                                onClick={() => setProfileAchievementRows(slug, moveArrayItem(rows, rowIndex, rowIndex + 1))}
+                                className="rounded-lg border border-slate-200 px-2 py-1 text-xs font-semibold text-slate-600 hover:border-[#2563eb] hover:text-[#2563eb]"
+                              >
+                                下移
+                              </button>
+                            ) : null}
+                            <button
+                              type="button"
+                              onClick={() =>
+                                setProfileAchievementRows(
+                                  slug,
+                                  rows.length > 1 ? rows.filter((_, itemIndex) => itemIndex !== rowIndex) : [{ en: "", zh: "" }],
+                                )
+                              }
+                              className="rounded-lg border border-red-200 px-2 py-1 text-xs font-semibold text-red-600 hover:border-red-400"
+                            >
+                              删除
+                            </button>
+                          </div>
+                        </div>
+                        <div className="grid gap-3 lg:grid-cols-2">
+                          <label className="block space-y-2">
+                            <span className="text-xs font-medium text-slate-600">English</span>
+                            <textarea
+                              value={row.en}
+                              rows={4}
+                              onChange={(event) =>
+                                setProfileAchievementRows(
+                                  slug,
+                                  rows.map((item, itemIndex) =>
+                                    itemIndex === rowIndex ? { ...item, en: event.target.value } : item,
+                                  ),
+                                )
+                              }
+                              className="min-h-24 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:border-[#2563eb]"
+                            />
+                          </label>
+                          <label className="block space-y-2">
+                            <span className="text-xs font-medium text-slate-600">中文</span>
+                            <textarea
+                              value={row.zh}
+                              rows={4}
+                              onChange={(event) =>
+                                setProfileAchievementRows(
+                                  slug,
+                                  rows.map((item, itemIndex) =>
+                                    itemIndex === rowIndex ? { ...item, zh: event.target.value } : item,
+                                  ),
+                                )
+                              }
+                              className="min-h-24 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:border-[#2563eb]"
+                            />
+                          </label>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </section>
                 {[
                   ["education", "英文教育背景"],
                   ["zhEducation", "中文教育背景"],

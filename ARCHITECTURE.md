@@ -1,6 +1,6 @@
 ﻿# Husuweb Official Site Architecture
 
-最后更新于：2026-07-03 00:24
+最后更新于：2026-08-03 22:54
 
 ## 椤圭洰姒傝堪
 
@@ -639,10 +639,16 @@ About 大事记前台事件正文使用 `whitespace-pre-line` 渲染，CMS 文�
 
 2026-07-03 已将当前 `cms` 分支代码部署到正式站 `https://www.tigerpartners.cn/`，新 release 为 `/opt/tigerpartners-web/releases/20260703-0032`。本次只部署代码，不覆盖正式 CMS 数据；新 release 的 `data` 和 `public` 软链到 `/opt/tigerpartners-web/releases/20260623-222902/data` 与 `/opt/tigerpartners-web/releases/20260623-222902/public`。远端 source 构建时补装 `lightningcss-linux-x64-gnu` 和 `@tailwindcss/oxide-linux-x64-gnu` 后构建通过，已切换 `current` 并重启 `tigerpartners-web.service`；公网验证首页、CMS 登录页、`/api/cms/public` 和 `/events` 均返回 `200 OK`。
 
+2026-08-03 内容管理的虎诉团队成员编辑器将个人业绩从中英文分离 textarea 改为多组中英文成对编辑框，并支持新增、删除、置顶、上移和下移；仍写回原有 `achievements` 与 `zhAchievements` 数组，前台个人简历按数组顺序展示。同时可视化编辑器的 official state 反向同步改为按当前页面收口：编辑团队页不再同步首页动态或动态列表，避免修改个人简历时把旧 pageContent 中的动态条目补回。
+
+2026-08-03 已将当前 `cms` 分支代码部署到正式站 `https://www.tigerpartners.cn/`，新 release 为 `/opt/tigerpartners-web/releases/20260803-2246`。本次发布包只包含应用代码、内容源文件和构建配置，不包含本地 `data`、`public`、`.env*`、`.next`、`node_modules` 或上传素材；新 release 的 `data` 与 `public` 继续软链到 `/opt/tigerpartners-web/releases/20260623-222902/data` 和 `/opt/tigerpartners-web/releases/20260623-222902/public`。远端构建通过后重启 `tigerpartners-web.service`，服务器本机与公网验证首页、CMS 登录页、公开 CMS API 和团队页均返回 `200 OK`。
+
 ## 鏇存柊鏃ュ織
 
 | 鏃堕棿 | 鍒嗘敮 | 鍙樻洿绫诲瀷 | 鎻忚堪 |
 | :--- | :--- | :--- | :--- |
+| 2026-08-03 22:54 | cms | 部署发布 | 正式站切换到 release `20260803-2246`，仅部署代码，`data/public` 继续复用 `20260623-222902`，公网首页、CMS 登录页、公开 CMS API 和团队页验证通过 |
+| 2026-08-03 22:22 | cms | 修复缺陷 | 虎诉团队个人业绩改为多组中英文成对编辑并支持排序；可视化编辑按当前页面同步 official state，避免编辑简历时误改动态列表 |
 | 2026-07-03 00:24 | cms | 部署发布 | 正式站切换到 release `20260703-0032`，仅部署代码，`data/public` 复用 `20260623-222902`，公网首页、CMS 登录页、公开 CMS API 和 Events 验证通过 |
 | 2026-07-02 23:56 | cms | 修复缺陷 | 可视化预览合成虎诉动态详情媒体时尊重空数组覆盖，清空 Detail image/video 后不再保留旧默认占位元素 |
 | 2026-07-02 23:43 | cms | 修复缺陷 | 虎诉动态详情页读取 CMS 详情媒体时尊重空值覆盖，清空 `Detail video N` 后不再回退静态默认视频 |
@@ -1086,6 +1092,8 @@ About 大事记前台事件正文使用 `whitespace-pre-line` 渲染，CMS 文�
 
 | 鏃堕棿 | 鍒嗘敮 | 瀹屾垚鐨勫姛鑳?/ 宸ヤ綔 | 璇存槑 |
 | :--- | :--- | :--- | :--- |
+| 2026-08-03 22:54 | cms | 正式站团队编辑修复发布 | `www.tigerpartners.cn` 已切换到 `/opt/tigerpartners-web/releases/20260803-2246`；保留正式 CMS 数据和上传素材，发布团队业绩成对编辑与动态同步隔离修复 |
+| 2026-08-03 22:22 | cms | 团队业绩成对编辑和动态同步隔离 | 内容管理团队成员个人业绩支持多组中英文编辑、删除和排序；可视化团队页保存不会再重建首页/动态页事件数据 |
 | 2026-07-03 00:24 | cms | 正式站代码部署 | `www.tigerpartners.cn` 已切换到 `/opt/tigerpartners-web/releases/20260703-0032`；保留正式 CMS 数据和上传素材，发布空媒体占位与 `[VIDEO]` 规则修复 |
 | 2026-07-02 23:56 | cms | 预览空媒体占位清理 | `CmsPuckVisualEditor` 和 `localizeCmsEvent` 区分未配置与已清空的详情图片/视频，空字段会覆盖默认媒体 |
 | 2026-07-02 23:43 | cms | 动态详情空视频覆盖默认媒体 | 前台详情页识别 CMS 中存在的详情媒体字段，空视频/图片字段会阻止静态默认媒体回退，避免空输入仍显示播放器 |

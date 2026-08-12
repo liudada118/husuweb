@@ -2746,24 +2746,56 @@ export function CmsPuckVisualEditor({
         current,
         activeLanguage,
       );
+      const scopedNextState =
+        previewPage === "home"
+          ? {
+              ...nextState,
+              events: current.events,
+              lists: {
+                ...nextState.lists,
+                eventSlugs: current.lists.eventSlugs,
+              },
+            }
+          : previewPage === "event"
+            ? {
+                ...nextState,
+                home: {
+                  ...nextState.home,
+                  eventSlugs: current.home.eventSlugs,
+                  eventOverrides: current.home.eventOverrides,
+                },
+              }
+            : {
+                ...nextState,
+                home: {
+                  ...nextState.home,
+                  eventSlugs: current.home.eventSlugs,
+                  eventOverrides: current.home.eventOverrides,
+                },
+                events: current.events,
+                lists: {
+                  ...nextState.lists,
+                  eventSlugs: current.lists.eventSlugs,
+                },
+              };
       const fingerprint = JSON.stringify({
-        homeEventSlugs: nextState.home.eventSlugs,
-        listEventSlugs: nextState.lists.eventSlugs,
-        eventOverrides: nextState.events.overrides,
-        homeEventOverrides: nextState.home.eventOverrides,
-        industries: nextState.lists.industries,
-        honors: nextState.content.honors,
-        chronicle: nextState.content.chronicle,
-        partnerSlugs: nextState.lists.partnerSlugs,
-        seniorAssociateSlugs: nextState.lists.seniorAssociateSlugs,
-        teamProfiles: nextState.content.teamProfiles,
-        clientLogos: nextState.lists.clientLogos,
+        homeEventSlugs: scopedNextState.home.eventSlugs,
+        listEventSlugs: scopedNextState.lists.eventSlugs,
+        eventOverrides: scopedNextState.events.overrides,
+        homeEventOverrides: scopedNextState.home.eventOverrides,
+        industries: scopedNextState.lists.industries,
+        honors: scopedNextState.content.honors,
+        chronicle: scopedNextState.content.chronicle,
+        partnerSlugs: scopedNextState.lists.partnerSlugs,
+        seniorAssociateSlugs: scopedNextState.lists.seniorAssociateSlugs,
+        teamProfiles: scopedNextState.content.teamProfiles,
+        clientLogos: scopedNextState.lists.clientLogos,
       });
 
       if (fingerprint === lastSyncedOfficialStateRef.current) return current;
       lastSyncedOfficialStateRef.current = fingerprint;
 
-      return nextState;
+      return scopedNextState;
     });
   };
 
@@ -2781,7 +2813,7 @@ export function CmsPuckVisualEditor({
 
   useEffect(() => {
     syncOfficialStateFromPageContent(pageContent);
-  }, [activeLanguage, basePreviewData, pageContent]);
+  }, [activeLanguage, basePreviewData, pageContent, previewPage]);
 
   const activeCarouselSectionsByLanguage = carouselDrawer
     ? ({
